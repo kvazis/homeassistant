@@ -1648,15 +1648,16 @@ views:
         - type: custom:vertical-stack-in-card
           cards: 
           - type: plant-status
-            entity: plant.miflora
+            entity: plant.dieffenbac
+            name: Диффенбахия
           
           - type: entities
             show_state: false
             entities:
-            - entity: sensor.ropot_battery
+            - entity: sensor.true_blue_battery
               name: 'True Blue Battery'
               icon: mdi:flower
-            - entity: sensor.ropot_fialka_battery
+            - entity: sensor.deep_purple_battery
               name: 'Deep Purple Battery'
               icon: mdi:flower
 

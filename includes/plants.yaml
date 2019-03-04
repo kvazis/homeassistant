@@ -1,8 +1,8 @@
-  miflora:
+  dieffenbac:
     sensors:
-      moisture: sensor.flower_1_moisture
-      battery: sensor.flower_1_battery
-      temperature: sensor.flower_1_temperature
-      conductivity: sensor.flower_1_conductivity
-      brightness: sensor.flower_1_light_intensity
+      moisture: sensor.dieffenbac_moisture
+      battery: sensor.dieffenbac_battery
+      temperature: sensor.dieffenbac_temperature
+      conductivity: sensor.dieffenbac_conductivity
+      brightness: sensor.dieffenbac_light_intensity
     min_moisture: 20

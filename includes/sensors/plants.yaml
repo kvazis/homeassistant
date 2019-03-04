@@ -1,50 +1,50 @@
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.miflora_yukka_moisture?api_password=qwerty
-    name: flower_1_moisture
+    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_moisture?api_password=qwerty
+    name: dieffenbac_moisture
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: "%"
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.miflora_yukka_battery?api_password=qwerty
-    name: flower_1_battery
+    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_battery?api_password=qwerty
+    name: dieffenbac_battery
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: "%"
     device_class: battery
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.miflora_yukka_temperature?api_password=qwerty
-    name: flower_1_temperature
+    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_temperature?api_password=qwerty
+    name: dieffenbac_temperature
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: "°C"
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.miflora_yukka_conductivity?api_password=qwerty
-    name: flower_1_conductivity
+    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_conductivity?api_password=qwerty
+    name: dieffenbac_conductivity
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: "µS/cm"
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.miflora_yukka_light_intensity?api_password=qwerty
-    name: flower_1_light_intensity
+    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_light_intensity?api_password=qwerty
+    name: dieffenbac_light_intensity
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: "lx"
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.ropot_battery?api_password=qwerty
-    name: ropot_battery
+    resource: http://192.168.0.71:8123/api/states/sensor.true_blue_battery?api_password=qwerty
+    name: true_blue_battery
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: "%"
     device_class: battery
 
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.ropot_fialka_battery?api_password=qwerty
-    name: ropot_fialka_battery
+    resource: http://192.168.0.71:8123/api/states/sensor.deep_purple_battery?api_password=qwerty
+    name: deep_purple_battery
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: "%"
