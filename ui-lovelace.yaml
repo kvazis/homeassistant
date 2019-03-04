@@ -130,18 +130,6 @@ views:
                - entity: sensor.home_assistant_v2_db
                  name: База данных
 
-          - type: markdown
-            content: >
-              **Сеть**
-                 
-          - type: history-graph
-            entities:
-            - entity: sensor.rt_ac66u_b1_kbyte_sec_received
-              name: Прием
-            - entity: sensor.rt_ac66u_b1_kbyte_sec_sent
-              name: Передача
-
-
       - type: vertical-stack
         cards:
 
@@ -259,6 +247,19 @@ views:
 
       - type: vertical-stack
         cards:
+
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                **Сеть**
+                 
+            - type: history-graph
+              entities:
+              - entity: sensor.rt_ac66u_b1_kbyte_sec_received
+                name: Прием
+              - entity: sensor.rt_ac66u_b1_kbyte_sec_sent
+                name: Передача
 
           - type: custom:vertical-stack-in-card
             cards:
