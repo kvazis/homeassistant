@@ -313,7 +313,7 @@ binary_sensor.water_leak_sensor_158d0001bb60c2:
 binary_sensor.water_leak_sensor_158d0001d72fa2:
   friendly_name: Ванная протечка раковина
 
-## Детская Дима 
+## Детская Д
 ## Освещение
 light.philips_07_ceiling:
   friendly_name: Детская Д, основной свет
@@ -363,7 +363,7 @@ binary_sensor.door_window_sensor_158d0001193697:
   friendly_name: Детская Д, окно
   device_class: window 
 
-## Детская Дима балкон
+## Детская Д балкон
 ## Сенсоры 
 binary_sensor.door_window_sensor_158d00015843d4:
   friendly_name: Детская Д, балкон дверь
@@ -380,7 +380,7 @@ binary_sensor.door_window_sensor_158d0001a65b68:
   friendly_name: Детская Д, балкон окно
   device_class: window 
 
-## Детская Арина
+## Детская А
 ## Освещение
 light.aqara_08_ceiling:
   friendly_name: Детская А, основной свет
