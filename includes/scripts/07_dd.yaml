@@ -1,0 +1,39 @@
+  07_dd_bra_on:
+    sequence:
+      - service: light.turn_on
+        entity_id:
+          -  light.yeelight_07_whitebulb
+        data_template:
+          brightness_pct: 100
+          kelvin: 4000
+          
+  07_dd_bra_off:
+    sequence:
+      - service: light.turn_off
+        entity_id:
+          -  light.yeelight_07_whitebulb
+          
+  07_dd_philpis_on:
+    sequence:
+      - service: light.xiaomi_miio_set_scene
+        entity_id: light.philips_07_ceiling
+        data:
+           scene: 1 
+           
+  07_dd_philpis_off:
+    sequence:
+      - service: light.turn_off
+        entity_id:
+          -  light.philips_07_ceiling
+          
+  07_dd_lightoff:
+    sequence:
+        - service: light.turn_off
+          entity_id:
+           - light.yeelight_07_whitebulb
+           - light.philips_07_ceiling
+           - light.broadlink_07_table
+        - delay: 00:00:03
+        - service: light.turn_on
+          entity_id:
+           - light.broadlink_07_table

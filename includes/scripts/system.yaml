@@ -1,0 +1,18 @@
+  purge_db:
+    sequence:
+       - service: recorder.purge
+         data:
+              keep_days: 3
+              repack: true
+              
+  all_scenario_reload:
+    sequence:
+        - service: automation.reload
+        
+  all_script_reload:
+    sequence:
+        - service: script.reload
+        
+  ha_restart:
+    sequence:
+        - service: homeassistant.restart

@@ -1,0 +1,131 @@
+- alias: 00_telegramm_photo
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/photo'
+  action:
+    - service: script.turn_on
+      entity_id: script.01_photo_door_t
+      
+- alias: 00_telegramm_robot
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/ilife'
+  action:
+  - service: notify.telegram
+    data:
+      title: 'Пылесос'
+      message: "Робот пылесос вышел на тропу войны {{ states('sensor.time_date') }}"
+  - service: switch.toggle
+    entity_id: switch.ilifea4
+
+- alias: 00_telegramm_command
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/start'
+  action:
+  - service: notify.telegram
+    data:
+      message: 'commands'
+      data:
+        keyboard:
+          - '/photo, /ilife'
+          - '/gg_off, /dd_off, /da_off'
+          - '/ping, /auto_on, /auto_off'
+          
+- alias: 00_telegramm_ggoff
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/gg_off'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Освещение в Гостиной - отключено "
+    - service: script.turn_on
+      entity_id: script.05_gg_lightoff
+
+- alias: 00_telegramm_ddoff
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/dd_off'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Освещение в детской Д - отключено "
+    - service: script.turn_on
+      entity_id: script.07_dd_lightoff
+      
+- alias: 00_telegramm_daoff
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/da_off'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Освещение в детской А - отключено "
+    - service: script.turn_on
+      entity_id: script.08_da_lightoff
+
+- alias: 00_telegramm_sc_off
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/auto_off'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Сценарии на Orange Primary 70 отключены"
+    - service: script.turn_on
+      entity_id: script.all_scenario_off
+      
+- alias: 00_telegramm_sc_on
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/auto_on'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Сценарии на Orange Primary 70 включены"
+    - service: script.turn_on
+      entity_id: script.all_scenario_on
+      
+- alias: 00_telegramm_ping
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/ping'
+  action:
+    - delay: 00:00:03
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Orange Primary 70 на связи и статус систем в норме, время - {{ states('sensor.time_date') }}"

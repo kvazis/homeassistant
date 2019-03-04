@@ -1,0 +1,26 @@
+  - platform: mjpeg
+    mjpeg_url: http://192.168.0.125/image.jpg
+    name: Xiaofang
+    
+  - platform: mjpeg
+    mjpeg_url: !secret reolink1_url
+    name: Reolink
+
+  - platform: mjpeg
+    mjpeg_url: http://192.168.0.127/snap.jpg
+    name: Alfawise
+    username: !secret alfawise_login
+    password: !secret alfawise_login
+    
+  - platform: mjpeg
+    mjpeg_url: !secret reolink2_url
+    name: Reolink2
+    
+#  - platform: onvif
+#    name: Alfawise
+#    host: 192.168.0.126
+#    username: !secret alfawise_login
+#    password: !secret alfawise_login
+#    port: 8080
+    
+

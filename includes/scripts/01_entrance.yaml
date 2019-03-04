@@ -1,0 +1,107 @@
+  01_photo_door_t:
+    sequence:
+       - service: timer.start
+         entity_id: timer.camphoto
+       - service: automation.turn_off
+         entity_id: automation.01_enter_photo
+       - service: notify.telegram
+         data:
+           title: "Дверь"
+           message: "Входная дверь открыта в {{ states('sensor.time_date') }}" 
+       - service: camera.snapshot
+         data:
+              entity_id: camera.alfawise
+              filename: "/config/www/cam_captures/alfawise.jpg"
+       - delay: 00:00:01
+       - service: camera.snapshot
+         data:
+              entity_id: camera.xiaofang
+              filename: "/config/www/cam_captures/xiaofang.jpg"
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink
+              filename: "/config/www/cam_captures/reolink.jpg"
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink2
+              filename: "/config/www/cam_captures/reolink2.jpg"
+       - delay: 00:00:10
+       - service: notify.telegram
+         data:
+              title: "Дверь"
+              message: "Фотография" 
+              data:
+                  photo:
+                      - file: /config/www/cam_captures/xiaofang.jpg
+                      - file: /config/www/cam_captures/reolink.jpg
+                      - file: /config/www/cam_captures/alfawise.jpg
+                      - file: /config/www/cam_captures/reolink2.jpg
+
+  01_enter_on:
+    sequence:
+      - service: light.turn_on
+        entity_id:
+          -  light.yeelight_01_whitebulb
+        data_template:
+          brightness_pct: 100
+          kelvin: 4000
+          
+  01_enter_off:
+    sequence:
+      - service: light.turn_off
+        entity_id:
+          -  light.yeelight_01_whitebulb
+
+  01_photo_xiaofang:
+    sequence:
+       - service: notify.telegram
+         data:
+           message: "Фото прихожей в  {{ states('sensor.time_date') }}" 
+       - service: camera.snapshot
+         data:
+              entity_id: camera.xiaofang
+              filename: "/config/www/cam_captures/xiaofang.jpg"
+       - delay: 00:00:05
+       - service: notify.telegram
+         data:
+              title: "Дверь"
+              message: "Фотография" 
+              data:
+                  photo:
+                      - file: /config/www/cam_captures/xiaofang.jpg
+                      
+  01_photo_reolink:
+    sequence:
+       - service: notify.telegram
+         data:
+           message: "Фото, этаж - дверь к лифту в {{ states('sensor.time_date') }}" 
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink
+              filename: "/config/www/cam_captures/reolink.jpg"
+       - delay: 00:00:05
+       - service: notify.telegram
+         data:
+              title: "Дверь"
+              message: "Фотография" 
+              data:
+                  photo:
+                      - file: /config/www/cam_captures/reolink.jpg
+
+  01_photo_alfawise:
+    sequence:
+       - service: notify.telegram
+         data:
+           message: "Фото, этаж - поворот в {{ states('sensor.time_date') }}" 
+       - service: camera.snapshot
+         data:
+              entity_id: camera.alfawise
+              filename: "/config/www/cam_captures/alfawise.jpg"
+       - delay: 00:00:05
+       - service: notify.telegram
+         data:
+              title: "Дверь"
+              message: "Фотография" 
+              data:
+                  photo:
+                      - file: /config/www/cam_captures/alfawise.jpg                   

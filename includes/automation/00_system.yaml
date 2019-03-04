@@ -1,0 +1,11 @@
+- alias: 00_start
+  trigger:
+  - platform: homeassistant
+    event: start
+  action:    
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Orange Primary 70 на связи и статус систем в норме, время - {{ states('sensor.time_date') }}"
+        
+

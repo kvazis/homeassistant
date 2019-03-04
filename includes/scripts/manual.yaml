@@ -1,0 +1,28 @@
+  heater_manual:
+    sequence:
+     - service: timer.cancel
+       entity_id: timer.heater
+     - service: timer.start
+       entity_id: timer.heater
+     - service: switch.turn_on
+       entity_id: switch.wall_plug_158d00015751f4
+       
+  humidifier_manual:
+    sequence:
+     - service: fan.set_speed
+       entity_id: 
+         - fan.gg_humidifier
+       data:
+         speed: High
+     - service: timer.start
+       entity_id: timer.humidifier
+       
+  humidifier_manual_off:
+    sequence:
+     - service: fan.set_speed
+       entity_id: 
+         - fan.gg_humidifier
+       data:
+         speed: Auto
+     - service: timer.cancel
+       entity_id: timer.humidifier

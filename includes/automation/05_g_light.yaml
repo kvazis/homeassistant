@@ -1,0 +1,255 @@
+## Возобновление питания на выключателе люстры
+- alias: 05_gg_cell_1_power
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_switch_right_158d00015723f1
+   from: 'on'
+   to: 'off'
+  action:
+  - delay: 00:00:03
+  - service: switch.turn_on
+    entity_id: switch.wall_switch_right_158d00015723f1
+
+## Люстра 1 гостиная
+- alias: 05_gg_cell_1_light
+  initial_state: true
+  trigger:
+## Квадратная кнопка на комоде
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001b86d2e
+        click_type: single
+## Переворот кубика на 180 градусов
+    - platform: event
+      event_type: xiaomi_aqara.cube_action
+      event_data:
+        entity_id: binary_sensor.cube_158d0001186d82
+        action_type: flip180
+## Выключатель возле комода - правая кнопка
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_right_158d0001f47e10
+        click_type: single
+## Выключатель на входе в комнату - левая кнопка
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_left_158d00013fc3bc
+        click_type: single
+  action:    
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {%- if states.light.yeelight_05_ceiling1.state == 'off' -%}
+          script.05_gg_650_1_on
+          {%- else -%}
+          script.05_gg_650_1_off
+          {%- endif -%}  
+
+## Люстра 2 гостиная
+- alias: 05_gg_cell_2_light
+  initial_state: true
+  trigger:
+## Квадратная кнопка на комоде
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.switch_158d0001b86d2e
+        click_type: double
+## Тряска кубика
+    - platform: event
+      event_type: xiaomi_aqara.cube_action
+      event_data:
+        entity_id: binary_sensor.cube_158d0001186d82
+        action_type: shake_air
+## Выключатель возле комода - левая кнопка
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_left_158d0001f47e10
+        click_type: single
+  action:    
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {%- if states.light.yeelight_05_ceiling2.state == 'off' -%}
+          script.05_gg_650_2_on
+          {%- else -%}
+          script.05_gg_650_2_off
+          {%- endif -%}  
+
+## Люстра 1 гостиная - цветовая температура
+- alias: 05_gg_cell_1_light_temp
+  initial_state: true
+  trigger:
+## Слайдер
+   - platform: state
+     entity_id: input_number.yeelight_05_ceiling1_temp
+  condition:
+   - condition: state
+     entity_id: light.yeelight_05_ceiling1
+     state: 'on'
+  action: 
+   - service: light.turn_on
+     data_template:
+       entity_id: light.yeelight_05_ceiling1
+       kelvin: "{{ trigger.to_state.state | int }}"
+
+## Люстра 2 гостиная - цветовая температура
+- alias: 05_gg_cell_2_light_temp
+  initial_state: true
+  trigger:
+## Слайдер
+   - platform: state
+     entity_id: input_number.yeelight_05_ceiling2_temp
+  condition:
+   - condition: state
+     entity_id: light.yeelight_05_ceiling2
+     state: 'on'
+  action: 
+   - service: light.turn_on
+     data_template:
+       entity_id: light.yeelight_05_ceiling2
+       kelvin: "{{ trigger.to_state.state | int }}"
+
+## Полное освещение
+- alias: 05_gg_full_light
+  initial_state: true
+  trigger:
+## Подброс кубика
+    - platform: event
+      event_type: xiaomi_aqara.cube_action
+      event_data:
+        entity_id: binary_sensor.cube_158d0001186d82
+        action_type: free_fall
+## Выключатель возле комода - обе кнопки
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_both_158d0001f47e10
+        click_type: both
+  action:    
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {%- if states.light.yeelight_05_ceiling1.state == 'on' and states.light.yeelight_05_ceiling2.state == 'on' -%}
+          script.05_gg_650_1_off, script.05_gg_650_2_off
+          {%- else -%}
+          script.05_gg_650_full_on
+          {%- endif -%}  
+
+## Светильники на стене
+- alias: 05_gg_wall_light
+  initial_state: true
+  trigger:
+## Круглая кнопка на комоде
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001531698
+      click_type: single
+## Круглая кнопка в прихожей
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d00010b1963
+      click_type: single
+## Переворот кубика на 90 градусов
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0001186d82
+      action_type: flip90
+## Выключатель на входе в комнату - правая кнопка
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_right_158d00013fc3bc
+      click_type: single   
+  action:
+    service: light.toggle
+    entity_id: light.aqara_05_wall
+    
+## Режим просмотра фильмов
+- alias: 05_gg_movie_light
+  initial_state: true
+  trigger:
+## Круглая кнопка на комоде
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001531698
+      click_type: long_click_press
+  action:    
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {%- if states.light.yeelight_05_rgbtvbulb.state == 'off' -%}
+          script.05_gg_movie_on
+          {%- elif states.light.yeelight_05_rgbtvbulb.state == 'on' -%}
+          script.05_gg_movie_off
+          {%- endif -%}  
+
+## Управление телевизором        
+- alias: 05_tv_samsung
+  initial_state: true
+  trigger:
+## Круглая кнопка на комоде
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001531698
+      click_type: double
+## Двойной тап кубиком
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d0001186d82
+      action_type: tap_twice
+  action:
+    service: script.turn_on
+    entity_id: script.samsung_tv
+    
+## Люстра на балконе вкл
+- alias: 05_gg_balkoon_light_on
+  initial_state: true
+  trigger:
+## Выключатель на входе на балкон
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_158d00010b5aee
+      click_type: single   
+  condition:
+   - condition: state
+     entity_id: light.66633530807d3a766432
+     state: 'off'
+  action:
+   - service: light.turn_on
+     entity_id:
+      - light.66633530807d3a766432
+     data_template:
+        brightness_pct: 100
+        kelvin: 5500
+        
+## Люстра на балконе выкл
+- alias: 05_gg_balkoon_light_off
+  initial_state: true
+  trigger:
+## Выключатель на входе на балкон
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_158d00010b5aee
+      click_type: single   
+  condition:
+   - condition: state
+     entity_id: light.66633530807d3a766432
+     state: 'on'
+  action:
+   - service: light.turn_off
+     entity_id:
+      - light.66633530807d3a766432

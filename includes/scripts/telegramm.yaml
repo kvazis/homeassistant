@@ -1,0 +1,6 @@
+  weather_message:
+    sequence:
+    - service: notify.telegram
+      data:
+        title: 'Прогноз погоды'
+        message: "Текущая температура {{ states('sensor.pws_temp_c') }} С, {{ states('sensor.pws_weather') }}, завтра - {{ states('sensor.pws_weather_2d_metric') }} "    

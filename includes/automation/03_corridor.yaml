@@ -1,0 +1,152 @@
+## Светильники прихожая и коридор
+- alias: 03_corr_entr
+  initial_state: true
+  trigger:
+## Нажатие на две кнопки одновременно
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_both_158d00013fc3bc
+      click_type: both
+  action: 
+  - service: script.turn_on
+    data_template:
+     entity_id: >-
+        {%- if states.light.yeelight_03_ceiling.state == 'off' and states.light.yeelight_01_whitebulb.state  == 'off' -%}
+        script.01_enter_on
+        {%- elif states.light.yeelight_03_ceiling.state == 'off' and states.light.yeelight_01_whitebulb.state  == 'on' and (as_timestamp (now()) -as_timestamp(states.light.yeelight_01_whitebulb.last_changed) <= 15) -%}
+        script.03_corr_on
+        {%- elif states.light.yeelight_03_ceiling.state == 'on' and states.light.yeelight_01_whitebulb.state  == 'on' -%}
+        script.01_enter_off, script.03_corr_off
+        {%- elif states.light.yeelight_03_ceiling.state == 'off' and states.light.yeelight_01_whitebulb.state  == 'on' and (as_timestamp (now()) -as_timestamp(states.light.yeelight_01_whitebulb.last_changed) > 15) -%}
+        script.01_enter_off
+        {%- elif states.light.yeelight_03_ceiling.state == 'on' and states.light.yeelight_01_whitebulb.state  == 'off' -%}
+        script.03_corr_off
+        {%- endif -%}   
+
+## Ручное управление светом
+- alias: 03_corr_light
+  initial_state: true
+  trigger:
+## Выключатель на входе
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_left_158d0001718ca8
+      click_type: single
+## Кнопка в шкафу
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001f3fefe
+      click_type: single
+## Квадратная кнопка на кухне
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001a672ef
+      click_type: double
+  action: 
+  - service: script.turn_on
+    data_template:
+     entity_id: >-
+        {%- if states.light.yeelight_03_ceiling.state == 'off' -%}
+        script.03_corr_on
+        {%- elif states.light.yeelight_03_ceiling.state == 'on'-%}
+        script.03_corr_off
+        {%- endif -%}
+        
+## Датчик вибрации     
+- alias: 03_corr_light_on_vibro
+  initial_state: true
+  trigger:
+## Квадратная датчик вибрации
+  - platform: event
+    event_type: xiaomi_aqara.movement
+    event_data:
+      entity_id: binary_sensor.vibration_158d0002a4f77e
+      click_type: free_fall
+  condition:
+    - condition: state
+      entity_id: light.yeelight_03_ceiling
+      state: 'off'
+    - condition: time
+      after: '08:00:00'
+      before: '22:00:00'
+  action:
+    - service: light.turn_on
+      entity_id:
+        - light.yeelight_03_ceiling
+      data_template:
+        brightness_pct: 75
+        kelvin: 4000
+    - delay: 00:00:15
+    - service: light.turn_off
+      entity_id:
+        - light.yeelight_03_ceiling
+        
+## Таймер освещения вкл
+- alias: 03_corridor_light_timer_on
+  initial_state: true
+  trigger:
+## Лампочка включается
+  - platform: state
+    entity_id: light.yeelight_03_ceiling
+    from: 'off'
+    to: 'on'
+  action:
+  - service: timer.cancel
+    entity_id: timer.corridor
+  - service: timer.start
+    entity_id: timer.corridor
+#    data_template: 
+#      duration: '00:05:00'
+
+## Таймер освещения обновление
+- alias: 03_corridor_light_timer_reload
+  initial_state: true
+  trigger:
+# Датчик движения
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d00010f8920
+  condition:
+    - condition: state
+      entity_id: light.yeelight_03_ceiling
+      state: 'on'
+  action:
+  - service: timer.cancel
+    entity_id: timer.corridor
+  - service: timer.start
+    entity_id: timer.corridor
+    
+## Таймер освещения выкл
+- alias: 03_corridor_light_timer_off
+  initial_state: true
+  trigger:
+## Лампочка включается
+  - platform: state
+    entity_id: light.yeelight_03_ceiling
+    from: 'on'
+    to: 'off'
+  action:
+  - service: timer.cancel
+    entity_id: timer.corridor
+        
+## Автоматическое отключение света       
+- alias: 03_corr_light_auto_off
+  initial_state: true
+  trigger:
+   - platform: event
+     event_type: timer.finished
+     event_data:
+       entity_id: timer.corridor
+  condition:
+    - condition: state
+      entity_id: light.yeelight_03_ceiling
+      state: 'on'
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.yeelight_03_ceiling

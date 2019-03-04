@@ -1,0 +1,247 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 50.521875
+  longitude: 30.463800
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Kiev
+  # Customization file
+  customize: !include customize.yaml
+  
+  whitelist_external_dirs :
+   - /config
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+http:
+  api_password: !secret http_password
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - yeelight
+
+system_health:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+tuya:
+  username: !secret tuya_username
+  password: !secret tuya_password
+  country_code: 380
+
+lovelace:
+  mode: yaml
+
+# Track the sun
+sun:
+
+weather:
+  - platform: openweathermap
+    api_key: !secret openweathermap_key
+# Weather prediction
+sensor: !include_dir_merge_list includes/sensors
+#  - platform: yr
+switch: !include includes/switch.yaml
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+mqtt:
+  broker: 192.168.0.70
+
+plant: !include includes/plants.yaml
+#device_tracker: !include includes/device.yaml
+binary_sensor: !include includes/binsensor.yaml
+input_number: !include includes/input_number.yaml
+
+recorder: 
+  purge_keep_days: 3
+  include:
+    domains:
+      - switch
+      - light
+      - binary_sensor
+      - sensor
+  exclude:
+    entities:
+      - sensor.mqtt_power_today_158d0001291d12
+      - sensor.mqtt_power_yesterday_158d0001291d12
+      - sensor.mqtt_power_month_158d0001291d12
+      - sensor.mqtt_power_lastmonth_158d0001291d12
+      - sensor.money_month_158d0001291d12
+      - sensor.money_lastmonth_158d0001291d12
+      - sensor.mqtt_power_today_158d0001fa2934
+      - sensor.mqtt_power_yesterday_158d0001fa2934
+      - sensor.mqtt_power_month_158d0001fa2934
+      - sensor.mqtt_power_lastmonth_158d0001fa2934
+      - sensor.money_month_158d0001fa2934
+      - sensor.money_lastmonth_158d0001fa2934
+      - sensor.mqtt_power_today_158d0001d35bc0
+      - sensor.mqtt_power_yesterday_158d0001d35bc0
+      - sensor.mqtt_power_month_158d0001d35bc0
+      - sensor.mqtt_power_lastmonth_158d0001d35bc0
+      - sensor.money_month_158d0001d35bc0
+      - sensor.money_lastmonth_158d0001d35bc0
+      - sensor.mqtt_power_today_wifi_socket_usb
+      - sensor.mqtt_power_yesterday_wifi_socket_usb
+      - sensor.mqtt_power_month_wifi_socket_usb
+      - sensor.mqtt_power_lastmonth_wifi_socket_usb
+      - sensor.money_month_wifi_socket_usb
+      - sensor.money_lastmonth_wifi_socket_usb
+      - sensor.mqtt_power_today_158d00012896cb
+      - sensor.mqtt_power_yesterday_158d00012896cb
+      - sensor.mqtt_power_month_158d00012896cb
+      - sensor.mqtt_power_lastmonth_158d00012896cb
+      - sensor.money_month_158d00012896cb
+      - sensor.money_lastmonth_158d00012896cb
+      - sensor.mqtt_power_today_158d000153dd8e
+      - sensor.mqtt_power_yesterday_158d000153dd8e
+      - sensor.mqtt_power_month_158d000153dd8e
+      - sensor.mqtt_power_lastmonth_158d000153dd8e
+      - sensor.money_month_158d000153dd8e
+      - sensor.money_lastmonth_158d000153dd8e
+      - sensor.mqtt_power_today_wifi_6port
+      - sensor.mqtt_power_yesterday_wifi_6port
+      - sensor.mqtt_power_month_wifi_6port
+      - sensor.mqtt_power_lastmonth_wifi_6port
+      - sensor.money_month_wifi_6port
+      - sensor.money_lastmonth_wifi_6port
+      - sensor.mqtt_power_today_158d00015751f4
+      - sensor.mqtt_power_yesterday_158d00015751f4
+      - sensor.mqtt_power_month_158d00015751f4
+      - sensor.mqtt_power_lastmonth_158d00015751f4
+      - sensor.money_month_158d00015751f4
+      - sensor.money_lastmonth_158d00015751f4
+      - sensor.mqtt_power_today_158d000114a1e1
+      - sensor.mqtt_power_yesterday_158d000114a1e1
+      - sensor.mqtt_power_month_158d000114a1e1
+      - sensor.mqtt_power_lastmonth_158d000114a1e1
+      - sensor.money_month_158d000114a1e1
+      - sensor.money_lastmonth_158d000114a1e1
+      - sensor.mqtt_power_today_158d00010ec4b8
+      - sensor.mqtt_power_yesterday_158d00010ec4b8
+      - sensor.mqtt_power_month_158d00010ec4b8
+      - sensor.mqtt_power_lastmonth_158d00010ec4b8
+      - sensor.money_month_158d00010ec4b8
+      - sensor.money_lastmonth_158d00010ec4b8 
+      - binary_sensor.ping_dlinknas
+      - binary_sensor.ping_printerhp
+      - binary_sensor.ping_ggtv
+      - binary_sensor.ping_kntv
+      - binary_sensor.ping_tvboxgg
+      - binary_sensor.ping_tvboxkn
+      - binary_sensor.ping_acer
+      - binary_sensor.ping_hp
+      - binary_sensor.ping_sony
+      - binary_sensor.ping_chuwinb
+      - binary_sensor.ping_orange_primary_70
+      - binary_sensor.ping_orange_secondary_71
+      - binary_sensor.ping_raspberry
+      - binary_sensor.ping_khadas_vim2_basic
+      - binary_sensor.ping_gateway1
+      - binary_sensor.ping_gateway2
+      - binary_sensor.ping_gateway3
+      - binary_sensor.ping_gateway4
+      - binary_sensor.ping_alfawise_cam
+      - binary_sensor.ping_reolink_cam
+      - binary_sensor.ping_xiaofang_cam
+
+      
+group: !include groups.yaml
+#automation: !include automations.yaml
+automation: !include_dir_merge_list includes/automation
+script: !include_dir_merge_named includes/scripts
+media_player: !include includes/mplayer.yaml
+light: !include includes/light.yaml
+camera: !include includes/camera.yaml
+timer: !include includes/timer.yaml
+fan: !include includes/fan.yaml
+
+
+remote:
+  - platform: xiaomi_miio
+    name: "kitchen remote"
+    host: 192.168.0.135
+    token: db472a45b4f1913439abaab3f7ff6356
+    slot: 3
+    timeout: 30
+    hidden: false
+
+panel_iframe:
+  configurator:
+    title: Конфигуратор
+    icon: mdi:wrench
+    url: http://192.168.0.70:3218/
+
+
+xiaomi_aqara:
+  discovery_retry: 10
+  gateways:
+    - mac: F0:B4:29:CC:1F:11
+      key: !secret gateway1_api
+    - mac: 28:6C:07:F0:AD:27
+      key: !secret gateway2_api
+    - mac: 34:CE:00:88:B0:39
+      key: !secret gateway3_api
+    - mac: 78:11:DC:64:F4:C8
+      key: !secret gateway4_api
+      
+notify:
+  - name: mailer
+    platform: smtp
+    server: smtp.gmail.com
+    port: 587
+    timeout: 15
+    sender: !secret notify_mail
+    encryption: starttls
+    username: !secret notify_mail
+    password: !secret notify_password
+    recipient:
+      - !secret notify_mail
+    sender_name: My Home Assistant
+  - name: telegram
+    platform: telegram
+    chat_id: !secret chat_id
+    
+telegram_bot:
+  - platform: polling
+    api_key: !secret api_key_70
+    allowed_chat_ids:
+      - !secret chat_id

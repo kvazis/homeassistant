@@ -1,0 +1,35 @@
+  - platform: mqtt
+    state_topic: "power/bw_relay/yesterday"
+    name: 'mqtt_power_yesterday_bw_relay'
+    unit_of_measurement: 'кВт⋅ч'
+        
+  - platform: mqtt
+    state_topic: "power/bw_relay/today"
+    name: 'mqtt_power_today_bw_relay'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/bw_relay/month"
+    name: 'mqtt_power_month_bw_relay'
+    unit_of_measurement: 'кВт⋅ч'
+    
+  - platform: mqtt
+    state_topic: "power/bw_relay/lastmonth"
+    name: 'mqtt_power_lastmonth_bw_relay'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: template
+    sensors:
+      money_month_bw_relay:
+        friendly_name: "Стоимость за текущий месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_month_bw_relay.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+  - platform: template
+    sensors:
+      money_lastmonth_bw_relay:
+        friendly_name: "Стоимость за прошлый месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_lastmonth_bw_relay.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 

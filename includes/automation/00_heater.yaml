@@ -1,0 +1,105 @@
+# Выключение бойлера 
+- alias: 00_heater_off
+  initial_state: false
+  trigger:       
+   - platform: event
+     event_type: timer.finished
+     event_data:
+       entity_id: timer.heater
+   - platform: event
+     event_type: xiaomi_aqara.click
+     event_data:
+       entity_id: binary_sensor.switch_158d00016d8628
+       click_type: long_click_press
+  condition:
+  - condition: state
+    entity_id: switch.wall_plug_158d00015751f4
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.wall_plug_158d00015751f4
+
+# Уведомление о включении бойлера
+- alias: 00_heater_notification_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_plug_158d00015751f4
+   from: 'off'
+   to: 'on'
+  action:
+  - service: notify.telegram
+    data:
+      title: 'Бойлер вкл'
+      message: "Бойлер включен в  {{ states('sensor.time_date') }}"
+
+# Уведомление о выключении бойлера, стоп таймера
+- alias: 00_heater_notification_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_plug_158d00015751f4
+   from: 'on'
+   to: 'off'
+  action:
+  - service: notify.telegram
+    data:
+      title: 'Бойлер выкл'
+      message: "Бойлер выключен в  {{ states('sensor.time_date') }}"
+  - service: timer.cancel
+    entity_id: timer.heater
+
+# Включение бойлера утром по будням
+- alias: 00_heater_week_on
+  initial_state: false
+  trigger:
+  - platform: time
+    at: '05:00:00'
+  - platform: time
+    at: '20:00:00'
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d00016d8628
+      click_type: long_click_press
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:
+  - service: timer.cancel
+    entity_id: timer.heater
+  - service: timer.start
+    entity_id: timer.heater
+  - service: switch.turn_on
+    entity_id: switch.wall_plug_158d00015751f4
+
+# Включение бойлера утром по выходным        
+- alias:  00_heater_weekend_on
+  initial_state: false
+  trigger:
+  - platform: time
+    at: '08:00:00'
+  - platform: time
+    at: '20:00:00'
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d00016d8628
+      click_type: long_click_press
+  condition:
+  - condition: time
+    weekday:
+      - sat
+      - sun
+  action:
+  - service: timer.cancel
+    entity_id: timer.heater
+  - service: timer.start
+    entity_id: timer.heater
+  - service: switch.turn_on
+    entity_id: switch.wall_plug_158d00015751f4

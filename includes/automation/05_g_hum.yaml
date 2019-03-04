@@ -1,0 +1,88 @@
+## Форсированный режим увлажнения
+- alias: 05_gg_hum_auto_on
+  initial_state: true
+  trigger:
+   - platform: numeric_state
+     entity_id: sensor.humidity_158d00015aebb6
+     below: 45
+  condition:
+     - condition: state
+       entity_id: switch.forse_hum
+       state: 'off'
+     - condition: time
+       after: '09:00:00'
+       before: '18:00:00'
+     - condition: state
+       entity_id: binary_sensor.door_window_sensor_158d00013ed373
+       state: 'off'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.forse_hum
+
+## Отключение форсированного режима увлажнения      
+- alias:  05_gg_hum_timer_off
+  initial_state: true
+  trigger:
+   - platform: event
+     event_type: timer.finished
+     event_data:
+       entity_id: timer.humidifier
+  action:    
+  - service: switch.turn_off
+    entity_id: switch.forse_hum
+
+## Включение увлажнителя и очистителя  
+- alias: 05_gg_hum_on
+  initial_state: true
+  trigger:
+   - platform: time
+     at: '09:00:00' 
+   - platform: state
+     entity_id: binary_sensor.door_window_sensor_158d00013ed373
+     from: 'on'
+     to: 'off'
+  condition:
+     - condition: time
+       after: '09:00:00'
+       before: '22:00:00'
+  action:    
+   - service: homeassistant.turn_on
+     entity_id: 
+       - fan.gg_humidifier
+       - fan.gg_purifier
+   - service: fan.set_speed
+     entity_id: 
+       - fan.gg_humidifier
+       - fan.gg_purifier
+     data:
+         speed: Auto
+
+## Выключение увлажнителя и очистителя           
+- alias: 05_gg_hum_off
+  initial_state: true
+  trigger:
+   - platform: time
+     at: '22:00:00' 
+   - platform: state
+     entity_id: binary_sensor.door_window_sensor_158d00013ed373
+     from: 'off'
+     to: 'on' 
+  action:    
+   - service: homeassistant.turn_off
+     entity_id: 
+       - fan.gg_humidifier
+       - fan.gg_purifier
+   - service: switch.turn_off
+     entity_id: switch.forse_hum       
+
+## Обновление состояния уровня воды
+- alias: 05_smartmi_water_update
+  initial_state: true
+  trigger:
+    - platform: time_pattern
+      minutes: '/5'
+  action:
+    - service: homeassistant.update_entity
+      entity_id: 
+        - sensor.smartmi_water
+      

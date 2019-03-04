@@ -1,0 +1,9 @@
+- alias: 77_youtube_new_day
+  initial_state: true
+  trigger:
+    - platform: time
+      at: '00:00:01'
+  action:
+##### Запись данных за прошедший день
+    - service: script.turn_on
+      entity_id: script.77_youtube_views

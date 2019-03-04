@@ -1,0 +1,66 @@
+  - platform: uptime
+    name: online
+    unit_of_measurement: minutes
+
+  - platform: template
+    sensors:
+       online_custom:
+         
+         value_template: >
+           {% set uptime = states.sensor.online.state | int %}
+           {% set minutes = (( uptime % 60) / 1) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+
+  - platform: template
+    sensors:
+      last_boot_custom:
+        friendly_name: "Последняя перезагрузка"
+##        value_template: "{{ now().strftime('%H:%M   %d/%m') }}"
+##        value_template: "{{ as_timestamp (now()) -as_timestamp(states.sensor.last_boot.state) | int }}"
+        value_template: >
+           {% set uptime = as_timestamp (now()) -as_timestamp(states.sensor.last_boot.state) | int %}
+           {% set minutes = (( uptime % 3660) / 60) | int %}
+           {% set hours = ((uptime % 86400) / 3600) | int %}
+           {% set days = (uptime / 86400) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+

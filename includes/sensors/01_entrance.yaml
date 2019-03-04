@@ -1,0 +1,3 @@
+  - platform: mqtt
+    state_topic: "binary_sensor/158d000119378d"
+    name: 'mqtt_binary_sensor_158d000119378d'

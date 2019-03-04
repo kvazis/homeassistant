@@ -1,0 +1,149 @@
+- platform: ping
+  host: 192.168.0.5
+  name: ping.dlinknas
+  count: 2
+  scan_interval: 30
+
+- platform: ping
+  host: 192.168.0.10
+  name: ping.ggtv
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.11
+  name: ping.kntv
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.15
+  name: ping.tvboxgg
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.15
+  name: ping.tvboxkn
+  count: 2
+  scan_interval: 30
+
+- platform: ping
+  host: 192.168.0.20
+  name: ping.acer
+  count: 2
+  scan_interval: 30
+    
+- platform: ping
+  host: 192.168.0.21
+  name: ping.hp
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.22
+  name: ping.sony
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.23
+  name: ping.chuwinb
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.29
+  name: ping.printerhp
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.70
+  name: ping.Orange Primary 70
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.71
+  name: ping.Orange Secondary 71
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.72
+  name: ping.raspberry
+  count: 2
+  scan_interval: 30
+
+- platform: ping
+  host: 192.168.0.73
+  name: ping.Khadas VIM2 Basic
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.80
+  name: ping.gateway1
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.81
+  name: ping.gateway2
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.82
+  name: ping.gateway3
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.83
+  name: ping.gateway4
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.125
+  name: ping.xiaofang_cam
+  count: 2
+  scan_interval: 30
+
+- platform: ping
+  host: 192.168.0.126
+  name: ping.reolink_cam
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.127
+  name: ping.alfawise_cam
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.128
+  name: ping.reolink2_cam
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.135
+  name: ping.xiaomi_ir
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.136
+  name: ping.broadlink_ir
+  count: 2
+  scan_interval: 30
+
+- platform: ping
+  host: 192.168.0.142
+  name: ping.xiaomi_tvoc
+  count: 2
+  scan_interval: 30

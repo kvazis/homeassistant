@@ -1,0 +1,40 @@
+- alias: 911_orange_71_loston
+  initial_state: true
+  trigger:
+   platform: state
+   entity_id: sensor.orange2_state
+   to: 'unavailable'
+  condition:
+    - condition: state
+      entity_id: automation.06_bathroom_cell_power
+      state: 'off'     
+  action:
+    - service: notify.telegram
+      data:
+        message: "Потеря связи с резервным сервером, Orange 71 - {{ states('sensor.time_date') }} . Включение сценариев"
+        
+- alias: 911_orange_71_lost
+  initial_state: true
+  trigger:
+   platform: state
+   entity_id: sensor.orange2_state
+   to: 'unavailable'
+  condition:
+    - condition: state
+      entity_id: automation.06_bathroom_cell_power
+      state: 'on'     
+  action:
+    - service: notify.telegram
+      data:
+        message: "Потеря связи с резервным сервером, Orange 71 - {{ states('sensor.time_date') }} Сценарии активны."
+        
+- alias: 911_orange_71_online
+  initial_state: true
+  trigger:
+   platform: state
+   entity_id: sensor.orange2_state
+   from: 'unavailable'
+  action:
+    - service: notify.telegram
+      data:
+        message: "Связь с резервнымм сервером, Orange 71 восстановлена в - {{ states('sensor.time_date') }} ."

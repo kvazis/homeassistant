@@ -1,0 +1,38 @@
+  - platform: template
+    sensors:
+      smartmi_mode:
+        friendly_name: 'Режим увлажнителя'
+        value_template: "{{ state_attr('fan.gg_humidifier', 'mode') }}"
+        icon_template: mdi:speedometer
+
+  - platform: template
+    sensors:
+      smartmi_water:
+        friendly_name: 'Уровень воды'
+        unit_of_measurement: '%'
+        entity_id: fan.xiaomi_humidifier
+        value_template: "{{ [state_attr('fan.gg_humidifier', 'depth') / 1.2, 100] | min | int }}"
+        icon_template: mdi:water-percent
+        
+  - platform: template
+    sensors:
+      purifier_mode:
+        friendly_name: 'Режим очистителя'
+        value_template: "{{ state_attr('fan.gg_purifier', 'mode') }}"
+        icon_template: mdi:speedometer
+
+  - platform: template
+    sensors:
+      purifier_filter:
+        friendly_name: 'Фильтр израсходован на - '
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('fan.gg_purifier', 'filter_life_remaining') }}"
+        icon_template: mdi:ticket-percent
+        
+  - platform: template
+    sensors:
+      purifier_pm25:
+        friendly_name: ' Оценка загрязения воздуха - '
+        unit_of_measurement: 'pm 2.5'
+        value_template: "{{ state_attr('fan.gg_purifier', 'aqi') }}"
+        icon_template: mdi:image-filter-center-focus-weak

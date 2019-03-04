@@ -1,0 +1,163 @@
+# Управление люстрой
+- alias: 07_dd_philips
+  initial_state: true
+  trigger:
+# Выключатель у входа
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_right_158d000163e571
+      click_type: single
+# Кнопка возле кровати
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d00013f82b7
+      click_type: double 
+# Кубик
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00011063da
+      action_type: flip90
+  action:    
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+         {%- if states.light.philips_07_ceiling.state == 'off'-%}
+         script.07_dd_philpis_on
+         {%- elif states.light.philips_07_ceiling.state == 'on' and states("sensor.philips_07_ceiling") | int <= 1  -%}
+         script.07_dd_philpis_off
+         {%- elif states.light.philips_07_ceiling.state == 'on' and states("sensor.philips_07_ceiling") | int >= 2  -%}
+         script.07_dd_philpis_on
+         {% endif %}  
+
+# Автоматическое включение люстры 
+- alias: 07_dd_philips_auto_on
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d0001a66222
+  condition:
+   condition: and
+   conditions:
+   - condition: state
+     entity_id: light.philips_07_ceiling
+     state: 'off'
+   - condition: or
+     conditions:
+         - condition: numeric_state
+           entity_id: sensor.illumination_286c07f0ad27
+           below: 800
+         - condition: sun
+           after: sunset
+         - condition: sun
+           before: sunrise
+  action:
+   - service: light.xiaomi_miio_set_scene
+     entity_id: light.philips_07_ceiling
+     data_template:
+       scene: >           
+         {% set hour=states("sensor.time").split(':')[0] | int %}
+         {%- if hour >= 0 and hour < 8  -%}
+         4
+         {%- elif hour >= 8 and hour < 10  -%}
+         3
+         {%- elif hour >= 10 and hour < 20  -%}
+         2
+         {%- elif hour >= 20 and hour < 22  -%}
+         3
+         {%- elif hour >= 22 and hour < 24  -%}
+         4
+         {% endif %}
+        
+# Автоматическое выключение люстры 
+- alias: 07_dd_philips_auto_off
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.motion_sensor_158d0001a66222
+    from: 'on'
+    to: 'off' 
+  condition:
+   - condition: state
+     entity_id: light.philips_07_ceiling
+     state: 'on'
+   - condition: numeric_state
+     entity_id: sensor.philips_07_ceiling
+     above: 1
+  action:
+   - service: light.turn_off
+     entity_id: light.philips_07_ceiling
+
+# Управление бра 
+- alias: 07_dd_bra
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_left_158d000163e571
+      click_type: single
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d00013f82b7
+      click_type: single  
+  action: 
+  - service: script.turn_on
+    data_template:
+     entity_id: >-
+        {%- if states.light.yeelight_07_whitebulb.state  == 'off' -%}
+        script.07_dd_bra_on
+        {%- elif states.light.yeelight_07_whitebulb.state  == 'on' -%}
+        script.07_dd_bra_off
+        {%- endif -%}
+        
+        
+# Выключение всего          
+- alias: 07_dd_all_off
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_both_158d000163e571
+      click_type: both
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00011063da
+      action_type: free_fall 
+  action:
+    - service: script.turn_on
+      entity_id: script.07_dd_lightoff
+
+# Принтер 
+- alias: 07_hp_toggle
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: xiaomi_aqara.cube_action
+    event_data:
+      entity_id: binary_sensor.cube_158d00011063da
+      action_type: flip180
+  action:
+    service: switch.toggle
+    entity_id: switch.plug1
+        
+# Включение ноутбука Sony
+- alias: 07_sony_on
+  initial_state: true
+  trigger:
+   platform: state
+   entity_id: binary_sensor.sony
+   from: 'off'
+   to: 'on'
+  action: 
+  - service: notify.telegram
+    data:
+      message: "Ноубтук Sony включен в {{ states('sensor.time_date') }}"
+   

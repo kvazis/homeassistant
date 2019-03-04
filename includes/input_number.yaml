@@ -1,0 +1,13 @@
+  yeelight_05_ceiling1_temp:
+    name: Гостиная люстра 1, цветовая температура
+    initial: 4000
+    min: 3000
+    max: 5000
+    step: 500
+
+  yeelight_05_ceiling2_temp:
+    name: Гостиная люстра 2, цветовая температура
+    initial: 4000
+    min: 3000
+    max: 5000
+    step: 500

@@ -1,0 +1,83 @@
+## Включение увлажнения
+- alias: 08_da_hum_auto_on
+  initial_state: true
+## ТРИГГЕР !!!
+  trigger:
+## Проверка каждые 5 минут
+   - platform: time_pattern
+     minutes: '/5'
+## Закрытие окна      
+   - platform: state
+     entity_id: binary_sensor.door_window_sensor_158d0001583c7b
+     from: 'on'
+     to: 'off'  
+## УСЛОВИЯ !!!
+  condition:
+## Увлажнитель выключен
+     - condition: state
+       entity_id: switch.plug_158d00010ec4b8
+       state: 'off'
+## Влажность ниже 45 %
+     - condition: numeric_state
+       entity_id: sensor.humidity_158d000159c7e6
+       below: 45
+## Время работы
+     - condition: time
+       after: '08:00:00'
+       before: '21:29:00'
+## Закрыто окно
+     - condition: state
+       entity_id: binary_sensor.door_window_sensor_158d0001583c7b
+       state: 'off'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.plug_158d00010ec4b8
+    
+    
+## Выключение увлажнения
+- alias: 08_da_hum_auto_off
+  initial_state: true
+  trigger:
+## Влажность выше 55 %
+   - platform: numeric_state
+     entity_id: sensor.humidity_158d000159c7e6
+     above: 55
+## Открыто окно
+   - platform: state
+     entity_id: binary_sensor.door_window_sensor_158d0001583c7b
+     from: 'off'
+     to: 'on'
+## 21:30 вечера
+   - platform: time
+     at: '21:30:00'
+  condition:
+## Увлажнитель включен
+     - condition: state
+       entity_id: switch.plug_158d00010ec4b8
+       state: 'on'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.plug_158d00010ec4b8
+
+## Предупреждение о недостатке воды    
+- alias: 08_da_hum_water_warning
+  initial_state: true
+  trigger:
+## Падение мощности менее 10 Ватт
+   - platform: numeric_state
+     entity_id: sensor.load_158d00010ec4b8
+     below: 10
+  condition:
+## Увлажнитель включен
+     - condition: state
+       entity_id: switch.plug_158d00010ec4b8
+       state: 'on'
+## Время работы
+     - condition: time
+       after: '08:00:00'
+       before: '21:29:00'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Детская А, в увлажнителе кончилась вода, или он отключен вручную, время - {{ states('sensor.time_date') }}"

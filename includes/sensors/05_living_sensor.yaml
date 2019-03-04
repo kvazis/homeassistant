@@ -1,0 +1,190 @@
+  - platform: template
+    sensors:
+      philips_05_bedside:
+        friendly_name: 'Гостиная, ночник   сцена - '
+        value_template: "{{ state_attr('light.philips_05_bedside', 'scene') }}"  
+        icon_template: mdi:numeric
+        entity_id: light.philips_05_bedside
+
+
+  - platform: template
+    sensors:
+      load_wifi_socket_usb:
+        friendly_name: 'Гостиная телевизор'
+        value_template: "{{ state_attr('switch.xiaomi_wifi_socket_usb', 'load_power') }}"
+        icon_template: mdi:flash
+        unit_of_measurement: 'Вт'
+        entity_id: switch.xiaomi_wifi_socket_usb
+
+  - platform: mqtt
+    state_topic: "power/wifi_socket_usb/yesterday"
+    name: 'mqtt_power_yesterday_wifi_socket_usb'
+    unit_of_measurement: 'кВт⋅ч'
+        
+  - platform: mqtt
+    state_topic: "power/wifi_socket_usb/today"
+    name: 'mqtt_power_today_wifi_socket_usb'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/wifi_socket_usb/month"
+    name: 'mqtt_power_month_wifi_socket_usb'
+    unit_of_measurement: 'кВт⋅ч'
+    
+  - platform: mqtt
+    state_topic: "power/wifi_socket_usb/lastmonth"
+    name: 'mqtt_power_lastmonth_wifi_socket_usb'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: template
+    sensors:
+      money_month_wifi_socket_usb:
+        friendly_name: "Стоимость за текущий месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_month_wifi_socket_usb.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+  - platform: template
+    sensors:
+      money_lastmonth_wifi_socket_usb:
+        friendly_name: "Стоимость за прошлый месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_lastmonth_wifi_socket_usb.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+
+
+  - platform: template
+    sensors:
+      load_158d00012896cb:
+        friendly_name: 'Ноутбук Acer'
+        value_template: "{{ state_attr('switch.plug_158d00012896cb', 'load_power') }}"
+        icon_template: mdi:flash
+        unit_of_measurement: 'Вт'
+        entity_id: switch.plug_158d00012896cb
+
+  - platform: mqtt
+    state_topic: "power/158d00012896cb/yesterday"
+    name: 'mqtt_power_yesterday_158d00012896cb'
+    unit_of_measurement: 'кВт⋅ч'
+        
+  - platform: mqtt
+    state_topic: "power/158d00012896cb/today"
+    name: 'mqtt_power_today_158d00012896cb'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/158d00012896cb/month"
+    name: 'mqtt_power_month_158d00012896cb'
+    unit_of_measurement: 'кВт⋅ч'
+    
+  - platform: mqtt
+    state_topic: "power/158d00012896cb/lastmonth"
+    name: 'mqtt_power_lastmonth_158d00012896cb'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: template
+    sensors:
+      money_month_158d00012896cb:
+        friendly_name: "Стоимость за текущий месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_month_158d00012896cb.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+  - platform: template
+    sensors:
+      money_lastmonth_158d00012896cb:
+        friendly_name: "Стоимость за прошлый месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d00012896cb.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+  - platform: template
+    sensors:
+      load_158d000153dd8e:
+        friendly_name: 'Ноутбук HP'
+        value_template: "{{ state_attr('switch.plug_158d000153dd8e', 'load_power') }}"
+        icon_template: mdi:flash
+        unit_of_measurement: 'Вт'
+        entity_id: switch.plug_158d000153dd8e
+        
+  - platform: mqtt
+    state_topic: "power/158d000153dd8e/yesterday"
+    name: 'mqtt_power_yesterday_158d000153dd8e'
+    unit_of_measurement: 'кВт⋅ч'
+        
+  - platform: mqtt
+    state_topic: "power/158d000153dd8e/today"
+    name: 'mqtt_power_today_158d000153dd8e'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/158d000153dd8e/month"
+    name: 'mqtt_power_month_158d000153dd8e'
+    unit_of_measurement: 'кВт⋅ч'
+    
+  - platform: mqtt
+    state_topic: "power/158d000153dd8e/lastmonth"
+    name: 'mqtt_power_lastmonth_158d000153dd8e'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: template
+    sensors:
+      money_month_158d000153dd8e:
+        friendly_name: "Стоимость за текущий месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_month_158d000153dd8e.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+  - platform: template
+    sensors:
+      money_lastmonth_158d000153dd8e:
+        friendly_name: "Стоимость за прошлый месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d000153dd8e.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+
+  - platform: template
+    sensors:
+      load_wifi_6port:
+        friendly_name: 'Удлинитель 6 портов'
+        value_template: "{{ state_attr('switch.wifi_6port', 'load_power') }}"
+        icon_template: mdi:flash
+        unit_of_measurement: 'Вт'
+        entity_id: switch.wifi_6port
+        
+  - platform: mqtt
+    state_topic: "power/wifi_6port/yesterday"
+    name: 'mqtt_power_yesterday_wifi_6port'
+    unit_of_measurement: 'кВт⋅ч'
+        
+  - platform: mqtt
+    state_topic: "power/wifi_6port/today"
+    name: 'mqtt_power_today_wifi_6port'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/wifi_6port/month"
+    name: 'mqtt_power_month_wifi_6port'
+    unit_of_measurement: 'кВт⋅ч'
+    
+  - platform: mqtt
+    state_topic: "power/wifi_6port/lastmonth"
+    name: 'mqtt_power_lastmonth_wifi_6port'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: template
+    sensors:
+      money_month_wifi_6port:
+        friendly_name: "Стоимость за текущий месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_month_wifi_6port.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+  - platform: template
+    sensors:
+      money_lastmonth_wifi_6port:
+        friendly_name: "Стоимость за прошлый месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_lastmonth_wifi_6port.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 

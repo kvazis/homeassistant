@@ -1,0 +1,20 @@
+  photo_door:
+    sequence:
+       - delay: 00:00:01
+       - service: camera.snapshot
+         data:
+              entity_id: camera.xiaofang
+              filename: "/config/www/cam_captures/door.jpg"
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink
+              filename: "/config/www/cam_captures/floor.jpg"
+       - delay: 00:00:05
+       - service: notify.mailer
+         data:
+              title: 'Дверь'
+              message: "Входная дверь открыта в {{ states('sensor.time_date') }}" 
+              data:
+                   images:
+                         - /config/www/cam_captures/door.jpg
+                         - /config/www/cam_captures/floor.jpg

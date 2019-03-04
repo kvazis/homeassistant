@@ -1,0 +1,46 @@
+- alias: 04_сhristmas_on
+  initial_state: false
+  trigger:
+   - platform: sun
+     event: sunset
+     offset: '00:30:00'
+   - platform: event
+     event_type: xiaomi_aqara.click
+     event_data:
+       entity_id: binary_sensor.switch_158d0001e8a244
+       click_type: single 
+  condition:
+   - condition: state
+     entity_id: light.yeelight_strip2_7c49ebb111e4
+     state: 'off'
+  action:
+   - service: light.turn_on
+     data:
+       entity_id: light.yeelight_strip2_7c49ebb111e4
+       effect: Slowdown
+   - service: switch.turn_on
+     entity_id: switch.wall_switch_ln_right_158d0001a2ccab
+
+- alias: 04_сhristmas_off
+  initial_state: false
+  trigger:
+   - platform: time
+     at: '21:00:00'
+   - platform: event
+     event_type: xiaomi_aqara.click
+     event_data:
+       entity_id: binary_sensor.switch_158d0001e8a244
+       click_type: single 
+  condition:
+   - condition: state
+     entity_id: light.yeelight_strip2_7c49ebb111e4
+     state: 'on'
+  action:
+   - service: light.turn_off
+     entity_id: light.yeelight_strip2_7c49ebb111e4
+   - service: switch.turn_off
+     entity_id: switch.wall_switch_ln_right_158d0001a2ccab
+
+
+
+

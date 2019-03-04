@@ -1,0 +1,109 @@
+####################  YEELIGHT  ####################
+
+  - platform: yeelight
+    devices:
+## Прихожая
+      192.168.0.105:
+        name: yeelight_01_whitebulb
+        transition: 1000
+## Санузел
+      192.168.0.106:
+        name: yeelight_02_ceiling
+        transition: 1000
+        model: ceiling1
+## Коридор
+      192.168.0.107:
+        name: yeelight_03_ceiling
+        transition: 1000
+        model: ceiling4
+## Гостиная
+      192.168.0.108:
+        name: yeelight_05_ceiling1
+        transition: 1000
+        model: ceiling4
+      192.168.0.109:
+        name: yeelight_05_ceiling2
+        transition: 1000
+        model: ceiling4
+      192.168.0.110:
+        name: yeelight_05_bedside
+        transition: 1000
+        model: bslamp1        
+      192.168.0.111:
+        name: yeelight_05_rgbtvbulb
+        transition: 1000
+        model: color1
+      192.168.0.120:
+        name: yeelight_05_bedside2
+        transition: 1000
+        model: bslamp1  
+## Ванная
+      192.168.0.112:
+        name: yeelight_06_ceiling
+        transition: 1000
+        model: ceiling3  
+## Детская Д
+      192.168.0.113:
+        name: yeelight_07_whitebulb
+        transition: 1000
+        model: mono1   
+## Детская А
+      192.168.0.114:
+        name: yeelight_08_bedside
+        transition: 1000
+        model: bslamp1
+      192.168.0.115:
+        name: yeelight_08_strip
+        transition: 1000
+        model: strip1 
+      192.168.0.116:
+        name: yeelight_08_table
+        model: lamp1
+
+####################  PHILIPS  ####################
+
+## Кухня
+  - platform: xiaomi_miio
+    name: philips_04_ceiling
+    host: 192.168.0.117 
+    token: f73f6c18ac3fd594c2ff3dfae32bb20f
+
+## Гостиная
+  - platform: xiaomi_miio    
+    name: philips_05_bedside
+    host: 192.168.0.118
+    token: 1b58a63916d95ba59607f36065d5f6e3
+    model: philips.light.moonlight
+
+## Детская Д    
+  - platform: xiaomi_miio    
+    name: philips_07_ceiling
+    host: 192.168.0.119 
+    token: d3388c79d4c6c0709da9c5361776fa1f
+
+####################  SWITCH  ####################    
+
+## Санузел
+  - platform: switch
+    name: aqara_02_ceiling
+    entity_id: switch.wall_switch_158d00014a1a55
+
+## Кухня
+  - platform: switch
+    name: aqara_04_strip
+    entity_id: switch.wall_plug_158d0001d35bc0
+
+## Гостиная    
+  - platform: switch
+    name: aqara_05_wall
+    entity_id: switch.wall_switch_left_158d00015723f1
+    
+## Детская Д
+  - platform: switch
+    name: broadlink_07_table
+    entity_id: switch.plug2
+
+## Детская А    
+  - platform: switch
+    name: aqara_08_ceiling
+    entity_id: switch.wall_switch_158d00014a1abd

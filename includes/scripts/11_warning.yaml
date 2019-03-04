@@ -1,0 +1,28 @@
+  11_warning:
+    sequence:
+     - service: light.xiaomi_miio_set_scene
+       entity_id: light.philips_05_bedside
+       data:
+          scene: 3
+     - service: light.turn_on
+       entity_id: light.yeelight_05_bedside
+       data_template:
+         brightness_pct: 100
+         rgb_color: [255, 0, 0]
+
+  11_all_ok:
+    sequence:
+     - service: light.xiaomi_miio_set_scene
+       entity_id: light.philips_05_bedside
+       data:
+          scene: 1
+     - service: light.turn_on
+       entity_id: light.yeelight_05_bedside
+       data_template:
+         brightness_pct: 100
+         rgb_color: [0, 255, 0]
+     - delay: 00:00:10
+     - service: light.turn_off
+       entity_id: 
+         - light.philips_05_bedside
+         - light.yeelight_05_bedside

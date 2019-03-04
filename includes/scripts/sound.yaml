@@ -1,0 +1,11 @@
+  99_sound_check:
+    sequence:
+     - service: xiaomi_aqara.play_ringtone
+       data:
+         gw_mac: 28:6C:07:F0:AD:27
+         ringtone_id: 5
+         ringtone_vol: 5
+     - delay: 00:00:01
+     - service: xiaomi_aqara.stop_ringtone
+       data:
+         gw_mac: 28:6C:07:F0:AD:27

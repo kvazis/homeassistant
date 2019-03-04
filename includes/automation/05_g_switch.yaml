@@ -1,0 +1,40 @@
+- alias: 05_usb_poweroff_week
+  initial_state: false
+  trigger:
+  - platform: time
+    at: '08:00:00'
+  condition:
+  - condition: time
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+  action:    
+  - service: switch.turn_off
+    entity_id: switch.xiaomi_wifi_socket_usb_usb
+
+- alias: 05_usb_poweroff
+  initial_state: false
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  action:    
+  - service: switch.turn_off
+    entity_id: switch.xiaomi_wifi_socket_usb_usb
+
+- alias: 05_usb_poweron
+  initial_state: false
+  trigger:
+  - platform: time
+    at: '06:00:00'
+  - platform: time
+    at: '17:00:00'
+  condition:
+   - condition: state
+     entity_id: switch.xiaomi_wifi_socket_usb_usb
+     state: 'off'
+  action:    
+  - service: switch.turn_on
+    entity_id: switch.xiaomi_wifi_socket_usb_usb

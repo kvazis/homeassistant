@@ -1,0 +1,33 @@
+  - platform: socialblade
+    channel_id: !secret socialblade_id
+    
+  - platform: template
+    sensors:
+      totalviews_today:
+        friendly_name: 'Просмотры на youtube'
+        value_template: "{{ state_attr('sensor.social_blade', 'total_views') }}"
+        icon_template: mdi:eye-outline
+        entity_id: sensor.social_blade
+
+  - platform: mqtt
+    state_topic: "youtube/totalviews/yesterday"
+    name: 'totalviews_yesterday'
+
+
+  - platform: template
+    sensors:
+      views_today:
+        friendly_name: "Просмотров сегодня"
+        value_template: "{{ (states.sensor.totalviews_today.state | float - states.sensor.totalviews_yesterday.state | float)|round(0) }}"
+        icon_template: mdi:eye-outline
+        
+  - platform: mqtt
+    state_topic: "youtube/totalsubs/yesterday"
+    name: 'totalsubs_yesterday'
+
+  - platform: template
+    sensors:
+      subs_today:
+        friendly_name: "Подписчиков сегодня"
+        value_template: "{{ (states.sensor.social_blade.state | float - states.sensor.totalsubs_yesterday.state | float)|round(0) }}"
+        icon_template: mdi:account-multiple

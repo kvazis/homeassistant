@@ -1,0 +1,14 @@
+  03_corr_on:
+    sequence:
+      - service: light.turn_on
+        entity_id:
+          -  light.yeelight_03_ceiling
+        data_template:
+          brightness_pct: 80
+          kelvin: 4000
+          
+  03_corr_off:
+    sequence:
+      - service: light.turn_off
+        entity_id:
+          -  light.yeelight_03_ceiling

@@ -1,0 +1,60 @@
+  04_kn_ceiling_on:
+    sequence:
+     - service: light.xiaomi_miio_set_scene
+       entity_id: light.philips_04_ceiling
+       data:
+          scene: 1
+     - service: light.turn_off
+       entity_id:
+          - light.gateway_light_7811dc64f4c8
+
+  04_kn_ceiling_off:
+    sequence:
+      - service: light.turn_off
+        entity_id:
+          - light.philips_04_ceiling
+          - light.gateway_light_7811dc64f4c8
+
+  04_kn_ceiling_auto_2:
+    sequence:
+     - service: light.xiaomi_miio_set_scene
+       entity_id: light.philips_04_ceiling
+       data:
+          scene: 2
+          
+  04_kn_ceiling_auto_3:
+    sequence:
+     - service: light.xiaomi_miio_set_scene
+       entity_id: light.philips_04_ceiling
+       data:
+          scene: 3
+
+  04_kn_ceiling_auto_4:
+    sequence:
+     - service: light.xiaomi_miio_set_scene
+       entity_id: light.philips_04_ceiling
+       data:
+          scene: 4
+     - service: light.turn_on
+       entity_id:
+          - light.gateway_light_7811dc64f4c8
+       data_template:
+         brightness_pct: 50
+         rgb_color: [0, 0, 255]
+         
+  04_photo_reolink2:
+    sequence:
+       - service: notify.telegram
+         data:
+           message: "Фото, кухня {{ states('sensor.time_date') }}" 
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink2
+              filename: "/config/www/cam_captures/reolink2.jpg"
+       - delay: 00:00:05
+       - service: notify.telegram
+         data:
+              message: "Фотография" 
+              data:
+                  photo:
+                      - file: /config/www/cam_captures/reolink2.jpg

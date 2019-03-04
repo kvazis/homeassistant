@@ -1,0 +1,229 @@
+## Возобновление питания на выключателе люстры
+- alias: 06_bathroom_cell_power
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_switch_right_158d0001117040
+   from: 'on'
+   to: 'off'
+  action:
+  - delay: 00:00:03
+  - service: switch.turn_on
+    entity_id: switch.wall_switch_right_158d0001117040
+
+## Автоматическая установка яркости
+- alias: 06_bathroom_light_bright
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_06_ceiling
+    from: 'off'
+    to: 'on'
+  action:
+  - service: light.turn_on
+    entity_id:
+      - light.yeelight_06_ceiling
+    data_template:
+       brightness_pct: >
+         {% set hour=states("sensor.time").split(':')[0] | int %}
+         {%- if hour >= 0 and hour < 6  -%}
+         30
+         {%- elif hour >= 6 and hour < 8  -%}
+         75
+         {%- elif hour >= 8 and hour < 20  -%}
+         100
+         {%- elif hour >= 20 and hour < 23  -%}
+         75
+         {%- elif hour >= 23 and hour < 24  -%}
+         30
+         {% endif %}
+       kelvin: 4000
+
+## Включение света
+- alias: 06_bathroom_light_on
+  initial_state: true
+  trigger:
+## Круглая кнопка на входе
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d00016d8628
+      click_type: single
+## Датчик движения
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id:  binary_sensor.motion_sensor_158d0001e547a3
+  condition:
+    - condition: state
+      entity_id: light.yeelight_06_ceiling
+      state: 'off'
+  action:
+    - service: light.turn_on
+      entity_id:
+        - light.yeelight_06_ceiling
+        
+## Выключение света
+- alias: 06_bathroom_light_off
+  initial_state: true
+  trigger:
+## Круглая кнопка на входе
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d00016d8628
+      click_type: single
+## Датчик движения
+  - platform: state
+    entity_id: binary_sensor.motion_sensor_158d0001e547a3
+    to: 'off'
+    for:
+      minutes: 8
+  condition:
+    - condition: state
+      entity_id: light.yeelight_06_ceiling
+      state: 'on'
+  action:
+    - service: light.turn_off
+      entity_id:
+        - light.yeelight_06_ceiling
+
+## Включение таймера вентиляции
+- alias: 06_bathroom_timer_vent_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_switch_left_158d0001117040
+   from: 'off'
+   to: 'on'
+  action:
+  - service: timer.start
+    entity_id: timer.bathroom
+    
+## Выключение таймера вентиляции
+- alias: 06_bathroom_timer_vent_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_switch_left_158d0001117040
+   from: 'on'
+   to: 'off'
+  action:
+  - service: timer.cancel
+    entity_id: timer.bathroom
+
+## Включение вентиляции     
+- alias: 06_bathroom_vent_on
+  initial_state: true
+  trigger:
+## Влажность более 70 процентов
+   - platform: numeric_state
+     entity_id: sensor.humidity_158d0001dcd47e
+     above: 70
+## Круглая кнопка на входе
+   - platform: event
+     event_type: xiaomi_aqara.click
+     event_data:
+       entity_id: binary_sensor.switch_158d00016d8628
+       click_type: double
+  condition:
+     - condition: state
+       entity_id: switch.wall_switch_left_158d0001117040
+       state: 'off'
+     - condition: time
+       after: '08:00:00'
+       before: '22:00:00'
+  action:
+  - service: timer.start
+    entity_id: timer.bathroom
+  - service: switch.turn_on
+    entity_id: switch.wall_switch_left_158d0001117040
+
+## Выключение вентиляции 
+- alias: 06_bathroom_vent_off
+  initial_state: true
+  trigger:    
+## Завершение таймера
+   - platform: event
+     event_type: timer.finished
+     event_data:
+       entity_id: timer.bathroom
+## Круглая кнопка на входе
+   - platform: event
+     event_type: xiaomi_aqara.click
+     event_data:
+       entity_id: binary_sensor.switch_158d00016d8628
+       click_type: double
+  condition:
+  - condition: state
+    entity_id: switch.wall_switch_left_158d0001117040
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.wall_switch_left_158d0001117040
+  - service: timer.cancel
+    entity_id: timer.bathroom
+
+## Обнаружение протечки, умывальник
+- alias: 06_bathroom_wleak_washstand_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.water_leak_sensor_158d0001d72fa2
+   from: 'off'
+   to: 'on'
+  action:
+  - service: notify.telegram
+    data:
+      title: "Обнаружена протечка"
+      message: "Ванная раковина {{ states('sensor.time_date') }}"
+  - service: script.turn_on
+    entity_id: script.11_warning
+
+## Протечка устранена, умывальник      
+- alias: 06_bathroom_wleak_washstand_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.water_leak_sensor_158d0001d72fa2
+   from: 'on'
+   to: 'off'
+  action:
+  - service: notify.telegram
+    data:
+      title: "Протечка устранена"
+      message: "Ванная раковина {{ states('sensor.time_date') }}"
+  - service: script.turn_on
+    entity_id: script.11_all_ok
+
+## Обнаружение протечки, душевая кабина  
+- alias: 06_bathroom_wleak_shower_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.water_leak_sensor_158d0001bb60c2
+   from: 'off'
+   to: 'on'
+  action:
+  - service: notify.telegram
+    data:
+      title: "Обнаружена протечка"
+      message: "Ванная душевая {{ states('sensor.time_date') }}"
+  - service: script.turn_on
+    entity_id: script.11_warning
+
+## Протечка устранена, душевая кабина    
+- alias: 06_bathroom_wleak_shower_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.water_leak_sensor_158d0001bb60c2
+   from: 'on'
+   to: 'off'
+  action:
+  - service: notify.telegram
+    data:
+      title: "Протечка устранена"
+      message: "Ванная душевая {{ states('sensor.time_date') }}"
+  - service: script.turn_on
+    entity_id: script.11_all_ok

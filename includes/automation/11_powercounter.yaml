@@ -1,0 +1,480 @@
+############################################################################################################
+##### 30 сек расчет
+- alias: 00_power_conter
+  initial_state: true
+  trigger:
+    - platform: time_pattern
+      seconds: '/30'
+  action:
+##### ПРАЧЕЧНАЯ
+##### Стиральная машина
+    - service: mqtt.publish
+      data_template:
+        topic: "power/bw_relay/today"
+        payload: '{{(states.sensor.mqtt_power_today_bw_relay.state | float +
+                    (states.sensor.bw_power.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/bw_relay/month"
+        payload: '{{(states.sensor.mqtt_power_month_bw_relay.state | float +
+                    (states.sensor.bw_power.state | float /120000))|round(5)}}'
+        retain: true
+##### КУХНЯ  
+##### Телевизор Xiaomi
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001291d12/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d0001291d12.state | float +
+                    (states.sensor.load_158d0001291d12.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001291d12/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d0001291d12.state | float +
+                    (states.sensor.load_158d0001291d12.state | float /120000))|round(5)}}'
+        retain: true
+##### Холодильник
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001fa2934/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d0001fa2934.state | float +
+                    (states.sensor.load_158d0001fa2934.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001fa2934/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d0001fa2934.state | float +
+                    (states.sensor.load_158d0001fa2934.state | float /120000))|round(5)}}'
+        retain: true
+##### LED лента
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001d35bc0/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d0001d35bc0.state | float +
+                    (states.sensor.load_158d0001d35bc0.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001d35bc0/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d0001d35bc0.state | float +
+                    (states.sensor.load_158d0001d35bc0.state | float /120000))|round(5)}}'
+        retain: true
+##### ГОСТИНАЯ
+##### Телевизор Samsung
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_socket_usb/today"
+        payload: '{{(states.sensor.mqtt_power_today_wifi_socket_usb.state | float +
+                    (states.sensor.load_wifi_socket_usb.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_socket_usb/month"
+        payload: '{{(states.sensor.mqtt_power_month_wifi_socket_usb.state | float +
+                    (states.sensor.load_wifi_socket_usb.state | float /120000))|round(5)}}'
+        retain: true
+##### Ноутбук Acer
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00012896cb/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d00012896cb.state | float +
+                    (states.sensor.load_158d00012896cb.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00012896cb/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d00012896cb.state | float +
+                    (states.sensor.load_158d00012896cb.state | float /120000))|round(5)}}'
+        retain: true
+##### Ноутбук HP
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000153dd8e/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d000153dd8e.state | float +
+                    (states.sensor.load_158d000153dd8e.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000153dd8e/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d000153dd8e.state | float +
+                    (states.sensor.load_158d000153dd8e.state | float /120000))|round(5)}}'
+        retain: true
+##### Удлинитель 6 портов
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_6port/today"
+        payload: '{{(states.sensor.mqtt_power_today_wifi_6port.state | float +
+                    (states.sensor.load_wifi_6port.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_6port/month"
+        payload: '{{(states.sensor.mqtt_power_month_wifi_6port.state | float +
+                    (states.sensor.load_wifi_6port.state | float /120000))|round(5)}}'
+        retain: true
+##### ВАННАЯ 
+##### Бойлер
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00015751f4/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d00015751f4.state | float +
+                    (states.sensor.load_158d00015751f4.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00015751f4/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d00015751f4.state | float +
+                    (states.sensor.load_158d00015751f4.state | float /120000))|round(5)}}'
+        retain: true
+##### ДЕТСКАЯ Д  
+##### Увлажнитель Д
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d000114a1e1.state | float +
+                    (states.sensor.load_158d000114a1e1.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d000114a1e1.state | float +
+                    (states.sensor.load_158d000114a1e1.state | float /120000))|round(5)}}'
+        retain: true
+##### ДЕТСКАЯ А  
+##### Увлажнитель А
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00010ec4b8/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d00010ec4b8.state | float +
+                    (states.sensor.load_158d00010ec4b8.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00010ec4b8/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d00010ec4b8.state | float +
+                    (states.sensor.load_158d00010ec4b8.state | float /120000))|round(5)}}'
+        retain: true
+
+        
+############################################################################################################
+##### Начало дня    
+- alias: 00_power_new_day
+  initial_state: true
+  trigger:
+    - platform: time
+      at: '00:00:05'
+  action:
+##### Запись данных за прошедший день
+##### ПРАЧЕЧНАЯ
+##### Стиральная машина
+    - service: mqtt.publish
+      data_template:
+        topic: "power/bw_relay/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_bw_relay.state | float )|round(5)}}'
+        retain: true 
+##### КУХНЯ  
+##### Телевизор Xiaomi
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001291d12/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d0001291d12.state | float )|round(5)}}'
+        retain: true 
+##### Холодильник
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001fa2934/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d0001fa2934.state | float )|round(5)}}'
+        retain: true 
+##### Кухня LED лента
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001d35bc0/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d0001d35bc0.state | float )|round(5)}}'
+        retain: true 
+##### ГОСТИНАЯ
+##### Телевизор Samsung
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_socket_usb/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_wifi_socket_usb.state | float )|round(5)}}'
+        retain: true 
+##### Ноутбук Acer
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00012896cb/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d00012896cb.state | float )|round(5)}}'
+        retain: true 
+##### Ноутбук HP
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000153dd8e/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d000153dd8e.state | float )|round(5)}}'
+        retain: true
+    - delay: 00:00:05
+##### Удлинитель 6 портов
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_6port/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_wifi_6port.state | float )|round(5)}}'
+        retain: true
+##### ВАННАЯ 
+##### Бойлер
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00015751f4/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d00015751f4.state | float )|round(5)}}'
+        retain: true
+##### ДЕТСКАЯ Д  
+##### Увлажнитель Д
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d000114a1e1.state | float )|round(5)}}'
+        retain: true
+##### ДЕТСКАЯ А  
+##### Увлажнитель А
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00010ec4b8/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d00010ec4b8.state | float )|round(5)}}'
+        retain: true
+        
+    - delay: 00:00:05
+
+##### Обнуление данных текущего дня
+##### ПРАЧЕЧНАЯ
+##### Стиральная машина
+    - service: mqtt.publish
+      data_template:
+        topic: "power/bw_relay/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### КУХНЯ  
+##### Телевизор Xiaomi
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001291d12/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Холодильник
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001fa2934/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Кухня LED лента        
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001d35bc0/today"
+        payload: '{{ 0.0 }}'
+        retain: true        
+##### ГОСТИНАЯ
+##### Телевизор Samsung
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_socket_usb/today"
+        payload: '{{ 0.0 }}'
+        retain: true  
+##### Ноутбук Acer
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00012896cb/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Ноутбук HP
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000153dd8e/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Удлинитель 6 портов        
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_6port/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### ВАННАЯ 
+##### Бойлер
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00015751f4/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### ДЕТСКАЯ Д  
+##### Увлажнитель Д        
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### ДЕТСКАЯ А  
+##### Увлажнитель А        
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00010ec4b8/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+        
+############################################################################################################
+##### Начало месяца
+- alias: 00_power_new_ month
+  initial_state: true
+  trigger:
+    - platform: time
+      at: '00:00:10'
+  condition:
+    - condition: template
+      value_template: '{{ now().day == 1 }}'
+  action:
+##### Запись данных за прошедший месяц
+##### ПРАЧЕЧНАЯ
+##### Стиральная машина
+    - service: mqtt.publish
+      data_template:
+        topic: "power/bw_relay/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_bw_relay.state | float )|round(5)}}'
+        retain: true 
+##### КУХНЯ  
+##### Телевизор Xiaomi
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001291d12/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d0001291d12.state | float )|round(5)}}'
+        retain: true 
+##### Холодильник
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001fa2934/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d0001fa2934.state | float )|round(5)}}'
+        retain: true 
+##### Кухня LED лента  
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001d35bc0/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d0001d35bc0.state | float )|round(5)}}'
+        retain: true
+##### ГОСТИНАЯ
+##### Телевизор Samsung
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_socket_usb/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_wifi_socket_usb.state | float )|round(5)}}'
+        retain: true
+##### Ноутбук Acer
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00012896cb/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d00012896cb.state | float )|round(5)}}'
+        retain: true
+##### Ноутбук HP
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000153dd8e/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d000153dd8e.state | float )|round(5)}}'
+        retain: true
+##### Удлинитель 6 портов          
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_6port/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_wifi_6port.state | float )|round(5)}}'
+        retain: true
+##### ВАННАЯ 
+##### Бойлер
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00015751f4/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d00015751f4.state | float )|round(5)}}'
+        retain: true
+
+##### ДЕТСКАЯ Д  
+##### Увлажнитель Д  
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d000114a1e1.state | float )|round(5)}}'
+        retain: true
+
+##### ДЕТСКАЯ А  
+##### Увлажнитель А
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00010ec4b8/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d00010ec4b8.state | float )|round(5)}}'
+        retain: true
+
+
+    - delay: 00:00:05
+##### Обнуление данных текущего месяца
+##### ПРАЧЕЧНАЯ
+##### Стиральная машина
+    - service: mqtt.publish
+      data_template:
+        topic: "power/bw_relay/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### КУХНЯ  
+##### Телевизор Xiaomi
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001291d12/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Холодильник
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001fa2934/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Кухня LED лента 
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001d35bc0/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### ГОСТИНАЯ
+##### Телевизор Samsung
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_socket_usb/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Ноутбук Acer
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00012896cb/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Ноутбук HP
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000153dd8e/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Удлинитель 6 портов  
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_6port/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### ВАННАЯ 
+##### Бойлер
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00015751f4/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### ДЕТСКАЯ Д  
+##### Увлажнитель Д 
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### ДЕТСКАЯ А  
+##### Увлажнитель А        
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00010ec4b8/month"
+        payload: '{{ 0.0 }}'
+        retain: true

@@ -1,0 +1,13 @@
+ 02_change_brightness:
+   sequence:
+    - service: light.turn_on
+      entity_id: light.yeelight_02_ceiling
+      data_template:
+#        transition: '1'
+        brightness: >-
+          {% set n = states.light.yeelight_02_ceiling.attributes.brightness - 90 %}
+          {% if n < 50 %}
+            50
+          {% else %}
+           {{ n | int }}
+          {% endif %}

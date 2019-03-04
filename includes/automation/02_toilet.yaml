@@ -1,0 +1,220 @@
+# Включение питания на люстру
+- alias: 02_toilet_autoswitch
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: switch.wall_switch_left_158d00014dceb3
+    to: 'off'
+  action:
+  - delay: 00:00:03
+  - service: switch.turn_on
+    entity_id:
+      - switch.wall_switch_left_158d00014dceb3
+      
+# Перезагрузка зависшей люстры
+- alias: 02_toilet_reboot
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_02_ceiling
+    to: 'unavailable'
+    for:
+      minutes: 5
+  action:
+    - service: notify.telegram
+      data:
+        message: "Потеря контроля в течении 5 минут - люстра в туалете.  Время события - {{ states('sensor.time_date') }} . Инициирована перезагрузка"
+    - service: switch.turn_off
+      entity_id: switch.wall_switch_left_158d00014dceb3
+      
+## Возобновление питания на выключателе стиралки
+- alias: 04_kn_power
+  initial_state: true
+  trigger:
+    - platform: time_pattern
+      minutes: '/1'
+  condition:
+    - condition: state
+      entity_id: switch.bw_relay
+      state: 'off'
+  action:
+   - service: switch.turn_on
+     entity_id: switch.bw_relay
+
+# Автоматическая установка яркости
+- alias: 02_toilet_light
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_02_ceiling
+    from: 'off'
+    to: 'on'
+  action:
+  - service: light.turn_on
+    entity_id:
+      - light.yeelight_02_ceiling
+    data_template:
+       brightness_pct: >
+         {% set hour=states("sensor.time").split(':')[0] | int %}
+         {%- if hour >= 0 and hour < 6  -%}
+         25
+         {%- elif hour >= 6 and hour < 8  -%}
+         50
+         {%- elif hour >= 8 and hour < 20  -%}
+         75
+         {%- elif hour >= 20 and hour < 23  -%}
+         50
+         {%- elif hour >= 23 and hour < 24  -%}
+         25
+         {% endif %}
+       kelvin: 4000
+
+# Включение освещения 
+- alias: 02_toilet_light_on
+  initial_state: true
+  trigger:
+# Датчик движения
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id:  binary_sensor.motion_sensor_158d0001a24e71
+# Выключатель в туалете
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_left_158d000128cd1a
+      click_type: single  
+  condition:
+  - condition: state
+    entity_id: light.yeelight_02_ceiling
+    state: 'off'
+  action:
+  - service: light.turn_on
+    entity_id:
+      - light.yeelight_02_ceiling
+
+# Выключение освещения       
+- alias: 02_toilet_light_off
+  initial_state: true
+  trigger:
+# Датчик движения
+  - platform: state
+    entity_id: binary_sensor.motion_sensor_158d0001a24e71
+    to: 'off'
+    for:
+      minutes: 8
+# Выключатель в туалете
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_left_158d000128cd1a
+      click_type: single
+  condition:
+  - condition: state
+    entity_id: light.yeelight_02_ceiling
+    state: 'on'
+  action:
+  - service: light.turn_off
+    entity_id:
+      - light.yeelight_02_ceiling
+ 
+# Выключение освещения с задержкой  
+- alias: 02_toilet_light_off_delay
+  initial_state: true
+  trigger:
+# Выключатель в туалете
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_both_158d000128cd1a
+      click_type: both   
+  condition:
+  - condition: state
+    entity_id: light.yeelight_02_ceiling
+    state: 'on'
+  action:
+  - service: script.turn_on
+    entity_id: script.02_change_brightness
+  - delay: 00:00:10
+  - service: light.turn_off
+    entity_id:
+      - light.yeelight_02_ceiling
+
+# Управление вентиляцией   
+- alias: 02_toilet_vent
+  initial_state: true
+  trigger:
+# Выключатель в туалете
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_right_158d000128cd1a
+      click_type: single   
+  action:
+  - service: switch.toggle
+    entity_id: switch.wall_switch_right_158d00014dceb3
+
+# Автоматическое отключение чеерез 10 минут
+- alias: 02_toilet_vent_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_switch_right_158d00014dceb3
+   from: 'off'
+   to: 'on'
+  action:
+  - delay: 00:10:00
+  - service: switch.turn_off
+    entity_id: switch.wall_switch_right_158d00014dceb3
+
+# Включение света на 15 секунд по движению
+- alias: 02_prachec_motion
+  initial_state: true
+  trigger:
+# Датчик движения
+   platform: event
+   event_type: xiaomi_aqara.motion
+   event_data:
+     entity_id: binary_sensor.motion_sensor_158d0001e16204
+  condition:
+  - condition: state
+    entity_id: light.aqara_02_ceiling
+    state: 'off'
+  action:
+  - service: light.turn_on
+    entity_id: light.aqara_02_ceiling
+  - delay: 00:00:15
+  - service: light.turn_off
+    entity_id: light.aqara_02_ceiling
+    
+## Обнаружение протечки, стиралка 
+- alias: 02_prachec_wleak_washmash_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
+   from: 'off'
+   to: 'on'
+  action:
+  - service: notify.telegram
+    data:
+      title: "Обнаружена протечка"
+      message: "Стиральная машина {{ states('sensor.time_date') }}"
+  - service: script.turn_on
+    entity_id: script.11_warning
+      
+## Протечка устранена, стиралка        
+- alias: 02_prachec_wleak_washmash_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
+   from: 'on'
+   to: 'off'
+  action:
+  - service: notify.telegram
+    data:
+      title: "Протечка устранена"
+      message: "Стиральная машина {{ states('sensor.time_date') }}"
+  - service: script.turn_on
+    entity_id: script.11_all_ok

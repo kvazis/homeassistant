@@ -1,0 +1,12 @@
+  77_youtube_views:
+    sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: "youtube/totalviews/yesterday"
+        payload: '{{(states.sensor.totalviews_today.state | float )|round(0)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "youtube/totalsubs/yesterday"
+        payload: '{{(states.sensor.social_blade.state | float )|round(0)}}'
+        retain: true
