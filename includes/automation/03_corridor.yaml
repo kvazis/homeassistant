@@ -120,7 +120,12 @@
     entity_id: timer.corridor
   - service: timer.start
     entity_id: timer.corridor
-    
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d00010f8920"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true
+
 ## Таймер освещения выкл
 - alias: 03_corridor_light_timer_off
   initial_state: true
@@ -150,3 +155,19 @@
     - service: light.turn_off
       entity_id:
         - light.yeelight_03_ceiling
+        
+## Запись последнего движения в коридоре
+- alias: 03_motion_time
+  initial_state: true
+  trigger:
+## Движение в коридоре
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d00010f8920
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d00010f8920"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true

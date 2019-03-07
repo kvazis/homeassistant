@@ -73,6 +73,23 @@
         payload: "{{ states('sensor.time_date')}}"
         retain: true
 
+## Запись последнего движения в прихожей
+- alias: 01_motion_time
+  initial_state: true
+  trigger:
+## Движение в коридоре
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d00013f7894
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d00013f7894"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true
+
+
 ## Включение съемки при входе     
 - alias: 01_enter_photo_on
   initial_state: true
@@ -120,6 +137,7 @@
     entity_id: timer.entrance
   - service: timer.start
     entity_id: timer.entrance
+
     
 ## Таймер освещения выкл
 - alias: 01_enter_light_timer_off

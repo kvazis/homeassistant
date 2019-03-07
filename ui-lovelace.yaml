@@ -1039,13 +1039,20 @@ views:
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: sensor.mqtt_binary_sensor_158d000119378d
-            name: Входная дверь открывалась в - 
-            icon: mdi:door-open
           - entity: switch.sonoff_basic_relay
             icon: mdi:lightbulb-outline
             tap_action: 
                action: toggle 
+          - entity: sensor.mqtt_binary_sensor_158d000119378d
+            name: Входная дверь открывалась в - 
+            icon: mdi:door-open
+          - entity: sensor.mqtt_binary_sensor_158d00013f7894
+            name: Последнее движение в прихожей в - 
+            icon: mdi:run-fast
+          - entity: sensor.mqtt_binary_sensor_158d00013f7894
+            name: Последнее движение в коридоре в - 
+            icon: mdi:run-fast
+
 
 
         - type: entity-filter

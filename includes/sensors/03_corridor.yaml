@@ -1,0 +1,4 @@
+# Время фиксации движения в коридоре
+  - platform: mqtt
+    state_topic: "binary_sensor/158d00010f8920"
+    name: 'mqtt_binary_sensor_158d00010f8920'

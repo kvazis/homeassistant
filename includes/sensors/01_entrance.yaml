@@ -1,3 +1,9 @@
+# Время последнего открытия входной двери
   - platform: mqtt
     state_topic: "binary_sensor/158d000119378d"
     name: 'mqtt_binary_sensor_158d000119378d'
+
+# Время фиксации движения в прихожей
+  - platform: mqtt
+    state_topic: "binary_sensor/158d00013f7894"
+    name: 'mqtt_binary_sensor_158d00013f7894'
