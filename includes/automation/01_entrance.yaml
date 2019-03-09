@@ -77,7 +77,7 @@
 - alias: 01_motion_time
   initial_state: true
   trigger:
-## Движение в коридоре
+## Движение в прихожей
   - platform: event
     event_type: xiaomi_aqara.motion
     event_data:

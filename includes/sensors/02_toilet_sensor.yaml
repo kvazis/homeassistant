@@ -33,3 +33,13 @@
         unit_of_measurement: 'грн'
         value_template: "{{ (states.sensor.mqtt_power_lastmonth_bw_relay.state | float * 1.68)|round(2) }}"
         icon_template: mdi:square-inc-cash 
+        
+# Время фиксации движения в туалете
+  - platform: mqtt
+    state_topic: "binary_sensor/158d0001a24e71"
+    name: 'mqtt_binary_sensor_158d0001a24e71'
+    
+# Время фиксации движения в прачечной
+  - platform: mqtt
+    state_topic: "binary_sensor/158d0001e16204"
+    name: 'mqtt_binary_sensor_158d0001e16204'

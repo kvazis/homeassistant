@@ -1,4 +1,5 @@
 - alias: 00_start
+  initial_state: true
   trigger:
   - platform: homeassistant
     event: start

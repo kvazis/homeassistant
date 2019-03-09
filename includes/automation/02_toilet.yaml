@@ -218,3 +218,35 @@
       message: "Стиральная машина {{ states('sensor.time_date') }}"
   - service: script.turn_on
     entity_id: script.11_all_ok
+    
+## Запись последнего движения в туалете
+- alias: 02_toilet_motion_time
+  initial_state: true
+  trigger:
+## Движение в туалете
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d0001a24e71
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d0001a24e71"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true
+      
+## Запись последнего движения в прачечной
+- alias: 02_prachec_motion_time
+  initial_state: true
+  trigger:
+## Движение в прачечной
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d0001e16204
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d0001e16204"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true

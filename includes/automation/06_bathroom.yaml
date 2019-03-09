@@ -227,3 +227,19 @@
       message: "Ванная душевая {{ states('sensor.time_date') }}"
   - service: script.turn_on
     entity_id: script.11_all_ok
+
+## Запись последнего движения в ванной
+- alias: 06_prachec_motion_time
+  initial_state: true
+  trigger:
+## Движение в ванной
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d0001e547a3
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d0001e547a3"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true
