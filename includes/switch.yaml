@@ -107,3 +107,14 @@
           service: script.turn_on
           data:
             entity_id: script.05_photo_reolink2
+      scenario:
+        friendly_name: "Сценарии"
+        value_template: "{{ is_state('automation.06_bathroom_cell_power', 'on') }}"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.all_scenario_on
+        turn_off:
+          service: script.turn_on
+          data:
+            entity_id: script.all_scenario_off

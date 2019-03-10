@@ -191,36 +191,9 @@ views:
                   name: Подписчиков за сегодня - 
                 - entity: sensor.views_today
                   name: Просмотров за сегодня - 
-     
-              - type: conditional
-                conditions:
-                  - entity: automation.05_gg_cell_1_power
-                    state: "on"
-                  - entity: automation.06_bathroom_cell_power
-                    state: "on"
-                card:
-                  type: entities
-                  show_header_toggle: false
-                  entities:
-                    - entity: script.all_scenario_off 
-                      tap_action: toggle
-                      name: Выключить сценарии
-                      icon: mdi:power-plug-off
-
-              - type: conditional
-                conditions:
-                  - entity: automation.05_gg_cell_1_power
-                    state: "off"
-                  - entity: automation.06_bathroom_cell_power
-                    state: "off"
-                card:
-                  type: entities
-                  show_header_toggle: false
-                  entities:
-                    - entity: script.all_scenario_on
-                      tap_action: toggle
-                      name: Включить сценарии
-                      icon: mdi:power-plug
+                - entity: switch.scenario
+                  name: Сценарии - 
+                  icon: mdi:format-list-numbered
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -1053,8 +1026,6 @@ views:
             name: Последнее движение в коридоре в - 
             icon: mdi:run-fast
 
-
-
         - type: entity-filter
           show_header_toggle: false
           entities:
@@ -1114,6 +1085,14 @@ views:
           - entity: sensor.mqtt_binary_sensor_158d0001e16204
             name: Последнее движение в прачечной в - 
             icon: mdi:run-fast
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.toilet
+          - entity: timer.toilet_v
+          state_filter:
+            - "active"
 
             
       - type: vertical-stack

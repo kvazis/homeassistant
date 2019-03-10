@@ -109,7 +109,6 @@
 ## Лампочка включается
   - platform: state
     entity_id: light.yeelight_01_whitebulb
-    from: 'off'
     to: 'on'
   action:
   - service: timer.cancel
@@ -146,7 +145,6 @@
 ## Лампочка включается
   - platform: state
     entity_id: light.yeelight_01_whitebulb
-    from: 'on'
     to: 'off'
   action:
   - service: timer.cancel

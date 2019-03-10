@@ -65,7 +65,7 @@
     event_type: xiaomi_aqara.movement
     event_data:
       entity_id: binary_sensor.vibration_158d0002a4f77e
-      click_type: free_fall
+      click_type: vibrate
   condition:
     - condition: state
       entity_id: light.yeelight_03_ceiling
@@ -92,7 +92,6 @@
 ## Лампочка включается
   - platform: state
     entity_id: light.yeelight_03_ceiling
-    from: 'off'
     to: 'on'
   action:
   - service: timer.cancel
@@ -120,11 +119,7 @@
     entity_id: timer.corridor
   - service: timer.start
     entity_id: timer.corridor
-  - service: mqtt.publish
-    data_template:
-      topic: "binary_sensor/158d00010f8920"
-      payload: "{{ states('sensor.time_date')}}"
-      retain: true
+
 
 ## Таймер освещения выкл
 - alias: 03_corridor_light_timer_off
@@ -133,7 +128,6 @@
 ## Лампочка включается
   - platform: state
     entity_id: light.yeelight_03_ceiling
-    from: 'on'
     to: 'off'
   action:
   - service: timer.cancel

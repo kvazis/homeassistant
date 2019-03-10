@@ -24,8 +24,12 @@
            - automation.02_toilet_light_on
            - automation.02_toilet_light_off
            - automation.02_toilet_light_off_delay
+           - automation.02_toilet_light_timer_reload   
+           - automation.02_toilet_timer_off           
            - automation.02_toilet_vent
            - automation.02_toilet_vent_off
+           - automation.02_toilet_vent_timer
+           - automation.02_toilet_vent_timer_off
            - automation.02_prachec_motion
            - automation.02_prachec_wleak_washmash_on           
            - automation.02_prachec_wleak_washmash_off    
@@ -122,8 +126,12 @@
            - automation.02_toilet_light_on
            - automation.02_toilet_light_off
            - automation.02_toilet_light_off_delay
+           - automation.02_toilet_light_timer_reload   
+           - automation.02_toilet_timer_off  
            - automation.02_toilet_vent
            - automation.02_toilet_vent_off
+           - automation.02_toilet_vent_timer
+           - automation.02_toilet_vent_timer_off
            - automation.02_prachec_motion
            - automation.02_prachec_wleak_washmash_on           
            - automation.02_prachec_wleak_washmash_off           

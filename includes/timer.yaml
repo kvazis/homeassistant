@@ -9,6 +9,12 @@
     
   toilet:
     duration: '00:10:00'
+    
+  toilet_v:
+    duration: '00:10:00'
+    
+  laundry:
+    duration: '00:10:00'
 
   bathroom:
     duration: '00:10:00'

@@ -446,6 +446,10 @@ timer.heater:
 timer.humidifier:
   friendly_name: Увлажнение авто через -
 timer.toilet:
+  friendly_name: Туалет свет выкл через -
+timer.toilet_v:
   friendly_name: Туалет вент. выкл через -
+timer.laundry:
+  friendly_name: Прачечная свет выкл через -
 timer.bathroom:
   friendly_name: Ванная вент. выкл через -

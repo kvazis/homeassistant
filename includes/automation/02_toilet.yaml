@@ -47,7 +47,6 @@
   trigger:
   - platform: state
     entity_id: light.yeelight_02_ceiling
-    from: 'off'
     to: 'on'
   action:
   - service: light.turn_on
@@ -68,6 +67,40 @@
          25
          {% endif %}
        kelvin: 4000
+  - service: timer.cancel
+    entity_id: timer.toilet
+  - service: timer.start
+    entity_id: timer.toilet
+
+## Таймер освещения обновление
+- alias: 02_toilet_light_timer_reload
+  initial_state: true
+  trigger:
+# Датчик движения
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d0001a24e71
+  condition:
+    - condition: state
+      entity_id: light.yeelight_02_ceiling
+      state: 'on'
+  action:
+  - service: timer.cancel
+    entity_id: timer.toilet
+  - service: timer.start
+    entity_id: timer.toilet
+
+# Сброс таймера при выключении
+- alias: 02_toilet_timer_off
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_02_ceiling
+    to: 'off'
+  action:
+  - service: timer.cancel
+    entity_id: timer.toilet
 
 # Включение освещения 
 - alias: 02_toilet_light_on
@@ -97,12 +130,11 @@
 - alias: 02_toilet_light_off
   initial_state: true
   trigger:
-# Датчик движения
-  - platform: state
-    entity_id: binary_sensor.motion_sensor_158d0001a24e71
-    to: 'off'
-    for:
-      minutes: 8
+# Таймер
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.toilet
 # Выключатель в туалете
   - platform: event
     event_type: xiaomi_aqara.click
@@ -154,18 +186,42 @@
   - service: switch.toggle
     entity_id: switch.wall_switch_right_158d00014dceb3
 
-# Автоматическое отключение чеерез 10 минут
-- alias: 02_toilet_vent_off
+# Включение таймера
+- alias: 02_toilet_vent_timer
   initial_state: true
   trigger:       
    platform: state
    entity_id: switch.wall_switch_right_158d00014dceb3
-   from: 'off'
    to: 'on'
   action:
-  - delay: 00:10:00
+  - service: timer.cancel
+    entity_id: timer.toilet_v
+  - service: timer.start
+    entity_id: timer.toilet_v
+    
+# Выключение таймера
+- alias: 02_toilet_vent_timer_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_switch_right_158d00014dceb3
+   to: 'off'
+  action:
+  - service: timer.cancel
+    entity_id: timer.toilet_v
+
+# Выключение вентиляциии
+- alias: 02_toilet_vent_off
+  initial_state: true
+  trigger:       
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.toilet_v
+  action:
   - service: switch.turn_off
     entity_id: switch.wall_switch_right_158d00014dceb3
+    
 
 # Включение света на 15 секунд по движению
 - alias: 02_prachec_motion
@@ -193,7 +249,6 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
-   from: 'off'
    to: 'on'
   action:
   - service: notify.telegram
@@ -209,7 +264,6 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
-   from: 'on'
    to: 'off'
   action:
   - service: notify.telegram
