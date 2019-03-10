@@ -1169,6 +1169,7 @@ views:
           show_header_toggle: false
           entities:
           - entity: timer.heater
+          - entity: timer.bathroom_light
           - entity: timer.bathroom
           state_filter:
             - "active"
@@ -2229,6 +2230,19 @@ views:
             filter:
               include:
                - domain: automation
+              exclude:
+               - state: 'off'
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: automation
+              exclude:
+               - state: 'on'
                
       - type: vertical-stack
         cards:

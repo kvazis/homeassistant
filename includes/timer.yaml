@@ -18,9 +18,15 @@
 
   bathroom:
     duration: '00:10:00'
+
+  bathroom_light:
+    duration: '00:10:00'
     
   entrance:
     duration: '00:05:00'
 
   corridor:
     duration: '00:05:00'
+    
+  kitchen:
+    duration: '00:30:00'

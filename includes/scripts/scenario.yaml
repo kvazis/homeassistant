@@ -73,6 +73,8 @@
            - automation.06_bathroom_light_bright
            - automation.06_bathroom_light_on           
            - automation.06_bathroom_light_off
+           - automation.06_bathroom_timer_restart
+           - automation.06_bathroom_timer_off           
            - automation.06_bathroom_timer_vent_on
            - automation.06_bathroom_timer_vent_off
            - automation.06_bathroom_vent_on
@@ -175,6 +177,8 @@
            - automation.06_bathroom_light_bright
            - automation.06_bathroom_light_on           
            - automation.06_bathroom_light_off
+           - automation.06_bathroom_timer_restart
+           - automation.06_bathroom_timer_off     
            - automation.06_bathroom_timer_vent_on
            - automation.06_bathroom_timer_vent_off
            - automation.06_bathroom_vent_on

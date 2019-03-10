@@ -4,20 +4,18 @@
   trigger:       
    platform: state
    entity_id: switch.wall_switch_right_158d0001117040
-   from: 'on'
    to: 'off'
   action:
   - delay: 00:00:03
   - service: switch.turn_on
     entity_id: switch.wall_switch_right_158d0001117040
 
-## Автоматическая установка яркости
+## Автоматическая установка яркости, включение таймера
 - alias: 06_bathroom_light_bright
   initial_state: true
   trigger:
   - platform: state
     entity_id: light.yeelight_06_ceiling
-    from: 'off'
     to: 'on'
   action:
   - service: light.turn_on
@@ -38,6 +36,10 @@
          30
          {% endif %}
        kelvin: 4000
+  - service: timer.cancel
+    entity_id: timer.bathroom_light
+  - service: timer.start
+    entity_id: timer.bathroom_light
 
 ## Включение света
 - alias: 06_bathroom_light_on
@@ -62,7 +64,38 @@
     - service: light.turn_on
       entity_id:
         - light.yeelight_06_ceiling
-        
+
+## Обновление таймера
+- alias: 06_bathroom_timer_restart
+  initial_state: true
+  trigger:
+## Датчик движения
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id:  binary_sensor.motion_sensor_158d0001e547a3
+  condition:
+    - condition: state
+      entity_id: light.yeelight_06_ceiling
+      state: 'on'
+  action:
+  - service: timer.cancel
+    entity_id: timer.bathroom_light
+  - service: timer.start
+    entity_id: timer.bathroom_light
+
+## Отключение таймера
+- alias: 06_bathroom_timer_off
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_06_ceiling
+    to: 'off'
+  action:
+  - service: timer.cancel
+    entity_id: timer.bathroom_light
+
+
 ## Выключение света
 - alias: 06_bathroom_light_off
   initial_state: true
@@ -73,12 +106,11 @@
     event_data:
       entity_id: binary_sensor.switch_158d00016d8628
       click_type: single
-## Датчик движения
-  - platform: state
-    entity_id: binary_sensor.motion_sensor_158d0001e547a3
-    to: 'off'
-    for:
-      minutes: 8
+## Таймер
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.bathroom_light
   condition:
     - condition: state
       entity_id: light.yeelight_06_ceiling
@@ -94,7 +126,6 @@
   trigger:       
    platform: state
    entity_id: switch.wall_switch_left_158d0001117040
-   from: 'off'
    to: 'on'
   action:
   - service: timer.start
@@ -106,7 +137,6 @@
   trigger:       
    platform: state
    entity_id: switch.wall_switch_left_158d0001117040
-   from: 'on'
    to: 'off'
   action:
   - service: timer.cancel
@@ -170,7 +200,6 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0001d72fa2
-   from: 'off'
    to: 'on'
   action:
   - service: notify.telegram
@@ -186,7 +215,6 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0001d72fa2
-   from: 'on'
    to: 'off'
   action:
   - service: notify.telegram
@@ -202,7 +230,6 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0001bb60c2
-   from: 'off'
    to: 'on'
   action:
   - service: notify.telegram
@@ -218,7 +245,6 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0001bb60c2
-   from: 'on'
    to: 'off'
   action:
   - service: notify.telegram

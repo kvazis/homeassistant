@@ -453,3 +453,7 @@ timer.laundry:
   friendly_name: Прачечная свет выкл через -
 timer.bathroom:
   friendly_name: Ванная вент. выкл через -
+timer.bathroom_light:
+  friendly_name: Ванная свет выкл через -
+timer.kitchen:
+  friendly_name: Кухня свет выкл через -
