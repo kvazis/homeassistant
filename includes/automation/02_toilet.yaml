@@ -83,8 +83,6 @@
          00:05:00
          {% endif %}
       
-      
-      
 
 ## Таймер освещения обновление
 - alias: 02_toilet_light_timer_reload
@@ -103,7 +101,18 @@
   - service: timer.cancel
     entity_id: timer.toilet
   - service: timer.start
-    entity_id: timer.toilet
+    entity_id: 
+      - timer.toilet
+    data_template: 
+        duration: > 
+         {% set hour=states("sensor.time").split(':')[0] | int %}
+         {%- if hour >= 0 and hour < 6  -%}
+         00:05:00
+         {%- elif hour >= 6 and hour < 21  -%}
+         00:10:00
+         {%- elif hour >= 21 and hour < 24  -%}
+         00:05:00
+         {% endif %}
 
 # Сброс таймера при выключении
 - alias: 02_toilet_timer_off
