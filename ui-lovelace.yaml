@@ -473,6 +473,22 @@ views:
                  - state: 'off'
 
           - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                  **Телевизоры**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: glance
+                show_state: false
+              filter:
+                include:
+                 - entity_id: switch.tv_*
+                exclude:
+                 - state: 'off'
+
+          - type: custom:vertical-stack-in-card
             cards:  
             - type: markdown
               content: >
@@ -1219,10 +1235,10 @@ views:
             name: Люстра, основное освещение
             tap_action: toggle
             icon: mdi:lightbulb-on-outline
-          - entity: script.xiaomi_tv
+          - entity: switch.tv_xiaomi
             name: Телевизор вкл/выкл
             tap_action: toggle
-            icon: mdi:television-box
+            icon: mdi:television
           - entity: switch.plug_158d0001291d12
             name: Телевизор питание
             tap_action: toggle
@@ -1384,8 +1400,6 @@ views:
             conditions:
               - entity: light.yeelight_05_ceiling1
                 state: "on"
-              - entity: switch.movie_mode
-                state: "off"
             card:
               type: entities
               show_header_toggle: false
@@ -1398,8 +1412,6 @@ views:
             conditions:
               - entity: light.yeelight_05_ceiling2
                 state: "on"
-              - entity: switch.movie_mode
-                state: "off"
             card:
               type: entities
               show_header_toggle: false
@@ -1407,6 +1419,15 @@ views:
                 - entity: input_number.yeelight_05_ceiling2_temp
                   name: Люстра 2
                   icon: mdi:temperature-kelvin
+
+          - type: horizontal-stack
+            cards:        
+            - type: light
+              entity: light.yeelight_05_bedside2
+              name: Ночник
+            - type: light
+              entity: light.philips_05_bedside
+              name: Стол
                   
         - type: custom:vertical-stack-in-card
           cards: 
@@ -1419,10 +1440,12 @@ views:
               type: entities
               show_header_toggle: false
               entities:
-                - entity: script.05_gg_movie_on
-                  tap_action: toggle
-                  name: Режим кино вкл
-                  icon: mdi:movie-roll
+               - entity: script.05_gg_movie_on
+                 tap_action: toggle
+                 name: Режим кино вкл
+                 icon: mdi:movie-roll
+               - entity: switch.tv_samsung
+                 icon: mdi:television-box
                      
           - type: conditional
             conditions:
@@ -1436,6 +1459,8 @@ views:
                  tap_action: toggle
                  name: Режим кино выкл
                  icon: mdi:filmstrip
+               - entity: switch.tv_samsung
+                 icon: mdi:television-box
 
           - type: glance
             show_state: false
@@ -1452,14 +1477,6 @@ views:
               name: Yeelight
               tap_action: 
                  action: more-info
-            - entity: light.yeelight_05_bedside2
-              name: Yeelight 2
-              tap_action: 
-                 action: more-info
-            - entity: light.philips_05_bedside
-              name: Philips
-              tap_action: 
-                 action: more-info
             - entity: light.gateway_light_34ce0088b039
               name: Шлюз
               tap_action: 
@@ -1474,11 +1491,6 @@ views:
                 action: toggle
               name: Выкл. свет
               icon: mdi:close-circle-outline
-            - entity: script.samsung_tv
-              tap_action: 
-                action: toggle
-              name: Samsung TV
-              icon: mdi:television-box
             - entity: switch.ilifea4
               tap_action: 
                 action: toggle
@@ -1598,14 +1610,6 @@ views:
           content: >
               **Гостиная - статус**
               
-        - type: glance
-          show_state: false
-          entities:
-           - entity: binary_sensor.door_window_sensor_158d00013ed373
-             name: Окно в гостиной
-           - entity: binary_sensor.door_window_sensor_158d0001a2f5f7
-             name: Окно на балконе 
-
         - type: custom:vertical-stack-in-card
           cards: 
 
@@ -1683,6 +1687,14 @@ views:
 
         - type: light
           entity: light.66633530807d3a766432
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.door_window_sensor_158d00013ed373
+             name: Окно в гостиной
+           - entity: binary_sensor.door_window_sensor_158d0001a2f5f7
+             name: Окно на балконе 
 
         - type: custom:vertical-stack-in-card
           cards: 

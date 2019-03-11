@@ -118,3 +118,25 @@
           service: script.turn_on
           data:
             entity_id: script.all_scenario_off
+      tv_xiaomi:
+        friendly_name: "ТВ Xiaomi"
+        value_template: "{{ states.sensor.load_158d0001291d12.state | float > 10 }}"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.xiaomi_tv
+        turn_off:
+          service: script.turn_on
+          data:
+            entity_id: script.xiaomi_tv
+      tv_samsung:
+        friendly_name: "ТВ Samsung"
+        value_template: "{{ states.sensor.load_wifi_socket_usb.state | float > 10 }}"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.samsung_tv
+        turn_off:
+          service: script.turn_on
+          data:
+            entity_id: script.samsung_tv
