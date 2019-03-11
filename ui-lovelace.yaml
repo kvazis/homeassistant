@@ -480,7 +480,7 @@ views:
             - type: custom:monster-card
               show_empty: false
               card:
-                type: glance
+                type: entities
                 show_state: false
               filter:
                 include:
@@ -1654,16 +1654,6 @@ views:
             entity: plant.yucca
             name: Юкка
           
-          - type: entities
-            show_state: false
-            entities:
-            - entity: sensor.true_blue_battery
-              name: 'True Blue Battery'
-              icon: mdi:flower
-            - entity: sensor.deep_purple_battery
-              name: 'Deep Purple Battery'
-              icon: mdi:flower
-
         - type: entities
           show_header_toggle: false
           entities:
@@ -2189,8 +2179,10 @@ views:
           filter:
             include:
               - entity_id: sensor.gg*battery
-              - entity_id: sensor.flower*battery
-              - entity_id: sensor.ropot*battery
+              - entity_id: sensor.true_blue_battery
+              - entity_id: sensor.deep_purple_battery
+              - entity_id: sensor.dieffenbac_battery
+              - entity_id: sensor.yucca_battery
 
       - type: vertical-stack
         cards:
