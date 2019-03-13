@@ -50,40 +50,39 @@
 - alias: 04_kn_ceiling_auto_on
   initial_state: true
   trigger:
+# Датчик движения
   - platform: event
     event_type: xiaomi_aqara.motion
     event_data:
       entity_id: binary_sensor.motion_sensor_158d0001ab3350
   condition:
+# Условие И - лампа выключена
    condition: and
    conditions:
     - condition: state
       entity_id: light.philips_04_ceiling
       state: 'off'
+# Второе условие И - одно из двух
     - condition: or
       conditions:
+# Освещенность ниже 800 с шлюза
          - condition: numeric_state
            entity_id: sensor.illumination_7811dc64f4c8
            below: 800
-         - condition: sun
-           after: sunset
-         - condition: sun
-           before: sunrise
+# Время между закатом и рассветом
+         - condition: state
+           entity_id: binary_sensor.tod_full_night
+           state: 'on'
   action:
     - service: script.turn_on
       data_template:
         entity_id: >-        
-         {% set hour=states("sensor.time").split(':')[0] | int %}
-         {%- if hour >= 0 and hour < 6  -%}
+         {%- if states("binary_sensor.tod_night") == 'on' -%}
          script.04_kn_ceiling_auto_4
-         {%- elif hour >= 6 and hour < 8  -%}
-         script.04_kn_ceiling_auto_3
-         {%- elif hour >= 8 and hour < 20  -%}
+         {%- elif states("binary_sensor.tod_day") == 'on'  -%}
          script.04_kn_ceiling_auto_2
-         {%- elif hour >= 20 and hour < 23  -%}
+         {%- else -%}
          script.04_kn_ceiling_auto_3
-         {%- elif hour >= 23 and hour < 24  -%}
-         script.04_kn_ceiling_auto_4
          {% endif %}
          
 # Автоматическое выключение люстры 

@@ -35,8 +35,10 @@
 - alias: 05_gg_hum_on
   initial_state: true
   trigger:
-   - platform: time
-     at: '09:00:00' 
+   - platform: state
+     entity_id: binary_sensor.tod_day
+     from: 'off'
+     to: 'on'
    - platform: state
      entity_id: binary_sensor.door_window_sensor_158d00013ed373
      from: 'on'
@@ -61,8 +63,10 @@
 - alias: 05_gg_hum_off
   initial_state: true
   trigger:
-   - platform: time
-     at: '22:00:00' 
+   - platform: state
+     entity_id: binary_sensor.tod_night
+     from: 'off'
+     to: 'on'
    - platform: state
      entity_id: binary_sensor.door_window_sensor_158d00013ed373
      from: 'off'
