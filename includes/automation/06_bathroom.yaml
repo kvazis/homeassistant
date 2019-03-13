@@ -215,6 +215,7 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0001d72fa2
+   from: 'on'
    to: 'off'
   action:
   - service: notify.telegram
@@ -245,6 +246,7 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0001bb60c2
+   from: 'on'
    to: 'off'
   action:
   - service: notify.telegram

@@ -137,7 +137,6 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0001bbeba6
-   from: 'off'
    to: 'on'
   action:
   - service: notify.telegram

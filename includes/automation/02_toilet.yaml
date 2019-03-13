@@ -54,17 +54,12 @@
       - light.yeelight_02_ceiling
     data_template:
        brightness_pct: >
-         {% set hour=states("sensor.time").split(':')[0] | int %}
-         {%- if hour >= 0 and hour < 6  -%}
+         {%- if states("binary_sensor.tod_night") == 'on' -%}
          25
-         {%- elif hour >= 6 and hour < 8  -%}
-         50
-         {%- elif hour >= 8 and hour < 20  -%}
+         {%- elif states("binary_sensor.tod_day") == 'on'  -%}
          75
-         {%- elif hour >= 20 and hour < 23  -%}
+         {%- else -%}
          50
-         {%- elif hour >= 23 and hour < 24  -%}
-         25
          {% endif %}
        kelvin: 4000
   - service: timer.cancel
@@ -74,15 +69,11 @@
       - timer.toilet
     data_template: 
         duration: > 
-         {% set hour=states("sensor.time").split(':')[0] | int %}
-         {%- if hour >= 0 and hour < 6  -%}
-         00:05:00
-         {%- elif hour >= 6 and hour < 21  -%}
+         {%- if states("binary_sensor.tod_long_day") == 'on' -%}
          00:10:00
-         {%- elif hour >= 21 and hour < 24  -%}
+         {%- else -%}
          00:05:00
          {% endif %}
-      
 
 ## Таймер освещения обновление
 - alias: 02_toilet_light_timer_reload
@@ -105,12 +96,9 @@
       - timer.toilet
     data_template: 
         duration: > 
-         {% set hour=states("sensor.time").split(':')[0] | int %}
-         {%- if hour >= 0 and hour < 6  -%}
-         00:05:00
-         {%- elif hour >= 6 and hour < 21  -%}
+         {%- if states("binary_sensor.tod_long_day") == 'on' -%}
          00:10:00
-         {%- elif hour >= 21 and hour < 24  -%}
+         {%- else -%}
          00:05:00
          {% endif %}
 
@@ -287,6 +275,7 @@
   trigger:       
    platform: state
    entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
+   from: 'on'
    to: 'off'
   action:
   - service: notify.telegram

@@ -88,7 +88,7 @@ mqtt:
 
 plant: !include includes/plants.yaml
 #device_tracker: !include includes/device.yaml
-binary_sensor: !include includes/binsensor.yaml
+binary_sensor: !include_dir_merge_list includes/bin_sensor
 input_number: !include includes/input_number.yaml
 
 recorder: 

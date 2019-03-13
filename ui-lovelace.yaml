@@ -2562,6 +2562,19 @@ views:
 
           - type: markdown
             content: >
+                  Сенсоры времени суток
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - entity_id: binary_sensor.tod*
+
+          - type: markdown
+            content: >
                   Москито сенсоры
 
           - type: custom:monster-card
@@ -2606,6 +2619,7 @@ views:
                - entity_id: sensor.p101*
                - entity_id: sensor.money*
                - entity_id: binary_sensor.ping*
+               - entity_id: binary_sensor.tod*
 
 ##################   Синхронизация
   - title: СИнхронизация электроэнергии 

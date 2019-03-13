@@ -1,0 +1,39 @@
+  - platform: tod
+    name: tod_night
+    after: '22:00'
+    before: '06:00'
+    
+  - platform: tod
+    name: tod_morning
+    after: '06:00'
+    before: '09:00'
+    
+  - platform: tod
+    name: tod_day
+    after: '09:00'
+    before: '20:00'
+    
+  - platform: tod
+    name: tod_evening
+    after: '20:00'
+    before: '22:00'
+    
+  - platform: tod
+    name: tod_long_day
+    after: '06:00'
+    before: '21:30'
+    
+  - platform: tod
+    name: tod_early_night
+    after: '21:30'
+    before: '06:00'
+    
+  - platform: tod
+    name: tod_full_day
+    after: sunrise
+    before: sunset
+    
+  - platform: tod
+    name: tod_full_night
+    after: sunset
+    before: sunrise
