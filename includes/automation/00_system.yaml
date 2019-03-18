@@ -9,4 +9,12 @@
         title: 'Отчет'
         message: "Orange Primary 70 на связи и статус систем в норме, время - {{ states('sensor.time_date') }}"
         
+- alias: 00_backup_everyday
+  initial_state: true
+  trigger:
+    - platform: time
+      at: '03:00:00'
+  action:
+    - service: script.turn_on
+      entity_id: script.ha_backup
 

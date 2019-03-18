@@ -45,7 +45,7 @@
      to: 'off'
   condition:
      - condition: time
-       after: '09:00:00'
+       after: '08:50:00'
        before: '22:00:00'
   action:    
    - service: homeassistant.turn_on

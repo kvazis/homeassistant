@@ -1,3 +1,6 @@
+  - platform: workday
+    country: UA
+
   - platform: tod
     name: tod_night
     after: '22:00'

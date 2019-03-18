@@ -245,3 +245,8 @@ telegram_bot:
     api_key: !secret api_key_70
     allowed_chat_ids:
       - !secret chat_id
+      
+rest_command:
+  google_backup:
+    url: 'http://192.168.0.70:8055/gb/doBackup'
+    timeout: '300'

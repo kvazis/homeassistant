@@ -1,0 +1,4 @@
+ - platform: mqtt
+   name: "Статус Google Backup"
+   state_topic: "googlebackup/result"
+   json_attributes_topic: "googlebackup/result"

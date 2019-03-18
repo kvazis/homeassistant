@@ -63,12 +63,9 @@
     - service: script.turn_on
       data_template:
         entity_id: >-
-         {% set hour=states("sensor.time").split(':')[0] | int %}
-         {%- if states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_bedside.state == 'off' and hour >= 7 and hour < 22 -%}
+         {%- if states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_bedside.state == 'off' and states("binary_sensor.tod_long_day") == 'on' -%}
          script.08_da_ceiling_on
-         {%- elif states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_bedside.state == 'off' and hour >= 22 and hour < 24 -%}
-         script.08_da_nightlight
-         {%- elif states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_bedside.state == 'off' and hour >= 0 and hour < 7 -%}
+         {%- elif states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_bedside.state == 'off' and states("binary_sensor.tod_early_night") == 'on' -%}
          script.08_da_nightlight
          {%- elif states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_bedside.state == 'on' -%}
          script.08_da_nightlight_off

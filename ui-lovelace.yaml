@@ -159,6 +159,11 @@ views:
               - type: glance
                 show_state: false
                 entities:
+                 - entity: script.ha_backup
+                   tap_action: 
+                     action: toggle
+                   name: Снапшот
+                   icon: mdi:backup-restore
                  - entity: script.purge_db
                    tap_action: 
                      action: toggle
@@ -167,7 +172,7 @@ views:
                  - entity: script.ha_restart
                    tap_action: 
                      action: toggle
-                   name: Home Assistant
+                   name: HA reboot
                    icon: mdi:home-assistant
                  - entity: script.all_scenario_reload
                    tap_action: 
@@ -205,6 +210,8 @@ views:
                 entities:
                 - entity: sensor.time
                   name: Текущее время - 
+                - entity: binary_sensor.workday_sensor                 
+                  name: Рабочий день -
                 - entity: sun.sun
                   name: Положение солнца -                 
               - type: weather-forecast
