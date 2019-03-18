@@ -101,6 +101,29 @@ views:
                    yellow: 3           
                    green: 6
 
+          - type: markdown
+            content: >
+               **Бекапы**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: script.ha_backup
+              name: Снапшот
+              icon: mdi:backup-restore            
+            - entity: sensor.last_google_backup
+              icon: mdi:map-clock-outline
+            - entity: sensor.last_google_filecount
+              icon: mdi:file-search
+            - entity: sensor.last_google_alreadycount
+              icon: mdi:file-export
+            - entity: sensor.last_google_backedupcount
+              icon: mdi:google-plus-box
+            - entity: sensor.last_google_deletedcount
+              icon: mdi:file-remove
+            - entity: sensor.last_google_deletedfromgoogle
+              icon: mdi:folder-google-drive
+
+
       - type: vertical-stack
         cards:
 

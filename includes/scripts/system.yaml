@@ -16,6 +16,7 @@
   ha_restart:
     sequence:
         - service: homeassistant.restart
+
         
   ha_backup:
     sequence:
