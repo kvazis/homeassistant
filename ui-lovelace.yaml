@@ -26,6 +26,9 @@ views:
           - type: entities
             show_header_toggle: false
             entities:
+            - entity: switch.scenario
+              name: Сценарии - 
+              icon: mdi:format-list-numbered
             - entity: sensor.last_boot_custom
               name: Сервер работает -
               icon: mdi:av-timer
@@ -130,10 +133,28 @@ views:
           - type: markdown
             content: >
                **Графики**
+
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                **Сеть**
+                 
+            - type: history-graph
+              entities:
+              - entity: sensor.rt_ac66u_b1_kbyte_sec_received
+                name: Прием
+              - entity: sensor.rt_ac66u_b1_kbyte_sec_sent
+                name: Передача
+
                
           - type: custom:vertical-stack-in-card
             cards:
-        
+     
+            - type: markdown
+              content: >
+                **Сервер**
+
             - type: history-graph
               entities:
                - entity: sensor.cpu_temp
@@ -219,9 +240,6 @@ views:
                   name: Подписчиков за сегодня - 
                 - entity: sensor.views_today
                   name: Просмотров за сегодня - 
-                - entity: switch.scenario
-                  name: Сценарии - 
-                  icon: mdi:format-list-numbered
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -250,19 +268,6 @@ views:
 
       - type: vertical-stack
         cards:
-
-          - type: custom:vertical-stack-in-card
-            cards:
-            - type: markdown
-              content: >
-                **Сеть**
-                 
-            - type: history-graph
-              entities:
-              - entity: sensor.rt_ac66u_b1_kbyte_sec_received
-                name: Прием
-              - entity: sensor.rt_ac66u_b1_kbyte_sec_sent
-                name: Передача
 
           - type: custom:vertical-stack-in-card
             cards:
