@@ -16,12 +16,3 @@
   ha_restart:
     sequence:
         - service: homeassistant.restart
-
-  ha_backup:
-    sequence:
-     - service: hassio.snapshot_full
-       data_template:
-         name: Automatic Backup {{ states('sensor.time_date') }}
-     - delay: 00:10:00
-     - service: rest_command.google_backup 
-     

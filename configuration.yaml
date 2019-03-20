@@ -91,7 +91,11 @@ plant: !include includes/plants.yaml
 binary_sensor: !include_dir_merge_list includes/bin_sensor
 input_number: !include includes/input_number.yaml
 
+
+
+
 recorder: 
+  db_url: !secret db_link
   purge_keep_days: 3
   include:
     domains:

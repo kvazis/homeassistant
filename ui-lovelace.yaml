@@ -32,8 +32,11 @@ views:
             - entity: sensor.last_boot_custom
               name: Сервер работает -
               icon: mdi:av-timer
+            - entity: sensor.maria_db_size
+              name: Размер Maria DB - 
+              icon: mdi:database
             - entity: sensor.home_assistant_v2_db
-              name: Размер базы данных - 
+              name: Размер HA DB - 
               icon: mdi:database
             - entity: sensor.online_custom
               name: Система в онлайне -
@@ -171,7 +174,7 @@ views:
 
             - type: history-graph
               entities:
-               - entity: sensor.home_assistant_v2_db
+               - entity: sensor.maria_db_size
                  name: База данных
 
       - type: vertical-stack
@@ -203,11 +206,6 @@ views:
               - type: glance
                 show_state: false
                 entities:
-                 - entity: script.ha_backup
-                   tap_action: 
-                     action: toggle
-                   name: Снапшот
-                   icon: mdi:backup-restore
                  - entity: script.purge_db
                    tap_action: 
                      action: toggle
