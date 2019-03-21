@@ -14,7 +14,6 @@
      
 - platform: sql
   db_url: !secret db_link
-  icon: mdi:database
   queries:
     - name: Maria DB size
       query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1048576, 2) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
