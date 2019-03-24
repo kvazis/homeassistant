@@ -46,6 +46,9 @@ discovery:
 
 system_health:
 
+# Stream component for camera
+stream:
+
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
@@ -72,6 +75,9 @@ sun:
 weather:
   - platform: openweathermap
     api_key: !secret openweathermap_key
+#   mode: daily
+
+
 # Weather prediction
 sensor: !include_dir_merge_list includes/sensors
 #  - platform: yr
@@ -90,8 +96,6 @@ plant: !include includes/plants.yaml
 #device_tracker: !include includes/device.yaml
 binary_sensor: !include_dir_merge_list includes/bin_sensor
 input_number: !include includes/input_number.yaml
-
-
 
 
 recorder: 

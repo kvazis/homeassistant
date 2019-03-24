@@ -98,15 +98,15 @@
             entity_id: script.01_photo_alfawise
       reolink2_photo:
         friendly_name: "Фото с reolink2"
-        value_template: "{{ is_state('script.05_photo_reolink2', 'on') }}"
+        value_template: "{{ is_state('script.04_photo_reolink2', 'on') }}"
         turn_on:
           service: script.turn_on
           data:
-            entity_id: script.05_photo_reolink2
+            entity_id: script.04_photo_reolink2
         turn_off:
           service: script.turn_on
           data:
-            entity_id: script.05_photo_reolink2
+            entity_id: script.04_photo_reolink2
       scenario:
         friendly_name: "Сценарии"
         value_template: "{{ is_state('automation.06_bathroom_cell_power', 'on') }}"
