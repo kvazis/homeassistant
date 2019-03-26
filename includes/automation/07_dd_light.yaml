@@ -159,5 +159,20 @@
   action: 
   - service: notify.telegram
     data:
-      message: "Ноубтук Sony включен в {{ states('sensor.time_date') }}"
+      message: "Ноутбук Sony включен в {{ states('sensor.time_date') }}"
    
+## Запись последнего движения в детской Д
+- alias: 07_dd_motion_time
+  initial_state: true
+  trigger:
+## Движение в детской Д
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d0001a66222
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d0001a66222"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true

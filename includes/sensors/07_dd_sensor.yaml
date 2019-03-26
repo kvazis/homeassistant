@@ -50,3 +50,8 @@
         unit_of_measurement: 'грн'
         value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d000114a1e1.state | float * 1.68)|round(2) }}"
         icon_template: mdi:square-inc-cash 
+        
+# Время фиксации движения в детской Д
+  - platform: mqtt
+    state_topic: "binary_sensor/158d0001a66222"
+    name: 'mqtt_binary_sensor_158d0001a66222'

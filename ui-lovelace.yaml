@@ -644,17 +644,18 @@ views:
 
       - type: vertical-stack
         cards:
-        
+
         - type: custom:vertical-stack-in-card
           cards:
            - type: markdown
              content: >
-                 **Стиральная машина**
+                 ## Стиральная машина
+           - type: sensor
+             entity: sensor.bw_power
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.bw_power
-               name: Текущее потребление
              - entity: sensor.mqtt_power_today_bw_relay
                name: Потребление за день
                icon: mdi:counter
@@ -674,16 +675,18 @@ views:
                name: Стоимость за прошлый месяц
                icon: mdi:cash
 
+
         - type: custom:vertical-stack-in-card
           cards:
            - type: markdown
              content: >
-                 **Кухня телевизор**
+                 ## Кухня телевизор
+           - type: sensor
+             entity: sensor.load_158d0001291d12
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_158d0001291d12
-               name: Текущее потребление
              - entity: sensor.mqtt_power_today_158d0001291d12
                name: Потребление за день
                icon: mdi:counter
@@ -707,12 +710,13 @@ views:
           cards:
            - type: markdown
              content: >
-                 **Холодильник**
+                 ## Холодильник
+           - type: sensor
+             entity: sensor.load_158d0001fa2934
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_158d0001fa2934
-               name: Текущее потребление   
              - entity: sensor.mqtt_power_today_158d0001fa2934
                name: Потребление за день
                icon: mdi:counter
@@ -736,12 +740,13 @@ views:
           cards:
            - type: markdown
              content: >
-                 **LED лента**
+                 ## LED лента
+           - type: sensor
+             entity: sensor.load_158d0001d35bc0
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_158d0001d35bc0
-               name: Текущее потребление   
              - entity: sensor.mqtt_power_today_158d0001d35bc0
                name: Потребление за день
                icon: mdi:counter
@@ -769,12 +774,13 @@ views:
 
            - type: markdown
              content: >
-                 **Гостиная телевизор**
+                 ## Гостиная телевизор
+           - type: sensor
+             entity: sensor.load_wifi_socket_usb
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_wifi_socket_usb
-               name: Текущее потребление   
              - entity: sensor.mqtt_power_today_wifi_socket_usb
                name: Потребление за день
                icon: mdi:counter
@@ -798,12 +804,13 @@ views:
           cards:
            - type: markdown
              content: >
-                 **Ноутбук Acer**
+                 ## Ноутбук Acer
+           - type: sensor
+             entity: sensor.load_158d00012896cb
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_158d00012896cb
-               name: Текущее потребление   
              - entity: sensor.mqtt_power_today_158d00012896cb
                name: Потребление за день
                icon: mdi:counter
@@ -828,12 +835,13 @@ views:
           cards:
            - type: markdown
              content: >
-                 **Ноутбук HP**
+                 ## Ноутбук HP
+           - type: sensor
+             entity: sensor.load_158d000153dd8e
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_158d000153dd8e
-               name: Текущее потребление   
              - entity: sensor.mqtt_power_today_158d000153dd8e
                name: Потребление за день
                icon: mdi:counter
@@ -858,12 +866,13 @@ views:
           cards:
            - type: markdown
              content: >
-                 **Удлинитель Xiaomi 6 портов**
+                ## Удлинитель Xiaomi 6 портов
+           - type: sensor
+             entity: sensor.load_wifi_6port
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_wifi_6port
-               name: Текущее потребление   
              - entity: sensor.mqtt_power_today_wifi_6port
                name: Потребление за день
                icon: mdi:counter
@@ -891,12 +900,13 @@ views:
           cards:            
            - type: markdown
              content: >
-                 **Бойлер**
+                ## Бойлер
+           - type: sensor
+             entity: sensor.load_158d00015751f4
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_158d00015751f4
-               name: Текущее потребление   
              - entity: sensor.mqtt_power_today_158d00015751f4
                name: Потребление за день
                icon: mdi:counter
@@ -920,12 +930,13 @@ views:
           cards:  
            - type: markdown
              content: >
-                 **Увлажнитель Д**
+                ## Увлажнитель Д
+           - type: sensor
+             entity: sensor.load_158d000114a1e1
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_158d000114a1e1
-               name: Текущее потребление   
              - entity: sensor.mqtt_power_today_158d000114a1e1
                name: Потребление за день
                icon: mdi:counter
@@ -949,12 +960,13 @@ views:
           cards:  
            - type: markdown
              content: >
-                 **Увлажнитель А**
+                ## Увлажнитель А
+           - type: sensor
+             entity: sensor.load_158d00010ec4b8
+             name: Текущее потребление
            - type: entities
              show_header_toggle: false
              entities:
-             - entity: sensor.load_158d00010ec4b8
-               name: Текущее потребление   
              - entity: sensor.mqtt_power_today_158d00010ec4b8
                name: Потребление за день
                icon: mdi:counter
@@ -1329,6 +1341,9 @@ views:
         - type: entities
           show_header_toggle: false
           entities:
+          - entity: sensor.mqtt_binary_sensor_158d0001ab3350
+            name: Последнее движение в кухне в - 
+            icon: mdi:run-fast 
           - entity: sensor.illumination_7811dc64f4c8
             name: Уровень освещенности
           - entity: sensor.load_158d0001291d12
@@ -1916,6 +1931,9 @@ views:
         - type: entities
           show_header_toggle: false
           entities:
+          - entity: sensor.mqtt_binary_sensor_158d0001a66222
+            name: Последнее движение в детской Д в - 
+            icon: mdi:run-fast 
           - entity: sensor.illumination_286c07f0ad27
             name: Уровень освещенности
           - entity: sensor.load_158d000114a1e1
@@ -2117,6 +2135,9 @@ views:
         - type: entities
           show_header_toggle: false
           entities:
+          - entity: sensor.mqtt_binary_sensor_158d00016d56f5
+            name: Последнее движение в детской А в - 
+            icon: mdi:run-fast 
           - entity: sensor.illumination_f0b429cc1f11
             name: Уровень освещенности
           - entity: sensor.load_158d00010ec4b8

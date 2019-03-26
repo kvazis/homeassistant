@@ -19,18 +19,15 @@
      entity_id: light.yeelight_08_bedside
      state: 'off'
 ## Вечером    
-   - condition: or
-     conditions:
-       - condition: sun
-         after: sunset
-       - condition: sun
-         before: sunrise
+   - condition: state
+     entity_id: binary_sensor.tod_full_night
+     state: 'on'
   action:
   - service: light.turn_on
     entity_id: 
      - light.gateway_light_f0b429cc1f11
     data_template:
-       brightness_pct: 50
+       brightness_pct: 70
        rgb_color: [0, 0, 255]
   - delay: 00:00:15
   - service: light.turn_off
@@ -139,3 +136,19 @@
     - delay: 00:00:05
     - service: switch.turn_on
       entity_id: switch.alfawise_relay
+      
+## Запись последнего движения в детской А
+- alias: 08_da_motion_time
+  initial_state: true
+  trigger:
+## Движение в детской А
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d00016d56f5
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d00016d56f5"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true

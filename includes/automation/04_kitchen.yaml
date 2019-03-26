@@ -202,3 +202,18 @@
   - service: script.turn_on
     entity_id: script.04_photo_reolink2
     
+## Запись последнего движения в кухне
+- alias: 04_kitchen_motion_time
+  initial_state: true
+  trigger:
+## Движение в кухне
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d0001ab3350
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d0001ab3350"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true
