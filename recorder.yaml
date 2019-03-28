@@ -1,0 +1,138 @@
+  db_url: !secret db_link
+  purge_keep_days: 1
+  include:
+    domains:
+      - switch
+      - light
+      - binary_sensor
+      - sensor
+  exclude:
+    entities:
+# Google Backup
+      - sensor.last_google_backup
+      - sensor.last_google_filecount
+      - sensor.last_google_alreadycount
+      - sensor.last_google_backedupcount
+      - sensor.last_google_deletedcount
+      - sensor.last_google_deletedfromgoogle
+# Social Blade
+      - sensor.social_blade
+      - sensor.totalviews_today
+      - sensor.subs_today
+      - sensor.views_today
+# Power counter
+## Стиральная машина
+      - sensor.mqtt_power_today_bw_relay
+      - sensor.mqtt_power_yesterday_bw_relay
+      - sensor.mqtt_power_month_bw_relay
+      - sensor.mqtt_power_lastmonth_bw_relay
+      - sensor.money_month_bw_relay
+      - sensor.money_lastmonth_bw_relay
+ ## Кухня телевизор
+      - sensor.mqtt_power_today_158d0001291d12
+      - sensor.mqtt_power_yesterday_158d0001291d12
+      - sensor.mqtt_power_month_158d0001291d12
+      - sensor.mqtt_power_lastmonth_158d0001291d12
+      - sensor.money_month_158d0001291d12
+      - sensor.money_lastmonth_158d0001291d12
+## Холодильник
+      - sensor.mqtt_power_today_158d0001fa2934
+      - sensor.mqtt_power_yesterday_158d0001fa2934
+      - sensor.mqtt_power_month_158d0001fa2934
+      - sensor.mqtt_power_lastmonth_158d0001fa2934
+      - sensor.money_month_158d0001fa2934
+      - sensor.money_lastmonth_158d0001fa2934
+## LED лента
+      - sensor.mqtt_power_today_158d0001d35bc0
+      - sensor.mqtt_power_yesterday_158d0001d35bc0
+      - sensor.mqtt_power_month_158d0001d35bc0
+      - sensor.mqtt_power_lastmonth_158d0001d35bc0
+      - sensor.money_month_158d0001d35bc0
+      - sensor.money_lastmonth_158d0001d35bc0
+## Гостиная телевизор
+      - sensor.mqtt_power_today_wifi_socket_usb
+      - sensor.mqtt_power_yesterday_wifi_socket_usb
+      - sensor.mqtt_power_month_wifi_socket_usb
+      - sensor.mqtt_power_lastmonth_wifi_socket_usb
+      - sensor.money_month_wifi_socket_usb
+      - sensor.money_lastmonth_wifi_socket_usb
+## Ноутбук Acer
+      - sensor.mqtt_power_today_158d00012896cb
+      - sensor.mqtt_power_yesterday_158d00012896cb
+      - sensor.mqtt_power_month_158d00012896cb
+      - sensor.mqtt_power_lastmonth_158d00012896cb
+      - sensor.money_month_158d00012896cb
+      - sensor.money_lastmonth_158d00012896cb
+## Ноутбук HP
+      - sensor.mqtt_power_today_158d000153dd8e
+      - sensor.mqtt_power_yesterday_158d000153dd8e
+      - sensor.mqtt_power_month_158d000153dd8e
+      - sensor.mqtt_power_lastmonth_158d000153dd8e
+      - sensor.money_month_158d000153dd8e
+      - sensor.money_lastmonth_158d000153dd8e
+## Удлинитель Xiaomi 6 портов
+      - sensor.mqtt_power_today_wifi_6port
+      - sensor.mqtt_power_yesterday_wifi_6port
+      - sensor.mqtt_power_month_wifi_6port
+      - sensor.mqtt_power_lastmonth_wifi_6port
+      - sensor.money_month_wifi_6port
+      - sensor.money_lastmonth_wifi_6port
+## Бойлер
+      - sensor.mqtt_power_today_158d00015751f4
+      - sensor.mqtt_power_yesterday_158d00015751f4
+      - sensor.mqtt_power_month_158d00015751f4
+      - sensor.mqtt_power_lastmonth_158d00015751f4
+      - sensor.money_month_158d00015751f4
+      - sensor.money_lastmonth_158d00015751f4
+## Увлажнитель Д
+      - sensor.mqtt_power_today_158d000114a1e1
+      - sensor.mqtt_power_yesterday_158d000114a1e1
+      - sensor.mqtt_power_month_158d000114a1e1
+      - sensor.mqtt_power_lastmonth_158d000114a1e1
+      - sensor.money_month_158d000114a1e1
+      - sensor.money_lastmonth_158d000114a1e1
+## Увлажнитель А
+      - sensor.mqtt_power_today_158d00010ec4b8
+      - sensor.mqtt_power_yesterday_158d00010ec4b8
+      - sensor.mqtt_power_month_158d00010ec4b8
+      - sensor.mqtt_power_lastmonth_158d00010ec4b8
+      - sensor.money_month_158d00010ec4b8
+      - sensor.money_lastmonth_158d00010ec4b8
+
+## Запись открытия дверей, движение
+      - sensor.mqtt_binary_sensor_158d000119378d
+      - sensor.mqtt_binary_sensor_158d00013f7894
+      - sensor.mqtt_binary_sensor_158d00013f7894
+      - sensor.mqtt_binary_sensor_158d0001a24e71
+      - sensor.mqtt_binary_sensor_158d0001e16204
+      - sensor.mqtt_binary_sensor_158d0001e547a3
+      - sensor.mqtt_binary_sensor_158d0001ab3350
+      - sensor.mqtt_binary_sensor_158d0001a66222
+      - sensor.mqtt_binary_sensor_158d00016d56f5
+
+# Ping
+      - binary_sensor.ping_dlinknas
+      - binary_sensor.ping_printerhp
+      - binary_sensor.ping_ggtv
+      - binary_sensor.ping_kntv
+      - binary_sensor.ping_tvboxgg
+      - binary_sensor.ping_tvboxkn
+      - binary_sensor.ping_acer
+      - binary_sensor.ping_hp
+      - binary_sensor.ping_sony
+      - binary_sensor.ping_chuwinb
+      - binary_sensor.ping_orange_primary_70
+      - binary_sensor.ping_orange_secondary_71
+      - binary_sensor.ping_raspberry
+      - binary_sensor.ping_khadas_vim2_basic
+      - binary_sensor.ping_gateway1
+      - binary_sensor.ping_gateway2
+      - binary_sensor.ping_gateway3
+      - binary_sensor.ping_gateway4
+      - binary_sensor.ping_alfawise_cam
+      - binary_sensor.ping_reolink_cam
+      - binary_sensor.ping_xiaofang_cam
+      - binary_sensor.ping_reolink2_cam
+      - binary_sensor.ping_xiaomi_ir
+      - binary_sensor.ping_broadlink_ir
+      - binary_sensor.ping_xiaomi_tvoc

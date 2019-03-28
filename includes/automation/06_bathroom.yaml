@@ -257,7 +257,7 @@
     entity_id: script.11_all_ok
 
 ## Запись последнего движения в ванной
-- alias: 06_prachec_motion_time
+- alias: 06_bathroom_time
   initial_state: true
   trigger:
 ## Движение в ванной

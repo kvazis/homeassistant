@@ -1,87 +1,43 @@
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_moisture?api_password=qwerty
-    name: dieffenbac_moisture
+  - platform: miflora
+    mac: 'C4:7C:8D:6A:0E:F3'
+    name: Dieffenbac
     force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "%"
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_battery?api_password=qwerty
-    name: dieffenbac_battery
+    median: 1
+    adapter: hci0
+    monitored_conditions:
+      - moisture
+      - light
+      - temperature
+      - conductivity
+      - battery
+      
+  - platform: miflora
+    mac: 'C4:7C:8D:62:8A:8A'
+    name: Yucca
     force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "%"
-    device_class: battery
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_temperature?api_password=qwerty
-    name: dieffenbac_temperature
+    median: 1
+    adapter: hci0
+    monitored_conditions:
+      - moisture
+      - light
+      - temperature
+      - conductivity
+      - battery
+      
+  - platform: miflora
+    mac: 'C4:7C:8D:6D:1C:F9'
+    name: Deep Purple
     force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "°C"
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_conductivity?api_password=qwerty
-    name: dieffenbac_conductivity
+    median: 1
+    adapter: hci0
+    monitored_conditions:
+      - battery
+      
+  - platform: miflora
+    mac: 'C4:7C:8D:6D:2C:7E'
+    name: True Blue
     force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "µS/cm"
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.dieffenbac_light_intensity?api_password=qwerty
-    name: dieffenbac_light_intensity
-    force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "lx"
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.yucca_moisture?api_password=qwerty
-    name: yucca_moisture
-    force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "%"
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.yucca_battery?api_password=qwerty
-    name: yucca_battery
-    force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "%"
-    device_class: battery
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.yucca_temperature?api_password=qwerty
-    name: yucca_temperature
-    force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "°C"
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.yucca_conductivity?api_password=qwerty
-    name: yucca_conductivity
-    force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "µS/cm"
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.yucca_light_intensity?api_password=qwerty
-    name: yucca_light_intensity
-    force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "lx"    
-    
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.true_blue_battery?api_password=qwerty
-    name: true_blue_battery
-    force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "%"
-    device_class: battery
-
-  - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.deep_purple_battery?api_password=qwerty
-    name: deep_purple_battery
-    force_update: true
-    value_template: '{{ value_json.state }}'
-    unit_of_measurement: "%"
-    device_class: battery
+    median: 1
+    adapter: hci0
+    monitored_conditions:
+      - battery

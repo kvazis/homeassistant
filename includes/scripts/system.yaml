@@ -2,7 +2,7 @@
     sequence:
        - service: recorder.purge
          data:
-              keep_days: 3
+              keep_days: 1
               repack: true
               
   all_scenario_reload:

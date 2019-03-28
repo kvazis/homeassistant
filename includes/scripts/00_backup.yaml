@@ -1,9 +1,14 @@
   ha_backup:
     sequence:
+     - service: recorder.purge
+       data:
+          keep_days: 1
+          repack: true
+     - delay: 00:15:00 
      - service: hassio.snapshot_full
        data_template:
           name: Automatic Backup {{ states('sensor.time_date') }}
-     - delay: 00:10:00 
+     - delay: 00:15:00 
      - service: rest_command.google_backup 
      - delay: 00:05:00
      - service: mqtt.publish
@@ -11,20 +16,3 @@
          topic: "googlebackup/result"
          payload: "{{ states('sensor.status_google_backup')}}"
          retain: true
-         
-#  ha_snapshot:
-#    sequence:
-#     - service: hassio.snapshot_full
-#       data_template:
-#          name: Automatic Backup {{ states('sensor.time_date') }}
-#    - service: hassio.snapshot_partial
-#      data_template:
-#        name: Automatic Backup {{ states('sensor.time_date') }}
-#        addons:
-#          - 3833edd4_googlebackup
-#          - core_configurator
-#        folders:
-#          - ssl
-#          - share
-#          - addons/local
-#          - homeassistant
