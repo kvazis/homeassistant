@@ -30,3 +30,6 @@
     
   kitchen:
     duration: '00:30:00'
+    
+  backup:
+    duration: '00:15:00'

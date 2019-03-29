@@ -107,6 +107,7 @@ media_player: !include includes/mplayer.yaml
 light: !include includes/light.yaml
 camera: !include includes/camera.yaml
 timer: !include includes/timer.yaml
+counter: !include includes/counter.yaml
 fan: !include includes/fan.yaml
 
 

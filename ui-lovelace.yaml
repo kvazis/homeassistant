@@ -115,7 +115,11 @@ views:
             entities:
             - entity: script.ha_backup
               name: Снапшот
-              icon: mdi:backup-restore            
+              icon: mdi:backup-restore 
+            - entity: counter.backup_stage
+              name: Фаза бэкапа - 
+            - entity: timer.backup
+              name: Фаза завершается через - 
             - entity: sensor.last_google_backup
               icon: mdi:map-clock-outline
             - entity: sensor.last_google_filecount

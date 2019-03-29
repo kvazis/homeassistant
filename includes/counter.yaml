@@ -1,0 +1,3 @@
+  backup_stage:
+    initial: 0
+    step: 1

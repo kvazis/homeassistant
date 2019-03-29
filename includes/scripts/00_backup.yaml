@@ -1,16 +1,62 @@
   ha_backup:
     sequence:
+# Стадия 1, сжатие базы
+# Старт счетчика - фаза 1
+     - service: counter.increment
+       entity_id: counter.backup_stage
+# Старт таймера 15 минут
+     - service: timer.start
+       entity_id: timer.backup
+       data_template:
+          duration: 00:15:00
+# Сжатие базы
      - service: recorder.purge
        data:
           keep_days: 1
           repack: true
+# Задержка 15 минут
      - delay: 00:15:00 
+# Стадия 2, создание бекапа
+# Счетчик - фаза 2     
+     - service: counter.increment
+       entity_id: counter.backup_stage
+# Отмена таймера, если остался
+     - service: timer.cancel
+       entity_id: timer.backup
+# Старт таймера 15 минут
+     - service: timer.start
+       entity_id: timer.backup
+       data_template:
+          duration: 00:15:00
+# Полный снимок системы
      - service: hassio.snapshot_full
        data_template:
           name: Automatic Backup {{ states('sensor.time_date') }}
+# Задержка 15 минут
      - delay: 00:15:00 
+# Стадия 3, сохранение на Google Drive
+# Счетчик - фаза 3  
+     - service: counter.increment
+       entity_id: counter.backup_stage
+# Отмена таймера, если остался
+     - service: timer.cancel
+       entity_id: timer.backup
+# Старт таймера 5 минут
+     - service: timer.start
+       entity_id: timer.backup
+       data_template:
+          duration: 00:05:00
+# Отправка на Google Drive
      - service: rest_command.google_backup 
+# Задержка 5 минут
      - delay: 00:05:00
+# Сброс счетчика
+     - service: counter.reset
+       entity_id: counter.backup_stage
+# Сброс таймера
+     - service: timer.cancel
+       entity_id: timer.backup
+# ПУбликация времени создания бэкапа
      - service: mqtt.publish
        data_template:
          topic: "googlebackup/result"
