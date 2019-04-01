@@ -118,6 +118,8 @@ views:
               icon: mdi:backup-restore 
             - entity: counter.backup_stage
               name: Фаза бэкапа - 
+            - entity: sensor.backup_phaze
+              name: Действие - 
             - entity: timer.backup
               name: Фаза завершается через - 
             - entity: sensor.last_google_backup
@@ -522,8 +524,10 @@ views:
               filter:
                 include:
                  - entity_id: switch.tv_*
+                 - entity_id: sensor.*_tv_custom
                 exclude:
                  - state: 'off'
+
 
           - type: custom:vertical-stack-in-card
             cards:  
@@ -1350,6 +1354,7 @@ views:
             icon: mdi:run-fast 
           - entity: sensor.illumination_7811dc64f4c8
             name: Уровень освещенности
+          - entity: sensor.xiaomi_tv_custom
           - entity: sensor.load_158d0001291d12
             name: Телевизор, текущее потребление
           - entity: sensor.load_158d0001fa2934
@@ -1612,6 +1617,7 @@ views:
                   name: Режим - 
                 - entity: sensor.smartmi_water
                   name: Остаток воды - 
+                - entity: sensor.smartmi_hum_custom
                 - entity: switch.forse_hum
                   tap_action: toggle
                   name: Форс. режим
@@ -1697,20 +1703,12 @@ views:
              - entity: sensor.smartmi_water
                name: Уровень воды в увлажнителе
 
-        - type: custom:vertical-stack-in-card
-          cards: 
-          - type: plant-status
-            entity: plant.dieffenbac
-            name: Диффенбахия
-          - type: plant-status
-            entity: plant.yucca
-            name: Юкка
-          
         - type: entities
           show_header_toggle: false
           entities:
           - entity: sensor.illumination_34ce0088b039
             name: Уровень освещенности
+          - entity: sensor.samsung_tv_custom
           - entity: sensor.load_wifi_socket_usb
             name: Телевизор, текущее потребление
           - entity: sensor.load_158d00012896cb
@@ -1719,6 +1717,15 @@ views:
             name: Ноутбук HP, потребление
           - entity: sensor.load_wifi_6port
             name: Удлинитель Xiaomi 6 портов 
+
+        - type: custom:vertical-stack-in-card
+          cards: 
+          - type: plant-status
+            entity: plant.dieffenbac
+            name: Диффенбахия
+          - type: plant-status
+            entity: plant.yucca
+            name: Юкка
 
       - type: vertical-stack
         cards:
@@ -1940,6 +1947,7 @@ views:
             icon: mdi:run-fast 
           - entity: sensor.illumination_286c07f0ad27
             name: Уровень освещенности
+          - entity: sensor.dd_hum_custom
           - entity: sensor.load_158d000114a1e1
             name: Увлажнитель, потребление
 
@@ -2144,6 +2152,7 @@ views:
             icon: mdi:run-fast 
           - entity: sensor.illumination_f0b429cc1f11
             name: Уровень освещенности
+          - entity: sensor.da_hum_custom
           - entity: sensor.load_158d00010ec4b8
             name: Увлажнитель, потребление
 

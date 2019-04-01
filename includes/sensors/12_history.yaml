@@ -1,0 +1,195 @@
+  - platform: history_stats
+    name: xiaomi_tv
+    entity_id: switch.tv_xiaomi
+    state: 'on'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+  - platform: template
+    sensors:
+       xiaomi_tv_custom:
+         friendly_name: "Телевизор Xiaomi работал сегодня - "
+         value_template: >
+           {% set uptime = (states.sensor.xiaomi_tv.state | float * 60) %}
+           {% set minutes = (( uptime % 60) / 1) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+    
+  - platform: history_stats
+    name: samsung_tv
+    entity_id: switch.tv_samsung
+    state: 'on'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+  - platform: template
+    sensors:
+       samsung_tv_custom:
+         friendly_name: "Телевизор Samsung работал сегодня - "
+         value_template: >
+           {% set uptime = (states.sensor.samsung_tv.state | float * 60) %}
+           {% set minutes = (( uptime % 60) / 1) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+
+    
+  - platform: history_stats
+    name: smartmi_hum
+    entity_id: switch.forse_hum
+    state: 'on'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+  - platform: template
+    sensors:
+       smartmi_hum_custom:
+         friendly_name: "Работа в режиме high - "
+         value_template: >
+           {% set uptime = (states.sensor.smartmi_hum.state | float * 60) %}
+           {% set minutes = (( uptime % 60) / 1) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+    
+  - platform: history_stats
+    name: dd_hum
+    entity_id: switch.plug_158d000114a1e1
+    state: 'on'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+  - platform: template
+    sensors:
+       dd_hum_custom:
+         friendly_name: "Увлажнитель Maxcan работал сегодня - "
+         value_template: >
+           {% set uptime = (states.sensor.dd_hum.state | float * 60) %}
+           {% set minutes = (( uptime % 60) / 1) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock
+    
+  - platform: history_stats
+    name: da_hum
+    entity_id: switch.plug_158d00010ec4b8
+    state: 'on'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+    
+  - platform: template
+    sensors:
+       da_hum_custom:
+         friendly_name: "Увлажнитель Deerma работал сегодня - "
+         value_template: >
+           {% set uptime = (states.sensor.da_hum.state | float * 60) %}
+           {% set minutes = (( uptime % 60) / 1) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}
+         icon_template: mdi:clock

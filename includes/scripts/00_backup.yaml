@@ -4,6 +4,12 @@
 # Старт счетчика - фаза 1
      - service: counter.increment
        entity_id: counter.backup_stage
+# Присвоение названия фазы 1
+     - service: mqtt.publish
+       data_template:
+         topic: "googlebackup/phaze"
+         payload: 'Сжатие базы данных'
+         retain: true
 # Старт таймера 15 минут
      - service: timer.start
        entity_id: timer.backup
@@ -20,6 +26,12 @@
 # Счетчик - фаза 2     
      - service: counter.increment
        entity_id: counter.backup_stage
+# Присвоение названия фазы 2
+     - service: mqtt.publish
+       data_template:
+         topic: "googlebackup/phaze"
+         payload: 'Создание снимка системы'
+         retain: true
 # Отмена таймера, если остался
      - service: timer.cancel
        entity_id: timer.backup
@@ -38,6 +50,12 @@
 # Счетчик - фаза 3  
      - service: counter.increment
        entity_id: counter.backup_stage
+# Присвоение названия фазы 3
+     - service: mqtt.publish
+       data_template:
+         topic: "googlebackup/phaze"
+         payload: 'Сохранение на Google Drive'
+         retain: true
 # Отмена таймера, если остался
      - service: timer.cancel
        entity_id: timer.backup
@@ -53,6 +71,12 @@
 # Сброс счетчика
      - service: counter.reset
        entity_id: counter.backup_stage
+# Присвоение названия - завершено
+     - service: mqtt.publish
+       data_template:
+         topic: "googlebackup/phaze"
+         payload: 'Резервное копирование завершено'
+         retain: true
 # Сброс таймера
      - service: timer.cancel
        entity_id: timer.backup

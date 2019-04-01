@@ -1,7 +1,11 @@
  - platform: mqtt
-   name: "Статус Google Backup"
+   name: "status_google_backup"
    state_topic: "googlebackup/result"
    json_attributes_topic: "googlebackup/result"
+   
+ - platform: mqtt
+   name: "backup_phaze"
+   state_topic: "googlebackup/phaze"
    
  - platform: template
    sensors:
