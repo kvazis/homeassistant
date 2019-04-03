@@ -115,7 +115,19 @@
         {%- elif states.light.yeelight_07_whitebulb.state  == 'on' -%}
         script.07_dd_bra_off
         {%- endif -%}
-        
+
+# Включение питания на настольную лампу
+- alias: 07_table_autoswitch
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: switch.plug_158d00030a6e78
+    to: 'off'
+  action:
+  - delay: 00:00:03
+  - service: switch.turn_on
+    entity_id:
+      - switch.plug_158d00030a6e78        
         
 # Выключение всего          
 - alias: 07_dd_all_off

@@ -32,8 +32,8 @@
           entity_id:
            - light.yeelight_07_whitebulb
            - light.philips_07_ceiling
-           - light.broadlink_07_table
+           - light.xiaomi_07_table
         - delay: 00:00:03
-        - service: light.turn_on
+        - service: switch.turn_on
           entity_id:
-           - light.broadlink_07_table
+           - switch.plug_158d00030a6e78

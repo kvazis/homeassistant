@@ -15,6 +15,14 @@ views:
   - title: Система
     id: system
     icon: mdi:home-map-marker
+    badges:
+      - sun.sun
+      - sensor.time
+      - binary_sensor.workday_sensor
+      - sensor.bw_voltage
+      - sensor.social_blade
+      - sensor.subs_today
+      - sensor.views_today    
     cards:
 
       - type: vertical-stack
@@ -23,31 +31,49 @@ views:
           - type: markdown
             content: >
                **Система**
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.scenario
-              name: Сценарии - 
-              icon: mdi:format-list-numbered
-            - entity: sensor.last_boot_custom
-              name: Сервер работает -
-              icon: mdi:av-timer
-            - entity: sensor.maria_db_size
-              name: Размер Maria DB - 
-              icon: mdi:database
-            - entity: sensor.home_assistant_v2_db
-              name: Размер HA DB - 
-              icon: mdi:database
-            - entity: sensor.online_custom
-              name: Система в онлайне -
-              icon: mdi:clock-outline
-            - entity: sensor.orange2_state
-              name: Orange 71 в онлайне -
-              icon: mdi:clock-outline  
-            - entity: sensor.khadas_state
-              name: Khadas VIM2 в онлайне -
-              icon: mdi:clock-outline              
-
+          - type: custom:vertical-stack-in-card
+            cards:
+            
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: switch.scenario
+                name: Сценарии - 
+                icon: mdi:format-list-numbered
+              - entity: sensor.last_boot_custom
+                name: Сервер работает -
+                icon: mdi:av-timer
+              - entity: sensor.maria_db_size
+                name: Размер Maria DB - 
+                icon: mdi:database
+              - entity: sensor.home_assistant_v2_db
+                name: Размер HA DB - 
+                icon: mdi:database
+              - entity: sensor.online_custom
+                name: Система в онлайне -
+                icon: mdi:clock-outline
+              - entity: sensor.orange2_state
+                name: Orange 71 в онлайне -
+                icon: mdi:clock-outline
+              - entity: sensor.khadas_state
+                name: Khadas VIM2 в онлайне -
+                icon: mdi:clock-outline
+            - type: horizontal-stack
+              cards:
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+                  - type: weblink
+                    name: Polymer frontend
+                    url: http://192.168.0.70:8123/states
+                    icon: mdi:home-assistant
+                - type: entities
+                  show_header_toggle: false
+                  entities:
+                  - type: weblink
+                    name: MotionEye
+                    url: http://192.168.0.73:8765/
+                    icon: mdi:cctv
 
           - type: custom:vertical-stack-in-card
             cards: 
@@ -107,35 +133,6 @@ views:
                    yellow: 3           
                    green: 6
 
-          - type: markdown
-            content: >
-               **Бекапы**
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: script.ha_backup
-              name: Снапшот
-              icon: mdi:backup-restore 
-            - entity: counter.backup_stage
-              name: Фаза бэкапа - 
-            - entity: sensor.backup_phaze
-              name: Действие - 
-            - entity: timer.backup
-              name: Фаза завершается через - 
-            - entity: sensor.last_google_backup
-              icon: mdi:map-clock-outline
-            - entity: sensor.last_google_filecount
-              icon: mdi:file-search
-            - entity: sensor.last_google_alreadycount
-              icon: mdi:file-export
-            - entity: sensor.last_google_backedupcount
-              icon: mdi:google-plus-box
-            - entity: sensor.last_google_deletedcount
-              icon: mdi:file-remove
-            - entity: sensor.last_google_deletedfromgoogle
-              icon: mdi:folder-google-drive
-
-
       - type: vertical-stack
         cards:
 
@@ -193,22 +190,7 @@ views:
           - type: custom:vertical-stack-in-card
             cards:
 
-              - type: horizontal-stack
-                cards:
-                  - type: entities
-                    show_header_toggle: false
-                    entities:
-                    - type: weblink
-                      name: Polymer frontend
-                      url: http://192.168.0.70:8123/states
-                      icon: mdi:home-assistant
-                  - type: entities
-                    show_header_toggle: false
-                    entities:
-                    - type: weblink
-                      name: MotionEye
-                      url: http://192.168.0.73:8765/
-                      icon: mdi:cctv
+
               - type: glance
                 show_state: false
                 entities:
@@ -232,33 +214,34 @@ views:
                      action: toggle
                    name: Скрипты
                    icon: mdi:autorenew 
+              - type: markdown
+                content: >
+                   **Бекапы**
               - type: entities
                 show_header_toggle: false
                 entities:
-                - entity: sensor.social_blade
-                  name: Подписчиков на канале - 
-                  icon: mdi:youtube 
-                - entity: sensor.totalviews_today
-                  name: Всего просмотров - 
-                - entity: sensor.subs_today
-                  name: Подписчиков за сегодня - 
-                - entity: sensor.views_today
-                  name: Просмотров за сегодня - 
+                - entity: script.ha_backup
+                  name: Снапшот
+                  icon: mdi:backup-restore 
+                - entity: counter.backup_stage
+                  name: Фаза бэкапа - 
+                - entity: sensor.backup_phaze
+                  name: Действие - 
+                - entity: timer.backup
+                  name: Фаза завершается через - 
+                - entity: sensor.last_google_backup
+                  icon: mdi:map-clock-outline
+                - entity: sensor.last_google_filecount
+                  icon: mdi:file-search
+                - entity: sensor.last_google_alreadycount
+                  icon: mdi:file-export
+                - entity: sensor.last_google_backedupcount
+                  icon: mdi:google-plus-box
+                - entity: sensor.last_google_deletedcount
+                  icon: mdi:file-remove
+                - entity: sensor.last_google_deletedfromgoogle
+                  icon: mdi:folder-google-drive
 
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: sensor
-                entity: sensor.bw_voltage
-                icon: mdi:current-ac
-              - type: entities
-                show_header_toggle: false
-                entities:
-                - entity: sensor.time
-                  name: Текущее время - 
-                - entity: binary_sensor.workday_sensor                 
-                  name: Рабочий день -
-                - entity: sun.sun
-                  name: Положение солнца -                 
               - type: weather-forecast
                 entity: weather.openweathermap
 
@@ -964,6 +947,36 @@ views:
                name: Стоимость за прошлый месяц
                icon: mdi:cash
 
+        - type: custom:vertical-stack-in-card
+          cards:  
+           - type: markdown
+             content: >
+                ## Настольная лампа Д
+           - type: sensor
+             entity: sensor.load_158d00030a6e78
+             name: Текущее потребление
+           - type: entities
+             show_header_toggle: false
+             entities:
+             - entity: sensor.mqtt_power_today_158d00030a6e78
+               name: Потребление за день
+               icon: mdi:counter
+             - entity: sensor.mqtt_power_yesterday_158d00030a6e78
+               name: Потребление за вчера
+               icon: mdi:counter
+             - entity: sensor.mqtt_power_month_158d00030a6e78
+               name: Потребление за месяц
+               icon: mdi:counter
+             - entity: sensor.mqtt_power_lastmonth_158d00030a6e78
+               name: Потребление за прошлый месяц
+               icon: mdi:counter
+             - entity: sensor.money_month_158d00030a6e78
+               name: Стоимость за текущий месяц
+               icon: mdi:cash
+             - entity: sensor.money_lastmonth_158d00030a6e78
+               name: Стоимость за прошлый месяц
+               icon: mdi:cash
+               
         - type: custom:vertical-stack-in-card
           cards:  
            - type: markdown

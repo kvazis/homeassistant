@@ -90,6 +90,7 @@
            - automation.07_dd_philips_auto_on
            - automation.07_dd_philips_auto_off
            - automation.07_dd_bra
+           - automation.07_table_autoswitch   
            - automation.07_dd_all_off
            - automation.07_hp_toggle
            - automation.07_sony_on
@@ -194,6 +195,7 @@
            - automation.07_dd_philips_auto_on
            - automation.07_dd_philips_auto_off
            - automation.07_dd_bra
+           - automation.07_table_autoswitch   
            - automation.07_dd_all_off
            - automation.07_hp_toggle
            - automation.07_sony_on

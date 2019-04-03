@@ -100,8 +100,8 @@
     
 ## Детская Д
   - platform: switch
-    name: broadlink_07_table
-    entity_id: switch.plug2
+    name: xiaomi_07_table
+    entity_id: switch.switch_07_table
 
 ## Детская А    
   - platform: switch

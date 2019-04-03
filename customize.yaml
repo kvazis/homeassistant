@@ -324,7 +324,7 @@ light.yeelight_07_whitebulb:
 light.gateway_light_286c07f0ad27:
   friendly_name: Детская Д шлюз свет
   icon: mdi:star-circle-outline
-light.broadlink_07_table:
+light.xiaomi_07_table:
   friendly_name: Детская Д, настольная лампа
   icon: mdi:desk-lamp
 ## Реле
@@ -336,6 +336,9 @@ switch.xiaomi_wifi_socket:
   friendly_name: Wi-Fi розетка Xiaomi
   device_class: plug 
   icon: mdi:power-socket-eu 
+switch.plug_158d00030a6e78:
+  friendly_name: Детская Д, питание настольной лампы
+  icon: mdi:desk-lamp
 ## Сенсоры 
 sensor.illumination_286c07f0ad27:
   friendly_name: Детская Д шлюз освещенность
@@ -457,3 +460,15 @@ timer.bathroom_light:
   friendly_name: Ванная свет выкл через -
 timer.kitchen:
   friendly_name: Кухня свет выкл через -
+timer.backup:
+  friendly_name: Фаза завершается через - 
+  
+## Системные
+sun.sun:
+  friendly_name: Солнце
+sensor.time:
+  friendly_name: Время
+binary_sensor.workday_sensor:
+  friendly_name: Рабочий день
+sensor.social_blade:
+  friendly_name: Подписчиков
