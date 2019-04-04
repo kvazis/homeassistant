@@ -1550,7 +1550,17 @@ views:
             - entity: light.gateway_light_34ce0088b039
               name: Шлюз
               tap_action: 
-                 action: more-info            
+                 action: more-info
+            - entity: light.yeelight_05_ceiling1_ambilight
+              name: Амбилайт люстра 1
+              tap_action: 
+                 action: more-info
+              icon: mdi:car-light-high
+            - entity: light.yeelight_05_ceiling2_ambilight
+              name: Амбилайт люстра 2
+              tap_action: 
+                 action: more-info
+              icon: mdi:car-light-high
             - entity: script.05_gg_650_full_on
               tap_action: 
                 action: toggle

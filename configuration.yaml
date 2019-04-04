@@ -105,6 +105,7 @@ automation: !include_dir_merge_list includes/automation
 script: !include_dir_merge_named includes/scripts
 media_player: !include includes/mplayer.yaml
 light: !include includes/light.yaml
+yeelight: !include includes/yeelight.yaml
 camera: !include includes/camera.yaml
 timer: !include includes/timer.yaml
 counter: !include includes/counter.yaml

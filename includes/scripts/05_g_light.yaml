@@ -76,7 +76,8 @@
           - light.aqara_05_wall
       - service: light.turn_on
         entity_id: 
-#          - light.gg_movie
+          - light.yeelight_05_ceiling1_ambilight
+          - light.yeelight_05_ceiling2_ambilight
           - light.yeelight_05_rgbtvbulb
           - light.yeelight_05_bedside2
         data_template:
@@ -87,6 +88,7 @@
     sequence:
       - service: light.turn_off
         entity_id:
-#          - light.gg_movie        
+          - light.yeelight_05_ceiling1_ambilight
+          - light.yeelight_05_ceiling2_ambilight
           - light.yeelight_05_rgbtvbulb
           - light.yeelight_05_bedside2

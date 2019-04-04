@@ -6,7 +6,7 @@ light.yeelight_01_whitebulb:
 ## Реле
 switch.sonoff_basic_relay:
   friendly_name: Прихожая, питание лампы
-  icon: mdi:power-plug
+  icon: mdi:power
 ## Сенсоры
 binary_sensor.door_window_sensor_158d000119378d:
   friendly_name: Входная дверь
@@ -33,7 +33,7 @@ light.yeelight_02_ceiling:
 ## Реле
 switch.wall_switch_left_158d00014dceb3:
   friendly_name: Туалет питание люстры
-  icon: mdi:power-plug
+  icon: mdi:power
 switch.wall_switch_right_158d00014dceb3:
   friendly_name: Туалет вентилятор
   icon: mdi:fan
@@ -59,6 +59,7 @@ switch.wall_switch_158d00014a1a55:
   friendly_name: Прачечная выключатель
 switch.bw_relay:
   friendly_name: Стиральная машина, питание
+  icon: mdi:power
 ## Сенсоры
 sensor.bw_power:
   friendly_name: Стиральная машина, потребление
@@ -112,9 +113,9 @@ switch.plug_158d0001fa2934:
   device_class: plug  
   icon: mdi:fridge
 switch.plug_158d0001291d12:
-  friendly_name: Кухня, телевизор
+  friendly_name: Кухня, питание телевизора
   device_class: plug  
-  icon: mdi:television-box
+  icon: mdi:power
 ## Сенсоры
 sensor.illumination_7811dc64f4c8:
   friendly_name: Кухня шлюз освещенность
@@ -196,7 +197,8 @@ light.gateway_light_34ce0088b039:
 switch.wall_switch_left_158d00015723f1:
   friendly_name: Гостиная выкл. стена
 switch.wall_switch_right_158d00015723f1:
-  friendly_name: Гостиная питание люстра 1
+  friendly_name: Гостиная, питание люстра 1
+  icon: mdi:power
 switch.plug_158d00012896cb:
   friendly_name: Ноутбук Acer
   device_class: plug  
@@ -210,9 +212,9 @@ switch.wifi_6port:
   device_class: plug  
   icon: mdi:power-socket-eu
 switch.xiaomi_wifi_socket_usb:
-  friendly_name: Питание телевизора
+  friendly_name: Гостиная, питание телевизора
   device_class: plug  
-  icon: mdi:television
+  icon: mdi:power
 switch.xiaomi_wifi_socket_usb_usb:
   friendly_name: USB
   device_class: plug  
@@ -289,6 +291,7 @@ light.yeelight_06_ceiling:
 ## Реле
 switch.wall_switch_right_158d0001117040:
   friendly_name: Ванная, питание лампы
+  icon: mdi:power
 switch.wall_switch_left_158d0001117040:
   friendly_name: Ванная, вентиляция
   icon: mdi:fan
