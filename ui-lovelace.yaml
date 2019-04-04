@@ -1870,6 +1870,8 @@ views:
         - type: glance
           show_state: false
           entities:
+          - entity: light.xiaomi_07_table   
+          - entity: switch.plug_158d00030a6e78
           - entity: script.07_dd_lightoff
             name: Выключение всего света
             tap_action: 
@@ -3035,6 +3037,38 @@ views:
               name: ТМ
               icon: mdi:counter
             - entity: sensor.p100_power_lastmonth_158d000114a1e1
+              name: ПМ
+              icon: mdi:counter
+              
+        - type: markdown
+          content: >
+              **Настольная лампа Д**
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: script.11_psync_158d00030a6e78
+            name: Синхронизация
+              
+        - type: horizontal-stack
+          cards:  
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.mqtt_power_month_158d00030a6e78
+              name: ТМ
+              icon: mdi:counter
+            - entity: sensor.mqtt_power_lastmonth_158d00030a6e78
+              name: ПМ
+              icon: mdi:counter
+              
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.p100_power_month_158d00030a6e78
+              name: ТМ
+              icon: mdi:counter
+            - entity: sensor.p100_power_lastmonth_158d00030a6e78
               name: ПМ
               icon: mdi:counter
 

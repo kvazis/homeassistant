@@ -149,6 +149,21 @@
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
+#####Настольная лампа Д
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00030a6e78?api_password=qwerty
+    name: p100_power_month_158d00030a6e78
+    force_update: true
+    value_template: '{{ value_json.state }}'
+    unit_of_measurement: 'кВт⋅ч'
+    
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00030a6e78?api_password=qwerty
+    name: p100_power_lastmonth_158d00030a6e78
+    force_update: true
+    value_template: '{{ value_json.state }}'
+    unit_of_measurement: 'кВт⋅ч'
+    
 #####Увлажнитель А
   - platform: rest
     resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00010ec4b8?api_password=qwerty

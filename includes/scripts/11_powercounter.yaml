@@ -137,6 +137,20 @@
         payload: '{{(states.sensor.p100_power_lastmonth_158d000114a1e1.state | float )|round(5)}}'
         retain: true
         
+  11_psync_158d00030a6e78:
+    sequence:
+##### Настольная лампа Д
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00030a6e78/month"
+        payload: '{{(states.sensor.p100_power_month_158d00030a6e78.state | float )|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d00030a6e78/lastmonth"
+        payload: '{{(states.sensor.p100_power_lastmonth_158d00030a6e78.state | float )|round(5)}}'
+        retain: true
+        
   11_psync_158d00010ec4b8:
     sequence:
 ##### Увлажнитель А

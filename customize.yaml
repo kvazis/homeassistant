@@ -338,7 +338,7 @@ switch.xiaomi_wifi_socket:
   icon: mdi:power-socket-eu 
 switch.plug_158d00030a6e78:
   friendly_name: Детская Д, питание настольной лампы
-  icon: mdi:desk-lamp
+  icon: mdi:power
 ## Сенсоры 
 sensor.illumination_286c07f0ad27:
   friendly_name: Детская Д шлюз освещенность
