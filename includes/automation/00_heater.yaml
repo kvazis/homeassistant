@@ -9,8 +9,8 @@
    - platform: event
      event_type: xiaomi_aqara.click
      event_data:
-       entity_id: binary_sensor.switch_158d00016d8628
-       click_type: long_click_press
+       entity_id: binary_sensor.wall_switch_both_158d000238a140
+       click_type: both
   condition:
   - condition: state
     entity_id: switch.wall_plug_158d00015751f4
@@ -60,8 +60,8 @@
   - platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d00016d8628
-      click_type: long_click_press
+      entity_id: binary_sensor.wall_switch_both_158d000238a140
+      click_type: both
   condition:
   - condition: time
     weekday:
@@ -89,8 +89,8 @@
   - platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d00016d8628
-      click_type: long_click_press
+      entity_id: binary_sensor.wall_switch_both_158d000238a140
+      click_type: both
   condition:
   - condition: time
     weekday:

@@ -42,6 +42,8 @@
        entity_id: >-
           {%- if states.light.yeelight_01_whitebulb.state  == 'off' and (as_timestamp (now()) -as_timestamp(states.light.yeelight_01_whitebulb.last_changed) > 120) -%}
           script.01_enter_on
+          {%- else -%}
+          script.stub
           {%- endif -%} 
 
 ## Фото при входе и отключение

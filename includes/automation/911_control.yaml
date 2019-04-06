@@ -12,8 +12,8 @@
     - service: notify.telegram
       data:
         message: "Потеря связи с резервным сервером, Orange 71 - {{ states('sensor.time_date') }} . Включение сценариев"
-    - service: script.turn_on
-      entity_id: script.all_scenario_on
+    - service: homeassistant.turn_on
+      entity_id: group.scenario
         
 - alias: 911_orange_71_lost
   initial_state: true

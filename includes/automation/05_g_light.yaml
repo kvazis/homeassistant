@@ -187,10 +187,10 @@
     - service: script.turn_on
       data_template:
         entity_id: >-
-          {%- if states.light.yeelight_05_rgbtvbulb.state == 'off' -%}
-          script.05_gg_movie_on
-          {%- elif states.light.yeelight_05_rgbtvbulb.state == 'on' -%}
+          {%- if states.light.yeelight_05_ceiling1_ambilight.state == 'on' and states.light.yeelight_05_ceiling2_ambilight.state == 'on' -%}
           script.05_gg_movie_off
+          {%- else -%}
+          script.05_gg_movie_on
           {%- endif -%}  
 
 ## Управление телевизором        

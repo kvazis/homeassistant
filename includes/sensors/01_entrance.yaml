@@ -7,3 +7,5 @@
   - platform: mqtt
     state_topic: "binary_sensor/158d00013f7894"
     name: 'mqtt_binary_sensor_158d00013f7894'
+
+        

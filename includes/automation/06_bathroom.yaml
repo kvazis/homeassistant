@@ -45,11 +45,11 @@
 - alias: 06_bathroom_light_on
   initial_state: true
   trigger:
-## Круглая кнопка на входе
+## Беспроводный выключатель
   - platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d00016d8628
+      entity_id: binary_sensor.wall_switch_left_158d000238a140
       click_type: single
 ## Датчик движения
   - platform: event
@@ -100,11 +100,11 @@
 - alias: 06_bathroom_light_off
   initial_state: true
   trigger:
-## Круглая кнопка на входе
+## Беспроводный выключатель
   - platform: event
     event_type: xiaomi_aqara.click
     event_data:
-      entity_id: binary_sensor.switch_158d00016d8628
+      entity_id: binary_sensor.wall_switch_left_158d000238a140
       click_type: single
 ## Таймер
   - platform: event
@@ -150,12 +150,12 @@
    - platform: numeric_state
      entity_id: sensor.humidity_158d0001dcd47e
      above: 70
-## Круглая кнопка на входе
+## Беспроводный выключатель
    - platform: event
      event_type: xiaomi_aqara.click
      event_data:
-       entity_id: binary_sensor.switch_158d00016d8628
-       click_type: double
+       entity_id: binary_sensor.wall_switch_right_158d000238a140
+       click_type: single
   condition:
      - condition: state
        entity_id: switch.wall_switch_left_158d0001117040
@@ -178,12 +178,12 @@
      event_type: timer.finished
      event_data:
        entity_id: timer.bathroom
-## Круглая кнопка на входе
+## Беспроводный выключатель
    - platform: event
      event_type: xiaomi_aqara.click
      event_data:
-       entity_id: binary_sensor.switch_158d00016d8628
-       click_type: double
+       entity_id: binary_sensor.wall_switch_right_158d000238a140
+       click_type: single
   condition:
   - condition: state
     entity_id: switch.wall_switch_left_158d0001117040

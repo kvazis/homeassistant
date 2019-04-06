@@ -37,7 +37,7 @@ views:
             - type: entities
               show_header_toggle: false
               entities:
-              - entity: switch.scenario
+              - entity: group.scenario
                 name: Сценарии - 
                 icon: mdi:format-list-numbered
               - entity: sensor.last_boot_custom

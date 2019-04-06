@@ -21,8 +21,8 @@
 - alias: 00_udpate_entity
   initial_state: true
   trigger:    
-    platform: time_pattern
-    minutes: '/5'
+   - platform: time_pattern
+     seconds: '/30'
   action:    
   - service: homeassistant.update_entity
     entity_id:
