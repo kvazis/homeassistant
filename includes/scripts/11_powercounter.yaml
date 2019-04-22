@@ -8,7 +8,8 @@
         retain: true
     - service: mqtt.publish
       data_template:
-        payload: '{{(states.sensor.p100_power_month_bw_relay.state | float )|round(5)}}'
+        topic: "power/bw_relay/lastmonth"
+        payload: '{{(states.sensor.p100_power_lastmonth_bw_relay.state | float )|round(5)}}'
         retain: true
 
   11_psync_158d0001291d12:

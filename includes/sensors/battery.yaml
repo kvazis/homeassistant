@@ -1,6 +1,7 @@
+# Прихожая
   - platform: template
     sensors:
-     entrance_motion_battery:
+     entrance_motion_sensor_158d00013f7894_battery:
         friendly_name: 'Прихожая, датчик движения'
         value_template: "{{ state_attr('binary_sensor.motion_sensor_158d00013f7894', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -9,7 +10,7 @@
 
   - platform: template
     sensors:
-     entrance_door_battery:
+     entrance_door_window_sensor_158d000119378d_battery:
         friendly_name: 'Прихожая, входная дверь'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d000119378d', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -18,7 +19,7 @@
         
   - platform: template
     sensors:
-     entrance_switch_battery:
+     entrance_wall_switch_both_158d0001718ca8_battery:
         friendly_name: 'Прихожая, выключатель, вход'
         value_template: "{{ state_attr('binary_sensor.wall_switch_both_158d0001718ca8', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -27,7 +28,7 @@
 
   - platform: template
     sensors:
-     entrance_button_battery:
+     entrance_switch_158d00010b1963_battery:
         friendly_name: 'Прихожая, кнопка, вход'
         value_template: "{{ state_attr('binary_sensor.switch_158d00010b1963', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -36,16 +37,18 @@
 
   - platform: template
     sensors:
-     entrance_smoke_battery:
+     entrance_smoke_sensor_158d000149d28b_battery:
         friendly_name: 'Прихожая, датчик дыма'
         value_template: "{{ state_attr('binary_sensor.smoke_sensor_158d000149d28b', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: binary_sensor.smoke_sensor_158d000149d28b
         device_class: battery  
 
+#Коридор
+
   - platform: template
     sensors:
-     corridor_motion_battery:
+     corridor_motion_sensor_158d00010f8920_battery:
         friendly_name: 'Коридор, датчик движения'
         value_template: "{{ state_attr('binary_sensor.motion_sensor_158d00010f8920', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -54,7 +57,7 @@
         
   - platform: template
     sensors:
-     corridor_button_battery:
+     corridor_switch_158d0001f3fefe_battery:
         friendly_name: 'Коридор, кнопка, шкаф'
         value_template: "{{ state_attr('binary_sensor.switch_158d0001f3fefe', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -63,25 +66,17 @@
         
   - platform: template
     sensors:
-     corridor_2k_battery:
-        friendly_name: 'Коридор, выключатель 2к'
-        value_template: "{{ state_attr('binary_sensor.wall_switch_left_158d000238a140', 'battery_level') }}"
-        unit_of_measurement: '%'
-        entity_id: binary_sensor.wall_switch_left_158d000238a140
-        device_class: battery
-        
-  - platform: template
-    sensors:
-     corridor_vibro_battery:
+     corridor_vibration_158d0002a4f77e_battery:
         friendly_name: 'Коридор, вибродатчик'
         value_template: "{{ state_attr('binary_sensor.vibration_158d0002a4f77e', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: binary_sensor.vibration_158d0002a4f77e
         device_class: battery 
-        
+
+#Туалет        
   - platform: template
     sensors:
-     toilet_motion_battery:
+     toilet_motion_sensor_158d0001a24e71_battery:
         friendly_name: 'Туалет, датчик движения'
         value_template: "{{ state_attr('binary_sensor.motion_sensor_158d0001a24e71', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -90,16 +85,17 @@
         
   - platform: template
     sensors:
-     toilet_switch_battery:
+     toilet_wall_switch_both_158d000128cd1a_battery:
         friendly_name: 'Туалет, выключатель'
         value_template: "{{ state_attr('binary_sensor.wall_switch_both_158d000128cd1a', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: binary_sensor.wall_switch_both_158d000128cd1a
         device_class: battery
-        
+
+# Прачечная        
   - platform: template
     sensors:
-     laundry_motion_battery:
+     laundry_motion_sensor_158d0001e16204_battery:
         friendly_name: 'Прачечная, датчик движения'
         value_template: "{{ state_attr('binary_sensor.motion_sensor_158d0001e16204', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -108,16 +104,17 @@
         
   - platform: template
     sensors:
-     laundry_wleak_battery:
+     laundry_water_leak_sensor_158d0002705b7b_battery:
         friendly_name: 'Прачечная, датчик протечки'
         value_template: "{{ state_attr('binary_sensor.water_leak_sensor_158d0002705b7b', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
         device_class: battery
-        
+
+# Кухня        
   - platform: template
     sensors:
-     kitchen_2k_battery:
+     kitchen_wall_switch_left_158d000238a140_battery:
         friendly_name: 'Кухня вход, свет'
         value_template: "{{ state_attr('binary_sensor.wall_switch_left_158d000238a140', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -126,7 +123,7 @@
         
   - platform: template
     sensors:
-     kitchen_motion_battery:
+     kitchen_motion_sensor_158d0001ab3350_battery:
         friendly_name: 'Кухня, движение'
         value_template: "{{ state_attr('binary_sensor.motion_sensor_158d0001ab3350', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -135,7 +132,7 @@
 
   - platform: template
     sensors:
-     kitchen_button_battery:
+     kitchen_switch_158d000154a353_battery:
         friendly_name: 'Кухня, вход, круглая'
         value_template: "{{ state_attr('binary_sensor.switch_158d000154a353', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -144,7 +141,7 @@
 
   - platform: template
     sensors:
-     kitchen_button_sq_battery:
+     kitchen_switch_158d0001a672ef_battery:
         friendly_name: 'Кухня, вход, квадратная'
         value_template: "{{ state_attr('binary_sensor.switch_158d0001a672ef', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -153,7 +150,7 @@
         
   - platform: template
     sensors:
-     kitchen_button_cube_battery:
+     kitchen_cube_158d000101bdc6_battery:
         friendly_name: 'Кухня кубик'
         value_template: "{{ state_attr('binary_sensor.cube_158d000101bdc6', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -162,7 +159,7 @@
         
   - platform: template
     sensors:
-     kitchen_climate_battery:
+     kitchen_humidity_158d0001581109_battery:
         friendly_name: 'Кухня климат'
         value_template: "{{ state_attr('sensor.humidity_158d0001581109', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -171,7 +168,7 @@
 
   - platform: template
     sensors:
-     kitchen_window_battery:
+     kitchen_door_window_sensor_158d0001a99562_battery:
         friendly_name: 'Кухня окно'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d0001a99562', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -180,7 +177,7 @@
 
   - platform: template
     sensors:
-     kitchen_water_battery:
+     kitchen_water_leak_sensor_158d0001bbeba6_battery:
         friendly_name: 'Кухня раковина, протечка'
         value_template: "{{ state_attr('binary_sensor.water_leak_sensor_158d0001bbeba6', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -189,7 +186,7 @@
         
   - platform: template
     sensors:
-     kitchen_vibro_battery:
+     kitchen_vibration_158d0002a8ab8b_battery:
         friendly_name: 'Кухня конфетница'
         value_template: "{{ state_attr('binary_sensor.vibration_158d0002a8ab8b', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -198,7 +195,7 @@
         
   - platform: template
     sensors:
-     kitchen_b_climate_battery:
+     kitchen_vibration_158d0002a8ab8b_battery:
         friendly_name: 'Кухня, балкон, климат'
         value_template: "{{ state_attr('sensor.humidity_158d000171ffde', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -207,7 +204,7 @@
 
   - platform: template
     sensors:
-     kitchen_b_door_battery:
+     kitchen_door_window_sensor_158d0001a20885_battery:
         friendly_name: 'Кухня, балкон дверь'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d0001a20885', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -216,16 +213,17 @@
 
   - platform: template
     sensors:
-     kitchen_b_window_battery:
+     kitchen_door_window_sensor_158d0001a4a394_battery:
         friendly_name: 'Кухня, балкон окно'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d0001a4a394', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: binary_sensor.door_window_sensor_158d0001a4a394
         device_class: battery  
 
+# Гостиная
   - platform: template
     sensors:
-     gg_enterswitch_battery:
+     gg_wall_switch_left_158d00013fc3bc_battery:
         friendly_name: 'Гостиная вход'
         value_template: "{{ state_attr('binary_sensor.wall_switch_left_158d00013fc3bc', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -234,8 +232,8 @@
         
   - platform: template
     sensors:
-     gg_middleswitch_battery:
-        friendly_name: 'Гостиная выкл 2'
+     gg_wall_switch_left_158d0001f47e10_battery:
+        friendly_name: 'Гостиная выключатель 2'
         value_template: "{{ state_attr('binary_sensor.wall_switch_left_158d0001f47e10', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: binary_sensor.wall_switch_left_158d0001f47e10
@@ -243,7 +241,7 @@
         
   - platform: template
     sensors:
-     gg_button_battery:
+     gg_switch_158d0001531698_battery:
         friendly_name: 'Гостиная, комод, круглая'
         value_template: "{{ state_attr('binary_sensor.switch_158d0001531698', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -252,7 +250,7 @@
         
   - platform: template
     sensors:
-     gg_button_sq_battery:
+     gg_switch_158d0001b86d2e_battery:
         friendly_name: 'Гостиная, комод, квадратная'
         value_template: "{{ state_attr('binary_sensor.switch_158d0001b86d2e', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -261,16 +259,7 @@
         
   - platform: template
     sensors:
-     gg_table_button_battery:
-        friendly_name: 'Гостиная, стол, квадратная'
-        value_template: "{{ state_attr('binary_sensor.switch_158d0001e8a244', 'battery_level') }}"
-        unit_of_measurement: '%'
-        entity_id: binary_sensor.switch_158d0001e8a244
-        device_class: battery 
-        
-  - platform: template
-    sensors:
-     gg_cube_battery:
+     gg_cube_158d0001186d82_battery:
         friendly_name: 'Гостиная кубик'
         value_template: "{{ state_attr('binary_sensor.cube_158d0001186d82', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -279,7 +268,7 @@
         
   - platform: template
     sensors:
-     gg_climate_battery:
+     gg_humidity_158d00015aebb6_battery:
         friendly_name: 'Гостиная, климат'
         value_template: "{{ state_attr('sensor.humidity_158d00015aebb6', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -288,7 +277,7 @@
 
   - platform: template
     sensors:
-     gg_windows_battery:
+     gg_door_window_sensor_158d00013ed373_battery:
         friendly_name: 'Гостиная, окно'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d00013ed373', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -297,7 +286,7 @@
 
   - platform: template
     sensors:
-     gg_b_switch_battery:
+     gg_wall_switch_158d00010b5aee_battery:
         friendly_name: 'Гостиная, балкон выключатель'
         value_template: "{{ state_attr('binary_sensor.wall_switch_158d00010b5aee', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -306,7 +295,7 @@
         
   - platform: template
     sensors:
-     gg_b_windows_battery:
+     gg_door_window_sensor_158d0001a2f5f7_battery:
         friendly_name: 'Гостиная, балкон окно'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d0001a2f5f7', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -315,25 +304,26 @@
 
   - platform: template
     sensors:
-     gg_b_climate_battery:
+     gg_humidity_158d0001a4b9da_battery:
         friendly_name: 'Гостиная, балкон климат'
         value_template: "{{ state_attr('sensor.humidity_158d0001a4b9da', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: sensor.humidity_158d0001a4b9da
         device_class: battery
 
+# Ванная
   - platform: template
     sensors:
-     bath_switch_battery:
-        friendly_name: 'Ванная, круглая кнопка'
-        value_template: "{{ state_attr('binary_sensor.switch_158d00016d8628', 'battery_level') }}"
+     bath_wall_switch_left_158d000238a140_battery:
+        friendly_name: 'Ванная, беспроводный выключатель'
+        value_template: "{{ state_attr('binary_sensor.wall_switch_left_158d000238a140', 'battery_level') }}"
         unit_of_measurement: '%'
-        entity_id: binary_sensor.switch_158d00016d8628
+        entity_id: binary_sensor.wall_switch_left_158d000238a140
         device_class: battery
-        
+
   - platform: template
     sensors:
-     bath_motion_battery:
+     bath_motion_sensor_158d0001e547a3_battery:
         friendly_name: 'Ванная, движение'
         value_template: "{{ state_attr('binary_sensor.motion_sensor_158d0001e547a3', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -342,7 +332,7 @@
         
   - platform: template
     sensors:
-     bath_climate_battery:
+     bath_humidity_158d0001dcd47e_battery:
         friendly_name: 'Ванная, климат'
         value_template: "{{ state_attr('sensor.humidity_158d0001dcd47e', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -351,7 +341,7 @@
         
   - platform: template
     sensors:
-     bath_wleak_d_battery:
+     bath_water_leak_sensor_158d0001bb60c2_battery:
         friendly_name: 'Ванная, протечка душевая'
         value_template: "{{ state_attr('binary_sensor.water_leak_sensor_158d0001bb60c2', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -360,16 +350,17 @@
         
   - platform: template
     sensors:
-     bath_wleak_r_battery:
+     bath_water_leak_sensor_158d0001d72fa2_battery:
         friendly_name: 'Ванная протечка раковина'
         value_template: "{{ state_attr('binary_sensor.water_leak_sensor_158d0001d72fa2', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: binary_sensor.water_leak_sensor_158d0001d72fa2
         device_class: battery
-        
+
+# Детская Д        
   - platform: template
     sensors:
-     dd_enter_battery:
+     dd_wall_switch_left_158d000163e571_battery:
         friendly_name: 'Детская Д, вход'
         value_template: "{{ state_attr('binary_sensor.wall_switch_left_158d000163e571', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -378,7 +369,7 @@
         
   - platform: template
     sensors:
-     dd_button_battery:
+     dd_switch_158d00013f82b7_battery:
         friendly_name: 'Детская Д, кровать, круглая'
         value_template: "{{ state_attr('binary_sensor.switch_158d00013f82b7', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -387,16 +378,16 @@
         
   - platform: template
     sensors:
-     dd_motion_battery:
+     dd_motion_sensor_158d0001a66222_battery:
         friendly_name: 'Детская Д, движение'
-        value_template: "{{ state_attr('binary_sensor.switch_158d00013f82b7', 'battery_level') }}"
+        value_template: "{{ state_attr('binary_sensor.motion_sensor_158d0001a66222', 'battery_level') }}"
         unit_of_measurement: '%'
-        entity_id: binary_sensor.switch_158d00013f82b7
+        entity_id: binary_sensor.motion_sensor_158d0001a66222
         device_class: battery
         
   - platform: template
     sensors:
-     dd_cube_battery:
+     dd_cube_158d00011063da_battery:
         friendly_name: 'Детская Д, кубик'
         value_template: "{{ state_attr('binary_sensor.cube_158d00011063da', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -405,7 +396,7 @@
         
   - platform: template
     sensors:
-     dd_climate_battery:
+     dd_temperature_158d000156e92e_battery:
         friendly_name: 'Детская Д, климат'
         value_template: "{{ state_attr('sensor.temperature_158d000156e92e', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -414,7 +405,7 @@
         
   - platform: template
     sensors:
-     dd_window_battery:
+     dd_door_window_sensor_158d0001193697_battery:
         friendly_name: 'Детская Д, окно'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d0001193697', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -423,7 +414,7 @@
         
   - platform: template
     sensors:
-     dd_b_door_battery:
+     dd_door_window_sensor_158d00015843d4_battery:
         friendly_name: 'Детская Д, балкон дверь'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d00015843d4', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -432,7 +423,7 @@
         
   - platform: template
     sensors:
-     dd_b_climate_battery:
+     dd_humidity_158d0001fa8321_battery:
         friendly_name: 'Детская Д, балкон климат'
         value_template: "{{ state_attr('sensor.humidity_158d0001fa8321', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -441,16 +432,17 @@
         
   - platform: template
     sensors:
-     dd_b_window_battery:
+     dd_door_window_sensor_158d0001a65b68_battery:
         friendly_name: 'Детская Д, балкон окно'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d0001a65b68', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: binary_sensor.door_window_sensor_158d0001a65b68
         device_class: battery
-        
+
+# Детская А        
   - platform: template
     sensors:
-     da_switch_enter_battery:
+     da_wall_switch_158d00010b5c6e_battery:
         friendly_name: 'Детская А вход'
         value_template: "{{ state_attr('binary_sensor.wall_switch_158d00010b5c6e', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -459,7 +451,7 @@
         
   - platform: template
     sensors:
-     da_climate_battery:
+     da_humidity_158d000159c7e6_battery:
         friendly_name: 'Детская А климат'
         value_template: "{{ state_attr('sensor.humidity_158d000159c7e6', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -468,7 +460,7 @@
 
   - platform: template
     sensors:
-     da_button_k_battery:
+     da_switch_158d000155d2fb_battery:
         friendly_name: 'Детская А, кровать'
         value_template: "{{ state_attr('binary_sensor.switch_158d000155d2fb', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -477,7 +469,7 @@
         
   - platform: template
     sensors:
-     da_button_t_battery:
+     da_switch_158d000186d9a9_battery:
         friendly_name: 'Детская А, стол'
         value_template: "{{ state_attr('binary_sensor.switch_158d000186d9a9', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -486,7 +478,7 @@
         
   - platform: template
     sensors:
-     da_window_battery:
+     da_door_window_sensor_158d0001583c7b_battery:
         friendly_name: 'Детская А, окно'
         value_template: "{{ state_attr('binary_sensor.door_window_sensor_158d0001583c7b', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -495,7 +487,7 @@
         
   - platform: template
     sensors:
-     da_motion_battery:
+     da_motion_sensor_158d00016d56f5_battery:
         friendly_name: 'Детская А, движение'
         value_template: "{{ state_attr('binary_sensor.motion_sensor_158d00016d56f5', 'battery_level') }}"
         unit_of_measurement: '%'
@@ -504,9 +496,37 @@
         
   - platform: template
     sensors:
-     da_cube_battery:
+     da_cube_158d00028f6fe6_battery:
         friendly_name: 'Детская А, кубик'
         value_template: "{{ state_attr('binary_sensor.cube_158d00028f6fe6', 'battery_level') }}"
         unit_of_measurement: '%'
         entity_id: binary_sensor.cube_158d00028f6fe6
         device_class: battery 
+
+# Тестовые        
+  - platform: template
+    sensors:
+     test_switch_158d0001e8a244_battery:
+        friendly_name: 'Квадратная 11 модель'
+        value_template: "{{ state_attr('binary_sensor.switch_158d0001e8a244', 'battery_level') }}"
+        unit_of_measurement: '%'
+        entity_id: binary_sensor.switch_158d0001e8a244
+        device_class: battery 
+        
+  - platform: template
+    sensors:
+     test_switch_158d00016d8628_battery:
+        friendly_name: 'Круглая кнопка из ванной'
+        value_template: "{{ state_attr('binary_sensor.switch_158d00016d8628', 'battery_level') }}"
+        unit_of_measurement: '%'
+        entity_id: binary_sensor.switch_158d00016d8628
+        device_class: battery
+        
+  - platform: template
+    sensors:
+     test_switch_158d0002af829b_battery:
+        friendly_name: 'Квадратная с тряской'
+        value_template: "{{ state_attr('binary_sensor.switch_158d0002af829b', 'battery_level') }}"
+        unit_of_measurement: '%'
+        entity_id: binary_sensor.switch_158d0002af829b
+        device_class: battery

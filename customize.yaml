@@ -72,6 +72,8 @@ binary_sensor.motion_sensor_158d0001e16204:
   friendly_name: Прачечная, движение
 sensor.illumination_158d0001e16204:
   friendly_name: Прачечная, освещенность
+binary_sensor.water_leak_sensor_158d0002705b7b:
+  friendly_name: Прачечная, протечка, стиралка
   
 
 ## Коридор
@@ -87,6 +89,7 @@ binary_sensor.switch_158d0001f3fefe:
 binary_sensor.vibration_158d0002a4f77e:
   friendly_name: Коридор вибродатчик
   device_class: vibration
+
 
 ## Кухня 
 ## Освещение
@@ -166,9 +169,15 @@ binary_sensor.door_window_sensor_158d0001a4a394:
 light.yeelight_05_ceiling1:
   friendly_name: Гостиная, люстра 1
   icon: mdi:ceiling-light
+light.yeelight_05_ceiling1_ambilight:
+  friendly_name: Гостиная, люстра 1 амбилайт
+  icon: mdi:car-light-high
 light.yeelight_05_ceiling2:
   friendly_name: Гостиная, люстра 2
   icon: mdi:ceiling-light
+light.yeelight_05_ceiling2_ambilight:
+  friendly_name: Гостиная, люстра 2 амбилайт
+  icon: mdi:car-light-high
 light.philips_05_bedside: 
   friendly_name: Гостиная, ночник ТВ
   icon: mdi:lighthouse
@@ -243,8 +252,6 @@ binary_sensor.switch_158d0001531698:
   friendly_name: Гостиная, комод, круглая
 binary_sensor.switch_158d0001b86d2e:
   friendly_name: Гостиная, комод, квадратная
-binary_sensor.switch_158d0001e8a244:
-  friendly_name: Гостиная, стол, квадратная
 binary_sensor.cube_158d0001186d82:
   friendly_name: Гостиная кубик
   icon: mdi:cube-outline
@@ -299,8 +306,6 @@ binary_sensor.wall_switch_right_158d000238a140:
   friendly_name: Ванная right
 binary_sensor.wall_switch_both_158d000238a140:
   friendly_name: Ванная both
-binary_sensor.switch_158d00016d8628:
-  friendly_name: Ванная, круглая кнопка
 binary_sensor.motion_sensor_158d0001e547a3:
   friendly_name: Ванная, движение
 sensor.illumination_158d0001e547a3:
@@ -439,6 +444,13 @@ binary_sensor.cube_158d00028f6fe6:
   friendly_name: Детская А, кубик
   icon: mdi:cube-outline
 
+## Тестовые
+binary_sensor.switch_158d0002af829b:
+  friendly_name: Квадратная с тряской
+binary_sensor.switch_158d00016d8628:
+  friendly_name: Круглая кнопка из ванной
+binary_sensor.switch_158d0001e8a244:
+  friendly_name: Квадратная 11 модель
 
 ## Таймеры
 timer.camphoto:

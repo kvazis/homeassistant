@@ -260,6 +260,21 @@ views:
             cards:
               - type: markdown
                 content: >
+                   **Load Network**
+              - type: glance
+                show_state: true
+                entities:
+                 - entity: sensor.rt_ac66u_b1_kbyte_sec_received
+                   name: Прием
+                   icon: mdi:download-network
+                 - entity: sensor.rt_ac66u_b1_kbyte_sec_sent
+                   name: Передача
+                   icon: mdi:upload-network
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
                    **Network device Zone**
               - type: glance
                 show_state: false
@@ -2304,6 +2319,19 @@ views:
           filter:
             include:
               - entity_id: sensor.da*battery
+              
+        - type: markdown
+          content: >
+              **Тестовые**
+
+        - type: custom:monster-card
+          show_empty: false
+          card:
+            type: entities
+            show_header_toggle: false
+          filter:
+            include:
+              - entity_id: sensor.test*battery
 
 ##################   Автоматика
   - title: Вся автоматика
