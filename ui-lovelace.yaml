@@ -455,6 +455,8 @@ views:
                 include:
                  - domain: light
                    state: 'unavailable'
+                exclude:
+                 - entity_id: light.3874550168c63ae1cbc3
 
           - type: custom:vertical-stack-in-card
             cards:  
