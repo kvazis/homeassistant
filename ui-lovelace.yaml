@@ -1040,6 +1040,7 @@ views:
         - type: picture-glance
           title: Этаж, выход к лифту
           camera_image: camera.reolink
+#          camera_view: live
           entities:
            - entity: switch.reolink_photo
              icon: mdi:camera
@@ -1068,6 +1069,7 @@ views:
         - type: picture-glance
           title: Кухня, холодильник
           camera_image: camera.reolink2
+          camera_view: live
           entities:
            - entity: switch.reolink2_photo
              icon: mdi:camera  

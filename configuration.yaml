@@ -84,7 +84,8 @@ sensor: !include_dir_merge_list includes/sensors
 switch: !include includes/switch.yaml
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 # Cloud
 cloud:
