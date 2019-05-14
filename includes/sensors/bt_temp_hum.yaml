@@ -1,0 +1,9 @@
+  - platform: mitemp_bt
+    mac: '3F:59:C8:82:D8:2D'
+    name: Toilet climate
+    force_update: false
+    median: 3
+    monitored_conditions:
+      - temperature
+      - humidity
+      - battery

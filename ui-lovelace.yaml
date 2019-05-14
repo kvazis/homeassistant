@@ -30,16 +30,28 @@ views:
         
           - type: markdown
             content: >
+               **Сценарии**
+
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: group.scenario
+              name: Бытовые сценарии - 
+              icon: mdi:format-list-numbered
+            - entity: group.heater
+              name: Бойлер, сценарии - 
+              icon: mdi:hot-tub
+
+          - type: markdown
+            content: >
                **Система**
+               
           - type: custom:vertical-stack-in-card
             cards:
             
             - type: entities
               show_header_toggle: false
               entities:
-              - entity: group.scenario
-                name: Сценарии - 
-                icon: mdi:format-list-numbered
               - entity: sensor.last_boot_custom
                 name: Сервер работает -
                 icon: mdi:av-timer
@@ -1048,6 +1060,7 @@ views:
         - type: picture-glance
           title: Этаж, поворот
           camera_image: camera.alfawise
+#          camera_view: live
           entities:
            - entity: switch.alfawise_photo
              icon: mdi:camera

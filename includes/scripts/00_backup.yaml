@@ -2,6 +2,8 @@
     sequence:
 # Стадия 1, сжатие базы
 # Старт счетчика - фаза 1
+     - service: counter.reset
+       entity_id: counter.backup_stage
      - service: counter.increment
        entity_id: counter.backup_stage
 # Присвоение названия фазы 1

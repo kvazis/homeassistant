@@ -126,7 +126,7 @@ panel_iframe:
   configurator:
     title: Конфигуратор
     icon: mdi:wrench
-    url: http://192.168.0.70:3218/
+    url: http://192.168.0.70:8123/api/hassio_ingress/-bIe85JAPBVxQkKyOfmyK1aVr39Hik2_Ut34P_HLJDw/
 
 
 xiaomi_aqara:

@@ -1,6 +1,6 @@
 # Выключение бойлера 
 - alias: 00_heater_off
-  initial_state: false
+  initial_state: true
   trigger:       
    - platform: event
      event_type: timer.finished
@@ -28,6 +28,10 @@
    from: 'off'
    to: 'on'
   action:
+  - service: timer.cancel
+    entity_id: timer.heater
+  - service: timer.start
+    entity_id: timer.heater
   - service: notify.telegram
     data:
       title: 'Бойлер вкл'
@@ -51,7 +55,7 @@
 
 # Включение бойлера утром по будням
 - alias: 00_heater_week_on
-  initial_state: false
+  initial_state: true
   trigger:
   - platform: time
     at: '05:00:00'
@@ -71,16 +75,12 @@
       - thu
       - fri
   action:
-  - service: timer.cancel
-    entity_id: timer.heater
-  - service: timer.start
-    entity_id: timer.heater
   - service: switch.turn_on
     entity_id: switch.wall_plug_158d00015751f4
 
 # Включение бойлера утром по выходным        
 - alias:  00_heater_weekend_on
-  initial_state: false
+  initial_state: true
   trigger:
   - platform: time
     at: '08:00:00'
@@ -97,9 +97,5 @@
       - sat
       - sun
   action:
-  - service: timer.cancel
-    entity_id: timer.heater
-  - service: timer.start
-    entity_id: timer.heater
   - service: switch.turn_on
     entity_id: switch.wall_plug_158d00015751f4

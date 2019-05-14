@@ -6,14 +6,16 @@
    to: 'unavailable'
   condition:
     - condition: state
-      entity_id: automation.06_bathroom_cell_power
-      state: 'off'     
+      entity_id: group.scenario
+      state: 'off'    
   action:
     - service: notify.telegram
       data:
         message: "Потеря связи с резервным сервером, Orange 71 - {{ states('sensor.time_date') }} . Включение сценариев"
     - service: homeassistant.turn_on
-      entity_id: group.scenario
+      entity_id:
+         - group.scenario
+         - group.heater
         
 - alias: 911_orange_71_lost
   initial_state: true
@@ -23,7 +25,7 @@
    to: 'unavailable'
   condition:
     - condition: state
-      entity_id: automation.06_bathroom_cell_power
+      entity_id: group.scenario
       state: 'on'     
   action:
     - service: notify.telegram

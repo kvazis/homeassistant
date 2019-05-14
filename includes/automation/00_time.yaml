@@ -9,6 +9,9 @@
       - mon
       - wed
       - fri
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
   action:    
   - service: notify.telegram
     data:

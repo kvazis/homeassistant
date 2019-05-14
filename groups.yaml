@@ -2,9 +2,6 @@
   scenario:
     name: scenario
     entities:
-#      - automation.00_heater_off
-#      - automation.00_heater_week_on
-#      - automation.00_heater_weekend_on
       - automation.00_heater_notification_on
       - automation.00_heater_notification_off
       - automation.00_ilife_a4
@@ -82,9 +79,9 @@
       - automation.06_bathroom_wleak_washstand_off
       - automation.06_bathroom_wleak_shower_on
       - automation.06_bathroom_wleak_shower_off
-      - automation.07_dd_hum_auto_on
-      - automation.07_dd_hum_auto_off
-      - automation.07_dd_hum_water_warning
+#      - automation.07_dd_hum_auto_on
+#      - automation.07_dd_hum_auto_off
+#      - automation.07_dd_hum_water_warning
       - automation.07_dd_philips
       - automation.07_dd_philips_auto_on
       - automation.07_dd_philips_auto_off
@@ -101,3 +98,10 @@
       - automation.08_da_light_circle
       - automation.08_da_alllight_off
       - automation.08_da_table_reboot
+      
+  heater:
+    name: heater
+    entities:
+      - automation.00_heater_off
+      - automation.00_heater_week_on
+      - automation.00_heater_weekend_on
