@@ -232,8 +232,18 @@ switch.wall_switch_ln_left_158d0001a2ccab:
   icon: mdi:power-socket-eu
   
 ## Сенсоры
-plant.miflora:
+plant.dieffenbac:
+  friendly_name: Диффенбахия
+plant.yucca:
   friendly_name: Юкка
+sensor.true_blue_battery:
+  friendly_name: Горшок True Blue
+sensor.deep_purple_battery:
+  friendly_name: Горшок Deep Purple
+sensor.yucca_battery:
+  friendly_name: Сенсор Юкка
+sensor.dieffenbac_battery:
+  friendly_name: Сенсор Диффенбахия
 sensor.illumination_34ce0088b039:
   friendly_name: Гостиная шлюз освещенность
 binary_sensor.wall_switch_left_158d00013fc3bc:
@@ -348,6 +358,8 @@ switch.plug_158d00030a6e78:
   friendly_name: Детская Д, питание настольной лампы
   icon: mdi:power
 ## Сенсоры 
+sensor.dd_bt_climate_battery:
+  friendly_name: Детская Д, BT датчик климата
 sensor.illumination_286c07f0ad27:
   friendly_name: Детская Д шлюз освещенность
 binary_sensor.wall_switch_left_158d000163e571:
@@ -420,6 +432,8 @@ switch.plug_158d00010ec4b8:
   device_class: plug 
   icon: mdi:cup-water
 ## Сенсоры 
+sensor.da_bt_climate_battery:
+  friendly_name: Детская А, BT датчик климата
 sensor.illumination_f0b429cc1f11:
   friendly_name: Детская А шлюз освещенность
 binary_sensor.wall_switch_158d00010b5c6e:
