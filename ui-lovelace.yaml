@@ -41,6 +41,18 @@ views:
             - entity: group.heater
               name: Бойлер, сценарии - 
               icon: mdi:hot-tub
+          - type: markdown
+            content: >
+               **Резервный сервер, сценарии**
+          - type: glance
+            show_state: true
+            entities:
+              - entity: sensor.reserve_scenario_group
+                name: Бытовые
+                icon: mdi:format-list-numbered
+              - entity: sensor.reserve_heater_group
+                name: Бойлер
+                icon: mdi:hot-tub
 
           - type: markdown
             content: >

@@ -1,6 +1,6 @@
 ## Включение увлажнения
 - alias: 08_da_hum_auto_on
-  initial_state: true
+  initial_state: false
 ## ТРИГГЕР !!!
   trigger:
 ## Проверка каждые 5 минут
@@ -36,7 +36,7 @@
     
 ## Выключение увлажнения
 - alias: 08_da_hum_auto_off
-  initial_state: true
+  initial_state: false
   trigger:
 ## Влажность выше 55 %
    - platform: numeric_state
@@ -61,7 +61,7 @@
 
 ## Предупреждение о недостатке воды    
 - alias: 08_da_hum_water_warning
-  initial_state: true
+  initial_state: false
   trigger:
 ## Падение мощности менее 10 Ватт
    - platform: numeric_state

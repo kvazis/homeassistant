@@ -90,9 +90,9 @@
       - automation.07_dd_all_off
       - automation.07_hp_toggle
       - automation.07_sony_on
-      - automation.08_da_hum_auto_on
-      - automation.08_da_hum_auto_off
-      - automation.08_da_hum_water_warning
+#      - automation.08_da_hum_auto_on
+#      - automation.08_da_hum_auto_off
+#      - automation.08_da_hum_water_warning
       - automation.08_da_light_auto
       - automation.08_da_light
       - automation.08_da_light_circle

@@ -38,6 +38,7 @@
       data:
         keyboard:
           - '/photo, /ilife'
+          - '/hscene_on, /hscene_off, /heat_on, /heat_off'
           - '/gg_off, /dd_off, /da_off'
           - '/ping, /auto_on, /auto_off'
           
@@ -98,8 +99,10 @@
       data:
         title: 'Отчет'
         message: "Сценарии на Orange Primary 70 отключены"
-    - service: script.turn_on
-      entity_id: script.all_scenario_off
+    - service: homeassistant.turn_off
+      entity_id:
+         - group.scenario
+         - group.heater
       
 - alias: 00_telegramm_sc_on
   initial_state: true
@@ -113,8 +116,10 @@
       data:
         title: 'Отчет'
         message: "Сценарии на Orange Primary 70 включены"
-    - service: script.turn_on
-      entity_id: script.all_scenario_on
+    - service: homeassistant.turn_on
+      entity_id:
+         - group.scenario
+         - group.heater
       
 - alias: 00_telegramm_ping
   initial_state: true
@@ -129,3 +134,59 @@
       data:
         title: 'Отчет'
         message: "Orange Primary 70 на связи и статус систем в норме, время - {{ states('sensor.time_date') }}"
+        
+- alias: 00_telegramm_hsc_on
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/hscene_on'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Сценарии бойлера на Orange Primary 70 включены"
+    - service: homeassistant.turn_on
+      entity_id:
+         - group.heater
+        
+- alias: 00_telegramm_hsc_off
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/hscene_off'
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Сценарии бойлера на Orange Primary 70 отключены"
+    - service: homeassistant.turn_off
+      entity_id:
+         - group.heater
+         
+- alias: 00_telegramm_heater_on
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/heat_on'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.wall_plug_158d00015751f4
+    
+- alias: 00_telegramm_heater_off
+  initial_state: true
+  trigger:
+  - platform: event
+    event_type: telegram_command
+    event_data:
+      command: '/heat_off'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.wall_plug_158d00015751f4
+    
+
