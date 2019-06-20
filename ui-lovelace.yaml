@@ -479,6 +479,8 @@ views:
                 include:
                  - domain: light
                    state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
                 exclude:
                  - entity_id: light.3874550168c63ae1cbc3
 
@@ -496,6 +498,8 @@ views:
                 include:
                  - domain: light
                    state: 'on'
+                   options:
+                      secondary_info: last-changed
                 exclude:
                  - entity_id: light.broadlink_07_table
 
@@ -567,6 +571,8 @@ views:
                 include:
                  - domain: switch
                    state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
 
           - type: custom:vertical-stack-in-card
             cards:  
@@ -1151,6 +1157,9 @@ views:
           - entity: sensor.mqtt_binary_sensor_158d00013f7894
             name: Последнее движение в коридоре в - 
             icon: mdi:run-fast
+          - entity: binary_sensor.vibration_158d0002a4f77e            
+            name: Датчик вибрации
+            secondary_info: last-changed
 
         - type: entity-filter
           show_header_toggle: false
@@ -1357,6 +1366,9 @@ views:
             name: Холодильник, питание
             tap_action: toggle
             icon: mdi:power-socket-eu
+          - entity: binary_sensor.vibration_158d0002a8ab8b     
+            name: Датчик вибрации
+            secondary_info: last-changed
 
       - type: vertical-stack
         cards:
@@ -1585,10 +1597,6 @@ views:
                  action: toggle
             - entity: light.yeelight_05_rgbtvbulb
               name: ТВ
-              tap_action: 
-                 action: more-info
-            - entity: light.yeelight_05_bedside
-              name: Yeelight
               tap_action: 
                  action: more-info
             - entity: light.gateway_light_34ce0088b039
@@ -1919,23 +1927,29 @@ views:
               state_image:
                 "on": /local/pict/hp1515_on.jpg
                 "off": /local/pict/hp1515_off.jpg
+                
+        - type: custom:vertical-stack-in-card
+          cards:
+               
+          - type: markdown
+            content: >
+                **Дополнительное освещение**  
 
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: light.gateway_light_286c07f0ad27
+              name: Шлюз
+              icon: mdi:star-circle-outline
+            - type: divider
+            - entity: light.xiaomi_07_table
+              secondary_info: last-changed
+            - entity: switch.plug_158d00030a6e78
+              secondary_info: last-changed
+            - type: divider
+            - entity: script.07_dd_lightoff
+              name: Выключение всего света
 
-        - type: glance
-          show_state: false
-          entities:
-          - entity: light.xiaomi_07_table   
-          - entity: switch.plug_158d00030a6e78
-          - entity: script.07_dd_lightoff
-            name: Выключение всего света
-            tap_action: 
-               action: toggle
-            icon: mdi:close-circle-outline
-          - entity: light.gateway_light_286c07f0ad27
-            name: Шлюз
-            tap_action: 
-               action: more-info
-            icon: mdi:star-circle-outline
 
         - type: custom:vertical-stack-in-card
           cards:
@@ -1944,30 +1958,26 @@ views:
             content: >
                 **Питание**       
 
-          - type: glance
-            show_state: false
+          - type: entities
+            show_header_toggle: false
             entities:
             - entity: switch.plug2
-              name: Настольная лампа
-              tap_action: 
-                action: toggle
+              name: Зарядная USB станция
               icon: mdi:power-socket-eu
+              secondary_info: entity-id
             - entity: switch.plug3
               name: Зарядка планшета
-              tap_action: 
-                action: toggle
               icon: mdi:power-socket-eu
+              secondary_info: entity-id
             - entity: switch.plug4
               name: Колонка Xiaomi
-              tap_action: 
-                action: toggle
               icon: mdi:power-socket-eu
+              secondary_info: entity-id
             - entity: switch.xiaomi_wifi_socket
               name: Power Line
-              tap_action: 
-                action: toggle
               icon: mdi:power-socket-eu
-            
+              secondary_info: entity-id
+
       - type: vertical-stack
         cards:
 

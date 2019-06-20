@@ -88,7 +88,7 @@ binary_sensor.switch_158d0001f3fefe:
   friendly_name: Коридор кнопка  
 binary_sensor.vibration_158d0002a4f77e:
   friendly_name: Коридор вибродатчик
-  device_class: vibration
+#  device_class: vibration
 
 
 ## Кухня 
@@ -184,9 +184,9 @@ light.philips_05_bedside:
 light.aqara_05_wall:
   friendly_name: Гостиная свет стена
   icon: mdi:track-light
-light.yeelight_05_bedside:
-  friendly_name: Гостиная, ночник
-  icon: mdi:lighthouse
+#light.yeelight_05_bedside:
+#  friendly_name: Гостиная, ночник
+#  icon: mdi:lighthouse
 light.yeelight_05_bedside2:
   friendly_name: Гостиная, ночник 2
   icon: mdi:lighthouse
