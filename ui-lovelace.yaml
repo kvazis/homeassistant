@@ -20,9 +20,9 @@ views:
       - sensor.time
       - binary_sensor.workday_sensor
       - sensor.bw_voltage
-      - sensor.social_blade
-      - sensor.subs_today
-      - sensor.views_today    
+#      - sensor.social_blade
+#      - sensor.subs_today
+#      - sensor.views_today    
     cards:
 
       - type: vertical-stack

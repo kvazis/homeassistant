@@ -168,3 +168,15 @@ rest_command:
   google_backup:
     url: 'http://192.168.0.70:8055/gb/doBackup'
     timeout: '300'
+
+  sonoff_on:
+    url: http://192.168.0.209:8081/zeroconf/switch
+    method: POST
+    payload: '{"sequence":"${now}", "deviceid": "1000906b35", "encrypt":false, "selfapikey":"123", "data":"{\"switch\":\"on\"}"}'
+    content_type:  'application/json; charset=utf-8'
+
+  sonoff_off:
+    url: http://192.168.0.209:8081/zeroconf/switch
+    method: POST
+    payload: '{"sequence":"${now}", "deviceid": "1000906b35", "encrypt":false, "selfapikey":"123", "data":"{\"switch\":\"off\"}"}'
+    content_type:  'application/json; charset=utf-8'
