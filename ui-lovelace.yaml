@@ -153,9 +153,9 @@ views:
                 maxValue: 100
                 startAngle: 45
                 ticksAngle: 270
-                valueBox: false
+                valueBox: true
                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 2
+                minorTicks: 4
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
@@ -172,9 +172,9 @@ views:
                 maxValue: 100
                 startAngle: 45
                 ticksAngle: 270
-                valueBox: false
+                valueBox: true
                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 2
+                minorTicks: 4
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
@@ -327,9 +327,9 @@ views:
                 maxValue: 10000
                 startAngle: 45
                 ticksAngle: 270
-                valueBox: false
+                valueBox: true
                 majorTicks: ["0", "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000"]
-                minorTicks: 2
+                minorTicks: 4
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 4000,"color": "rgba(10, 255, 0, .75)"},{"from": 4000, "to": 6000,"color": "rgba(255, 255, 0, .75)"},{"from": 6000, "to": 8000,"color": "rgba(255, 140, 0, .75)"}, {"from": 8000, "to": 10000,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
@@ -346,9 +346,9 @@ views:
                 maxValue: 10000
                 startAngle: 45
                 ticksAngle: 270
-                valueBox: false
+                valueBox: true
                 majorTicks: ["0", "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000"]
-                minorTicks: 2
+                minorTicks: 4
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 4000,"color": "rgba(10, 255, 0, .75)"},{"from": 4000, "to": 6000,"color": "rgba(255, 255, 0, .75)"},{"from": 6000, "to": 8000,"color": "rgba(255, 140, 0, .75)"}, {"from": 8000, "to": 10000,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
@@ -1323,47 +1323,45 @@ views:
         - type: light
           entity: light.yeelight_06_ceiling
 
-        - type: custom:vertical-stack-in-card
-          cards: 
-          - type: horizontal-stack
-            cards:
-             - type: custom:canvas-gauge-card
-               entity: sensor.temperature_158d0001dcd47e
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Температура (С)
-                 width: 220
-                 height: 200
-                 minValue: 00
-                 maxValue: 40
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-                 borders: false
+        - type: horizontal-stack
+          cards:
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d0001dcd47e
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.humidity_158d0001dcd47e
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Влажность (%)
-                 width: 220
-                 height: 200
-                 minValue: 0
-                 maxValue: 100
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-                 borders: false
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d0001dcd47e
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false
                  
 
         - type: entities
@@ -1474,49 +1472,46 @@ views:
            - entity: binary_sensor.door_window_sensor_158d0001a99562
              name: Окно 
 
-        - type: custom:vertical-stack-in-card
-          cards: 
+        - type: horizontal-stack
+          cards:
 
-          - type: horizontal-stack
-            cards:
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d0001581109
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.temperature_158d0001581109
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Температура (С)
-                 width: 220
-                 height: 200
-                 minValue: 00
-                 maxValue: 40
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-                 borders: false
-
-             - type: custom:canvas-gauge-card
-               entity: sensor.humidity_158d0001581109
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Влажность (%)
-                 width: 220
-                 height: 200
-                 minValue: 0
-                 maxValue: 100
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-                 borders: false
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d0001581109
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false
 
 
         - type: entities
@@ -1551,49 +1546,46 @@ views:
            - entity: binary_sensor.door_window_sensor_158d0001a4a394
              name: Окно на балконе
 
-        - type: custom:vertical-stack-in-card
-          cards: 
-
-          - type: horizontal-stack
-            cards:
+        - type: horizontal-stack
+          cards:
             
-             - type: custom:canvas-gauge-card
-               entity: sensor.temperature_158d000171ffde
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Температура (С)
-                 width: 220
-                 height: 200
-                 minValue: 00
-                 maxValue: 40
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-                 borders: false
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d000171ffde
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.humidity_158d000171ffde
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Влажность (%)
-                 width: 220
-                 height: 200
-                 minValue: 0
-                 maxValue: 100
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-                 borders: false            
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d000171ffde
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false            
 
         - type: custom:canvas-gauge-card
           entity: sensor.pressure_mmhg_158d000171ffde
@@ -1881,49 +1873,46 @@ views:
           content: >
               **Гостиная - статус**
               
-        - type: custom:vertical-stack-in-card
-          cards: 
-
-          - type: horizontal-stack
-            cards:
+        - type: horizontal-stack
+          cards:
             
-             - type: custom:canvas-gauge-card
-               entity: sensor.temperature_158d00015aebb6
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Температура (С)
-                 width: 220
-                 height: 200
-                 minValue: 00
-                 maxValue: 40
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-                 borders: false
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d00015aebb6
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.humidity_158d00015aebb6
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Влажность (%)
-                 width: 220
-                 height: 200
-                 minValue: 0
-                 maxValue: 100
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-                 borders: false  
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d00015aebb6
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false  
 
         - type: conditional
           conditions:
@@ -1977,47 +1966,45 @@ views:
            - entity: binary_sensor.door_window_sensor_158d0001a2f5f7
              name: Окно на балконе 
 
-        - type: custom:vertical-stack-in-card
-          cards: 
-          - type: horizontal-stack
-            cards:
-             - type: custom:canvas-gauge-card
-               entity: sensor.temperature_158d0001a4b9da
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Температура (С)
-                 width: 220
-                 height: 200
-                 minValue: 00
-                 maxValue: 40
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-                 borders: false
+        - type: horizontal-stack
+          cards:
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d0001a4b9da
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.humidity_158d0001a4b9da
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Влажность (%)
-                 width: 220
-                 height: 200
-                 minValue: 0
-                 maxValue: 100
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-                 borders: false             
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d0001a4b9da
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false             
 
         - type: custom:canvas-gauge-card
           entity: sensor.pressure_mmhg_158d0001a4b9da
@@ -2185,50 +2172,46 @@ views:
            - entity: binary_sensor.door_window_sensor_158d0001193697
              name: Окно
 
-        - type: custom:vertical-stack-in-card
+        - type: horizontal-stack
           cards:
-
-          - type: horizontal-stack
-            cards:
             
-             - type: custom:canvas-gauge-card
-               entity: sensor.temperature_158d000156e92e
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Температура (С)
-                 width: 220
-                 height: 200
-                 minValue: 00
-                 maxValue: 40
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-                 borders: false
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d000156e92e
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.humidity_158d000156e92e
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Влажность (%)
-                 width: 220
-                 height: 200
-                 minValue: 0
-                 maxValue: 100
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-                 borders: false
-
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d000156e92e
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false
 
         - type: entities
           show_header_toggle: false
@@ -2257,49 +2240,46 @@ views:
            - entity: binary_sensor.door_window_sensor_158d0001a65b68
              name: Окно на балконе
 
-        - type: custom:vertical-stack-in-card
+        - type: horizontal-stack
           cards:
 
-          - type: horizontal-stack
-            cards:
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d0001fa8321
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.temperature_158d0001fa8321
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Температура (С)
-                 width: 220
-                 height: 200
-                 minValue: 00
-                 maxValue: 40
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-                 borders: false
-
-             - type: custom:canvas-gauge-card
-               entity: sensor.humidity_158d0001fa8321
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Влажность (%)
-                 width: 220
-                 height: 200
-                 minValue: 0
-                 maxValue: 100
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-                 borders: false             
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d0001fa8321
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false             
 
         - type: custom:canvas-gauge-card
           entity: sensor.pressure_mmhg_158d0001fa8321
@@ -2446,49 +2426,46 @@ views:
            - entity: binary_sensor.door_window_sensor_158d0001583c7b
              name: Окно
 
-        - type: custom:vertical-stack-in-card
+        - type: horizontal-stack
           cards:
-
-          - type: horizontal-stack
-            cards:
             
-             - type: custom:canvas-gauge-card
-               entity: sensor.temperature_158d000159c7e6
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Температура (С)
-                 width: 220
-                 height: 200
-                 minValue: 00
-                 maxValue: 40
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-                 borders: false
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d000159c7e6
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.humidity_158d000159c7e6
-               card_height: 180
-               gauge:
-                 type: "radial-gauge"
-                 title: Влажность (%)
-                 width: 220
-                 height: 200
-                 minValue: 0
-                 maxValue: 100
-                 startAngle: 45
-                 ticksAngle: 270
-                 valueBox: false
-                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                 minorTicks: 2
-                 strokeTicks: true
-                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-                 borders: false  
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d000159c7e6
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false  
 
         - type: entities
           show_header_toggle: false
