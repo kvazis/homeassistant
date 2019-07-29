@@ -5,7 +5,11 @@ resources:
   - url: /local/monster-card.js
     type: js
   - url: /local/vertical-stack-in-card.js
-    type: js  
+    type: js 
+  - url: /local/light-entity-card.js
+    type: js 
+  - url: /local/canvas-gauge-card.js
+    type: module 
     
 title: Умный дом - Orange Primary 70
 views:
@@ -15,11 +19,11 @@ views:
   - title: Система
     id: system
     icon: mdi:home-map-marker
-    badges:
-      - sun.sun
-      - sensor.time
-      - binary_sensor.workday_sensor
-      - sensor.bw_voltage
+#    badges:
+#      - sun.sun
+#      - sensor.time
+#      - binary_sensor.workday_sensor
+#      - sensor.bw_voltage
 #      - sensor.social_blade
 #      - sensor.subs_today
 #      - sensor.views_today    
@@ -41,18 +45,37 @@ views:
             - entity: group.heater
               name: Бойлер, сценарии - 
               icon: mdi:hot-tub
-          - type: markdown
-            content: >
-               **Резервный сервер, сценарии**
-          - type: glance
-            show_state: true
-            entities:
-              - entity: sensor.reserve_scenario_group
-                name: Бытовые
-                icon: mdi:format-list-numbered
-              - entity: sensor.reserve_heater_group
-                name: Бойлер
-                icon: mdi:hot-tub
+          - type: horizontal-stack
+            cards:
+            - type: markdown
+              content: >
+                 **Резервный сервер, сценарии**
+            - type: markdown
+              content: >
+                 **Khadas, сценарии**                 
+
+          - type: horizontal-stack
+            cards:  
+                 
+            - type: glance
+              show_state: true
+              entities:
+                - entity: sensor.reserve_scenario_group
+                  name: Бытовые
+                  icon: mdi:format-list-numbered
+                - entity: sensor.reserve_heater_group
+                  name: Бойлер
+                  icon: mdi:hot-tub
+                
+            - type: glance
+              show_state: true
+              entities:
+                - entity: sensor.khadas_scenario_group
+                  name: Бытовые
+                  icon: mdi:format-list-numbered
+                - entity: sensor.khadas_heater_group
+                  name: Бойлер
+                  icon: mdi:hot-tub
 
           - type: markdown
             content: >
@@ -60,7 +83,31 @@ views:
                
           - type: custom:vertical-stack-in-card
             cards:
-            
+
+            - type: glance
+              show_state: false
+              entities:
+               - entity: script.purge_db
+                 tap_action: 
+                   action: toggle
+                 name: Сжатие базы
+                 icon: mdi:database
+               - entity: script.ha_restart
+                 tap_action: 
+                   action: toggle
+                 name: HA reboot
+                 icon: mdi:home-assistant
+               - entity: script.all_scenario_reload
+                 tap_action: 
+                   action: toggle
+                 name: Сценарии
+                 icon: mdi:autorenew
+               - entity: script.all_script_reload
+                 tap_action: 
+                   action: toggle
+                 name: Скрипты
+                 icon: mdi:autorenew 
+
             - type: entities
               show_header_toggle: false
               entities:
@@ -82,108 +129,114 @@ views:
               - entity: sensor.khadas_state
                 name: Khadas VIM2 в онлайне -
                 icon: mdi:clock-outline
-            - type: horizontal-stack
-              cards:
-                - type: entities
-                  show_header_toggle: false
-                  entities:
-                  - type: weblink
-                    name: Polymer frontend
-                    url: http://192.168.0.70:8123/states
-                    icon: mdi:home-assistant
-                - type: entities
-                  show_header_toggle: false
-                  entities:
-                  - type: weblink
-                    name: MotionEye
-                    url: http://192.168.0.73:8765/
-                    icon: mdi:cctv
 
-          - type: custom:vertical-stack-in-card
-            cards: 
-
-            - type: horizontal-stack
-              cards:
-               - type: gauge
-                 name: CPU
-                 entity: sensor.cpu_temp
-                 min: 0
-                 max: 100
-                 severity:
-                   green: 0
-                   yellow: 60           
-                   red: 90
-
-            - type: horizontal-stack
-              cards:
-               - type: gauge
-                 name: Процессор
-                 entity: sensor.processor_use
-                 min: 0
-                 max: 100
-                 severity:
-                   green: 0
-                   yellow: 60           
-                   red: 90
-               - type: gauge
-                 name: ОЗУ
-                 entity: sensor.memory_use_percent
-                 min: 0
-                 max: 100
-                 severity:
-                   green: 0
-                   yellow: 60           
-                   red: 90
-
-            - type: horizontal-stack
-              cards:
-               - type: gauge
-                 name: Занято на диске
-                 entity: sensor.disk_use_percent
-                 min: 0
-                 max: 100
-                 severity:
-                   green: 0
-                   yellow: 60           
-                   red: 90
-               - type: gauge
-                 name: Свободно
-                 unit: 'ГБ'
-                 entity: sensor.disk_free
-                 min: 0
-                 max: 32
-                 severity:
-                   red: 1
-                   yellow: 3           
-                   green: 6
 
       - type: vertical-stack
         cards:
 
           - type: markdown
             content: >
-               **Графики**
+               **Hardware**
 
-          - type: custom:vertical-stack-in-card
+          - type: horizontal-stack
             cards:
-            - type: markdown
-              content: >
-                **Сеть**
-                 
-            - type: history-graph
-              entities:
-              - entity: sensor.rt_ac66u_b1_kbyte_sec_received
-                name: Прием
-              - entity: sensor.rt_ac66u_b1_kbyte_sec_sent
-                name: Передача
+  
+            - type: custom:canvas-gauge-card
+              entity: sensor.processor_use
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Processor (%)
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 100
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: false
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
 
-               
+            - type: custom:canvas-gauge-card
+              entity: sensor.cpu_temp
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Processor (C)
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 100
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: false
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+
+          - type: custom:canvas-gauge-card
+            entity: sensor.memory_use_percent
+            card_height: 100
+            gauge:
+                type: "linear-gauge"
+                title: Занято ОЗУ (%)
+                width: 450
+                height: 100
+                minValue: 00
+                maxValue: 100
+                valueBox: false
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+                
+          - type: custom:canvas-gauge-card
+            entity: sensor.disk_use_percent
+            card_height: 100
+            gauge:
+                type: "linear-gauge"
+                title: Занято на диске (%)
+                width: 450
+                height: 100
+                minValue: 00
+                maxValue: 100
+                valueBox: false
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+                
+          - type: custom:canvas-gauge-card
+            entity: sensor.disk_free
+            card_height: 100
+            gauge:
+                type: "linear-gauge"
+                title: Свободно на диске (ГБ)
+                width: 450
+                height: 100
+                minValue: 00
+                maxValue: 32
+                valueBox: false
+                majorTicks: ["0", "4", "8", "12", "16", "20", "24", "28", "32"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 2,"color": "rgba(255, 0, 0, .75)"}, {"from": 2, "to": 8,"color": "rgba(255, 140, 0, .75)"}, {"from": 8, "to": 16,"color": "rgba(255, 255, 0, .75)"}, {"from": 16, "to": 32,"color": "rgba(10, 255, 0, .75)"}]
+                borders: false
+
           - type: custom:vertical-stack-in-card
             cards:
      
             - type: markdown
               content: >
-                **Сервер**
+                **Графики**
 
             - type: history-graph
               entities:
@@ -199,48 +252,22 @@ views:
                - entity: sensor.processor_use
                  name: Процессор
 
-            - type: history-graph
-              entities:
-               - entity: sensor.maria_db_size
-                 name: База данных
 
       - type: vertical-stack
         cards:
 
           - type: markdown
             content: >
-               **Разное**
+               **База, резервное копирование**
 
           - type: custom:vertical-stack-in-card
             cards:
-
-
-              - type: glance
-                show_state: false
+    
+              - type: history-graph
                 entities:
-                 - entity: script.purge_db
-                   tap_action: 
-                     action: toggle
-                   name: Сжатие базы
-                   icon: mdi:database
-                 - entity: script.ha_restart
-                   tap_action: 
-                     action: toggle
-                   name: HA reboot
-                   icon: mdi:home-assistant
-                 - entity: script.all_scenario_reload
-                   tap_action: 
-                     action: toggle
-                   name: Сценарии
-                   icon: mdi:autorenew
-                 - entity: script.all_script_reload
-                   tap_action: 
-                     action: toggle
-                   name: Скрипты
-                   icon: mdi:autorenew 
-              - type: markdown
-                content: >
-                   **Бекапы**
+                 - entity: sensor.maria_db_size
+                   name: База данных
+
               - type: entities
                 show_header_toggle: false
                 entities:
@@ -266,8 +293,9 @@ views:
                 - entity: sensor.last_google_deletedfromgoogle
                   icon: mdi:folder-google-drive
 
-              - type: weather-forecast
-                entity: weather.openweathermap
+
+#              - type: weather-forecast
+#                entity: weather.openweathermap
 
 
 ##################   Локальная сеть
@@ -280,20 +308,60 @@ views:
       - type: vertical-stack
         cards:
 
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **Load Network**
-              - type: glance
-                show_state: true
-                entities:
-                 - entity: sensor.rt_ac66u_b1_kbyte_sec_received
-                   name: Прием
-                   icon: mdi:download-network
-                 - entity: sensor.rt_ac66u_b1_kbyte_sec_sent
-                   name: Передача
-                   icon: mdi:upload-network
+         - type: markdown
+           content: >
+              **Загрузка канала**
+
+         - type: horizontal-stack
+           cards:
+  
+            - type: custom:canvas-gauge-card
+              entity: sensor.rt_ac66u_b1_kbyte_sec_received
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Прием КБайт/сек
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 10000
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: false
+                majorTicks: ["0", "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 4000,"color": "rgba(10, 255, 0, .75)"},{"from": 4000, "to": 6000,"color": "rgba(255, 255, 0, .75)"},{"from": 6000, "to": 8000,"color": "rgba(255, 140, 0, .75)"}, {"from": 8000, "to": 10000,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+            - type: custom:canvas-gauge-card
+              entity: sensor.rt_ac66u_b1_kbyte_sec_sent
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Передача КБайт/сек
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 10000
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: false
+                majorTicks: ["0", "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 4000,"color": "rgba(10, 255, 0, .75)"},{"from": 4000, "to": 6000,"color": "rgba(255, 255, 0, .75)"},{"from": 6000, "to": 8000,"color": "rgba(255, 140, 0, .75)"}, {"from": 8000, "to": 10000,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+   
+         - type: history-graph
+           entities:
+            - entity: sensor.rt_ac66u_b1_kbyte_sec_received
+              name: Прием
+            - entity: sensor.rt_ac66u_b1_kbyte_sec_sent
+              name: Передача
+
+      - type: vertical-stack
+        cards:
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -1100,7 +1168,7 @@ views:
         - type: picture-glance
           title: Кухня, холодильник
           camera_image: camera.reolink2
-          camera_view: live
+#          camera_view: live
           entities:
            - entity: switch.reolink2_photo
              icon: mdi:camera  
@@ -1259,25 +1327,44 @@ views:
           cards: 
           - type: horizontal-stack
             cards:
-             - type: gauge
-               name: Температура
+             - type: custom:canvas-gauge-card
                entity: sensor.temperature_158d0001dcd47e
-               min: 10
-               max: 35
-               severity:
-                 normal: 0
-                 yellow: 20
-                 red: 27
-             - type: gauge
-               name: Влажность
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Температура (С)
+                 width: 220
+                 height: 200
+                 minValue: 00
+                 maxValue: 40
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+                 borders: false
+
+             - type: custom:canvas-gauge-card
                entity: sensor.humidity_158d0001dcd47e
-               min: 0
-               max: 100
-               scale: 30px
-               severity:
-                 yellow: 0
-                 green: 45
-                 normal: 70
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Влажность (%)
+                 width: 220
+                 height: 200
+                 minValue: 0
+                 maxValue: 100
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+                 borders: false
+                 
 
         - type: entities
           show_header_toggle: false
@@ -1392,28 +1479,45 @@ views:
 
           - type: horizontal-stack
             cards:
-             - type: gauge
-               title: Температура
+
+             - type: custom:canvas-gauge-card
                entity: sensor.temperature_158d0001581109
-               name: Температура
-               min: 10
-               max: 35
-               scale: 30px
-               severity:
-                 normal: 0
-                 yellow: 20
-                 red: 27
-             - type: gauge
-               title: Влажность
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Температура (С)
+                 width: 220
+                 height: 200
+                 minValue: 00
+                 maxValue: 40
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+                 borders: false
+
+             - type: custom:canvas-gauge-card
                entity: sensor.humidity_158d0001581109
-               name: Влажность
-               min: 0
-               max: 100
-               scale: 30px
-               severity:
-                 yellow: 0
-                 green: 45
-                 normal: 70
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Влажность (%)
+                 width: 220
+                 height: 200
+                 minValue: 0
+                 maxValue: 100
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+                 borders: false
+
 
         - type: entities
           show_header_toggle: false
@@ -1452,51 +1556,85 @@ views:
 
           - type: horizontal-stack
             cards:
-             - type: gauge
-               title: Температура
+            
+             - type: custom:canvas-gauge-card
                entity: sensor.temperature_158d000171ffde
-               name: Температура
-               min: -5
-               max: 35
-               scale: 30px
-               severity:
-                 normal: 0
-                 yellow: 15               
-                 red: 25
-             - type: gauge
-               title: Влажность
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Температура (С)
+                 width: 220
+                 height: 200
+                 minValue: 00
+                 maxValue: 40
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+                 borders: false
+
+             - type: custom:canvas-gauge-card
                entity: sensor.humidity_158d000171ffde
-               name: Влажность
-               min: 0
-               max: 100
-               scale: 30px
-               severity:
-                 yellow: 0
-                 green: 45
-                 normal: 70
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Влажность (%)
+                 width: 220
+                 height: 200
+                 minValue: 0
+                 maxValue: 100
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+                 borders: false            
 
-        - type: custom:vertical-stack-in-card
-          cards:
-          - type: sensor
-            name: Атмосферное давление факт
-            entity: sensor.pressure_mmhg_158d000171ffde
-            graph: none
-            unit: "мм рт. ст."
-            icon: mdi:gauge
-          
-          - type: sensor
-            name: Атмосферное давление с учетом высоты
-            entity: sensor.pressure_mmhg_correct_158d000171ffde
-            graph: none
-            unit: "мм рт. ст."
-            icon: mdi:gauge
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_158d000171ffde
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление факт, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
 
-          - type: history-graph
-            entities:
-             - entity: sensor.pressure_mmhg_158d000171ffde
-               name: факт 
-             - entity: sensor.pressure_mmhg_correct_158d000171ffde
-               name: коррект 
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_correct_158d000171ffde
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление с учетом высоты, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+        - type: history-graph
+          entities:
+           - entity: sensor.pressure_mmhg_158d000171ffde
+             name: факт 
+           - entity: sensor.pressure_mmhg_correct_158d000171ffde
+             name: коррект 
 
 ##################   Living room
   - title: Гостиная
@@ -1748,25 +1886,44 @@ views:
 
           - type: horizontal-stack
             cards:
-             - type: gauge
-               name: Температура
+            
+             - type: custom:canvas-gauge-card
                entity: sensor.temperature_158d00015aebb6
-               min: 15
-               max: 35
-               severity:
-                 normal: 0
-                 yellow: 20
-                 red: 27
-             - type: gauge
-               name: Влажность
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Температура (С)
+                 width: 220
+                 height: 200
+                 minValue: 00
+                 maxValue: 40
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+                 borders: false
+
+             - type: custom:canvas-gauge-card
                entity: sensor.humidity_158d00015aebb6
-               min: 0
-               max: 100
-               scale: 30px
-               severity:
-                 yellow: 0
-                 green: 45
-                 normal: 70
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Влажность (%)
+                 width: 220
+                 height: 200
+                 minValue: 0
+                 maxValue: 100
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+                 borders: false  
 
         - type: conditional
           conditions:
@@ -1822,51 +1979,86 @@ views:
 
         - type: custom:vertical-stack-in-card
           cards: 
-
           - type: horizontal-stack
             cards:
-             - type: gauge
-               name: Температура
+             - type: custom:canvas-gauge-card
                entity: sensor.temperature_158d0001a4b9da
-               min: -5
-               max: 35
-               severity:
-                 normal: 0
-                 yellow: 15               
-                 red: 25
-             - type: gauge
-               name: Влажность
-               entity: sensor.humidity_158d0001a4b9da
-               min: 0
-               max: 100
-               scale: 30px
-               severity:
-                 yellow: 0
-                 green: 45
-                 normal: 70
-               
-        - type: custom:vertical-stack-in-card
-          cards:
-          - type: sensor
-            name: Атмосферное давление факт
-            entity: sensor.pressure_mmhg_158d0001a4b9da
-            graph: none
-            unit: "мм рт. ст."
-            icon: mdi:gauge
-          
-          - type: sensor
-            name: Атмосферное давление с учетом высоты
-            entity: sensor.pressure_mmhg_correct_158d0001a4b9da
-            graph: none
-            unit: "мм рт. ст."
-            icon: mdi:gauge
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Температура (С)
+                 width: 220
+                 height: 200
+                 minValue: 00
+                 maxValue: 40
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+                 borders: false
 
-          - type: history-graph
-            entities:
-             - entity: sensor.pressure_mmhg_158d0001a4b9da
-               name: факт 
-             - entity: sensor.pressure_mmhg_correct_158d0001a4b9da
-               name: коррект 
+             - type: custom:canvas-gauge-card
+               entity: sensor.humidity_158d0001a4b9da
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Влажность (%)
+                 width: 220
+                 height: 200
+                 minValue: 0
+                 maxValue: 100
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+                 borders: false             
+
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_158d0001a4b9da
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление факт, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_correct_158d0001a4b9da
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление с учетом высоты, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+        - type: history-graph
+          entities:
+           - entity: sensor.pressure_mmhg_158d0001a4b9da
+             name: факт 
+           - entity: sensor.pressure_mmhg_correct_158d0001a4b9da
+             name: коррект  
 
 ##################   DD
 
@@ -1998,25 +2190,45 @@ views:
 
           - type: horizontal-stack
             cards:
-             - type: gauge
-               name: Температура
+            
+             - type: custom:canvas-gauge-card
                entity: sensor.temperature_158d000156e92e
-               min: 15
-               max: 35
-               severity:
-                 normal: 0
-                 yellow: 20
-                 red: 27
-             - type: gauge
-               name: Влажность
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Температура (С)
+                 width: 220
+                 height: 200
+                 minValue: 00
+                 maxValue: 40
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+                 borders: false
+
+             - type: custom:canvas-gauge-card
                entity: sensor.humidity_158d000156e92e
-               min: 0
-               max: 100
-               scale: 30px
-               severity:
-                 yellow: 0
-                 green: 45
-                 normal: 70
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Влажность (%)
+                 width: 220
+                 height: 200
+                 minValue: 0
+                 maxValue: 100
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+                 borders: false
+
 
         - type: entities
           show_header_toggle: false
@@ -2050,49 +2262,85 @@ views:
 
           - type: horizontal-stack
             cards:
-             - type: gauge
-               name: Температура
+
+             - type: custom:canvas-gauge-card
                entity: sensor.temperature_158d0001fa8321
-               min: -5
-               max: 35
-               severity:
-                 normal: 0
-                 yellow: 15               
-                 red: 25
-             - type: gauge
-               name: Влажность
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Температура (С)
+                 width: 220
+                 height: 200
+                 minValue: 00
+                 maxValue: 40
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+                 borders: false
+
+             - type: custom:canvas-gauge-card
                entity: sensor.humidity_158d0001fa8321
-               min: 0
-               max: 100
-               scale: 30px
-               severity:
-                 yellow: 0
-                 green: 45
-                 normal: 70
-               
-        - type: custom:vertical-stack-in-card
-          cards:
-          - type: sensor
-            name: Атмосферное давление факт
-            entity: sensor.pressure_mmhg_158d0001fa8321
-            graph: none
-            unit: "мм рт. ст."
-            icon: mdi:gauge
-          
-          - type: sensor
-            name: Атмосферное давление с учетом высоты
-            entity: sensor.pressure_mmhg_correct_158d0001fa8321
-            graph: none
-            unit: "мм рт. ст."
-            icon: mdi:gauge
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Влажность (%)
+                 width: 220
+                 height: 200
+                 minValue: 0
+                 maxValue: 100
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+                 borders: false             
 
-          - type: history-graph
-            entities:
-             - entity: sensor.pressure_mmhg_158d0001fa8321
-               name: факт 
-             - entity: sensor.pressure_mmhg_correct_158d0001fa8321
-               name: коррект 
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_158d0001fa8321
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление факт, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
 
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_correct_158d0001fa8321
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление с учетом высоты, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+        - type: history-graph
+          entities:
+           - entity: sensor.pressure_mmhg_158d0001fa8321
+             name: факт 
+           - entity: sensor.pressure_mmhg_correct_158d0001fa8321
+             name: коррект              
 
 ##################   DA
 
@@ -2203,26 +2451,45 @@ views:
 
           - type: horizontal-stack
             cards:
-             - type: gauge
-               name: Температура
+            
+             - type: custom:canvas-gauge-card
                entity: sensor.temperature_158d000159c7e6
-               min: 15
-               max: 35
-               severity:
-                 normal: 0
-                 yellow: 20
-                 red: 27
-             - type: gauge
-               name: Влажность
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Температура (С)
+                 width: 220
+                 height: 200
+                 minValue: 00
+                 maxValue: 40
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+                 borders: false
+
+             - type: custom:canvas-gauge-card
                entity: sensor.humidity_158d000159c7e6
-               min: 0
-               max: 100
-               scale: 30px
-               severity:
-                 yellow: 0
-                 green: 45
-                 normal: 708
-              
+               card_height: 180
+               gauge:
+                 type: "radial-gauge"
+                 title: Влажность (%)
+                 width: 220
+                 height: 200
+                 minValue: 0
+                 maxValue: 100
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: false
+                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                 minorTicks: 2
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+                 borders: false  
+
         - type: entities
           show_header_toggle: false
           entities:

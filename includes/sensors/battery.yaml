@@ -515,15 +515,6 @@
         
   - platform: template
     sensors:
-     test_switch_158d00016d8628_battery:
-        friendly_name: 'Круглая кнопка из ванной'
-        value_template: "{{ state_attr('binary_sensor.switch_158d00016d8628', 'battery_level') }}"
-        unit_of_measurement: '%'
-        entity_id: binary_sensor.switch_158d00016d8628
-        device_class: battery
-        
-  - platform: template
-    sensors:
      test_switch_158d0002af829b_battery:
         friendly_name: 'Квадратная с тряской'
         value_template: "{{ state_attr('binary_sensor.switch_158d0002af829b', 'battery_level') }}"

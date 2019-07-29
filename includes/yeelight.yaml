@@ -15,7 +15,7 @@
       192.168.0.107:
         name: yeelight_03_ceiling
         transition: 1000
-        model: ceiling4
+#        model: ceiling4
 ## Гостиная
       192.168.0.108:
         name: yeelight_05_ceiling1
@@ -25,10 +25,6 @@
         name: yeelight_05_ceiling2
         transition: 1000
         model: ceiling4
-#      192.168.0.110:
-#        name: yeelight_05_bedside
-#        transition: 1000
-#        model: bslamp1   
       192.168.0.111:
         name: yeelight_05_rgbtvbulb
         transition: 1000
