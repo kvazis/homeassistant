@@ -1,0 +1,63 @@
+  - platform: mitemp_bt
+    mac: '4C:65:A8:D0:0E:2F'
+    name: da_bt_climate
+    force_update: true
+    median: 3
+    monitored_conditions:
+      - temperature
+      - humidity
+      - battery
+      
+  - platform: mitemp_bt
+    mac: '4C:65:A8:D0:54:BB'
+    name: dd_bt_climate
+    force_update: true
+    median: 3
+    monitored_conditions:
+      - temperature
+      - humidity
+      - battery    
+      
+  - platform: miflora
+    mac: 'C4:7C:8D:6A:0E:F3'
+    name: Dieffenbac
+    force_update: true
+    median: 1
+    adapter: hci0
+    monitored_conditions:
+      - moisture
+      - light
+      - temperature
+      - conductivity
+      - battery
+      
+  - platform: miflora
+    mac: 'C4:7C:8D:62:8A:8A'
+    name: Yucca
+    force_update: true
+    median: 1
+    adapter: hci0
+    monitored_conditions:
+      - moisture
+      - light
+      - temperature
+      - conductivity
+      - battery
+      
+  - platform: miflora
+    mac: 'C4:7C:8D:6D:1C:F9'
+    name: Deep Purple
+    force_update: true
+    median: 1
+    adapter: hci0
+    monitored_conditions:
+      - battery
+      
+  - platform: miflora
+    mac: 'C4:7C:8D:6D:2C:7E'
+    name: True Blue
+    force_update: true
+    median: 1
+    adapter: hci0
+    monitored_conditions:
+      - battery

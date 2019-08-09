@@ -12,12 +12,15 @@ homeassistant:
   time_zone: Europe/Kiev
   # Customization file
   customize: !include customize.yaml
+  auth_providers:
+   - type: legacy_api_password
+     api_password: !secret http_password
   
   whitelist_external_dirs :
    - /config
 
 # Show links to resources in log and frontend
-# introduction:
+#introduction:
 
 # Enables the frontend
 frontend:
@@ -28,7 +31,8 @@ config:
 # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
 # http:
 #   base_url: example.duckdns.org:8123
-http:
+#http:
+#  api_password: !secret http_password
   api_password: !secret http_password
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -127,6 +131,10 @@ panel_iframe:
     title: Конфигуратор
     icon: mdi:wrench
     url: http://192.168.0.70:8123/api/hassio_ingress/-bIe85JAPBVxQkKyOfmyK1aVr39Hik2_Ut34P_HLJDw/
+  bletracker:
+    title: BLE Tracker
+    icon: mdi:radar
+    url: http://192.168.0.85/
 
 
 xiaomi_aqara:

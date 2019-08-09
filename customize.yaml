@@ -358,8 +358,9 @@ switch.plug_158d00030a6e78:
   friendly_name: Детская Д, питание настольной лампы
   icon: mdi:power
 ## Сенсоры 
-sensor.dd_bt_climate_battery:
+sensor.dd_bt_battery_level:
   friendly_name: Детская Д, BT датчик климата
+  device_class: battery 
 sensor.illumination_286c07f0ad27:
   friendly_name: Детская Д шлюз освещенность
 binary_sensor.wall_switch_left_158d000163e571:
@@ -432,8 +433,9 @@ switch.plug_158d00010ec4b8:
   device_class: plug 
   icon: mdi:cup-water
 ## Сенсоры 
-sensor.da_bt_climate_battery:
+sensor.da_bt_battery_level:
   friendly_name: Детская А, BT датчик климата
+  device_class:  battery
 sensor.illumination_f0b429cc1f11:
   friendly_name: Детская А шлюз освещенность
 binary_sensor.wall_switch_158d00010b5c6e:

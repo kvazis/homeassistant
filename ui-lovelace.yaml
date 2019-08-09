@@ -10,6 +10,8 @@ resources:
     type: js 
   - url: /local/canvas-gauge-card.js
     type: module 
+  - url: /local/battery-entity.js?v=0.1
+    type: module
     
 title: Умный дом - Orange Primary 70
 views:
@@ -367,6 +369,24 @@ views:
             cards:
               - type: markdown
                 content: >
+                   **BLE device Zone**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.mi_smart_band_4
+                   name: Mi Band 4
+                   icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.amazfit_bip_alex
+                   name: Bip Alex
+                   icon: mdi:watch-variant              
+                   
+                   
+
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
                    **Network device Zone**
               - type: glance
                 show_state: false
@@ -698,7 +718,7 @@ views:
             cards:
             - type: markdown
               content: >
-                  **Влажность менее 45%**
+                  **Влажность менее 40%**
             - type: custom:monster-card
               show_empty: false
               card:
@@ -706,9 +726,10 @@ views:
                 show_header_toggle: false
               filter:
                 include:
-                 - entity_id: sensor.humidity*
+                 - entity_id: sensor.*humidity*
                 exclude:
-                 - state: '> 45'
+                 - entity_id: sensor.*battery*
+                 - state: '> 40'
                  
           - type: custom:vertical-stack-in-card
             cards:
@@ -722,8 +743,9 @@ views:
                 show_header_toggle: false
               filter:
                 include:
-                 - entity_id: sensor.humidity*
+                 - entity_id: sensor.*humidity*
                 exclude:
+                 - entity_id: sensor.*battery*
                  - state: '< 60'
 
           - type: custom:vertical-stack-in-card
@@ -738,7 +760,9 @@ views:
                 show_header_toggle: false
               filter:
                 include:
-                 - entity_id: sensor.*battery
+                 - entity_id: sensor.*battery*
+                   options:
+                      type: 'custom:battery-entity'                   
                 exclude:
                  - state: '> 30.0'
 
@@ -756,30 +780,83 @@ views:
            - type: markdown
              content: >
                  ## Стиральная машина
-           - type: sensor
-             entity: sensor.bw_power
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_bw_relay
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_bw_relay
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_bw_relay
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_bw_relay
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_bw_relay
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_bw_relay
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.bw_power
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 4000
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "500", "1000", "1500", "2000", "2500", "3000", "3500", "4000"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 2500,"color": "rgba(10, 255, 0, .75)"},{"from": 2500, "to": 3000,"color": "rgba(255, 255, 0, .75)"},{"from": 3000, "to": 3500,"color": "rgba(255, 140, 0, .75)"}, {"from": 3500, "to": 4000,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false
+
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.bw_voltage
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Напряжение В
+                  width: 220
+                  height: 200
+                  minValue: 200
+                  maxValue: 260
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["200", "210", "220", "230", "240", "250", "260"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 200, "to": 210,"color": "rgba(255, 0, 0, .75)"},{"from": 210, "to": 220,"color": "rgba(255, 255, 0, .75)"},{"from": 220, "to": 240,"color": "rgba(10, 255, 0, .75)"}, {"from": 240, "to": 250,"color": "rgba(255, 255, 0, .75)"},{"from": 250, "to": 260,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false
+
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_bw_relay
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_bw_relay
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_bw_relay
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_bw_relay
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_bw_relay
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_bw_relay
+                 name: Месяц
+                 icon: mdi:cash
 
 
         - type: custom:vertical-stack-in-card
@@ -787,90 +864,187 @@ views:
            - type: markdown
              content: >
                  ## Кухня телевизор
-           - type: sensor
-             entity: sensor.load_158d0001291d12
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_158d0001291d12
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_158d0001291d12
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_158d0001291d12
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_158d0001291d12
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_158d0001291d12
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_158d0001291d12
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d0001291d12
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d0001291d12
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d0001291d12
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d0001291d12
+                 name: Месяц
+                 icon: mdi:cash
+ 
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d0001291d12
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d0001291d12
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d0001291d12
+                 name: Месяц
+                 icon: mdi:cash
 
         - type: custom:vertical-stack-in-card
           cards:
            - type: markdown
              content: >
                  ## Холодильник
-           - type: sensor
-             entity: sensor.load_158d0001fa2934
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_158d0001fa2934
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_158d0001fa2934
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_158d0001fa2934
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_158d0001fa2934
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_158d0001fa2934
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_158d0001fa2934
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d0001fa2934
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d0001fa2934
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d0001fa2934
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d0001fa2934
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d0001fa2934
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d0001fa2934
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d0001fa2934
+                 name: Месяц
+                 icon: mdi:cash
 
         - type: custom:vertical-stack-in-card
           cards:
            - type: markdown
              content: >
                  ## LED лента
-           - type: sensor
-             entity: sensor.load_158d0001d35bc0
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_158d0001d35bc0
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_158d0001d35bc0
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_158d0001d35bc0
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_158d0001d35bc0
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_158d0001d35bc0
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_158d0001d35bc0
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d0001d35bc0
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:  
+             
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d0001d35bc0
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d0001d35bc0
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d0001d35bc0
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d0001d35bc0
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d0001d35bc0
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d0001d35bc0
+                 name: Месяц
+                 icon: mdi:cash
 
       - type: vertical-stack
         cards:
@@ -881,60 +1055,126 @@ views:
            - type: markdown
              content: >
                  ## Гостиная телевизор
-           - type: sensor
-             entity: sensor.load_wifi_socket_usb
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_wifi_socket_usb
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_wifi_socket_usb
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_wifi_socket_usb
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_wifi_socket_usb
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_wifi_socket_usb
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_wifi_socket_usb
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_wifi_socket_usb
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false
+                  
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_wifi_socket_usb
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_wifi_socket_usb
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_wifi_socket_usb
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_wifi_socket_usb
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_wifi_socket_usb
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_wifi_socket_usb
+                 name: Месяц
+                 icon: mdi:cash
 
         - type: custom:vertical-stack-in-card
           cards:
            - type: markdown
              content: >
                  ## Ноутбук Acer
-           - type: sensor
-             entity: sensor.load_158d00012896cb
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_158d00012896cb
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_158d00012896cb
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_158d00012896cb
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_158d00012896cb
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_158d00012896cb
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_158d00012896cb
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d00012896cb
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false     
+            
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d00012896cb
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d00012896cb
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d00012896cb
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d00012896cb
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d00012896cb
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d00012896cb
+                 name: Месяц
+                 icon: mdi:cash
 
 
         - type: custom:vertical-stack-in-card
@@ -942,30 +1182,62 @@ views:
            - type: markdown
              content: >
                  ## Ноутбук HP
-           - type: sensor
-             entity: sensor.load_158d000153dd8e
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_158d000153dd8e
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_158d000153dd8e
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_158d000153dd8e
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_158d000153dd8e
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_158d000153dd8e
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_158d000153dd8e
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d000153dd8e
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false 
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d000153dd8e
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d000153dd8e
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d000153dd8e
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d000153dd8e
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d000153dd8e
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d000153dd8e
+                 name: Месяц
+                 icon: mdi:cash
 
 
         - type: custom:vertical-stack-in-card
@@ -973,30 +1245,63 @@ views:
            - type: markdown
              content: >
                 ## Удлинитель Xiaomi 6 портов
-           - type: sensor
-             entity: sensor.load_wifi_6port
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_wifi_6port
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_wifi_6port
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_wifi_6port
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_wifi_6port
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_wifi_6port
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_wifi_6port
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_wifi_6port
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false 
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_wifi_6port
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_wifi_6port
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_wifi_6port
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_wifi_6port
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_wifi_6port
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_wifi_6port
+                 name: Месяц
+                 icon: mdi:cash
+
 
       - type: vertical-stack
         cards:
@@ -1007,120 +1312,249 @@ views:
            - type: markdown
              content: >
                 ## Бойлер
-           - type: sensor
-             entity: sensor.load_158d00015751f4
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_158d00015751f4
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_158d00015751f4
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_158d00015751f4
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_158d00015751f4
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_158d00015751f4
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_158d00015751f4
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d00015751f4
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false 
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d00015751f4
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d00015751f4
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d00015751f4
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d00015751f4
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d00015751f4
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d00015751f4
+                 name: Месяц
+                 icon: mdi:cash
 
         - type: custom:vertical-stack-in-card
           cards:  
            - type: markdown
              content: >
                 ## Увлажнитель Д
-           - type: sensor
-             entity: sensor.load_158d000114a1e1
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_158d000114a1e1
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_158d000114a1e1
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_158d000114a1e1
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_158d000114a1e1
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_158d000114a1e1
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_158d000114a1e1
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d000114a1e1
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false                 
+
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d000114a1e1
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d000114a1e1
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d000114a1e1
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d000114a1e1
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d000114a1e1
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d000114a1e1
+                 name: Месяц
+                 icon: mdi:cash
 
         - type: custom:vertical-stack-in-card
           cards:  
            - type: markdown
              content: >
                 ## Настольная лампа Д
-           - type: sensor
-             entity: sensor.load_158d00030a6e78
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_158d00030a6e78
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_158d00030a6e78
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_158d00030a6e78
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_158d00030a6e78
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_158d00030a6e78
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_158d00030a6e78
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d00030a6e78
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false 
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d00030a6e78
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d00030a6e78
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d00030a6e78
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d00030a6e78
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d00030a6e78
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d00030a6e78
+                 name: Месяц
+                 icon: mdi:cash
                
         - type: custom:vertical-stack-in-card
           cards:  
            - type: markdown
              content: >
                 ## Увлажнитель А
-           - type: sensor
-             entity: sensor.load_158d00010ec4b8
-             name: Текущее потребление
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_power_today_158d00010ec4b8
-               name: Потребление за день
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_yesterday_158d00010ec4b8
-               name: Потребление за вчера
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_month_158d00010ec4b8
-               name: Потребление за месяц
-               icon: mdi:counter
-             - entity: sensor.mqtt_power_lastmonth_158d00010ec4b8
-               name: Потребление за прошлый месяц
-               icon: mdi:counter
-             - entity: sensor.money_month_158d00010ec4b8
-               name: Стоимость за текущий месяц
-               icon: mdi:cash
-             - entity: sensor.money_lastmonth_158d00010ec4b8
-               name: Стоимость за прошлый месяц
-               icon: mdi:cash
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d00010ec4b8
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false 
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d00010ec4b8
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d00010ec4b8
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d00010ec4b8
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d00010ec4b8
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d00010ec4b8
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d00010ec4b8
+                 name: Месяц
+                 icon: mdi:cash
 
 ##################  Camera
   - title: Камеры
@@ -1276,18 +1710,33 @@ views:
             name: Туалет вентиляция
             tap_action: toggle
             icon: mdi:fan
-          - entity: switch.bw_relay
-            name: Стиральная машина, питание
-            tap_action: toggle
-            icon: mdi:washing-machine
-          - entity: sensor.bw_power
-            name: Стиральная машина, потребление
           - entity: sensor.mqtt_binary_sensor_158d0001a24e71
             name: Последнее движение в туалете в - 
             icon: mdi:run-fast
           - entity: sensor.mqtt_binary_sensor_158d0001e16204
             name: Последнее движение в прачечной в - 
             icon: mdi:run-fast
+
+        - type: markdown
+          content: >
+              **Стиральная машина* - Blitzwolf BW-SHP 2**
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: switch.bw_relay
+            name: Питание
+            tap_action: toggle
+            icon: mdi:washing-machine
+          - entity: sensor.bw_voltage
+            name: Напряжение
+          - entity: sensor.bw_current
+            name: Ток
+          - entity: sensor.bw_power
+            name: Потребление
+          - entity: sensor.bwshp2_wi_fi_signal
+            name: Сигнал wi-fi
+          - entity: sensor.bwshp2_firmware_version
+            name: Прошивка
 
         - type: entity-filter
           show_header_toggle: false
@@ -1914,15 +2363,46 @@ views:
                highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
                borders: false  
 
-        - type: conditional
-          conditions:
-           - entity: fan.gg_humidifier
-             state: "on"
-          card:  
-            type: history-graph
-            entities:
-             - entity: sensor.smartmi_water
-               name: Уровень воды в увлажнителе
+        - type: horizontal-stack
+          cards:
+  
+            - type: custom:canvas-gauge-card
+              entity: sensor.smartmi_water
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Уровень воды (%)
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 100
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: true
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                minorTicks: 4
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 25,"color": "rgba(255, 0, 0, .75)"},{"from": 25, "to": 50,"color": "rgba(255, 140, 0, .75)"},{"from": 50, "to": 75,"color": "rgba(255, 250, 0, .75)"}, {"from": 75, "to": 100,"color": "rgba(10, 255, 0, .75)"}]
+                borders: false
+
+            - type: custom:canvas-gauge-card
+              entity: sensor.purifier_filter
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Расход фильтра (%)
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 100
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: true
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                minorTicks: 4
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 25,"color": "rgba(255, 0, 0, .75)"},{"from": 25, "to": 50,"color": "rgba(255, 140, 0, .75)"},{"from": 50, "to": 75,"color": "rgba(255, 250, 0, .75)"}, {"from": 75, "to": 100,"color": "rgba(10, 255, 0, .75)"}]
+                borders: false
 
         - type: entities
           show_header_toggle: false
@@ -2213,17 +2693,55 @@ views:
                highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
                borders: false
 
+        - type: horizontal-stack
+          cards:
+            
+           - type: custom:canvas-gauge-card
+             entity: sensor.illumination_286c07f0ad27
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Освещенность лм
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 1000
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 200,"color": "rgba(0, 0, 0, .75)"},{"from": 200, "to": 400,"color": "rgba(75, 75, 75, .75)"},{"from": 400, "to": 600,"color": "rgba(150, 150, 150, .75)"},{"from": 600, "to": 800,"color": "rgba(200, 200, 200, .75)"},{"from": 800, "to": 1000,"color": "rgba(255, 255, 255, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.load_158d000114a1e1
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Увлажнитель Вт
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 50
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 10,"color": "rgba(255, 0, 0, .75)"},{"from": 10, "to": 50,"color": "rgba(10, 255, 0, .75)"}]
+               borders: false 
+
+
         - type: entities
           show_header_toggle: false
           entities:
           - entity: sensor.mqtt_binary_sensor_158d0001a66222
             name: Последнее движение в детской Д в - 
             icon: mdi:run-fast 
-          - entity: sensor.illumination_286c07f0ad27
-            name: Уровень освещенности
           - entity: sensor.dd_hum_custom
-          - entity: sensor.load_158d000114a1e1
-            name: Увлажнитель, потребление
 
       - type: vertical-stack
         cards:
@@ -2467,17 +2985,56 @@ views:
                highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
                borders: false  
 
+        - type: horizontal-stack
+          cards:
+            
+           - type: custom:canvas-gauge-card
+             entity: sensor.illumination_f0b429cc1f11
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Освещенность лм
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 1000
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 200,"color": "rgba(0, 0, 0, .75)"},{"from": 200, "to": 400,"color": "rgba(75, 75, 75, .75)"},{"from": 400, "to": 600,"color": "rgba(150, 150, 150, .75)"},{"from": 600, "to": 800,"color": "rgba(200, 200, 200, .75)"},{"from": 800, "to": 1000,"color": "rgba(255, 255, 255, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.load_158d00010ec4b8
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Увлажнитель Вт
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 50
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 10,"color": "rgba(255, 0, 0, .75)"},{"from": 10, "to": 50,"color": "rgba(10, 255, 0, .75)"}]
+               borders: false 
+
+
         - type: entities
           show_header_toggle: false
           entities:
           - entity: sensor.mqtt_binary_sensor_158d00016d56f5
             name: Последнее движение в детской А в - 
             icon: mdi:run-fast 
-          - entity: sensor.illumination_f0b429cc1f11
-            name: Уровень освещенности
           - entity: sensor.da_hum_custom
-          - entity: sensor.load_158d00010ec4b8
-            name: Увлажнитель, потребление
+
 
 ##################   BATTERY
   - title: Уровень батарей
@@ -2500,6 +3057,8 @@ views:
           filter:
             include:
               - entity_id: sensor.entrance*battery
+                options:
+                  type: 'custom:battery-entity'
             
         - type: markdown
           content: >
@@ -2513,6 +3072,8 @@ views:
           filter:
             include:
               - entity_id: sensor.corridor*battery
+                options:
+                  type: 'custom:battery-entity'
               
         - type: markdown
           content: >
@@ -2526,7 +3087,11 @@ views:
           filter:
             include:
               - entity_id: sensor.toilet*battery
+                options:
+                  type: 'custom:battery-entity'
               - entity_id: sensor.laundry*battery
+                options:
+                  type: 'custom:battery-entity'
               
         - type: markdown
           content: >
@@ -2540,6 +3105,8 @@ views:
           filter:
             include:
               - entity_id: sensor.bath*battery
+                options:
+                  type: 'custom:battery-entity'
 
       - type: vertical-stack
         cards:
@@ -2556,6 +3123,8 @@ views:
           filter:
             include:
               - entity_id: sensor.kitchen*battery
+                options:
+                  type: 'custom:battery-entity'
 
         - type: markdown
           content: >
@@ -2569,10 +3138,8 @@ views:
           filter:
             include:
               - entity_id: sensor.gg*battery
-              - entity_id: sensor.true_blue_battery
-              - entity_id: sensor.deep_purple_battery
-              - entity_id: sensor.dieffenbac_battery
-              - entity_id: sensor.yucca_battery
+                options:
+                  type: 'custom:battery-entity'
 
       - type: vertical-stack
         cards:
@@ -2588,7 +3155,9 @@ views:
             show_header_toggle: false
           filter:
             include:
-              - entity_id: sensor.dd*battery
+              - entity_id: sensor.dd*battery*
+                options:
+                  type: 'custom:battery-entity'
               
         - type: markdown
           content: >
@@ -2601,8 +3170,10 @@ views:
             show_header_toggle: false
           filter:
             include:
-              - entity_id: sensor.da*battery
-              
+              - entity_id: sensor.da*battery*
+                options:
+                  type: 'custom:battery-entity'
+
         - type: markdown
           content: >
               **Тестовые**
@@ -2615,6 +3186,8 @@ views:
           filter:
             include:
               - entity_id: sensor.test*battery
+                options:
+                  type: 'custom:battery-entity'
 
 ##################   Автоматика
   - title: Вся автоматика

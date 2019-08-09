@@ -1,17 +1,17 @@
   dieffenbac:
     sensors:
       moisture: sensor.dieffenbac_moisture
-      battery: sensor.dieffenbac_battery
+#      battery: sensor.dieffenbac_battery
       temperature: sensor.dieffenbac_temperature
-      conductivity: sensor.dieffenbac_conductivity
-      brightness: sensor.dieffenbac_light_intensity
+      conductivity: sensor.dieffenbac_soil
+      brightness: sensor.dieffenbac_illuminance
     min_moisture: 20
     
   yucca:
     sensors:
       moisture: sensor.yucca_moisture
-      battery: sensor.yucca_battery
+#      battery: sensor.yucca_battery
       temperature: sensor.yucca_temperature
-      conductivity: sensor.yucca_conductivity
-      brightness: sensor.yucca_light_intensity
+      conductivity: sensor.yucca_soil
+      brightness: sensor.yucca_illuminance
     min_moisture: 20
