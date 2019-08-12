@@ -1,0 +1,80 @@
+esphome:
+  name: bletracker
+  platform: ESP32
+  board: nodemcu-32s
+
+wifi:
+  ssid: 'SSID Name'
+  password: 'password'
+  manual_ip:
+    static_ip: 192.168.your IP
+    gateway: 192.168.your IP
+    subnet: 255.255.255.0
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: 'password'
+
+# Enable OTA Update
+ota:
+  password: 'password'
+
+# Web server
+web_server:
+  port: 80
+
+esp32_ble_tracker:
+  scan_interval: 300s
+  
+# Gadget Tracker
+binary_sensor:
+  - platform: ble_presence
+    mac_address: XX:XX:XX:XX:XX:XX
+    name: gadget name
+    
+
+  
+sensor:
+# Mi Flora sensor
+  - platform: xiaomi_miflora
+    mac_address: XX:XX:XX:XX:XX:XX
+    temperature:
+      name: "sensor name Temperature"
+    moisture:
+      name: "sensor name Moisture"
+    illuminance:
+      name: "sensor name Illuminance"
+    conductivity:
+      name: "sensor name Soil"
+
+# BLE Temperature Humidity Sensor
+  - platform: xiaomi_mijia
+    mac_address: XX:XX:XX:XX:XX:XX
+    temperature:
+      name: "sensor name Temperature"
+    humidity:
+      name: "sensor name Humidity"
+    battery_level:
+      name: "sensor name Battery Level"
+
+# Uptime       
+  - platform: uptime
+    name: sensor name_Uptime
+	
+# Wi-fi strenght
+  - platform: wifi_signal
+    name: sensor name_Wi-Fi_Signal
+    update_interval: 60s
+	
+# firmware version
+text_sensor:
+  - platform: version
+    name: sensor name_firmware_version
+	
+# reboot 
+switch:
+  - platform: restart
+    name: your name_Restart

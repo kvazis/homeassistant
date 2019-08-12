@@ -1710,33 +1710,16 @@ views:
             name: Туалет вентиляция
             tap_action: toggle
             icon: mdi:fan
+          - entity: switch.bw_relay
+            name: Стиральная машина, питание
+            tap_action: toggle
+            icon: mdi:washing-machine
           - entity: sensor.mqtt_binary_sensor_158d0001a24e71
             name: Последнее движение в туалете в - 
             icon: mdi:run-fast
           - entity: sensor.mqtt_binary_sensor_158d0001e16204
             name: Последнее движение в прачечной в - 
             icon: mdi:run-fast
-
-        - type: markdown
-          content: >
-              **Стиральная машина* - Blitzwolf BW-SHP 2**
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: switch.bw_relay
-            name: Питание
-            tap_action: toggle
-            icon: mdi:washing-machine
-          - entity: sensor.bw_voltage
-            name: Напряжение
-          - entity: sensor.bw_current
-            name: Ток
-          - entity: sensor.bw_power
-            name: Потребление
-          - entity: sensor.bwshp2_wi_fi_signal
-            name: Сигнал wi-fi
-          - entity: sensor.bwshp2_firmware_version
-            name: Прошивка
 
         - type: entity-filter
           show_header_toggle: false
@@ -3035,6 +3018,139 @@ views:
             icon: mdi:run-fast 
           - entity: sensor.da_hum_custom
 
+##################   ESP Home
+  - title: ESP Home
+    id: esp_home
+    icon: mdi:developer-board
+    cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Розетки**
+    
+        - type: custom:vertical-stack-in-card
+          cards:
+          - type: markdown
+            content: >
+                 Удлинитель в Детской А - Alfawise 8285
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.alfawise8285_uptime_custom
+            - entity: sensor.alfawise8285_wi_fi_signal
+              name: Сигнал wi-fi
+            - entity: sensor.alfawise8285_firmware_version
+              name: Прошивка
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: switch.alfawise_relay
+              name: Питание
+              tap_action: toggle
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Розетки - энергомониторы**
+
+        - type: custom:vertical-stack-in-card
+          cards:
+          - type: markdown
+            content: >
+                 Стиральная машина - Blitzwolf BW-SHP 2
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.bwshp2_uptime_custom
+            - entity: sensor.bwshp2_wi_fi_signal
+              name: Сигнал wi-fi
+            - entity: sensor.bwshp2_firmware_version
+              name: Прошивка
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: switch.bw_relay
+              name: Питание
+              tap_action: toggle
+            - entity: sensor.bw_voltage
+              name: Напряжение
+            - entity: sensor.bw_current
+              name: Ток
+            - entity: sensor.bw_power
+              name: Потребление
+
+              
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **BLE Шлюз**
+        - type: custom:vertical-stack-in-card
+          cards:
+          - type: markdown
+            content: >
+                 Гостиная стол - ESP 32S
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: switch.esp32_1_restart
+            - entity: sensor.esp32_1_uptime_custom
+            - entity: sensor.esp32_1_wi_fi_signal
+              name: Сигнал wi-fi
+            - entity: sensor.esp32_1_firmware_version
+              name: Прошивка
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: binary_sensor.amazfit_bip_alex
+              name: Bip Alex
+              icon: mdi:watch-variant  
+            - entity: binary_sensor.mi_smart_band_4
+              name: Mi Band 4
+              icon: mdi:bluetooth-connect
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.dieffenbac_moisture
+              name: Диффенбахия влажность
+            - entity: sensor.dieffenbac_temperature
+              name: Диффенбахия температура
+            - entity: sensor.dieffenbac_soil
+              name: Диффенбахия фертильность
+            - entity: sensor.dieffenbac_illuminance
+              name: Диффенбахия освещенность
+            - entity: sensor.yucca_moisture
+              name: Юкка влажность
+            - entity: sensor.yucca_temperature
+              name: Юкка температура
+            - entity: sensor.yucca_soil
+              name: Юкка фертильность
+            - entity: sensor.yucca_illuminance
+              name: Юкка освещенность
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.dd_bt_temperature
+              name: Детская Д BLE температура
+            - entity: sensor.dd_bt_humidity
+              name: Детская Д BLE влажность
+            - entity: sensor.dd_bt_battery_level
+              type: 'custom:battery-entity'
+              name: Детская Д BLE батарейка
+            - entity: sensor.da_bt_temperature
+              name: Детская А BLE температура
+            - entity: sensor.da_bt_humidity 
+              name: Детская Д BLE влажность
+            - entity: sensor.da_bt_battery_level
+              type: 'custom:battery-entity'
+              name: Детская А BLE батарейка
+         
 
 ##################   BATTERY
   - title: Уровень батарей

@@ -43,3 +43,21 @@
   - platform: mqtt
     state_topic: "binary_sensor/158d0001e16204"
     name: 'mqtt_binary_sensor_158d0001e16204'
+
+# Blitzwolf BW-SHP2 в онлайне
+  - platform: template
+    sensors:
+      bwshp2_uptime_custom:
+        friendly_name: "BW-SHP2 в онлайне"
+        entity_id:
+          - sensor.bwshp2_uptime
+        value_template: >
+          {%- set time = states('sensor.bwshp2_uptime') | int %}
+          {%- set minutes = ((time % 3600) // 60) %}
+          {%- set minutes = '{} мин.'.format(minutes) if minutes > 0 else '' %}
+          {%- set hours = ((time % 86400) // 3600) %}
+          {%- set hours = '{} ч. '.format(hours) if hours > 0 else '' %}
+          {%- set days = (time // 86400) %}
+          {%- set days = '{} д. '.format(days) if days > 0 else '' %}
+          {{ 'Меньше минуты' if time < 60 else days + hours + minutes }}
+        icon_template: mdi:clock

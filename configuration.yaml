@@ -131,10 +131,6 @@ panel_iframe:
     title: Конфигуратор
     icon: mdi:wrench
     url: http://192.168.0.70:8123/api/hassio_ingress/-bIe85JAPBVxQkKyOfmyK1aVr39Hik2_Ut34P_HLJDw/
-  bletracker:
-    title: BLE Tracker
-    icon: mdi:radar
-    url: http://192.168.0.85/
 
 
 xiaomi_aqara:

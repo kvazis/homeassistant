@@ -31,16 +31,17 @@
                    {{ minutes }} мин.
                {% endif %}
              {% endif %}
-
+             
+# Время с последней перезагрузки
   - platform: template
     sensors:
       last_boot_custom:
         friendly_name: "Последняя перезагрузка"
-##        value_template: "{{ now().strftime('%H:%M   %d/%m') }}"
-##        value_template: "{{ as_timestamp (now()) -as_timestamp(states.sensor.last_boot.state) | int }}"
+        entity_id:
+          - sensor.time
         value_template: >
            {% set uptime = as_timestamp (now()) -as_timestamp(states.sensor.last_boot.state) | int %}
-           {% set minutes = (( uptime % 3660) / 60) | int %}
+           {% set minutes = (( uptime % 3600) / 60) | int %}
            {% set hours = ((uptime % 86400) / 3600) | int %}
            {% set days = (uptime / 86400) | int %}
 
@@ -63,4 +64,4 @@
                    {{ minutes }} мин.
                {% endif %}
              {% endif %}
-
+        icon_template: mdi:clock

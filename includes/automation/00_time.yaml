@@ -22,11 +22,12 @@
     
 
 - alias: 00_udpate_entity
-  initial_state: true
+  initial_state: false
   trigger:    
    - platform: time_pattern
      seconds: '/30'
   action:    
   - service: homeassistant.update_entity
     entity_id:
-      -  sensor.last_boot_custom
+       - sensor.last_boot_custom
+       - sensor.bwshp2_uptime_custom
