@@ -63,17 +63,17 @@ sensor:
 # Uptime       
   - platform: uptime
     name: sensor name_Uptime
-	
+
 # Wi-fi strenght
   - platform: wifi_signal
     name: sensor name_Wi-Fi_Signal
     update_interval: 60s
-	
+
 # firmware version
 text_sensor:
   - platform: version
     name: sensor name_firmware_version
-	
+
 # reboot 
 switch:
   - platform: restart
