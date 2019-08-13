@@ -579,22 +579,6 @@ views:
       - type: vertical-stack
         cards:
 
-          - type: custom:vertical-stack-in-card
-            cards: 
-            - type: markdown
-              content: >
-                  **Аварийные датчики**
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - entity_id: binary_sensor.water*
-                 - entity_id: binary_sensor.smoke*
-                exclude:
-                 - state: 'off'
 
           - type: custom:vertical-stack-in-card
             cards:  
@@ -735,7 +719,6 @@ views:
                  - entity_id: sensor.*_tv_custom
                 exclude:
                  - state: 'off'
-#                 - state: 'Меньше минуты'
 
           - type: custom:vertical-stack-in-card
             cards:                
@@ -756,6 +739,23 @@ views:
 
       - type: vertical-stack
         cards:
+
+          - type: custom:vertical-stack-in-card
+            cards: 
+            - type: markdown
+              content: >
+                  **Аварийные датчики**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.water*
+                 - entity_id: binary_sensor.smoke*
+                exclude:
+                 - state: 'off'
 
           - type: custom:vertical-stack-in-card
             cards:

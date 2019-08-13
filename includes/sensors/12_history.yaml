@@ -17,7 +17,7 @@
            {% set days = (uptime / 1440) | int %}
 
              {% if uptime < 1 %}
-               Меньше минуты
+               off
              {% else %}
                {% if days > 0 %}
                  {{ days }} д.
@@ -56,7 +56,7 @@
            {% set days = (uptime / 1440) | int %}
 
              {% if uptime < 1 %}
-               Меньше минуты
+               off
              {% else %}
                {% if days > 0 %}
                  {{ days }} д.
