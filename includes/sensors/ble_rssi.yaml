@@ -1,0 +1,66 @@
+  - platform: template
+    sensors:
+      amazfit_bip_alex_rssi:
+        friendly_name: "Bip Alex Rssi"
+        value_template: "{{ states.sensor.amazfit_bip_alex_rssi_value.state }}"
+        unit_of_measurement: 'dB'
+        icon_template: >-
+           {% set signal_level = states.sensor.amazfit_bip_alex_rssi_value.state|int %}
+           {% if is_state('sensor.amazfit_bip_alex_rssi', 'unknown') %}
+              mdi:signal-off
+           {% else %}
+             {% if signal_level >= -70 %}
+               mdi:signal-cellular-3
+             {% elif signal_level >= -80 %}
+               mdi:signal-cellular-2
+             {% elif signal_level >= -90 %}
+               mdi:signal-cellular-1
+             {% elif signal_level >= -100 %}
+               mdi:signal-cellular-outline
+             {% endif %}
+           {% endif %}
+
+           
+  - platform: template
+    sensors:
+      amazfit_bip_olha_rssi:
+        friendly_name: "Bip Olha Rssi"
+        value_template: "{{ states.sensor.amazfit_bip_olha_rssi_value.state }}"
+        unit_of_measurement: 'dB'
+        icon_template: >-
+           {% set signal_level = states.sensor.amazfit_bip_olha_rssi_value.state|int %}
+           {% if is_state('sensor.amazfit_bip_olha_rssi', 'unknown') %}
+              mdi:signal-off
+           {% else %}
+             {% if signal_level >= -70 %}
+               mdi:signal-cellular-3
+             {% elif signal_level >= -80 %}
+               mdi:signal-cellular-2
+             {% elif signal_level >= -90 %}
+               mdi:signal-cellular-1
+             {% elif signal_level >= -100 %}
+               mdi:signal-cellular-outline
+             {% endif %}
+           {% endif %}
+           
+  - platform: template
+    sensors:
+      mi_smart_band_4_rssi:
+        friendly_name: "Mi Band 4 Rssi"
+        value_template: "{{ states.sensor.mi_smart_band_4_rssi_value.state }}"
+        unit_of_measurement: 'dB'
+        icon_template: >-
+           {% set signal_level = states.sensor.mi_smart_band_4_rssi_value.state|int %}
+           {% if is_state('sensor.mi_smart_band_4_rssi', 'unknown') %}
+              mdi:signal-off
+           {% else %}
+             {% if signal_level >= -70 %}
+               mdi:signal-cellular-3
+             {% elif signal_level >= -80 %}
+               mdi:signal-cellular-2
+             {% elif signal_level >= -90 %}
+               mdi:signal-cellular-1
+             {% elif signal_level >= -100 %}
+               mdi:signal-cellular-outline
+             {% endif %}
+           {% endif %}

@@ -12,6 +12,8 @@ resources:
     type: module 
   - url: /local/battery-entity.js?v=0.1
     type: module
+  - url: /local/mini-graph-card-bundle.js?v=0.5.0
+    type: module
     
 title: Умный дом - Orange Primary 70
 views:
@@ -240,6 +242,13 @@ views:
               content: >
                 **Графики**
 
+#            - type: custom:mini-graph-card
+#              entities:
+#               - entity: sensor.cpu_temp
+#                 name: Температура CPU
+#                 color: "#ff0000"
+
+
             - type: history-graph
               entities:
                - entity: sensor.cpu_temp
@@ -265,10 +274,18 @@ views:
           - type: custom:vertical-stack-in-card
             cards:
     
-              - type: history-graph
+
+              - type: custom:mini-graph-card
+                
                 entities:
                  - entity: sensor.maria_db_size
                    name: База данных
+                   color: '#0066ff'
+                icon: mdi:database
+                show:
+                   graph: bar
+                
+                  
 
               - type: entities
                 show_header_toggle: false
@@ -355,39 +372,68 @@ views:
                 highlights: [{"from": 0, "to": 4000,"color": "rgba(10, 255, 0, .75)"},{"from": 4000, "to": 6000,"color": "rgba(255, 255, 0, .75)"},{"from": 6000, "to": 8000,"color": "rgba(255, 140, 0, .75)"}, {"from": 8000, "to": 10000,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
    
-         - type: history-graph
+         - type: custom:mini-graph-card
            entities:
             - entity: sensor.rt_ac66u_b1_kbyte_sec_received
               name: Прием
+              color: "#00ff00"
             - entity: sensor.rt_ac66u_b1_kbyte_sec_sent
               name: Передача
+              color: "#0000ff"
+           animate: true
+           line_width: 3
+           show:
+#              state: false
+              name: false
+              fill: false
+#              points: true
 
       - type: vertical-stack
         cards:
 
+          - type: markdown
+            content: >
+               **Bluetooth device Zone**
+
           - type: custom:vertical-stack-in-card
             cards:
               - type: markdown
                 content: >
-                   **BLE device Zone**
+                   **BLE шлюз гостиная**
               - type: glance
                 show_state: false
                 entities:
+                 - entity: binary_sensor.amazfit_bip_alex
+                   name: Bip Alex
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.amazfit_bip_olha
+                   name: Bip Olha
+                   icon: mdi:watch-variant
                  - entity: binary_sensor.mi_smart_band_4
                    name: Mi Band 4
                    icon: mdi:bluetooth-connect
-                 - entity: binary_sensor.amazfit_bip_alex
-                   name: Bip Alex
-                   icon: mdi:watch-variant              
-                   
-                   
+              - type: glance
+                show_state: true
+                show_name: false
+                entities:
+                 - entity: sensor.amazfit_bip_alex_rssi
+                 - entity: sensor.amazfit_bip_olha_rssi
+                 - entity: sensor.mi_smart_band_4_rssi
 
+
+
+      - type: vertical-stack
+        cards:
+
+          - type: markdown
+            content: >
+               **Network device Zone**
 
           - type: custom:vertical-stack-in-card
             cards:
               - type: markdown
                 content: >
-                   **Network device Zone**
+                   **Home Zone**
               - type: glance
                 show_state: false
                 entities:
@@ -440,9 +486,6 @@ views:
                    name: Chuwi
                    icon: mdi:laptop
 
-
-      - type: vertical-stack
-        cards:
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -554,6 +597,40 @@ views:
                  - state: 'off'
 
           - type: custom:vertical-stack-in-card
+            cards:  
+            - type: markdown
+              content: >
+                  **Отвалившиеся выключатели**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: switch
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+
+          - type: custom:vertical-stack-in-card
+            cards:  
+            - type: markdown
+              content: >
+                  **Активные розетки > 5 Ватт**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.load*
+                 - entity_id: sensor.bw_power
+                exclude:
+                 - state: '< 5.0'
+
+          - type: custom:vertical-stack-in-card
             cards: 
             - type: markdown
               content: >
@@ -569,8 +646,7 @@ views:
                    state: 'unavailable'
                    options:
                       secondary_info: last-changed
-                exclude:
-                 - entity_id: light.3874550168c63ae1cbc3
+
 
           - type: custom:vertical-stack-in-card
             cards:  
@@ -626,6 +702,22 @@ views:
                  - entity_id: binary_sensor.motion*
                 exclude:
                  - state: 'off'
+                 
+          - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                  **Активные BLE метки**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*rssi
+                exclude:
+                 - state: 'unknown'
 
           - type: custom:vertical-stack-in-card
             cards:          
@@ -643,47 +735,13 @@ views:
                  - entity_id: sensor.*_tv_custom
                 exclude:
                  - state: 'off'
-
-
-          - type: custom:vertical-stack-in-card
-            cards:  
-            - type: markdown
-              content: >
-                  **Отвалившиеся выключатели**
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - domain: switch
-                   state: 'unavailable'
-                   options:
-                      secondary_info: last-changed
-
-          - type: custom:vertical-stack-in-card
-            cards:  
-            - type: markdown
-              content: >
-                  **Розетки с нагрузкой более 5 Ватт**
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - entity_id: sensor.load*
-                 - entity_id: sensor.bw_power
-                exclude:
-                 - state: '< 5.0'
+#                 - state: 'Меньше минуты'
 
           - type: custom:vertical-stack-in-card
             cards:                
             - type: markdown
               content: >
-                  **Cенсоры освещения - свет более 500 люмен**
+                  **Cенсоры освещения > 500 люмен**
             - type: custom:monster-card
               show_empty: false
               card:
@@ -694,6 +752,7 @@ views:
                  - entity_id: sensor.illumination* 
                 exclude:
                  - state: '< 500.0'
+                 - state: 'unknown'
 
       - type: vertical-stack
         cards:
@@ -718,7 +777,7 @@ views:
             cards:
             - type: markdown
               content: >
-                  **Влажность менее 40%**
+                  **Влажность < 40%**
             - type: custom:monster-card
               show_empty: false
               card:
@@ -735,7 +794,7 @@ views:
             cards:
             - type: markdown
               content: >
-                  **Влажность более 60%**
+                  **Влажность > 60%**
             - type: custom:monster-card
               show_empty: false
               card:
@@ -752,7 +811,7 @@ views:
             cards:              
             - type: markdown
               content: >
-                  **Сенсоры менее 30% заряда**
+                  **Сенсоры < 30% заряда**
             - type: custom:monster-card
               show_empty: false
               card:
@@ -3029,13 +3088,33 @@ views:
 
         - type: markdown
           content: >
-              **Розетки**
+              ## Розетки
+
+        - type: custom:vertical-stack-in-card
+          cards:
+          - type: markdown
+            content: >
+               **Прихожая - Sonoff Basic - питание лампы**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.sonoff_uptime_custom
+            - entity: sensor.sonoff_wi_fi_signal
+              name: Сигнал wi-fi
+            - entity: sensor.sonoff_firmware_version
+              name: Прошивка
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: switch.sonoff_basic_relay
+              name: Питание
+              tap_action: toggle
     
         - type: custom:vertical-stack-in-card
           cards:
           - type: markdown
             content: >
-                 Удлинитель в Детской А - Alfawise 8285
+               **Детская А - Alfawise 8285, питание стола**
           - type: entities
             show_header_toggle: false
             entities:
@@ -3050,19 +3129,19 @@ views:
             - entity: switch.alfawise_relay
               name: Питание
               tap_action: toggle
-
+              
       - type: vertical-stack
         cards:
 
         - type: markdown
           content: >
-              **Розетки - энергомониторы**
+              ## Розетки - энергомониторы
 
         - type: custom:vertical-stack-in-card
           cards:
           - type: markdown
             content: >
-                 Стиральная машина - Blitzwolf BW-SHP 2
+               **Прачечная - Blitzwolf BW-SHP 2, стиральная машина**
           - type: entities
             show_header_toggle: false
             entities:
@@ -3090,30 +3169,52 @@ views:
 
         - type: markdown
           content: >
-              **BLE Шлюз**
+              ## BLE Шлюз
         - type: custom:vertical-stack-in-card
           cards:
           - type: markdown
             content: >
-                 Гостиная стол - ESP 32S
+               **Гостиная, ESP 32 BLE шлюз**
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: switch.esp32_1_restart
             - entity: sensor.esp32_1_uptime_custom
             - entity: sensor.esp32_1_wi_fi_signal
               name: Сигнал wi-fi
             - entity: sensor.esp32_1_firmware_version
               name: Прошивка
+            - entity: switch.esp32_1_restart
+              name: Перезагрузка
+              icon: mdi:reload
+
+          - type: markdown
+            content: >
+               BLE трекер
           - type: entities
             show_header_toggle: false
             entities:
             - entity: binary_sensor.amazfit_bip_alex
               name: Bip Alex
               icon: mdi:watch-variant  
+            - entity: sensor.amazfit_bip_alex_rssi_value
+              name: Уровень сигнала
+              icon: mdi:signal              
+            - entity: binary_sensor.amazfit_bip_olha
+              name: Bip Olha
+              icon: mdi:watch-variant  
+            - entity: sensor.amazfit_bip_olha_rssi_value
+              name: Уровень сигнала
+              icon: mdi:signal  
             - entity: binary_sensor.mi_smart_band_4
               name: Mi Band 4
               icon: mdi:bluetooth-connect
+            - entity: sensor.mi_smart_band_4_rssi_value
+              name: Уровень сигнала
+              icon: mdi:signal
+
+          - type: markdown
+            content: >
+               BLE сенсоры - растения
           - type: entities
             show_header_toggle: false
             entities:
@@ -3133,6 +3234,11 @@ views:
               name: Юкка фертильность
             - entity: sensor.yucca_illuminance
               name: Юкка освещенность
+
+          - type: markdown
+            content: >
+               BLE сенсоры - климат
+
           - type: entities
             show_header_toggle: false
             entities:
