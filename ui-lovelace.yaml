@@ -579,23 +579,22 @@ views:
       - type: vertical-stack
         cards:
 
-
           - type: custom:vertical-stack-in-card
-            cards:  
+            cards:          
             - type: markdown
               content: >
-                  **Отвалившиеся выключатели**
+                  **Телевизоры**
             - type: custom:monster-card
               show_empty: false
               card:
                 type: entities
-                show_header_toggle: false
+                show_state: false
               filter:
                 include:
-                 - domain: switch
-                   state: 'unavailable'
-                   options:
-                      secondary_info: last-changed
+                 - entity_id: switch.tv_*
+                 - entity_id: sensor.*_tv_custom
+                exclude:
+                 - state: 'off'
 
           - type: custom:vertical-stack-in-card
             cards:  
@@ -615,10 +614,10 @@ views:
                  - state: '< 5.0'
 
           - type: custom:vertical-stack-in-card
-            cards: 
+            cards:  
             - type: markdown
               content: >
-                  **Отвалившиеся светильники**
+                  **Отвалившиеся розетки**
             - type: custom:monster-card
               show_empty: false
               card:
@@ -626,11 +625,10 @@ views:
                 show_header_toggle: false
               filter:
                 include:
-                 - domain: light
+                 - domain: switch
                    state: 'unavailable'
                    options:
                       secondary_info: last-changed
-
 
           - type: custom:vertical-stack-in-card
             cards:  
@@ -650,6 +648,23 @@ views:
                       secondary_info: last-changed
                 exclude:
                  - entity_id: light.broadlink_07_table
+
+          - type: custom:vertical-stack-in-card
+            cards: 
+            - type: markdown
+              content: >
+                  **Отвалившиеся светильники**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: light
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
 
           - type: custom:vertical-stack-in-card
             cards:                   
@@ -675,7 +690,7 @@ views:
             cards:          
             - type: markdown
               content: >
-                  **Обнаружение движения**
+                  **Активные датчики движения**
             - type: custom:monster-card
               show_empty: false
               card:
@@ -686,65 +701,12 @@ views:
                  - entity_id: binary_sensor.motion*
                 exclude:
                  - state: 'off'
-                 
-          - type: custom:vertical-stack-in-card
-            cards:          
-            - type: markdown
-              content: >
-                  **Активные BLE метки**
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - entity_id: sensor.*rssi
-                exclude:
-                 - state: 'unknown'
-
-          - type: custom:vertical-stack-in-card
-            cards:          
-            - type: markdown
-              content: >
-                  **Телевизоры**
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: entities
-                show_state: false
-              filter:
-                include:
-                 - entity_id: switch.tv_*
-                 - entity_id: sensor.*_tv_custom
-                exclude:
-                 - state: 'off'
-
-          - type: custom:vertical-stack-in-card
-            cards:                
-            - type: markdown
-              content: >
-                  **Cенсоры освещения > 500 люмен**
-            - type: custom:monster-card
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - entity_id: sensor.illumination* 
-                exclude:
-                 - state: '< 500.0'
-                 - state: 'unknown'
-
-      - type: vertical-stack
-        cards:
 
           - type: custom:vertical-stack-in-card
             cards: 
             - type: markdown
               content: >
-                  **Аварийные датчики**
+                  **Активные аварийные датчики**
             - type: custom:monster-card
               show_empty: false
               card:
@@ -772,6 +734,79 @@ views:
                  - entity_id: binary_sensor.door_window*
                 exclude:
                  - state: 'off'
+                 
+          - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                  **Активные BLE метки**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*rssi
+                exclude:
+                 - state: 'unknown'
+
+
+          - type: custom:vertical-stack-in-card
+            cards:              
+            - type: markdown
+              content: >
+                  **Сенсоры < 30% заряда**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*battery*
+                   options:
+                      type: 'custom:battery-entity'                   
+                exclude:
+                 - state: '> 30.0'
+
+      - type: vertical-stack
+        cards:
+
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                  **Температура < 18 C**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*temperature*
+                exclude:
+                 - entity_id: sensor.*battery*
+                 - state: '> 18'
+
+
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                  **Температура > 26 C**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*temperature*
+                exclude:
+                 - entity_id: sensor.*battery*
+                 - state: '< 26'
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -808,10 +843,10 @@ views:
                  - state: '< 60'
 
           - type: custom:vertical-stack-in-card
-            cards:              
+            cards:                
             - type: markdown
               content: >
-                  **Сенсоры < 30% заряда**
+                  **Cенсоры освещения > 500 люмен**
             - type: custom:monster-card
               show_empty: false
               card:
@@ -819,11 +854,10 @@ views:
                 show_header_toggle: false
               filter:
                 include:
-                 - entity_id: sensor.*battery*
-                   options:
-                      type: 'custom:battery-entity'                   
+                 - entity_id: sensor.illumination* 
                 exclude:
-                 - state: '> 30.0'
+                 - state: '< 500.0'
+                 - state: 'unknown'
 
 ##################   Power counter
   - title: Расход электроэнергии 
@@ -3146,9 +3180,9 @@ views:
             show_header_toggle: false
             entities:
             - entity: sensor.bwshp2_uptime_custom
-            - entity: sensor.bwshp2_wi_fi_signal
+            - entity: sensor.bw_wi_fi_signal
               name: Сигнал wi-fi
-            - entity: sensor.bwshp2_firmware_version
+            - entity: sensor.bw_firmware_version
               name: Прошивка
           - type: entities
             show_header_toggle: false
@@ -3156,12 +3190,19 @@ views:
             - entity: switch.bw_relay
               name: Питание
               tap_action: toggle
+            - entity: switch.bw_led_blue
+              name: Синий светодиод
+              tap_action: toggle
+            - entity: switch.bw_led_red
+              name: Красный светодиод
+              tap_action: toggle
             - entity: sensor.bw_voltage
               name: Напряжение
             - entity: sensor.bw_current
               name: Ток
             - entity: sensor.bw_power
               name: Потребление
+              
 
               
       - type: vertical-stack
