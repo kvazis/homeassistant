@@ -1,3 +1,19 @@
+#####Общее потребление
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_total_energy?api_password=qwerty
+    name: p100_power_month_total_energy
+    force_update: true
+    value_template: '{{ value_json.state }}'
+    unit_of_measurement: 'кВт⋅ч'
+    
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_total_energy?api_password=qwerty
+    name: p100_power_lastmonth_total_energy
+    force_update: true
+    value_template: '{{ value_json.state }}'
+    unit_of_measurement: 'кВт⋅ч'
+
+
 #####Стиральная машина
   - platform: rest
     resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_bw_relay?api_password=qwerty

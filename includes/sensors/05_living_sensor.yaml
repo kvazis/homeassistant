@@ -10,7 +10,7 @@
   - platform: template
     sensors:
       load_wifi_socket_usb:
-        friendly_name: 'Гостиная телевизор'
+        friendly_name: 'Ноутбук Acer'
         value_template: "{{ state_attr('switch.xiaomi_wifi_socket_usb', 'load_power') }}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
@@ -56,7 +56,7 @@
   - platform: template
     sensors:
       load_158d00012896cb:
-        friendly_name: 'Ноутбук Acer'
+        friendly_name: 'Гостиная телевизор'
         value_template: "{{ state_attr('switch.plug_158d00012896cb', 'load_power') }}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'

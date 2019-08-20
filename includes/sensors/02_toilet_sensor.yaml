@@ -50,9 +50,9 @@
       bwshp2_uptime_custom:
         friendly_name: "BW-SHP2 в онлайне"
         entity_id:
-          - sensor.bw_uptime
+          - sensor.uptime_bwshp2
         value_template: >
-          {%- set time = states('sensor.bw_uptime') | int %}
+          {%- set time = states('sensor.uptime_bwshp2') | int %}
           {%- set minutes = ((time % 3600) // 60) %}
           {%- set minutes = '{} мин.'.format(minutes) if minutes > 0 else '' %}
           {%- set hours = ((time % 86400) // 3600) %}

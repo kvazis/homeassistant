@@ -1,0 +1,14 @@
+## Предупреждение о массовом сбое светильников
+- alias: 20_unavailable_yeelight
+#  initial_state: true
+  initial_state: false
+  trigger:
+## Более 5 светильником
+   - platform: numeric_state
+     entity_id: sensor.unavailable_now_offline
+     above: 5
+  action:
+    - service: notify.telegram
+      data:
+        title: 'Отчет'
+        message: "Недоступны более 5 светильников - {{ states('sensor.time_date') }}"

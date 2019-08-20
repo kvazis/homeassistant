@@ -6,19 +6,33 @@
     - platform: time_pattern
       seconds: '/30'
   action:
+##### Общее потребление
+    - service: mqtt.publish
+      data_template:
+        topic: "power/total_energy/today"
+        payload: '{{(states.sensor.mqtt_power_today_total_energy.state | float +
+                    (states.sensor.load_total_energy.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/total_energy/month"
+        payload: '{{(states.sensor.mqtt_power_month_total_energy.state | float +
+                    (states.sensor.load_total_energy.state | float /120000))|round(5)}}'
+        retain: true  
+  
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
     - service: mqtt.publish
       data_template:
         topic: "power/bw_relay/today"
         payload: '{{(states.sensor.mqtt_power_today_bw_relay.state | float +
-                    (states.sensor.bw_power.state | float /120000))|round(5)}}'
+                    (states.sensor.load_bwshp2.state | float /120000))|round(5)}}'
         retain: true
     - service: mqtt.publish
       data_template:
         topic: "power/bw_relay/month"
         payload: '{{(states.sensor.mqtt_power_month_bw_relay.state | float +
-                    (states.sensor.bw_power.state | float /120000))|round(5)}}'
+                    (states.sensor.load_bwshp2.state | float /120000))|round(5)}}'
         retain: true
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
@@ -179,6 +193,12 @@
       at: '00:00:05'
   action:
 ##### Запись данных за прошедший день
+##### Общее потребление
+    - service: mqtt.publish
+      data_template:
+        topic: "power/total_energy/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_total_energy.state | float )|round(5)}}'
+        retain: true 
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
     - service: mqtt.publish
@@ -262,6 +282,12 @@
     - delay: 00:00:05
 
 ##### Обнуление данных текущего дня
+##### Общее потребление
+    - service: mqtt.publish
+      data_template:
+        topic: "power/total_energy/today"
+        payload: '{{ 0.0 }}'
+        retain: true
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
     - service: mqtt.publish
@@ -353,6 +379,12 @@
       value_template: '{{ now().day == 1 }}'
   action:
 ##### Запись данных за прошедший месяц
+##### Общее потребление
+    - service: mqtt.publish
+      data_template:
+        topic: "power/total_energy/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_total_energy.state | float )|round(5)}}'
+        retain: true 
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
     - service: mqtt.publish
@@ -437,6 +469,12 @@
 
     - delay: 00:00:05
 ##### Обнуление данных текущего месяца
+##### Стиральная машина
+    - service: mqtt.publish
+      data_template:
+        topic: "power/total_energy/month"
+        payload: '{{ 0.0 }}'
+        retain: true
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
     - service: mqtt.publish

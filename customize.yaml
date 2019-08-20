@@ -57,15 +57,15 @@ light.aqara_02_ceiling:
 ## Реле
 switch.wall_switch_158d00014a1a55:
   friendly_name: Прачечная выключатель
-switch.bw_relay:
+switch.relay_bwshp2:
   friendly_name: Стиральная машина, питание
   icon: mdi:power
 ## Сенсоры
-sensor.bw_power:
+sensor.load_bwshp2:
   friendly_name: Стиральная машина, потребление
   unit_of_measurement: Вт
   device_class: power
-sensor.bw_voltage:
+sensor.voltage_bwshp2:
   friendly_name: Напряжение в сети
   unit_of_measurement: В
 binary_sensor.motion_sensor_158d0001e16204:
@@ -203,9 +203,9 @@ switch.wall_switch_right_158d00015723f1:
   friendly_name: Гостиная, питание люстра 1
   icon: mdi:power
 switch.plug_158d00012896cb:
-  friendly_name: Ноутбук Acer
+  friendly_name: Гостиная, питание телевизора
   device_class: plug  
-  icon: mdi:laptop-windows
+  icon: mdi:power
 switch.plug_158d000153dd8e:
   friendly_name: Ноутбук HP
   device_class: plug  
@@ -215,9 +215,9 @@ switch.wifi_6port:
   device_class: plug  
   icon: mdi:power-socket-eu
 switch.xiaomi_wifi_socket_usb:
-  friendly_name: Гостиная, питание телевизора
+  friendly_name: Ноутбук Acer
   device_class: plug  
-  icon: mdi:power
+  icon: mdi:laptop-windows
 switch.xiaomi_wifi_socket_usb_usb:
   friendly_name: USB
   device_class: plug  

@@ -144,7 +144,7 @@
             entity_id: script.xiaomi_tv
       tv_samsung:
         friendly_name: "ТВ Samsung"
-        value_template: "{{ states.sensor.load_wifi_socket_usb.state | float > 10 }}"
+        value_template: "{{ states.sensor.load_158d00012896cb.state | float > 10 }}"
         turn_on:
           service: script.turn_on
           data:
