@@ -503,3 +503,22 @@ binary_sensor.workday_sensor:
   friendly_name: Рабочий день
 sensor.social_blade:
   friendly_name: Подписчиков
+  
+## Растения
+sensor.dieffenbac_moisture:
+  friendly_name: Диффенбахия влажность почвы
+sensor.dieffenbac_soil:
+  friendly_name: Диффенбахия фертильность почвы
+sensor.dieffenbac_temperature:
+  friendly_name: Диффенбахия температура
+sensor.dieffenbac_illuminance:
+  friendly_name: Диффенбахия уровень освещенности
+
+sensor.yucca_moisture:
+  friendly_name: Юкка влажность почвы
+sensor.yucca_soil:
+  friendly_name: Юкка фертильность почвы
+sensor.yucca_temperature:
+  friendly_name: Юкка температура
+sensor.yucca_illuminance:
+  friendly_name: Юкка уровень освещенности

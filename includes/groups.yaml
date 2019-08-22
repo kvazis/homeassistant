@@ -98,6 +98,7 @@
       - automation.08_da_light_circle
       - automation.08_da_alllight_off
       - automation.08_da_table_reboot
+      - automation.20_unavailable_yeelight
       
   heater:
     name: heater

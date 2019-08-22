@@ -1,5 +1,0 @@
-    service: xiaomi_aqara.play_ringtone
-    data:
-      gw_mac: xxxxxxxxxxxx
-      ringtone_id: 8
-      ringtone_vol: 8

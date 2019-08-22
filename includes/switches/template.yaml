@@ -1,81 +1,6 @@
-#  - platform: command_line
-#    switches:
-#      movie_mode:
-#        command_on: "/config/includes/script/gg_l1_bg.sh"
-#        command_off: "/config/includes/script/gg_l1_bg_off.sh"
-
-  - platform: broadlink
-    host: 192.168.0.136
-    mac: 'B4:43:0D:EE:FF:F4'
-    switches:
-      samsung:
-        friendly_name: "Телевизор Samsung"
-        command_on: 'JgCMAJaSFDUUNhQ1FBEUERQRFBAUERQ2FDUUNhQQFBEUERQRFBAVEBQ2FBEUEBQRFBEUERQQFDYUERQ1FDUVNRQ2FDQVNRUABf6WkhQ1FDYUNRUQFBEUERQRFBAUNhQ1FDYUEBUQFBEUERQRFBAUNhQRFBAUERQRFBEUEBQ2FBEUNRQ1FTUUNRU1FDUVAA0FAAAAAAAAAAAAAAAA'
-        command_off: 'JgCMAJaSFDUUNhQ1FBEUERQRFBAUERQ2FDUUNhQQFBEUERQRFBAVEBQ2FBEUEBQRFBEUERQQFDYUERQ1FDUVNRQ2FDQVNRUABf6WkhQ1FDYUNRUQFBEUERQRFBAUNhQ1FDYUEBUQFBEUERQRFBAUNhQRFBAUERQRFBEUEBQ2FBEUNRQ1FTUUNRU1FDUVAA0FAAAAAAAAAAAAAAAA'
-      alfawise:
-        friendly_name: "Alfawise H96"
-        command_on: 'JgBQAAABKJITNxIUEhQSFBIUEhURFBMTExMTNhM3EjcTNhM3EjcTNhM3EhQSFBI3EzcSFBIUFBIUEhI3FDUVEhQSFDUUNRU1FAAE7AABJ0kUAA0FAAAAAAAAAAA='
-        command_off: 'JgBQAAABKJITNxIUEhQSFBIUEhURFBMTExMTNhM3EjcTNhM3EjcTNhM3EhQSFBI3EzcSFBIUFBIUEhI3FDUVEhQSFDUUNRU1FAAE7AABJ0kUAA0FAAAAAAAAAAA='
-      ilifea4:
-        friendly_name: "Робот пылесос"
-        command_on: 'JgBIAAABJ5ATEhMSEhMSEhMSExISOBITETcTEhI3ExISNxMSEjcTEhIUERMSNxITEhITEhE5EhMSNxI4ERMSOBE3EzgSEhM3EgANBQ=='
-        command_off: 'JgBIAAABJ5ATEhMSEhMSEhMSExISOBITETcTEhI3ExISNxMSEjcTEhIUERMSNxITEhITEhE5EhMSNxI4ERMSOBE3EzgSEhM3EgANBQ=='
-
-  - platform: xiaomi_miio
-    name: wifi_6port
-    host: 192.168.0.95
-    token: 82dc0e63cd05e7d74b9065c0bc9e0556
-    model: zimi.powerstrip.v2
-
-  - platform: xiaomi_miio
-    name: Xiaomi WiFi Socket USB
-    host: 192.168.0.96
-    token: b7086999a920a560080c07beeb5da4cd
-    model: chuangmi.plug.v3
-    
-  - platform: xiaomi_miio
-    name: Xiaomi WiFi Socket
-    host: 192.168.0.97
-    token: d2a2dd48b585340b46fe650cb2f9462b
-    model: chuangmi.plug.m1 
-
-#  - platform: broadlink
-#    host: 192.168.0.98
-#    mac: '34:EA:34:A5:37:3B'
-#    type: mp1
-#    friendly_name: "Детская Д Broadlink"
-#    slots:
-#      slot_1: 'plug1'
-#      slot_2: 'plug2'
-#      slot_3: 'plug3'
-#      slot_4: 'plug4'
-
-  - platform: broadlink_mp1
-    host: 192.168.0.98
-    mac: '34:EA:34:A5:37:3B'
-    type: mp11
-    friendly_name: "plug1"
-
-  - platform: broadlink_mp1
-    host: 192.168.0.98
-    mac: '34:EA:34:A5:37:3B'
-    type: mp12
-    friendly_name: "plug2"
-    
-  - platform: broadlink_mp1
-    host: 192.168.0.98
-    mac: '34:EA:34:A5:37:3B'
-    type: mp13
-    friendly_name: "plug3"
-    
-  - platform: broadlink_mp1
-    host: 192.168.0.98
-    mac: '34:EA:34:A5:37:3B'
-    type: mp14
-    friendly_name: "plug4"
-
   - platform: template
     switches:
+    
       forse_hum:
         friendly_name: "Усиленное увлажнение"
         value_template: "{{ is_state('sensor.smartmi_mode', 'high') }}"
@@ -87,6 +12,7 @@
           service: script.turn_on
           data:
             entity_id: script.humidifier_manual_off  
+            
       xiaofang_photo:
         friendly_name: "Фото с xiaofang"
         value_template: "{{ is_state('script.01_photo_xiaofang', 'on') }}"
@@ -98,6 +24,7 @@
           service: script.turn_on
           data:
             entity_id: script.01_photo_xiaofang 
+            
       reolink_photo:
         friendly_name: "Фото с reolink"
         value_template: "{{ is_state('script.01_photo_reolink', 'on') }}"
@@ -109,6 +36,7 @@
           service: script.turn_on
           data:
             entity_id: script.01_photo_reolink
+            
       alfawise_photo:
         friendly_name: "Фото с alfawise"
         value_template: "{{ is_state('script.01_photo_alfawise', 'on') }}"
@@ -120,6 +48,7 @@
           service: script.turn_on
           data:
             entity_id: script.01_photo_alfawise
+            
       reolink2_photo:
         friendly_name: "Фото с reolink2"
         value_template: "{{ is_state('script.04_photo_reolink2', 'on') }}"
@@ -131,6 +60,7 @@
           service: script.turn_on
           data:
             entity_id: script.04_photo_reolink2
+
       tv_xiaomi:
         friendly_name: "ТВ Xiaomi"
         value_template: "{{ states.sensor.load_158d0001291d12.state | float > 10 }}"
@@ -142,6 +72,7 @@
           service: script.turn_on
           data:
             entity_id: script.xiaomi_tv
+
       tv_samsung:
         friendly_name: "ТВ Samsung"
         value_template: "{{ states.sensor.load_158d00012896cb.state | float > 10 }}"
@@ -153,6 +84,7 @@
           service: script.turn_on
           data:
             entity_id: script.samsung_tv
+ 
       switch_07_table:
         friendly_name: "ДД Настольная лампа"
         value_template: "{{ states.sensor.load_158d00030a6e78.state | float > 5 }}"

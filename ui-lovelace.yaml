@@ -608,9 +608,21 @@ views:
                 show_header_toggle: false
               filter:
                 include:
+                 - entity_id: sensor.load_total_energy
+                exclude:
+                 - state: '< 5.0'
+                 
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
                  - entity_id: sensor.load*
                 exclude:
                  - state: '< 5.0'
+                 - entity_id: sensor.load_total_energy
 
           - type: custom:vertical-stack-in-card
             cards:  
@@ -761,6 +773,21 @@ views:
                 exclude:
                  - state: 'unknown'
 
+          - type: custom:vertical-stack-in-card
+            cards:              
+            - type: markdown
+              content: >
+                  **Растения < 20% влажности почвы**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*moisture*
+                exclude:
+                 - state: '> 20.0'
 
           - type: custom:vertical-stack-in-card
             cards:              

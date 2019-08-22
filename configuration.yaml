@@ -20,26 +20,14 @@ homeassistant:
   whitelist_external_dirs :
    - /config
 
-# Show links to resources in log and frontend
-#introduction:
-
 # Enables the frontend
 frontend:
 
 # Enables configuration UI
 config:
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
-#http:
-#  api_password: !secret http_password
-  api_password: !secret http_password
 # Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+
 updater:
   # Optional, allows Home Assistant developers to focus on popular components.
   # include_used_components: true
@@ -54,69 +42,41 @@ system_health:
 # Stream component for camera
 stream:
 
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
+lovelace:
+  mode: yaml
 
 # Enables support for tracking state changes over time
-history:
+#history:
 
 # View all events in a logbook
-logbook:
+#logbook:
 
 # Enables a map showing the location of tracked devices
-map:
+#map:
 
+# Track the sun
+sun:
+
+#Платформы
 tuya:
   username: !secret tuya_username
   password: !secret tuya_password
   country_code: 380
 
-lovelace:
-  mode: yaml
-
-# Track the sun
-sun:
+mqtt:
+  broker: 192.168.0.70
+  discovery: true
+  discovery_prefix: homeassistant
 
 weather:
   - platform: openweathermap
     api_key: !secret openweathermap_key
 #   mode: daily
 
-
-# Weather prediction
-sensor: !include_dir_merge_list includes/sensors
-#  - platform: yr
-switch: !include includes/switch.yaml
 # Text to speech
 tts:
   - platform: google_translate
     service_name: google_say
-
-# Cloud
-cloud:
-
-mqtt:
-  broker: 192.168.0.70
-
-plant: !include includes/plants.yaml
-#device_tracker: !include includes/device.yaml
-binary_sensor: !include_dir_merge_list includes/bin_sensor
-input_number: !include includes/input_number.yaml
-
-
-recorder: !include recorder.yaml
-group: !include groups.yaml
-#automation: !include automations.yaml
-automation: !include_dir_merge_list includes/automation
-script: !include_dir_merge_named includes/scripts
-media_player: !include includes/mplayer.yaml
-light: !include includes/light.yaml
-yeelight: !include includes/yeelight.yaml
-camera: !include includes/camera.yaml
-timer: !include includes/timer.yaml
-counter: !include includes/counter.yaml
-fan: !include includes/fan.yaml
-
 
 remote:
   - platform: xiaomi_miio
@@ -133,7 +93,6 @@ panel_iframe:
     icon: mdi:wrench
     url: http://192.168.0.70:8123/api/hassio_ingress/-bIe85JAPBVxQkKyOfmyK1aVr39Hik2_Ut34P_HLJDw/
 
-
 xiaomi_aqara:
   discovery_retry: 10
   gateways:
@@ -145,43 +104,32 @@ xiaomi_aqara:
       key: !secret gateway3_api
     - mac: 78:11:DC:64:F4:C8
       key: !secret gateway4_api
-      
-notify:
-  - name: mailer
-    platform: smtp
-    server: smtp.gmail.com
-    port: 587
-    timeout: 15
-    sender: !secret notify_mail
-    encryption: starttls
-    username: !secret notify_mail
-    password: !secret notify_password
-    recipient:
-      - !secret notify_mail
-    sender_name: My Home Assistant
-  - name: telegram
-    platform: telegram
-    chat_id: !secret chat_id
-    
+
 telegram_bot:
   - platform: polling
     api_key: !secret api_key_70
     allowed_chat_ids:
-      - !secret chat_id
-      
-rest_command:
-  google_backup:
-    url: 'http://192.168.0.70:8055/gb/doBackup'
-    timeout: '300'
+      - !secret chat_id_alex
+      - !secret chat_id_olha
 
-  sonoff_on:
-    url: http://192.168.0.209:8081/zeroconf/switch
-    method: POST
-    payload: '{"sequence":"${now}", "deviceid": "1000906b35", "encrypt":false, "selfapikey":"123", "data":"{\"switch\":\"on\"}"}'
-    content_type:  'application/json; charset=utf-8'
+#Вынос в папки
+sensor: !include_dir_merge_list includes/sensors
+binary_sensor: !include_dir_merge_list includes/bin_sensor
+automation: !include_dir_merge_list includes/automation
+switch: !include_dir_merge_list includes/switches
+script: !include_dir_merge_named includes/scripts
 
-  sonoff_off:
-    url: http://192.168.0.209:8081/zeroconf/switch
-    method: POST
-    payload: '{"sequence":"${now}", "deviceid": "1000906b35", "encrypt":false, "selfapikey":"123", "data":"{\"switch\":\"off\"}"}'
-    content_type:  'application/json; charset=utf-8'
+#Вынос в файлы
+plant: !include includes/plants.yaml
+input_number: !include includes/input_number.yaml
+media_player: !include includes/mplayer.yaml
+light: !include includes/light.yaml
+yeelight: !include includes/yeelight.yaml
+camera: !include includes/camera.yaml
+timer: !include includes/timer.yaml
+counter: !include includes/counter.yaml
+fan: !include includes/fan.yaml
+recorder: !include includes/recorder.yaml 
+group: !include includes/groups.yaml
+rest_command: !include includes/rest_command.yaml
+notify: !include includes/notify.yaml

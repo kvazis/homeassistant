@@ -1,0 +1,51 @@
+  - platform: broadlink
+    host: 192.168.0.136
+    mac: 'B4:43:0D:EE:FF:F4'
+    switches:
+      samsung:
+        friendly_name: "Телевизор Samsung"
+        command_on: 'JgCMAJaSFDUUNhQ1FBEUERQRFBAUERQ2FDUUNhQQFBEUERQRFBAVEBQ2FBEUEBQRFBEUERQQFDYUERQ1FDUVNRQ2FDQVNRUABf6WkhQ1FDYUNRUQFBEUERQRFBAUNhQ1FDYUEBUQFBEUERQRFBAUNhQRFBAUERQRFBEUEBQ2FBEUNRQ1FTUUNRU1FDUVAA0FAAAAAAAAAAAAAAAA'
+        command_off: 'JgCMAJaSFDUUNhQ1FBEUERQRFBAUERQ2FDUUNhQQFBEUERQRFBAVEBQ2FBEUEBQRFBEUERQQFDYUERQ1FDUVNRQ2FDQVNRUABf6WkhQ1FDYUNRUQFBEUERQRFBAUNhQ1FDYUEBUQFBEUERQRFBAUNhQRFBAUERQRFBEUEBQ2FBEUNRQ1FTUUNRU1FDUVAA0FAAAAAAAAAAAAAAAA'
+      alfawise:
+        friendly_name: "Alfawise H96"
+        command_on: 'JgBQAAABKJITNxIUEhQSFBIUEhURFBMTExMTNhM3EjcTNhM3EjcTNhM3EhQSFBI3EzcSFBIUFBIUEhI3FDUVEhQSFDUUNRU1FAAE7AABJ0kUAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKJITNxIUEhQSFBIUEhURFBMTExMTNhM3EjcTNhM3EjcTNhM3EhQSFBI3EzcSFBIUFBIUEhI3FDUVEhQSFDUUNRU1FAAE7AABJ0kUAA0FAAAAAAAAAAA='
+      ilifea4:
+        friendly_name: "Робот пылесос"
+        command_on: 'JgBIAAABJ5ATEhMSEhMSEhMSExISOBITETcTEhI3ExISNxMSEjcTEhIUERMSNxITEhITEhE5EhMSNxI4ERMSOBE3EzgSEhM3EgANBQ=='
+        command_off: 'JgBIAAABJ5ATEhMSEhMSEhMSExISOBITETcTEhI3ExISNxMSEjcTEhIUERMSNxITEhITEhE5EhMSNxI4ERMSOBE3EzgSEhM3EgANBQ=='
+
+#  - platform: broadlink
+#    host: 192.168.0.98
+#    mac: '34:EA:34:A5:37:3B'
+#    type: mp1
+#    friendly_name: "Детская Д Broadlink"
+#    slots:
+#      slot_1: 'plug1'
+#      slot_2: 'plug2'
+#      slot_3: 'plug3'
+#      slot_4: 'plug4'
+
+  - platform: broadlink_mp1
+    host: 192.168.0.98
+    mac: '34:EA:34:A5:37:3B'
+    type: mp11
+    friendly_name: "plug1"
+
+  - platform: broadlink_mp1
+    host: 192.168.0.98
+    mac: '34:EA:34:A5:37:3B'
+    type: mp12
+    friendly_name: "plug2"
+    
+  - platform: broadlink_mp1
+    host: 192.168.0.98
+    mac: '34:EA:34:A5:37:3B'
+    type: mp13
+    friendly_name: "plug3"
+    
+  - platform: broadlink_mp1
+    host: 192.168.0.98
+    mac: '34:EA:34:A5:37:3B'
+    type: mp14
+    friendly_name: "plug4"

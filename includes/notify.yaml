@@ -1,0 +1,20 @@
+  - name: mailer
+    platform: smtp
+    server: smtp.gmail.com
+    port: 587
+    timeout: 15
+    sender: !secret notify_mail
+    encryption: starttls
+    username: !secret notify_mail
+    password: !secret notify_password
+    recipient:
+      - !secret notify_mail
+    sender_name: My Home Assistant
+    
+  - name: telegram
+    platform: telegram
+    chat_id: !secret chat_id_alex
+    
+  - name: telegram_olha
+    platform: telegram
+    chat_id: !secret chat_id_olha

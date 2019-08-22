@@ -8,6 +8,10 @@
          data:
            title: "Дверь"
            message: "Входная дверь открыта в {{ states('sensor.time_date') }}" 
+       - service: notify.telegram_olha
+         data:
+           title: "Дверь"
+           message: "Входная дверь открыта в {{ states('sensor.time_date') }}" 
        - service: camera.snapshot
          data:
               entity_id: camera.alfawise
@@ -27,6 +31,16 @@
               filename: "/config/www/cam_captures/reolink2.jpg"
        - delay: 00:00:10
        - service: notify.telegram
+         data:
+              title: "Дверь"
+              message: "Фотография" 
+              data:
+                  photo:
+                      - file: /config/www/cam_captures/xiaofang.jpg
+                      - file: /config/www/cam_captures/reolink.jpg
+                      - file: /config/www/cam_captures/alfawise.jpg
+                      - file: /config/www/cam_captures/reolink2.jpg
+       - service: notify.telegram_olha
          data:
               title: "Дверь"
               message: "Фотография" 
