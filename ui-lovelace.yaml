@@ -227,12 +227,12 @@ views:
                 width: 450
                 height: 100
                 minValue: 00
-                maxValue: 32
+                maxValue: 120
                 valueBox: false
-                majorTicks: ["0", "4", "8", "12", "16", "20", "24", "28", "32"]
+                majorTicks: ["0", "15", "30", "45", "60", "75", "90", "105", "120"]
                 minorTicks: 2
                 strokeTicks: true
-                highlights: [{"from": 0, "to": 2,"color": "rgba(255, 0, 0, .75)"}, {"from": 2, "to": 8,"color": "rgba(255, 140, 0, .75)"}, {"from": 8, "to": 16,"color": "rgba(255, 255, 0, .75)"}, {"from": 16, "to": 32,"color": "rgba(10, 255, 0, .75)"}]
+                highlights: [{"from": 0, "to": 5,"color": "rgba(255, 0, 0, .75)"}, {"from": 5, "to": 15,"color": "rgba(255, 140, 0, .75)"}, {"from": 15, "to": 45,"color": "rgba(255, 255, 0, .75)"}, {"from": 45, "to": 120,"color": "rgba(10, 255, 0, .75)"}]
                 borders: false
 
           - type: custom:vertical-stack-in-card
@@ -1764,7 +1764,7 @@ views:
         - type: picture-glance
           title: Этаж, выход к лифту
           camera_image: camera.reolink
-#          camera_view: live
+          camera_view: live
           entities:
            - entity: switch.reolink_photo
              icon: mdi:camera
@@ -2602,6 +2602,9 @@ views:
           - type: plant-status
             entity: plant.yucca
             name: Юкка
+          - type: plant-status
+            entity: plant.zamiokulkas
+            name: Замиокулькас
 
       - type: vertical-stack
         cards:
@@ -3366,6 +3369,7 @@ views:
               name: Диффенбахия фертильность
             - entity: sensor.dieffenbac_illuminance
               name: Диффенбахия освещенность
+
             - entity: sensor.yucca_moisture
               name: Юкка влажность
             - entity: sensor.yucca_temperature
@@ -3374,6 +3378,15 @@ views:
               name: Юкка фертильность
             - entity: sensor.yucca_illuminance
               name: Юкка освещенность
+              
+            - entity: sensor.zamiokulkas_moisture
+              name: Замиокулькас влажность
+            - entity: sensor.zamiokulkas_temperature
+              name: Замиокулькас температура
+            - entity: sensor.zamiokulkas_soil
+              name: Замиокулькас фертильность
+            - entity: sensor.zamiokulkas_illuminance
+              name: Замиокулькас освещенность
 
           - type: markdown
             content: >

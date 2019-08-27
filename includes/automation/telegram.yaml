@@ -98,7 +98,7 @@
     - service: notify.telegram
       data:
         title: 'Отчет'
-        message: "Сценарии на Orange Primary 70 отключены"
+        message: "Сценарии на Raspberry Pi 3 B+ 70 отключены"
     - service: homeassistant.turn_off
       entity_id:
          - group.scenario
@@ -115,7 +115,7 @@
     - service: notify.telegram
       data:
         title: 'Отчет'
-        message: "Сценарии на Orange Primary 70 включены"
+        message: "Сценарии на Raspberry Pi 3 B+ включены"
     - service: homeassistant.turn_on
       entity_id:
          - group.scenario
@@ -133,7 +133,7 @@
     - service: notify.telegram
       data:
         title: 'Отчет'
-        message: "Orange Primary 70 на связи и статус систем в норме, время - {{ states('sensor.time_date') }}"
+        message: "Raspberry Pi 3 B+ на связи и статус систем в норме, время - {{ states('sensor.time_date') }}"
         
 - alias: 00_telegramm_hsc_on
   initial_state: true
@@ -146,7 +146,7 @@
     - service: notify.telegram
       data:
         title: 'Отчет'
-        message: "Сценарии бойлера на Orange Primary 70 включены"
+        message: "Сценарии бойлера на Raspberry Pi 3 B+ включены"
     - service: homeassistant.turn_on
       entity_id:
          - group.heater
@@ -162,7 +162,7 @@
     - service: notify.telegram
       data:
         title: 'Отчет'
-        message: "Сценарии бойлера на Orange Primary 70 отключены"
+        message: "Сценарии бойлера на Raspberry Pi 3 B+0 отключены"
     - service: homeassistant.turn_off
       entity_id:
          - group.heater

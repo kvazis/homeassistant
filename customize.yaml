@@ -522,3 +522,12 @@ sensor.yucca_temperature:
   friendly_name: Юкка температура
 sensor.yucca_illuminance:
   friendly_name: Юкка уровень освещенности
+  
+sensor.zamiokulkas_moisture:
+  friendly_name: Замиокулькас влажность почвы
+sensor.zamiokulkas_soil:
+  friendly_name: Замиокулькас фертильность почвы
+sensor.zamiokulkas_temperature:
+  friendly_name: Замиокулькас температура
+sensor.zamiokulkas_illuminance:
+  friendly_name: Замиокулькас уровень освещенности

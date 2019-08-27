@@ -15,3 +15,12 @@
       conductivity: sensor.yucca_soil
       brightness: sensor.yucca_illuminance
     min_moisture: 20
+    
+  zamiokulkas:
+    sensors:
+      moisture: sensor.zamiokulkas_moisture
+#      battery: sensor.zamiokulkas_battery
+      temperature: sensor.zamiokulkas_temperature
+      conductivity: sensor.zamiokulkas_soil
+      brightness: sensor.zamiokulkas_illuminance
+    min_moisture: 20
