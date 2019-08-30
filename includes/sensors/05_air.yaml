@@ -1,0 +1,29 @@
+- platform: file
+  name: 05_mi_air_co2a
+  file_path: /config/bash/air.txt
+  value_template: '{{ value_json.co2e }}'
+  unit_of_measurement: 'ppm'
+  
+- platform: file
+  name: 05_mi_air_tvoc
+  file_path: /config/bash/air.txt
+  value_template: '{{ value_json.tvoc | round(3) }}'
+  unit_of_measurement: 'mg_m3'
+  
+- platform: file
+  name: 05_mi_air_pm25
+  file_path: /config/bash/air.txt
+  value_template: '{{ value_json.pm25 | round(2) }}'
+  unit_of_measurement: 'ppm'
+  
+- platform: file
+  name: 05_mi_air_temperature
+  file_path: /config/bash/air.txt
+  value_template: '{{ value_json.temperature | round(1) }}'
+  unit_of_measurement: '°C'
+  
+- platform: file
+  name: 05_mi_air_humidity
+  file_path: /config/bash/air.txt
+  value_template: '{{ value_json.humidity | round(1) }}'
+  unit_of_measurement: '%'

@@ -275,6 +275,23 @@ binary_sensor.door_window_sensor_158d00013ed373:
   friendly_name: Гостиная, окно
   device_class: window 
 
+# Монитор воздуха
+sensor.05_mi_air_co2a:
+  friendly_name: Гостиная mi air СО2а
+  icon: mdi:periodic-table-co2
+sensor.05_mi_air_tvoc:
+  friendly_name: Гостиная mi air ЛОВ
+  icon: mdi:alpha-t
+sensor.05_mi_air_pm25:
+  friendly_name: Гостиная mi air PM 2.5
+  icon: mdi:alpha-p
+sensor.05_mi_air_humidity:
+  friendly_name: Гостиная mi air влажность
+  icon: mdi:water-percent
+sensor.05_mi_air_temperature:
+  friendly_name: Гостиная mi air температура
+  icon: mdi:temperature-celsius
+
 ## Гостиная балкон
 ## Освещение
 light.66633530807d3a766432:

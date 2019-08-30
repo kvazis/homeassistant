@@ -60,25 +60,19 @@
   
 - platform: ping
   host: 192.168.0.70
-  name: ping.Orange Primary 70
+  name: ping.main
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.71
-  name: ping.Orange Secondary 71
+  name: ping.reserve
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.72
-  name: ping.raspberry
-  count: 2
-  scan_interval: 30
-
-- platform: ping
-  host: 192.168.0.73
-  name: ping.Khadas VIM2 Basic
+  name: ping.test
   count: 2
   scan_interval: 30
   

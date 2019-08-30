@@ -28,13 +28,9 @@
 
 - platform: rest
   resource: http://192.168.0.71:8123/api/states/sensor.online_custom?api_password=qwerty
-  name: orange2_state
+  name: reserve_state
   force_update: true
   value_template: '{{ value_json.state }}'
-  
-- platform: rest
-  resource: http://192.168.0.73:8123/api/states/sensor.online_custom?api_password=qwerty
-  name: khadas_state
-  force_update: true
-  value_template: '{{ value_json.state }}'
+
+
 

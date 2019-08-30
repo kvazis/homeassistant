@@ -1,13 +1,13 @@
 #####Общее потребление
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_total_energy?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_total_energy?api_password=qwerty
     name: p100_power_month_total_energy
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_total_energy?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_total_energy?api_password=qwerty
     name: p100_power_lastmonth_total_energy
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -16,14 +16,14 @@
 
 #####Стиральная машина
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_bw_relay?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_bw_relay?api_password=qwerty
     name: p100_power_month_bw_relay
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_bw_relay?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_bw_relay?api_password=qwerty
     name: p100_power_lastmonth_bw_relay
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -32,14 +32,14 @@
 
 #####Кухня телевизор
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_158d0001291d12?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d0001291d12?api_password=qwerty
     name: p100_power_month_158d0001291d12
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_158d0001291d12?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d0001291d12?api_password=qwerty
     name: p100_power_lastmonth_158d0001291d12
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -47,14 +47,14 @@
 
 #####Холодильник
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_158d0001fa2934?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d0001fa2934?api_password=qwerty
     name: p100_power_month_158d0001fa2934
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_158d0001fa2934?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d0001fa2934?api_password=qwerty
     name: p100_power_lastmonth_158d0001fa2934
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -62,14 +62,14 @@
     
 #####LED лента
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_158d0001d35bc0?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d0001d35bc0?api_password=qwerty
     name: p100_power_month_158d0001d35bc0
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_158d0001d35bc0?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d0001d35bc0?api_password=qwerty
     name: p100_power_lastmonth_158d0001d35bc0
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -77,14 +77,14 @@
     
 #####Гостиная телевизор
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_wifi_socket_usb?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_wifi_socket_usb?api_password=qwerty
     name: p100_power_month_wifi_socket_usb
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_wifi_socket_usb?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_wifi_socket_usb?api_password=qwerty
     name: p100_power_lastmonth_wifi_socket_usb
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -92,14 +92,14 @@
     
 #####Ноутбук Acer
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_158d00012896cb?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00012896cb?api_password=qwerty
     name: p100_power_month_158d00012896cb
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_158d00012896cb?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00012896cb?api_password=qwerty
     name: p100_power_lastmonth_158d00012896cb
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -107,14 +107,14 @@
     
 #####Ноутбук HP
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_158d000153dd8e?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d000153dd8e?api_password=qwerty
     name: p100_power_month_158d000153dd8e
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_158d000153dd8e?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d000153dd8e?api_password=qwerty
     name: p100_power_lastmonth_158d000153dd8e
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -122,14 +122,14 @@
     
 #####Удлинитель Xiaomi 6 портов
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_wifi_6port?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_wifi_6port?api_password=qwerty
     name: p100_power_month_wifi_6port
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_wifi_6port?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_wifi_6port?api_password=qwerty
     name: p100_power_lastmonth_wifi_6port
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -137,14 +137,14 @@
     
 #####Бойлер
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_158d00015751f4?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00015751f4?api_password=qwerty
     name: p100_power_month_158d00015751f4
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_158d00015751f4?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00015751f4?api_password=qwerty
     name: p100_power_lastmonth_158d00015751f4
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -152,14 +152,14 @@
     
 #####Увлажнитель Д
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_158d000114a1e1?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d000114a1e1?api_password=qwerty
     name: p100_power_month_158d000114a1e1
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_158d000114a1e1?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d000114a1e1?api_password=qwerty
     name: p100_power_lastmonth_158d000114a1e1
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -167,14 +167,14 @@
     
 #####Настольная лампа Д
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_158d00030a6e78?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00030a6e78?api_password=qwerty
     name: p100_power_month_158d00030a6e78
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_158d00030a6e78?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00030a6e78?api_password=qwerty
     name: p100_power_lastmonth_158d00030a6e78
     force_update: true
     value_template: '{{ value_json.state }}'
@@ -182,14 +182,14 @@
     
 #####Увлажнитель А
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_month_158d00010ec4b8?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00010ec4b8?api_password=qwerty
     name: p100_power_month_158d00010ec4b8
     force_update: true
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.73:8123/api/states/sensor.mqtt_power_lastmonth_158d00010ec4b8?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00010ec4b8?api_password=qwerty
     name: p100_power_lastmonth_158d00010ec4b8
     force_update: true
     value_template: '{{ value_json.state }}'

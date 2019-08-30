@@ -2,7 +2,7 @@
   initial_state: true
   trigger:
    platform: state
-   entity_id: sensor.orange2_state
+   entity_id: sensor.reserve_state
    to: 'unavailable'
   condition:
     - condition: state
@@ -11,7 +11,7 @@
   action:
     - service: notify.telegram
       data:
-        message: "Потеря связи с резервным сервером, Orange 71 - {{ states('sensor.time_date') }} . Включение сценариев"
+        message: "Потеря связи с резервным сервером, Khadas VIM 2 - {{ states('sensor.time_date') }} . Включение сценариев"
     - service: homeassistant.turn_on
       entity_id:
          - group.scenario
@@ -21,7 +21,7 @@
   initial_state: true
   trigger:
    platform: state
-   entity_id: sensor.orange2_state
+   entity_id: sensor.reserve_state
    to: 'unavailable'
   condition:
     - condition: state
@@ -30,15 +30,15 @@
   action:
     - service: notify.telegram
       data:
-        message: "Потеря связи с резервным сервером, Orange 71 - {{ states('sensor.time_date') }} Сценарии активны."
+        message: "Потеря связи с резервным сервером, Khadas VIM 2 - {{ states('sensor.time_date') }} Сценарии активны."
         
 - alias: 911_orange_71_online
   initial_state: true
   trigger:
    platform: state
-   entity_id: sensor.orange2_state
+   entity_id: sensor.reserve_state
    from: 'unavailable'
   action:
     - service: notify.telegram
       data:
-        message: "Связь с резервнымм сервером, Orange 71 восстановлена в - {{ states('sensor.time_date') }} ."
+        message: "Связь с резервнымм сервером, Khadas VIM 2 восстановлена в - {{ states('sensor.time_date') }} ."

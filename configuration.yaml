@@ -19,6 +19,7 @@ homeassistant:
   
   whitelist_external_dirs :
    - /config
+   - /config/bash
 
 # Enables the frontend
 frontend:
@@ -92,18 +93,26 @@ panel_iframe:
     title: Конфигуратор
     icon: mdi:wrench
     url: http://192.168.0.70:8123/api/hassio_ingress/-bIe85JAPBVxQkKyOfmyK1aVr39Hik2_Ut34P_HLJDw/
+  esphome:
+    title: ESPHome
+    icon: mdi:chip
+    url: http://192.168.0.70:6052/
 
 xiaomi_aqara:
   discovery_retry: 10
   gateways:
     - mac: F0:B4:29:CC:1F:11
       key: !secret gateway1_api
+      host: 192.168.0.80
     - mac: 28:6C:07:F0:AD:27
       key: !secret gateway2_api
+      host: 192.168.0.81
     - mac: 34:CE:00:88:B0:39
       key: !secret gateway3_api
+      host: 192.168.0.82
     - mac: 78:11:DC:64:F4:C8
       key: !secret gateway4_api
+      host: 192.168.0.83
 
 telegram_bot:
   - platform: polling
@@ -111,7 +120,7 @@ telegram_bot:
     allowed_chat_ids:
       - !secret chat_id_alex
       - !secret chat_id_olha
-
+      
 #Вынос в папки
 sensor: !include_dir_merge_list includes/sensors
 binary_sensor: !include_dir_merge_list includes/bin_sensor

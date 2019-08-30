@@ -1,11 +1,11 @@
   - platform: template
     sensors:
-      amazfit_bip_alex_rssi:
+      amazfit_bip_alex_rssi_summ:
         friendly_name: "Bip Alex Rssi"
-        value_template: "{{ states.sensor.amazfit_bip_alex_rssi_value.state }}"
+        value_template: "{{ states.sensor.gostinaya_amazfit_bip_alex_rssi.state }}"
         unit_of_measurement: 'dB'
         icon_template: >-
-           {% set signal_level = states.sensor.amazfit_bip_alex_rssi_value.state|int %}
+           {% set signal_level = states.sensor.gostinaya_amazfit_bip_alex_rssi.state|int %}
            {% if is_state('sensor.amazfit_bip_alex_rssi', 'unknown') %}
               mdi:signal-off
            {% else %}
@@ -23,12 +23,12 @@
            
   - platform: template
     sensors:
-      amazfit_bip_olha_rssi:
+      amazfit_bip_olha_rssi_summ:
         friendly_name: "Bip Olha Rssi"
-        value_template: "{{ states.sensor.amazfit_bip_olha_rssi_value.state }}"
+        value_template: "{{ states.sensor.gostinaya_amazfit_bip_olha_rssi.state }}"
         unit_of_measurement: 'dB'
         icon_template: >-
-           {% set signal_level = states.sensor.amazfit_bip_olha_rssi_value.state|int %}
+           {% set signal_level = states.sensor.gostinaya_amazfit_bip_olha_rssi.state|int %}
            {% if is_state('sensor.amazfit_bip_olha_rssi', 'unknown') %}
               mdi:signal-off
            {% else %}
@@ -45,12 +45,12 @@
            
   - platform: template
     sensors:
-      mi_smart_band_4_rssi:
+      mi_smart_band_4_rssi_summ:
         friendly_name: "Mi Band 4 Rssi"
-        value_template: "{{ states.sensor.mi_smart_band_4_rssi_value.state }}"
+        value_template: "{{ states.sensor.gostinaya_miband_4_dima_rssi.state }}"
         unit_of_measurement: 'dB'
         icon_template: >-
-           {% set signal_level = states.sensor.mi_smart_band_4_rssi_value.state|int %}
+           {% set signal_level = states.sensor.gostinaya_miband_4_dima_rssi.state|int %}
            {% if is_state('sensor.mi_smart_band_4_rssi', 'unknown') %}
               mdi:signal-off
            {% else %}

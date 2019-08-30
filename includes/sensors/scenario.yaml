@@ -10,14 +10,14 @@
     force_update: true
     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.73:8123/api/states/group.scenario?api_password=qwerty
-    name: khadas_scenario_group
-    force_update: true
-    value_template: '{{ value_json.state }}'
+#  - platform: rest
+#    resource: http://192.168.0.73:8123/api/states/group.scenario?api_password=qwerty
+#    name: khadas_scenario_group
+#    force_update: true
+#    value_template: '{{ value_json.state }}'
 
-  - platform: rest
-    resource: http://192.168.0.73:8123/api/states/group.heater?api_password=qwerty
-    name: khadas_heater_group
-    force_update: true
-    value_template: '{{ value_json.state }}'
+#  - platform: rest
+#    resource: http://192.168.0.73:8123/api/states/group.heater?api_password=qwerty
+#    name: khadas_heater_group
+#    force_update: true
+#    value_template: '{{ value_json.state }}'
