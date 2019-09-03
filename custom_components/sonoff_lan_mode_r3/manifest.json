@@ -1,0 +1,8 @@
+{
+        "domain": "sonoff_lan_mode_r3",
+        "name": "SOnOff Lan Model component",
+        "documentation": "https://github.com/beveradb/sonoff-lan-mode-homeassistant",
+        "requirements": [],
+        "dependencies": [],
+        "codeowners": ["andrew@beveridge.uk"]
+}

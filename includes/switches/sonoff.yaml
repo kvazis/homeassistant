@@ -1,0 +1,4 @@
+  - platform: sonoff_lan_mode_r3
+    name: 05_sonoff_mini
+    device_id: 1000985173
+    icon: mdi:electric-switch

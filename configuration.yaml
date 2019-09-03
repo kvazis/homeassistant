@@ -96,7 +96,7 @@ panel_iframe:
   esphome:
     title: ESPHome
     icon: mdi:chip
-    url: http://192.168.0.70:6052/
+    url: http://192.168.0.70:8123/api/hassio_ingress/ItwZ1aSUaW2nO1r6IcAVNuQ1NhKCR8VGTKks7WhktFA/#
 
 xiaomi_aqara:
   discovery_retry: 10
