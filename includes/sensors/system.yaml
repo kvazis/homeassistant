@@ -31,6 +31,12 @@
   name: reserve_state
   force_update: true
   value_template: '{{ value_json.state }}'
+  
+- platform: template
+  sensors:
+    version:
+      friendly_name: 'Последняя версия - '
+      value_template: '{{ states.binary_sensor.updater.attributes["newest_version"] }}'
 
 
 

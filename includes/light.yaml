@@ -26,6 +26,10 @@
     name: aqara_02_ceiling
     entity_id: switch.wall_switch_158d00014a1a55
 
+  - platform: switch
+    name: sonoff_02_mirror
+    entity_id: switch.02_sonoff_mini
+
 ## Кухня
   - platform: switch
     name: aqara_04_strip
@@ -45,3 +49,4 @@
   - platform: switch
     name: aqara_08_ceiling
     entity_id: switch.wall_switch_158d00014a1abd
+    

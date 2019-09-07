@@ -118,6 +118,11 @@ views:
               - entity: sensor.last_boot_custom
                 name: Сервер работает -
                 icon: mdi:av-timer
+              - entity: sensor.version
+                icon: mdi:alpha-v-circle-outline
+              - entity: binary_sensor.updater
+                name: Обновление Home Assistant - 
+                icon: mdi:update
               - entity: sensor.maria_db_size
                 name: Размер Maria DB - 
                 icon: mdi:database
@@ -396,27 +401,77 @@ views:
             cards:
               - type: markdown
                 content: >
-                   **BLE шлюз гостиная**
+                   **BLE шлюз кухня**
               - type: glance
                 show_state: false
                 entities:
-                 - entity: binary_sensor.gostinaya_amazfit_bip_alex
+                 - entity: binary_sensor.kn_bip_alex
                    name: Bip Alex
                    icon: mdi:watch-variant
-                 - entity: binary_sensor.gostinaya_amazfit_bip_olha
+                 - entity: binary_sensor.kn_bip_olha
                    name: Bip Olha
                    icon: mdi:watch-variant
-                 - entity: binary_sensor.gostinaya_miband_4_dima
+                 - entity: binary_sensor.kn_mi_band_4_dima
                    name: Mi Band 4
                    icon: mdi:bluetooth-connect
               - type: glance
                 show_state: true
                 show_name: false
                 entities:
-                 - entity: sensor.amazfit_bip_alex_rssi_summ
-                 - entity: sensor.amazfit_bip_olha_rssi_summ
-                 - entity: sensor.mi_smart_band_4_rssi_summ
+                 - entity: sensor.kn_bip_alex_rssi
+                 - entity: sensor.kn_bip_olha_rssi
+                 - entity: sensor.kn_mi_band_4_dima_rssi
 
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **BLE шлюз гостиная**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.gg_bip_alex
+                   name: Bip Alex
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.gg_bip_olha
+                   name: Bip Olha
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.gg_mi_band_4_dima
+                   name: Mi Band 4
+                   icon: mdi:bluetooth-connect
+              - type: glance
+                show_state: true
+                show_name: false
+                entities:
+                 - entity: sensor.gg_bip_alex_rssi
+                 - entity: sensor.gg_bip_olha_rssi
+                 - entity: sensor.gg_mi_band_4_dima_rssi
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **BLE шлюз детская Д**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.dd_bip_alex
+                   name: Bip Alex
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.dd_bip_olha
+                   name: Bip Olha
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.dd_mi_band_4_dima
+                   name: Mi Band 4
+                   icon: mdi:bluetooth-connect
+              - type: glance
+                show_state: true
+                show_name: false
+                entities:
+                 - entity: sensor.dd_bip_alex_rssi
+                 - entity: sensor.dd_bip_olha_rssi
+                 - entity: sensor.dd_mi_band_4_dima_rssi
 
 
       - type: vertical-stack
@@ -1789,7 +1844,7 @@ views:
         - type: picture-glance
           title: Кухня, холодильник
           camera_image: camera.reolink2
-#          camera_view: live
+          camera_view: live
           entities:
            - entity: switch.reolink2_photo
              icon: mdi:camera  
@@ -1889,6 +1944,7 @@ views:
         - type: entities
           show_header_toggle: false
           entities:
+          - entity: light.sonoff_02_mirror
           - entity: switch.wall_switch_left_158d00014dceb3
             name: Туалет, питание люстры
             tap_action: toggle
@@ -2491,6 +2547,10 @@ views:
         - type: markdown
           content: >
               **Гостиная - статус**
+
+        - type: markdown
+          content: >
+                Датчик климата ZigBee
               
         - type: horizontal-stack
           cards:
@@ -2533,6 +2593,10 @@ views:
                highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
                borders: false  
 
+        - type: markdown
+          content: >
+                Увлажнитель и очиститель воздуха
+
         - type: horizontal-stack
           cards:
   
@@ -2574,6 +2638,10 @@ views:
                 highlights: [{"from": 0, "to": 25,"color": "rgba(255, 0, 0, .75)"},{"from": 25, "to": 50,"color": "rgba(255, 140, 0, .75)"},{"from": 50, "to": 75,"color": "rgba(255, 250, 0, .75)"}, {"from": 75, "to": 100,"color": "rgba(10, 255, 0, .75)"}]
                 borders: false
 
+        - type: markdown
+          content: >
+                Монитор состояния воздуха
+
         - type: entities
           show_header_toggle: false
           entities:
@@ -2583,6 +2651,9 @@ views:
           - entity: sensor.05_mi_air_humidity
           - entity: sensor.05_mi_air_temperature
 
+        - type: markdown
+          content: >
+                Сенсоры и датчики
 
         - type: entities
           show_header_toggle: false
@@ -2591,13 +2662,17 @@ views:
             name: Уровень освещенности
           - entity: sensor.samsung_tv_custom
           - entity: sensor.load_wifi_socket_usb
-            name: Телевизор, текущее потребление
-          - entity: sensor.load_158d00012896cb
             name: Ноутбук Acer, потребление
+          - entity: sensor.load_158d00012896cb
+            name: Телевизор, текущее потребление
           - entity: sensor.load_158d000153dd8e
             name: Ноутбук HP, потребление
           - entity: sensor.load_wifi_6port
             name: Удлинитель Xiaomi 6 портов 
+
+        - type: markdown
+          content: >
+                Растения
 
         - type: custom:vertical-stack-in-card
           cards: 
@@ -2808,15 +2883,15 @@ views:
               icon: mdi:power-socket-eu
               secondary_info: entity-id
             - entity: switch.plug3
-              name: Зарядка планшета
-              icon: mdi:power-socket-eu
+              name: Asus RT-AC66U B1
+              icon: mdi:router-wireless
               secondary_info: entity-id
             - entity: switch.plug4
               name: Колонка Xiaomi
-              icon: mdi:power-socket-eu
+              icon: mdi:speaker-bluetooth
               secondary_info: entity-id
             - entity: switch.xiaomi_wifi_socket
-              name: Power Line
+              name: Empty
               icon: mdi:power-socket-eu
               secondary_info: entity-id
 

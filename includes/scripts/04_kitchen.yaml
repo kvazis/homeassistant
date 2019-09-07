@@ -10,7 +10,7 @@
      - service: automation.turn_off
        entity_id:
           - automation.04_kn_ceiling_auto_on
-     - delay: 00:00:10
+     - delay: 00:00:05
      - service: automation.turn_on
        entity_id:
           - automation.04_kn_ceiling_auto_on

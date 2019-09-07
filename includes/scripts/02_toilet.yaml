@@ -11,3 +11,13 @@
           {% else %}
            {{ n | int }}
           {% endif %}
+          
+ 02_mirror_light:
+   sequence:
+    - service: light.turn_off
+      entity_id:
+       - light.yeelight_02_ceiling
+    - service: light.turn_on
+      entity_id:
+       - light.sonoff_02_mirror
+

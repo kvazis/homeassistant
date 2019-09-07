@@ -65,9 +65,9 @@ tuya:
   country_code: 380
 
 mqtt:
-  broker: 192.168.0.70
-  discovery: true
-  discovery_prefix: homeassistant
+  broker: core-mosquitto
+  username: mqtt
+  password: mqtt
 
 weather:
   - platform: openweathermap
@@ -93,10 +93,7 @@ panel_iframe:
     title: Конфигуратор
     icon: mdi:wrench
     url: http://192.168.0.70:8123/api/hassio_ingress/-bIe85JAPBVxQkKyOfmyK1aVr39Hik2_Ut34P_HLJDw/
-  esphome:
-    title: ESPHome
-    icon: mdi:chip
-    url: http://192.168.0.70:8123/api/hassio_ingress/ItwZ1aSUaW2nO1r6IcAVNuQ1NhKCR8VGTKks7WhktFA/#
+
 
 xiaomi_aqara:
   discovery_retry: 10

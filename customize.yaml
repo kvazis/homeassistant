@@ -30,6 +30,9 @@ binary_sensor.smoke_sensor_158d000149d28b:
 light.yeelight_02_ceiling:
   friendly_name: Туалет, люстра
   icon: mdi:ceiling-light
+light.sonoff_02_mirror:
+  friendly_name: Туалет, подсветка зеркала
+  icon: mdi:spotlight-beam
 ## Реле
 switch.wall_switch_left_158d00014dceb3:
   friendly_name: Туалет питание люстры
@@ -374,10 +377,21 @@ switch.xiaomi_wifi_socket:
 switch.plug_158d00030a6e78:
   friendly_name: Детская Д, питание настольной лампы
   icon: mdi:power
+
 ## Сенсоры 
+
+#Bluetooth
 sensor.dd_bt_battery_level:
   friendly_name: Детская Д, BT датчик климата
   device_class: battery 
+sensor.dd_bt_temperature:
+  friendly_name: Детская Д, BT температура
+  icon: mdi:temperature-celsius
+sensor.dd_bt_humidity:
+  friendly_name: Детская Д, BT влажность
+  icon: mdi:water-percent
+
+##ZigBee
 sensor.illumination_286c07f0ad27:
   friendly_name: Детская Д шлюз освещенность
 binary_sensor.wall_switch_left_158d000163e571:
@@ -449,10 +463,23 @@ switch.plug_158d00010ec4b8:
   friendly_name: Детская А увлажнитель
   device_class: plug 
   icon: mdi:cup-water
+
 ## Сенсоры 
+
+#Bluetooth
+
 sensor.da_bt_battery_level:
   friendly_name: Детская А, BT датчик климата
   device_class:  battery
+sensor.da_bt_temperature:
+  friendly_name: Детская А, BT температура
+  icon: mdi:temperature-celsius
+sensor.da_bt_humidity:
+  friendly_name: Детская А, BT влажность
+  icon: mdi:water-percent
+
+##ZigBee  
+  
 sensor.illumination_f0b429cc1f11:
   friendly_name: Детская А шлюз освещенность
 binary_sensor.wall_switch_158d00010b5c6e:
@@ -518,9 +545,7 @@ sensor.time:
   friendly_name: Время
 binary_sensor.workday_sensor:
   friendly_name: Рабочий день
-sensor.social_blade:
-  friendly_name: Подписчиков
-  
+
 ## Растения
 sensor.dieffenbac_moisture:
   friendly_name: Диффенбахия влажность почвы
@@ -528,6 +553,7 @@ sensor.dieffenbac_soil:
   friendly_name: Диффенбахия фертильность почвы
 sensor.dieffenbac_temperature:
   friendly_name: Диффенбахия температура
+  icon: mdi:temperature-celsius
 sensor.dieffenbac_illuminance:
   friendly_name: Диффенбахия уровень освещенности
 
@@ -537,6 +563,7 @@ sensor.yucca_soil:
   friendly_name: Юкка фертильность почвы
 sensor.yucca_temperature:
   friendly_name: Юкка температура
+  icon: mdi:temperature-celsius
 sensor.yucca_illuminance:
   friendly_name: Юкка уровень освещенности
   
@@ -546,5 +573,6 @@ sensor.zamiokulkas_soil:
   friendly_name: Замиокулькас фертильность почвы
 sensor.zamiokulkas_temperature:
   friendly_name: Замиокулькас температура
+  icon: mdi:temperature-celsius
 sensor.zamiokulkas_illuminance:
   friendly_name: Замиокулькас уровень освещенности

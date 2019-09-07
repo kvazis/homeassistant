@@ -177,11 +177,18 @@
     state: 'on'
   action:
   - service: script.turn_on
-    entity_id: script.02_change_brightness
-  - delay: 00:00:10
+    data_template:
+       entity_id: >-
+          {%- if states.light.sonoff_02_mirror.state == 'off' -%}
+          script.02_mirror_light
+          {%- else -%}
+          script.02_change_brightness
+          {%- endif -%}   
+  - delay: 00:00:15
   - service: light.turn_off
     entity_id:
       - light.yeelight_02_ceiling
+      - light.sonoff_02_mirror
 
 # Управление вентиляцией   
 - alias: 02_toilet_vent

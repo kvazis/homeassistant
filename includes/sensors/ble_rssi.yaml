@@ -1,12 +1,37 @@
+  - platform: min_max
+    name: best_bip_alex_rssi
+    type: max
+    entity_ids:
+      - sensor.gg_bip_alex_rssi
+      - sensor.dd_bip_alex_rssi
+      - sensor.kn_bip_alex_rssi
+
+  - platform: min_max
+    name: best_bip_olha_rssi
+    type: max
+    entity_ids:
+      - sensor.gg_bip_olha_rssi
+      - sensor.dd_bip_olha_rssi
+      - sensor.kn_bip_olha_rssi
+      
+  - platform: min_max
+    name: best_mi_band_4_dima_rssi
+    type: max
+    entity_ids:
+      - sensor.gg_mi_band_4_dima_rssi
+      - sensor.dd_mi_band_4_dima_rssi
+      - sensor.kn_mi_band_4_dima_rssi
+
+
   - platform: template
     sensors:
       amazfit_bip_alex_rssi_summ:
         friendly_name: "Bip Alex Rssi"
-        value_template: "{{ states.sensor.gostinaya_amazfit_bip_alex_rssi.state }}"
+        value_template: "{{ states.sensor.best_bip_alex_rssi.state }}"
         unit_of_measurement: 'dB'
         icon_template: >-
-           {% set signal_level = states.sensor.gostinaya_amazfit_bip_alex_rssi.state|int %}
-           {% if is_state('sensor.amazfit_bip_alex_rssi', 'unknown') %}
+           {% set signal_level = states.sensor.best_bip_alex_rssi.state|int %}
+           {% if is_state('sensor.best_bip_alex_rssi', 'unknown') %}
               mdi:signal-off
            {% else %}
              {% if signal_level >= -70 %}
@@ -25,11 +50,11 @@
     sensors:
       amazfit_bip_olha_rssi_summ:
         friendly_name: "Bip Olha Rssi"
-        value_template: "{{ states.sensor.gostinaya_amazfit_bip_olha_rssi.state }}"
+        value_template: "{{ states.sensor.best_bip_olha_rssi.state }}"
         unit_of_measurement: 'dB'
         icon_template: >-
-           {% set signal_level = states.sensor.gostinaya_amazfit_bip_olha_rssi.state|int %}
-           {% if is_state('sensor.amazfit_bip_olha_rssi', 'unknown') %}
+           {% set signal_level = states.sensor.best_bip_olha_rssi.state|int %}
+           {% if is_state('sensor.best_bip_olha_rssi', 'unknown') %}
               mdi:signal-off
            {% else %}
              {% if signal_level >= -70 %}
@@ -47,11 +72,11 @@
     sensors:
       mi_smart_band_4_rssi_summ:
         friendly_name: "Mi Band 4 Rssi"
-        value_template: "{{ states.sensor.gostinaya_miband_4_dima_rssi.state }}"
+        value_template: "{{ states.sensor.best_mi_band_4_dima_rssi.state }}"
         unit_of_measurement: 'dB'
         icon_template: >-
-           {% set signal_level = states.sensor.gostinaya_miband_4_dima_rssi.state|int %}
-           {% if is_state('sensor.mi_smart_band_4_rssi', 'unknown') %}
+           {% set signal_level = states.sensor.best_mi_band_4_dima_rssi.state|int %}
+           {% if is_state('sensor.best_mi_band_4_dima_rssi', 'unknown') %}
               mdi:signal-off
            {% else %}
              {% if signal_level >= -70 %}
