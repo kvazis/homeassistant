@@ -25,10 +25,10 @@
         name: yeelight_05_ceiling2
         transition: 1000
         model: ceiling4
-      192.168.0.111:
+      192.168.0.110:
         name: yeelight_05_rgbtvbulb
         transition: 1000
-        model: color1
+        model: color2
       192.168.0.120:
         name: yeelight_05_bedside2
         transition: 1000

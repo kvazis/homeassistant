@@ -192,12 +192,12 @@
 # BLE Hub ESP 32 в онлайне
   - platform: template
     sensors:
-      esp32_1_uptime_custom:
-        friendly_name: "BLE Hub ESP 32 в онлайне"
+      gg_esp32_uptime_custom:
+        friendly_name: "BLE Hub, гостиная в онлайне"
         entity_id:
-          - sensor.esp32_1_uptime
+          - sensor.gg_esp32_uptime
         value_template: >
-          {%- set time = states('sensor.esp32_1_uptime') | int %}
+          {%- set time = states('sensor.gg_esp32_uptime') | int %}
           {%- set minutes = ((time % 3600) // 60) %}
           {%- set minutes = '{} мин.'.format(minutes) if minutes > 0 else '' %}
           {%- set hours = ((time % 86400) // 3600) %}

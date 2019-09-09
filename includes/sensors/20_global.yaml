@@ -1,10 +1,37 @@
   - platform: template
     sensors:
-      unavailable_now_offline:
+      unavailable_now_light:
         friendly_name: "Всего недоступных светильников - "
         entity_id:
           - sensor.time
         value_template: "{{states.light | selectattr ('state', 'equalto', 'unavailable') | list | length}}"
+        icon_template: mdi:counter
+        
+  - platform: template
+    sensors:
+      unavailable_now_switch:
+        friendly_name: "Всего недоступных реле - "
+        entity_id:
+          - sensor.time
+        value_template: "{{states.switch | selectattr ('state', 'equalto', 'unavailable') | list | length}}"
+        icon_template: mdi:counter
+        
+  - platform: template
+    sensors:
+      unavailable_now_sensor:
+        friendly_name: "Всего недоступных сенсоров - "
+        entity_id:
+          - sensor.time
+        value_template: "{{states.sensor | selectattr ('state', 'equalto', 'unavailable') | list | length}}"
+        icon_template: mdi:counter
+        
+  - platform: template
+    sensors:
+      unavailable_now_binary_sensor:
+        friendly_name: "Всего недоступных бинарных сенсоров - "
+        entity_id:
+          - sensor.time
+        value_template: "{{states.binary_sensor | selectattr ('state', 'equalto', 'unavailable') | list | length}}"
         icon_template: mdi:counter
         
   - platform: template

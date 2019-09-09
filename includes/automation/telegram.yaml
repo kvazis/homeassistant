@@ -129,11 +129,8 @@
     event_data:
       command: '/ping'
   action:
-    - delay: 00:00:03
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Raspberry Pi 3 B+ на связи и статус систем в норме, время - {{ states('sensor.time_date') }}"
+    - service: script.turn_on
+      entity_id: script.telegramm_state
         
 - alias: 00_telegramm_hsc_on
   initial_state: true

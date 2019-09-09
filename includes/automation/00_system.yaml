@@ -3,11 +3,10 @@
   trigger:
   - platform: homeassistant
     event: start
-  action:    
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Raspberry Pi 3 B+ на связи и статус систем в норме, время - {{ states('sensor.time_date') }}"
+  action:  
+    - delay: 00:00:10
+    - service: script.turn_on
+      entity_id: script.telegramm_state
 
         
 - alias: 00_backup_everyday

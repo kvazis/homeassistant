@@ -1,6 +1,13 @@
-  weather_message:
+  telegramm_state:
     sequence:
-    - service: notify.telegram
-      data:
-        title: 'Прогноз погоды'
-        message: "Текущая температура {{ states('sensor.pws_temp_c') }} С, {{ states('sensor.pws_weather') }}, завтра - {{ states('sensor.pws_weather_2d_metric') }} "    
+     - service: notify.telegram
+       data:
+         message: | 
+             Основной сервер Raspberry Pi 3 B+
+             Отчет за {{ states('sensor.time_date') }} 
+             Бытовые сценарии - {{ states('group.scenario') }} 
+             Сценарии бойлера - {{ states('group.heater') }} 
+             Светильников недоступно - {{ states('sensor.unavailable_now_light') }} 
+             Реле недоступно - {{ states('sensor.unavailable_now_switch') }} 
+             Сенсоров недоступно - {{ states('sensor.unavailable_now_sensor') }} 
+             Бинарных сенсоров недоступно - {{ states('sensor.unavailable_now_binary_sensor') }} 

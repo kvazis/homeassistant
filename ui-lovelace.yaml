@@ -722,7 +722,7 @@ views:
                 show_header_toggle: false
               filter:
                 include:
-                 - entity_id: sensor.unavailable_now_offline
+                 - entity_id: sensor.unavailable_now_light
                 exclude:
                  - state: '< 1'
                  
@@ -2448,7 +2448,7 @@ views:
               tap_action: 
                 action: toggle
               icon: mdi:ceiling-light
-            - entity: switch.xiaomi_wifi_socket_usb_usb            
+            - entity: switch.xiaomi_wifi_socket_usb
               name: Acer 
               tap_action: 
                 action: toggle
@@ -3392,7 +3392,25 @@ views:
 
         - type: markdown
           content: >
-              ## BLE Шлюз
+              ## BLE Шлюзы
+              
+        - type: custom:vertical-stack-in-card
+          cards:
+          - type: markdown
+            content: >
+               **Кухня, ESP 32 BLE шлюз**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.kn_esp32_uptime_custom
+            - entity: sensor.kn_esp32_wi_fi
+              name: Сигнал wi-fi
+            - entity: sensor.kn_esp32_firmware_version
+              name: Прошивка
+            - entity: switch.kn_esp32_restart
+              name: Перезагрузка
+              icon: mdi:reload
+              
         - type: custom:vertical-stack-in-card
           cards:
           - type: markdown
@@ -3401,94 +3419,32 @@ views:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: sensor.esp32_1_uptime_custom
-            - entity: sensor.esp32_1_wi_fi_signal
+            - entity: sensor.gg_esp32_uptime_custom
+            - entity: sensor.gg_esp32_wi_fi
               name: Сигнал wi-fi
-            - entity: sensor.esp32_1_firmware_version
+            - entity: sensor.gg_esp32_firmware_version
               name: Прошивка
-            - entity: switch.esp32_1_restart
+            - entity: switch.gg_esp32_restart
               name: Перезагрузка
               icon: mdi:reload
 
+        - type: custom:vertical-stack-in-card
+          cards:
           - type: markdown
             content: >
-               BLE трекер
+               **Детская Д, ESP 32 BLE шлюз**
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: binary_sensor.gostinaya_amazfit_bip_alex
-              name: Bip Alex
-              icon: mdi:watch-variant  
-            - entity: sensor.gostinaya_amazfit_bip_alex_rssi
-              name: Уровень сигнала
-              icon: mdi:signal              
-            - entity: binary_sensor.gostinaya_amazfit_bip_olha
-              name: Bip Olha
-              icon: mdi:watch-variant  
-            - entity: sensor.gostinaya_amazfit_bip_olha_rssi
-              name: Уровень сигнала
-              icon: mdi:signal  
-            - entity: binary_sensor.gostinaya_miband_4_dima
-              name: Mi Band 4
-              icon: mdi:bluetooth-connect
-            - entity: sensor.gostinaya_miband_4_dima_rssi
-              name: Уровень сигнала
-              icon: mdi:signal
+            - entity: sensor.dd_esp32_uptime_custom
+            - entity: sensor.dd_esp32_wi_fi
+              name: Сигнал wi-fi
+            - entity: sensor.dd_esp32_firmware_version
+              name: Прошивка
+            - entity: switch.dd_esp32_restart
+              name: Перезагрузка
+              icon: mdi:reload
 
-          - type: markdown
-            content: >
-               BLE сенсоры - растения
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: sensor.dieffenbac_moisture
-              name: Диффенбахия влажность
-            - entity: sensor.dieffenbac_temperature
-              name: Диффенбахия температура
-            - entity: sensor.dieffenbac_soil
-              name: Диффенбахия фертильность
-            - entity: sensor.dieffenbac_illuminance
-              name: Диффенбахия освещенность
-
-            - entity: sensor.yucca_moisture
-              name: Юкка влажность
-            - entity: sensor.yucca_temperature
-              name: Юкка температура
-            - entity: sensor.yucca_soil
-              name: Юкка фертильность
-            - entity: sensor.yucca_illuminance
-              name: Юкка освещенность
-              
-            - entity: sensor.zamiokulkas_moisture
-              name: Замиокулькас влажность
-            - entity: sensor.zamiokulkas_temperature
-              name: Замиокулькас температура
-            - entity: sensor.zamiokulkas_soil
-              name: Замиокулькас фертильность
-            - entity: sensor.zamiokulkas_illuminance
-              name: Замиокулькас освещенность
-
-          - type: markdown
-            content: >
-               BLE сенсоры - климат
-
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: sensor.dd_bt_temperature
-              name: Детская Д BLE температура
-            - entity: sensor.dd_bt_humidity
-              name: Детская Д BLE влажность
-            - entity: sensor.dd_bt_battery_level
-              type: 'custom:battery-entity'
-              name: Детская Д BLE батарейка
-            - entity: sensor.da_bt_temperature
-              name: Детская А BLE температура
-            - entity: sensor.da_bt_humidity 
-              name: Детская Д BLE влажность
-            - entity: sensor.da_bt_battery_level
-              type: 'custom:battery-entity'
-              name: Детская А BLE батарейка
          
 
 ##################   BATTERY
@@ -3804,253 +3760,6 @@ views:
             filter:
               include:
                - domain: fan
-
-##################   Сенсоры
-  - title: Все сенсоры
-    id: sensor
-    icon: mdi:chip
-    cards:
-    
-      - type: vertical-stack
-        cards:
-        
-          - type: markdown
-            content: >
-                **Бинарные сенсоры**
-                
-          - type: markdown
-            content: >
-                  Сенсоры движения
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: binary_sensor.motion*
-               
-          - type: markdown
-            content: >
-                  Сенсоры открытия
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: binary_sensor.door_window*           
-
-          - type: markdown
-            content: >
-                  Аварийные сенсоры
-               
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: binary_sensor.water_leak*
-               - entity_id: binary_sensor.smoke*
-               
-          - type: markdown
-            content: >
-                  Беспроводные кнопки
-               
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: binary_sensor.switch*
-
-          - type: markdown
-            content: >
-                  Беспроводные выключатели
-               
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: binary_sensor.wall_switch*
-
-          - type: markdown
-            content: >
-                  Кубики, вибродатчики
-               
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: binary_sensor.cube*
-               - entity_id: binary_sensor.vibration*
-
-          - type: markdown
-            content: >
-                  Ping сенсоры
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: binary_sensor.ping*
-               
-      - type: vertical-stack
-        cards:
-        
-          - type: markdown
-            content: >
-                **Сенсоры**
-
-          - type: markdown
-            content: >
-                  Датчики влажности и температуры
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: sensor.humidity*
-               - entity_id: sensor.temperature*
-               
-          - type: markdown
-            content: >
-                  Датчики давления
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: sensor.pressure*
-               
-          - type: markdown
-            content: >
-                  Датчики освещенности
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: sensor.illumination*
-               
-          - type: markdown
-            content: >
-                  Сенсоры мощности
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: sensor.load*
-
-          - type: markdown
-            content: >
-                  Уровень заряда
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: sensor.*battery
-               
-      - type: vertical-stack
-        cards:
-
-          - type: markdown
-            content: >
-                **Все остальное**
-
-          - type: markdown
-            content: >
-                  Сенсоры времени суток
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: binary_sensor.tod*
-
-          - type: markdown
-            content: >
-                  Москито сенсоры
-
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: sensor.mqtt*
-               
-          - type: markdown
-            content: >
-                 Разное
-        
-          - type: custom:monster-card
-            show_empty: false
-            card:
-              type: entities
-              show_header_toggle: false
-            filter:
-              include:
-               - entity_id: binary_sensor.*
-               - entity_id: sensor.*
-              exclude:
-               - entity_id: binary_sensor.motion*
-               - entity_id: binary_sensor.door_window* 
-               - entity_id: binary_sensor.water_leak*
-               - entity_id: binary_sensor.smoke*
-               - entity_id: binary_sensor.switch*
-               - entity_id: binary_sensor.wall_switch*
-               - entity_id: binary_sensor.cube*
-               - entity_id: binary_sensor.vibration*
-               - entity_id: sensor.humidity*
-               - entity_id: sensor.temperature*
-               - entity_id: sensor.pressure*
-               - entity_id: sensor.illumination*
-               - entity_id: sensor.load*
-               - entity_id: sensor.*battery
-               - entity_id: sensor.pws*
-               - entity_id: sensor.mqtt*
-               - entity_id: sensor.p101*
-               - entity_id: sensor.money*
-               - entity_id: binary_sensor.ping*
-               - entity_id: binary_sensor.tod*
 
 ##################   Синхронизация
   - title: СИнхронизация электроэнергии 
