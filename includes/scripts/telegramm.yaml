@@ -11,3 +11,21 @@
              Реле недоступно - {{ states('sensor.unavailable_now_switch') }} 
              Сенсоров недоступно - {{ states('sensor.unavailable_now_sensor') }} 
              Бинарных сенсоров недоступно - {{ states('sensor.unavailable_now_binary_sensor') }} 
+             
+  telegramm_start:
+    sequence:
+     - service: notify.telegram
+       data:
+         message: | 
+             Основной сервер Raspberry Pi 3 B+ запущен в {{ states('sensor.time_date') }} 
+             Бытовые сценарии - {{ states('group.scenario') }} 
+             Сценарии бойлера - {{ states('group.heater') }} 
+             Отчет по устройствам будет готов через 1 минуту
+     - delay: 00:00:60  
+     - service: notify.telegram
+       data:
+         message: | 
+             Светильников недоступно - {{ states('sensor.unavailable_now_light') }} 
+             Реле недоступно - {{ states('sensor.unavailable_now_switch') }} 
+             Сенсоров недоступно - {{ states('sensor.unavailable_now_sensor') }} 
+             Бинарных сенсоров недоступно - {{ states('sensor.unavailable_now_binary_sensor') }} 

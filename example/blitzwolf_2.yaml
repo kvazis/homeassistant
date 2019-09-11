@@ -1,0 +1,118 @@
+# Переменные 
+substitutions:
+  plug_name: bw
+  current_res: "0.00221"
+  voltage_div: "945"
+
+# Платформа и имя проекта
+esphome:
+  name: blitzshp2
+  platform: ESP8266
+  board: esp8285
+
+# Параметры сети
+wifi:
+  ssid: 'имя сети'
+  password: 'пароль'
+  manual_ip:
+    static_ip: 192.168.0.хх
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0
+
+# Логирование
+logger:
+
+# Активация Home Assistant API
+api:
+  password: 'пароль'
+
+ota:
+  password: 'пароль'
+
+# Веб сервер
+web_server:
+  port: 80
+
+# Состояние кноки
+binary_sensor:
+  - platform: gpio
+    name: ${plug_name}_button
+    pin:
+      number: GPIO3
+      mode: INPUT_PULLUP
+      inverted: True
+    on_press:
+      - switch.toggle: relay
+
+# Управление реле
+switch:
+  - platform: gpio
+    name: ${plug_name}_relay
+    pin: GPIO14
+    id: relay
+    restore_mode: ALWAYS_ON
+    on_turn_on:
+      - switch.turn_on: blue_led
+      - switch.turn_off: red_led
+    on_turn_off:
+      - switch.turn_off: blue_led
+      - switch.turn_on: red_led
+
+# Синяя лампочка
+  - platform: gpio
+    id: blue_led
+    name: ${plug_name}_LED_Blue
+    icon: mdi:led-on
+    restore_mode: ALWAYS_ON
+    pin: 
+      number: GPIO1
+      inverted: True
+
+# Красная лампочка
+  - platform: gpio
+    id: red_led
+    name: ${plug_name}_LED_Red
+    icon: mdi:led-on
+    restore_mode: ALWAYS_OFF
+    pin: 
+      number: GPIO13
+      inverted: True
+
+# Снеснор нагрузки
+sensor:
+  - platform: hlw8012
+    sel_pin: 
+      number: GPIO12
+      inverted: True
+    cf_pin: GPIO04
+    cf1_pin: GPIO05
+    current_resistor: ${current_res}
+    voltage_divider: ${voltage_div}
+    current:
+      name: ${plug_name}_current
+      icon: mdi:current-ac
+      unit_of_measurement: A
+    voltage:
+      name: ${plug_name}_voltage
+      icon: mdi:flash-circle
+      unit_of_measurement: V
+    power:
+      name: ${plug_name}_power
+      icon: mdi:flash-outline
+      unit_of_measurement: W
+    change_mode_every: 8
+    update_interval: 10s
+ 
+ # Время в онлайне   
+  - platform: uptime
+    name: ${plug_name}_Uptime
+
+# Уровень сигнала розетки
+  - platform: wifi_signal
+    name: ${plug_name}_Wi-Fi_Signal
+    update_interval: 60s
+
+# Версия прошивки
+text_sensor:
+  - platform: version
+    name: ${plug_name}_firmware_version

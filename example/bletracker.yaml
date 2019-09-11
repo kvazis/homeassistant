@@ -1,0 +1,99 @@
+# Переменные 
+substitutions:
+ location: kitchen
+ plant: fikus
+
+# Платформа и имя проекта
+esphome:
+  name: bletracker
+  platform: ESP32
+  board: nodemcu-32s
+
+# Параметры сети
+wifi:
+  ssid: 'имя сети'
+  password: 'пароль'
+  manual_ip:
+    static_ip: 192.168.0.хх
+    gateway: 192.168.0.1
+    subnet: 255.255.255.0
+
+# Логирование
+logger:
+
+# Активация Home Assistant API
+api:
+  password: 'пароль'
+
+ota:
+  password: 'пароль'
+
+# Веб сервер
+web_server:
+  port: 80
+
+# Интерфал сканирования
+esp32_ble_tracker:
+  scan_interval: 300s
+
+# Наличие BLE устройств в зоне видимости
+binary_sensor:
+  - platform: ble_presence
+    mac_address: **:**:**:**:**:**
+    name: ${location}_mi_band_4
+    
+  - platform: ble_presence
+    mac_address: **:**:**:**:**:**
+    name: ${location}_amazfit_bip
+
+    
+sensor:
+# Уровень сигнала обнаруженных устройств
+  - platform: ble_rssi
+    mac_address: **:**:**:**:**:**
+    name: ${location}_mi_band_4_rssi
+
+  - platform: ble_rssi
+    mac_address: **:**:**:**:**:**
+    name: ${location}_amazfit_bip_rssi
+    
+# Получение данных от сенсоров растений   
+  - platform: xiaomi_miflora
+    mac_address: **:**:**:**:**:**
+    temperature:
+      name: ${plant}_temperature
+    moisture:
+      name: ${plant}_moisture
+    illuminance:
+      name: ${plant}_illuminance
+    conductivity:
+      name: ${plant}_soil
+
+# Датчики температуры и влажности
+  - platform: xiaomi_mijia
+    mac_address: **:**:**:**:**:**
+    temperature:
+      name: ${location}_bt_temperature
+    humidity:
+      name: ${location}_bt_humidity
+    battery_level:
+      name: ${location}_bt_battery_level
+
+# Время в онлайне
+  - platform: uptime
+    name: ${location}_esp32_uptime
+
+# Уровень сигнала шлюза
+  - platform: wifi_signal
+    name:  ${location}_esp32_wi-fi
+    update_interval: 60s
+
+# Версия прошивки
+text_sensor:
+  - platform: version
+    name: ${location}_esp32_firmware_version
+
+# кнопка перезапуска    
+switch:
+  - platform: restart
+    name: ${location}_esp32_Restart

@@ -412,7 +412,10 @@ views:
                    name: Bip Olha
                    icon: mdi:watch-variant
                  - entity: binary_sensor.kn_mi_band_4_dima
-                   name: Mi Band 4
+                   name: Mi Band 4 
+                   icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.kn_mi_band_2_ns
+                   name: Mi Band 2 NS
                    icon: mdi:bluetooth-connect
               - type: glance
                 show_state: true
@@ -421,6 +424,7 @@ views:
                  - entity: sensor.kn_bip_alex_rssi
                  - entity: sensor.kn_bip_olha_rssi
                  - entity: sensor.kn_mi_band_4_dima_rssi
+                 - entity: sensor.kn_mi_band_2_ns_rssi
 
 
           - type: custom:vertical-stack-in-card
@@ -440,6 +444,9 @@ views:
                  - entity: binary_sensor.gg_mi_band_4_dima
                    name: Mi Band 4
                    icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.gg_mi_band_2_ns
+                   name: Mi Band 2 NS
+                   icon: mdi:bluetooth-connect
               - type: glance
                 show_state: true
                 show_name: false
@@ -447,6 +454,7 @@ views:
                  - entity: sensor.gg_bip_alex_rssi
                  - entity: sensor.gg_bip_olha_rssi
                  - entity: sensor.gg_mi_band_4_dima_rssi
+                 - entity: sensor.gg_mi_band_2_ns_rssi
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -465,6 +473,9 @@ views:
                  - entity: binary_sensor.dd_mi_band_4_dima
                    name: Mi Band 4
                    icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.dd_mi_band_2_ns
+                   name: Mi Band 2 NS
+                   icon: mdi:bluetooth-connect
               - type: glance
                 show_state: true
                 show_name: false
@@ -472,6 +483,7 @@ views:
                  - entity: sensor.dd_bip_alex_rssi
                  - entity: sensor.dd_bip_olha_rssi
                  - entity: sensor.dd_mi_band_4_dima_rssi
+                 - entity: sensor.dd_mi_band_2_ns_rssi
 
 
       - type: vertical-stack
@@ -1818,11 +1830,11 @@ views:
           entities:
            - entity: switch.reolink_photo
              icon: mdi:camera
-             
+
         - type: picture-glance
           title: Этаж, поворот
           camera_image: camera.alfawise
-#          camera_view: live
+          camera_view: live
           entities:
            - entity: switch.alfawise_photo
              icon: mdi:camera
