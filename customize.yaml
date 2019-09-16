@@ -278,6 +278,15 @@ binary_sensor.door_window_sensor_158d00013ed373:
   friendly_name: Гостиная, окно
   device_class: window 
 
+# Среднее значение
+sensor.05_mean_humidity:
+  friendly_name: Гостиная, средняя влажность
+  icon: mdi:water-percent  
+sensor.05_mean_temperature:
+  friendly_name: Гостиная, средняя температура
+  icon: mdi:temperature-celsius
+
+
 # Монитор воздуха
 sensor.05_mi_air_co2a:
   friendly_name: Гостиная mi air СО2а
@@ -380,6 +389,14 @@ switch.plug_158d00030a6e78:
 
 ## Сенсоры 
 
+# Среднее значение
+sensor.07_mean_humidity:
+  friendly_name: Детская Д, средняя влажность
+  icon: mdi:water-percent  
+sensor.07_mean_temperature:
+  friendly_name: Детская Д, средняя температура
+  icon: mdi:temperature-celsius
+
 #Bluetooth
 sensor.dd_bt_battery_level:
   friendly_name: Детская Д, BT датчик климата
@@ -466,8 +483,15 @@ switch.plug_158d00010ec4b8:
 
 ## Сенсоры 
 
-#Bluetooth
+# Среднее значение
+sensor.08_mean_humidity:
+  friendly_name: Детская А, средняя влажность
+  icon: mdi:water-percent  
+sensor.08_mean_temperature:
+  friendly_name: Детская А, средняя температура
+  icon: mdi:temperature-celsius
 
+#Bluetooth
 sensor.da_bt_battery_level:
   friendly_name: Детская А, BT датчик климата
   device_class:  battery

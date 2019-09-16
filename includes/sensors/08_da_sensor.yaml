@@ -1,48 +1,3 @@
-  - platform: template
-    sensors:
-      load_158d00010ec4b8:
-        friendly_name: 'Детская А, увлажнитель'
-        value_template: "{{ state_attr('switch.plug_158d00010ec4b8', 'load_power') }}"
-        icon_template: mdi:flash
-        unit_of_measurement: 'Вт'
-        entity_id: switch.plug_158d00010ec4b8
-        
-  - platform: mqtt
-    state_topic: "power/158d00010ec4b8/yesterday"
-    name: 'mqtt_power_yesterday_158d00010ec4b8'
-    unit_of_measurement: 'кВт⋅ч'
-        
-  - platform: mqtt
-    state_topic: "power/158d00010ec4b8/today"
-    name: 'mqtt_power_today_158d00010ec4b8'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: mqtt
-    state_topic: "power/158d00010ec4b8/month"
-    name: 'mqtt_power_month_158d00010ec4b8'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: mqtt
-    state_topic: "power/158d00010ec4b8/lastmonth"
-    name: 'mqtt_power_lastmonth_158d00010ec4b8'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: template
-    sensors:
-      money_month_158d00010ec4b8:
-        friendly_name: "Стоимость за текущий месяц"
-        unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.mqtt_power_month_158d00010ec4b8.state | float * 1.68)|round(2) }}"
-        icon_template: mdi:square-inc-cash 
-    
-  - platform: template
-    sensors:
-      money_lastmonth_158d00010ec4b8:
-        friendly_name: "Стоимость за прошлый месяц"
-        unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d00010ec4b8.state | float * 1.68)|round(2) }}"
-        icon_template: mdi:square-inc-cash 
-        
 # Время фиксации движения в детской А
   - platform: mqtt
     state_topic: "binary_sensor/158d00016d56f5"
@@ -51,12 +6,12 @@
 # Розетка Alfawise 8285 в онлайне
   - platform: template
     sensors:
-      alfawise8285_uptime_custom:
+      08_alfawise_uptime_custom:
         friendly_name: "Alfawise 8285 в онлайне"
         entity_id:
-          - sensor.alfawise8285_uptime
+          - sensor.08_alfawise_uptime
         value_template: >
-          {%- set time = states('sensor.alfawise8285_uptime') | int %}
+          {%- set time = states('sensor.08_alfawise_uptime') | int %}
           {%- set minutes = ((time % 3600) // 60) %}
           {%- set minutes = '{} мин.'.format(minutes) if minutes > 0 else '' %}
           {%- set hours = ((time % 86400) // 3600) %}
@@ -65,3 +20,20 @@
           {%- set days = '{} д. '.format(days) if days > 0 else '' %}
           {{ 'Меньше минуты' if time < 60 else days + hours + minutes }}
         icon_template: mdi:clock
+        
+# Аverage temperature
+  - platform: min_max
+    name: 08_mean_temperature
+    type: mean
+    entity_ids:
+      - sensor.temperature_158d000159c7e6
+      - sensor.da_bt_temperature
+
+      
+# Аverage humidity
+  - platform: min_max
+    name: 08_mean_humidity
+    type: mean
+    entity_ids:
+      - sensor.humidity_158d000159c7e6
+      - sensor.da_bt_humidity

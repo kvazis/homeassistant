@@ -1,12 +1,28 @@
+# Кубик Xiaofang
+
   - platform: generic
     name: Xiaofang
     still_image_url: http://192.168.0.125/image.jpg
     stream_source: rtsp://192.168.0.125:554/unicast
 
+# Reolink - RLC-411WS
+# Основной поток
+
   - platform: generic
     name: Reolink
     still_image_url: !secret reolink1_url
     stream_source: !secret reolink1_rtsp
+
+# Reolink - RLC-411WS
+# Дополнительный поток
+
+  - platform: generic
+    name: Reolink_sub
+    still_image_url: !secret reolink1_url
+    stream_source: !secret reolink1_sub_rtsp
+
+# Alfawise
+# Основной поток
 
   - platform: generic
     name: Alfawise
@@ -15,34 +31,70 @@
     username: !secret alfawise_login
     password: !secret alfawise_pass
 
+# Alfawise
+# Дополнительный поток
+
+  - platform: generic
+    name: Alfawise_sub
+    still_image_url: http://192.168.0.127/snap.jpg
+    stream_source: !secret alfawise_sub_url
+    username: !secret alfawise_login
+    password: !secret alfawise_pass
+
+# Reolink C2 Pro
+# Основной поток
+
   - platform: generic
     name: Reolink2
     still_image_url: !secret reolink2_url
     stream_source: !secret reolink2_rtsp
-
-
-#  - platform: mjpeg
-#    mjpeg_url: !secret reolink2_url
-#    name: Reolink2
-
-
-#  - platform: mjpeg
-#    mjpeg_url: http://192.168.0.125/image.jpg
-#    name: Xiaofang
     
-#  - platform: mjpeg
-#    mjpeg_url: !secret reolink1_url
-#    name: Reolink
-    
-#  - platform: onvif
-#    name: Alfawise
-#    host: 192.168.0.126
-#    username: !secret alfawise_login
-#    password: !secret alfawise_login
-#    port: 8080
+# Reolink C2 Pro
+# Дополнительный поток
 
-#  - platform: mjpeg
-#    mjpeg_url: http://192.168.0.127/snap.jpg
-#    name: Alfawise
-#    username: !secret alfawise_login
-#    password: !secret alfawise_login
+  - platform: generic
+    name: Reolink2_sub
+    still_image_url: !secret reolink2_url
+    stream_source: !secret reolink2_sub_rtsp
+    
+
+# Hikvision HDR
+
+  - platform: generic
+    name: hikvision1
+    still_image_url: !secret hikvision1_url
+    stream_source: !secret hikvision1_rtsp
+    
+  - platform: generic
+    name: hikvision2
+    still_image_url: !secret hikvision2_url
+    stream_source: !secret hikvision2_rtsp
+    
+  - platform: generic
+    name: hikvision3
+    still_image_url: !secret hikvision3_url
+    stream_source: !secret hikvision3_rtsp
+
+  - platform: generic
+    name: hikvision4
+    still_image_url: !secret hikvision4_url
+    stream_source: !secret hikvision4_rtsp
+
+  - platform: generic
+    name: hikvision5
+    still_image_url: !secret hikvision5_url
+    stream_source: !secret hikvision5_rtsp
+    
+  - platform: generic
+    name: hikvision6
+    still_image_url: !secret hikvision6_url
+    stream_source: !secret hikvision6_rtsp 
+    
+  - platform: generic
+    name: hikvision7
+    still_image_url: !secret hikvision7_url
+    stream_source: !secret hikvision7_rtsp   
+    
+    
+    
+    

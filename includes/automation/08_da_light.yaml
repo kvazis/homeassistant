@@ -132,10 +132,10 @@
 #      data:
 #        message: "Потеря контроля в течении 5 минут - Настольная лампа, ДА.  Время события - {{ states('sensor.time_date') }} . Инициирована перезагрузка"
     - service: switch.turn_off
-      entity_id: switch.alfawise_relay
+      entity_id: switch.08_alfawise_relay
     - delay: 00:00:05
     - service: switch.turn_on
-      entity_id: switch.alfawise_relay
+      entity_id: switch.08_alfawise_relay
       
 ## Запись последнего движения в детской А
 - alias: 08_da_motion_time

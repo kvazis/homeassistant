@@ -6,96 +6,6 @@
         icon_template: mdi:numeric
         entity_id: light.philips_07_ceiling
 
-  - platform: template
-    sensors:
-      load_158d000114a1e1:
-        friendly_name: 'Детская Д, увлажнитель'
-        value_template: "{{ state_attr('switch.plug_158d000114a1e1', 'load_power') }}"
-        icon_template: mdi:flash
-        unit_of_measurement: 'Вт'
-        entity_id: switch.plug_158d000114a1e1
-        
-  - platform: mqtt
-    state_topic: "power/158d000114a1e1/yesterday"
-    name: 'mqtt_power_yesterday_158d000114a1e1'
-    unit_of_measurement: 'кВт⋅ч'
-        
-  - platform: mqtt
-    state_topic: "power/158d000114a1e1/today"
-    name: 'mqtt_power_today_158d000114a1e1'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: mqtt
-    state_topic: "power/158d000114a1e1/month"
-    name: 'mqtt_power_month_158d000114a1e1'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: mqtt
-    state_topic: "power/158d000114a1e1/lastmonth"
-    name: 'mqtt_power_lastmonth_158d000114a1e1'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: template
-    sensors:
-      money_month_158d000114a1e1:
-        friendly_name: "Стоимость за текущий месяц"
-        unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.mqtt_power_month_158d000114a1e1.state | float * 1.68)|round(2) }}"
-        icon_template: mdi:square-inc-cash 
-    
-  - platform: template
-    sensors:
-      money_lastmonth_158d000114a1e1:
-        friendly_name: "Стоимость за прошлый месяц"
-        unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d000114a1e1.state | float * 1.68)|round(2) }}"
-        icon_template: mdi:square-inc-cash 
-        
-  - platform: template
-    sensors:
-      load_158d00030a6e78:
-        friendly_name: 'Детская Д, настольная лампа'
-        value_template: "{{ state_attr('switch.plug_158d00030a6e78', 'load_power') }}"
-        icon_template: mdi:flash
-        unit_of_measurement: 'Вт'
-        entity_id: switch.plug_158d00030a6e78
-        
-  - platform: mqtt
-    state_topic: "power/158d00030a6e78/yesterday"
-    name: 'mqtt_power_yesterday_158d00030a6e78'
-    unit_of_measurement: 'кВт⋅ч'
-        
-  - platform: mqtt
-    state_topic: "power/158d00030a6e78/today"
-    name: 'mqtt_power_today_158d00030a6e78'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: mqtt
-    state_topic: "power/158d00030a6e78/month"
-    name: 'mqtt_power_month_158d00030a6e78'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: mqtt
-    state_topic: "power/158d00030a6e78/lastmonth"
-    name: 'mqtt_power_lastmonth_158d00030a6e78'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: template
-    sensors:
-      money_month_158d00030a6e78:
-        friendly_name: "Стоимость за текущий месяц"
-        unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.mqtt_power_month_158d00030a6e78.state | float * 1.68)|round(2) }}"
-        icon_template: mdi:square-inc-cash 
-    
-  - platform: template
-    sensors:
-      money_lastmonth_158d00030a6e78:
-        friendly_name: "Стоимость за прошлый месяц"
-        unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d00030a6e78.state | float * 1.68)|round(2) }}"
-        icon_template: mdi:square-inc-cash 
-        
 # Время фиксации движения в детской Д
   - platform: mqtt
     state_topic: "binary_sensor/158d0001a66222"
@@ -118,3 +28,20 @@
           {%- set days = '{} д. '.format(days) if days > 0 else '' %}
           {{ 'Меньше минуты' if time < 60 else days + hours + minutes }}
         icon_template: mdi:clock
+        
+# Аverage temperature
+  - platform: min_max
+    name: 07_mean_temperature
+    type: mean
+    entity_ids:
+      - sensor.temperature_158d000156e92e
+      - sensor.dd_bt_temperature
+
+      
+# Аverage humidity
+  - platform: min_max
+    name: 07_mean_humidity
+    type: mean
+    entity_ids:
+      - sensor.humidity_158d000156e92e
+      - sensor.dd_bt_humidity

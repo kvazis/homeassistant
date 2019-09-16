@@ -70,7 +70,7 @@ views:
                 - entity: sensor.reserve_heater_group
                   name: Бойлер
                   icon: mdi:hot-tub
-                
+
 #            - type: glance
 #              show_state: true
 #              entities:
@@ -88,53 +88,71 @@ views:
           - type: custom:vertical-stack-in-card
             cards:
 
-            - type: glance
-              show_state: false
-              entities:
-               - entity: script.purge_db
-                 tap_action: 
-                   action: toggle
-                 name: Сжатие базы
+            - type: horizontal-stack
+              cards:
+               - type: entity-button
+                 tap_action: call-service
+                 service: script.toggle
+                 entity: script.purge_db
                  icon: mdi:database
-               - entity: script.ha_restart
-                 tap_action: 
-                   action: toggle
-                 name: HA reboot
+                 color: auto
+                 name: Сжатие базы
+         
+               - type: entity-button
+                 tap_action: call-service
+                 service: script.toggle
+                 entity: script.ha_restart
                  icon: mdi:home-assistant
-               - entity: script.all_scenario_reload
-                 tap_action: 
-                   action: toggle
-                 name: Сценарии
+                 color: auto
+                 name: Reboot
+                 
+               - type: entity-button
+                 tap_action: call-service
+                 service: script.toggle
+                 entity: script.all_scenario_reload
                  icon: mdi:autorenew
-               - entity: script.all_script_reload
-                 tap_action: 
-                   action: toggle
+                 color: auto
+                 name: Сценарии
+                 
+               - type: entity-button
+                 tap_action: call-service
+                 service: script.toggle
+                 entity: script.all_script_reload
+                 icon: mdi:autorenew
+                 color: auto
                  name: Скрипты
-                 icon: mdi:autorenew 
 
+          - type: custom:vertical-stack-in-card
+            cards:
+                 
             - type: entities
               show_header_toggle: false
               entities:
-              - entity: sensor.last_boot_custom
-                name: Сервер работает -
-                icon: mdi:av-timer
+              - entity: sensor.current_ha
+                name: Установлен Home Assistant -
+                icon: mdi:alpha-v-circle
               - entity: sensor.version
+                name: Последний Home Assistant -
                 icon: mdi:alpha-v-circle-outline
-              - entity: binary_sensor.updater
-                name: Обновление Home Assistant - 
-                icon: mdi:update
+              - type: divider
+              - entity: sensor.last_boot_custom
+                name: Сервер в онлайне -
+                icon: mdi:av-timer
+              - entity: sensor.online_custom
+                name: Home Assistant в онлайне -
+                icon: mdi:clock
+              - entity: sensor.reserve_state
+                name: Khadas VIM2 в онлайне -
+                icon: mdi:clock-outline
+              - type: divider
               - entity: sensor.maria_db_size
                 name: Размер Maria DB - 
                 icon: mdi:database
               - entity: sensor.home_assistant_v2_db
                 name: Размер HA DB - 
                 icon: mdi:database
-              - entity: sensor.online_custom
-                name: Система в онлайне -
-                icon: mdi:clock-outline
-              - entity: sensor.reserve_state
-                name: Khadas VIM2 в онлайне -
-                icon: mdi:clock-outline
+
+
 
 
       - type: vertical-stack
@@ -243,13 +261,6 @@ views:
             - type: markdown
               content: >
                 **Графики**
-
-#            - type: custom:mini-graph-card
-#              entities:
-#               - entity: sensor.cpu_temp
-#                 name: Температура CPU
-#                 color: "#ff0000"
-
 
             - type: history-graph
               entities:
@@ -887,8 +898,15 @@ views:
                  - entity_id: sensor.*temperature*
                 exclude:
                  - entity_id: sensor.*battery*
+                 - entity_id: sensor.temperature_158d00015aebb6
+                 - entity_id: sensor.05_mi_air_temperature
+                 - entity_id: sensor.05_smartmi_temperature
+                 - entity_id: sensor.temperature_158d000156e92e
+                 - entity_id: sensor.dd_bt_temperature
+                 - entity_id: sensor.temperature_158d000159c7e6
+                 - entity_id: sensor.da_bt_temperature
                  - state: '> 18'
-
+                 
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -905,6 +923,13 @@ views:
                  - entity_id: sensor.*temperature*
                 exclude:
                  - entity_id: sensor.*battery*
+                 - entity_id: sensor.temperature_158d00015aebb6
+                 - entity_id: sensor.05_mi_air_temperature
+                 - entity_id: sensor.05_smartmi_temperature
+                 - entity_id: sensor.temperature_158d000156e92e
+                 - entity_id: sensor.dd_bt_temperature
+                 - entity_id: sensor.temperature_158d000159c7e6
+                 - entity_id: sensor.da_bt_temperature
                  - state: '< 26'
 
           - type: custom:vertical-stack-in-card
@@ -922,6 +947,13 @@ views:
                  - entity_id: sensor.*humidity*
                 exclude:
                  - entity_id: sensor.*battery*
+                 - entity_id: sensor.humidity_158d00015aebb6
+                 - entity_id: sensor.05_mi_air_humidity
+                 - entity_id: sensor.05_smartmi_humidity
+                 - entity_id: sensor.humidity_158d000156e92e
+                 - entity_id: sensor.dd_bt_humidity
+                 - entity_id: sensor.humidity_158d000159c7e6
+                 - entity_id: sensor.da_bt_humidity
                  - state: '> 40'
                  
           - type: custom:vertical-stack-in-card
@@ -939,6 +971,13 @@ views:
                  - entity_id: sensor.*humidity*
                 exclude:
                  - entity_id: sensor.*battery*
+                 - entity_id: sensor.humidity_158d00015aebb6
+                 - entity_id: sensor.05_mi_air_humidity
+                 - entity_id: sensor.05_smartmi_humidity
+                 - entity_id: sensor.humidity_158d000156e92e
+                 - entity_id: sensor.dd_bt_humidity
+                 - entity_id: sensor.humidity_158d000159c7e6
+                 - entity_id: sensor.da_bt_humidi
                  - state: '< 60'
 
           - type: custom:vertical-stack-in-card
@@ -1810,10 +1849,93 @@ views:
                  name: Месяц
                  icon: mdi:cash
 
+
+##################  Hikvision
+  - title: Камеры Hikvision
+    id: cameras_hik
+    icon: mdi:cctv
+    cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+            **Hikvision State** 
+
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.hikvision_online
+             name: Статус
+             icon: mdi:security-network
+           - entity: sensor.hikvision_uptime_custom
+             name: В онлайне
+             icon: mdi:timer
+           - entity: sensor.hikvision_cpu_frequency
+             name: Процессор
+             icon: mdi:chip
+           - entity: sensor.hikvision_disk_size
+             name: Объем диска
+             icon: mdi:harddisk
+           - entity: sensor.hikvision_free_space
+             name: Свободно на диске
+             icon: mdi:harddisk-plus
+
+        - type: picture-entity
+          entity: camera.hikvision6
+          camera_view: live 
+          show_state: false
+          show_name: false
+ 
+      - type: vertical-stack
+        cards:
+        
+        - type: picture-entity
+          entity: camera.hikvision1
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+
+        - type: picture-entity
+          entity: camera.hikvision2
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+
+        - type: picture-entity
+          entity: camera.hikvision7
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+      - type: vertical-stack
+        cards:
+
+        - type: picture-entity
+          entity: camera.hikvision5
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+        - type: picture-entity
+          entity: camera.hikvision3
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+        - type: picture-entity
+          entity: camera.hikvision4
+          camera_view: live 
+          show_state: false
+          show_name: false
+
 ##################  Camera
-  - title: Камеры
-    id: cameras
-    icon: mdi:camera
+  - title: Камеры в квартире
+    id: cameras_in
+    icon: mdi:webcam
     cards:
 
       - type: vertical-stack
@@ -1833,7 +1955,7 @@ views:
 
         - type: picture-glance
           title: Этаж, поворот
-          camera_image: camera.alfawise
+          camera_image: camera.alfawise_sub
           camera_view: live
           entities:
            - entity: switch.alfawise_photo
@@ -1913,9 +2035,6 @@ views:
           - entity: sensor.mqtt_binary_sensor_158d00013f7894
             name: Последнее движение в коридоре в - 
             icon: mdi:run-fast
-          - entity: binary_sensor.vibration_158d0002a4f77e            
-            name: Датчик вибрации
-            secondary_info: last-changed
 
         - type: entity-filter
           show_header_toggle: false
@@ -1953,18 +2072,27 @@ views:
             - type: light
               entity: light.aqara_02_ceiling
 
+        - type: horizontal-stack
+          cards: 
+
+          - type: entity-button
+            entity: light.sonoff_02_mirror
+            name: Зеркало свет
+            icon: mdi:spotlight
+
+          - type: entity-button
+            entity: switch.wall_switch_left_158d00014dceb3
+            name: Питание люстры
+            icon: mdi:power
+
+          - type: entity-button
+            entity: switch.wall_switch_right_158d00014dceb3
+            name: Вентиляция
+
+
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: light.sonoff_02_mirror
-          - entity: switch.wall_switch_left_158d00014dceb3
-            name: Туалет, питание люстры
-            tap_action: toggle
-            icon: mdi:ceiling-light
-          - entity: switch.wall_switch_right_158d00014dceb3
-            name: Туалет вентиляция
-            tap_action: toggle
-            icon: mdi:fan
           - entity: switch.relay_bwshp2
             name: Стиральная машина, питание
             tap_action: toggle
@@ -2049,23 +2177,28 @@ views:
                strokeTicks: true
                highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
                borders: false
-                 
 
+        - type: horizontal-stack
+          cards: 
+
+          - type: entity-button
+            entity: switch.wall_plug_158d00015751f4
+            name: Бойлер
+            icon: mdi:hot-tub
+
+          - type: entity-button 
+            entity: switch.wall_switch_right_158d0001117040
+            name: Питание люстры
+            icon: mdi:power
+
+          - type: entity-button 
+            entity: switch.wall_switch_left_158d0001117040
+            name: Вентиляция
+            icon: mdi:fan
+            
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: switch.wall_switch_right_158d0001117040
-            name: Ванная, питание люстры
-            tap_action: toggle
-            icon: mdi:ceiling-light
-          - entity: switch.wall_switch_left_158d0001117040
-            name: Ванная вентиляция
-            tap_action: toggle
-            icon: mdi:fan
-          - entity: switch.wall_plug_158d00015751f4
-            name: Бойлер питание
-            tap_action: toggle
-            icon: mdi:hot-tub
           - entity: sensor.load_158d00015751f4
             name: Бойлер потребление
           - entity: sensor.mqtt_binary_sensor_158d0001e547a3
@@ -2116,31 +2249,37 @@ views:
               entities:
                 - entity: sensor.philips_04_ceiling
 
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: light.aqara_04_strip
-            name: Освещение рабочей поверхности
-            tap_action: toggle
-          - entity: script.04_kn_ceiling_on
-            name: Люстра, основное освещение
-            tap_action: toggle
+        - type: horizontal-stack
+          cards: 
+
+          - type: entity-button
+            entity: light.aqara_04_strip
+            name: Подсветка
+            
+          - type: entity-button
+            entity: script.04_kn_ceiling_on
+            name: Полный свет
             icon: mdi:lightbulb-on-outline
-          - entity: switch.tv_xiaomi
-            name: Телевизор вкл/выкл
-            tap_action: toggle
+            
+          - type: entity-button
+            entity: switch.tv_xiaomi
+            name: Телевизор
             icon: mdi:television
-          - entity: switch.plug_158d0001291d12
+
+
+        - type: horizontal-stack
+          cards: 
+
+          - type: entity-button
+            entity: switch.plug_158d0001291d12
             name: Телевизор питание
-            tap_action: toggle
-            icon: mdi:television
-          - entity: switch.plug_158d0001fa2934
+            icon: mdi:power
+
+          - type: entity-button
+            entity: switch.plug_158d0001fa2934
             name: Холодильник, питание
-            tap_action: toggle
-            icon: mdi:power-socket-eu
-          - entity: binary_sensor.vibration_158d0002a8ab8b     
-            name: Датчик вибрации
-            secondary_info: last-changed
+            icon: mdi:power
+
 
       - type: vertical-stack
         cards:
@@ -2562,13 +2701,13 @@ views:
 
         - type: markdown
           content: >
-                Датчик климата ZigBee
+                Мониторинг качества воздуха
               
         - type: horizontal-stack
           cards:
             
            - type: custom:canvas-gauge-card
-             entity: sensor.temperature_158d00015aebb6
+             entity: sensor.05_mean_temperature
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -2587,7 +2726,7 @@ views:
                borders: false
 
            - type: custom:canvas-gauge-card
-             entity: sensor.humidity_158d00015aebb6
+             entity: sensor.05_mean_humidity
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -2604,6 +2743,65 @@ views:
                strokeTicks: true
                highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
                borders: false  
+
+        - type: horizontal-stack
+          cards:
+            
+           - type: custom:canvas-gauge-card
+             entity: sensor.05_mi_air_pm25
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: PM 2.5 μg/m3
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 500
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "50", "100", "150", "200", "250", "300", "350", "400", "450", "500"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 75,"color": "rgba(0, 210, 255, .75)"},{"from": 75, "to": 115,"color": "rgba(0, 255, 200, .75)"},{"from": 115, "to": 150,"color": "rgba(255, 255, 0, .75)"},{"from": 150, "to": 250,"color": "rgba(255, 150, 0, .75)"},{"from": 250, "to": 500,"color": "rgba(255, 0, 0, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.05_mi_air_tvoc
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: ЛОВ mg/m3
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 10
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 1,"color": "rgba(0, 210, 255, .75)"},{"from": 1, "to": 2,"color": "rgba(0, 255, 200, .75)"},{"from": 2, "to": 3,"color": "rgba(255, 255, 0, .75)"},{"from": 3, "to": 9,"color": "rgba(255, 150, 0, .75)"},{"from": 9, "to": 10,"color": "rgba(255, 0, 0, .75)"}]
+               borders: false
+
+        - type: custom:canvas-gauge-card
+          entity: sensor.05_mi_air_co2a
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Расчетное значение СО2 ppm
+                width: 450
+                height: 100
+                minValue: 0
+                maxValue: 5000
+                valueBox: false
+                majorTicks: ["0", "1000", "2000", "3000", "4000", "5000"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 1000,"color": "rgba(0, 210, 255, .75)"},{"from": 1000, "to": 2000,"color": "rgba(0, 255, 200, .75)"},{"from": 2000, "to": 3000,"color": "rgba(255, 255, 0, .75)"},{"from": 3000, "to": 4000,"color": "rgba(255, 150, 0, .75)"},{"from": 4000, "to": 5000,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
 
         - type: markdown
           content: >
@@ -2649,38 +2847,6 @@ views:
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 25,"color": "rgba(255, 0, 0, .75)"},{"from": 25, "to": 50,"color": "rgba(255, 140, 0, .75)"},{"from": 50, "to": 75,"color": "rgba(255, 250, 0, .75)"}, {"from": 75, "to": 100,"color": "rgba(10, 255, 0, .75)"}]
                 borders: false
-
-        - type: markdown
-          content: >
-                Монитор состояния воздуха
-
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: sensor.05_mi_air_co2a
-          - entity: sensor.05_mi_air_tvoc
-          - entity: sensor.05_mi_air_pm25
-          - entity: sensor.05_mi_air_humidity
-          - entity: sensor.05_mi_air_temperature
-
-        - type: markdown
-          content: >
-                Сенсоры и датчики
-
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: sensor.illumination_34ce0088b039
-            name: Уровень освещенности
-          - entity: sensor.samsung_tv_custom
-          - entity: sensor.load_wifi_socket_usb
-            name: Ноутбук Acer, потребление
-          - entity: sensor.load_158d00012896cb
-            name: Телевизор, текущее потребление
-          - entity: sensor.load_158d000153dd8e
-            name: Ноутбук HP, потребление
-          - entity: sensor.load_wifi_6port
-            name: Удлинитель Xiaomi 6 портов 
 
         - type: markdown
           content: >
@@ -2926,7 +3092,7 @@ views:
           cards:
             
            - type: custom:canvas-gauge-card
-             entity: sensor.temperature_158d000156e92e
+             entity: sensor.07_mean_temperature
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -2945,7 +3111,7 @@ views:
                borders: false
 
            - type: custom:canvas-gauge-card
-             entity: sensor.humidity_158d000156e92e
+             entity: sensor.07_mean_humidity
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -3193,7 +3359,7 @@ views:
             tap_action: 
               action: toggle
             icon: mdi:close-circle-outline
-          - entity: switch.alfawise_relay
+          - entity: switch.08_alfawise_relay
             name: Удлинитель
             tap_action: 
               action: toggle 
@@ -3218,7 +3384,7 @@ views:
           cards:
             
            - type: custom:canvas-gauge-card
-             entity: sensor.temperature_158d000159c7e6
+             entity: sensor.08_mean_temperature
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -3237,7 +3403,7 @@ views:
                borders: false
 
            - type: custom:canvas-gauge-card
-             entity: sensor.humidity_158d000159c7e6
+             entity: sensor.08_mean_humidity
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -3337,6 +3503,26 @@ views:
             - entity: switch.sonoff_basic_relay
               name: Питание
               tap_action: toggle
+
+        - type: custom:vertical-stack-in-card
+          cards:
+          - type: markdown
+            content: >
+               **Туалет - Sonoff mini - подсветка зеркала**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.02_sonoff_mini_uptime_custom
+            - entity: sensor.02_sonoff_mini_wifi_signal
+              name: Сигнал wi-fi
+            - entity: sensor.02_sonoff_mini_firmware_version
+              name: Прошивка
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: switch.02_sonoff_mini_relay
+              name: Питание
+              tap_action: toggle
     
         - type: custom:vertical-stack-in-card
           cards:
@@ -3346,15 +3532,15 @@ views:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: sensor.alfawise8285_uptime_custom
-            - entity: sensor.alfawise8285_wi_fi_signal
+            - entity: sensor.08_alfawise_uptime_custom
+            - entity: sensor.08_alfawise_wifi_signal
               name: Сигнал wi-fi
-            - entity: sensor.alfawise8285_firmware_version
+            - entity: sensor.08_alfawise_firmware_version
               name: Прошивка
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: switch.alfawise_relay
+            - entity: switch.08_alfawise_relay
               name: Питание
               tap_action: toggle
               
