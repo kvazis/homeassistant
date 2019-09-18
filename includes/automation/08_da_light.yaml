@@ -26,6 +26,7 @@
   - service: light.turn_on
     entity_id: 
      - light.gateway_light_f0b429cc1f11
+     - light.philips_08_bedside
     data_template:
        brightness_pct: 70
        rgb_color: [0, 0, 255]
@@ -33,6 +34,7 @@
   - service: light.turn_off
     entity_id: 
      - light.gateway_light_f0b429cc1f11
+     - light.philips_08_bedside
 
 ## Управление освещением
 - alias: 08_da_light

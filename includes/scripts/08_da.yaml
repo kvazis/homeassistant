@@ -12,6 +12,7 @@
            - light.yeelight_08_bedside
            - light.yeelight_08_table
            - light.aqara_08_ceiling
+           - light.philips_08_bedside
            
   08_da_ceiling_on:
     sequence:
@@ -36,6 +37,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [255, 107, 239]
@@ -45,6 +47,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [189, 0, 157]
@@ -54,6 +57,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [255, 251, 116]
@@ -63,6 +67,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [0, 251, 0]
@@ -72,6 +77,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [71, 255, 254]
@@ -81,6 +87,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [7, 0, 113]
@@ -90,6 +97,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
            
   08_da_nightlight_off:
     sequence:
@@ -103,6 +111,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
            
   08_da_light_circle_1:
     sequence:
@@ -115,6 +124,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [255, 107, 239]
@@ -124,6 +134,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [189, 0, 157]
@@ -133,6 +144,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [255, 251, 116]
@@ -151,6 +163,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [0, 251, 0]
@@ -160,6 +173,7 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [71, 255, 254]
@@ -169,9 +183,11 @@
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
            - light.yeelight_08_bedside
+           - light.philips_08_bedside
           data_template:
             brightness_pct: 50
             rgb_color: [7, 0, 113]
         - delay: 00:00:10
         - service: script.turn_on
           entity_id: script.08_da_light_circle_1
+          

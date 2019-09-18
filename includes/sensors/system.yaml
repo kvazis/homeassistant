@@ -42,6 +42,9 @@
     version:
       friendly_name: 'Последняя версия - '
       value_template: '{{ states.binary_sensor.updater.attributes["newest_version"] }}'
+      
+- platform: rpi_power
+  text_state: true
 
 
 

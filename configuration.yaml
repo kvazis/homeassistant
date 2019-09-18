@@ -118,6 +118,24 @@ telegram_bot:
       - !secret chat_id_alex
       - !secret chat_id_olha
       
+# Кастомные карты
+hacs:
+  token: !secret HACS_github
+  appdaemon: true
+  python_script: true
+  theme: true
+
+# Роутер
+asuswrt:
+  host: !secret asus_ip
+  username: !secret asus_user
+  password: !secret asus_password
+  sensors:
+    - upload
+    - download
+    - upload_speed
+    - download_speed
+  
 #Вынос в папки
 sensor: !include_dir_merge_list includes/sensors
 binary_sensor: !include_dir_merge_list includes/bin_sensor

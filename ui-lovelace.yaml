@@ -2,17 +2,15 @@
 # https://github.com/dale3h/python-lovelace
 
 resources:
-  - url: /local/monster-card.js
+  - url: /community_plugin/monster-card/monster-card.js
     type: js
-  - url: /local/vertical-stack-in-card.js
+  - url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
     type: js 
-  - url: /local/light-entity-card.js
-    type: js 
-  - url: /local/canvas-gauge-card.js
+  - url: /community_plugin/canvas-gauge-card/canvas-gauge-card.js
     type: module 
-  - url: /local/battery-entity.js?v=0.1
+  - url: /community_plugin/mini-graph-card/mini-graph-card-bundle.js
     type: module
-  - url: /local/mini-graph-card-bundle.js?v=0.5.0
+  - url: /local/battery-entity.js?v=0.1
     type: module
     
 title: Home Assistant - Raspberry Pi 3 B+ 70 Основной сервер
@@ -128,6 +126,9 @@ views:
             - type: entities
               show_header_toggle: false
               entities:
+              - entity: sensor.rpi_power_status
+                name: Питание Raspberry Pi 3 B+ 
+                icon: mdi:power-plug
               - entity: sensor.current_ha
                 name: Установлен Home Assistant -
                 icon: mdi:alpha-v-circle
@@ -348,58 +349,67 @@ views:
            cards:
   
             - type: custom:canvas-gauge-card
-              entity: sensor.rt_ac88u_kbyte_sec_received
+              entity: sensor.asuswrt_download_speed
               card_height: 180
               gauge:
                 type: "radial-gauge"
-                title: Прием КБайт/сек
+                title: Прием Мбит/сек
                 width: 220
                 height: 200
                 minValue: 0
-                maxValue: 12000
+                maxValue: 120
                 startAngle: 45
                 ticksAngle: 270
                 valueBox: true
-                majorTicks: ["0", "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000", "12000"]
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120"]
                 minorTicks: 4
                 strokeTicks: true
-                highlights: [{"from": 0, "to": 4000,"color": "rgba(10, 255, 0, .75)"},{"from": 4000, "to": 6000,"color": "rgba(255, 255, 0, .75)"},{"from": 6000, "to": 9000,"color": "rgba(255, 140, 0, .75)"}, {"from": 9000, "to": 12000,"color": "rgba(255, 0, 0, .75)"}]
+                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 90,"color": "rgba(255, 140, 0, .75)"}, {"from": 90, "to": 120,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
 
             - type: custom:canvas-gauge-card
-              entity: sensor.rt_ac88u_kbyte_sec_sent
+              entity: sensor.asuswrt_upload_speed
               card_height: 180
               gauge:
                 type: "radial-gauge"
-                title: Передача КБайт/сек
+                title: Передача Мбит/сек
                 width: 220
                 height: 200
                 minValue: 0
-                maxValue: 12000
+                maxValue: 120
                 startAngle: 45
                 ticksAngle: 270
                 valueBox: true
-                majorTicks: ["0", "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000", "12000"]
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120"]
                 minorTicks: 4
                 strokeTicks: true
-                highlights: [{"from": 0, "to": 4000,"color": "rgba(10, 255, 0, .75)"},{"from": 4000, "to": 6000,"color": "rgba(255, 255, 0, .75)"},{"from": 6000, "to": 9000,"color": "rgba(255, 140, 0, .75)"}, {"from": 9000, "to": 12000,"color": "rgba(255, 0, 0, .75)"}]
+                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 90,"color": "rgba(255, 140, 0, .75)"}, {"from": 90, "to": 120,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
    
          - type: custom:mini-graph-card
            entities:
-            - entity: sensor.rt_ac88u_kbyte_sec_received
+            - entity: sensor.asuswrt_download_speed
               name: Прием
               color: "#00ff00"
-            - entity: sensor.rt_ac88u_kbyte_sec_sent
+            - entity: sensor.asuswrt_upload_speed
               name: Передача
               color: "#0000ff"
            animate: true
            line_width: 3
+           icon: mdi:access-point-network
            show:
-#              state: false
               name: false
               fill: false
-#              points: true
+              
+         - type: entities
+           show_header_toggle: false
+           entities:
+             - entity: sensor.asuswrt_download
+               name: Принято сегодня - 
+               icon: mdi:download
+             - entity: sensor.asuswrt_upload
+               name: Отправлено сегодня - 
+               icon: mdi:upload
 
       - type: vertical-stack
         cards:
@@ -1972,6 +1982,8 @@ views:
           title: Прихожая, входная дверь
           camera_image: camera.xiaofang
           entities:
+           - entity: light.yeelight_01_whitebulb
+           - entity: light.yeelight_03_ceiling
            - entity: switch.xiaofang_photo
              icon: mdi:camera
              
@@ -1980,9 +1992,12 @@ views:
           camera_image: camera.reolink2
           camera_view: live
           entities:
+           - entity: light.philips_04_ceiling
+           - entity: light.aqara_04_strip
+           - entity: switch.tv_xiaomi
+             icon: mdi:television-classic
            - entity: switch.reolink2_photo
              icon: mdi:camera  
-
 
 ##################  ECTLB
   - title: ПКТПВ
@@ -2508,8 +2523,8 @@ views:
               entity: light.yeelight_05_bedside2
               name: Ночник
             - type: light
-              entity: light.philips_05_bedside
-              name: Стол
+              entity: light.yeelight_05_rgbtvbulb
+              name: Лампа ТВ
                   
         - type: custom:vertical-stack-in-card
           cards: 
@@ -2551,10 +2566,6 @@ views:
               name: Свет, стена
               tap_action: 
                  action: toggle
-            - entity: light.yeelight_05_rgbtvbulb
-              name: ТВ
-              tap_action: 
-                 action: more-info
             - entity: light.gateway_light_34ce0088b039
               name: Шлюз
               tap_action: 
@@ -3332,13 +3343,17 @@ views:
               entity: light.yeelight_08_strip
               name: LED лента Yeelight
             - type: light
-              entity: light.gateway_light_f0b429cc1f11
-              name: Шлюз
+              entity: light.philips_08_bedside
+              name: Ночник Philips
 
 
         - type: glance
           show_state: false
           entities:
+          - entity: light.gateway_light_f0b429cc1f11
+            tap_action: 
+              action: toggle
+            name: Шлюз          
           - entity: script.08_da_nightlight
             tap_action: 
               action: toggle
@@ -3960,7 +3975,7 @@ views:
                - domain: fan
 
 ##################   Синхронизация
-  - title: СИнхронизация электроэнергии 
+  - title: Синхронизация электроэнергии 
     id: powersync
     icon: mdi:powershell
     cards:

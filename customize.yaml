@@ -181,9 +181,6 @@ light.yeelight_05_ceiling2:
 light.yeelight_05_ceiling2_ambilight:
   friendly_name: Гостиная, люстра 2 амбилайт
   icon: mdi:car-light-high
-light.philips_05_bedside: 
-  friendly_name: Гостиная, ночник ТВ
-  icon: mdi:lighthouse
 light.aqara_05_wall:
   friendly_name: Гостиная свет стена
   icon: mdi:track-light
@@ -468,6 +465,9 @@ light.yeelight_08_table:
   icon: mdi:desk-lamp
 light.yeelight_08_bedside:
   friendly_name: Детская А прикроватник
+  icon: mdi:lighthouse
+light.philips_08_bedside: 
+  friendly_name: Детская А, ночник стол
   icon: mdi:lighthouse
 ## Реле
 switch.wall_switch_158d00014a1abd:
