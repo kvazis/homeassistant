@@ -15,7 +15,7 @@
       192.168.0.107:
         name: yeelight_03_ceiling
         transition: 1000
-#        model: ceiling4
+        model: ceiling4
 ## Гостиная
       192.168.0.108:
         name: yeelight_05_ceiling1

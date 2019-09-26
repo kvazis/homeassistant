@@ -6,6 +6,7 @@
 esphome/
 
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+*.token
 *.db
 *.log
 *.jpg
@@ -14,4 +15,4 @@ ip_bans.yaml
 secrets.yaml
 known_devices.yaml
 core.*
-*.gitignore*
+*gitignore*

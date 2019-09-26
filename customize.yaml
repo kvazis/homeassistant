@@ -84,6 +84,9 @@ binary_sensor.water_leak_sensor_158d0002705b7b:
 light.yeelight_03_ceiling:
   friendly_name: Коридор, люстра
   icon: mdi:ceiling-light
+light.yeelight_03_ceiling_ambilight:
+  friendly_name: Коридор, люстра амбилайт
+  icon: mdi:car-light-high
 ## Сенсоры
 binary_sensor.motion_sensor_158d00010f8920:
   friendly_name: Коридор, движение
@@ -184,9 +187,6 @@ light.yeelight_05_ceiling2_ambilight:
 light.aqara_05_wall:
   friendly_name: Гостиная свет стена
   icon: mdi:track-light
-#light.yeelight_05_bedside:
-#  friendly_name: Гостиная, ночник
-#  icon: mdi:lighthouse
 light.yeelight_05_bedside2:
   friendly_name: Гостиная, ночник 2
   icon: mdi:lighthouse
@@ -228,6 +228,10 @@ switch.wall_switch_ln_right_158d0001a2ccab:
   icon: mdi:power-socket-eu
 switch.wall_switch_ln_left_158d0001a2ccab:
   friendly_name: Выкл с нулем, левый
+  device_class: plug  
+  icon: mdi:power-socket-eu
+switch.xiaomi_euro:
+  friendly_name: Розетка Xiaomi euro
   device_class: plug  
   icon: mdi:power-socket-eu
   
@@ -600,3 +604,17 @@ sensor.zamiokulkas_temperature:
   icon: mdi:temperature-celsius
 sensor.zamiokulkas_illuminance:
   friendly_name: Замиокулькас уровень освещенности
+
+## Google Fit 
+sensor.alex_weight:
+ friendly_name: Текущий вес - 
+ unit_of_measurement: кг
+sensor.alex_distance:
+ friendly_name: Пройденное расстояние - 
+ unit_of_measurement: км
+sensor.alex_sleep:
+ friendly_name: Отдых - 
+ unit_of_measurement: сон
+sensor.alex_heartrate:
+ friendly_name: Пульс - 
+ unit_of_measurement: уд/мин

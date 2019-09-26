@@ -244,7 +244,6 @@
         topic: "power/158d000153dd8e/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_158d000153dd8e.state | float )|round(5)}}'
         retain: true
-    - delay: 00:00:05
 ##### Удлинитель 6 портов
     - service: mqtt.publish
       data_template:
@@ -465,7 +464,6 @@
         topic: "power/158d00010ec4b8/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_158d00010ec4b8.state | float )|round(5)}}'
         retain: true
-
 
     - delay: 00:00:05
 ##### Обнуление данных текущего месяца

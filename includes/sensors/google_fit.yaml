@@ -1,0 +1,86 @@
+
+# Сбор данных с Google Fit
+  - platform: google_fit
+    name: Alex
+    client_id: !secret google_fit_client_id
+    client_secret: !secret google_fit_client_secret
+
+# Расчет остатка шагов от нормы
+  - platform: template
+    sensors:
+      alex_steps_custom:
+        friendly_name: "Пройдено шагов - "
+        entity_id:
+          - sensor.alex_steps
+        value_template: >
+           {% set steps = states.sensor.alex_steps.state | int %}
+           {% set custom_steps = states.sensor.alex_steps_custom.state | int %}
+             {% if steps > custom_steps %}
+               {{ steps }}
+             {% else %}
+               {{ custom_steps }}
+             {% endif %}
+
+# Расчет остатка шагов от нормы
+  - platform: template
+    sensors:
+      alex_steps_remain:
+        friendly_name: "Осталось до нормы шагов - "
+        entity_id:
+          - sensor.alex_steps_custom
+        value_template: >
+           {% set remain = (10000 - states.sensor.alex_steps_custom.state | int) %}
+             {% if remain > 0 %}
+               {{ remain }}
+             {% else %}
+               {% if remain <= 0 %}
+                 Норма выполнена
+               {% endif %}
+             {% endif %}
+           
+
+# Перевод даты и времени обновления пулься в удобоваримый формат      
+  - platform: template
+    sensors:
+     alex_heartrate_update:
+        friendly_name: 'Обновление пульса -'
+        value_template: '{{ (as_timestamp(states.sensor.alex_heartrate.attributes["last_updated"])) | timestamp_custom("%d.%m.%Y %H:%M") }}'    
+
+# Перевод даты и времени обновления веса в удобоваримый формат      
+  - platform: template
+    sensors:
+     alex_weight_update:
+        friendly_name: 'Обновление веса -'
+        value_template: '{{ (as_timestamp(states.sensor.alex_weight.attributes["last_updated"])) | timestamp_custom("%d.%m.%Y %H:%M") }}'
+
+
+# Перевод минут активности в часы/минуты. Дни не актуально, но оставлено для сохранения формата
+  - platform: template
+    sensors:
+       alex_move_time_custom:
+         friendly_name: 'Время в движении -'         
+         value_template: >
+           {% set uptime = states.sensor.alex_move_time.state | int %}
+           {% set minutes = (( uptime % 60) / 1) | int %}
+           {% set hours = ((uptime % 1440) / 60) | int %}
+           {% set days = (uptime / 1440) | int %}
+
+             {% if uptime < 1 %}
+               Меньше минуты
+             {% else %}
+               {% if days > 0 %}
+                 {{ days }} д.
+               {% endif %}
+               {% if hours > 0 %}
+                 {% if days > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                 {{ hours }} ч.
+               {% endif %}
+               {% if minutes > 0 %}
+                 {% if days > 0 or hours > 0 %}
+                   {{ ' ' }}
+                 {% endif %}
+                   {{ minutes }} мин.
+               {% endif %}
+             {% endif %}

@@ -331,6 +331,32 @@ views:
 #                entity: weather.openweathermap
 
 
+##################   People
+  - title: Люди
+    icon: mdi:account-group
+
+    cards:
+    
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+               **Google Fit Alex**
+
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.alex_steps_custom
+            - entity: sensor.alex_steps_remain
+            - entity: sensor.alex_distance
+            - entity: sensor.alex_move_time_custom
+            - entity: sensor.alex_heartrate
+            - entity: sensor.alex_heartrate_update           
+            - entity: sensor.alex_sleep
+            - entity: sensor.alex_weight
+            - entity: sensor.alex_weight_update
+
 ##################   Локальная сеть
 
   - title: Локальная сеть
@@ -1957,7 +1983,7 @@ views:
 
         - type: picture-glance
           title: Этаж, выход к лифту
-          camera_image: camera.reolink
+          camera_image: camera.reolink_sub
           camera_view: live
           entities:
            - entity: switch.reolink_photo
@@ -1998,7 +2024,8 @@ views:
              icon: mdi:television-classic
            - entity: switch.reolink2_photo
              icon: mdi:camera  
-
+             
+             
 ##################  ECTLB
   - title: ПКТПВ
     id: room_1
@@ -2086,6 +2113,7 @@ views:
               entity: light.yeelight_02_ceiling
             - type: light
               entity: light.aqara_02_ceiling
+              name: Прачечная
 
         - type: horizontal-stack
           cards: 

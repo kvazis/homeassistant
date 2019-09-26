@@ -61,7 +61,8 @@ class MonsterCard extends HTMLElement {
 
       Object.keys(hass.states).sort().forEach(key => {
         if (filters.every(filterFunc => filterFunc(hass.states[key]))) {
-          entities.set(hass.states[key].entity_id, Object.assign({ "entity": hass.states[key].entity_id }, options));
+          const dynOptions = JSON.parse(JSON.stringify(options).replace(/this.entity_id/g,hass.states[key].entity_id));
+          entities.set(hass.states[key].entity_id, Object.assign({ "entity": hass.states[key].entity_id }, dynOptions));
         }
       });
     });
