@@ -1,0 +1,80 @@
+##################  Hikvision
+itle: Камеры Hikvision
+icon: mdi:cctv
+cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+            **Hikvision State** 
+
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.hikvision_online
+             name: Статус
+             icon: mdi:security-network
+           - entity: sensor.hikvision_uptime_custom
+             name: В онлайне
+             icon: mdi:timer
+           - entity: sensor.hikvision_cpu_frequency
+             name: Процессор
+             icon: mdi:chip
+           - entity: sensor.hikvision_disk_size
+             name: Объем диска
+             icon: mdi:harddisk
+           - entity: sensor.hikvision_free_space
+             name: Свободно на диске
+             icon: mdi:harddisk-plus
+
+        - type: picture-entity
+          entity: camera.hikvision6
+          camera_view: live 
+          show_state: false
+          show_name: false
+ 
+      - type: vertical-stack
+        cards:
+        
+        - type: picture-entity
+          entity: camera.hikvision1
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+
+        - type: picture-entity
+          entity: camera.hikvision2
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+
+        - type: picture-entity
+          entity: camera.hikvision7
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+      - type: vertical-stack
+        cards:
+
+        - type: picture-entity
+          entity: camera.hikvision5
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+        - type: picture-entity
+          entity: camera.hikvision3
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+        - type: picture-entity
+          entity: camera.hikvision4
+          camera_view: live 
+          show_state: false
+          show_name: false

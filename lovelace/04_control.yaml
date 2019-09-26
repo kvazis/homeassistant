@@ -1,0 +1,352 @@
+##################   Control pahel
+title: Панель управления
+icon: mdi:keyboard
+cards:
+
+      - type: vertical-stack
+        cards:
+
+          - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                  **Телевизоры**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_state: false
+              filter:
+                include:
+                 - entity_id: switch.tv_*
+                 - entity_id: sensor.*_tv_custom
+                exclude:
+                 - state: 'off'
+
+          - type: custom:vertical-stack-in-card
+            cards:  
+            - type: markdown
+              content: >
+                  **Активные розетки > 5 Ватт**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.load_total_energy
+                exclude:
+                 - state: '< 5.0'
+                 
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.load*
+                exclude:
+                 - state: '< 5.0'
+                 - entity_id: sensor.load_total_energy
+
+          - type: custom:vertical-stack-in-card
+            cards:  
+            - type: markdown
+              content: >
+                  **Отвалившиеся розетки**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: switch
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+
+          - type: custom:vertical-stack-in-card
+            cards:  
+            - type: markdown
+              content: >
+                  **Активные светильники**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: light
+                   state: 'on'
+                   options:
+                      secondary_info: last-changed
+                exclude:
+                 - entity_id: light.broadlink_07_table
+
+          - type: custom:vertical-stack-in-card
+            cards: 
+            - type: markdown
+              content: >
+                  **Отвалившиеся светильники**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.unavailable_now_light
+                exclude:
+                 - state: '< 1'
+                 
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: light
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+
+          - type: custom:vertical-stack-in-card
+            cards:                   
+            - type: markdown
+              content: >
+                  **Активные таймеры**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: timer
+                exclude:
+                 - domain: timer
+                   state: 'idle'
+
+      - type: vertical-stack
+        cards:
+
+          - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                  **Активные датчики движения**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: glance
+                show_state: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.motion*
+                exclude:
+                 - state: 'off'
+
+          - type: custom:vertical-stack-in-card
+            cards: 
+            - type: markdown
+              content: >
+                  **Активные аварийные датчики**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.water*
+                 - entity_id: binary_sensor.smoke*
+                exclude:
+                 - state: 'off'
+
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                  **Открытые окна и двери**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: glance
+                show_state: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.door_window*
+                exclude:
+                 - state: 'off'
+                 
+          - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                  **Активные BLE метки**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*rssi_summ
+                exclude:
+                 - state: 'unknown'
+
+          - type: custom:vertical-stack-in-card
+            cards:              
+            - type: markdown
+              content: >
+                  **Растения < 20% влажности почвы**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*moisture*
+                exclude:
+                 - state: '> 20.0'
+
+          - type: custom:vertical-stack-in-card
+            cards:              
+            - type: markdown
+              content: >
+                  **Сенсоры < 30% заряда**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*battery*
+                   options:
+                      type: 'custom:battery-entity'                   
+                exclude:
+                 - state: '> 30.0'
+
+      - type: vertical-stack
+        cards:
+
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                  **Температура < 18 C**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*temperature*
+                exclude:
+                 - entity_id: sensor.*battery*
+                 - entity_id: sensor.temperature_158d00015aebb6
+                 - entity_id: sensor.05_mi_air_temperature
+                 - entity_id: sensor.05_smartmi_temperature
+                 - entity_id: sensor.temperature_158d000156e92e
+                 - entity_id: sensor.dd_bt_temperature
+                 - entity_id: sensor.temperature_158d000159c7e6
+                 - entity_id: sensor.da_bt_temperature
+                 - state: '> 18'
+                 
+
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                  **Температура > 26 C**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*temperature*
+                exclude:
+                 - entity_id: sensor.*battery*
+                 - entity_id: sensor.temperature_158d00015aebb6
+                 - entity_id: sensor.05_mi_air_temperature
+                 - entity_id: sensor.05_smartmi_temperature
+                 - entity_id: sensor.temperature_158d000156e92e
+                 - entity_id: sensor.dd_bt_temperature
+                 - entity_id: sensor.temperature_158d000159c7e6
+                 - entity_id: sensor.da_bt_temperature
+                 - state: '< 26'
+
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                  **Влажность < 40%**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*humidity*
+                exclude:
+                 - entity_id: sensor.*battery*
+                 - entity_id: sensor.humidity_158d00015aebb6
+                 - entity_id: sensor.05_mi_air_humidity
+                 - entity_id: sensor.05_smartmi_humidity
+                 - entity_id: sensor.humidity_158d000156e92e
+                 - entity_id: sensor.dd_bt_humidity
+                 - entity_id: sensor.humidity_158d000159c7e6
+                 - entity_id: sensor.da_bt_humidity
+                 - state: '> 40'
+                 
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                  **Влажность > 60%**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*humidity*
+                exclude:
+                 - entity_id: sensor.*battery*
+                 - entity_id: sensor.humidity_158d00015aebb6
+                 - entity_id: sensor.05_mi_air_humidity
+                 - entity_id: sensor.05_smartmi_humidity
+                 - entity_id: sensor.humidity_158d000156e92e
+                 - entity_id: sensor.dd_bt_humidity
+                 - entity_id: sensor.humidity_158d000159c7e6
+                 - entity_id: sensor.da_bt_humidi
+                 - state: '< 60'
+
+          - type: custom:vertical-stack-in-card
+            cards:                
+            - type: markdown
+              content: >
+                  **Cенсоры освещения > 500 люмен**
+            - type: custom:monster-card
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.illumination* 
+                exclude:
+                 - state: '< 500.0'
+                 - state: 'unknown'

@@ -1,0 +1,503 @@
+##################   Living room
+title: Гостиная
+icon: mdi:account-multiple
+cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Гостиная - панель управления**
+
+        - type: custom:vertical-stack-in-card
+          cards:        
+          - type: horizontal-stack
+            cards:        
+            - type: light
+              entity: light.yeelight_05_ceiling1
+              name: Люстра 1
+            - type: light
+              entity: light.yeelight_05_ceiling2
+              name: Люстра 2
+
+          - type: conditional
+            conditions:
+              - entity: light.yeelight_05_ceiling1
+                state: "on"
+            card:
+              type: entities
+              show_header_toggle: false
+              entities:
+                - entity: input_number.yeelight_05_ceiling1_temp
+                  name: Люстра 1
+                  icon: mdi:temperature-kelvin
+
+          - type: conditional
+            conditions:
+              - entity: light.yeelight_05_ceiling2
+                state: "on"
+            card:
+              type: entities
+              show_header_toggle: false
+              entities:
+                - entity: input_number.yeelight_05_ceiling2_temp
+                  name: Люстра 2
+                  icon: mdi:temperature-kelvin
+
+          - type: horizontal-stack
+            cards:        
+            - type: light
+              entity: light.yeelight_05_bedside2
+              name: Ночник
+            - type: light
+              entity: light.yeelight_05_rgbtvbulb
+              name: Лампа ТВ
+                  
+        - type: custom:vertical-stack-in-card
+          cards: 
+
+          - type: conditional
+            conditions:
+              - entity: light.yeelight_05_rgbtvbulb
+                state: "off"
+            card:
+              type: entities
+              show_header_toggle: false
+              entities:
+               - entity: script.05_gg_movie_on
+                 tap_action: toggle
+                 name: Режим кино вкл
+                 icon: mdi:movie-roll
+               - entity: switch.tv_samsung
+                 icon: mdi:television-box
+                     
+          - type: conditional
+            conditions:
+              - entity: light.yeelight_05_rgbtvbulb
+                state: "on"
+            card:
+              type: entities
+              show_header_toggle: false
+              entities:
+               - entity: script.05_gg_movie_off
+                 tap_action: toggle
+                 name: Режим кино выкл
+                 icon: mdi:filmstrip
+               - entity: switch.tv_samsung
+                 icon: mdi:television-box
+
+          - type: glance
+            show_state: false
+            entities:
+            - entity: light.aqara_05_wall
+              name: Свет, стена
+              tap_action: 
+                 action: toggle
+            - entity: light.gateway_light_34ce0088b039
+              name: Шлюз
+              tap_action: 
+                 action: more-info
+            - entity: light.yeelight_05_ceiling1_ambilight
+              name: Амбилайт люстра 1
+              tap_action: 
+                 action: more-info
+              icon: mdi:car-light-high
+            - entity: light.yeelight_05_ceiling2_ambilight
+              name: Амбилайт люстра 2
+              tap_action: 
+                 action: more-info
+              icon: mdi:car-light-high
+            - entity: script.05_gg_650_full_on
+              tap_action: 
+                action: toggle
+              name: Свет 100%
+              icon: mdi:lightbulb-on
+            - entity: script.05_gg_lightoff
+              tap_action: 
+                action: toggle
+              name: Выкл. свет
+              icon: mdi:close-circle-outline
+            - entity: switch.ilifea4
+              tap_action: 
+                action: toggle
+              name: iLife A4
+              icon: mdi:robot-vacuum
+              
+        - type: custom:vertical-stack-in-card
+          cards: 
+          - type: markdown
+            content: >
+                **Питание**
+
+          - type: glance
+            show_state: false
+            entities:
+            - entity: switch.wall_switch_right_158d00015723f1          
+              name: Люстра 1 
+              tap_action: 
+                action: toggle
+              icon: mdi:ceiling-light
+            - entity: switch.xiaomi_wifi_socket_usb
+              name: Acer 
+              tap_action: 
+                action: toggle
+              icon: mdi:laptop-windows
+            - entity: switch.plug_158d000153dd8e
+              name: HP
+              tap_action: 
+                action: toggle
+              icon: mdi:laptop-windows
+            - entity: switch.plug_158d00012896cb
+              name: ТВ
+              tap_action: 
+                action: toggle
+              icon: mdi:television
+            - entity: switch.xiaomi_wifi_socket_usb_usb
+              name: USB 
+              tap_action: 
+                action: toggle
+              icon: mdi:usb
+
+
+        - type: custom:vertical-stack-in-card
+          cards: 
+
+          - type: horizontal-stack
+            cards:
+              
+            - type: picture-entity
+              entity: fan.gg_humidifier
+              tap_action: 
+                action: toggle
+              name: Увлажнитель
+              state_image:
+                "on": /local/pict/smartmi_hum_on.jpg
+                "off": /local/pict/smartmi_hum_off.jpg
+
+            - type: conditional
+              conditions:
+               - entity: fan.gg_humidifier
+                 state: "on"
+              card:            
+                type: entities
+                show_header_toggle: false
+                entities:
+                - entity: sensor.smartmi_mode
+                  name: Режим - 
+                - entity: sensor.smartmi_water
+                  name: Остаток воды - 
+                - entity: sensor.smartmi_hum_custom
+                - entity: switch.forse_hum
+                  tap_action: toggle
+                  name: Форс. режим
+                  icon: mdi:water
+
+          - type: entity-filter
+            show_header_toggle: false
+            entities:
+            - entity: timer.humidifier
+            state_filter:
+              - "active"
+
+
+        - type: custom:vertical-stack-in-card
+          cards: 
+              
+          - type: horizontal-stack
+            cards:
+              
+            - type: picture-entity
+              entity: fan.gg_purifier
+              tap_action: 
+                action: toggle
+              name: Очиститель
+              state_image:
+                "on": /local/pict/airpurifier_on.jpg
+                "off": /local/pict/airpurifier_off.jpg
+
+            - type: conditional
+              conditions:
+               - entity: fan.gg_purifier
+                 state: "on"
+              card:            
+                type: entities
+                show_header_toggle: false
+                entities:
+                - entity: sensor.purifier_mode
+                  name: Режим - 
+                - entity: sensor.purifier_pm25
+                  name: Воздух -
+                - entity: sensor.purifier_filter
+                  name: Расход фильтра -
+
+      - type: vertical-stack
+        cards:
+        
+        - type: markdown
+          content: >
+              **Гостиная - статус**
+
+        - type: markdown
+          content: >
+                Мониторинг качества воздуха
+              
+        - type: horizontal-stack
+          cards:
+            
+           - type: custom:canvas-gauge-card
+             entity: sensor.05_mean_temperature
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.05_mean_humidity
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false  
+
+        - type: horizontal-stack
+          cards:
+            
+           - type: custom:canvas-gauge-card
+             entity: sensor.05_mi_air_pm25
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: PM 2.5 μg/m3
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 500
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "50", "100", "150", "200", "250", "300", "350", "400", "450", "500"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 75,"color": "rgba(0, 210, 255, .75)"},{"from": 75, "to": 115,"color": "rgba(0, 255, 200, .75)"},{"from": 115, "to": 150,"color": "rgba(255, 255, 0, .75)"},{"from": 150, "to": 250,"color": "rgba(255, 150, 0, .75)"},{"from": 250, "to": 500,"color": "rgba(255, 0, 0, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.05_mi_air_tvoc
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: ЛОВ mg/m3
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 10
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 1,"color": "rgba(0, 210, 255, .75)"},{"from": 1, "to": 2,"color": "rgba(0, 255, 200, .75)"},{"from": 2, "to": 3,"color": "rgba(255, 255, 0, .75)"},{"from": 3, "to": 9,"color": "rgba(255, 150, 0, .75)"},{"from": 9, "to": 10,"color": "rgba(255, 0, 0, .75)"}]
+               borders: false
+
+        - type: custom:canvas-gauge-card
+          entity: sensor.05_mi_air_co2a
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Расчетное значение СО2 ppm
+                width: 450
+                height: 100
+                minValue: 0
+                maxValue: 5000
+                valueBox: false
+                majorTicks: ["0", "1000", "2000", "3000", "4000", "5000"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 1000,"color": "rgba(0, 210, 255, .75)"},{"from": 1000, "to": 2000,"color": "rgba(0, 255, 200, .75)"},{"from": 2000, "to": 3000,"color": "rgba(255, 255, 0, .75)"},{"from": 3000, "to": 4000,"color": "rgba(255, 150, 0, .75)"},{"from": 4000, "to": 5000,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+
+        - type: markdown
+          content: >
+                Увлажнитель и очиститель воздуха
+
+        - type: horizontal-stack
+          cards:
+  
+            - type: custom:canvas-gauge-card
+              entity: sensor.smartmi_water
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Уровень воды (%)
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 100
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: true
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                minorTicks: 4
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 25,"color": "rgba(255, 0, 0, .75)"},{"from": 25, "to": 50,"color": "rgba(255, 140, 0, .75)"},{"from": 50, "to": 75,"color": "rgba(255, 250, 0, .75)"}, {"from": 75, "to": 100,"color": "rgba(10, 255, 0, .75)"}]
+                borders: false
+
+            - type: custom:canvas-gauge-card
+              entity: sensor.purifier_filter
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Расход фильтра (%)
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 100
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: true
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+                minorTicks: 4
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 25,"color": "rgba(255, 0, 0, .75)"},{"from": 25, "to": 50,"color": "rgba(255, 140, 0, .75)"},{"from": 50, "to": 75,"color": "rgba(255, 250, 0, .75)"}, {"from": 75, "to": 100,"color": "rgba(10, 255, 0, .75)"}]
+                borders: false
+
+        - type: markdown
+          content: >
+                Растения
+
+        - type: custom:vertical-stack-in-card
+          cards: 
+          - type: plant-status
+            entity: plant.dieffenbac
+            name: Диффенбахия
+          - type: plant-status
+            entity: plant.yucca
+            name: Юкка
+          - type: plant-status
+            entity: plant.zamiokulkas
+            name: Замиокулькас
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Балкон гостиной**
+
+        - type: light
+          entity: light.66633530807d3a766432
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.door_window_sensor_158d00013ed373
+             name: Окно в гостиной
+           - entity: binary_sensor.door_window_sensor_158d0001a2f5f7
+             name: Окно на балконе 
+
+        - type: horizontal-stack
+          cards:
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d0001a4b9da
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d0001a4b9da
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false             
+
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_158d0001a4b9da
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление факт, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_correct_158d0001a4b9da
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление с учетом высоты, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+        - type: history-graph
+          entities:
+           - entity: sensor.pressure_mmhg_158d0001a4b9da
+             name: факт 
+           - entity: sensor.pressure_mmhg_correct_158d0001a4b9da
+             name: коррект  

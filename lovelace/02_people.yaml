@@ -1,0 +1,44 @@
+##################   People
+title: Люди
+icon: mdi:account-group
+cards:
+    
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+               **Google Fit Alex**
+
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.alex_steps
+            - entity: sensor.alex_steps_remain
+            - entity: sensor.alex_distance
+            - entity: sensor.alex_move_time_custom
+            - entity: sensor.alex_heartrate
+            - entity: sensor.alex_heartrate_update           
+            - entity: sensor.alex_sleep
+            - entity: sensor.alex_weight
+            - entity: sensor.alex_weight_update
+            
+      - type: vertical-stack
+        cards:
+
+          - type: markdown
+            content: >
+               **Активность по часам**
+
+          - type: custom:vertical-stack-in-card
+            cards:
+    
+
+              - type: custom:mini-graph-card
+                
+                entities:
+                 - entity: sensor.alex_steps
+                   color: '#00FF00'
+                icon: mdi:walk
+                show:
+                   graph: bar

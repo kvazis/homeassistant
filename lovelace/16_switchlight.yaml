@@ -1,0 +1,92 @@
+##################   Исполнительные устройства
+title: Все исполнительные устройства
+icon: mdi:dip-switch
+cards:
+    
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+                **Cветильники**
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: light
+               
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+                **Выключатели**
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: switch
+               
+      - type: vertical-stack
+        cards:
+
+          - type: markdown
+            content: >
+                **Медиа плееры**
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: media_player
+
+          - type: markdown
+            content: >
+                **Камеры**
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: glance
+              show_state: false
+            filter:
+              include:
+               - domain: camera
+
+        
+          - type: markdown
+            content: >
+                **Пульты ДУ**
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: remote
+               
+          - type: markdown
+            content: >
+                **Климатическая техника**
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: fan

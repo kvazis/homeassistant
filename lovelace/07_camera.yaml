@@ -1,0 +1,56 @@
+##################  Camera
+title: Камеры в квартире
+icon: mdi:webcam
+cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Камеры на этаже**
+
+        - type: picture-glance
+          title: Этаж, выход к лифту
+          camera_image: camera.reolink_sub
+          camera_view: live
+          entities:
+           - entity: switch.reolink_photo
+             icon: mdi:camera
+
+        - type: picture-glance
+          title: Этаж, поворот
+          camera_image: camera.alfawise_sub
+          camera_view: live
+          entities:
+           - entity: switch.alfawise_photo
+             icon: mdi:camera
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Камеры в квартире** 
+              
+        - type: picture-glance
+          title: Прихожая, входная дверь
+          camera_image: camera.xiaofang
+          entities:
+           - entity: light.yeelight_01_whitebulb
+           - entity: light.yeelight_03_ceiling
+           - entity: switch.xiaofang_photo
+             icon: mdi:camera
+             
+        - type: picture-glance
+          title: Кухня, холодильник
+          camera_image: camera.reolink2
+          camera_view: live
+          entities:
+           - entity: light.philips_04_ceiling
+           - entity: light.aqara_04_strip
+           - entity: switch.tv_xiaomi
+             icon: mdi:television-classic
+           - entity: switch.reolink2_photo
+             icon: mdi:camera  
+             

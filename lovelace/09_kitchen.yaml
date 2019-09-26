@@ -1,0 +1,238 @@
+##################   Kitchen
+title: Кухня
+icon: mdi:food-fork-drink
+cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Кухня - панель управления**
+
+        - type: custom:vertical-stack-in-card
+          cards: 
+
+          - type: horizontal-stack
+            cards:        
+            - type: light
+              entity: light.philips_04_ceiling
+              name: Люстра
+            - type: light
+              entity: light.gateway_light_7811dc64f4c8
+              name: Шлюз
+
+          - type: conditional
+            conditions:
+              - entity: light.philips_04_ceiling
+                state: "on"
+            card:
+              type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.philips_04_ceiling
+
+        - type: horizontal-stack
+          cards: 
+
+          - type: entity-button
+            entity: light.aqara_04_strip
+            name: Подсветка
+            
+          - type: entity-button
+            entity: script.04_kn_ceiling_on
+            name: Полный свет
+            icon: mdi:lightbulb-on-outline
+            
+          - type: entity-button
+            entity: switch.tv_xiaomi
+            name: Телевизор
+            icon: mdi:television
+
+
+        - type: horizontal-stack
+          cards: 
+
+          - type: entity-button
+            entity: switch.plug_158d0001291d12
+            name: Телевизор питание
+            icon: mdi:power
+
+          - type: entity-button
+            entity: switch.plug_158d0001fa2934
+            name: Холодильник, питание
+            icon: mdi:power
+
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Кухня - статус**
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.water_leak_sensor_158d0001bbeba6 
+             name: Раковина
+           - entity: binary_sensor.motion_sensor_158d0001ab3350
+             name: Движение
+           - entity: binary_sensor.door_window_sensor_158d0001a99562
+             name: Окно 
+
+        - type: horizontal-stack
+          cards:
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d0001581109
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d0001581109
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false
+
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.mqtt_binary_sensor_158d0001ab3350
+            name: Последнее движение в кухне в - 
+            icon: mdi:run-fast 
+          - entity: sensor.illumination_7811dc64f4c8
+            name: Уровень освещенности
+          - entity: sensor.xiaomi_tv_custom
+          - entity: sensor.load_158d0001291d12
+            name: Телевизор, текущее потребление
+          - entity: sensor.load_158d0001fa2934
+            name: Холодильник, текущее потребление
+          - entity: sensor.load_158d0001d35bc0
+            name: Led лента, потребление
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Кухонный балкон**
+
+        - type: glance
+          name: Балкон, кухня
+          show_state: false
+          entities:
+           - entity: binary_sensor.door_window_sensor_158d0001a20885
+             name: Дверь на балкон
+           - entity: binary_sensor.door_window_sensor_158d0001a4a394
+             name: Окно на балконе
+
+        - type: horizontal-stack
+          cards:
+            
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d000171ffde
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d000171ffde
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false            
+
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_158d000171ffde
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление факт, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+        - type: custom:canvas-gauge-card
+          entity: sensor.pressure_mmhg_correct_158d000171ffde
+          card_height: 100
+          gauge:
+                type: "linear-gauge"
+                title: Атмосферное давление с учетом высоты, мм рт. ст.
+                width: 450
+                height: 100
+                minValue: 740
+                maxValue: 780
+                valueBox: false
+                majorTicks: ["740", "745", "750", "755", "760", "765", "770", "775", "780"]
+                minorTicks: 2
+                strokeTicks: true
+                highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+        - type: history-graph
+          entities:
+           - entity: sensor.pressure_mmhg_158d000171ffde
+             name: факт 
+           - entity: sensor.pressure_mmhg_correct_158d000171ffde
+             name: коррект 

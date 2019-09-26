@@ -606,6 +606,9 @@ sensor.zamiokulkas_illuminance:
   friendly_name: Замиокулькас уровень освещенности
 
 ## Google Fit 
+sensor.alex_steps:
+ friendly_name: Пройдено -
+ unit_of_measurement: шагов
 sensor.alex_weight:
  friendly_name: Текущий вес - 
  unit_of_measurement: кг

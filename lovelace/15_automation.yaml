@@ -1,0 +1,65 @@
+##################   Автоматика
+title: Вся автоматика
+icon: mdi:script
+cards:
+    
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+                **Автоматизации**
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: automation
+              exclude:
+               - state: 'off'
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: automation
+              exclude:
+               - state: 'on'
+               
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+                **Скрипты**
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: script
+               
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+                **Группы**
+
+          - type: custom:monster-card
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - domain: group

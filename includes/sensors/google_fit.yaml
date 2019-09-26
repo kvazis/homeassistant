@@ -8,28 +8,12 @@
 # Расчет остатка шагов от нормы
   - platform: template
     sensors:
-      alex_steps_custom:
-        friendly_name: "Пройдено шагов - "
-        entity_id:
-          - sensor.alex_steps
-        value_template: >
-           {% set steps = states.sensor.alex_steps.state | int %}
-           {% set custom_steps = states.sensor.alex_steps_custom.state | int %}
-             {% if steps > custom_steps %}
-               {{ steps }}
-             {% else %}
-               {{ custom_steps }}
-             {% endif %}
-
-# Расчет остатка шагов от нормы
-  - platform: template
-    sensors:
       alex_steps_remain:
         friendly_name: "Осталось до нормы шагов - "
         entity_id:
-          - sensor.alex_steps_custom
+          - sensor.alex_steps
         value_template: >
-           {% set remain = (10000 - states.sensor.alex_steps_custom.state | int) %}
+           {% set remain = (10000 - states.sensor.alex_steps.state | int) %}
              {% if remain > 0 %}
                {{ remain }}
              {% else %}

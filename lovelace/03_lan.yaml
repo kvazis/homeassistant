@@ -1,0 +1,320 @@
+##################   Локальная сеть
+title: Локальная сеть
+icon: mdi:lan
+cards:
+
+      - type: vertical-stack
+        cards:
+
+         - type: markdown
+           content: >
+              **Загрузка канала**
+
+         - type: horizontal-stack
+           cards:
+  
+            - type: custom:canvas-gauge-card
+              entity: sensor.asuswrt_download_speed
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Прием Мбит/сек
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 120
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: true
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120"]
+                minorTicks: 4
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 90,"color": "rgba(255, 140, 0, .75)"}, {"from": 90, "to": 120,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+
+            - type: custom:canvas-gauge-card
+              entity: sensor.asuswrt_upload_speed
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Передача Мбит/сек
+                width: 220
+                height: 200
+                minValue: 0
+                maxValue: 120
+                startAngle: 45
+                ticksAngle: 270
+                valueBox: true
+                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120"]
+                minorTicks: 4
+                strokeTicks: true
+                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 90,"color": "rgba(255, 140, 0, .75)"}, {"from": 90, "to": 120,"color": "rgba(255, 0, 0, .75)"}]
+                borders: false
+   
+         - type: custom:mini-graph-card
+           entities:
+            - entity: sensor.asuswrt_download_speed
+              name: Прием
+              color: "#00ff00"
+            - entity: sensor.asuswrt_upload_speed
+              name: Передача
+              color: "#0000ff"
+           animate: true
+           line_width: 3
+           icon: mdi:access-point-network
+           show:
+              name: false
+              fill: false
+              
+         - type: entities
+           show_header_toggle: false
+           entities:
+             - entity: sensor.asuswrt_download
+               name: Принято сегодня - 
+               icon: mdi:download
+             - entity: sensor.asuswrt_upload
+               name: Отправлено сегодня - 
+               icon: mdi:upload
+
+      - type: vertical-stack
+        cards:
+
+          - type: markdown
+            content: >
+               **Bluetooth device Zone**
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **BLE шлюз кухня**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.kn_bip_alex
+                   name: Bip Alex
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.kn_bip_olha
+                   name: Bip Olha
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.kn_mi_band_4_dima
+                   name: Mi Band 4 
+                   icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.kn_mi_band_2_ns
+                   name: Mi Band 2 NS
+                   icon: mdi:bluetooth-connect
+              - type: glance
+                show_state: true
+                show_name: false
+                entities:
+                 - entity: sensor.kn_bip_alex_rssi
+                 - entity: sensor.kn_bip_olha_rssi
+                 - entity: sensor.kn_mi_band_4_dima_rssi
+                 - entity: sensor.kn_mi_band_2_ns_rssi
+
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **BLE шлюз гостиная**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.gg_bip_alex
+                   name: Bip Alex
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.gg_bip_olha
+                   name: Bip Olha
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.gg_mi_band_4_dima
+                   name: Mi Band 4
+                   icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.gg_mi_band_2_ns
+                   name: Mi Band 2 NS
+                   icon: mdi:bluetooth-connect
+              - type: glance
+                show_state: true
+                show_name: false
+                entities:
+                 - entity: sensor.gg_bip_alex_rssi
+                 - entity: sensor.gg_bip_olha_rssi
+                 - entity: sensor.gg_mi_band_4_dima_rssi
+                 - entity: sensor.gg_mi_band_2_ns_rssi
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **BLE шлюз детская Д**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.dd_bip_alex
+                   name: Bip Alex
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.dd_bip_olha
+                   name: Bip Olha
+                   icon: mdi:watch-variant
+                 - entity: binary_sensor.dd_mi_band_4_dima
+                   name: Mi Band 4
+                   icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.dd_mi_band_2_ns
+                   name: Mi Band 2 NS
+                   icon: mdi:bluetooth-connect
+              - type: glance
+                show_state: true
+                show_name: false
+                entities:
+                 - entity: sensor.dd_bip_alex_rssi
+                 - entity: sensor.dd_bip_olha_rssi
+                 - entity: sensor.dd_mi_band_4_dima_rssi
+                 - entity: sensor.dd_mi_band_2_ns_rssi
+
+
+      - type: vertical-stack
+        cards:
+
+          - type: markdown
+            content: >
+               **Network device Zone**
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **Home Zone**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.ping_dlinknas
+                   name: Dlink NAS 1 TB
+                   icon: mdi:nas
+                 - entity: binary_sensor.ping_printerhp
+                   name: HP 1015 cn
+                   icon: mdi:printer
+    
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **Media Zone**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.ping_ggtv
+                   name: Samsung, гостиная
+                   icon: mdi:television
+                 - entity: binary_sensor.ping_kntv
+                   name: Xiaomi, кухня
+                   icon: mdi:television
+                 - entity: binary_sensor.ping_tvboxgg
+                   name: H96, гостиная
+                   icon: mdi:android
+                 - entity: binary_sensor.ping_tvboxkn
+                   name: Mini M8S, кухня
+                   icon: mdi:android
+                   
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **Computer Zone**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.ping_acer
+                   name: Acer
+                   icon: mdi:laptop
+                 - entity: binary_sensor.ping_hp
+                   name: HP
+                   icon: mdi:laptop
+                 - entity: binary_sensor.ping_sony
+                   name: Sony
+                   icon: mdi:laptop
+                 - entity: binary_sensor.ping_chuwinb
+                   name: Chuwi
+                   icon: mdi:laptop
+
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **Mini server zone**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.ping_main
+                   name: Основной - RPB3+
+                   icon: mdi:developer-board
+                 - entity: binary_sensor.ping_reserve
+                   name: Резервный Khadas VIM 2
+                   icon: mdi:developer-board
+                 - entity: binary_sensor.ping_test
+                   name: Тестовый - RPB3 
+                   icon: mdi:developer-board
+                 
+             
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **Gateway zone**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.ping_gateway1
+                   name: Gateway 1
+                   icon: mdi:blur-radial
+                 - entity: binary_sensor.ping_gateway2
+                   name: Gateway 2
+                   icon: mdi:blur-radial
+                 - entity: binary_sensor.ping_gateway3
+                   name: Gateway 3
+                   icon: mdi:blur-radial
+                 - entity: binary_sensor.ping_gateway4
+                   name: Gateway 4
+                   icon: mdi:blur-radial  
+                   
+
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **Ip cam zone**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.ping_alfawise_cam
+                   name: Alfawise 
+                   icon: mdi:cctv
+                 - entity: binary_sensor.ping_reolink_cam
+                   name: Reolink 
+                   icon: mdi:cctv
+                 - entity: binary_sensor.ping_xiaofang_cam
+                   name: Xiaofang 
+                   icon: mdi:cctv   
+                 - entity: binary_sensor.ping_reolink2_cam
+                   name: Reolink 2 
+                   icon: mdi:cctv
+                   
+          - type: custom:vertical-stack-in-card
+            cards:
+              - type: markdown
+                content: >
+                   **Controler zone**
+              - type: glance
+                show_state: false
+                entities:
+                 - entity: binary_sensor.ping_xiaomi_ir
+                   name: Mi Ir Base 
+                   icon: mdi:remote
+                 - entity: binary_sensor.ping_broadlink_ir
+                   name: BL ir Base 
+                   icon: mdi:remote
+                 - entity: binary_sensor.ping_xiaomi_tvoc
+                   name: Mi TVOC 
+                   icon: mdi:periodic-table-co2   
+                   

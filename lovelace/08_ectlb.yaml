@@ -1,0 +1,229 @@
+##################  ECTLB
+title: ПКТПВ
+icon: mdi:exit-run
+cards:
+
+      - type: vertical-stack
+        cards:
+
+
+        - type: markdown
+          content: >
+              **Прихожая, коридор**
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.smoke_sensor_158d000149d28b
+             name: Датчик дыма
+           - entity: binary_sensor.door_window_sensor_158d000119378d
+             name: Входная дверь
+           - entity: binary_sensor.motion_sensor_158d00013f7894
+             name: Прихожая           
+           - entity: binary_sensor.motion_sensor_158d00010f8920  
+             name: Коридор
+
+        - type: custom:vertical-stack-in-card
+          cards:     
+          - type: horizontal-stack
+            cards:        
+            - type: light
+              entity: light.yeelight_01_whitebulb
+            - type: light
+              entity: light.yeelight_03_ceiling
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: switch.sonoff_basic_relay
+            icon: mdi:lightbulb-outline
+            tap_action: 
+               action: toggle 
+          - entity: sensor.mqtt_binary_sensor_158d000119378d
+            name: Входная дверь открывалась в - 
+            icon: mdi:door-open
+          - entity: sensor.mqtt_binary_sensor_158d00013f7894
+            name: Последнее движение в прихожей в - 
+            icon: mdi:run-fast
+          - entity: sensor.mqtt_binary_sensor_158d00013f7894
+            name: Последнее движение в коридоре в - 
+            icon: mdi:run-fast
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.camphoto
+          - entity: timer.entrance
+          - entity: timer.corridor
+          state_filter:
+            - "active"
+
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Туалет, прачечная**
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.motion_sensor_158d0001a24e71  
+             name: Туалет движение
+           - entity: binary_sensor.motion_sensor_158d0001e16204 
+             name: Прачечная движение
+           - entity: binary_sensor.water_leak_sensor_158d0002705b7b
+             name: Прачечная протечка
+
+        - type: custom:vertical-stack-in-card
+          cards: 
+          - type: horizontal-stack
+            cards:        
+            - type: light
+              entity: light.yeelight_02_ceiling
+            - type: light
+              entity: light.aqara_02_ceiling
+              name: Прачечная
+
+        - type: horizontal-stack
+          cards: 
+
+          - type: entity-button
+            entity: light.sonoff_02_mirror
+            name: Зеркало свет
+            icon: mdi:spotlight
+
+          - type: entity-button
+            entity: switch.wall_switch_left_158d00014dceb3
+            name: Питание люстры
+            icon: mdi:power
+
+          - type: entity-button
+            entity: switch.wall_switch_right_158d00014dceb3
+            name: Вентиляция
+
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: switch.relay_bwshp2
+            name: Стиральная машина, питание
+            tap_action: toggle
+            icon: mdi:washing-machine
+          - entity: sensor.mqtt_binary_sensor_158d0001a24e71
+            name: Последнее движение в туалете в - 
+            icon: mdi:run-fast
+          - entity: sensor.mqtt_binary_sensor_158d0001e16204
+            name: Последнее движение в прачечной в - 
+            icon: mdi:run-fast
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.toilet
+          - entity: timer.toilet_v
+          state_filter:
+            - "active"
+
+            
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Ванная**
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.motion_sensor_158d0001e547a3 
+             name: Ванная движение
+           - entity: binary_sensor.water_leak_sensor_158d0001bb60c2
+             name: Душевая
+           - entity: binary_sensor.water_leak_sensor_158d0001d72fa2
+             name: Раковина
+           - entity: script.heater_manual
+             tap_action: 
+               action: more-info
+             name: Бойлер
+             icon: mdi:fire 
+
+        - type: light
+          entity: light.yeelight_06_ceiling
+
+        - type: horizontal-stack
+          cards:
+           - type: custom:canvas-gauge-card
+             entity: sensor.temperature_158d0001dcd47e
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.humidity_158d0001dcd47e
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false
+
+        - type: horizontal-stack
+          cards: 
+
+          - type: entity-button
+            entity: switch.wall_plug_158d00015751f4
+            name: Бойлер
+            icon: mdi:hot-tub
+
+          - type: entity-button 
+            entity: switch.wall_switch_right_158d0001117040
+            name: Питание люстры
+            icon: mdi:power
+
+          - type: entity-button 
+            entity: switch.wall_switch_left_158d0001117040
+            name: Вентиляция
+            icon: mdi:fan
+            
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.load_158d00015751f4
+            name: Бойлер потребление
+          - entity: sensor.mqtt_binary_sensor_158d0001e547a3
+            name: Последнее движение в ванной в - 
+            icon: mdi:run-fast
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.heater
+          - entity: timer.bathroom_light
+          - entity: timer.bathroom
+          state_filter:
+            - "active"
