@@ -5,136 +5,120 @@ cards:
 
       - type: vertical-stack
         cards:
-        
+
           - type: markdown
             content: >
-               **Сценарии**
+                 **Статус ПО**   
 
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: group.scenario
-              name: Бытовые сценарии - 
-              icon: mdi:format-list-numbered
-            - entity: group.heater
-              name: Бойлер, сценарии - 
-              icon: mdi:hot-tub
-          - type: horizontal-stack
+          - type: custom:vertical-stack-in-card
             cards:
+        
             - type: markdown
               content: >
-                 **Резервный сервер, сценарии**
-#            - type: markdown
-#              content: >
-#                 **Khadas, сценарии**                 
+                 **Состояние сервера**
 
-          - type: horizontal-stack
-            cards:  
-                 
-            - type: glance
-              show_state: true
-              entities:
-                - entity: sensor.reserve_scenario_group
-                  name: Бытовые
-                  icon: mdi:format-list-numbered
-                - entity: sensor.reserve_heater_group
-                  name: Бойлер
-                  icon: mdi:hot-tub
-
-#            - type: glance
-#              show_state: true
-#              entities:
-#                - entity: sensor.khadas_scenario_group
-#                  name: Бытовые
-#                  icon: mdi:format-list-numbered
-#                - entity: sensor.khadas_heater_group
-#                  name: Бойлер
-#                  icon: mdi:hot-tub
-
-          - type: markdown
-            content: >
-               **Система**
-               
-          - type: custom:vertical-stack-in-card
-            cards:
-
-            - type: horizontal-stack
-              cards:
-               - type: entity-button
-                 tap_action: call-service
-                 service: script.toggle
-                 entity: script.purge_db
-                 icon: mdi:database
-                 color: auto
-                 name: Сжатие базы
-         
-               - type: entity-button
-                 tap_action: call-service
-                 service: script.toggle
-                 entity: script.ha_restart
-                 icon: mdi:home-assistant
-                 color: auto
-                 name: Reboot
-                 
-               - type: entity-button
-                 tap_action: call-service
-                 service: script.toggle
-                 entity: script.all_scenario_reload
-                 icon: mdi:autorenew
-                 color: auto
-                 name: Сценарии
-                 
-               - type: entity-button
-                 tap_action: call-service
-                 service: script.toggle
-                 entity: script.all_script_reload
-                 icon: mdi:autorenew
-                 color: auto
-                 name: Скрипты
-
-          - type: custom:vertical-stack-in-card
-            cards:
-                 
             - type: entities
               show_header_toggle: false
               entities:
+              - entity: sensor.last_boot_custom
+                name: Сервер в онлайне -
+                icon: mdi:av-timer
               - entity: sensor.rpi_power_status
                 name: Питание Raspberry Pi 3 B+ 
                 icon: mdi:power-plug
+              - entity: sensor.online_custom
+                name: Home Assistant в онлайне -
+                icon: mdi:clock
+              - type: divider
+              - entity: group.scenario
+                name: Бытовые сценарии - 
+                icon: mdi:format-list-numbered
+              - type: divider
               - entity: sensor.current_ha
                 name: Установлен Home Assistant -
                 icon: mdi:alpha-v-circle
               - entity: sensor.version
                 name: Последний Home Assistant -
                 icon: mdi:alpha-v-circle-outline
-              - type: divider
-              - entity: sensor.last_boot_custom
-                name: Сервер в онлайне -
-                icon: mdi:av-timer
-              - entity: sensor.online_custom
-                name: Home Assistant в онлайне -
-                icon: mdi:clock
+
+            - type: markdown
+              content: >
+                 **Недоступно**   
+            - type: horizontal-stack
+              cards:                 
+                 
+              - type: entities
+                show_header_toggle: false
+                entities:
+                - entity: sensor.unavailable_now_light
+                  name: Cветильники - 
+                  icon: mdi:lightbulb-off
+                - entity: sensor.unavailable_now_switch
+                  name: Реле - 
+                  icon: mdi:power-plug-off
+                  
+              - type: entities
+                show_header_toggle: false
+                entities:
+                - entity: sensor.unavailable_now_sensor
+                  name: Сенсоры - 
+                  icon: mdi:credit-card-wireless
+                - entity: sensor.unavailable_now_binary_sensor
+                  name: Бинарники - 
+                  icon: mdi:ab-testing
+
+          - type: custom:vertical-stack-in-card
+            cards:
+     
+            - type: markdown
+              content: >
+                 **Резервный сервер, состояние** 
+            - type: entities
+              show_header_toggle: false
+              entities:
               - entity: sensor.reserve_state
                 name: Khadas VIM2 в онлайне -
                 icon: mdi:clock-outline
-              - type: divider
-              - entity: sensor.maria_db_size
-                name: Размер Maria DB - 
-                icon: mdi:database
-              - entity: sensor.home_assistant_v2_db
-                name: Размер HA DB - 
-                icon: mdi:database
+              - entity: sensor.reserve_scenario_group
+                name: Бытовые сценарии
+                icon: mdi:format-list-numbered
 
-
-
+            - type: markdown
+              content: >
+                 **Недоступно**   
+            - type: horizontal-stack
+              cards:                 
+                 
+              - type: entities
+                show_header_toggle: false
+                entities:
+                - entity: sensor.reserve_unavailable_now_light
+                  name: Cветильники - 
+                  icon: mdi:lightbulb-off
+                - entity: sensor.reserve_unavailable_now_switch
+                  name: Реле - 
+                  icon: mdi:power-plug-off
+                  
+              - type: entities
+                show_header_toggle: false
+                entities:
+                - entity: sensor.reserve_unavailable_now_sensor
+                  name: Сенсоры - 
+                  icon: mdi:credit-card-wireless
+                - entity: sensor.reserve_unavailable_now_binary_sensor
+                  name: Бинарники - 
+                  icon: mdi:ab-testing
 
       - type: vertical-stack
         cards:
 
-          - type: markdown
-            content: >
+        - type: markdown
+          content: >
                **Hardware**
 
+        - type: custom:vertical-stack-in-card
+          cards:
+          
           - type: horizontal-stack
             cards:
   
@@ -252,6 +236,48 @@ cards:
 
       - type: vertical-stack
         cards:
+
+          - type: markdown
+            content: >
+                 **Действия**   
+
+          - type: custom:vertical-stack-in-card
+            cards:
+
+            - type: horizontal-stack
+              cards:
+               - type: entity-button
+                 tap_action: call-service
+                 service: script.toggle
+                 entity: script.purge_db
+                 icon: mdi:database
+                 color: auto
+                 name: Сжатие базы
+         
+               - type: entity-button
+                 tap_action: call-service
+                 service: script.toggle
+                 entity: script.ha_restart
+                 icon: mdi:home-assistant
+                 color: auto
+                 name: Reboot
+                 
+               - type: entity-button
+                 tap_action: call-service
+                 service: script.toggle
+                 entity: script.all_scenario_reload
+                 icon: mdi:autorenew
+                 color: auto
+                 name: Сценарии
+                 
+               - type: entity-button
+                 tap_action: call-service
+                 service: script.toggle
+                 entity: script.all_script_reload
+                 icon: mdi:autorenew
+                 color: auto
+                 name: Скрипты
+
 
           - type: markdown
             content: >

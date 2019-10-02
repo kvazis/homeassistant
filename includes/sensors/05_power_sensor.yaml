@@ -3,7 +3,7 @@
   - platform: template
     sensors:
       load_wifi_socket_usb:
-        friendly_name: 'Ноутбук Acer'
+        friendly_name: 'Xiaomi wi-fi + 2 USB'
         value_template: "{{ state_attr('switch.xiaomi_wifi_socket_usb', 'load_power') }}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
@@ -97,7 +97,7 @@
   - platform: template
     sensors:
       load_158d000153dd8e:
-        friendly_name: 'Ноутбук HP'
+        friendly_name: 'Удлинитель - гостиная, стол'
         value_template: "{{ state_attr('switch.plug_158d000153dd8e', 'load_power') }}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
@@ -143,7 +143,7 @@
   - platform: template
     sensors:
       load_wifi_6port:
-        friendly_name: 'Удлинитель 6 портов'
+        friendly_name: 'Удлинитель - гостиная, стойка ТВ'
         value_template: "{{ state_attr('switch.wifi_6port', 'load_power') }}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'

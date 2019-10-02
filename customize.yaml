@@ -266,6 +266,8 @@ binary_sensor.switch_158d0001531698:
   friendly_name: Гостиная, комод, круглая
 binary_sensor.switch_158d0001b86d2e:
   friendly_name: Гостиная, комод, квадратная
+binary_sensor.switch_158d0001e8a244:
+  friendly_name: Гостиная, стол, квадратная
 binary_sensor.cube_158d0001186d82:
   friendly_name: Гостиная кубик
   icon: mdi:cube-outline
@@ -537,8 +539,7 @@ binary_sensor.switch_158d0002af829b:
   friendly_name: Квадратная с тряской
 binary_sensor.switch_158d00016d8628:
   friendly_name: Круглая кнопка из ванной
-binary_sensor.switch_158d0001e8a244:
-  friendly_name: Квадратная 11 модель
+
 
 ## Таймеры
 timer.camphoto:

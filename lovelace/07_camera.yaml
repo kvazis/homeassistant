@@ -47,6 +47,8 @@ cards:
           camera_image: camera.reolink2
           camera_view: live
           entities:
+           - entity: light.yeelight_02_ceiling
+             icon: mdi:toilet
            - entity: light.philips_04_ceiling
            - entity: light.aqara_04_strip
            - entity: switch.tv_xiaomi

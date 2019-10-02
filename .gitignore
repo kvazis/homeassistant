@@ -6,6 +6,7 @@
 esphome/
 
 # Ensure these YAML files are ignored, otherwise your secret data/credentials will leak.
+gateway.txt
 *.token
 *.db
 *.log

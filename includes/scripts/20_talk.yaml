@@ -1,0 +1,155 @@
+# Шлюз Кухня
+talk_tv_done:
+  sequence:
+   - service: light.turn_on
+     entity_id:
+       - light.gateway_light_7811dc64f4c8
+     data_template:
+       brightness_pct: 20
+       rgb_color: [0, 255, 0]
+   - service: xiaomi_aqara.play_ringtone
+     data:
+       gw_mac: 78:11:DC:64:F4:C8
+       ringtone_id: 10001
+       ringtone_vol: 50
+   - delay: 00:00:05
+   - service: light.turn_off
+     entity_id:
+        - light.gateway_light_7811dc64f4c8
+
+talk_bon_appetit:
+  sequence:
+   - service: light.turn_on
+     entity_id:
+       - light.gateway_light_7811dc64f4c8
+     data_template:
+       brightness_pct: 20
+       rgb_color: [0, 255, 0]
+   - service: xiaomi_aqara.play_ringtone
+     data:
+       gw_mac: 78:11:DC:64:F4:C8
+       ringtone_id: 10002
+       ringtone_vol: 50
+   - delay: 00:00:05
+   - service: light.turn_off
+     entity_id:
+        - light.gateway_light_7811dc64f4c8
+
+# Шлюз гостиная
+talk_smart_zak:
+  sequence:
+   - service: light.turn_on
+     entity_id:
+        - light.gateway_light_34ce0088b039
+     data_template:
+       brightness_pct: 20
+       rgb_color: [0, 255, 0]
+   - service: xiaomi_aqara.play_ringtone
+     data:
+      gw_mac: 34:CE:00:88:B0:39
+      ringtone_id: 10002
+      ringtone_vol: 50
+   - delay: 00:00:05
+   - service: light.turn_off
+     entity_id:
+        - light.gateway_light_34ce0088b039
+
+# Шлюз ДД
+talk_smart_done:
+  sequence:
+   - service: light.turn_on
+     entity_id:
+        - light.gateway_light_286c07f0ad27
+     data_template:
+       brightness_pct: 20
+       rgb_color: [0, 255, 0]
+   - service: xiaomi_aqara.play_ringtone
+     data:
+       gw_mac: 28:6C:07:F0:AD:27
+       ringtone_id: 10001
+       ringtone_vol: 50
+   - delay: 00:00:07
+   - service: light.turn_off
+     entity_id:
+        - light.gateway_light_286c07f0ad27
+
+talk_inet:
+  sequence:
+   - service: light.turn_on
+     entity_id:
+        - light.gateway_light_286c07f0ad27
+     data_template:
+       brightness_pct: 20
+       rgb_color: [0, 255, 0]
+   - service: xiaomi_aqara.play_ringtone
+     data:
+       gw_mac: 28:6C:07:F0:AD:27
+       ringtone_id: 10002
+       ringtone_vol: 50
+   - delay: 00:00:03
+   - service: light.turn_off
+     entity_id:
+        - light.gateway_light_286c07f0ad27
+
+# Шлюз ДА
+talk_clean_table:
+  sequence:
+   - service: light.turn_on
+     entity_id:
+       - light.gateway_light_f0b429cc1f11
+     data_template:
+       brightness_pct: 20
+       rgb_color: [0, 255, 0]
+   - service: xiaomi_aqara.play_ringtone
+     data:
+       gw_mac: F0:B4:29:CC:1F:11
+       ringtone_id: 10001
+       ringtone_vol: 50
+   - delay: 00:00:07
+   - service: light.turn_off
+     entity_id:
+        - light.gateway_light_f0b429cc1f11
+
+talk_sleep:
+  sequence:
+   - service: light.turn_on
+     entity_id:
+       - light.gateway_light_f0b429cc1f11
+     data_template:
+       brightness_pct: 20
+       rgb_color: [0, 255, 0]
+   - service: xiaomi_aqara.play_ringtone
+     data:
+       gw_mac: F0:B4:29:CC:1F:11
+       ringtone_id: 10003
+       ringtone_vol: 50
+   - delay: 00:00:07
+   - service: light.turn_off
+     entity_id:
+        - light.gateway_light_f0b429cc1f11
+        
+# Шлюз ДД+ДА
+talk_eat:
+  sequence:
+  - service: light.turn_on
+    entity_id:
+      - light.gateway_light_f0b429cc1f11
+      - light.gateway_light_286c07f0ad27
+    data_template:
+       brightness_pct: 20
+       rgb_color: [0, 255, 0]
+  - service: xiaomi_aqara.play_ringtone
+    data:
+      gw_mac: 28:6C:07:F0:AD:27
+      ringtone_id: 10004
+      ringtone_vol: 50
+  - service: xiaomi_aqara.play_ringtone
+    data:
+      gw_mac: F0:B4:29:CC:1F:11
+      ringtone_id: 10004
+      ringtone_vol: 50
+  - delay: 00:00:05
+  - service: light.turn_off
+    entity_id:
+      - light.gateway_light_f0b429cc1f11
+      - light.gateway_light_286c07f0ad27

@@ -230,7 +230,7 @@ cards:
                 include:
                  - entity_id: sensor.*battery*
                    options:
-                      type: 'custom:battery-entity'                   
+                      type: 'custom:battery-entity'
                 exclude:
                  - state: '> 30.0'
 

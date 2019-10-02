@@ -80,3 +80,13 @@
           {%- set days = '{} д. '.format(days) if days > 0 else '' %}
           {{ 'Меньше минуты' if time < 60 else days + hours + minutes }}
         icon_template: mdi:clock
+
+# Заряд батарей
+  - platform: attributes
+    attribute: battery_level
+    unit_of_measurement: "%"
+    entities:
+# Туалет выключатель
+       - binary_sensor.wall_switch_both_158d000128cd1a
+# Туалет движение
+       - binary_sensor.motion_sensor_158d0001a24e71

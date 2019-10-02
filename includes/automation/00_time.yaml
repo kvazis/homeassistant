@@ -12,7 +12,16 @@
   - condition: state
     entity_id: binary_sensor.workday_sensor
     state: 'on'
-  action:    
+  action:
+  - service: xiaomi_aqara.play_ringtone
+    data:
+      gw_mac: 34:CE:00:88:B0:39
+      ringtone_id: 10001
+      ringtone_vol: 50
+  - delay: 00:00:05
+  - service: xiaomi_aqara.stop_ringtone
+    data:
+      gw_mac: 34:CE:00:88:B0:39   
   - service: notify.telegram
     data:
       title: 'Пылесос'

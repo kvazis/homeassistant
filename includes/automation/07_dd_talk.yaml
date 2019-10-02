@@ -1,0 +1,83 @@
+- alias: 07_talk_smartfon_16
+  initial_state: true
+  trigger:
+  - platform: time
+    at: '15:55:00'
+  condition:
+     - condition: state
+       entity_id: binary_sensor.dd_mi_band_4_dima
+       state: 'on'
+     - condition: state
+       entity_id: binary_sensor.workday_sensor
+       state: 'on'
+  action:  
+     - service: light.turn_on
+       entity_id:
+          - light.gateway_light_286c07f0ad27
+       data_template:
+         brightness_pct: 50
+         rgb_color: [0, 255, 0]
+     - service: xiaomi_aqara.play_ringtone
+       data:
+         gw_mac: 28:6C:07:F0:AD:27
+         ringtone_id: 10003
+         ringtone_vol: 50
+     - delay: 00:00:05
+     - service: light.turn_off
+       entity_id:
+          - light.gateway_light_286c07f0ad27
+          
+- alias: 07_talk_smartfon_19
+  initial_state: true
+  trigger:
+  - platform: time
+    at: '19:00:00'
+  condition:
+     - condition: state
+       entity_id: binary_sensor.dd_mi_band_4_dima
+       state: 'on'
+     - condition: state
+       entity_id: binary_sensor.workday_sensor
+       state: 'on'
+  action:  
+     - service: light.turn_on
+       entity_id:
+          - light.gateway_light_286c07f0ad27
+       data_template:
+         brightness_pct: 20
+         rgb_color: [0, 255, 0]
+     - service: xiaomi_aqara.play_ringtone
+       data:
+         gw_mac: 28:6C:07:F0:AD:27
+         ringtone_id: 10002
+         ringtone_vol: 50
+     - delay: 00:00:05
+     - service: light.turn_off
+       entity_id:
+          - light.gateway_light_286c07f0ad27
+          
+- alias: 07_talk_smartfon_21
+  initial_state: true
+  trigger:
+  - platform: time
+    at: '20:55:00'
+  condition:
+     - condition: state
+       entity_id: binary_sensor.dd_mi_band_4_dima
+       state: 'on'
+  action:  
+     - service: light.turn_on
+       entity_id:
+          - light.gateway_light_286c07f0ad27
+       data_template:
+         brightness_pct: 50
+         rgb_color: [0, 255, 0]
+     - service: xiaomi_aqara.play_ringtone
+       data:
+         gw_mac: 28:6C:07:F0:AD:27
+         ringtone_id: 10003
+         ringtone_vol: 50
+     - delay: 00:00:05
+     - service: light.turn_off
+       entity_id:
+          - light.gateway_light_286c07f0ad27

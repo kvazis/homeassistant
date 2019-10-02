@@ -1,0 +1,35 @@
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/group.scenario?api_password=qwerty
+    name: reserve_scenario_group
+    force_update: true
+    value_template: '{{ value_json.state }}'
+
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/group.heater?api_password=qwerty
+    name: reserve_heater_group
+    force_update: true
+    value_template: '{{ value_json.state }}'
+    
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_light?api_password=qwerty
+    name: reserve_unavailable_now_light
+    force_update: true
+    value_template: '{{ value_json.state }}'
+
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_switch?api_password=qwerty
+    name: reserve_unavailable_now_switch
+    force_update: true
+    value_template: '{{ value_json.state }}'
+    
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_sensor?api_password=qwerty
+    name: reserve_unavailable_now_sensor
+    force_update: true
+    value_template: '{{ value_json.state }}'
+
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_binary_sensor?api_password=qwerty
+    name: reserve_unavailable_now_binary_sensor
+    force_update: true
+    value_template: '{{ value_json.state }}'

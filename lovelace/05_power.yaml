@@ -411,7 +411,7 @@ cards:
 
            - type: markdown
              content: >
-                 ## Ноутбук Acer
+                 ## Xiaomi wi-fi + 2 USB
            - type: horizontal-stack
              cards:      
 
@@ -474,7 +474,7 @@ cards:
           cards:
            - type: markdown
              content: >
-                 ## Ноутбук HP
+                 ## Гостиная, удлинитель, стол
            - type: horizontal-stack
              cards:      
 
@@ -537,7 +537,7 @@ cards:
           cards:
            - type: markdown
              content: >
-                ## Удлинитель Xiaomi 6 портов
+                 ## Гостиная, удлинитель, стойка ТВ
            - type: horizontal-stack
              cards:      
 

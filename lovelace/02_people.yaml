@@ -2,7 +2,29 @@
 title: Люди
 icon: mdi:account-group
 cards:
-    
+
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+               **Режимы работы**
+
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: switch.heater_mode
+            - entity: sensor.states_water_heater
+              name: Режим основного сервера
+            - entity: group.heater
+              name: Бойлер, сценарии - 
+              icon: mdi:hot-tub
+            - entity: sensor.reserve_states_water_heater
+              name: Режим резервного сервера
+            - entity: sensor.reserve_heater_group
+              name: Бойлер
+              icon: mdi:hot-tub
+
       - type: vertical-stack
         cards:
         
@@ -28,17 +50,63 @@ cards:
 
           - type: markdown
             content: >
-               **Активность по часам**
+               **Говорилка**
 
           - type: custom:vertical-stack-in-card
             cards:
-    
 
-              - type: custom:mini-graph-card
-                
+              - type: markdown
+                content: >
+                  _Кухня_
+    
+              - type: entities
+                show_header_toggle: false
                 entities:
-                 - entity: sensor.alex_steps
-                   color: '#00FF00'
-                icon: mdi:walk
-                show:
-                   graph: bar
+                 - entity: script.talk_tv_done
+                   name: Хватит смотреть телевизор
+                   icon: mdi:television-off
+                 - entity: script.talk_bon_appetit
+                   name: Приятного аппетита
+                   icon: mdi:food 
+                 - entity: script.talk_eat
+                   name: Садитесь кушать
+                   icon: mdi:food-croissant
+
+              - type: markdown
+                content: >
+                  _Гостиная_
+    
+              - type: entities
+                show_header_toggle: false
+                entities:
+                 - entity: script.talk_smart_zak
+                   name: Нудеть
+                   icon: mdi:account-star
+
+              - type: markdown
+                content: >
+                  _Детская Д_
+    
+              - type: entities
+                show_header_toggle: false
+                entities:
+                 - entity: script.talk_smart_done
+                   name: Хватит играть
+                   icon: mdi:cellphone-off
+                 - entity: script.talk_inet
+                   name: Интернет активен
+                   icon: mdi:internet-explorer
+
+              - type: markdown
+                content: >
+                  _Детская А_
+    
+              - type: entities
+                show_header_toggle: false
+                entities:
+                 - entity: script.talk_clean_table
+                   name: Убери на столе
+                   icon: mdi:chair-school
+                 - entity: script.talk_sleep
+                   name: Спать
+                   icon: mdi:sleep

@@ -136,3 +136,31 @@
         unit_of_measurement: 'pm 2.5'
         value_template: "{{ state_attr('fan.gg_purifier', 'aqi') }}"
         icon_template: mdi:image-filter-center-focus-weak
+        
+# Заряд батарей
+  - platform: attributes
+    attribute: battery_level
+    unit_of_measurement: "%"
+    entities:
+# Гостиная вход выключатель
+       - binary_sensor.wall_switch_both_158d00013fc3bc
+# Гостиная выключатель 2
+       - binary_sensor.wall_switch_both_158d0001f47e10 
+# Гостиная, комод, круглая
+       - binary_sensor.switch_158d0001531698   
+# Гостиная, комод, квадратная
+       - binary_sensor.switch_158d0001b86d2e 
+# Гостиная, стол, квадратная
+       - binary_sensor.switch_158d0001e8a244
+# Гостиная кубик
+       - binary_sensor.cube_158d0001186d82
+# Гостиная, влажность, температура
+       - sensor.humidity_158d00015aebb6
+# Гостиная, окно
+       - binary_sensor.door_window_sensor_158d00013ed373 
+# Выключатель на входе на балкон
+       - binary_sensor.wall_switch_158d00010b5aee
+# Гостиная, балкон влажность, температура
+       - sensor.humidity_158d0001a4b9da 
+# Гостиная, балкон окно
+       - binary_sensor.door_window_sensor_158d0001a2f5f7

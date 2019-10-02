@@ -128,6 +128,13 @@ asuswrt:
     - download
     - upload_speed
     - download_speed
+
+device_tracker:
+  - platform: asuswrt
+    consider_home: 180
+    new_device_defaults:
+      track_new_devices: false
+      hide_if_away: false
   
 #Вынос в папки
 sensor: !include_dir_merge_list includes/sensors

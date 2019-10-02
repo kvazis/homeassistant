@@ -160,19 +160,6 @@
     service: switch.toggle
     entity_id: switch.plug1
         
-# Включение ноутбука Sony
-- alias: 07_sony_on
-  initial_state: true
-  trigger:
-   platform: state
-   entity_id: binary_sensor.sony
-   from: 'off'
-   to: 'on'
-  action: 
-  - service: notify.telegram
-    data:
-      message: "Ноутбук Sony включен в {{ states('sensor.time_date') }}"
-   
 ## Запись последнего движения в детской Д
 - alias: 07_dd_motion_time
   initial_state: true

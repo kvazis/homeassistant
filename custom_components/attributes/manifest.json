@@ -1,0 +1,10 @@
+{
+  "domain": "attributes",
+  "name": "Attributes",
+  "documentation": "https://github.com/pilotak/homeassistant-attributes",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": [
+  	"@pilotak"
+  ]
+}

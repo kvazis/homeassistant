@@ -1,0 +1,11 @@
+# Состояние бойлера
+  - platform: mqtt
+    state_topic: "states/water_heater"
+    name: 'states_water_heater'
+    
+# Состояние бойлера с резервного  
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.states_water_heater?api_password=qwerty
+    name: reserve_states_water_heater
+    force_update: true
+    value_template: '{{ value_json.state }}'

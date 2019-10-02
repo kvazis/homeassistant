@@ -164,3 +164,33 @@
           {%- set days = '{} д. '.format(days) if days > 0 else '' %}
           {{ 'Меньше минуты' if time < 60 else days + hours + minutes }}
         icon_template: mdi:clock
+        
+# Заряд батарей
+  - platform: attributes
+    attribute: battery_level
+    unit_of_measurement: "%"
+    entities:
+# Кухня выключатель
+       - binary_sensor.wall_switch_both_158d000282a130
+# Кухня движение
+       - binary_sensor.motion_sensor_158d0001ab3350
+# Кухня, вход, круглая
+       - binary_sensor.switch_158d000154a353
+# Кухня, вход, квадратная
+       - binary_sensor.switch_158d0001a672ef
+# Кухня кубик
+       - binary_sensor.cube_158d000101bdc6
+# Кухня влажность
+       - sensor.humidity_158d0001581109
+# Кухня окно
+       - binary_sensor.door_window_sensor_158d0001a99562
+# Кухня раковина, протечка
+       - binary_sensor.water_leak_sensor_158d0001bbeba6
+# Кухня конфетница
+       - binary_sensor.vibration_158d0002a8ab8b
+# Кухня, балкон дверь
+       - binary_sensor.door_window_sensor_158d0001a20885
+# Кухня, балкон, влажность
+       - sensor.humidity_158d000171ffde
+# Кухня, балкон окно
+       - binary_sensor.door_window_sensor_158d0001a4a394

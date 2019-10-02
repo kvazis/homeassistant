@@ -8,6 +8,21 @@
     - service: script.turn_on
       entity_id: script.telegramm_start
 
+- alias: 00_start_heater
+  initial_state: true
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition:
+  - condition: state
+    entity_id: sensor.states_water_heater
+    state: 'Горячая вода'  
+  action:
+  - service: homeassistant.turn_off
+    entity_id:
+        - group.heater
+
+
         
 - alias: 00_backup_everyday
   initial_state: true

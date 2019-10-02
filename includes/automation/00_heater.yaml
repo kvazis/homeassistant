@@ -1,3 +1,63 @@
+# Включение бойлера по будням
+- alias: 00_heater_week_on
+  initial_state: true
+  trigger:
+  - platform: time
+    at: '05:00:00'
+  - platform: time
+    at: '20:00:00'
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_both_158d000238a140
+      click_type: both
+  condition:
+   - condition: state
+     entity_id: binary_sensor.workday_sensor
+     state: 'on'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.wall_plug_158d00015751f4
+    
+# Включение бойлера по выходным        
+- alias:  00_heater_weekend_on
+  initial_state: true
+  trigger:
+  - platform: time
+    at: '08:00:00'
+  - platform: time
+    at: '20:00:00'
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_both_158d000238a140
+      click_type: both
+  condition:
+   - condition: state
+     entity_id: binary_sensor.workday_sensor
+     state: 'off'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.wall_plug_158d00015751f4
+    
+# Уведомление о включении бойлера
+- alias: 00_heater_notification_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_plug_158d00015751f4
+   from: 'off'
+   to: 'on'
+  action:
+  - service: timer.cancel
+    entity_id: timer.heater
+  - service: timer.start
+    entity_id: timer.heater
+  - service: notify.telegram
+    data:
+      title: 'Бойлер вкл'
+      message: "Бойлер включен в  {{ states('sensor.time_date') }}"
+
 # Выключение бойлера 
 - alias: 00_heater_off
   initial_state: true
@@ -19,24 +79,6 @@
   - service: switch.turn_off
     entity_id: switch.wall_plug_158d00015751f4
 
-# Уведомление о включении бойлера
-- alias: 00_heater_notification_on
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: switch.wall_plug_158d00015751f4
-   from: 'off'
-   to: 'on'
-  action:
-  - service: timer.cancel
-    entity_id: timer.heater
-  - service: timer.start
-    entity_id: timer.heater
-  - service: notify.telegram
-    data:
-      title: 'Бойлер вкл'
-      message: "Бойлер включен в  {{ states('sensor.time_date') }}"
-
 # Уведомление о выключении бойлера, стоп таймера
 - alias: 00_heater_notification_off
   initial_state: true
@@ -52,50 +94,51 @@
       message: "Бойлер выключен в  {{ states('sensor.time_date') }}"
   - service: timer.cancel
     entity_id: timer.heater
+    
+# Изменение режима бойлера на резервном сервере   
+- alias: 00_heater_reserve_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: sensor.reserve_states_water_heater
+   to: 'Бойлер'
+  condition:
+    - condition: state
+      entity_id: sensor.states_water_heater
+      state: 'Горячая вода'  
+  action:
+    - service: script.turn_on
+      entity_id: script.21_heater_on
 
-# Включение бойлера утром по будням
-- alias: 00_heater_week_on
+# Изменение режима бойлера на резервном сервере   
+- alias: 00_heater_reserve_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: sensor.reserve_states_water_heater
+   to: 'Горячая вода'
+  condition:
+    - condition: state
+      entity_id: sensor.states_water_heater
+      state: 'Бойлер'  
+  action:
+    - service: script.turn_on
+      entity_id: script.21_heater_off
+      
+# Контроль за сценариями бойлера      
+- alias: 00_heater_control
   initial_state: true
   trigger:
-  - platform: time
-    at: '05:00:00'
-  - platform: time
-    at: '20:00:00'
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_both_158d000238a140
-      click_type: both
+    - platform: time_pattern
+      minutes: '/1'
   condition:
-  - condition: time
-    weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - condition: state
+      entity_id: group.heater
+      state: 'on'
+    - condition: state
+      entity_id: sensor.states_water_heater
+      state: 'Горячая вода'    
   action:
-  - service: switch.turn_on
-    entity_id: switch.wall_plug_158d00015751f4
-
-# Включение бойлера утром по выходным        
-- alias:  00_heater_weekend_on
-  initial_state: true
-  trigger:
-  - platform: time
-    at: '08:00:00'
-  - platform: time
-    at: '20:00:00'
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_both_158d000238a140
-      click_type: both
-  condition:
-  - condition: time
-    weekday:
-      - sat
-      - sun
-  action:
-  - service: switch.turn_on
-    entity_id: switch.wall_plug_158d00015751f4
+    - service: homeassistant.turn_off
+      entity_id:
+         - group.heater
