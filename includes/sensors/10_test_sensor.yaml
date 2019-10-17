@@ -1,0 +1,7 @@
+# Заряд батарей
+  - platform: attributes
+    attribute: battery_level
+    unit_of_measurement: "%"
+    entities:
+# Квадратная с тряской
+       - binary_sensor.switch_158d0002af829b

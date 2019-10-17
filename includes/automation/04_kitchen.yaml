@@ -54,7 +54,7 @@
   - platform: event
     event_type: xiaomi_aqara.motion
     event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001ab3350
+      entity_id: binary_sensor.motion_sensor_158d0001e16204
   condition:
 # Условие И - лампа выключена
    condition: and
@@ -90,7 +90,7 @@
   initial_state: true
   trigger:
   - platform: state
-    entity_id: binary_sensor.motion_sensor_158d0001ab3350
+    entity_id: binary_sensor.motion_sensor_158d0001e16204
     from: 'on'
     to: 'off' 
   condition:

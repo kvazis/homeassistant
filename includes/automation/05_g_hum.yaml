@@ -3,15 +3,15 @@
   initial_state: true
   trigger:
    - platform: numeric_state
-     entity_id: sensor.humidity_158d00015aebb6
+     entity_id: sensor.05_mean_humidity
      below: 45
   condition:
      - condition: state
        entity_id: switch.forse_hum
        state: 'off'
-     - condition: time
-       after: '09:00:00'
-       before: '18:00:00'
+     - condition: state
+       entity_id: binary_sensor.tod_day
+       state: 'on'
      - condition: state
        entity_id: binary_sensor.door_window_sensor_158d00013ed373
        state: 'off'

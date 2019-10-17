@@ -10,18 +10,18 @@ cards:
         - type: markdown
           content: >
               **Прихожая, коридор**
-
+ 
         - type: glance
           show_state: false
           entities:
-           - entity: binary_sensor.smoke_sensor_158d000149d28b
-             name: Датчик дыма
-           - entity: binary_sensor.door_window_sensor_158d000119378d
-             name: Входная дверь
-           - entity: binary_sensor.motion_sensor_158d00013f7894
-             name: Прихожая           
-           - entity: binary_sensor.motion_sensor_158d00010f8920  
-             name: Коридор
+             - entity: binary_sensor.smoke_sensor_158d000149d28b
+               name: Датчик дыма
+             - entity: binary_sensor.door_window_sensor_158d000119378d
+               name: Входная дверь
+             - entity: binary_sensor.motion_sensor_158d00013f7894
+               name: Прихожая           
+             - entity: binary_sensor.motion_sensor_158d00010f8920  
+               name: Коридор
 
         - type: custom:vertical-stack-in-card
           cards:     
@@ -29,8 +29,10 @@ cards:
             cards:        
             - type: light
               entity: light.yeelight_01_whitebulb
+              name: Прихожая
             - type: light
               entity: light.yeelight_03_ceiling
+              name: Коридор
 
         - type: entities
           show_header_toggle: false
@@ -58,6 +60,19 @@ cards:
           state_filter:
             - "active"
 
+        # - type: entities
+        #   show_header_toggle: false
+        #   entities:
+        #   - entity: sensor.smoke_sensor_158d000149d28b_battery_level
+        #      type: 'custom:battery-entity'   
+        #   - entity: sensor.door_window_sensor_158d000119378d_battery_level
+        #      type: 'custom:battery-entity'   
+        #   - entity: sensor.motion_sensor_158d00013f7894_battery_level
+        #      type: 'custom:battery-entity'   
+        #   - entity: sensor.motion_sensor_158d00010f8920_battery_level 
+        #      type: 'custom:battery-entity'   
+        #   - entity: sensor.switch_158d00010b1963_battery_level 
+        #      type: 'custom:battery-entity' 
 
       - type: vertical-stack
         cards:
@@ -85,6 +100,47 @@ cards:
             - type: light
               entity: light.aqara_02_ceiling
               name: Прачечная
+
+        - type: horizontal-stack
+          cards:
+           - type: custom:canvas-gauge-card
+             entity: sensor.02_toilet_lywsd02_temperature
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Температура (С)
+               width: 220
+               height: 200
+               minValue: 00
+               maxValue: 40
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
+               borders: false
+
+           - type: custom:canvas-gauge-card
+             entity: sensor.02_toilet_lywsd02_humidity
+             card_height: 180
+             gauge:
+               type: "radial-gauge"
+               title: Влажность (%)
+               width: 220
+               height: 200
+               minValue: 0
+               maxValue: 100
+               startAngle: 45
+               ticksAngle: 270
+               valueBox: true
+               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
+               minorTicks: 4
+               strokeTicks: true
+               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
+               borders: false
+
 
         - type: horizontal-stack
           cards: 

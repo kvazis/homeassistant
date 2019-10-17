@@ -39,7 +39,7 @@
       load_total_energy:
         friendly_name: 'Суммарное потребление'
         unit_of_measurement: "Вт"
-        icon_template: mdi:flash
+        icon_template: mdi:sigma
         value_template: 
          "{{ ((states.sensor.load_158d00010ec4b8.state | float) + 
               (states.sensor.load_158d000114a1e1.state | float) + 

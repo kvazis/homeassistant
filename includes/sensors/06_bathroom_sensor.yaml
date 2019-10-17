@@ -47,3 +47,19 @@
   - platform: mqtt
     state_topic: "binary_sensor/158d0001e547a3"
     name: 'mqtt_binary_sensor_158d0001e547a3'
+
+# Заряд батарей
+  - platform: attributes
+    attribute: battery_level
+    unit_of_measurement: "%"
+    entities:
+# Ванная выключатель
+       - binary_sensor.wall_switch_both_158d000238a140
+# Ванная, движение
+       - binary_sensor.motion_sensor_158d0001e547a3
+# Ванная, влажность
+       - sensor.humidity_158d0001dcd47e  
+# Ванная протечка душевая
+       - binary_sensor.water_leak_sensor_158d0001bb60c2
+# Ванная протечка раковина
+       - binary_sensor.water_leak_sensor_158d0001d72fa2

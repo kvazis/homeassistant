@@ -27,9 +27,13 @@
       - automation.02_toilet_vent_off
       - automation.02_toilet_vent_timer
       - automation.02_toilet_vent_timer_off
-      - automation.02_prachec_motion
-      - automation.02_prachec_wleak_washmash_on      
-      - automation.02_prachec_wleak_washmash_off    
+      - automation.02_laundry_motion
+      - automation.02_laundry_light_timer_reload
+      - automation.02_laundry_light_off
+      - automation.02_laundry_power
+      - automation.02_laundry_wleak_washmash_on
+      - automation.02_laundry_wleak_washmash_off
+      - automation.02_laundry_motion_time
       - automation.03_corr_entr
       - automation.03_corr_light
       - automation.03_corr_light_on_vibro
@@ -59,7 +63,7 @@
       - automation.05_gg_hum_timer_off
       - automation.05_gg_hum_on
       - automation.05_gg_hum_off
-#      - automation.05_usb_poweroff_week
+      - automation.05_gg_air_fresh
 #      - automation.05_usb_poweroff
 #      - automation.05_usb_poweron      
       - automation.05_tv_samsung
@@ -79,9 +83,9 @@
       - automation.06_bathroom_wleak_washstand_off
       - automation.06_bathroom_wleak_shower_on
       - automation.06_bathroom_wleak_shower_off
-#      - automation.07_dd_hum_auto_on
-#      - automation.07_dd_hum_auto_off
-#      - automation.07_dd_hum_water_warning
+      - automation.07_dd_hum_auto_on
+      - automation.07_dd_hum_auto_off
+      - automation.07_dd_hum_water_warning
       - automation.07_dd_philips
       - automation.07_dd_philips_auto_on
       - automation.07_dd_philips_auto_off

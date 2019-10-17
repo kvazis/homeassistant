@@ -23,6 +23,14 @@
       - sensor.kn_mi_band_4_dima_rssi
       
   - platform: min_max
+    name: best_arc_sf_rssi
+    type: max
+    entity_ids:
+      - sensor.gg_arc_sf_rssi
+      - sensor.dd_arc_sf_rssi
+      - sensor.kn_arc_sf_rssi
+      
+  - platform: min_max
     name: best_mi_band_2_ns_rssi
     type: max
     entity_ids:
@@ -85,6 +93,28 @@
         icon_template: >-
            {% set signal_level = states.sensor.best_mi_band_4_dima_rssi.state|int %}
            {% if is_state('sensor.best_mi_band_4_dima_rssi', 'unknown') %}
+              mdi:signal-off
+           {% else %}
+             {% if signal_level >= -70 %}
+               mdi:signal-cellular-3
+             {% elif signal_level >= -80 %}
+               mdi:signal-cellular-2
+             {% elif signal_level >= -90 %}
+               mdi:signal-cellular-1
+             {% elif signal_level >= -100 %}
+               mdi:signal-cellular-outline
+             {% endif %}
+           {% endif %}
+           
+  - platform: template
+    sensors:
+      arc_sf_rssi_summ:
+        friendly_name: "Amazfit Arc Rssi"
+        value_template: "{{ states.sensor.best_arc_sf_rssi.state }}"
+        unit_of_measurement: 'dB'
+        icon_template: >-
+           {% set signal_level = states.sensor.best_arc_sf_rssi.state|int %}
+           {% if is_state('sensor.best_arc_sf_rssi', 'unknown') %}
               mdi:signal-off
            {% else %}
              {% if signal_level >= -70 %}

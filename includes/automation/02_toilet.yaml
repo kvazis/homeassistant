@@ -27,20 +27,6 @@
     - service: switch.turn_off
       entity_id: switch.wall_switch_left_158d00014dceb3
       
-## Возобновление питания на выключателе стиралки
-- alias: 04_kn_power
-  initial_state: true
-  trigger:
-    - platform: time_pattern
-      minutes: '/1'
-  condition:
-    - condition: state
-      entity_id: switch.bw_relay
-      state: 'off'
-  action:
-   - service: switch.turn_on
-     entity_id: switch.bw_relay
-
 # Автоматическая установка яркости
 - alias: 02_toilet_light
   initial_state: true
@@ -117,6 +103,12 @@
 - alias: 02_toilet_light_on
   initial_state: true
   trigger:
+# Выключатель на входе в туалет
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_left_158d00027c0e2b
+      click_type: single 
 # Датчик движения
   - platform: event
     event_type: xiaomi_aqara.motion
@@ -146,6 +138,12 @@
     event_type: timer.finished
     event_data:
       entity_id: timer.toilet
+# Выключатель на входе в туалет
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_left_158d00027c0e2b
+      click_type: single 
 # Выключатель в туалете
   - platform: event
     event_type: xiaomi_aqara.click
@@ -165,6 +163,12 @@
 - alias: 02_toilet_light_off_delay
   initial_state: true
   trigger:
+# Выключатель на входе в туалет
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_both_158d00027c0e2b
+      click_type: both    
 # Выключатель в туалете
   - platform: event
     event_type: xiaomi_aqara.click
@@ -194,6 +198,12 @@
 - alias: 02_toilet_vent
   initial_state: true
   trigger:
+# Выключатель на входе в туалет
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_right_158d00027c0e2b
+      click_type: single   
 # Выключатель в туалете
   - platform: event
     event_type: xiaomi_aqara.click
@@ -202,15 +212,20 @@
       click_type: single   
   action:
   - service: switch.toggle
-    entity_id: switch.wall_switch_right_158d00014dceb3
+    entity_id: 
+         - switch.wall_switch_right_158d00014dceb3
+         - switch.02_sonoff_basic_relay
 
 # Включение таймера
 - alias: 02_toilet_vent_timer
   initial_state: true
   trigger:       
-   platform: state
-   entity_id: switch.wall_switch_right_158d00014dceb3
-   to: 'on'
+   - platform: state
+     entity_id: switch.wall_switch_right_158d00014dceb3
+     to: 'on'
+   - platform: state
+     entity_id: switch.02_sonoff_basic_relay
+     to: 'on'
   action:
   - service: timer.cancel
     entity_id: timer.toilet_v
@@ -221,9 +236,12 @@
 - alias: 02_toilet_vent_timer_off
   initial_state: true
   trigger:       
-   platform: state
-   entity_id: switch.wall_switch_right_158d00014dceb3
-   to: 'off'
+   - platform: state
+     entity_id: switch.wall_switch_right_158d00014dceb3
+     to: 'off'
+   - platform: state
+     entity_id: switch.02_sonoff_basic_relay
+     to: 'off'
   action:
   - service: timer.cancel
     entity_id: timer.toilet_v
@@ -238,60 +256,10 @@
       entity_id: timer.toilet_v
   action:
   - service: switch.turn_off
-    entity_id: switch.wall_switch_right_158d00014dceb3
-    
+    entity_id: 
+         - switch.wall_switch_right_158d00014dceb3
+         - switch.02_sonoff_basic_relay
 
-# Включение света на 15 секунд по движению
-- alias: 02_prachec_motion
-  initial_state: true
-  trigger:
-# Датчик движения
-   platform: event
-   event_type: xiaomi_aqara.motion
-   event_data:
-     entity_id: binary_sensor.motion_sensor_158d0001e16204
-  condition:
-  - condition: state
-    entity_id: light.aqara_02_ceiling
-    state: 'off'
-  action:
-  - service: light.turn_on
-    entity_id: light.aqara_02_ceiling
-  - delay: 00:00:15
-  - service: light.turn_off
-    entity_id: light.aqara_02_ceiling
-    
-## Обнаружение протечки, стиралка 
-- alias: 02_prachec_wleak_washmash_on
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
-   to: 'on'
-  action:
-  - service: notify.telegram
-    data:
-      title: "Обнаружена протечка"
-      message: "Стиральная машина {{ states('sensor.time_date') }}"
-  - service: script.turn_on
-    entity_id: script.11_warning
-      
-## Протечка устранена, стиралка        
-- alias: 02_prachec_wleak_washmash_off
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
-   from: 'on'
-   to: 'off'
-  action:
-  - service: notify.telegram
-    data:
-      title: "Протечка устранена"
-      message: "Стиральная машина {{ states('sensor.time_date') }}"
-  - service: script.turn_on
-    entity_id: script.11_all_ok
-    
 ## Запись последнего движения в туалете
 - alias: 02_toilet_motion_time
   initial_state: true
@@ -308,18 +276,3 @@
       payload: "{{ states('sensor.time_date')}}"
       retain: true
       
-## Запись последнего движения в прачечной
-- alias: 02_prachec_motion_time
-  initial_state: true
-  trigger:
-## Движение в прачечной
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001e16204
-  action: 
-  - service: mqtt.publish
-    data_template:
-      topic: "binary_sensor/158d0001e16204"
-      payload: "{{ states('sensor.time_date')}}"
-      retain: true

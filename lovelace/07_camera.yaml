@@ -20,11 +20,19 @@ cards:
 
         - type: picture-glance
           title: Этаж, поворот
-          camera_image: camera.alfawise_sub
+          camera_image: camera.reolink3_sub
           camera_view: live
           entities:
-           - entity: switch.alfawise_photo
+           - entity: switch.reolink3_photo
              icon: mdi:camera
+
+        # - type: picture-glance
+        #   title: Этаж, поворот
+        #   camera_image: camera.alfawise_sub
+        #   camera_view: live
+        #   entities:
+        #   - entity: switch.alfawise_photo
+        #      icon: mdi:camera
 
       - type: vertical-stack
         cards:

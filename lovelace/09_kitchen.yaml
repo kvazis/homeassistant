@@ -42,6 +42,11 @@ cards:
           - type: entity-button
             entity: script.04_kn_ceiling_on
             name: Полный свет
+            tap_action:
+              action: call-service
+              service: script.turn_on
+              service_data:
+                entity_id: script.04_kn_ceiling_on
             icon: mdi:lightbulb-on-outline
             
           - type: entity-button

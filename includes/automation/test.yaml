@@ -66,4 +66,4 @@
   - service: light.turn_off
     entity_id:
       - light.24730816ecfabc996804
-      
+

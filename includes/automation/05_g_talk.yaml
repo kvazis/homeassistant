@@ -1,0 +1,40 @@
+## Проветривание
+- alias: 05_gg_air_fresh
+  initial_state: true
+# Проверка каждые 15 минут
+  trigger:
+    - platform: time_pattern
+      minutes: '/30'
+
+  condition:
+# Обязательные условия
+    condition: and
+    conditions:
+# День
+      - condition: state
+        entity_id: binary_sensor.tod_day
+        state: 'on'
+# Закрыто окно  
+      - condition: state
+        entity_id: binary_sensor.door_window_sensor_158d00013ed373
+        state: 'off'  
+# Дополнительные условия 
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity_id: sensor.05_mi_air_co2a
+            above: 2000
+          - condition: numeric_state
+            entity_id: sensor.05_mi_air_pm25
+            above: 150
+          - condition: numeric_state
+            entity_id: sensor.05_mi_air_tvoc
+            above: 3
+  action:
+  - service: notify.telegram
+    data:
+      message: "Гостиная {{ states('sensor.time_date') }} - хорошо бы проветрить"
+  - service: script.turn_on
+    entity_id: script.talk_05_fresh   
+    
+

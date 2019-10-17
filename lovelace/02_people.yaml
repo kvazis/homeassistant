@@ -71,6 +71,9 @@ cards:
                  - entity: script.talk_eat
                    name: Садитесь кушать
                    icon: mdi:food-croissant
+                 - entity: script.talk_04_fresh
+                   name: Проветривание
+                   icon: mdi:air-filter
 
               - type: markdown
                 content: >
@@ -82,6 +85,9 @@ cards:
                  - entity: script.talk_smart_zak
                    name: Нудеть
                    icon: mdi:account-star
+                 - entity: script.talk_05_fresh
+                   name: Проветривание
+                   icon: mdi:air-filter
 
               - type: markdown
                 content: >
@@ -96,6 +102,9 @@ cards:
                  - entity: script.talk_inet
                    name: Интернет активен
                    icon: mdi:internet-explorer
+                 - entity: script.talk_07_fresh
+                   name: Проветривание
+                   icon: mdi:air-filter
 
               - type: markdown
                 content: >
@@ -110,3 +119,6 @@ cards:
                  - entity: script.talk_sleep
                    name: Спать
                    icon: mdi:sleep
+                 - entity: script.talk_08_fresh
+                   name: Проветривание
+                   icon: mdi:air-filter

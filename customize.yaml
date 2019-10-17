@@ -12,11 +12,11 @@ binary_sensor.door_window_sensor_158d000119378d:
   friendly_name: Входная дверь
   device_class: door
 binary_sensor.wall_switch_left_158d0001718ca8:
-  friendly_name: Прихожая вход left
+  friendly_name: Прихожая вход левая
 binary_sensor.wall_switch_right_158d0001718ca8:
-  friendly_name: Прихожая вход right
+  friendly_name: Прихожая вход правая
 binary_sensor.wall_switch_both_158d0001718ca8:
-  friendly_name: Прихожая вход both
+  friendly_name: Прихожая вход
 binary_sensor.motion_sensor_158d00013f7894:
   friendly_name: Прихожая, движение  
 binary_sensor.switch_158d00010b1963:
@@ -33,20 +33,40 @@ light.yeelight_02_ceiling:
 light.sonoff_02_mirror:
   friendly_name: Туалет, подсветка зеркала
   icon: mdi:spotlight-beam
+
 ## Реле
+switch.02_sonoff_basic_relay:
+  friendly_name: Туалет вентилятор
+  icon: mdi:fan 
 switch.wall_switch_left_158d00014dceb3:
   friendly_name: Туалет питание люстры
   icon: mdi:power
 switch.wall_switch_right_158d00014dceb3:
-  friendly_name: Туалет вентилятор
+  friendly_name: Туалет вентилятор 2
   icon: mdi:fan
 ## Сенсоры
+#Bluetooth
+sensor.02_toilet_lywsd02_humidity:
+  friendly_name: Туалет влажность
+  icon: mdi:water-percent
+sensor.02_toilet_lywsd02_temperature:
+  friendly_name: Туалет температура
+  icon: mdi:temperature-celsius
+
+#Zigbee
+
 binary_sensor.wall_switch_left_158d000128cd1a:
-  friendly_name: Туалет выключатель left
+  friendly_name: Туалет выключатель левая
 binary_sensor.wall_switch_right_158d000128cd1a:
-  friendly_name: Туалет выключатель right
+  friendly_name: Туалет выключатель правая
 binary_sensor.wall_switch_both_158d000128cd1a:
-  friendly_name: Туалет выключатель both  
+  friendly_name: Туалет выключатель  
+binary_sensor.wall_switch_left_158d00027c0e2b: 
+  friendly_name: Туалет вход выключатель левая
+binary_sensor.wall_switch_right_158d00027c0e2b: 
+  friendly_name: Туалет вход выключатель правая
+binary_sensor.wall_switch_both_158d00027c0e2b:
+  friendly_name: Туалет вход выключатель
 binary_sensor.motion_sensor_158d0001a24e71:
   friendly_name: Туалет движение
 sensor.illumination_158d0001a24e71:
@@ -71,7 +91,7 @@ sensor.load_bwshp2:
 sensor.voltage_bwshp2:
   friendly_name: Напряжение в сети
   unit_of_measurement: В
-binary_sensor.motion_sensor_158d0001e16204:
+binary_sensor.motion_sensor_158d0001ab3350:
   friendly_name: Прачечная, движение
 sensor.illumination_158d0001e16204:
   friendly_name: Прачечная, освещенность
@@ -123,12 +143,12 @@ switch.plug_158d0001291d12:
 sensor.illumination_7811dc64f4c8:
   friendly_name: Кухня шлюз освещенность
 binary_sensor.wall_switch_left_158d000282a130:
-  friendly_name: Кухня выключатель left
+  friendly_name: Кухня выключатель левая
 binary_sensor.wall_switch_right_158d000282a130:
-  friendly_name: Кухня выключатель right
+  friendly_name: Кухня выключатель правая
 binary_sensor.wall_switch_both_158d000282a130:
-  friendly_name: Кухня выключатель both
-binary_sensor.motion_sensor_158d0001ab3350:
+  friendly_name: Кухня выключатель
+binary_sensor.motion_sensor_158d0001e16204:
   friendly_name: Кухня, движение
 sensor.illumination_158d0001ab3350:
   friendly_name: Кухня, освещенность
@@ -198,7 +218,7 @@ light.gateway_light_34ce0088b039:
   icon: mdi:star-circle-outline
 ## Реле
 switch.wall_switch_left_158d00015723f1:
-  friendly_name: Гостиная выкл. стена
+  friendly_name: Гостиная выключатель стена
 switch.wall_switch_right_158d00015723f1:
   friendly_name: Гостиная, питание люстра 1
   icon: mdi:power
@@ -207,17 +227,17 @@ switch.plug_158d00012896cb:
   device_class: plug  
   icon: mdi:power
 switch.plug_158d000153dd8e:
-  friendly_name: Ноутбук HP
+  friendly_name: Удлинитель - гостиная, стол
   device_class: plug  
-  icon: mdi:laptop-windows
+  icon: mdi:power
 switch.wifi_6port:
   friendly_name: Удлинитель 6 портов
   device_class: plug  
   icon: mdi:power-socket-eu
 switch.xiaomi_wifi_socket_usb:
-  friendly_name: Ноутбук Acer
+  friendly_name: wi-fi розетка с USB
   device_class: plug  
-  icon: mdi:laptop-windows
+  icon: mdi:power
 switch.xiaomi_wifi_socket_usb_usb:
   friendly_name: USB
   device_class: plug  
@@ -251,17 +271,17 @@ sensor.dieffenbac_battery:
 sensor.illumination_34ce0088b039:
   friendly_name: Гостиная шлюз освещенность
 binary_sensor.wall_switch_left_158d00013fc3bc:
-  friendly_name: Гостиная вход left
+  friendly_name: Гостиная вход левая
 binary_sensor.wall_switch_right_158d00013fc3bc:
-  friendly_name: Гостиная вход right
+  friendly_name: Гостиная вход правая
 binary_sensor.wall_switch_both_158d00013fc3bc:
-  friendly_name: Гостиная вход both
+  friendly_name: Гостиная вход
 binary_sensor.wall_switch_left_158d0001f47e10:
-  friendly_name: Гостиная выкл 2 left
+  friendly_name: Гостиная выкл 2 левая
 binary_sensor.wall_switch_right_158d0001f47e10:
-  friendly_name: Гостиная выкл 2 right
+  friendly_name: Гостиная выкл 2 правая
 binary_sensor.wall_switch_both_158d0001f47e10:
-  friendly_name: Гостиная выкл 2 both  
+  friendly_name: Гостиная выкл 2  
 binary_sensor.switch_158d0001531698:
   friendly_name: Гостиная, комод, круглая
 binary_sensor.switch_158d0001b86d2e:
@@ -343,11 +363,11 @@ switch.wall_plug_158d00015751f4:
   icon: mdi:hot-tub
 ## Сенсоры 
 binary_sensor.wall_switch_left_158d000238a140:
-  friendly_name: Ванная left
+  friendly_name: Ванная выключатель левая
 binary_sensor.wall_switch_right_158d000238a140:
-  friendly_name: Ванная right
+  friendly_name: Ванная выключатель правая
 binary_sensor.wall_switch_both_158d000238a140:
-  friendly_name: Ванная both
+  friendly_name: Ванная выключатель 
 binary_sensor.motion_sensor_158d0001e547a3:
   friendly_name: Ванная, движение
 sensor.illumination_158d0001e547a3:
@@ -415,11 +435,11 @@ sensor.dd_bt_humidity:
 sensor.illumination_286c07f0ad27:
   friendly_name: Детская Д шлюз освещенность
 binary_sensor.wall_switch_left_158d000163e571:
-  friendly_name: Детская Д, вход left
+  friendly_name: Детская Д, выключатель вход левая
 binary_sensor.wall_switch_right_158d000163e571:
-  friendly_name: Детская Д, вход right
+  friendly_name: Детская Д, выключатель вход правая
 binary_sensor.wall_switch_both_158d000163e571:
-  friendly_name: Детская Д, вход both
+  friendly_name: Детская Д, выключатель  вход
 binary_sensor.switch_158d00013f82b7:
   friendly_name: Детская Д, кровать, круглая
 binary_sensor.motion_sensor_158d0001a66222:
@@ -513,7 +533,7 @@ sensor.da_bt_humidity:
 sensor.illumination_f0b429cc1f11:
   friendly_name: Детская А шлюз освещенность
 binary_sensor.wall_switch_158d00010b5c6e:
-  friendly_name: Детская А вход
+  friendly_name: Детская А выключатель вход
 sensor.humidity_158d000159c7e6:
   friendly_name: Детская А, влажность
   icon: mdi:water-percent
@@ -537,10 +557,6 @@ binary_sensor.cube_158d00028f6fe6:
 ## Тестовые
 binary_sensor.switch_158d0002af829b:
   friendly_name: Квадратная с тряской
-binary_sensor.switch_158d00016d8628:
-  friendly_name: Круглая кнопка из ванной
-
-
 ## Таймеры
 timer.camphoto:
   friendly_name: Фото на входе через - 

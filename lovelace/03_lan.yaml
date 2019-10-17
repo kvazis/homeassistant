@@ -100,6 +100,9 @@ cards:
                  - entity: binary_sensor.kn_mi_band_4_dima
                    name: Mi Band 4 
                    icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.kn_arc_sf                   
+                   name: Amazfit Arc SF
+                   icon: mdi:bluetooth-connect   
                  - entity: binary_sensor.kn_mi_band_2_ns
                    name: Mi Band 2 NS
                    icon: mdi:bluetooth-connect
@@ -110,6 +113,7 @@ cards:
                  - entity: sensor.kn_bip_alex_rssi
                  - entity: sensor.kn_bip_olha_rssi
                  - entity: sensor.kn_mi_band_4_dima_rssi
+                 - entity: sensor.kn_arc_sf_rssi  
                  - entity: sensor.kn_mi_band_2_ns_rssi
 
 
@@ -130,6 +134,9 @@ cards:
                  - entity: binary_sensor.gg_mi_band_4_dima
                    name: Mi Band 4
                    icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.gg_arc_sf                   
+                   name: Amazfit Arc SF
+                   icon: mdi:bluetooth-connect                   
                  - entity: binary_sensor.gg_mi_band_2_ns
                    name: Mi Band 2 NS
                    icon: mdi:bluetooth-connect
@@ -140,6 +147,7 @@ cards:
                  - entity: sensor.gg_bip_alex_rssi
                  - entity: sensor.gg_bip_olha_rssi
                  - entity: sensor.gg_mi_band_4_dima_rssi
+                 - entity: sensor.gg_arc_sf_rssi                 
                  - entity: sensor.gg_mi_band_2_ns_rssi
 
           - type: custom:vertical-stack-in-card
@@ -159,6 +167,9 @@ cards:
                  - entity: binary_sensor.dd_mi_band_4_dima
                    name: Mi Band 4
                    icon: mdi:bluetooth-connect
+                 - entity: binary_sensor.dd_arc_sf                   
+                   name: Amazfit Arc SF
+                   icon: mdi:bluetooth-connect
                  - entity: binary_sensor.dd_mi_band_2_ns
                    name: Mi Band 2 NS
                    icon: mdi:bluetooth-connect
@@ -169,6 +180,7 @@ cards:
                  - entity: sensor.dd_bip_alex_rssi
                  - entity: sensor.dd_bip_olha_rssi
                  - entity: sensor.dd_mi_band_4_dima_rssi
+                 - entity: sensor.dd_arc_sf_rssi                  
                  - entity: sensor.dd_mi_band_2_ns_rssi
 
 

@@ -12,11 +12,11 @@
          data:
            title: "Дверь"
            message: "Входная дверь открыта в {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.alfawise
-              filename: "/config/www/cam_captures/alfawise.jpg"
-       - delay: 00:00:01
+    #   - service: camera.snapshot
+    #      data:
+    #           entity_id: camera.alfawise
+    #           filename: "/config/www/cam_captures/alfawise.jpg"
+    #   - delay: 00:00:01
        - service: camera.snapshot
          data:
               entity_id: camera.xiaofang
@@ -29,6 +29,10 @@
          data:
               entity_id: camera.reolink2
               filename: "/config/www/cam_captures/reolink2.jpg"
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink3
+              filename: "/config/www/cam_captures/reolink3.jpg"
        - delay: 00:00:10
        - service: notify.telegram
          data:
@@ -36,20 +40,23 @@
               message: "Фотография" 
               data:
                   photo:
+                    #   - file: /config/www/cam_captures/alfawise.jpg
                       - file: /config/www/cam_captures/xiaofang.jpg
                       - file: /config/www/cam_captures/reolink.jpg
-                      - file: /config/www/cam_captures/alfawise.jpg
                       - file: /config/www/cam_captures/reolink2.jpg
+                      - file: /config/www/cam_captures/reolink3.jpg
        - service: notify.telegram_olha
          data:
               title: "Дверь"
               message: "Фотография" 
               data:
                   photo:
+                    #   - file: /config/www/cam_captures/alfawise.jpg
                       - file: /config/www/cam_captures/xiaofang.jpg
                       - file: /config/www/cam_captures/reolink.jpg
-                      - file: /config/www/cam_captures/alfawise.jpg
                       - file: /config/www/cam_captures/reolink2.jpg
+                      - file: /config/www/cam_captures/reolink3.jpg
+
 
   01_enter_on:
     sequence:
@@ -101,16 +108,16 @@
               data:
                   photo:
                       - file: /config/www/cam_captures/reolink.jpg
-
-  01_photo_alfawise:
+                      
+  01_photo_reolink3:
     sequence:
        - service: notify.telegram
          data:
            message: "Фото, этаж - поворот в {{ states('sensor.time_date') }}" 
        - service: camera.snapshot
          data:
-              entity_id: camera.alfawise
-              filename: "/config/www/cam_captures/alfawise.jpg"
+              entity_id: camera.reolink3
+              filename: "/config/www/cam_captures/reolink3.jpg"
        - delay: 00:00:05
        - service: notify.telegram
          data:
@@ -118,4 +125,22 @@
               message: "Фотография" 
               data:
                   photo:
-                      - file: /config/www/cam_captures/alfawise.jpg                   
+                      - file: /config/www/cam_captures/reolink3.jpg
+
+#   01_photo_alfawise:
+#     sequence:
+#       - service: notify.telegram
+#          data:
+#           message: "Фото, этаж - поворот в {{ states('sensor.time_date') }}" 
+#       - service: camera.snapshot
+#          data:
+#               entity_id: camera.alfawise
+#               filename: "/config/www/cam_captures/alfawise.jpg"
+#       - delay: 00:00:05
+#       - service: notify.telegram
+#          data:
+#               title: "Дверь"
+#               message: "Фотография" 
+#               data:
+#                   photo:
+#                       - file: /config/www/cam_captures/alfawise.jpg                   

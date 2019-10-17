@@ -1,6 +1,5 @@
   - platform: template
     switches:
-
       heater_mode:
         friendly_name: "Режим бойлера"
         value_template: "{{ is_state('sensor.states_water_heater', 'Бойлер') }}"
@@ -11,8 +10,7 @@
         turn_off:
           service: script.turn_on
           data:
-            entity_id: script.21_heater_off
-
+            entity_id: script.21_heater_off    
       forse_hum:
         friendly_name: "Усиленное увлажнение"
         value_template: "{{ is_state('sensor.smartmi_mode', 'high') }}"
@@ -49,17 +47,17 @@
           data:
             entity_id: script.01_photo_reolink
             
-      alfawise_photo:
-        friendly_name: "Фото с alfawise"
-        value_template: "{{ is_state('script.01_photo_alfawise', 'on') }}"
-        turn_on:
-          service: script.turn_on
-          data:
-            entity_id: script.01_photo_alfawise
-        turn_off:
-          service: script.turn_on
-          data:
-            entity_id: script.01_photo_alfawise
+    #   alfawise_photo:
+    #     friendly_name: "Фото с alfawise"
+    #     value_template: "{{ is_state('script.01_photo_alfawise', 'on') }}"
+    #     turn_on:
+    #       service: script.turn_on
+    #       data:
+    #         entity_id: script.01_photo_alfawise
+    #     turn_off:
+    #       service: script.turn_on
+    #       data:
+    #         entity_id: script.01_photo_alfawise
             
       reolink2_photo:
         friendly_name: "Фото с reolink2"
@@ -72,6 +70,18 @@
           service: script.turn_on
           data:
             entity_id: script.04_photo_reolink2
+            
+      reolink3_photo:
+        friendly_name: "Фото с reolink3"
+        value_template: "{{ is_state('script.01_photo_reolink3', 'on') }}"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.01_photo_reolink3
+        turn_off:
+          service: script.turn_on
+          data:
+            entity_id: script.01_photo_reolink3
 
       tv_xiaomi:
         friendly_name: "ТВ Xiaomi"

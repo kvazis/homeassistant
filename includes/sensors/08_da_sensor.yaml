@@ -37,3 +37,21 @@
     entity_ids:
       - sensor.humidity_158d000159c7e6
       - sensor.da_bt_humidity
+      
+# Заряд батарей
+  - platform: attributes
+    attribute: battery_level
+    unit_of_measurement: "%"
+    entities:
+# Детская Д, вход выключатель
+       - binary_sensor.wall_switch_158d00010b5c6e
+# Детская А, влажность
+       - sensor.humidity_158d000159c7e6       
+# Детская А, кровать
+       - binary_sensor.switch_158d000155d2fb      
+# Детская А, стол
+       - binary_sensor.switch_158d000186d9a9 
+# Детская А, движение
+       - binary_sensor.motion_sensor_158d00016d56f5
+# Детская А, кубик
+       - binary_sensor.cube_158d00028f6fe6

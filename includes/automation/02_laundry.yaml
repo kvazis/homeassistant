@@ -1,0 +1,124 @@
+# Включение света на 15 секунд по движению
+- alias: 02_laundry_motion
+  initial_state: true
+  trigger:
+# Датчик движения
+   platform: event
+   event_type: xiaomi_aqara.motion
+   event_data:
+     entity_id: binary_sensor.motion_sensor_158d0001ab3350
+  condition:
+  - condition: state
+    entity_id: light.aqara_02_ceiling
+    state: 'off'
+  action:
+  - service: light.turn_on
+    entity_id: light.aqara_02_ceiling
+  - service: timer.cancel
+    entity_id: timer.laundry
+  - service: timer.start
+    entity_id: 
+      - timer.laundry
+    data_template: 
+        duration: 00:01:00
+
+## Таймер освещения обновление
+- alias: 02_laundry_light_timer_reload
+  initial_state: true
+  trigger:
+# Датчик движения
+   platform: event
+   event_type: xiaomi_aqara.motion
+   event_data:
+     entity_id: binary_sensor.motion_sensor_158d0001ab3350
+  condition:
+    - condition: state
+      entity_id: light.aqara_02_ceiling
+      state: 'on'
+  action:
+  - service: timer.cancel
+    entity_id: timer.laundry
+  - service: timer.start
+    entity_id: 
+      - timer.laundry
+    data_template: 
+        duration: 00:01:00
+
+# Выключение освещения       
+- alias: 02_laundry_light_off
+  initial_state: true
+  trigger:
+# Отсчет таймера
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.laundry
+  condition:
+  - condition: state
+    entity_id: light.aqara_02_ceiling
+    state: 'on'
+  action:
+  - service: light.turn_off
+    entity_id: light.aqara_02_ceiling
+
+## Возобновление питания на выключателе стиралки
+- alias: 02_laundry_power
+  initial_state: true
+  trigger:
+    - platform: time_pattern
+      minutes: '/1'
+  condition:
+    - condition: state
+      entity_id: switch.bw_relay
+      state: 'off'
+  action:
+   - service: switch.turn_on
+     entity_id: switch.bw_relay
+    
+## Обнаружение протечки, стиралка 
+- alias: 02_laundry_wleak_washmash_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
+   to: 'on'
+  action:
+  - service: notify.telegram
+    data:
+      title: "Обнаружена протечка"
+      message: "Стиральная машина {{ states('sensor.time_date') }}"
+  - service: script.turn_on
+    entity_id: script.11_warning
+      
+## Протечка устранена, стиралка        
+- alias: 02_laundry_wleak_washmash_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
+   from: 'on'
+   to: 'off'
+  action:
+  - service: notify.telegram
+    data:
+      title: "Протечка устранена"
+      message: "Стиральная машина {{ states('sensor.time_date') }}"
+  - service: script.turn_on
+    entity_id: script.11_all_ok
+    
+## Запись последнего движения в прачечной
+- alias: 02_laundry_motion_time
+  initial_state: true
+  trigger:
+## Движение в прачечной
+  - platform: event
+    event_type: xiaomi_aqara.motion
+    event_data:
+      entity_id: binary_sensor.motion_sensor_158d0001ab3350
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d0001e16204"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true
+      

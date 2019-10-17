@@ -15,7 +15,7 @@
   - platform: template
     sensors:
       dd_esp32_uptime_custom:
-        friendly_name: "BLE Hub, кухня в онлайне"
+        friendly_name: "BLE Hub, детская Д в онлайне"
         entity_id:
           - sensor.dd_esp32_uptime
         value_template: >
@@ -45,3 +45,27 @@
     entity_ids:
       - sensor.humidity_158d000156e92e
       - sensor.dd_bt_humidity
+
+# Заряд батарей
+  - platform: attributes
+    attribute: battery_level
+    unit_of_measurement: "%"
+    entities:
+# Детская Д, вход выключатель
+       - binary_sensor.wall_switch_both_158d000163e571
+# Детская Д, кровать, круглая
+       - binary_sensor.switch_158d00013f82b7
+# Детская Д, движение
+       - binary_sensor.motion_sensor_158d0001a66222
+# Детская Д, кубик
+       - binary_sensor.cube_158d00011063da       
+# Детская Д, влажность
+       - sensor.humidity_158d000156e92e
+# Детская Д, окно
+       - binary_sensor.door_window_sensor_158d0001193697      
+# Детская Д, балкон дверь
+       - binary_sensor.door_window_sensor_158d00015843d4
+# Детская Д, балкон влажность
+       - sensor.humidity_158d0001fa8321
+# Детская Д, балкон окно
+       - binary_sensor.door_window_sensor_158d0001a65b68 
