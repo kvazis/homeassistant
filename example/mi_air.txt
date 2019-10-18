@@ -1,0 +1,31 @@
+1. Установка php / bc
+sudo apt-get -y install php bc
+
+2. Установка php-miio
+sudo git clone https://github.com/skysilver-lab/php-miio.git
+
+3. Тестовый запрос
+php /home/ИМЯ/php-miio/miio-cli.php --ip IP_УСТРОЙСТВА --token ТОКЕН --info
+
+4. Скрипт
+
+#!/bin/bash
+
+id=$(echo $RANDOM % 1000 + 1 | bc)
+
+php /home/ИМЯ/php-miio/miio-cli.php --ip IP_УСТРОЙСТВА --token ТОКЕН --sendcmd '{"id":'"$id"',"method":"get_air_data","params":[]}' | tail -1 | sed 's/{"result"://g' | sed 's/\,"id.*//g'
+
+5. Присвоение прав на запуск скрипта
+sudo chmod 777 ~/scripts/air.sh
+
+6. После создания папки и файла - вывод из скрипта
+/home/ИМЯ/scripts/air.sh > /usr/share/hassio/homeassistant/bash/air.txt
+
+7. Ежеминутное выполнение в cron
+
+sudo crontab -e
+
+* * * * * /home/ИМЯ/scripts/air.sh > /usr/share/hassio/homeassistant/bash/air.txt
+
+8. Проверка в cron
+sudo crontab -l
