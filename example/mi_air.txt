@@ -18,7 +18,9 @@ php /home/ИМЯ/php-miio/miio-cli.php --ip IP_УСТРОЙСТВА --token ТО
 5. Присвоение прав на запуск скрипта
 sudo chmod 777 ~/scripts/air.sh
 
-6. После создания папки и файла - вывод из скрипта
+6. После создания папки и файла - права на папку и вывод из скрипта
+sudo chmod -R 777 /usr/share/hassio/homeassistant/bash/
+
 /home/ИМЯ/scripts/air.sh > /usr/share/hassio/homeassistant/bash/air.txt
 
 7. Ежеминутное выполнение в cron

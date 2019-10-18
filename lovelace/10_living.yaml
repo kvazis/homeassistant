@@ -138,26 +138,27 @@ cards:
               tap_action: 
                 action: toggle
               icon: mdi:ceiling-light
-            - entity: switch.xiaomi_wifi_socket_usb
-              name: Acer 
-              tap_action: 
-                action: toggle
-              icon: mdi:laptop-windows
             - entity: switch.plug_158d000153dd8e
-              name: HP
+              name: Удлинитель стол
               tap_action: 
                 action: toggle
-              icon: mdi:laptop-windows
+              icon: mdi:power-plug
             - entity: switch.plug_158d00012896cb
               name: ТВ
               tap_action: 
                 action: toggle
               icon: mdi:television
+            - entity: switch.xiaomi_wifi_socket_usb
+              name: Xiaomi USB 220
+              tap_action: 
+                action: toggle
+              icon: mdi:power-socket-de
             - entity: switch.xiaomi_wifi_socket_usb_usb
-              name: USB 
+              name: Xiaomi USB
               tap_action: 
                 action: toggle
               icon: mdi:usb
+
 
 
         - type: custom:vertical-stack-in-card
