@@ -1,9 +1,9 @@
 # Имя устройства, будет подставляться по тексту конфига
 substitutions:
-  plug_name: 02_sonoff_mini
-
+  plug_name: 02_sonoff_basic
+  
 esphome:
-  name: 02_sonoff_mini
+  name: 02_sonoff_basic
   platform: ESP8266
   board: esp01_1m
 
@@ -28,37 +28,17 @@ ota:
 
 web_server:
   port: 80
-  
-status_led:
-  pin:
-    number: GPIO13
-    inverted: True
 
 binary_sensor:
   - platform: gpio
-    pin: GPIO00
-    id: reset
-    internal: true
-    filters:
-      - invert:
-      - delayed_off: 10ms
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: ${plug_name}_button
     on_press:
-      - switch.toggle: 
-          id: relay
-
-  - platform: gpio
-    name: ${plug_name}_sw
-    pin: GPIO04
-    id: switch_1
-    on_press:
-      then:
-        - switch.toggle:
-            id: relay
-    on_release:
-      then:
-        - switch.toggle:
-            id: relay
-
+      - switch.toggle: relay
+    
 switch:
   - platform: gpio
     name: ${plug_name}_relay
@@ -76,3 +56,4 @@ sensor:
 text_sensor:
   - platform: version
     name: ${plug_name}_firmware_version
+
