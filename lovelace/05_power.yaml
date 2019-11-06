@@ -97,7 +97,7 @@ cards:
 
 
              - type: custom:canvas-gauge-card
-               entity: sensor.voltage_bwshp2
+               entity: sensor.bwshp2_voltage
                card_height: 180
                gauge:
                   type: "radial-gauge"

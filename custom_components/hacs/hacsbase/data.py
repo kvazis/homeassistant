@@ -6,6 +6,7 @@ from . import Hacs
 from .const import STORAGE_VERSION
 from ..const import VERSION
 from ..repositories.manifest import HacsManifest
+from ..store import async_save_to_store, async_load_from_store
 
 
 STORES = {
@@ -43,7 +44,7 @@ class HacsData(Hacs):
                 content = json.loads(content)
         return content
 
-    def write(self):
+    async def async_write(self):
         """Write content to the store files."""
         if self.system.status.background_task:
             return
@@ -51,27 +52,11 @@ class HacsData(Hacs):
         self.logger.debug("Saving data")
 
         # Hacs
-        path = f"{self.system.config_path}/.storage/{STORES['hacs']}"
-        hacs = {"view": self.configuration.frontend_mode}
-        save(self.logger, path, hacs)
-
-        # Installed
-        path = f"{self.system.config_path}/.storage/{STORES['installed']}"
-        installed = {}
-        for repository_name in self.common.installed:
-            repository = self.get_by_name(repository_name)
-            if repository is None:
-                self.logger.warning(f"Did not save information about {repository_name}")
-                continue
-            installed[repository.information.full_name] = {
-                "version_type": repository.display_version_or_commit,
-                "version_installed": repository.display_installed_version,
-                "version_available": repository.display_available_version,
-            }
-        save(self.logger, path, installed)
+        await async_save_to_store(
+            self.hass, "hacs", {"view": self.configuration.frontend_mode}
+        )
 
         # Repositories
-        path = f"{self.system.config_path}/.storage/{STORES['repositories']}"
         content = {}
         for repository in self.repositories:
             if repository.repository_manifest is not None:
@@ -97,50 +82,50 @@ class HacsData(Hacs):
                 "version_installed": repository.versions.installed,
             }
 
-        # Validate installed repositories
-        count_installed = len(installed) + 1  # For HACS it self
-        count_installed_restore = 0
-        for repository in self.repositories:
-            if repository.status.installed:
-                count_installed_restore += 1
-
-        if count_installed < count_installed_restore:
-            self.logger.debug("Save failed!")
-            self.logger.debug(
-                f"Number of installed repositories does not match the number of stored repositories [{count_installed} vs {count_installed_restore}]"
-            )
-            return
-        save(self.logger, path, content)
+        await async_save_to_store(self.hass, "repositories", content)
+        self.hass.bus.async_fire("hacs/repository", {})
+        self.hass.bus.fire("hacs/config", {})
 
     async def restore(self):
         """Restore saved data."""
+        hacs = {}
+        repositories = {}
+
         try:
-            hacs = self.read("hacs")
-            installed = self.read("installed")
-            repositrories = self.read("repositories")
+            hacs = await async_load_from_store(self.hass, "hacs")
+        except KeyError:
+            await async_save_to_store(self.hass, "hacs", self.data.read("hacs")["data"])
+            hacs = await async_load_from_store(self.hass, "hacs")
+
+        try:
+            repositories = await async_load_from_store(self.hass, "repositories")
+        except KeyError:
+            await async_save_to_store(
+                self.hass, "repositories", self.data.read("repositories")["data"]
+            )
+            repositories = await async_load_from_store(self.hass, "repositories")
+
+        try:
             if self.check_corrupted_files():
                 # Coruptted installation
                 self.logger.critical("Restore failed one or more files are corrupted!")
                 return False
-            if hacs is None and installed is None and repositrories is None:
+            if hacs is None and repositories is None:
                 # Assume new install
                 return True
 
             self.logger.info("Restore started")
 
             # Hacs
-            hacs = hacs["data"]
-            self.configuration.frontend_mode = hacs["view"]
-
-            # Installed
-            installed = installed["data"]
-            for repository in installed:
-                self.common.installed.append(repository)
+            self.configuration.frontend_mode = hacs.get("view", "Grid")
 
             # Repositories
-            repositrories = repositrories["data"]
-            for entry in repositrories:
-                repo = repositrories[entry]
+            repositories = repositories
+            for entry in repositories:
+                repo = repositories[entry]
+                if repo["full_name"] == "custom-components/hacs":
+                    # Skip the old repo location
+                    continue
                 if not self.is_known(repo["full_name"]):
                     await self.register_repository(
                         repo["full_name"], repo["category"], False
@@ -175,7 +160,7 @@ class HacsData(Hacs):
                     repository.status.selected_tag = repo["selected_tag"]
 
                 if repo.get("repository_manifest") is not None:
-                    repository.repository_manifest = HacsManifest(
+                    repository.repository_manifest = HacsManifest.from_dict(
                         repo["repository_manifest"]
                     )
 
@@ -194,7 +179,7 @@ class HacsData(Hacs):
                 if repo.get("new") is not None:
                     repository.status.new = repo["new"]
 
-                if repo["full_name"] == "custom-components/hacs":
+                if repo["full_name"] == "hacs/integration":
                     repository.versions.installed = VERSION
                     repository.status.installed = True
                     if "b" in VERSION:
@@ -205,56 +190,10 @@ class HacsData(Hacs):
                 if repo.get("installed_commit") is not None:
                     repository.versions.installed_commit = repo["installed_commit"]
 
-                if repo["full_name"] in self.common.installed:
-                    repository.status.installed = True
-                    repository.status.new = False
-                    frominstalled = installed[repo["full_name"]]
-                    if frominstalled["version_type"] == "commit":
-                        repository.versions.installed_commit = frominstalled[
-                            "version_installed"
-                        ]
-                        repository.versions.available_commit = frominstalled[
-                            "version_available"
-                        ]
-                    else:
-                        repository.versions.installed = frominstalled[
-                            "version_installed"
-                        ]
-                        repository.versions.available = frominstalled[
-                            "version_available"
-                        ]
-
-            # Check the restore.
-            count_installed = len(installed) + 1  # For HACS it self
-            count_installed_restore = 0
-            installed_restore = []
-            for repository in self.repositories:
-                if repository.status.installed:
-                    installed_restore.append(repository.information.full_name)
-                    if (
-                        repository.information.full_name not in self.common.installed
-                        and repository.information.full_name != "custom-components/hacs"
-                    ):
-                        self.logger.warning(
-                            f"{repository.information.full_name} is not in common.installed"
-                        )
-                    count_installed_restore += 1
-
-            if count_installed < count_installed_restore:
-                for repo in installed:
-                    installed_restore.remove(repo)
-                self.logger.warning(f"Check {repo}")
-
-                self.logger.critical("Restore failed!")
-                self.logger.critical(
-                    f"Number of installed repositories does not match the number of restored repositories [{count_installed} vs {count_installed_restore}]"
-                )
-                return False
-
             self.logger.info("Restore done")
         except Exception as exception:
             self.logger.critical(
-                f"[{exception}] Restore Failed! see https://github.com/custom-components/hacs/issues/639 for more details."
+                f"[{exception}] Restore Failed! see https://github.com/hacs/integration/issues/639 for more details."
             )
             return False
         return True

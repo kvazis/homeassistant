@@ -1,5 +1,5 @@
 - alias: 07_talk_smartfon_16
-  initial_state: true
+  initial_state: false
   trigger:
   - platform: time
     at: '15:55:00'
@@ -28,7 +28,7 @@
           - light.gateway_light_286c07f0ad27
           
 - alias: 07_talk_smartfon_19
-  initial_state: true
+  initial_state: false
   trigger:
   - platform: time
     at: '19:00:00'
@@ -57,7 +57,7 @@
           - light.gateway_light_286c07f0ad27
           
 - alias: 07_talk_smartfon_21
-  initial_state: true
+  initial_state: false
   trigger:
   - platform: time
     at: '20:55:00'

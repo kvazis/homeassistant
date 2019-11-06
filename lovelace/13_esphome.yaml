@@ -18,15 +18,15 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: sensor.sonoff_uptime_custom
-            - entity: sensor.sonoff_wi_fi_signal
+            - entity: sensor.01_sonoff_basic_uptime_custom
+            - entity: sensor.01_sonoff_basic_wifi_signal
               name: Сигнал wi-fi
-            - entity: sensor.sonoff_firmware_version
+            - entity: sensor.01_sonoff_basic_firmware_version
               name: Прошивка
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: switch.sonoff_basic_relay
+            - entity: switch.01_sonoff_basic_relay
               name: Питание
               tap_action: toggle
 
@@ -106,30 +106,29 @@ cards:
             show_header_toggle: false
             entities:
             - entity: sensor.bwshp2_uptime_custom
-            - entity: sensor.wi_fi_signal_bwshp2
+            - entity: sensor.bwshp2_wi_fi_signal
               name: Сигнал wi-fi
-            - entity: sensor.firmware_version_bwshp2
+            - entity: sensor.bwshp2_firmware_version
               name: Прошивка
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: switch.relay_bwshp2
+            - entity: switch.bwshp2_relay
               name: Питание
               tap_action: toggle
-            - entity: switch.led_blue_bwshp2
+            - entity: switch.bwshp2_led_blue
               name: Синий светодиод
               tap_action: toggle
-            - entity: switch.led_red_bwshp2
+            - entity: switch.bwshp2_led_red
               name: Красный светодиод
               tap_action: toggle
-            - entity: sensor.voltage_bwshp2
+            - entity: sensor.bwshp2_voltage
               name: Напряжение
-            - entity: sensor.current_bwshp2
+            - entity: sensor.bwshp2_current
               name: Ток
             - entity: sensor.load_bwshp2
               name: Потребление
               
-
               
       - type: vertical-stack
         cards:

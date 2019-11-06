@@ -81,7 +81,7 @@ cards:
           entities:
            - entity: binary_sensor.water_leak_sensor_158d0001bbeba6 
              name: Раковина
-           - entity: binary_sensor.motion_sensor_158d0001ab3350
+           - entity: binary_sensor.motion_sensor_158d0001e16204
              name: Движение
            - entity: binary_sensor.door_window_sensor_158d0001a99562
              name: Окно 
@@ -131,7 +131,7 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: sensor.mqtt_binary_sensor_158d0001ab3350
+          - entity: sensor.mqtt_binary_sensor_158d0001e16204
             name: Последнее движение в кухне в - 
             icon: mdi:run-fast 
           - entity: sensor.illumination_7811dc64f4c8

@@ -69,11 +69,11 @@
       minutes: '/1'
   condition:
     - condition: state
-      entity_id: switch.bw_relay
+      entity_id: switch.bwshp2_relay
       state: 'off'
   action:
    - service: switch.turn_on
-     entity_id: switch.bw_relay
+     entity_id: switch.bwshp2_relay
     
 ## Обнаружение протечки, стиралка 
 - alias: 02_laundry_wleak_washmash_on
@@ -118,7 +118,7 @@
   action: 
   - service: mqtt.publish
     data_template:
-      topic: "binary_sensor/158d0001e16204"
+      topic: "binary_sensor/158d0001ab3350"
       payload: "{{ states('sensor.time_date')}}"
       retain: true
       

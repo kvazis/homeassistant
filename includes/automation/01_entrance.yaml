@@ -3,13 +3,13 @@
   initial_state: true
   trigger:
   - platform: state
-    entity_id: switch.sonoff_basic_relay
+    entity_id: switch.01_sonoff_basic_relay
     to: 'off'
   action:
   - delay: 00:00:03
   - service: switch.turn_on
     entity_id:
-      - switch.sonoff_basic_relay
+      - switch.01_sonoff_basic_relay
       
 # Перезагрузка зависшей лампочки
 - alias: 01_enter_reboot
@@ -25,7 +25,7 @@
       data:
         message: "Потеря контроля в течении 5 минут - лампочка в прихожей.  Время события - {{ states('sensor.time_date') }} . Инициирована перезагрузка"
     - service: switch.turn_off
-      entity_id: switch.sonoff_basic_relay
+      entity_id: switch.01_sonoff_basic_relay
 
 ## Включение освещения
 - alias: 01_enter

@@ -37,11 +37,9 @@
   trigger:
    - platform: state
      entity_id: binary_sensor.tod_day
-     from: 'off'
      to: 'on'
    - platform: state
      entity_id: binary_sensor.door_window_sensor_158d00013ed373
-     from: 'on'
      to: 'off'
   condition:
      - condition: time
@@ -68,11 +66,9 @@
   trigger:
    - platform: state
      entity_id: binary_sensor.tod_night
-     from: 'off'
      to: 'on'
    - platform: state
      entity_id: binary_sensor.door_window_sensor_158d00013ed373
-     from: 'off'
      to: 'on' 
   action:    
    - service: homeassistant.turn_off
@@ -82,14 +78,14 @@
    - service: switch.turn_off
      entity_id: switch.forse_hum       
 
-## Обновление состояния уровня воды
-- alias: 05_smartmi_water_update
-  initial_state: true
-  trigger:
-    - platform: time_pattern
-      minutes: '/5'
-  action:
-    - service: homeassistant.update_entity
-      entity_id: 
-        - sensor.smartmi_water
+# ## Обновление состояния уровня воды
+# - alias: 05_smartmi_water_update
+#   initial_state: true
+#   trigger:
+#     - platform: time_pattern
+#       minutes: '/5'
+#   action:
+#     - service: homeassistant.update_entity
+#       entity_id: 
+#         - sensor.smartmi_water
       

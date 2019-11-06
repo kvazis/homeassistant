@@ -93,9 +93,9 @@
       - automation.07_table_autoswitch   
       - automation.07_dd_all_off
       - automation.07_hp_toggle
-      - automation.07_talk_smartfon_16
-      - automation.07_talk_smartfon_19
-      - automation.07_talk_smartfon_21      
+    #   - automation.07_talk_smartfon_16
+    #   - automation.07_talk_smartfon_19
+    #   - automation.07_talk_smartfon_21      
       - automation.08_da_hum_auto_on
       - automation.08_da_hum_auto_off
       - automation.08_da_hum_water_warning

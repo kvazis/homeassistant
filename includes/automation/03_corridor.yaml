@@ -70,6 +70,9 @@
     - condition: state
       entity_id: light.yeelight_03_ceiling
       state: 'off'
+    - condition: state
+      entity_id: binary_sensor.motion_sensor_158d00010f8920
+      state: 'on'
     - condition: time
       after: '08:00:00'
       before: '22:00:00'

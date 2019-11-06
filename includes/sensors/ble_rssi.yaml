@@ -131,7 +131,7 @@
   - platform: template
     sensors:
       mi_band_2_ns_rssi_summ:
-        friendly_name: "Mi Band 2 NS Rssi"
+        friendly_name: "Mi Band 3 Rssi"
         value_template: "{{ states.sensor.best_mi_band_2_ns_rssi.state }}"
         unit_of_measurement: 'dB'
         icon_template: >-

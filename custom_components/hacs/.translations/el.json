@@ -33,11 +33,14 @@
                     "theme": "Ενεργοποίηση εύρεσης & παρακολούθησης για τα θεμάτων",
                     "token": "Διακριτικό πρόσβασης του GitHub"
                 },
-                "description": "Εάν χρειαστείτε βοήθεια με τις ρυθμίσεις ανατρέξτε εδώ: https:\/\/hacs.netlify.com\/installation\/configuration\/",
+                "description": "Εάν χρειαστείτε βοήθεια με τις ρυθμίσεις ανατρέξτε εδώ: https:\/\/hacs.xyz\/docs\/configuration\/start\/",
                 "title": "HACS (Home Assistant Community Store)"
             }
         },
         "title": "HACS (Home Assistant Community Store)"
+    },
+    "confirm": {
+        "delete": "Είστε σίγουροι ότι θέλετε να διαγράψετε το \"{item}\";"
     },
     "options": {
         "step": {

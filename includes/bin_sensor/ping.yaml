@@ -112,15 +112,21 @@
   count: 2
   scan_interval: 30
   
-- platform: ping
-  host: 192.168.0.127
-  name: ping.alfawise_cam
-  count: 2
-  scan_interval: 30
+# - platform: ping
+#   host: 192.168.0.127
+#   name: ping.alfawise_cam
+#   count: 2
+#   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.128
   name: ping.reolink2_cam
+  count: 2
+  scan_interval: 30
+
+- platform: ping
+  host: 192.168.0.129
+  name: ping.reolink3_cam
   count: 2
   scan_interval: 30
   

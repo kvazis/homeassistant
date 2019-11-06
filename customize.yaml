@@ -4,7 +4,7 @@ light.yeelight_01_whitebulb:
   friendly_name: Прихожая, лампа
   icon: mdi:lightbulb
 ## Реле
-switch.sonoff_basic_relay:
+switch.01_sonoff_basic_relay:
   friendly_name: Прихожая, питание лампы
   icon: mdi:power
 ## Сенсоры
@@ -80,7 +80,7 @@ light.aqara_02_ceiling:
 ## Реле
 switch.wall_switch_158d00014a1a55:
   friendly_name: Прачечная выключатель
-switch.relay_bwshp2:
+switch.bwshp2_relay:
   friendly_name: Стиральная машина, питание
   icon: mdi:power
 ## Сенсоры
@@ -88,12 +88,12 @@ sensor.load_bwshp2:
   friendly_name: Стиральная машина, потребление
   unit_of_measurement: Вт
   device_class: power
-sensor.voltage_bwshp2:
+sensor.bwshp2_voltage:
   friendly_name: Напряжение в сети
   unit_of_measurement: В
 binary_sensor.motion_sensor_158d0001ab3350:
   friendly_name: Прачечная, движение
-sensor.illumination_158d0001e16204:
+sensor.illumination_158d0001ab3350:
   friendly_name: Прачечная, освещенность
 binary_sensor.water_leak_sensor_158d0002705b7b:
   friendly_name: Прачечная, протечка, стиралка
@@ -150,7 +150,7 @@ binary_sensor.wall_switch_both_158d000282a130:
   friendly_name: Кухня выключатель
 binary_sensor.motion_sensor_158d0001e16204:
   friendly_name: Кухня, движение
-sensor.illumination_158d0001ab3350:
+sensor.illumination_158d0001e16204:
   friendly_name: Кухня, освещенность
 binary_sensor.switch_158d000154a353:
   friendly_name: Кухня, вход, круглая
@@ -256,18 +256,6 @@ switch.xiaomi_euro:
   icon: mdi:power-socket-eu
   
 ## Сенсоры
-plant.dieffenbac:
-  friendly_name: Диффенбахия
-plant.yucca:
-  friendly_name: Юкка
-sensor.true_blue_battery:
-  friendly_name: Горшок True Blue
-sensor.deep_purple_battery:
-  friendly_name: Горшок Deep Purple
-sensor.yucca_battery:
-  friendly_name: Сенсор Юкка
-sensor.dieffenbac_battery:
-  friendly_name: Сенсор Диффенбахия
 sensor.illumination_34ce0088b039:
   friendly_name: Гостиная шлюз освещенность
 binary_sensor.wall_switch_left_158d00013fc3bc:
@@ -594,33 +582,52 @@ binary_sensor.workday_sensor:
 ## Растения
 sensor.dieffenbac_moisture:
   friendly_name: Диффенбахия влажность почвы
-sensor.dieffenbac_soil:
+sensor.dieffenbac_conductivity:
   friendly_name: Диффенбахия фертильность почвы
 sensor.dieffenbac_temperature:
   friendly_name: Диффенбахия температура
   icon: mdi:temperature-celsius
-sensor.dieffenbac_illuminance:
+sensor.dieffenbac_light_intensity:
   friendly_name: Диффенбахия уровень освещенности
+sensor.dieffenbac_battery:
+  friendly_name: Диффенбахия батарейка
 
 sensor.yucca_moisture:
   friendly_name: Юкка влажность почвы
-sensor.yucca_soil:
+sensor.yucca_conductivity:
   friendly_name: Юкка фертильность почвы
 sensor.yucca_temperature:
   friendly_name: Юкка температура
   icon: mdi:temperature-celsius
-sensor.yucca_illuminance:
+sensor.yucca_light_intensity:
   friendly_name: Юкка уровень освещенности
+sensor.yucca_battery:
+  friendly_name: Юкка батарейка
   
 sensor.zamiokulkas_moisture:
   friendly_name: Замиокулькас влажность почвы
-sensor.zamiokulkas_soil:
+sensor.zamiokulkas_conductivity:
   friendly_name: Замиокулькас фертильность почвы
 sensor.zamiokulkas_temperature:
   friendly_name: Замиокулькас температура
   icon: mdi:temperature-celsius
-sensor.zamiokulkas_illuminance:
+sensor.zamiokulkas_light_intensity:
   friendly_name: Замиокулькас уровень освещенности
+sensor.zamiokulkas_battery:
+  friendly_name: Замиокулькас батарейка
+
+sensor.deep_purple_battery:
+  friendly_name: Deep Purple батарейка
+
+sensor.true_blue_battery:
+  friendly_name: Trueblue батарейка
+
+plant.dieffenbac:
+  friendly_name: Диффенбахия
+plant.yucca:
+  friendly_name: Юкка
+plant.zamiokulkas:
+  friendly_name: Замиокулькас
 
 ## Google Fit 
 sensor.alex_steps:

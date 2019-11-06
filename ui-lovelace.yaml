@@ -33,3 +33,4 @@ views:
   - !include lovelace/16_switchlight.yaml
   - !include lovelace/17_powersync.yaml
 
+ 

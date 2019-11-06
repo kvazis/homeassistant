@@ -1,196 +1,274 @@
 #####Общее потребление
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_total_energy?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_total_energy
     name: p100_power_month_total_energy
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_total_energy?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_total_energy
     name: p100_power_lastmonth_total_energy
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
 
 
 #####Стиральная машина
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_bw_relay?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_bw_relay
     name: p100_power_month_bw_relay
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_bw_relay?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_bw_relay
     name: p100_power_lastmonth_bw_relay
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
 
 
 #####Кухня телевизор
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d0001291d12?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d0001291d12
     name: p100_power_month_158d0001291d12
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d0001291d12?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d0001291d12
     name: p100_power_lastmonth_158d0001291d12
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
 
 #####Холодильник
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d0001fa2934?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d0001fa2934
     name: p100_power_month_158d0001fa2934
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d0001fa2934?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d0001fa2934
     name: p100_power_lastmonth_158d0001fa2934
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
 #####LED лента
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d0001d35bc0?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d0001d35bc0
     name: p100_power_month_158d0001d35bc0
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d0001d35bc0?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d0001d35bc0
     name: p100_power_lastmonth_158d0001d35bc0
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
 #####Гостиная телевизор
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_wifi_socket_usb?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_wifi_socket_usb
     name: p100_power_month_wifi_socket_usb
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_wifi_socket_usb?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_wifi_socket_usb
     name: p100_power_lastmonth_wifi_socket_usb
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
 #####Ноутбук Acer
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00012896cb?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00012896cb
     name: p100_power_month_158d00012896cb
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00012896cb?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00012896cb
     name: p100_power_lastmonth_158d00012896cb
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
 #####Ноутбук HP
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d000153dd8e?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d000153dd8e
     name: p100_power_month_158d000153dd8e
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d000153dd8e?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d000153dd8e
     name: p100_power_lastmonth_158d000153dd8e
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
 #####Удлинитель Xiaomi 6 портов
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_wifi_6port?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_wifi_6port
     name: p100_power_month_wifi_6port
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_wifi_6port?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_wifi_6port
     name: p100_power_lastmonth_wifi_6port
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
 #####Бойлер
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00015751f4?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00015751f4
     name: p100_power_month_158d00015751f4
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00015751f4?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00015751f4
     name: p100_power_lastmonth_158d00015751f4
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
 #####Увлажнитель Д
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d000114a1e1?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d000114a1e1
     name: p100_power_month_158d000114a1e1
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d000114a1e1?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d000114a1e1
     name: p100_power_lastmonth_158d000114a1e1
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
 #####Настольная лампа Д
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00030a6e78?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00030a6e78
     name: p100_power_month_158d00030a6e78
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00030a6e78?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00030a6e78
     name: p100_power_lastmonth_158d00030a6e78
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
 #####Увлажнитель А
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00010ec4b8?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00010ec4b8
     name: p100_power_month_158d00010ec4b8
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00010ec4b8?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_158d00010ec4b8
     name: p100_power_lastmonth_158d00010ec4b8
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'

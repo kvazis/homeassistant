@@ -37,7 +37,7 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: switch.sonoff_basic_relay
+          - entity: switch.01_sonoff_basic_relay
             icon: mdi:lightbulb-outline
             tap_action: 
                action: toggle 
@@ -86,7 +86,7 @@ cards:
           entities:
            - entity: binary_sensor.motion_sensor_158d0001a24e71  
              name: Туалет движение
-           - entity: binary_sensor.motion_sensor_158d0001e16204 
+           - entity: binary_sensor.motion_sensor_158d0001ab3350 
              name: Прачечная движение
            - entity: binary_sensor.water_leak_sensor_158d0002705b7b
              name: Прачечная протечка
@@ -170,7 +170,7 @@ cards:
           - entity: sensor.mqtt_binary_sensor_158d0001a24e71
             name: Последнее движение в туалете в - 
             icon: mdi:run-fast
-          - entity: sensor.mqtt_binary_sensor_158d0001e16204
+          - entity: sensor.mqtt_binary_sensor_158d0001ab3350
             name: Последнее движение в прачечной в - 
             icon: mdi:run-fast
 

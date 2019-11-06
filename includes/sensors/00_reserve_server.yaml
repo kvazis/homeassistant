@@ -1,35 +1,53 @@
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/group.scenario?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/group.scenario
     name: reserve_scenario_group
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
 
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/group.heater?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/group.heater
     name: reserve_heater_group
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_light?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_light
     name: reserve_unavailable_now_light
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
 
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_switch?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_switch
     name: reserve_unavailable_now_switch
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_sensor?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_sensor
     name: reserve_unavailable_now_sensor
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
 
   - platform: rest
-    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_binary_sensor?api_password=qwerty
+    resource: http://192.168.0.71:8123/api/states/sensor.unavailable_now_binary_sensor
     name: reserve_unavailable_now_binary_sensor
     force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
     value_template: '{{ value_json.state }}'
