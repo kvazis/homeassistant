@@ -10,7 +10,7 @@ cards:
             content: >
                 **Автоматизации**
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: entities
@@ -21,7 +21,7 @@ cards:
               exclude:
                - state: 'off'
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: entities
@@ -39,7 +39,7 @@ cards:
             content: >
                 **Скрипты**
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: entities
@@ -55,7 +55,7 @@ cards:
             content: >
                 **Группы**
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: entities

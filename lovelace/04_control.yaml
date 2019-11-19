@@ -11,7 +11,7 @@ cards:
             - type: markdown
               content: >
                   **Телевизоры**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -28,7 +28,7 @@ cards:
             - type: markdown
               content: >
                   **Активные розетки > 5 Ватт**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -39,7 +39,7 @@ cards:
                 exclude:
                  - state: '< 5.0'
                  
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -56,7 +56,7 @@ cards:
             - type: markdown
               content: >
                   **Отвалившиеся розетки**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -73,7 +73,7 @@ cards:
             - type: markdown
               content: >
                   **Активные светильники**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -92,7 +92,7 @@ cards:
             - type: markdown
               content: >
                   **Отвалившиеся светильники**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -103,7 +103,7 @@ cards:
                 exclude:
                  - state: '< 1'
                  
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -120,7 +120,7 @@ cards:
             - type: markdown
               content: >
                   **Активные таймеры**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -140,7 +140,7 @@ cards:
             - type: markdown
               content: >
                   **Активные датчики движения**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: glance
@@ -156,7 +156,7 @@ cards:
             - type: markdown
               content: >
                   **Активные аварийные датчики**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -173,7 +173,7 @@ cards:
             - type: markdown
               content: >
                   **Открытые окна и двери**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: glance
@@ -189,7 +189,7 @@ cards:
             - type: markdown
               content: >
                   **Активные BLE метки**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -205,7 +205,7 @@ cards:
             - type: markdown
               content: >
                   **Растения < 20% влажности почвы**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -221,7 +221,7 @@ cards:
             - type: markdown
               content: >
                   **Сенсоры < 30% заряда**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -237,12 +237,35 @@ cards:
       - type: vertical-stack
         cards:
 
+
+          - type: custom:vertical-stack-in-card
+            cards:
+            - type: markdown
+              content: >
+                  **Отвалившиеся климат сенсоры**
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*temperature*
+                   state: 'unknown'
+                 - entity_id: sensor.*temperature*
+                   state: 'unavailable'
+                 - entity_id: sensor.*humidity*
+                   state: 'unknown'
+                 - entity_id: sensor.*humidity*
+                   state: 'unavailable'
+                
+
           - type: custom:vertical-stack-in-card
             cards:
             - type: markdown
               content: >
                   **Температура < 18 C**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -260,6 +283,8 @@ cards:
                  - entity_id: sensor.temperature_158d000159c7e6
                  - entity_id: sensor.da_bt_temperature
                  - state: '> 18'
+                 - state: 'unknown'
+                 - state: 'unavailable'
                  
 
           - type: custom:vertical-stack-in-card
@@ -267,7 +292,7 @@ cards:
             - type: markdown
               content: >
                   **Температура > 26 C**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -285,13 +310,15 @@ cards:
                  - entity_id: sensor.temperature_158d000159c7e6
                  - entity_id: sensor.da_bt_temperature
                  - state: '< 26'
-
+                 - state: 'unknown'
+                 - state: 'unavailable'
+                 
           - type: custom:vertical-stack-in-card
             cards:
             - type: markdown
               content: >
                   **Влажность < 40%**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -309,13 +336,15 @@ cards:
                  - entity_id: sensor.humidity_158d000159c7e6
                  - entity_id: sensor.da_bt_humidity
                  - state: '> 40'
+                 - state: 'unknown'
+                 - state: 'unavailable'
                  
           - type: custom:vertical-stack-in-card
             cards:
             - type: markdown
               content: >
                   **Влажность > 60%**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities
@@ -333,13 +362,15 @@ cards:
                  - entity_id: sensor.humidity_158d000159c7e6
                  - entity_id: sensor.da_bt_humidi
                  - state: '< 60'
-
+                 - state: 'unknown'
+                 - state: 'unavailable'
+                 
           - type: custom:vertical-stack-in-card
             cards:                
             - type: markdown
               content: >
                   **Cенсоры освещения > 500 люмен**
-            - type: custom:monster-card
+            - type: custom:auto-entities
               show_empty: false
               card:
                 type: entities

@@ -10,7 +10,7 @@ cards:
             content: >
                 **Cветильники**
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: entities
@@ -26,7 +26,7 @@ cards:
             content: >
                 **Выключатели**
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: entities
@@ -42,7 +42,7 @@ cards:
             content: >
                 **Медиа плееры**
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: entities
@@ -55,7 +55,7 @@ cards:
             content: >
                 **Камеры**
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: glance
@@ -69,7 +69,7 @@ cards:
             content: >
                 **Пульты ДУ**
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: entities
@@ -82,7 +82,7 @@ cards:
             content: >
                 **Климатическая техника**
 
-          - type: custom:monster-card
+          - type: custom:auto-entities
             show_empty: false
             card:
               type: entities

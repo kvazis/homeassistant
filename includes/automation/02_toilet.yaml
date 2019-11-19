@@ -214,7 +214,7 @@
   - service: switch.toggle
     entity_id: 
          - switch.wall_switch_right_158d00014dceb3
-         - switch.02_sonoff_basic_relay
+         - switch.02_sonoff_fan_relay
 
 # Включение таймера
 - alias: 02_toilet_vent_timer
@@ -224,7 +224,7 @@
      entity_id: switch.wall_switch_right_158d00014dceb3
      to: 'on'
    - platform: state
-     entity_id: switch.02_sonoff_basic_relay
+     entity_id: switch.02_sonoff_fan_relay
      to: 'on'
   action:
   - service: timer.cancel
@@ -240,7 +240,7 @@
      entity_id: switch.wall_switch_right_158d00014dceb3
      to: 'off'
    - platform: state
-     entity_id: switch.02_sonoff_basic_relay
+     entity_id: switch.02_sonoff_fan_relay
      to: 'off'
   action:
   - service: timer.cancel
@@ -258,7 +258,7 @@
   - service: switch.turn_off
     entity_id: 
          - switch.wall_switch_right_158d00014dceb3
-         - switch.02_sonoff_basic_relay
+         - switch.02_sonoff_fan_relay
 
 ## Запись последнего движения в туалете
 - alias: 02_toilet_motion_time

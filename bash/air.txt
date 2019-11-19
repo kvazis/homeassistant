@@ -1,1 +1,1 @@
-{"co2e":430,"humidity":42.299999237060547,"pm25":12.800000190734863,"temperature":23.799999237060547,"temperature_unit":"c","tvoc":0.99811452627182007,"tvoc_unit":"mg_m3"}
+{"co2e":2081,"humidity":51.5,"pm25":35.400001525878906,"temperature":22.5,"temperature_unit":"c","tvoc":3.3847708702087402,"tvoc_unit":"mg_m3"}

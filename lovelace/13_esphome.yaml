@@ -49,12 +49,32 @@ cards:
             - entity: switch.02_sonoff_mini_relay
               name: Питание
               tap_action: toggle
+              
+        - type: custom:vertical-stack-in-card
+          cards:
+          - type: markdown
+            content: >
+               **Туалет - Sonoff fan - вентилятор**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.02_sonoff_fan_uptime_custom
+            - entity: sensor.02_sonoff_fan_wifi_signal
+              name: Сигнал wi-fi
+            - entity: sensor.02_sonoff_fan_firmware_version
+              name: Прошивка
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: switch.02_sonoff_fan_relay
+              name: Питание
+              tap_action: toggle
     
         - type: custom:vertical-stack-in-card
           cards:
           - type: markdown
             content: >
-               **Туалет - Sonoff Basic - вентилятор**
+               **Туалет - Sonoff Basic**
           - type: entities
             show_header_toggle: false
             entities:

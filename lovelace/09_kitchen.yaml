@@ -135,7 +135,9 @@ cards:
             name: Последнее движение в кухне в - 
             icon: mdi:run-fast 
           - entity: sensor.illumination_7811dc64f4c8
-            name: Уровень освещенности
+            name: Уровень освещенности шлюз
+          - entity: sensor.illumination_158d0001e16204
+            name: Уровень освещенности дд
           - entity: sensor.xiaomi_tv_custom
           - entity: sensor.load_158d0001291d12
             name: Телевизор, текущее потребление

@@ -75,8 +75,8 @@
      entity_id: 
        - fan.gg_humidifier
        - fan.gg_purifier
-   - service: switch.turn_off
-     entity_id: switch.forse_hum       
+#   - service: switch.turn_off
+#      entity_id: switch.forse_hum       
 
 # ## Обновление состояния уровня воды
 # - alias: 05_smartmi_water_update

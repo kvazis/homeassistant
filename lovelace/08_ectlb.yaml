@@ -163,13 +163,15 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: switch.relay_bwshp2
+          - entity: switch.bwshp2_relay
             name: Стиральная машина, питание
             tap_action: toggle
             icon: mdi:washing-machine
           - entity: sensor.mqtt_binary_sensor_158d0001a24e71
             name: Последнее движение в туалете в - 
             icon: mdi:run-fast
+          - entity: sensor.illumination_158d0001a24e71
+            name: Освещенность в туалете -
           - entity: sensor.mqtt_binary_sensor_158d0001ab3350
             name: Последнее движение в прачечной в - 
             icon: mdi:run-fast

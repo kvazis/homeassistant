@@ -64,8 +64,9 @@
       - automation.05_gg_hum_on
       - automation.05_gg_hum_off
       - automation.05_gg_air_fresh
-#      - automation.05_usb_poweroff
-#      - automation.05_usb_poweron      
+      - automation.05_usb_cool_work
+      - automation.05_usb_cool_week
+      - automation.05_usb_cool_off      
       - automation.05_tv_samsung
       - automation.05_gg_balkoon_light_on
       - automation.05_gg_balkoon_light_off
