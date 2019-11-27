@@ -11,6 +11,7 @@ esphome:
 
 # Параметры сети
 wifi:
+  output_power: 17dB
   ssid: 'имя сети'
   password: 'пароль'
   manual_ip:

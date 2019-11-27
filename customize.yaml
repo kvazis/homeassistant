@@ -35,15 +35,9 @@ light.sonoff_02_mirror:
   icon: mdi:spotlight-beam
 
 ## Реле
-switch.02_sonoff_basic_relay:
+switch.02_sonoff_fan_relay:
   friendly_name: Туалет вентилятор
   icon: mdi:fan 
-switch.wall_switch_left_158d00014dceb3:
-  friendly_name: Туалет питание люстры
-  icon: mdi:power
-switch.wall_switch_right_158d00014dceb3:
-  friendly_name: Туалет вентилятор 2
-  icon: mdi:fan
 ## Сенсоры
 #Bluetooth
 sensor.02_toilet_lywsd02_humidity:
@@ -295,24 +289,6 @@ sensor.05_mean_humidity:
   icon: mdi:water-percent  
 sensor.05_mean_temperature:
   friendly_name: Гостиная, средняя температура
-  icon: mdi:temperature-celsius
-
-
-# Монитор воздуха
-sensor.05_mi_air_co2a:
-  friendly_name: Гостиная mi air СО2а
-  icon: mdi:periodic-table-co2
-sensor.05_mi_air_tvoc:
-  friendly_name: Гостиная mi air ЛОВ
-  icon: mdi:alpha-t
-sensor.05_mi_air_pm25:
-  friendly_name: Гостиная mi air PM 2.5
-  icon: mdi:alpha-p
-sensor.05_mi_air_humidity:
-  friendly_name: Гостиная mi air влажность
-  icon: mdi:water-percent
-sensor.05_mi_air_temperature:
-  friendly_name: Гостиная mi air температура
   icon: mdi:temperature-celsius
 
 ## Гостиная балкон

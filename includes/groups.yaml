@@ -15,8 +15,8 @@
       - automation.01_enter_light_timer_on
       - automation.01_enter_light_timer_reload      
       - automation.01_enter_light_timer_off
-      - automation.02_toilet_autoswitch
-      - automation.02_toilet_reboot
+    #   - automation.02_toilet_autoswitch
+    #   - automation.02_toilet_reboot
       - automation.02_toilet_light      
       - automation.02_toilet_light_on
       - automation.02_toilet_light_off

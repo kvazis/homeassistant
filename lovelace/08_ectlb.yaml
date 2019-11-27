@@ -97,9 +97,9 @@ cards:
             cards:        
             - type: light
               entity: light.yeelight_02_ceiling
-            - type: light
-              entity: light.aqara_02_ceiling
-              name: Прачечная
+            # - type: light
+            #   entity: light.aqara_02_ceiling
+            #   name: Прачечная
 
         - type: horizontal-stack
           cards:
@@ -151,13 +151,14 @@ cards:
             icon: mdi:spotlight
 
           - type: entity-button
-            entity: switch.wall_switch_left_158d00014dceb3
-            name: Питание люстры
-            icon: mdi:power
-
-          - type: entity-button
-            entity: switch.wall_switch_right_158d00014dceb3
+            entity: switch.02_sonoff_fan_relay
             name: Вентиляция
+            icon: mdi:fan
+            
+          - type: entity-button
+            entity: light.aqara_02_ceiling
+            name: Прачечная
+            icon: mdi:ceiling-light
 
 
         - type: entities

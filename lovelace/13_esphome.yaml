@@ -54,7 +54,7 @@ cards:
           cards:
           - type: markdown
             content: >
-               **Туалет - Sonoff fan - вентилятор**
+               **Туалет - Sonoff mini - вентилятор**
           - type: entities
             show_header_toggle: false
             entities:
@@ -74,7 +74,7 @@ cards:
           cards:
           - type: markdown
             content: >
-               **Туалет - Sonoff Basic**
+               **Sonoff Basic**
           - type: entities
             show_header_toggle: false
             entities:

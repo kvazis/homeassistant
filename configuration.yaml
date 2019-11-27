@@ -135,6 +135,13 @@ device_tracker:
     new_device_defaults:
       track_new_devices: false
       hide_if_away: false
+      
+# Качество воздуха
+air_quality:
+  - platform: xiaomi_miio
+    name: 05_air_monitor
+    host: 192.168.0.142
+    token: 5233595a56594a4e55724b4967513542
   
 #Вынос в папки
 sensor: !include_dir_merge_list includes/sensors

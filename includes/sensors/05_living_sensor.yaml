@@ -7,37 +7,32 @@
         entity_id: light.philips_05_bedside
 
 # Mi Air monitor
-
-  - platform: file
-    name: 05_mi_air_co2a
-    file_path: /config/bash/air.txt
-    value_template: '{{ value_json.co2e }}'
-    unit_of_measurement: 'ppm'
-  
-  - platform: file
-    name: 05_mi_air_tvoc
-    file_path: /config/bash/air.txt
-    value_template: '{{ value_json.tvoc | round(3) }}'
-    unit_of_measurement: 'mg_m3'
-  
-  - platform: file
-    name: 05_mi_air_pm25
-    file_path: /config/bash/air.txt
-    value_template: '{{ value_json.pm25 | round(2) }}'
-    unit_of_measurement: 'ppm'
-  
-  - platform: file
-    name: 05_mi_air_temperature
-    file_path: /config/bash/air.txt
-    value_template: '{{ value_json.temperature | round(1) }}'
-    unit_of_measurement: '°C'
-  
-  - platform: file
-    name: 05_mi_air_humidity
-    file_path: /config/bash/air.txt
-    value_template: '{{ value_json.humidity | round(1) }}'
-    unit_of_measurement: '%'
-
+  - platform: template
+    sensors:
+      05_mi_air_co2a:
+        friendly_name: 'Гостиная mi air СО2а - '
+        value_template: "{{ state_attr('air_quality.05_air_monitor', 'carbon_dioxide_equivalent') }}"  
+        icon_template: mdi:periodic-table-co2
+        entity_id: air_quality.05_air_monitor
+        unit_of_measurement: 'ppm'
+        
+  - platform: template
+    sensors:
+      05_mi_air_tvoc:
+        friendly_name: 'Гостиная mi air ЛОВ - '
+        value_template: "{{ state_attr('air_quality.05_air_monitor', 'total_volatile_organic_compounds') }}"  
+        icon_template: mdi:alpha-t
+        entity_id: air_quality.05_air_monitor
+        unit_of_measurement: 'mg_m3'
+        
+  - platform: template
+    sensors:
+      05_mi_air_pm25:
+        friendly_name: 'Гостиная mi air PM 2.5 - '
+        value_template: "{{ state_attr('air_quality.05_air_monitor', 'particulate_matter_2_5') }}"  
+        icon_template: mdi:alpha-p
+        entity_id: air_quality.05_air_monitor
+        unit_of_measurement: 'ppm'
 
 # Аverage temperature
   - platform: min_max
@@ -45,7 +40,6 @@
     type: mean
     entity_ids:
       - sensor.temperature_158d00015aebb6
-      - sensor.05_mi_air_temperature
       - sensor.05_smartmi_temperature
       
 # Аverage humidity
@@ -54,7 +48,6 @@
     type: mean
     entity_ids:
       - sensor.humidity_158d00015aebb6
-      - sensor.05_mi_air_humidity
       - sensor.05_smartmi_humidity
 
         

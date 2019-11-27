@@ -1,31 +1,31 @@
-# Включение питания на люстру
-- alias: 02_toilet_autoswitch
-  initial_state: true
-  trigger:
-  - platform: state
-    entity_id: switch.wall_switch_left_158d00014dceb3
-    to: 'off'
-  action:
-  - delay: 00:00:03
-  - service: switch.turn_on
-    entity_id:
-      - switch.wall_switch_left_158d00014dceb3
+# # Включение питания на люстру
+# - alias: 02_toilet_autoswitch
+#   initial_state: true
+#   trigger:
+#   - platform: state
+#     entity_id: switch.wall_switch_left_158d00014dceb3
+#     to: 'off'
+#   action:
+#   - delay: 00:00:03
+#   - service: switch.turn_on
+#     entity_id:
+#       - switch.wall_switch_left_158d00014dceb3
       
-# Перезагрузка зависшей люстры
-- alias: 02_toilet_reboot
-  initial_state: true
-  trigger:
-  - platform: state
-    entity_id: light.yeelight_02_ceiling
-    to: 'unavailable'
-    for:
-      minutes: 5
-  action:
-    - service: notify.telegram
-      data:
-        message: "Потеря контроля в течении 5 минут - люстра в туалете.  Время события - {{ states('sensor.time_date') }} . Инициирована перезагрузка"
-    - service: switch.turn_off
-      entity_id: switch.wall_switch_left_158d00014dceb3
+# # Перезагрузка зависшей люстры
+# - alias: 02_toilet_reboot
+#   initial_state: true
+#   trigger:
+#   - platform: state
+#     entity_id: light.yeelight_02_ceiling
+#     to: 'unavailable'
+#     for:
+#       minutes: 5
+#   action:
+#     - service: notify.telegram
+#       data:
+#         message: "Потеря контроля в течении 5 минут - люстра в туалете.  Время события - {{ states('sensor.time_date') }} . Инициирована перезагрузка"
+#     - service: switch.turn_off
+#       entity_id: switch.wall_switch_left_158d00014dceb3
       
 # Автоматическая установка яркости
 - alias: 02_toilet_light
@@ -213,16 +213,16 @@
   action:
   - service: switch.toggle
     entity_id: 
-         - switch.wall_switch_right_158d00014dceb3
+        #  - switch.wall_switch_right_158d00014dceb3
          - switch.02_sonoff_fan_relay
 
 # Включение таймера
 - alias: 02_toilet_vent_timer
   initial_state: true
   trigger:       
-   - platform: state
-     entity_id: switch.wall_switch_right_158d00014dceb3
-     to: 'on'
+#   - platform: state
+#      entity_id: switch.wall_switch_right_158d00014dceb3
+#      to: 'on'
    - platform: state
      entity_id: switch.02_sonoff_fan_relay
      to: 'on'
@@ -236,9 +236,9 @@
 - alias: 02_toilet_vent_timer_off
   initial_state: true
   trigger:       
-   - platform: state
-     entity_id: switch.wall_switch_right_158d00014dceb3
-     to: 'off'
+#   - platform: state
+#      entity_id: switch.wall_switch_right_158d00014dceb3
+#      to: 'off'
    - platform: state
      entity_id: switch.02_sonoff_fan_relay
      to: 'off'
@@ -257,7 +257,7 @@
   action:
   - service: switch.turn_off
     entity_id: 
-         - switch.wall_switch_right_158d00014dceb3
+        #  - switch.wall_switch_right_158d00014dceb3
          - switch.02_sonoff_fan_relay
 
 ## Запись последнего движения в туалете
