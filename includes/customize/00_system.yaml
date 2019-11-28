@@ -1,0 +1,11 @@
+## Тестовые
+binary_sensor.switch_158d0002af829b:
+  friendly_name: Квадратная с тряской
+
+## Системные
+sun.sun:
+  friendly_name: Солнце
+sensor.time:
+  friendly_name: Время
+binary_sensor.workday_sensor:
+  friendly_name: Рабочий день

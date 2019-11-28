@@ -214,13 +214,9 @@ cards:
               - type: glance
                 show_state: false
                 entities:
-                 - entity: binary_sensor.ping_dlinknas
-                   name: Dlink NAS 1 TB
-                   icon: mdi:nas
-                 - entity: binary_sensor.ping_printerhp
-                   name: HP 1015 cn
-                   icon: mdi:printer
-    
+                 - entity: binary_sensor.nas_dlink
+                 - entity: binary_sensor.printer
+
           - type: custom:vertical-stack-in-card
             cards:
               - type: markdown
@@ -229,19 +225,11 @@ cards:
               - type: glance
                 show_state: false
                 entities:
-                 - entity: binary_sensor.ping_ggtv
-                   name: Samsung, гостиная
-                   icon: mdi:television
-                 - entity: binary_sensor.ping_kntv
-                   name: Xiaomi, кухня
-                   icon: mdi:television
-                 - entity: binary_sensor.ping_tvboxgg
-                   name: H96, гостиная
-                   icon: mdi:android
-                 - entity: binary_sensor.ping_tvboxkn
-                   name: Mini M8S, кухня
-                   icon: mdi:android
-                   
+                 - entity: binary_sensor.tv_gg
+                 - entity: binary_sensor.tv_kn
+                 - entity: binary_sensor.tvbox_gg
+                 - entity: binary_sensor.tvbox_kn
+
           - type: custom:vertical-stack-in-card
             cards:
               - type: markdown
@@ -250,18 +238,10 @@ cards:
               - type: glance
                 show_state: false
                 entities:
-                 - entity: binary_sensor.ping_acer
-                   name: Acer
-                   icon: mdi:laptop
-                 - entity: binary_sensor.ping_hp
-                   name: HP
-                   icon: mdi:laptop
-                 - entity: binary_sensor.ping_sony
-                   name: Sony
-                   icon: mdi:laptop
-                 - entity: binary_sensor.ping_chuwinb
-                   name: Chuwi
-                   icon: mdi:laptop
+                 - entity: binary_sensor.notebook_acer
+                 - entity: binary_sensor.notebook_hp
+                 - entity: binary_sensor.notebook_sony
+                 - entity: binary_sensor.notebook_chuwi
 
 
           - type: custom:vertical-stack-in-card
@@ -272,15 +252,10 @@ cards:
               - type: glance
                 show_state: false
                 entities:
-                 - entity: binary_sensor.ping_main
-                   name: Основной - RPB3+
-                   icon: mdi:developer-board
-                 - entity: binary_sensor.ping_reserve
-                   name: Резервный Khadas VIM 2
-                   icon: mdi:developer-board
-                 - entity: binary_sensor.ping_test
-                   name: Тестовый - RPB3 
-                   icon: mdi:developer-board
+                 - entity: binary_sensor.hainst_main
+                 - entity: binary_sensor.hainst_reserve
+                 - entity: binary_sensor.hainst_test
+                 - entity: binary_sensor.hainst_test2
                  
              
 
@@ -292,19 +267,10 @@ cards:
               - type: glance
                 show_state: false
                 entities:
-                 - entity: binary_sensor.ping_gateway1
-                   name: Gateway 1
-                   icon: mdi:blur-radial
-                 - entity: binary_sensor.ping_gateway2
-                   name: Gateway 2
-                   icon: mdi:blur-radial
-                 - entity: binary_sensor.ping_gateway3
-                   name: Gateway 3
-                   icon: mdi:blur-radial
-                 - entity: binary_sensor.ping_gateway4
-                   name: Gateway 4
-                   icon: mdi:blur-radial  
-                   
+                 - entity: binary_sensor.gateway_da
+                 - entity: binary_sensor.gateway_dd
+                 - entity: binary_sensor.gateway_gg
+                 - entity: binary_sensor.gateway_kn
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -314,19 +280,11 @@ cards:
               - type: glance
                 show_state: false
                 entities:
-                 - entity: binary_sensor.ping_xiaofang_cam
-                   name: Xiaofang 
-                   icon: mdi:cctv  
-                 - entity: binary_sensor.ping_reolink_cam
-                   name: Reolink 411WS
-                   icon: mdi:cctv
-                 - entity: binary_sensor.ping_reolink2_cam
-                   name: Reolink C2 Pro
-                   icon: mdi:cctv
-                 - entity: binary_sensor.ping_reolink3_cam
-                   name: Reolink 410W
-                   icon: mdi:cctv
-                   
+                 - entity: binary_sensor.camera_xiaofang
+                 - entity: binary_sensor.camera_reolink_411
+                 - entity: binary_sensor.camera_reolink_c2
+                 - entity: binary_sensor.camera_reolink_410
+
           - type: custom:vertical-stack-in-card
             cards:
               - type: markdown
@@ -335,13 +293,8 @@ cards:
               - type: glance
                 show_state: false
                 entities:
-                 - entity: binary_sensor.ping_xiaomi_ir
-                   name: Mi Ir Base 
-                   icon: mdi:remote
-                 - entity: binary_sensor.ping_broadlink_ir
-                   name: BL ir Base 
-                   icon: mdi:remote
-                 - entity: binary_sensor.ping_xiaomi_tvoc
-                   name: Mi TVOC 
-                   icon: mdi:periodic-table-co2   
+                 - entity: binary_sensor.irbase_kitchen
+                 - entity: binary_sensor.irbase_gg
+                 - entity: binary_sensor.airmonitor_gg
+
                    

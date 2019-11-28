@@ -1,0 +1,25 @@
+## Таймеры
+timer.camphoto:
+  friendly_name: Фото на входе через - 
+timer.entrance:
+  friendly_name: Свет в прихожей отключится через - 
+timer.corridor:
+  friendly_name: Свет в коридоре отключится через - 
+timer.heater:
+  friendly_name: Бойлер выкл через -
+timer.humidifier:
+  friendly_name: Увлажнение авто через -
+timer.toilet:
+  friendly_name: Туалет свет выкл через -
+timer.toilet_v:
+  friendly_name: Туалет вент. выкл через -
+timer.laundry:
+  friendly_name: Прачечная свет выкл через -
+timer.bathroom:
+  friendly_name: Ванная вент. выкл через -
+timer.bathroom_light:
+  friendly_name: Ванная свет выкл через -
+timer.kitchen:
+  friendly_name: Кухня свет выкл через -
+timer.backup:
+  friendly_name: Фаза завершается через - 

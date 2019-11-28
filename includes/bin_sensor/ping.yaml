@@ -1,149 +1,149 @@
 - platform: ping
   host: 192.168.0.5
-  name: ping.dlinknas
+  name: nas_dlink
   count: 2
   scan_interval: 30
 
 - platform: ping
   host: 192.168.0.10
-  name: ping.ggtv
+  name: tv_gg
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.11
-  name: ping.kntv
+  name: tv_kn
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.15
-  name: ping.tvboxgg
+  name: tvbox_gg
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.15
-  name: ping.tvboxkn
+  name: tvbox_kn
   count: 2
   scan_interval: 30
 
 - platform: ping
   host: 192.168.0.20
-  name: ping.acer
+  name: notebook_acer
   count: 2
   scan_interval: 30
     
 - platform: ping
   host: 192.168.0.21
-  name: ping.hp
+  name: notebook_hp
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.22
-  name: ping.sony
+  name: notebook_sony
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.23
-  name: ping.chuwinb
+  name: notebook_chuwi
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.29
-  name: ping.printerhp
+  name: printer
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.70
-  name: ping.main
+  name: hainst_main
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.71
-  name: ping.reserve
+  name: hainst_reserve
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.72
-  name: ping.test
+  name: hainst_test
+  count: 2
+  scan_interval: 30
+
+- platform: ping
+  host: 192.168.0.77
+  name: hainst_test2
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.80
-  name: ping.gateway1
+  name: gateway_da
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.81
-  name: ping.gateway2
+  name: gateway_dd
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.82
-  name: ping.gateway3
+  name: gateway_gg
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.83
-  name: ping.gateway4
+  name: gateway_kn
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.125
-  name: ping.xiaofang_cam
+  name: camera_xiaofang
   count: 2
   scan_interval: 30
 
 - platform: ping
   host: 192.168.0.126
-  name: ping.reolink_cam
+  name: camera_reolink_411
   count: 2
   scan_interval: 30
-  
-# - platform: ping
-#   host: 192.168.0.127
-#   name: ping.alfawise_cam
-#   count: 2
-#   scan_interval: 30
-  
+
 - platform: ping
   host: 192.168.0.128
-  name: ping.reolink2_cam
+  name: camera_reolink_c2
   count: 2
   scan_interval: 30
 
 - platform: ping
   host: 192.168.0.129
-  name: ping.reolink3_cam
+  name: camera_reolink_410
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.135
-  name: ping.xiaomi_ir
+  name: irbase_kitchen
   count: 2
   scan_interval: 30
   
 - platform: ping
   host: 192.168.0.136
-  name: ping.broadlink_ir
+  name: irbase_gg
   count: 2
   scan_interval: 30
 
 - platform: ping
   host: 192.168.0.142
-  name: ping.xiaomi_tvoc
+  name: airmonitor_gg
   count: 2
   scan_interval: 30

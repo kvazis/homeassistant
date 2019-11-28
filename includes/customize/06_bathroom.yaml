@@ -1,0 +1,36 @@
+## Ванная 
+## Освещение
+light.yeelight_06_ceiling:
+  friendly_name: Ванная, люстра
+  icon: mdi:ceiling-light
+## Реле
+switch.wall_switch_right_158d0001117040:
+  friendly_name: Ванная, питание лампы
+  icon: mdi:power
+switch.wall_switch_left_158d0001117040:
+  friendly_name: Ванная, вентиляция
+  icon: mdi:fan
+switch.wall_plug_158d00015751f4:
+  friendly_name: Ванная, бойлер
+  icon: mdi:hot-tub
+## Сенсоры 
+binary_sensor.wall_switch_left_158d000238a140:
+  friendly_name: Ванная выключатель левая
+binary_sensor.wall_switch_right_158d000238a140:
+  friendly_name: Ванная выключатель правая
+binary_sensor.wall_switch_both_158d000238a140:
+  friendly_name: Ванная выключатель 
+binary_sensor.motion_sensor_158d0001e547a3:
+  friendly_name: Ванная, движение
+sensor.illumination_158d0001e547a3:
+  friendly_name: Ванная, освещенность
+sensor.humidity_158d0001dcd47e:
+  friendly_name: Ванная, влажность
+  icon: mdi:water-percent
+sensor.temperature_158d0001dcd47e:
+  friendly_name: Ванная температура
+  icon: mdi:temperature-celsius
+binary_sensor.water_leak_sensor_158d0001bb60c2:
+  friendly_name: Ванная протечка душевая
+binary_sensor.water_leak_sensor_158d0001d72fa2:
+  friendly_name: Ванная протечка раковина

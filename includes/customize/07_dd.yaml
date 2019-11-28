@@ -1,0 +1,91 @@
+## Детская Д
+## Освещение
+light.philips_07_ceiling:
+  friendly_name: Детская Д, основной свет
+  icon: mdi:ceiling-light
+light.yeelight_07_whitebulb:
+  friendly_name: Детская Д, бра
+  icon: mdi:lightbulb  
+light.gateway_light_286c07f0ad27:
+  friendly_name: Детская Д шлюз свет
+  icon: mdi:star-circle-outline
+light.xiaomi_07_table:
+  friendly_name: Детская Д, настольная лампа
+  icon: mdi:desk-lamp
+## Реле
+switch.plug_158d000114a1e1:
+  friendly_name: Детская Д увлажнитель
+  device_class: plug  
+  icon: mdi:cup-water
+switch.xiaomi_wifi_socket:
+  friendly_name: Wi-Fi розетка Xiaomi
+  device_class: plug 
+  icon: mdi:power-socket-eu 
+switch.plug_158d00030a6e78:
+  friendly_name: Детская Д, питание настольной лампы
+  icon: mdi:power
+
+## Сенсоры 
+
+# Среднее значение
+sensor.07_mean_humidity:
+  friendly_name: Детская Д, средняя влажность
+  icon: mdi:water-percent  
+sensor.07_mean_temperature:
+  friendly_name: Детская Д, средняя температура
+  icon: mdi:temperature-celsius
+
+#Bluetooth
+sensor.dd_bt_battery_level:
+  friendly_name: Детская Д, BT датчик климата
+  device_class: battery 
+sensor.dd_bt_temperature:
+  friendly_name: Детская Д, BT температура
+  icon: mdi:temperature-celsius
+sensor.dd_bt_humidity:
+  friendly_name: Детская Д, BT влажность
+  icon: mdi:water-percent
+
+##ZigBee
+sensor.illumination_286c07f0ad27:
+  friendly_name: Детская Д шлюз освещенность
+binary_sensor.wall_switch_left_158d000163e571:
+  friendly_name: Детская Д, выключатель вход левая
+binary_sensor.wall_switch_right_158d000163e571:
+  friendly_name: Детская Д, выключатель вход правая
+binary_sensor.wall_switch_both_158d000163e571:
+  friendly_name: Детская Д, выключатель  вход
+binary_sensor.switch_158d00013f82b7:
+  friendly_name: Детская Д, кровать, круглая
+binary_sensor.motion_sensor_158d0001a66222:
+  friendly_name: Детская Д, движение
+sensor.illumination_158d0001a66222:
+  friendly_name: Детская Д, освещенность
+binary_sensor.cube_158d00011063da:
+  friendly_name: Детская Д, кубик
+  icon: mdi:cube-outline
+sensor.humidity_158d000156e92e:
+  friendly_name: Детская Д, влажность
+  icon: mdi:water-percent
+sensor.temperature_158d000156e92e:
+  friendly_name: Детская Д, температура
+binary_sensor.door_window_sensor_158d0001193697:
+  friendly_name: Детская Д, окно
+  device_class: window 
+
+## Детская Д балкон
+## Сенсоры 
+binary_sensor.door_window_sensor_158d00015843d4:
+  friendly_name: Детская Д, балкон дверь
+  device_class: door
+sensor.humidity_158d0001fa8321:
+  friendly_name: Детская Д, балкон влажность
+  icon: mdi:water-percent
+sensor.pressure_158d0001fa8321:
+  friendly_name: Детская Д, балкон давление
+sensor.temperature_158d0001fa8321:
+  friendly_name: Детская Д, балкон температура
+  icon: mdi:temperature-celsius
+binary_sensor.door_window_sensor_158d0001a65b68:
+  friendly_name: Детская Д, балкон окно
+  device_class: window 

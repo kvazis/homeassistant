@@ -1,0 +1,82 @@
+## Ping бинарные сенсоры
+binary_sensor.nas_dlink:
+  friendly_name: Dlink NAS 1 TB
+  icon: mdi:nas
+binary_sensor.printer:
+  friendly_name: HP 1015 cn
+  icon: mdi:printer
+
+binary_sensor.tv_gg:
+  friendly_name: Samsung, гостиная
+  icon: mdi:television
+binary_sensor.tv_kn:
+  friendly_name: Xiaomi, кухня
+  icon: mdi:television
+binary_sensor.tvbox_gg:
+  friendly_name: H96, гостиная
+  icon: mdi:android
+binary_sensor.tvbox_kn:
+  friendly_name: Mini M8S, кухня
+  icon: mdi:android
+
+binary_sensor.notebook_acer:
+  friendly_name: Acer
+  icon: mdi:laptop
+binary_sensor.notebook_hp:
+  friendly_name: HP
+  icon: mdi:laptop
+binary_sensor.notebook_sony:
+  friendly_name: HP
+  icon: mdi:laptop
+binary_sensor.notebook_chuwi:
+  friendly_name: Chuwi
+  icon: mdi:laptop
+  
+binary_sensor.hainst_main:
+  friendly_name: Основной RPB3+
+  icon: mdi:developer-board
+binary_sensor.hainst_reserve:
+  friendly_name: Резервный Khadas VIM 2
+  icon: mdi:developer-board
+binary_sensor.hainst_test:
+  friendly_name: Тестовый RPB3
+  icon: mdi:developer-board
+binary_sensor.hainst_test2:
+  friendly_name: Тестовый Orange
+  icon: mdi:developer-board
+  
+binary_sensor.gateway_da:
+  friendly_name: Шлюз, ДА
+  icon: mdi:blur-radial
+binary_sensor.gateway_dd:
+  friendly_name: Шлюз, ДД
+  icon: mdi:blur-radial
+binary_sensor.gateway_gg:
+  friendly_name: Шлюз, гостиная
+  icon: mdi:blur-radial
+binary_sensor.gateway_kn:
+  friendly_name: Шлюз, кухня
+  icon: mdi:blur-radial
+  
+binary_sensor.camera_xiaofang:
+  friendly_name: Xiaofang 
+  icon: mdi:cctv
+binary_sensor.camera_reolink_411:
+  friendly_name: Reolink 411WS
+  icon: mdi:cctv
+binary_sensor.camera_reolink_c2:
+  friendly_name: Reolink C2 Pro
+  icon: mdi:cctv
+binary_sensor.camera_reolink_410:
+  friendly_name: Reolink 410W
+  icon: mdi:cctv
+
+binary_sensor.irbase_kitchen:
+  friendly_name: Mi Ir Base
+  icon: mdi:remote
+binary_sensor.irbase_gg:
+  friendly_name: Broadlink Ir Base
+  icon: mdi:remote
+binary_sensor.airmonitor_gg:
+  friendly_name: Mi TVOC 
+  icon: mdi:periodic-table-co2 

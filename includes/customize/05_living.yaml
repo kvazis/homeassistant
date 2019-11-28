@@ -1,0 +1,125 @@
+## Гостиная 
+## Освещение
+light.yeelight_05_ceiling1:
+  friendly_name: Гостиная, люстра 1
+  icon: mdi:ceiling-light
+light.yeelight_05_ceiling1_ambilight:
+  friendly_name: Гостиная, люстра 1 амбилайт
+  icon: mdi:car-light-high
+light.yeelight_05_ceiling2:
+  friendly_name: Гостиная, люстра 2
+  icon: mdi:ceiling-light
+light.yeelight_05_ceiling2_ambilight:
+  friendly_name: Гостиная, люстра 2 амбилайт
+  icon: mdi:car-light-high
+light.aqara_05_wall:
+  friendly_name: Гостиная свет стена
+  icon: mdi:track-light
+light.yeelight_05_bedside2:
+  friendly_name: Гостиная, ночник 2
+  icon: mdi:lighthouse
+light.yeelight_05_rgbtvbulb:
+  friendly_name: Гостиная ТВ подсветка
+  icon: mdi:lightbulb
+light.gateway_light_34ce0088b039:
+  friendly_name: Гостиная шлюз свет
+  icon: mdi:star-circle-outline
+## Реле
+switch.wall_switch_left_158d00015723f1:
+  friendly_name: Гостиная выключатель стена
+switch.wall_switch_right_158d00015723f1:
+  friendly_name: Гостиная, питание люстра 1
+  icon: mdi:power
+switch.plug_158d00012896cb:
+  friendly_name: Гостиная, питание телевизора
+  device_class: plug  
+  icon: mdi:power
+switch.plug_158d000153dd8e:
+  friendly_name: Удлинитель - гостиная, стол
+  device_class: plug  
+  icon: mdi:power
+switch.wifi_6port:
+  friendly_name: Удлинитель 6 портов
+  device_class: plug  
+  icon: mdi:power-socket-eu
+switch.xiaomi_wifi_socket_usb:
+  friendly_name: wi-fi розетка с USB
+  device_class: plug  
+  icon: mdi:power
+switch.xiaomi_wifi_socket_usb_usb:
+  friendly_name: USB
+  device_class: plug  
+  icon: mdi:usb
+switch.wall_switch_ln_right_158d0001a2ccab:
+  friendly_name: Выкл с нулем, правый с розеткой
+  device_class: plug  
+  icon: mdi:power-socket-eu
+switch.wall_switch_ln_left_158d0001a2ccab:
+  friendly_name: Выкл с нулем, левый
+  device_class: plug  
+  icon: mdi:power-socket-eu
+switch.xiaomi_euro:
+  friendly_name: Розетка Xiaomi euro
+  device_class: plug  
+  icon: mdi:power-socket-eu
+  
+## Сенсоры
+sensor.illumination_34ce0088b039:
+  friendly_name: Гостиная шлюз освещенность
+binary_sensor.wall_switch_left_158d00013fc3bc:
+  friendly_name: Гостиная вход левая
+binary_sensor.wall_switch_right_158d00013fc3bc:
+  friendly_name: Гостиная вход правая
+binary_sensor.wall_switch_both_158d00013fc3bc:
+  friendly_name: Гостиная вход
+binary_sensor.wall_switch_left_158d0001f47e10:
+  friendly_name: Гостиная выкл 2 левая
+binary_sensor.wall_switch_right_158d0001f47e10:
+  friendly_name: Гостиная выкл 2 правая
+binary_sensor.wall_switch_both_158d0001f47e10:
+  friendly_name: Гостиная выкл 2  
+binary_sensor.switch_158d0001531698:
+  friendly_name: Гостиная, комод, круглая
+binary_sensor.switch_158d0001b86d2e:
+  friendly_name: Гостиная, комод, квадратная
+binary_sensor.switch_158d0001e8a244:
+  friendly_name: Гостиная, стол, квадратная
+binary_sensor.cube_158d0001186d82:
+  friendly_name: Гостиная кубик
+  icon: mdi:cube-outline
+sensor.humidity_158d00015aebb6:
+  friendly_name: Гостиная, влажность
+  icon: mdi:water-percent  
+sensor.temperature_158d00015aebb6:
+  friendly_name: Гостиная, температура
+  icon: mdi:temperature-celsius
+binary_sensor.door_window_sensor_158d00013ed373:
+  friendly_name: Гостиная, окно
+  device_class: window 
+
+# Среднее значение
+sensor.05_mean_humidity:
+  friendly_name: Гостиная, средняя влажность
+  icon: mdi:water-percent  
+sensor.05_mean_temperature:
+  friendly_name: Гостиная, средняя температура
+  icon: mdi:temperature-celsius
+
+## Гостиная балкон
+## Освещение
+light.66633530807d3a766432:
+  friendly_name: Балкон люстра
+## Сенсоры  
+binary_sensor.wall_switch_158d00010b5aee:
+  friendly_name: Балкон выключатель
+sensor.humidity_158d0001a4b9da:
+  friendly_name: Гостиная, балкон влажность
+  icon: mdi:water-percent
+sensor.pressure_158d0001a4b9da:
+  friendly_name: Гостиная, балкон давление
+sensor.temperature_158d0001a4b9da:
+  friendly_name: Гостиная, балкон температура
+  icon: mdi:temperature-celsius
+binary_sensor.door_window_sensor_158d0001a2f5f7:
+  friendly_name: Гостиная, балкон окно
+  device_class: window 

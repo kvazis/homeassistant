@@ -1,0 +1,49 @@
+## Растения
+sensor.dieffenbac_moisture:
+  friendly_name: Диффенбахия влажность почвы
+sensor.dieffenbac_conductivity:
+  friendly_name: Диффенбахия фертильность почвы
+sensor.dieffenbac_temperature:
+  friendly_name: Диффенбахия температура
+  icon: mdi:temperature-celsius
+sensor.dieffenbac_light_intensity:
+  friendly_name: Диффенбахия уровень освещенности
+sensor.dieffenbac_battery:
+  friendly_name: Диффенбахия батарейка
+
+sensor.yucca_moisture:
+  friendly_name: Юкка влажность почвы
+sensor.yucca_conductivity:
+  friendly_name: Юкка фертильность почвы
+sensor.yucca_temperature:
+  friendly_name: Юкка температура
+  icon: mdi:temperature-celsius
+sensor.yucca_light_intensity:
+  friendly_name: Юкка уровень освещенности
+sensor.yucca_battery:
+  friendly_name: Юкка батарейка
+  
+sensor.zamiokulkas_moisture:
+  friendly_name: Замиокулькас влажность почвы
+sensor.zamiokulkas_conductivity:
+  friendly_name: Замиокулькас фертильность почвы
+sensor.zamiokulkas_temperature:
+  friendly_name: Замиокулькас температура
+  icon: mdi:temperature-celsius
+sensor.zamiokulkas_light_intensity:
+  friendly_name: Замиокулькас уровень освещенности
+sensor.zamiokulkas_battery:
+  friendly_name: Замиокулькас батарейка
+
+sensor.deep_purple_battery:
+  friendly_name: Deep Purple батарейка
+
+sensor.true_blue_battery:
+  friendly_name: Trueblue батарейка
+
+plant.dieffenbac:
+  friendly_name: Диффенбахия
+plant.yucca:
+  friendly_name: Юкка
+plant.zamiokulkas:
+  friendly_name: Замиокулькас
