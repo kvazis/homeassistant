@@ -47,6 +47,8 @@ cards:
             filter:
               include:
                - domain: script
+              sort:
+                 method: entity_id  
                
       - type: vertical-stack
         cards:

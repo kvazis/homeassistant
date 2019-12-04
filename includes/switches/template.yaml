@@ -23,66 +23,6 @@
           data:
             entity_id: script.humidifier_manual_off  
             
-      xiaofang_photo:
-        friendly_name: "Фото с xiaofang"
-        value_template: "{{ is_state('script.01_photo_xiaofang', 'on') }}"
-        turn_on:
-          service: script.turn_on
-          data:
-            entity_id: script.01_photo_xiaofang
-        turn_off:
-          service: script.turn_on
-          data:
-            entity_id: script.01_photo_xiaofang 
-            
-      reolink_photo:
-        friendly_name: "Фото с reolink"
-        value_template: "{{ is_state('script.01_photo_reolink', 'on') }}"
-        turn_on:
-          service: script.turn_on
-          data:
-            entity_id: script.01_photo_reolink
-        turn_off:
-          service: script.turn_on
-          data:
-            entity_id: script.01_photo_reolink
-            
-    #   alfawise_photo:
-    #     friendly_name: "Фото с alfawise"
-    #     value_template: "{{ is_state('script.01_photo_alfawise', 'on') }}"
-    #     turn_on:
-    #       service: script.turn_on
-    #       data:
-    #         entity_id: script.01_photo_alfawise
-    #     turn_off:
-    #       service: script.turn_on
-    #       data:
-    #         entity_id: script.01_photo_alfawise
-            
-      reolink2_photo:
-        friendly_name: "Фото с reolink2"
-        value_template: "{{ is_state('script.04_photo_reolink2', 'on') }}"
-        turn_on:
-          service: script.turn_on
-          data:
-            entity_id: script.04_photo_reolink2
-        turn_off:
-          service: script.turn_on
-          data:
-            entity_id: script.04_photo_reolink2
-            
-      reolink3_photo:
-        friendly_name: "Фото с reolink3"
-        value_template: "{{ is_state('script.01_photo_reolink3', 'on') }}"
-        turn_on:
-          service: script.turn_on
-          data:
-            entity_id: script.01_photo_reolink3
-        turn_off:
-          service: script.turn_on
-          data:
-            entity_id: script.01_photo_reolink3
-
       tv_xiaomi:
         friendly_name: "ТВ Xiaomi"
         value_template: "{{ states.sensor.load_158d0001291d12.state | float > 10 }}"

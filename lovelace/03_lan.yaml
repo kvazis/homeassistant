@@ -88,23 +88,28 @@ cards:
               - type: markdown
                 content: >
                    **BLE шлюз кухня**
+              - type: entities
+                show_header_toggle: false
+                entities:
+                 - entity: binary_sensor.kn_state
+                   name: Состояние - 
               - type: glance
                 show_state: false
                 entities:
                  - entity: binary_sensor.kn_bip_alex
-                   name: Bip Alex
+                   name: Alex
                    icon: mdi:watch-variant
                  - entity: binary_sensor.kn_bip_olha
-                   name: Bip Olha
+                   name: Olha
                    icon: mdi:watch-variant
                  - entity: binary_sensor.kn_mi_band_4_dima
-                   name: Mi Band 4 
+                   name: Dima 
                    icon: mdi:bluetooth-connect
                  - entity: binary_sensor.kn_arc_sf                   
-                   name: Amazfit Arc SF
+                   name: SF
                    icon: mdi:bluetooth-connect   
                  - entity: binary_sensor.kn_mi_band_2_ns
-                   name: Mi Band 3
+                   name: NS
                    icon: mdi:bluetooth-connect
               - type: glance
                 show_state: true
@@ -127,23 +132,28 @@ cards:
               - type: markdown
                 content: >
                    **BLE шлюз гостиная**
+              - type: entities
+                show_header_toggle: false
+                entities:
+                 - entity: binary_sensor.gg_state
+                   name: Состояние - 
               - type: glance
                 show_state: false
                 entities:
                  - entity: binary_sensor.gg_bip_alex
-                   name: Bip Alex
+                   name: Alex
                    icon: mdi:watch-variant
                  - entity: binary_sensor.gg_bip_olha
-                   name: Bip Olha
+                   name: Olha
                    icon: mdi:watch-variant
                  - entity: binary_sensor.gg_mi_band_4_dima
-                   name: Mi Band 4
+                   name: Dima
                    icon: mdi:bluetooth-connect
                  - entity: binary_sensor.gg_arc_sf                   
-                   name: Amazfit Arc SF
+                   name: SF
                    icon: mdi:bluetooth-connect                   
                  - entity: binary_sensor.gg_mi_band_2_ns
-                   name: Mi Band 3
+                   name: NS
                    icon: mdi:bluetooth-connect
               - type: glance
                 show_state: true
@@ -169,19 +179,19 @@ cards:
                 show_state: false
                 entities:
                  - entity: binary_sensor.dd_bip_alex
-                   name: Bip Alex
+                   name: Alex
                    icon: mdi:watch-variant
                  - entity: binary_sensor.dd_bip_olha
-                   name: Bip Olha
+                   name: Olha
                    icon: mdi:watch-variant
                  - entity: binary_sensor.dd_mi_band_4_dima
-                   name: Mi Band 4
+                   name: Dima
                    icon: mdi:bluetooth-connect
                  - entity: binary_sensor.dd_arc_sf                   
-                   name: Amazfit Arc SF
+                   name: SF
                    icon: mdi:bluetooth-connect
                  - entity: binary_sensor.dd_mi_band_2_ns
-                   name: Mi Band 3
+                   name: NS
                    icon: mdi:bluetooth-connect
               - type: glance
                 show_state: true

@@ -11,6 +11,7 @@ gateway.txt
 *.db
 *.log
 *.jpg
+*.mp4
 home-assistant_v2.*
 ip_bans.yaml
 secrets.yaml

@@ -20,16 +20,16 @@ binary_sensor.tvbox_kn:
   icon: mdi:android
 
 binary_sensor.notebook_acer:
-  friendly_name: Acer
+  friendly_name: Ноутбук Acer
   icon: mdi:laptop
 binary_sensor.notebook_hp:
-  friendly_name: HP
+  friendly_name: Ноутбук HP
   icon: mdi:laptop
 binary_sensor.notebook_sony:
-  friendly_name: HP
+  friendly_name: Ноутбук Sony
   icon: mdi:laptop
 binary_sensor.notebook_chuwi:
-  friendly_name: Chuwi
+  friendly_name: Ноутбук Chuwi
   icon: mdi:laptop
   
 binary_sensor.hainst_main:

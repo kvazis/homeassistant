@@ -24,6 +24,22 @@ cards:
                  - state: 'off'
 
           - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                  **Ноутбуки**
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_state: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.notebook*
+                exclude:
+                 - state: 'off'
+
+          - type: custom:vertical-stack-in-card
             cards:  
             - type: markdown
               content: >

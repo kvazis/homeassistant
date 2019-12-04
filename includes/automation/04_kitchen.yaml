@@ -200,7 +200,8 @@
       click_type: vibrate
   action:
   - service: script.turn_on
-    entity_id: script.04_photo_reolink2
+    # entity_id: script.04_photo_reolink2
+    entity_id: script.04_video_reolink2
     
 ## Запись последнего движения в кухне
 - alias: 04_kitchen_motion_time

@@ -49,28 +49,4 @@
          brightness_pct: 50
          rgb_color: [0, 0, 255]
          
-  04_photo_reolink2:
-    sequence:
-       - service: notify.telegram
-         data:
-           message: "Фото, кухня {{ states('sensor.time_date') }}" 
-       - service: notify.telegram_olha
-         data:
-           message: "Фото, кухня {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink2
-              filename: "/config/www/cam_captures/reolink2.jpg"
-       - delay: 00:00:05
-       - service: notify.telegram
-         data:
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/reolink2.jpg
-       - service: notify.telegram_olha
-         data:
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/reolink2.jpg
+

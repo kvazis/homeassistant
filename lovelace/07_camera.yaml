@@ -8,38 +8,48 @@ cards:
 
         - type: markdown
           content: >
-              **Камеры на этаже**
+              **Reolink 411**
 
         - type: picture-glance
           title: Этаж, выход к лифту
           camera_image: camera.reolink_sub
           camera_view: live
           entities:
-           - entity: switch.reolink_photo
-             icon: mdi:camera
+           - entity: script.01_photo_reolink
+             icon: mdi:camera 
+             tap_action:
+                action: toggle
+           - entity: script.01_video_reolink
+             icon: mdi:record-rec 
+             tap_action:
+                action: toggle
+             
+
+
+        - type: markdown
+          content: >
+              **Reolink 410**
 
         - type: picture-glance
           title: Этаж, поворот
           camera_image: camera.reolink3_sub
           camera_view: live
           entities:
-           - entity: switch.reolink3_photo
-             icon: mdi:camera
-
-        # - type: picture-glance
-        #   title: Этаж, поворот
-        #   camera_image: camera.alfawise_sub
-        #   camera_view: live
-        #   entities:
-        #   - entity: switch.alfawise_photo
-        #      icon: mdi:camera
+           - entity: script.01_photo_reolink3
+             icon: mdi:camera 
+             tap_action:
+                action: toggle
+           - entity: script.01_video_reolink3
+             icon: mdi:record-rec 
+             tap_action:
+                action: toggle
 
       - type: vertical-stack
         cards:
 
         - type: markdown
           content: >
-              **Камеры в квартире** 
+              **Xiaofang** 
               
         - type: picture-glance
           title: Прихожая, входная дверь
@@ -47,8 +57,14 @@ cards:
           entities:
            - entity: light.yeelight_01_whitebulb
            - entity: light.yeelight_03_ceiling
-           - entity: switch.xiaofang_photo
-             icon: mdi:camera
+           - entity: script.01_photo_xiaofang
+             icon: mdi:camera 
+             tap_action:
+                action: toggle
+
+        - type: markdown
+          content: >
+              **Reolink C2 Pro**
              
         - type: picture-glance
           title: Кухня, холодильник
@@ -61,6 +77,37 @@ cards:
            - entity: light.aqara_04_strip
            - entity: switch.tv_xiaomi
              icon: mdi:television-classic
-           - entity: switch.reolink2_photo
-             icon: mdi:camera  
+           - entity: script.04_photo_reolink2
+             icon: mdi:camera 
+             tap_action:
+                action: toggle
+           - entity: script.04_video_reolink2
+             icon: mdi:record-rec 
+             tap_action:
+                action: toggle 
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Xiaofang 1S** 
+             
+        - type: picture-glance
+          title: Гостиная
+          camera_image: camera.xiaofang1s
+          entities:
+           - entity: light.yeelight_05_ceiling1
+           - entity: light.yeelight_05_ceiling2
+           - entity: switch.tv_samsung
+             icon: mdi:television-classic
+           - entity: script.05_photo_xiaofang1s
+             icon: mdi:camera 
+             tap_action:
+                action: toggle
+           - entity: script.05_video_xiaofang1s
+             icon: mdi:record-rec 
+             tap_action:
+                action: toggle
+
              

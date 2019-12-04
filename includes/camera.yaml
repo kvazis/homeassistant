@@ -5,6 +5,12 @@
     still_image_url: http://192.168.0.125/image.jpg
     stream_source: rtsp://192.168.0.125:554/unicast
 
+
+# Кубик Xiaofang 1s    
+  - platform: ffmpeg
+    name: Xiaofang1s
+    input: -rtsp_transport tcp -i rtsp://192.168.0.127:8554/unicast
+
 # Reolink - RLC-411WS
 # Основной поток
 

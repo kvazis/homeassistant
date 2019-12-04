@@ -1,4 +1,5 @@
   01_photo_door_t:
+    alias: Фотографии на входе и отправка в телеграмм
     sequence:
        - service: timer.start
          entity_id: timer.camphoto
@@ -12,11 +13,6 @@
          data:
            title: "Дверь"
            message: "Входная дверь открыта в {{ states('sensor.time_date') }}" 
-    #   - service: camera.snapshot
-    #      data:
-    #           entity_id: camera.alfawise
-    #           filename: "/config/www/cam_captures/alfawise.jpg"
-    #   - delay: 00:00:01
        - service: camera.snapshot
          data:
               entity_id: camera.xiaofang
@@ -40,7 +36,6 @@
               message: "Фотография" 
               data:
                   photo:
-                    #   - file: /config/www/cam_captures/alfawise.jpg
                       - file: /config/www/cam_captures/xiaofang.jpg
                       - file: /config/www/cam_captures/reolink.jpg
                       - file: /config/www/cam_captures/reolink2.jpg
@@ -51,14 +46,14 @@
               message: "Фотография" 
               data:
                   photo:
-                    #   - file: /config/www/cam_captures/alfawise.jpg
                       - file: /config/www/cam_captures/xiaofang.jpg
                       - file: /config/www/cam_captures/reolink.jpg
                       - file: /config/www/cam_captures/reolink2.jpg
                       - file: /config/www/cam_captures/reolink3.jpg
-
-
+                  
+                      
   01_enter_on:
+    alias: Включение лампочки в прихожей
     sequence:
       - service: light.turn_on
         entity_id:
@@ -68,79 +63,11 @@
           kelvin: 4000
           
   01_enter_off:
+    alias: Выключение лампочки в прихожей
     sequence:
       - service: light.turn_off
         entity_id:
           -  light.yeelight_01_whitebulb
 
-  01_photo_xiaofang:
-    sequence:
-       - service: notify.telegram
-         data:
-           message: "Фото прихожей в  {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.xiaofang
-              filename: "/config/www/cam_captures/xiaofang.jpg"
-       - delay: 00:00:05
-       - service: notify.telegram
-         data:
-              title: "Дверь"
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/xiaofang.jpg
-                      
-  01_photo_reolink:
-    sequence:
-       - service: notify.telegram
-         data:
-           message: "Фото, этаж - дверь к лифту в {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink
-              filename: "/config/www/cam_captures/reolink.jpg"
-       - delay: 00:00:05
-       - service: notify.telegram
-         data:
-              title: "Дверь"
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/reolink.jpg
-                      
-  01_photo_reolink3:
-    sequence:
-       - service: notify.telegram
-         data:
-           message: "Фото, этаж - поворот в {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink3
-              filename: "/config/www/cam_captures/reolink3.jpg"
-       - delay: 00:00:05
-       - service: notify.telegram
-         data:
-              title: "Дверь"
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/reolink3.jpg
 
-#   01_photo_alfawise:
-#     sequence:
-#       - service: notify.telegram
-#          data:
-#           message: "Фото, этаж - поворот в {{ states('sensor.time_date') }}" 
-#       - service: camera.snapshot
-#          data:
-#               entity_id: camera.alfawise
-#               filename: "/config/www/cam_captures/alfawise.jpg"
-#       - delay: 00:00:05
-#       - service: notify.telegram
-#          data:
-#               title: "Дверь"
-#               message: "Фотография" 
-#               data:
-#                   photo:
-#                       - file: /config/www/cam_captures/alfawise.jpg                   
+                 
