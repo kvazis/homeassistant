@@ -188,7 +188,27 @@
       content-type: 'application/json'
     value_template: '{{ value_json.state }}'
     unit_of_measurement: 'кВт⋅ч'
+
+########## Удлинитель 3+3
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_wifi_3usb
+    name: p100_power_month_wifi_3usb
+    force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
+    value_template: '{{ value_json.state }}'
+    unit_of_measurement: 'кВт⋅ч'
     
+  - platform: rest
+    resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_lastmonth_wifi_3usb
+    name: p100_power_lastmonth_wifi_3usb
+    force_update: true
+    headers: 
+      Authorization: !secret reserve_secret_token
+      content-type: 'application/json'
+    value_template: '{{ value_json.state }}'
+    unit_of_measurement: 'кВт⋅ч'   
 #####Бойлер
   - platform: rest
     resource: http://192.168.0.71:8123/api/states/sensor.mqtt_power_month_158d00015751f4

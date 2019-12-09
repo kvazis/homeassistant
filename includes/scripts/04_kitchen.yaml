@@ -7,13 +7,13 @@
      - service: light.turn_off
        entity_id:
           - light.gateway_light_7811dc64f4c8
-     - service: automation.turn_off
-       entity_id:
-          - automation.04_kn_ceiling_auto_on
-     - delay: 00:00:05
-     - service: automation.turn_on
-       entity_id:
-          - automation.04_kn_ceiling_auto_on
+    #  - service: automation.turn_off
+    #   entity_id:
+    #       - automation.04_kn_ceiling_auto_on
+    #  - delay: 00:00:05
+    #  - service: automation.turn_on
+    #   entity_id:
+    #       - automation.04_kn_ceiling_auto_on
 
   04_kn_ceiling_off:
     sequence:

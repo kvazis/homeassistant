@@ -21,3 +21,9 @@
     host: 192.168.0.99
     token: b4d9471bf9f6db8c40014efc41392f48
     model: chuangmi.plug.m1 
+    
+  - platform: xiaomi_miio
+    name: wifi_3usb
+    host: 192.168.0.101
+    token: 29eae10bd4d757528e31dc6a783ec2ee
+    model: qmi.powerstrip.v1

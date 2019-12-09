@@ -52,6 +52,24 @@ talk_bon_appetit:
    - service: light.turn_off
      entity_id:
         - light.gateway_light_7811dc64f4c8
+        
+talk_privet:
+  sequence:
+   - service: light.turn_on
+     entity_id:
+       - light.gateway_light_7811dc64f4c8
+     data_template:
+       brightness_pct: 20
+       rgb_color: [0, 255, 0]
+   - service: xiaomi_aqara.play_ringtone
+     data:
+       gw_mac: 78:11:DC:64:F4:C8
+       ringtone_id: 10005
+       ringtone_vol: 50
+   - delay: 00:00:05
+   - service: light.turn_off
+     entity_id:
+        - light.gateway_light_7811dc64f4c8
 
 # Шлюз гостиная
 talk_smart_zak:

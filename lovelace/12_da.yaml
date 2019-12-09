@@ -194,3 +194,16 @@ cards:
             name: Последнее движение в детской А в - 
             icon: mdi:run-fast 
           - entity: sensor.da_hum_custom
+          
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Детская А - наблюдение**          
+          
+        - type: picture-entity
+          entity: camera.xiaofang1s
+          camera_view: live 
+          show_state: false
+          show_name: false

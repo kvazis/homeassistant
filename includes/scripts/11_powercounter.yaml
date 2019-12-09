@@ -15,6 +15,7 @@
         - script.11_psync_158d000114a1e1
         - script.11_psync_158d00030a6e78
         - script.11_psync_158d00010ec4b8
+        - script.11_psync_wifi_3usb
 
   11_psync_total_energy:
     sequence:
@@ -141,6 +142,21 @@
         topic: "power/wifi_6port/lastmonth"
         payload: '{{(states.sensor.p100_power_lastmonth_wifi_6port.state | float )|round(5)}}'
         retain: true
+
+  11_psync_wifi_3usb:
+    sequence:
+##### Гостиная, удлинитель комод
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_3usb/month"
+        payload: '{{(states.sensor.p100_power_month_wifi_3usb.state | float )|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_3usb/lastmonth"
+        payload: '{{(states.sensor.p100_power_lastmonth_wifi_3usb.state | float )|round(5)}}'
+        retain: true
+
         
   11_psync_158d00015751f4:
     sequence:

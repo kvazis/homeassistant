@@ -175,6 +175,11 @@ cards:
               - type: markdown
                 content: >
                    **BLE шлюз детская Д**
+              - type: entities
+                show_header_toggle: false
+                entities:
+                 - entity: binary_sensor.dd_state
+                   name: Состояние -                   
               - type: glance
                 show_state: false
                 entities:

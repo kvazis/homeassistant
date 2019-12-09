@@ -94,13 +94,12 @@ cards:
               **Xiaofang 1S** 
              
         - type: picture-glance
-          title: Гостиная
+          title: Детская А
           camera_image: camera.xiaofang1s
           entities:
-           - entity: light.yeelight_05_ceiling1
-           - entity: light.yeelight_05_ceiling2
-           - entity: switch.tv_samsung
-             icon: mdi:television-classic
+           - entity: switch.plug_158d00010ec4b8
+           - entity: light.aqara_08_ceiling
+           - entity: light.yeelight_08_table
            - entity: script.05_photo_xiaofang1s
              icon: mdi:camera 
              tap_action:

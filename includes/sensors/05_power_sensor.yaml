@@ -184,3 +184,51 @@
         unit_of_measurement: 'грн'
         value_template: "{{ (states.sensor.mqtt_power_lastmonth_wifi_6port.state | float * 1.68)|round(2) }}"
         icon_template: mdi:square-inc-cash 
+        
+#  wi-fi 3 + 3 port power strip       
+  - platform: template
+    sensors:
+      load_wifi_3usb:
+        friendly_name: 'Удлинитель - гостиная, комод'
+        value_template: "{{ state_attr('switch.wifi_3usb', 'load_power') }}"
+        icon_template: mdi:flash
+        unit_of_measurement: 'Вт'
+        entity_id: switch.wifi_3usb
+        
+  - platform: mqtt
+    state_topic: "power/wifi_3usb/yesterday"
+    name: 'mqtt_power_yesterday_wifi_3usb'
+    unit_of_measurement: 'кВт⋅ч'
+        
+  - platform: mqtt
+    state_topic: "power/wifi_3usb/today"
+    name: 'mqtt_power_today_wifi_3usb'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/wifi_3usb/month"
+    name: 'mqtt_power_month_wifi_3usb'
+    unit_of_measurement: 'кВт⋅ч'
+    
+  - platform: mqtt
+    state_topic: "power/wifi_3usb/lastmonth"
+    name: 'mqtt_power_lastmonth_wifi_3usb'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: template
+    sensors:
+      money_month_wifi_3usb:
+        friendly_name: "Стоимость за текущий месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_month_wifi_3usb.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+  - platform: template
+    sensors:
+      money_lastmonth_wifi_3usb:
+        friendly_name: "Стоимость за прошлый месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_lastmonth_wifi_3usb.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+        
+        

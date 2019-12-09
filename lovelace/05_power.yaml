@@ -595,6 +595,69 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
+        - type: custom:vertical-stack-in-card
+          cards:
+           - type: markdown
+             content: >
+                 ## Гостиная, удлинитель комод
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_wifi_3usb
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false 
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_wifi_3usb
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_wifi_3usb
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_wifi_3usb
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_wifi_3usb
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_wifi_3usb
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_wifi_3usb
+                 name: Месяц
+                 icon: mdi:cash
+
+
 
       - type: vertical-stack
         cards:

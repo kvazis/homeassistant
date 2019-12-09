@@ -26,13 +26,13 @@
       data_template:
         topic: "power/bw_relay/today"
         payload: '{{(states.sensor.mqtt_power_today_bw_relay.state | float +
-                    (states.sensor.load_bwshp2.state | float /120000))|round(5)}}'
+                    (states.sensor.sensor.load_bwshp2.state | float /120000))|round(5)}}'
         retain: true
     - service: mqtt.publish
       data_template:
         topic: "power/bw_relay/month"
         payload: '{{(states.sensor.mqtt_power_month_bw_relay.state | float +
-                    (states.sensor.load_bwshp2.state | float /120000))|round(5)}}'
+                    (states.sensor.sensor.load_bwshp2.state | float /120000))|round(5)}}'
         retain: true
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
@@ -126,6 +126,19 @@
         topic: "power/wifi_6port/month"
         payload: '{{(states.sensor.mqtt_power_month_wifi_6port.state | float +
                     (states.sensor.load_wifi_6port.state | float /120000))|round(5)}}'
+        retain: true
+##### Удлинитель 3+3
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_3usb/today"
+        payload: '{{(states.sensor.mqtt_power_today_wifi_3usb.state | float +
+                    (states.sensor.load_wifi_3usb.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_3usb/month"
+        payload: '{{(states.sensor.mqtt_power_month_wifi_3usb.state | float +
+                    (states.sensor.load_wifi_3usb.state | float /120000))|round(5)}}'
         retain: true
 ##### ВАННАЯ 
 ##### Бойлер
@@ -250,6 +263,12 @@
         topic: "power/wifi_6port/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_wifi_6port.state | float )|round(5)}}'
         retain: true
+##### Удлинитель 3+3        
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_3usb/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_wifi_3usb.state | float )|round(5)}}'
+        retain: true
 ##### ВАННАЯ 
 ##### Бойлер
     - service: mqtt.publish
@@ -336,6 +355,12 @@
     - service: mqtt.publish
       data_template:
         topic: "power/wifi_6port/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Удлинитель 3+3 
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_3usb/today"
         payload: '{{ 0.0 }}'
         retain: true
 ##### ВАННАЯ 
@@ -435,6 +460,12 @@
         topic: "power/wifi_6port/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_wifi_6port.state | float )|round(5)}}'
         retain: true
+##### Удлинитель 3+3 
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_3usb/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_wifi_3usb.state | float )|round(5)}}'
+        retain: true
 ##### ВАННАЯ 
 ##### Бойлер
     - service: mqtt.publish
@@ -522,6 +553,12 @@
     - service: mqtt.publish
       data_template:
         topic: "power/wifi_6port/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Удлинитель 3+3 
+    - service: mqtt.publish
+      data_template:
+        topic: "power/wifi_3usb/month"
         payload: '{{ 0.0 }}'
         retain: true
 ##### ВАННАЯ 

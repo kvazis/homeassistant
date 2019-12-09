@@ -107,26 +107,19 @@
   05_photo_xiaofang1s:
     alias: Фотография Xiaofang1S и отправка в телеграмм
     sequence:
-       - service: notify.telegram
-         data:
-           message: "Фото гостиной в  {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.xiaofang1s
-              filename: "/config/www/cam_captures/xiaofang1s.jpg"
-       - delay: 00:00:05
-       - service: notify.telegram
-         data:
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/xiaofang1s.jpg
-    #   - service: notify.telegram_olha
-    #      data:
-    #           message: "Фотография" 
-    #           data:
-    #               photo:
-    #                   - file: /config/www/cam_captures/xiaofang1s.jpg
+    - service: camera.snapshot
+      data:
+        entity_id: camera.xiaofang1s
+        filename: "/config/www/cam_captures/xiaofang1s.jpg"
+    - delay: 00:00:05
+    - service: telegram_bot.send_photo
+      data_template:
+        target:
+         - !secret chat_id_alex
+         - !secret chat_id_olha
+        file: "/config/www/cam_captures/xiaofang1s.jpg"
+        caption: "Гостиная - {{ states('sensor.time_date') }}"
+
 ## Видео с камер
 
   01_video_reolink:
@@ -188,14 +181,13 @@
       data_template:
         entity_id: camera.xiaofang1s
         filename: "/config/www/cam_captures/xiaofang1s.mp4"
-        lookback: 5
-        duration: 15
+        # duration: 15
     - delay: 00:00:35
     - service: telegram_bot.send_video
       data_template:
         target:
          - !secret chat_id_alex
-        #  - !secret chat_id_olha
+         - !secret chat_id_olha
         file: "/config/www/cam_captures/xiaofang1s.mp4"
-        caption: "Гостиная - {{ states('sensor.time') }}"
+        caption: "Детская А - {{ states('sensor.time') }}"
 

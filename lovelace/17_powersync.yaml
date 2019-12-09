@@ -300,6 +300,38 @@ cards:
             - entity: sensor.p100_power_lastmonth_wifi_6port
               name: ПМ
               icon: mdi:counter
+              
+        - type: markdown
+          content: >
+              **Гостиная, удлинитель комод**
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: script.11_psync_wifi_3usb
+            name: Синхронизация
+              
+        - type: horizontal-stack
+          cards:  
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.mqtt_power_month_wifi_3usb
+              name: ТМ
+              icon: mdi:counter
+            - entity: sensor.mqtt_power_lastmonth_wifi_3usb
+              name: ПМ
+              icon: mdi:counter
+              
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.p100_power_month_wifi_3usb
+              name: ТМ
+              icon: mdi:counter
+            - entity: sensor.p100_power_lastmonth_wifi_3usb
+              name: ПМ
+              icon: mdi:counter
 
       - type: vertical-stack
         cards:

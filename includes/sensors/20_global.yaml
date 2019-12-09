@@ -52,6 +52,7 @@
               (states.sensor.load_158d00030a6e78.state | float) + 
               (states.sensor.load_bwshp2.state | float) + 
               (states.sensor.load_wifi_6port.state | float) + 
+              (states.sensor.load_wifi_3usb.state | float) + 
               (states.sensor.load_wifi_socket_usb.state | float)) | round(3) }}"
               
   - platform: mqtt
