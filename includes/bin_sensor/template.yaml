@@ -1,0 +1,13 @@
+# Движение в доме
+  - platform: template
+    sensors:
+      home_motion:
+        friendly_name: "Движение в доме"
+        device_class: motion
+        value_template: >-
+          {{ is_state('binary_sensor.motion_sensor_158d00010f8920', 'on')  
+             or is_state('binary_sensor.motion_sensor_158d0001a24e71', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0001a66222', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0001e16204', 'on')
+             or is_state('binary_sensor.motion_sensor_158d0001e547a3', 'on')
+             or is_state('binary_sensor.motion_sensor_158d00016d56f5', 'on') }}

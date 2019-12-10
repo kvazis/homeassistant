@@ -156,6 +156,16 @@ cards:
             - type: markdown
               content: >
                   **Активные датчики движения**
+                  
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.home_motion                
+              
             - type: custom:auto-entities
               show_empty: false
               card:
