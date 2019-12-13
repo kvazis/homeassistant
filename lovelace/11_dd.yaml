@@ -120,6 +120,7 @@ cards:
              name: Движение
            - entity: binary_sensor.door_window_sensor_158d0001193697
              name: Окно
+           - entity: binary_sensor.07_dd_hum
 
         - type: horizontal-stack
           cards:

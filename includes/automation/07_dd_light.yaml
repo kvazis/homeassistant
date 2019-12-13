@@ -56,7 +56,7 @@
          - condition: sun
            before: sunrise
   action:
-   - service: light.xiaomi_miio_set_scene
+   - service: xiaomi_miio.light_set_scene
      entity_id: light.philips_07_ceiling
      data_template:
        scene: >           

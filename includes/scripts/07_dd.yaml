@@ -15,7 +15,7 @@
           
   07_dd_philpis_on:
     sequence:
-      - service: light.xiaomi_miio_set_scene
+      - service: xiaomi_miio.light_set_scene
         entity_id: light.philips_07_ceiling
         data:
            scene: 1 

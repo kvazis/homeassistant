@@ -4,19 +4,9 @@
 #   initial_state: false
 ## ТРИГГЕР !!!
   trigger:
-## Проверка каждые 5 минут
+## Проверка каждые 3 минуты
    - platform: time_pattern
-     minutes: '/5'
-## Закрытие окна  
-   - platform: state
-     entity_id: binary_sensor.door_window_sensor_158d0001193697
-     from: 'on'
-     to: 'off'
-## Закрытие двери
-   - platform: state
-     entity_id: binary_sensor.door_window_sensor_158d00015843d4
-     from: 'on'
-     to: 'off'
+     minutes: '/3'
 ## УСЛОВИЯ !!!
   condition:
 ## Увлажнитель выключен
@@ -27,18 +17,10 @@
      - condition: numeric_state
        entity_id: sensor.humidity_158d000156e92e
        below: 45
-## Время работы
-     - condition: time
-       after: '08:00:00'
-       before: '21:59:00'
-## Закрыто окно
+## Комплексный сенсор для увлажнения
      - condition: state
-       entity_id: binary_sensor.door_window_sensor_158d0001193697
-       state: 'off'
-## Закрыта дверь на балкон
-     - condition: state
-       entity_id: binary_sensor.door_window_sensor_158d00015843d4
-       state: 'off'
+       entity_id: binary_sensor.07_dd_hum
+       state: 'on'
   action:
   - service: switch.turn_on
     entity_id: switch.plug_158d000114a1e1
@@ -48,23 +30,10 @@
   initial_state: true
 #   initial_state: false
   trigger:
-## Влажность выше 55 %
-   - platform: numeric_state
-     entity_id: sensor.humidity_158d000156e92e
-     above: 55
-## Открыто окно
+## Комплексный сенсор для увлажнения
    - platform: state
-     entity_id: binary_sensor.door_window_sensor_158d0001193697
-     from: 'off'
-     to: 'on'
-## Открыта дверь на балкон
-   - platform: state
-     entity_id: binary_sensor.door_window_sensor_158d00015843d4
-     from: 'off'
-     to: 'on'
-## 10 часов вечера
-   - platform: time
-     at: '22:00:00'
+     entity_id: binary_sensor.07_dd_hum
+     to: 'off'
   condition:
 ## Увлажнитель включен
      - condition: state

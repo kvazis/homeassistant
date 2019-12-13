@@ -1,6 +1,6 @@
   04_kn_ceiling_on:
     sequence:
-     - service: light.xiaomi_miio_set_scene
+     - service: xiaomi_miio.light_set_scene
        entity_id: light.philips_04_ceiling
        data:
           scene: 1
@@ -24,21 +24,21 @@
 
   04_kn_ceiling_auto_2:
     sequence:
-     - service: light.xiaomi_miio_set_scene
+     - service: xiaomi_miio.light_set_scene
        entity_id: light.philips_04_ceiling
        data:
           scene: 2
           
   04_kn_ceiling_auto_3:
     sequence:
-     - service: light.xiaomi_miio_set_scene
+     - service: xiaomi_miio.light_set_scene
        entity_id: light.philips_04_ceiling
        data:
           scene: 3
 
   04_kn_ceiling_auto_4:
     sequence:
-     - service: light.xiaomi_miio_set_scene
+     - service: xiaomi_miio.light_set_scene
        entity_id: light.philips_04_ceiling
        data:
           scene: 4

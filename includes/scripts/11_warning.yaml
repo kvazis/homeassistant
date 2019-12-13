@@ -1,6 +1,6 @@
   11_warning:
     sequence:
-     - service: light.xiaomi_miio_set_scene
+     - service: xiaomi_miio.light_set_scene
        entity_id: light.philips_05_bedside
        data:
           scene: 3
@@ -14,7 +14,7 @@
 
   11_all_ok:
     sequence:
-     - service: light.xiaomi_miio_set_scene
+     - service: xiaomi_miio.light_set_scene
        entity_id: light.philips_05_bedside
        data:
           scene: 1
