@@ -123,6 +123,11 @@ cards:
                 action: toggle
               name: iLife A4
               icon: mdi:robot-vacuum
+            - entity: switch.02_sonoff_basic_relay
+              tap_action: 
+                action: toggle
+              name: Router fan
+              icon: mdi:fan
               
         - type: custom:vertical-stack-in-card
           cards: 
@@ -158,7 +163,6 @@ cards:
               tap_action: 
                 action: toggle
               icon: mdi:usb
-
 
 
         - type: custom:vertical-stack-in-card

@@ -1,6 +1,6 @@
 ############################################################################################################
 ##### 30 сек расчет
-- alias: 00_power_conter
+- alias: 00_power_counter
   initial_state: true
   trigger:
     - platform: time_pattern
@@ -26,13 +26,13 @@
       data_template:
         topic: "power/bw_relay/today"
         payload: '{{(states.sensor.mqtt_power_today_bw_relay.state | float +
-                    (states.sensor.sensor.load_bwshp2.state | float /120000))|round(5)}}'
+                    (states.sensor.load_bwshp2.state | float /120000))|round(5)}}'
         retain: true
     - service: mqtt.publish
       data_template:
         topic: "power/bw_relay/month"
         payload: '{{(states.sensor.mqtt_power_month_bw_relay.state | float +
-                    (states.sensor.sensor.load_bwshp2.state | float /120000))|round(5)}}'
+                    (states.sensor.load_bwshp2.state | float /120000))|round(5)}}'
         retain: true
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
@@ -393,7 +393,7 @@
         
 ############################################################################################################
 ##### Начало месяца
-- alias: 00_power_new_ month
+- alias: 00_power_new_month
   initial_state: true
   trigger:
     - platform: time

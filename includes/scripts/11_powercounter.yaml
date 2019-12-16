@@ -1,215 +1,215 @@
-  11_psync_all:
-    sequence:
-    - service: script.turn_on
-      entity_id: 
-        - script.11_psync_total_energy
-        - script.11_psync_bw_relay
-        - script.11_psync_158d0001291d12
-        - script.11_psync_158d0001fa2934
-        - script.11_psync_158d0001d35bc0  
-        - script.11_psync_wifi_socket_usb
-        - script.11_psync_158d00012896cb
-        - script.11_psync_158d000153dd8e
-        - script.11_psync_wifi_6port
-        - script.11_psync_158d00015751f4
-        - script.11_psync_158d000114a1e1
-        - script.11_psync_158d00030a6e78
-        - script.11_psync_158d00010ec4b8
-        - script.11_psync_wifi_3usb
+#   11_psync_all:
+#     sequence:
+#     - service: script.turn_on
+#       entity_id: 
+#         - script.11_psync_total_energy
+#         - script.11_psync_bw_relay
+#         - script.11_psync_158d0001291d12
+#         - script.11_psync_158d0001fa2934
+#         - script.11_psync_158d0001d35bc0  
+#         - script.11_psync_wifi_socket_usb
+#         - script.11_psync_158d00012896cb
+#         - script.11_psync_158d000153dd8e
+#         - script.11_psync_wifi_6port
+#         - script.11_psync_158d00015751f4
+#         - script.11_psync_158d000114a1e1
+#         - script.11_psync_158d00030a6e78
+#         - script.11_psync_158d00010ec4b8
+#         - script.11_psync_wifi_3usb
 
-  11_psync_total_energy:
-    sequence:
-##### Общее потребление
-    - service: mqtt.publish
-      data_template:
-        topic: "power/total_energy/month"
-        payload: '{{(states.sensor.p100_power_month_total_energy.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/total_energy/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_total_energy.state | float )|round(5)}}'
-        retain: true
+#   11_psync_total_energy:
+#     sequence:
+# ##### Общее потребление
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/total_energy/month"
+#         payload: '{{(states.sensor.p100_power_month_total_energy.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/total_energy/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_total_energy.state | float )|round(5)}}'
+#         retain: true
 
-  11_psync_bw_relay:
-    sequence:
-##### Стиральная машина
-    - service: mqtt.publish
-      data_template:
-        topic: "power/bw_relay/month"
-        payload: '{{(states.sensor.p100_power_month_bw_relay.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/bw_relay/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_bw_relay.state | float )|round(5)}}'
-        retain: true
+#   11_psync_bw_relay:
+#     sequence:
+# ##### Стиральная машина
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/bw_relay/month"
+#         payload: '{{(states.sensor.p100_power_month_bw_relay.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/bw_relay/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_bw_relay.state | float )|round(5)}}'
+#         retain: true
 
-  11_psync_158d0001291d12:
-    sequence:
-##### Телевизор Xiaomi
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001291d12/month"
-        payload: '{{(states.sensor.p100_power_month_158d0001291d12.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001291d12/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_158d0001291d12.state | float )|round(5)}}'
-        retain: true
+#   11_psync_158d0001291d12:
+#     sequence:
+# ##### Телевизор Xiaomi
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d0001291d12/month"
+#         payload: '{{(states.sensor.p100_power_month_158d0001291d12.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d0001291d12/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_158d0001291d12.state | float )|round(5)}}'
+#         retain: true
         
-  11_psync_158d0001fa2934:
-    sequence:
-##### Холодильник
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001fa2934/month"
-        payload: '{{(states.sensor.p100_power_month_158d0001fa2934.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001fa2934/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_158d0001fa2934.state | float )|round(5)}}'
-        retain: true
+#   11_psync_158d0001fa2934:
+#     sequence:
+# ##### Холодильник
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d0001fa2934/month"
+#         payload: '{{(states.sensor.p100_power_month_158d0001fa2934.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d0001fa2934/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_158d0001fa2934.state | float )|round(5)}}'
+#         retain: true
 
-  11_psync_158d0001d35bc0:
-    sequence:
-##### LED лента
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001d35bc0/month"
-        payload: '{{(states.sensor.p100_power_month_158d0001d35bc0.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001d35bc0/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_158d0001d35bc0.state | float )|round(5)}}'
-        retain: true
+#   11_psync_158d0001d35bc0:
+#     sequence:
+# ##### LED лента
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d0001d35bc0/month"
+#         payload: '{{(states.sensor.p100_power_month_158d0001d35bc0.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d0001d35bc0/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_158d0001d35bc0.state | float )|round(5)}}'
+#         retain: true
         
-  11_psync_wifi_socket_usb:
-    sequence:
-##### Гостиная телевизор
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_socket_usb/month"
-        payload: '{{(states.sensor.p100_power_month_wifi_socket_usb.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_socket_usb/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_wifi_socket_usb.state | float )|round(5)}}'
-        retain: true
+#   11_psync_wifi_socket_usb:
+#     sequence:
+# ##### Гостиная телевизор
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/wifi_socket_usb/month"
+#         payload: '{{(states.sensor.p100_power_month_wifi_socket_usb.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/wifi_socket_usb/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_wifi_socket_usb.state | float )|round(5)}}'
+#         retain: true
         
-  11_psync_158d00012896cb:
-    sequence:
-##### Ноутбук Acer
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00012896cb/month"
-        payload: '{{(states.sensor.p100_power_month_158d00012896cb.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00012896cb/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_158d00012896cb.state | float )|round(5)}}'
-        retain: true
+#   11_psync_158d00012896cb:
+#     sequence:
+# ##### Ноутбук Acer
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d00012896cb/month"
+#         payload: '{{(states.sensor.p100_power_month_158d00012896cb.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d00012896cb/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_158d00012896cb.state | float )|round(5)}}'
+#         retain: true
         
-  11_psync_158d000153dd8e:
-    sequence:
-##### Ноутбук HP
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000153dd8e/month"
-        payload: '{{(states.sensor.p100_power_month_158d000153dd8e.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000153dd8e/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_158d000153dd8e.state | float )|round(5)}}'
-        retain: true
+#   11_psync_158d000153dd8e:
+#     sequence:
+# ##### Ноутбук HP
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d000153dd8e/month"
+#         payload: '{{(states.sensor.p100_power_month_158d000153dd8e.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d000153dd8e/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_158d000153dd8e.state | float )|round(5)}}'
+#         retain: true
         
-  11_psync_wifi_6port:
-    sequence:
-##### Удлинитель Xiaomi 6 портов
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_6port/month"
-        payload: '{{(states.sensor.p100_power_month_wifi_6port.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_6port/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_wifi_6port.state | float )|round(5)}}'
-        retain: true
+#   11_psync_wifi_6port:
+#     sequence:
+# ##### Удлинитель Xiaomi 6 портов
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/wifi_6port/month"
+#         payload: '{{(states.sensor.p100_power_month_wifi_6port.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/wifi_6port/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_wifi_6port.state | float )|round(5)}}'
+#         retain: true
 
-  11_psync_wifi_3usb:
-    sequence:
-##### Гостиная, удлинитель комод
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_3usb/month"
-        payload: '{{(states.sensor.p100_power_month_wifi_3usb.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_3usb/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_wifi_3usb.state | float )|round(5)}}'
-        retain: true
+#   11_psync_wifi_3usb:
+#     sequence:
+# ##### Гостиная, удлинитель комод
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/wifi_3usb/month"
+#         payload: '{{(states.sensor.p100_power_month_wifi_3usb.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/wifi_3usb/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_wifi_3usb.state | float )|round(5)}}'
+#         retain: true
 
         
-  11_psync_158d00015751f4:
-    sequence:
-##### Бойлер
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00015751f4/month"
-        payload: '{{(states.sensor.p100_power_month_158d00015751f4.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00015751f4/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_158d00015751f4.state | float )|round(5)}}'
-        retain: true
+#   11_psync_158d00015751f4:
+#     sequence:
+# ##### Бойлер
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d00015751f4/month"
+#         payload: '{{(states.sensor.p100_power_month_158d00015751f4.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d00015751f4/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_158d00015751f4.state | float )|round(5)}}'
+#         retain: true
         
-  11_psync_158d000114a1e1:
-    sequence:
-##### Увлажнитель Д
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000114a1e1/month"
-        payload: '{{(states.sensor.p100_power_month_158d000114a1e1.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000114a1e1/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_158d000114a1e1.state | float )|round(5)}}'
-        retain: true
+#   11_psync_158d000114a1e1:
+#     sequence:
+# ##### Увлажнитель Д
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d000114a1e1/month"
+#         payload: '{{(states.sensor.p100_power_month_158d000114a1e1.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d000114a1e1/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_158d000114a1e1.state | float )|round(5)}}'
+#         retain: true
         
-  11_psync_158d00030a6e78:
-    sequence:
-##### Настольная лампа Д
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00030a6e78/month"
-        payload: '{{(states.sensor.p100_power_month_158d00030a6e78.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00030a6e78/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_158d00030a6e78.state | float )|round(5)}}'
-        retain: true
+#   11_psync_158d00030a6e78:
+#     sequence:
+# ##### Настольная лампа Д
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d00030a6e78/month"
+#         payload: '{{(states.sensor.p100_power_month_158d00030a6e78.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d00030a6e78/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_158d00030a6e78.state | float )|round(5)}}'
+#         retain: true
         
-  11_psync_158d00010ec4b8:
-    sequence:
-##### Увлажнитель А
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00010ec4b8/month"
-        payload: '{{(states.sensor.p100_power_month_158d00010ec4b8.state | float )|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00010ec4b8/lastmonth"
-        payload: '{{(states.sensor.p100_power_lastmonth_158d00010ec4b8.state | float )|round(5)}}'
-        retain: true
+#   11_psync_158d00010ec4b8:
+#     sequence:
+# ##### Увлажнитель А
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d00010ec4b8/month"
+#         payload: '{{(states.sensor.p100_power_month_158d00010ec4b8.state | float )|round(5)}}'
+#         retain: true
+#     - service: mqtt.publish
+#       data_template:
+#         topic: "power/158d00010ec4b8/lastmonth"
+#         payload: '{{(states.sensor.p100_power_lastmonth_158d00010ec4b8.state | float )|round(5)}}'
+#         retain: true

@@ -1,47 +1,51 @@
  - platform: mqtt
    name: "status_google_backup"
    state_topic: "googlebackup/result"
-   json_attributes_topic: "googlebackup/result"
+
+ - platform: mqtt
+   name: "status_google_backup_70"
+   state_topic: "googlebackup/main70/result"
+   json_attributes_topic: "googlebackup/main70/result"
    
  - platform: mqtt
    name: "backup_phaze"
-   state_topic: "googlebackup/phaze"
-   
+   state_topic: "googlebackup/main70/phaze"
+
  - platform: template
    sensors:
     last_google_backup:
        friendly_name: 'Последний удачный бэкап'
-       value_template: '{{ (as_timestamp(states.sensor.status_google_backup.attributes["backupTimestamp"]) + 10800) | timestamp_custom("%d.%m.%Y %H:%M") }}'
-       
+       value_template: '{{ (as_timestamp(states.sensor.status_google_backup_70.attributes["backupTimestamp"]) + 7200) | timestamp_custom("%d.%m.%Y %H:%M") }}'
+
  - platform: template
    sensors:
     last_google_filecount:
        friendly_name: 'Обнаружено файлов - '
-       value_template: '{{ states.sensor.status_google_backup.attributes["fileCount"] }}'
+       value_template: '{{ states.sensor.status_google_backup_70.attributes["fileCount"] }}'
        
  - platform: template
    sensors:
     last_google_alreadycount:
        friendly_name: 'Уже было сохранено файлов - '
-       value_template: '{{ states.sensor.status_google_backup.attributes["alreadyCount"] }}'
+       value_template: '{{ states.sensor.status_google_backup_70.attributes["alreadyCount"] }}'
        
  - platform: template
    sensors:
     last_google_backedupcount:
        friendly_name: 'Сохранено во время последнего прогона - '
-       value_template: '{{ states.sensor.status_google_backup.attributes["backedUpCount"] }}'
+       value_template: '{{ states.sensor.status_google_backup_70.attributes["backedUpCount"] }}'
        
  - platform: template
    sensors:
     last_google_deletedcount:
        friendly_name: 'Удалено с сервера - '
-       value_template: '{{ states.sensor.status_google_backup.attributes["deletedCount"] }}'
+       value_template: '{{ states.sensor.status_google_backup_70.attributes["deletedCount"] }}'
        
  - platform: template
    sensors:
     last_google_deletedfromgoogle:
        friendly_name: 'Удалено с Google диска - '
-       value_template: '{{ states.sensor.status_google_backup.attributes["deletedFromGoogle"] }}'
+       value_template: '{{ states.sensor.status_google_backup_70.attributes["deletedFromGoogle"] }}'
 
 
 

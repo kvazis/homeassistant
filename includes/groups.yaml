@@ -2,6 +2,9 @@
   scenario:
     name: scenario
     entities:
+      - automation.00_power_counter
+      - automation.00_power_new_day
+      - automation.00_power_new_month
       - automation.00_heater_notification_on
       - automation.00_heater_notification_off
       - automation.00_ilife_a4
@@ -15,8 +18,8 @@
       - automation.01_enter_light_timer_on
       - automation.01_enter_light_timer_reload      
       - automation.01_enter_light_timer_off
-    #   - automation.02_toilet_autoswitch
-    #   - automation.02_toilet_reboot
+      - automation.01_enter_time
+      - automation.01_motion_time
       - automation.02_toilet_light      
       - automation.02_toilet_light_on
       - automation.02_toilet_light_off
@@ -33,7 +36,8 @@
       - automation.02_laundry_power
       - automation.02_laundry_wleak_washmash_on
       - automation.02_laundry_wleak_washmash_off
-      - automation.02_laundry_motion_time
+      - automation.02_laundry_motion_time   
+      - automation.02_toilet_motion_time
       - automation.03_corr_entr
       - automation.03_corr_light
       - automation.03_corr_light_on_vibro
@@ -41,6 +45,7 @@
       - automation.03_corridor_light_timer_reload      
       - automation.03_corridor_light_timer_off
       - automation.03_corr_light_auto_off
+      - automation.03_motion_time
       - automation.04_kn_ceiling
       - automation.04_kn_ceiling_auto_on
       - automation.04_kn_ceiling_auto_off
@@ -49,8 +54,8 @@
       - automation.04_kitchen_wleak_washstand_off
       - automation.04_tv_xiaomi
       - automation.04_photo_on_vibro
-#      - automation.04_сhristmas_on      
-#      - automation.04_сhristmas_off      
+      - automation.04_kn_power
+      - automation.04_kitchen_motion_time
       - automation.05_gg_cell_1_power
       - automation.05_gg_cell_1_light
       - automation.05_gg_cell_2_light
@@ -84,6 +89,7 @@
       - automation.06_bathroom_wleak_washstand_off
       - automation.06_bathroom_wleak_shower_on
       - automation.06_bathroom_wleak_shower_off
+      - automation.06_bathroom_motion_time
       - automation.07_dd_hum_auto_on
       - automation.07_dd_hum_auto_off
       - automation.07_dd_hum_water_warning
@@ -94,9 +100,7 @@
       - automation.07_table_autoswitch   
       - automation.07_dd_all_off
       - automation.07_hp_toggle
-    #   - automation.07_talk_smartfon_16
-    #   - automation.07_talk_smartfon_19
-    #   - automation.07_talk_smartfon_21      
+      - automation.07_dd_motion_time
       - automation.08_da_hum_auto_on
       - automation.08_da_hum_auto_off
       - automation.08_da_hum_water_warning
@@ -105,6 +109,7 @@
       - automation.08_da_light_circle
       - automation.08_da_alllight_off
       - automation.08_da_table_reboot
+      - automation.08_da_motion_time
       - automation.20_unavailable_yeelight
       
   heater:
@@ -113,3 +118,4 @@
       - automation.00_heater_off
       - automation.00_heater_week_on
       - automation.00_heater_weekend_on
+      

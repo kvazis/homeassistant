@@ -1,0 +1,26 @@
+- platform: rest
+  resource: http://192.168.0.71:8123/api/states/sensor.online_custom
+  name: reserve_state
+  force_update: true
+  headers: 
+    Authorization: !secret reserve_secret_token
+    content-type: 'application/json'
+  value_template: '{{ value_json.state }}'
+  
+- platform: rest
+  resource: http://192.168.0.72:8123/api/states/sensor.online_custom
+  name: rasp3b_state
+  force_update: true
+  headers: 
+    Authorization: !secret rasp3_secret_token
+    content-type: 'application/json'
+  value_template: '{{ value_json.state }}'
+  
+- platform: rest
+  resource: http://192.168.0.77:8123/api/states/sensor.online_custom
+  name: mqtt_state
+  force_update: true
+  headers: 
+    Authorization: !secret orange_secret_token
+    content-type: 'application/json'
+  value_template: '{{ value_json.state }}'

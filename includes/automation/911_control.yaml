@@ -1,38 +1,16 @@
-- alias: 911_orange_71_loston
+- alias: 911_reserve_lost
   initial_state: true
   trigger:
    platform: state
    entity_id: sensor.reserve_state
    to: 'unavailable'
-  condition:
-    - condition: state
-      entity_id: group.scenario
-      state: 'off'    
   action:
     - service: notify.telegram
       data:
-        message: "Потеря связи с резервным сервером, Khadas VIM 2 - {{ states('sensor.time_date') }} . Включение сценариев"
-    - service: homeassistant.turn_on
-      entity_id:
-         - group.scenario
-         - group.heater
-        
-- alias: 911_orange_71_lost
-  initial_state: true
-  trigger:
-   platform: state
-   entity_id: sensor.reserve_state
-   to: 'unavailable'
-  condition:
-    - condition: state
-      entity_id: group.scenario
-      state: 'on'     
-  action:
-    - service: notify.telegram
-      data:
-        message: "Потеря связи с резервным сервером, Khadas VIM 2 - {{ states('sensor.time_date') }} Сценарии активны."
-        
-- alias: 911_orange_71_online
+        message: "Потеря связи с резервным сервером, Khadas VIM 2 - {{ states('sensor.time_date') }} ."
+
+
+- alias: 911_reserve_online
   initial_state: true
   trigger:
    platform: state
@@ -41,4 +19,25 @@
   action:
     - service: notify.telegram
       data:
-        message: "Связь с резервнымм сервером, Khadas VIM 2 восстановлена в - {{ states('sensor.time_date') }} ."
+        message: "Связь с резервным сервером, Khadas VIM 2 восстановлена в - {{ states('sensor.time_date') }} ."
+
+- alias: 911_scenario_on
+  initial_state: true
+  trigger:
+   - platform: state
+     entity_id: sensor.reserve_scenario_group
+     to: 'off'
+   - platform: state
+     entity_id: sensor.reserve_scenario_group
+     to: 'unavailable'
+  condition:
+    - condition: state
+      entity_id: group.scenario
+      state: 'off'     
+  action:
+    - service: notify.telegram
+      data:
+        message: "Бытовые сценарии резервном сервере, Khadas VIM 2 отключены в - {{ states('sensor.time_date') }} . Включение сценариев на основном сервере"
+    - service: homeassistant.turn_on
+      entity_id:
+         - group.scenario

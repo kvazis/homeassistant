@@ -1,7 +1,6 @@
 ## Включение увлажнения
 - alias: 07_dd_hum_auto_on
   initial_state: true
-#   initial_state: false
 ## ТРИГГЕР !!!
   trigger:
 ## Проверка каждые 3 минуты

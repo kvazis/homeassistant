@@ -239,6 +239,19 @@ cards:
 
           - type: markdown
             content: >
+                 **Hassio instanse**   
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: sensor.rasp3b_state
+                name: Raspberry 3B в онлайне -
+                icon: mdi:clock-outline
+              - entity: sensor.mqtt_state
+                name: MQTT instanse -
+                icon: mdi:clock-outline
+
+          - type: markdown
+            content: >
                  **Действия**   
 
           - type: custom:vertical-stack-in-card

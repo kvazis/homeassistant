@@ -9,7 +9,7 @@
 # Присвоение названия фазы 1
      - service: mqtt.publish
        data_template:
-         topic: "googlebackup/phaze"
+         topic: "googlebackup/main70/phaze"
          payload: 'Сжатие базы данных'
          retain: true
 # Старт таймера 15 минут
@@ -31,7 +31,7 @@
 # Присвоение названия фазы 2
      - service: mqtt.publish
        data_template:
-         topic: "googlebackup/phaze"
+         topic: "googlebackup/main70/phaze"
          payload: 'Создание снимка системы'
          retain: true
 # Отмена таймера, если остался
@@ -55,7 +55,7 @@
 # Присвоение названия фазы 3
      - service: mqtt.publish
        data_template:
-         topic: "googlebackup/phaze"
+         topic: "googlebackup/main70/phaze"
          payload: 'Сохранение на Google Drive'
          retain: true
 # Отмена таймера, если остался
@@ -76,7 +76,7 @@
 # Присвоение названия - завершено
      - service: mqtt.publish
        data_template:
-         topic: "googlebackup/phaze"
+         topic: "googlebackup/main70/phaze"
          payload: 'Резервное копирование завершено'
          retain: true
 # Сброс таймера
@@ -85,6 +85,6 @@
 # ПУбликация времени создания бэкапа
      - service: mqtt.publish
        data_template:
-         topic: "googlebackup/result"
+         topic: "googlebackup/main70/result"
          payload: "{{ states('sensor.status_google_backup')}}"
          retain: true

@@ -5,10 +5,7 @@
       topic: "states/water_heater"
       payload: "Бойлер"
       retain: true
-  - service: homeassistant.turn_on
-    entity_id:
-         - group.heater
-      
+
 21_heater_off:
  sequence:
   - service: mqtt.publish
@@ -16,6 +13,3 @@
       topic: "states/water_heater"
       payload: "Горячая вода"
       retain: true
-  - service: homeassistant.turn_off
-    entity_id:
-         - group.heater

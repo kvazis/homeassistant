@@ -13,17 +13,15 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: switch.heater_mode
             - entity: sensor.states_water_heater
-              name: Режим основного сервера
+              name: Режим нагрева воды
+            - entity: switch.heater_mode
+              name: Сменить режим нагрева
             - entity: group.heater
-              name: Бойлер, сценарии - 
+              name: Сценарии бойлера - 
               icon: mdi:hot-tub
-            - entity: sensor.reserve_states_water_heater
-              name: Режим резервного сервера
-            - entity: sensor.reserve_heater_group
-              name: Бойлер
-              icon: mdi:hot-tub
+            - entity: binary_sensor.reserve_heat
+
 
       - type: vertical-stack
         cards:

@@ -1,7 +1,7 @@
   - platform: template
     switches:
       heater_mode:
-        friendly_name: "Режим бойлера"
+        friendly_name: "Смена режима нагрева"
         value_template: "{{ is_state('sensor.states_water_heater', 'Бойлер') }}"
         turn_on:
           service: script.turn_on
@@ -10,7 +10,13 @@
         turn_off:
           service: script.turn_on
           data:
-            entity_id: script.21_heater_off    
+            entity_id: script.21_heater_off  
+        icon_template: >-
+          {% if is_state('switch.heater_mode', 'on') %}
+            mdi:power-plug
+          {% else %}
+            mdi:power-plug-off
+          {% endif %}  
       forse_hum:
         friendly_name: "Усиленное увлажнение"
         value_template: "{{ is_state('sensor.smartmi_mode', 'high') }}"

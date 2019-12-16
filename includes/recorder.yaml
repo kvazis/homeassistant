@@ -1,7 +1,13 @@
   db_url: !secret db_link
-  purge_keep_days: 1
+  purge_keep_days: 2
   include:
     entities:
+# Свичи для сбора истории
+       - switch.tv_xiaomi
+       - switch.tv_samsung
+       - switch.forse_hum
+       - switch.plug_158d000114a1e1
+       - switch.plug_158d00010ec4b8
 # Системные сенсоры
        - sensor.processor_use
        - sensor.cpu_temp

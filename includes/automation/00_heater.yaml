@@ -1,3 +1,43 @@
+# Включение нагрева воды
+- alias: 00_hot_on
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: sensor.states_water_heater
+    to: 'Бойлер'
+  condition:
+    - condition: state
+      entity_id: group.heater
+      state: 'off'
+  action:
+    - service: notify.telegram
+      data:
+        message: "Сценарии бойлера на основном сервере включены в - {{ states('sensor.time_date') }}"
+    - service: homeassistant.turn_on
+      entity_id:
+         - group.heater
+
+# Выключение нагрева воды
+- alias: 00_hot_off
+  initial_state: true
+  trigger:
+  - platform: homeassistant
+    event: start
+  - platform: state
+    entity_id: sensor.states_water_heater
+    to: 'Горячая вода'
+  - platform: state
+    entity_id: group.heater
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: sensor.states_water_heater
+    state: 'Горячая вода'  
+  action:
+  - service: homeassistant.turn_off
+    entity_id:
+        - group.heater
+
 # Включение бойлера по будням
 - alias: 00_heater_week_on
   initial_state: true
@@ -94,51 +134,3 @@
       message: "Бойлер выключен в  {{ states('sensor.time_date') }}"
   - service: timer.cancel
     entity_id: timer.heater
-    
-# Изменение режима бойлера на резервном сервере   
-- alias: 00_heater_reserve_on
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: sensor.reserve_states_water_heater
-   to: 'Бойлер'
-  condition:
-    - condition: state
-      entity_id: sensor.states_water_heater
-      state: 'Горячая вода'  
-  action:
-    - service: script.turn_on
-      entity_id: script.21_heater_on
-
-# Изменение режима бойлера на резервном сервере   
-- alias: 00_heater_reserve_off
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: sensor.reserve_states_water_heater
-   to: 'Горячая вода'
-  condition:
-    - condition: state
-      entity_id: sensor.states_water_heater
-      state: 'Бойлер'  
-  action:
-    - service: script.turn_on
-      entity_id: script.21_heater_off
-      
-# Контроль за сценариями бойлера      
-- alias: 00_heater_control
-  initial_state: true
-  trigger:
-    - platform: time_pattern
-      minutes: '/1'
-  condition:
-    - condition: state
-      entity_id: group.heater
-      state: 'on'
-    - condition: state
-      entity_id: sensor.states_water_heater
-      state: 'Горячая вода'    
-  action:
-    - service: homeassistant.turn_off
-      entity_id:
-         - group.heater

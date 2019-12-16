@@ -26,15 +26,6 @@
   unit_of_measurement: "°C"
   value_template: '{{ (value | multiply(0.001)) | round(1) }}'
 
-- platform: rest
-  resource: http://192.168.0.71:8123/api/states/sensor.online_custom
-  name: reserve_state
-  force_update: true
-  headers: 
-    Authorization: !secret reserve_secret_token
-    content-type: 'application/json'
-  value_template: '{{ value_json.state }}'
-
 - platform: version
   name: current_ha
   scan_interval: 1800

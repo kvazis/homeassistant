@@ -32,6 +32,5 @@ views:
 #   - !include lovelace/14_battery.yaml
   - !include lovelace/15_automation.yaml
   - !include lovelace/16_switchlight.yaml
-  - !include lovelace/17_powersync.yaml
+#   - !include lovelace/17_powersync.yaml
   
- 

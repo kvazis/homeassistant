@@ -66,7 +66,10 @@ tuya:
   country_code: 380
 
 mqtt:
-  broker: core-mosquitto
+#   broker: core-mosquitto
+  broker: 192.168.0.77
+  discovery: true
+  discovery_prefix: homeassistant
   username: mqtt
   password: mqtt
 

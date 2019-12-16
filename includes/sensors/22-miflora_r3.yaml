@@ -1,159 +1,159 @@
-## Юкка
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.yucca_temperature
-    name: yucca_temperature
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+# ## Юкка
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.yucca_temperature
+#     name: yucca_temperature
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
 
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.yucca_moisture
-    name: yucca_moisture
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.yucca_moisture
+#     name: yucca_moisture
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.yucca_conductivity
-    name: yucca_conductivity
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.yucca_conductivity
+#     name: yucca_conductivity
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.yucca_light_intensity
-    name: yucca_light_intensity
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.yucca_light_intensity
+#     name: yucca_light_intensity
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.yucca_battery
-    name: yucca_battery
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.yucca_battery
+#     name: yucca_battery
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
 
-## Диффенбахия
+# ## Диффенбахия
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_temperature
-    name: dieffenbac_temperature
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_temperature
+#     name: dieffenbac_temperature
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
 
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_moisture
-    name: dieffenbac_moisture
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_moisture
+#     name: dieffenbac_moisture
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_conductivity
-    name: dieffenbac_conductivity
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_conductivity
+#     name: dieffenbac_conductivity
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_light_intensity
-    name: dieffenbac_light_intensity
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_light_intensity
+#     name: dieffenbac_light_intensity
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_battery
-    name: dieffenbac_battery
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.dieffenbac_battery
+#     name: dieffenbac_battery
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
 
-## Замиокулькас
+# ## Замиокулькас
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_temperature
-    name: zamiokulkas_temperature
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_temperature
+#     name: zamiokulkas_temperature
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
 
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_moisture
-    name: zamiokulkas_moisture
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_moisture
+#     name: zamiokulkas_moisture
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_conductivity
-    name: zamiokulkas_conductivity
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_conductivity
+#     name: zamiokulkas_conductivity
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_light_intensity
-    name: zamiokulkas_light_intensity
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_light_intensity
+#     name: zamiokulkas_light_intensity
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_battery
-    name: zamiokulkas_battery
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.zamiokulkas_battery
+#     name: zamiokulkas_battery
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
 
-## Горшки
+# ## Горшки
 
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.deep_purple_battery
-    name: deep_purple_battery
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.deep_purple_battery
+#     name: deep_purple_battery
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
     
-  - platform: rest
-    resource: http://192.168.0.72:8123/api/states/sensor.true_blue_battery
-    name: true_blue_battery
-    force_update: true
-    headers: 
-      Authorization: !secret rasp3_secret_token
-      content-type: 'application/json'
-    value_template: '{{ value_json.state }}'
+#   - platform: rest
+#     resource: http://192.168.0.72:8123/api/states/sensor.true_blue_battery
+#     name: true_blue_battery
+#     force_update: true
+#     headers: 
+#       Authorization: !secret rasp3_secret_token
+#       content-type: 'application/json'
+#     value_template: '{{ value_json.state }}'
