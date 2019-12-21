@@ -421,10 +421,19 @@ cards:
         - type: glance
           show_state: false
           entities:
+           - entity: binary_sensor.motion_sensor_158d000449b773
+             name: Движение
            - entity: binary_sensor.door_window_sensor_158d00013ed373
              name: Окно в гостиной
            - entity: binary_sensor.door_window_sensor_158d0001a2f5f7
              name: Окно на балконе 
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: sensor.illumination_158d000449b773
+             name: Освещенность на балконе -
+             icon: mdi:white-balance-sunny
 
         - type: horizontal-stack
           cards:

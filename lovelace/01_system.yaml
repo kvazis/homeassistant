@@ -125,6 +125,7 @@ cards:
             - type: custom:canvas-gauge-card
               entity: sensor.processor_use
               card_height: 180
+              background-color: var(--background-image)
               gauge:
                 type: "radial-gauge"
                 title: Processor (%)

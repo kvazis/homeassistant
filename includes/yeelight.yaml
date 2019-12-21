@@ -29,6 +29,9 @@
         name: yeelight_05_rgbtvbulb
         transition: 1000
         model: color2
+      192.168.0.116:
+        name: yeelight_05_table
+        model: lamp1
       192.168.0.120:
         name: yeelight_05_bedside2
         transition: 1000
@@ -52,6 +55,3 @@
         name: yeelight_08_strip
         transition: 1000
         model: strip1 
-      192.168.0.116:
-        name: yeelight_08_table
-        model: lamp1

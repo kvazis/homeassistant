@@ -6,7 +6,7 @@
              Основной сервер Raspberry Pi 3 B+
              Отчет за {{ states('sensor.time_date') }} 
              Бытовые сценарии - {{ states('group.scenario') }} 
-             Сценарии бойлера - {{ states('group.heater') }} 
+             Режим бойлера - {{ states('binary_sensor.boiler') }} 
              {{"\U0001F4A1"}} недоступно - {{ states('sensor.unavailable_now_light') }} 
              {{"\U0001F50C"}} недоступно - {{ states('sensor.unavailable_now_switch') }} 
              Сенсоров недоступно - {{ states('sensor.unavailable_now_sensor') }} 
@@ -19,7 +19,7 @@
          message: | 
              Основной сервер Raspberry Pi 3 B+ запущен в {{ states('sensor.time_date') }} 
              Бытовые сценарии - {{ states('group.scenario') }} 
-             Сценарии бойлера - {{ states('group.heater') }} 
+             Режим бойлера - {{ states('binary_sensor.boiler') }} 
              {{"\U0001F4C3"}} по устройствам будет готов через 1 минуту
      - delay: 00:00:60  
      - service: notify.telegram

@@ -40,7 +40,7 @@ cards:
           - type: horizontal-stack
             cards:        
             - type: light
-              entity: light.yeelight_08_table
+              entity: light.24730816ecfabc996804
               name: Лампа
             - type: light
               entity: light.yeelight_08_bedside

@@ -5,8 +5,6 @@
       - automation.00_power_counter
       - automation.00_power_new_day
       - automation.00_power_new_month
-      - automation.00_heater_notification_on
-      - automation.00_heater_notification_off
       - automation.00_ilife_a4
       - automation.01_enter_autoswitch
       - automation.01_enter_reboot
@@ -75,6 +73,8 @@
       - automation.05_tv_samsung
       - automation.05_gg_balkoon_light_on
       - automation.05_gg_balkoon_light_off
+      - automation.05_gg_balkoon_light_motion
+      - automation.05_gg_balkoon_light_power
       - automation.06_bathroom_cell_power
       - automation.06_bathroom_light_bright
       - automation.06_bathroom_light_on      
@@ -111,11 +111,3 @@
       - automation.08_da_table_reboot
       - automation.08_da_motion_time
       - automation.20_unavailable_yeelight
-      
-  heater:
-    name: heater
-    entities:
-      - automation.00_heater_off
-      - automation.00_heater_week_on
-      - automation.00_heater_weekend_on
-      

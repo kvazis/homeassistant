@@ -24,6 +24,9 @@ light.yeelight_05_rgbtvbulb:
 light.gateway_light_34ce0088b039:
   friendly_name: Гостиная шлюз свет
   icon: mdi:star-circle-outline
+light.yeelight_05_table:
+  friendly_name: Гостиная настольная лампа
+  icon: mdi:desk-lamp
 ## Реле
 switch.wall_switch_left_158d00015723f1:
   friendly_name: Гостиная выключатель стена
@@ -109,7 +112,12 @@ sensor.05_mean_temperature:
 ## Освещение
 light.66633530807d3a766432:
   friendly_name: Балкон люстра
+  icon: mdi:ceiling-light
 ## Сенсоры  
+binary_sensor.motion_sensor_158d000449b773:
+  friendly_name: Гостиная, балкон движение
+sensor.illumination_158d000449b773:
+  friendly_name: Гостиная, балкон освещенность
 binary_sensor.wall_switch_158d00010b5aee:
   friendly_name: Балкон выключатель
 sensor.humidity_158d0001a4b9da:

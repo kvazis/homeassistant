@@ -1,13 +1,5 @@
-# Нагрев на резервном сервере
-  - platform: template
-    sensors:
-      reserve_heat:
-        friendly_name: "Бойлер на reserve"
-        value_template: >-
-          {{ is_state('sensor.reserve_heater_group', 'on')  }}
-        icon_template: >-
-          {% if is_state("binary_sensor.reserve_heat", "on") %}
-            mdi:water-boiler
-          {% else %}
-            mdi:water-boiler-off
-          {% endif %}
+  - platform: mqtt
+    name: boiler
+    state_topic: "states/water_heater"
+    payload_on: "ON"
+    payload_off: "OFF"

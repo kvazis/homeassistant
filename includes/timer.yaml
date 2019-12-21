@@ -33,3 +33,6 @@
     
   backup:
     duration: '00:15:00'
+    
+  liv_balc:
+    duration: '00:05:00'

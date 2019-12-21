@@ -1,0 +1,48 @@
+---
+#
+# Aqua Fiesta Thheme
+#
+aqua-fiesta:
+  accent-color: "#f9a825"
+  card-background-color: var(--secondary-background-color)
+  dark-primary-color: "#007c91"
+  default-primary-color: var(--primary-color)
+  disabled-text-color: '#777777'
+  ha-user-badge: var(--accent-color)
+  label-badge-red: var(--primary-color)
+  label-badge-text-color: var(--primary-text-color)
+  light-primary-color: "#5ddef4"
+  lumo-body-text-color: var(--dark-primary-color)
+  lumo-primary-color: var(--text-primary-color)
+  lumo-primary-text-color: var(--text-primary-color)
+  lumo-secondary-text-color: var(--text-primary-color)
+  mdc-theme-primary: var(--primary-color)
+  paper-card-background-color: var(--secondary-background-color)
+  paper-card-header-color: var(--text-primary-color)
+  paper-grey-200: var(--paper-listbox-background-color)
+  paper-grey-50: var(--primary-text-color)
+  paper-icon-item: var(--accent-color)
+  paper-item-icon-active-color: var(--accent-color)
+  paper-item-icon-color: var(--primary-text-color)
+  paper-item-selected_-_background-color: var(--paper-card-background-color)
+  paper-light-blue-500: var(--light-primary-color)
+  paper-listbox-background-color: '#2f3030'
+  paper-slider-active-color: var(--primary-color)
+  paper-slider-container-color: 'linear-gradient(var(--primary-background-color), var(--secondary-background-color)) no-repeat'
+  paper-slider-knob-color: var(--primary-color)
+  paper-slider-knob-start-color: var(--primary-color)
+  paper-slider-pin-color: var(--primary-color)
+  paper-slider-secondary-color: var(--secondary-background-color)
+  paper-tabs-selection-bar-color: var(--primary-color)
+  paper-toggle-button-checked-bar-color: var(--primary-color)
+  paper-toggle-button-checked-button-color: var(--primary-color)
+  paper-toggle-button-checked-ink-color: var(--primary-color)
+  primary-background-color: "#636363"
+  primary-color: "#00acc1"
+  primary-text-color: var(--text-primary-color)
+  secondary-background-color: "#494949"
+  secondary-text-color: var(--primary-color)
+  sidebar-icon-color: var(--disabled-text-color)
+  table-row-alternative-background-color: var(--paper-card-background-color)
+  table-row-background-color: var(--paper-card-background-color)
+  text-primary-color: "#dae0e0"

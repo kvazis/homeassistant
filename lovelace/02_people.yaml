@@ -13,15 +13,11 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: sensor.states_water_heater
-              name: Режим нагрева воды
+            - entity: binary_sensor.boiler
+              name: Режим бойлера - 
             - entity: switch.heater_mode
               name: Сменить режим нагрева
-            - entity: group.heater
-              name: Сценарии бойлера - 
-              icon: mdi:hot-tub
-            - entity: binary_sensor.reserve_heat
-
+            - entity: script.mqtt_payload_sensor
 
       - type: vertical-stack
         cards:

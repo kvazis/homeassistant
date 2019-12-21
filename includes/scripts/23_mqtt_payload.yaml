@@ -1,0 +1,33 @@
+  mqtt_payload_sensor:
+    alias: Сенсоры состояния в mqtt
+    sequence:
+     - service: mqtt.publish
+       data_template:
+         topic: "states/main/system/scenario"
+         payload: '{{(states.group.scenario.state)}}'
+         retain: true 
+     - service: mqtt.publish
+       data_template:
+         topic: "states/main/system/unavailable_now_light"
+         payload: '{{(states.sensor.unavailable_now_light.state)}}'
+         retain: true  
+     - service: mqtt.publish
+       data_template:
+         topic: "states/main/system/unavailable_now_switch"
+         payload: '{{(states.sensor.unavailable_now_switch.state)}}'
+         retain: true  
+     - service: mqtt.publish
+       data_template:
+         topic: "states/main/system/unavailable_now_sensor"
+         payload: '{{(states.sensor.unavailable_now_sensor.state)}}'
+         retain: true 
+     - service: mqtt.publish
+       data_template:
+         topic: "states/main/system/unavailable_now_binary_sensor"
+         payload: '{{(states.sensor.unavailable_now_binary_sensor.state)}}'
+         retain: true 
+     - service: mqtt.publish
+       data_template:
+         topic: "states/main/system/send"
+         payload: '{{(states.sensor.time_date.state)}}'
+         retain: true

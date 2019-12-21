@@ -23,3 +23,5 @@ timer.kitchen:
   friendly_name: Кухня свет выкл через -
 timer.backup:
   friendly_name: Фаза завершается через - 
+timer.liv_balc:
+  friendly_name: Гостиная балкон свет выкл через -

@@ -1,0 +1,97 @@
+# Автоматизации
+
+# Контроль за основным сервером - 911_control.yaml
+automation.911_reserve_online:
+  friendly_name: Резервный сервер online
+  icon: mdi:server-network
+  
+automation.911_reserve_lost:
+  friendly_name: Резервный сервер offline
+  icon: mdi:server-network
+
+automation.911_scenario_on:
+  friendly_name: Включение сценариев
+  icon: mdi:check-network-outline 
+  
+# Системные сценарии - 00_system.yaml
+automation.00_backup_everyday:
+  friendly_name: Резервное копирование
+  icon: mdi:cloud-upload
+  
+automation.00_start:
+  friendly_name: Запуск Home Assistant
+  icon: mdi:upload
+
+# Сценарии бойлера - 00_heater.yaml
+automation.00_heater_week_on:
+  friendly_name: Включение бойлера по будням
+  icon: mdi:water-boiler
+  
+automation.00_heater_weekend_on:
+  friendly_name: Включение бойлера по выходным
+  icon: mdi:water-boiler
+  
+automation.00_heater_off:
+  friendly_name: Выключение бойлера
+  icon: mdi:water-boiler-off
+  
+automation.00_heater_notification_on:
+  friendly_name: Уведомление о включении бойлера
+  icon: mdi:water-boiler-alert
+  
+automation.00_heater_notification_off:
+  friendly_name: Уведомление о выключении бойлера
+  icon: mdi:water-boiler-alert
+  
+# Телеграмм уведомления - 00_telegramm.yaml
+automation.00_telegramm_photo:
+  friendly_name: Фотографии на входе и отправка в телеграмм
+  icon: mdi:telegram
+
+automation.00_telegramm_robot:
+  friendly_name: Запуск робота пылесоса и отправка в телеграмм
+  icon: mdi:telegram
+  
+automation.00_telegramm_command:
+  friendly_name: Вывод команд быстрого запуска
+  icon: mdi:telegram
+  
+automation.00_telegramm_ggoff:
+  friendly_name: Отключение света в гостиной
+  icon: mdi:telegram
+  
+automation.00_telegramm_ddoff:
+  friendly_name: Отключение света в детской Д
+  icon: mdi:telegram
+  
+automation.00_telegramm_daoff:
+  friendly_name: Отключение света в детской А
+  icon: mdi:telegram
+  
+automation.00_telegramm_sc_off:
+  friendly_name: Отключение автоматизаций на основном сервере
+  icon: mdi:telegram
+  
+automation.00_telegramm_sc_on:
+  friendly_name: Включение автоматизаций на основном сервере
+  icon: mdi:telegram
+  
+automation.00_telegramm_ping:
+  friendly_name: Отчет о состоянии сервера
+  icon: mdi:telegram
+  
+automation.00_telegramm_hsc_on:
+  friendly_name: Включение режима бойлера
+  icon: mdi:telegram
+  
+automation.00_telegramm_hsc_off:
+  friendly_name: Выключение режима бойлера
+  icon: mdi:telegram
+  
+automation.00_telegramm_heater_on:
+  friendly_name: Включение бойлера
+  icon: mdi:telegram
+  
+automation.00_telegramm_heater_off:
+  friendly_name: Выключение бойлера
+  icon: mdi:telegram

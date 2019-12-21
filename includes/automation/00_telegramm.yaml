@@ -46,7 +46,7 @@
       message: 'commands'
       data:
         keyboard:
-          - '/photo, /ilife , /sleep'
+          - '/photo, /ilife'
           - '/hscene_on, /hscene_off, /heat_on, /heat_off'
           - '/gg_off, /dd_off, /da_off'
           - '/ping, /auto_on, /auto_off'
@@ -152,10 +152,10 @@
     - service: notify.telegram
       data:
         title: 'Отчет'
-        message: "Сценарии бойлера на Raspberry Pi 3 B+ включены"
-    - service: homeassistant.turn_on
+        message: "Режим нагрева бойлера включен"
+    - service: switch.turn_on
       entity_id:
-         - group.heater
+         - switch.heater_mode
         
 - alias: 00_telegramm_hsc_off
   initial_state: true
@@ -168,10 +168,10 @@
     - service: notify.telegram
       data:
         title: 'Отчет'
-        message: "Сценарии бойлера на Raspberry Pi 3 B+0 отключены"
-    - service: homeassistant.turn_off
+        message: "Режим нагрева бойлера выключен"
+    - service: switch.turn_off
       entity_id:
-         - group.heater
+         - switch.heater_mode
          
 - alias: 00_telegramm_heater_on
   initial_state: true
@@ -180,6 +180,13 @@
     event_type: telegram_command
     event_data:
       command: '/heat_on'
+  condition:
+   - condition: state
+     entity_id: binary_sensor.boiler
+     state: 'on'
+   - condition: state
+     entity_id: switch.wall_plug_158d00015751f4
+     state: 'off'
   action:
   - service: switch.turn_on
     entity_id: switch.wall_plug_158d00015751f4
@@ -194,19 +201,3 @@
   action:
   - service: switch.turn_off
     entity_id: switch.wall_plug_158d00015751f4
-    
-- alias: 00_telegramm_sleep
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/sleep'
-  action:
-    - service: notify.telegram
-      data:
-        message: "Сообщение отправлено "
-    - service: script.turn_on
-      entity_id: script.talk_sleep
-    
-

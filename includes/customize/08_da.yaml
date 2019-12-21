@@ -9,7 +9,7 @@ light.gateway_light_f0b429cc1f11:
 light.yeelight_08_strip:
   friendly_name: Детская А LED лента
   icon: mdi:led-strip
-light.yeelight_08_table:
+light.24730816ecfabc996804:
   friendly_name: Детская А настольная лампа
   icon: mdi:desk-lamp
 light.yeelight_08_bedside:

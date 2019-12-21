@@ -54,6 +54,11 @@ cards:
             name: Телевизор
             icon: mdi:television
 
+        - type: picture-entity
+          entity: camera.reolink2
+          camera_view: live 
+          show_state: false
+          show_name: false
 
         - type: horizontal-stack
           cards: 
@@ -67,7 +72,6 @@ cards:
             entity: switch.plug_158d0001fa2934
             name: Холодильник, питание
             icon: mdi:power
-
 
       - type: vertical-stack
         cards:
