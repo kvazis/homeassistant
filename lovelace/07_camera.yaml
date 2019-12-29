@@ -99,7 +99,7 @@ cards:
           entities:
            - entity: switch.plug_158d00010ec4b8
            - entity: light.aqara_08_ceiling
-           - entity: light.yeelight_08_table
+           - entity: light.24730816ecfabc996804
            - entity: script.05_photo_xiaofang1s
              icon: mdi:camera 
              tap_action:

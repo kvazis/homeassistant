@@ -40,3 +40,13 @@
     name: tod_full_night
     after: sunset
     before: sunrise
+    
+  - platform: tod
+    name: weekday_time
+    after: '07:00'
+    before: '22:00'
+
+  - platform: tod
+    name: weekend_time
+    after: '10:00'
+    before: '22:00'

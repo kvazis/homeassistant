@@ -5,9 +5,8 @@
    entity_id: sensor.reserve_state
    to: 'unavailable'
   action:
-    - service: notify.telegram
-      data:
-        message: "Потеря связи с резервным сервером, Khadas VIM 2 - {{ states('sensor.time_date') }} ."
+    - service: script.turn_on
+      entity_id: script.mqtt_payload_reserve_offline
 
 - alias: 911_reserve_online
   initial_state: true
@@ -16,9 +15,8 @@
    entity_id: sensor.reserve_state
    from: 'unavailable'
   action:
-    - service: notify.telegram
-      data:
-        message: "Связь с резервным сервером, Khadas VIM 2 восстановлена в - {{ states('sensor.time_date') }} ."
+    - service: script.turn_on
+      entity_id: script.mqtt_payload_reserve_online
 
 - alias: 911_scenario_on
   initial_state: true
@@ -40,3 +38,25 @@
     - service: homeassistant.turn_on
       entity_id:
          - group.scenario
+
+- alias: 911_mqtt_lost
+  initial_state: true
+  trigger:
+   platform: state
+   entity_id: sensor.mqtt_state
+   to: 'unavailable'
+  action:
+    - service: notify.telegram
+      data:
+        message: "Потеря связи с MQTT сервером, Orange PI PC 2 - {{ states('sensor.time_date') }} ."
+
+- alias: 911_mqtt_online
+  initial_state: true
+  trigger:
+   platform: state
+   entity_id: sensor.mqtt_state
+   from: 'unavailable'
+  action:
+    - service: notify.telegram
+      data:
+        message: "Связь с MQTT сервером, Orange PI PC 2 восстановлена в - {{ states('sensor.time_date') }} ."

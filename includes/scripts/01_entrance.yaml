@@ -5,53 +5,12 @@
          entity_id: timer.camphoto
        - service: automation.turn_off
          entity_id: automation.01_enter_photo
-       - service: notify.telegram
-         data:
-           title: "Дверь"
-           message: "Входная дверь открыта в {{ states('sensor.time_date') }}" 
-       - service: notify.telegram_olha
-         data:
-           title: "Дверь"
-           message: "Входная дверь открыта в {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.xiaofang
-              filename: "/config/www/cam_captures/xiaofang.jpg"
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink
-              filename: "/config/www/cam_captures/reolink.jpg"
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink2
-              filename: "/config/www/cam_captures/reolink2.jpg"
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink3
-              filename: "/config/www/cam_captures/reolink3.jpg"
-       - delay: 00:00:10
-       - service: notify.telegram
-         data:
-              title: "Дверь"
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/xiaofang.jpg
-                      - file: /config/www/cam_captures/reolink.jpg
-                      - file: /config/www/cam_captures/reolink2.jpg
-                      - file: /config/www/cam_captures/reolink3.jpg
-       - service: notify.telegram_olha
-         data:
-              title: "Дверь"
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/xiaofang.jpg
-                      - file: /config/www/cam_captures/reolink.jpg
-                      - file: /config/www/cam_captures/reolink2.jpg
-                      - file: /config/www/cam_captures/reolink3.jpg
-                  
-                      
+       - service: mqtt.publish
+         data_template:
+           topic: "states/error"
+           payload_template: '001'
+           retain: true
+
   01_enter_on:
     alias: Включение лампочки в прихожей
     sequence:

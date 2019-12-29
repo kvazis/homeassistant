@@ -2,6 +2,8 @@
   scenario:
     name: scenario
     entities:
+      - automation.911_mqtt_lost
+      - automation.911_mqtt_online
       - automation.00_power_counter
       - automation.00_power_new_day
       - automation.00_power_new_month

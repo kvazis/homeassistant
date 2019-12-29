@@ -57,9 +57,9 @@
        entity_id: switch.plug_158d000114a1e1
        state: 'on'
 ## Время работы
-     - condition: time
-       after: '08:00:00'
-       before: '21:59:00'
+     - condition: state
+       entity_id: binary_sensor.day_work
+       state: 'on'
   action:
     - service: notify.telegram
       data:

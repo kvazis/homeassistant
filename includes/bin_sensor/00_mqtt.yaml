@@ -1,0 +1,11 @@
+  - platform: mqtt
+    name: boiler
+    state_topic: "states/water_heater"
+    payload_on: "ON"
+    payload_off: "OFF"
+    
+  - platform: mqtt
+    name: humidification
+    state_topic: "states/humidification"
+    payload_on: "ON"
+    payload_off: "OFF"

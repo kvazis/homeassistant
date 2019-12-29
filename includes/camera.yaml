@@ -27,26 +27,6 @@
     still_image_url: !secret reolink1_url
     stream_source: !secret reolink1_sub_rtsp
 
-# # Alfawise
-# # Основной поток
-
-#   - platform: generic
-#     name: Alfawise
-#     still_image_url: http://192.168.0.127/snap.jpg
-#     stream_source: !secret alfawise_url
-#     username: !secret alfawise_login
-#     password: !secret alfawise_pass
-
-# # Alfawise
-# # Дополнительный поток
-
-#   - platform: generic
-#     name: Alfawise_sub
-#     still_image_url: http://192.168.0.127/snap.jpg
-#     stream_source: !secret alfawise_sub_url
-#     username: !secret alfawise_login
-#     password: !secret alfawise_pass
-
 # Reolink C2 Pro
 # Основной поток
 

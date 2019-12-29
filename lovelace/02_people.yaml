@@ -17,7 +17,19 @@ cards:
               name: Режим бойлера - 
             - entity: switch.heater_mode
               name: Сменить режим нагрева
-            - entity: script.mqtt_payload_sensor
+            - entity: binary_sensor.humidification
+              name: Режим увлажнения воздуха - 
+            - entity: switch.humidification_mode
+              name: Сменить режим увлажнителя
+
+
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: script.mqtt_payload_online
+              name: Скрипт онлайн
+            - entity: script.mqtt_payload_report
+              name: Скрипт репорт
 
       - type: vertical-stack
         cards:

@@ -1,4 +1,13 @@
-  mqtt_payload_sensor:
+  mqtt_payload_online:
+    alias: Время загрузки в mqtt
+    sequence:
+     - service: mqtt.publish
+       data_template:
+         topic: "states/main/system/send"
+         payload: '{{(states.sensor.time_date.state)}}'
+         retain: true
+
+  mqtt_payload_report:
     alias: Сенсоры состояния в mqtt
     sequence:
      - service: mqtt.publish
@@ -28,6 +37,6 @@
          retain: true 
      - service: mqtt.publish
        data_template:
-         topic: "states/main/system/send"
+         topic: "states/main/system/report"
          payload: '{{(states.sensor.time_date.state)}}'
          retain: true

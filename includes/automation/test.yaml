@@ -1,24 +1,18 @@
-# # Полное освещение 
-# - alias: test_smart_light_on
-#   initial_state: true
-#   trigger:
-# # Одинарный клик на кнопку
-#   - platform: event
-#     event_type: xiaomi_aqara.click
-#     event_data:
-#       entity_id: binary_sensor.switch_158d0001e8a244
-#       click_type: single
-#   condition:
-#   - condition: state
-#     entity_id: light.24730816ecfabc996804
-#     state: 'off'
-#   action:
-#   - service: light.turn_on
-#     entity_id:
-#       - light.24730816ecfabc996804
-#     data_template:
-#       brightness: 255
-#       color_temp: 182
+# Елка
+- alias: test_smart_light_on
+  initial_state: true
+  trigger:
+# Одинарный клик на кнопку
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.switch_158d0001e8a244
+      click_type: single
+  action:
+  - service: switch.toggle
+    entity_id:
+      - switch.87874800dc4f22ec37b2
+
 
 # # Подсветка 
 # - alias: test2_smart_light_on

@@ -22,12 +22,13 @@
   - service: xiaomi_aqara.stop_ringtone
     data:
       gw_mac: 34:CE:00:88:B0:39   
-  - service: notify.telegram
-    data:
-      title: 'Пылесос'
-      message: "Робот пылесос вышел на тропу войны {{ states('sensor.time_date') }}"
-  - service: switch.toggle
-    entity_id: switch.ilifea4
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '002'
+       retain: true
+  - service: script.turn_on
+    entity_id: script.ilife_a4
     
 - alias: 05_usb_cool_work
   initial_state: true

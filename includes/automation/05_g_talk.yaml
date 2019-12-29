@@ -31,9 +31,11 @@
             entity_id: sensor.05_mi_air_tvoc
             above: 3
   action:
-  - service: notify.telegram
-    data:
-      message: "Гостиная {{ states('sensor.time_date') }} - хорошо бы проветрить"
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '003'
+       retain: true
   - service: script.turn_on
     entity_id: script.talk_05_fresh   
     

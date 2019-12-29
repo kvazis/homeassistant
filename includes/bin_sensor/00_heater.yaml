@@ -1,5 +1,0 @@
-  - platform: mqtt
-    name: boiler
-    state_topic: "states/water_heater"
-    payload_on: "ON"
-    payload_off: "OFF"

@@ -118,7 +118,7 @@ cards:
                 action: toggle
               name: Выкл. свет
               icon: mdi:close-circle-outline
-            - entity: switch.ilifea4
+            - entity: script.ilife_a4
               tap_action: 
                 action: toggle
               name: iLife A4
@@ -128,6 +128,11 @@ cards:
                 action: toggle
               name: Router fan
               icon: mdi:fan
+            - entity: switch.87874800dc4f22ec37b2
+              tap_action: 
+                action: toggle
+              name: Йолка
+              icon: mdi:pine-tree
               
         - type: custom:vertical-stack-in-card
           cards: 
@@ -164,6 +169,10 @@ cards:
                 action: toggle
               icon: mdi:usb
 
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: binary_sensor.05_living_hum
 
         - type: custom:vertical-stack-in-card
           cards: 
@@ -421,10 +430,12 @@ cards:
         - type: glance
           show_state: false
           entities:
-           - entity: binary_sensor.motion_sensor_158d000449b773
-             name: Движение
            - entity: binary_sensor.door_window_sensor_158d00013ed373
              name: Окно в гостиной
+           - entity: binary_sensor.door_window_sensor_158d000445206b
+             name: Дверь на балкон
+           - entity: binary_sensor.motion_sensor_158d000449b773
+             name: Движение
            - entity: binary_sensor.door_window_sensor_158d0001a2f5f7
              name: Окно на балконе 
 

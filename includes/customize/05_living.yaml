@@ -114,6 +114,9 @@ light.66633530807d3a766432:
   friendly_name: Балкон люстра
   icon: mdi:ceiling-light
 ## Сенсоры  
+binary_sensor.door_window_sensor_158d000445206b:
+  friendly_name: Гостиная, балкон дверь
+  device_class: door
 binary_sensor.motion_sensor_158d000449b773:
   friendly_name: Гостиная, балкон движение
 sensor.illumination_158d000449b773:

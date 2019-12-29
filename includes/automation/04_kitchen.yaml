@@ -199,9 +199,11 @@
       entity_id: binary_sensor.vibration_158d0002a8ab8b
       click_type: vibrate
   action:
-  - service: script.turn_on
-    # entity_id: script.04_photo_reolink2
-    entity_id: script.04_video_reolink2
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '004'
+       retain: true
     
 ## Запись последнего движения в кухне
 - alias: 04_kitchen_motion_time

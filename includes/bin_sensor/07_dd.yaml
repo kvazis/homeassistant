@@ -8,7 +8,8 @@
              and is_state('binary_sensor.door_window_sensor_158d00015843d4', 'off')
              and is_state('light.xiaomi_07_table', 'off')
              and states('sensor.humidity_158d000156e92e')|float < 55
-             and is_state('binary_sensor.tod_day', 'on') }}
+             and is_state('binary_sensor.humidification', 'on') 
+             and is_state('binary_sensor.day_work', 'on') }}
         icon_template: >-
           {% if is_state("binary_sensor.07_dd_hum", "on") %}
             mdi:water-percent

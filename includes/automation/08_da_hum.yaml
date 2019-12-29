@@ -3,14 +3,9 @@
   initial_state: true
 ## ТРИГГЕР !!!
   trigger:
-## Проверка каждые 5 минут
+## Проверка каждые 3 минуты
    - platform: time_pattern
-     minutes: '/5'
-## Закрытие окна      
-   - platform: state
-     entity_id: binary_sensor.door_window_sensor_158d0001583c7b
-     from: 'on'
-     to: 'off'  
+     minutes: '/3'
 ## УСЛОВИЯ !!!
   condition:
 ## Увлажнитель выключен
@@ -21,14 +16,10 @@
      - condition: numeric_state
        entity_id: sensor.humidity_158d000159c7e6
        below: 45
-## Время работы
-     - condition: time
-       after: '08:00:00'
-       before: '21:29:00'
-## Закрыто окно
+## Комплексный сенсор для увлажнения
      - condition: state
-       entity_id: binary_sensor.door_window_sensor_158d0001583c7b
-       state: 'off'
+       entity_id: binary_sensor.08_da_hum
+       state: 'on'
   action:
   - service: switch.turn_on
     entity_id: switch.plug_158d00010ec4b8
@@ -38,18 +29,10 @@
 - alias: 08_da_hum_auto_off
   initial_state: true
   trigger:
-## Влажность выше 55 %
-   - platform: numeric_state
-     entity_id: sensor.humidity_158d000159c7e6
-     above: 55
-## Открыто окно
+## Комплексный сенсор для увлажнения
    - platform: state
-     entity_id: binary_sensor.door_window_sensor_158d0001583c7b
-     from: 'off'
-     to: 'on'
-## 21:30 вечера
-   - platform: time
-     at: '21:30:00'
+     entity_id: binary_sensor.08_da_hum
+     to: 'off'
   condition:
 ## Увлажнитель включен
      - condition: state
@@ -72,10 +55,10 @@
      - condition: state
        entity_id: switch.plug_158d00010ec4b8
        state: 'on'
-## Время работы
-     - condition: time
-       after: '08:00:00'
-       before: '21:29:00'
+## Время работы 
+     - condition: state
+       entity_id: binary_sensor.day_work
+       state: 'on'
   action:
     - service: notify.telegram
       data:
