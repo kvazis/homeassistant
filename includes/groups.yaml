@@ -2,8 +2,15 @@
   scenario:
     name: scenario
     entities:
+      - automation.telegramm_command_code
       - automation.911_mqtt_lost
       - automation.911_mqtt_online
+      - automation.911_test_lost
+      - automation.911_test_online
+      - automation.00_heater_week_on
+      - automation.00_heater_weekend_on
+      - automation.00_heater_off
+      - automation.00_heater_notification  
       - automation.00_power_counter
       - automation.00_power_new_day
       - automation.00_power_new_month
@@ -69,8 +76,7 @@
       - automation.05_gg_hum_on
       - automation.05_gg_hum_off
       - automation.05_gg_air_fresh
-      - automation.05_usb_cool_work
-      - automation.05_usb_cool_week
+      - automation.05_usb_cool_on
       - automation.05_usb_cool_off      
       - automation.05_tv_samsung
       - automation.05_gg_balkoon_light_on
@@ -113,3 +119,4 @@
       - automation.08_da_table_reboot
       - automation.08_da_motion_time
       - automation.20_unavailable_yeelight
+      - automation.20_holiday_auto_off

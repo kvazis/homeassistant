@@ -5,7 +5,7 @@
         friendly_name: "Увлажнение в Детской Д"
         value_template: >-
           {{ is_state('binary_sensor.door_window_sensor_158d0001583c7b', 'off')  
-             and states('sensor.humidity_158d000159c7e6')|float < 55
+             and states('sensor.08_mean_humidity')|float < 55
              and is_state('binary_sensor.humidification', 'on') 
              and is_state('binary_sensor.day_work', 'on') }}
         icon_template: >-

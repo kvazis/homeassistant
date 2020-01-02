@@ -1,0 +1,4 @@
+# Код команд для уведомлений
+  - platform: mqtt
+    state_topic: "states/command"
+    name: 'mqtt_command_code'

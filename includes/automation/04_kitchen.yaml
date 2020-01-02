@@ -138,10 +138,11 @@
    entity_id: binary_sensor.water_leak_sensor_158d0001bbeba6
    to: 'on'
   action:
-  - service: notify.telegram
-    data:
-      title: "Обнаружена протечка"
-      message: "Кухня раковина {{ states('sensor.time_date') }}"
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '041'
+       retain: true
   - service: script.turn_on
     entity_id: script.11_warning
 
@@ -155,10 +156,11 @@
    from: 'on'
    to: 'off'
   action:
-  - service: notify.telegram
-    data:
-      title: "Протечка устранена"
-      message: "Кухня раковина {{ states('sensor.time_date') }}"
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '042'
+       retain: true
   - service: script.turn_on
     entity_id: script.11_all_ok
 
@@ -202,7 +204,7 @@
   - service: mqtt.publish
     data_template:
        topic: "states/error"
-       payload_template: '004'
+       payload_template: '040'
        retain: true
     
 ## Запись последнего движения в кухне

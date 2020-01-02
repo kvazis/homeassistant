@@ -72,23 +72,6 @@ talk_privet:
         - light.gateway_light_7811dc64f4c8
 
 # Шлюз гостиная
-talk_smart_zak:
-  sequence:
-   - service: light.turn_on
-     entity_id:
-        - light.gateway_light_34ce0088b039
-     data_template:
-       brightness_pct: 20
-       rgb_color: [0, 255, 0]
-   - service: xiaomi_aqara.play_ringtone
-     data:
-      gw_mac: 34:CE:00:88:B0:39
-      ringtone_id: 10002
-      ringtone_vol: 50
-   - delay: 00:00:05
-   - service: light.turn_off
-     entity_id:
-        - light.gateway_light_34ce0088b039
 
 talk_05_fresh:
   sequence:

@@ -74,36 +74,24 @@
     entity_id: switch.wall_plug_158d00015751f4
 
     
-# Уведомление о включении бойлера
-- alias: 00_heater_notification_on
+# Уведомление о смене состояния бойлера
+- alias: 00_heater_notification
   initial_state: true
   trigger:       
    platform: state
    entity_id: switch.wall_plug_158d00015751f4
-   from: 'off'
-   to: 'on'
   action:
-  - service: timer.cancel
-    entity_id: timer.heater
-  - service: timer.start
-    entity_id: timer.heater
-  - service: notify.telegram
-    data:
-      title: 'Бойлер вкл'
-      message: "Бойлер включен в  {{ states('sensor.time_date') }}"
+    - service: script.turn_on
+      data_template:
+       entity_id: >-
+          {%- if states.switch.wall_plug_158d00015751f4.state == 'on' and states.binary_sensor.boiler.state  == 'on' -%}
+          script.21_heater_on
+          {%- elif states.switch.wall_plug_158d00015751f4.state == 'on' and  states.binary_sensor.boiler.state  == 'off' -%}
+          script.21_heater_impossible
+          {%- elif states.switch.wall_plug_158d00015751f4.state == 'off' -%}
+          script.21_heater_off
+          {%- endif -%}
 
-# Уведомление о выключении бойлера, стоп таймера
-- alias: 00_heater_notification_off
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: switch.wall_plug_158d00015751f4
-   from: 'on'
-   to: 'off'
-  action:
-  - service: notify.telegram
-    data:
-      title: 'Бойлер выкл'
-      message: "Бойлер выключен в  {{ states('sensor.time_date') }}"
-  - service: timer.cancel
-    entity_id: timer.heater
+
+
+

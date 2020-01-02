@@ -8,7 +8,7 @@
        - service: mqtt.publish
          data_template:
            topic: "states/error"
-           payload_template: '001'
+           payload_template: '010'
            retain: true
 
   01_enter_on:

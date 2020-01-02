@@ -207,3 +207,20 @@ cards:
             - entity: switch.dd_esp32_restart
               name: Перезагрузка
               icon: mdi:reload
+              
+        - type: custom:vertical-stack-in-card
+          cards:
+          - type: markdown
+            content: >
+               **Детская А, ESP 32 BLE шлюз**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.da_esp32_uptime_custom
+            - entity: sensor.da_esp32_wi_fi
+              name: Сигнал wi-fi
+            - entity: sensor.da_esp32_firmware_version
+              name: Прошивка
+            - entity: switch.da_esp32_restart
+              name: Перезагрузка
+              icon: mdi:reload

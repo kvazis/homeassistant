@@ -60,3 +60,39 @@
     - service: notify.telegram
       data:
         message: "Связь с MQTT сервером, Orange PI PC 2 восстановлена в - {{ states('sensor.time_date') }} ."
+        
+- alias: 911_test_lost
+  initial_state: true
+  trigger:
+   platform: state
+   entity_id: sensor.rasp3b_state
+   to: 'unavailable'
+  action:
+     - service: mqtt.publish
+       data_template:
+         topic: "states/test/system/test_offline"
+         payload: '{{(states.sensor.time_date.state)}}'
+         retain: true
+     - service: mqtt.publish
+       data_template:
+         topic: "states/error"
+         payload_template: '005'
+         retain: true  
+
+- alias: 911_test_online
+  initial_state: true
+  trigger:
+   platform: state
+   entity_id: sensor.rasp3b_state
+   from: 'unavailable'
+  action:
+     - service: mqtt.publish
+       data_template:
+         topic: "states/test/system/test_online"
+         payload: '{{(states.sensor.time_date.state)}}'
+         retain: true
+     - service: mqtt.publish
+       data_template:
+         topic: "states/error"
+         payload_template: '006'
+         retain: true  

@@ -5,6 +5,7 @@
       - sensor.gg_bip_alex_rssi
       - sensor.dd_bip_alex_rssi
       - sensor.kn_bip_alex_rssi
+      - sensor.da_bip_alex_rssi
 
   - platform: min_max
     name: best_bip_olha_rssi
@@ -13,6 +14,7 @@
       - sensor.gg_bip_olha_rssi
       - sensor.dd_bip_olha_rssi
       - sensor.kn_bip_olha_rssi
+      - sensor.da_bip_olha_rssi
       
   - platform: min_max
     name: best_mi_band_4_dima_rssi
@@ -21,6 +23,7 @@
       - sensor.gg_mi_band_4_dima_rssi
       - sensor.dd_mi_band_4_dima_rssi
       - sensor.kn_mi_band_4_dima_rssi
+      - sensor.da_mi_band_4_dima_rssi
       
   - platform: min_max
     name: best_arc_sf_rssi
@@ -29,6 +32,7 @@
       - sensor.gg_arc_sf_rssi
       - sensor.dd_arc_sf_rssi
       - sensor.kn_arc_sf_rssi
+      - sensor.da_arc_sf_rssi
       
   - platform: min_max
     name: best_mi_band_2_ns_rssi
@@ -37,6 +41,7 @@
       - sensor.gg_mi_band_2_ns_rssi
       - sensor.dd_mi_band_2_ns_rssi
       - sensor.kn_mi_band_2_ns_rssi
+      - sensor.da_mi_band_2_ns_rssi
 
 
   - platform: template

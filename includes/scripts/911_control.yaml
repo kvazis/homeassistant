@@ -6,6 +6,11 @@
          topic: "states/main/system/reserve_offline"
          payload: '{{(states.sensor.time_date.state)}}'
          retain: true
+     - service: mqtt.publish
+       data_template:
+         topic: "states/error"
+         payload_template: '003'
+         retain: true  
          
   mqtt_payload_reserve_online:
     alias: Время восстановления связи с резервным сервером в mqtt
@@ -15,3 +20,8 @@
          topic: "states/main/system/reserve_online"
          payload: '{{(states.sensor.time_date.state)}}'
          retain: true
+     - service: mqtt.publish
+       data_template:
+         topic: "states/error"
+         payload_template: '004'
+         retain: true  

@@ -20,3 +20,20 @@
      - service: notify.telegram
        data:
          message: "Ошибка связи {{ states('sensor.time_date') }} , светильников недоступно - {{ states('sensor.unavailable_now_light') }} "
+         
+## Выключение режима праздничного дня
+ - alias: 20_holiday_auto_off
+   initial_state: true
+   trigger:
+## Выходной день
+   - platform: state
+     entity_id: binary_sensor.workday_sensor
+     to: 'off'
+   condition:
+## Режим выходного дня включен
+   - condition: state
+     entity_id: switch.holiday_mode
+     state: 'on'
+   action:
+   - service: switch.turn_off
+     entity_id: switch.holiday_mode

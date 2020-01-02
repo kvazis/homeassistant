@@ -53,10 +53,11 @@
 - alias: 05_gg_hum_auto_on
   initial_state: true
   trigger:
-   - platform: numeric_state
-     entity_id: sensor.05_mean_humidity
-     below: 40
+## Проверка каждые 3 минуты
+   - platform: time_pattern
+     minutes: '/3'
   condition:
+## Форсированный режим выключен
      - condition: state
        entity_id: switch.forse_hum
        state: 'off'
@@ -64,6 +65,10 @@
      - condition: state
        entity_id: fan.gg_humidifier
        state: 'on'
+## Влажность ниже 40 %
+     - condition: numeric_state
+       entity_id: sensor.05_mean_humidity
+       below: 40
   action:
   - service: switch.turn_on
     entity_id: switch.forse_hum

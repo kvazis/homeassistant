@@ -12,7 +12,7 @@
     conditions:
 # День
       - condition: state
-        entity_id: binary_sensor.tod_day
+        entity_id: binary_sensor.day_work
         state: 'on'
 # Закрыто окно  
       - condition: state
@@ -34,7 +34,7 @@
   - service: mqtt.publish
     data_template:
        topic: "states/error"
-       payload_template: '003'
+       payload_template: '051'
        retain: true
   - service: script.turn_on
     entity_id: script.talk_05_fresh   

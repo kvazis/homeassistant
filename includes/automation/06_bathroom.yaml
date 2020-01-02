@@ -202,10 +202,11 @@
    entity_id: binary_sensor.water_leak_sensor_158d0001d72fa2
    to: 'on'
   action:
-  - service: notify.telegram
-    data:
-      title: "Обнаружена протечка"
-      message: "Ванная раковина {{ states('sensor.time_date') }}"
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '060'
+       retain: true
   - service: script.turn_on
     entity_id: script.11_warning
 
@@ -218,10 +219,11 @@
    from: 'on'
    to: 'off'
   action:
-  - service: notify.telegram
-    data:
-      title: "Протечка устранена"
-      message: "Ванная раковина {{ states('sensor.time_date') }}"
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '061'
+       retain: true
   - service: script.turn_on
     entity_id: script.11_all_ok
 
@@ -233,10 +235,11 @@
    entity_id: binary_sensor.water_leak_sensor_158d0001bb60c2
    to: 'on'
   action:
-  - service: notify.telegram
-    data:
-      title: "Обнаружена протечка"
-      message: "Ванная душевая {{ states('sensor.time_date') }}"
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '062'
+       retain: true
   - service: script.turn_on
     entity_id: script.11_warning
 
@@ -249,10 +252,11 @@
    from: 'on'
    to: 'off'
   action:
-  - service: notify.telegram
-    data:
-      title: "Протечка устранена"
-      message: "Ванная душевая {{ states('sensor.time_date') }}"
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '063'
+       retain: true
   - service: script.turn_on
     entity_id: script.11_all_ok
 

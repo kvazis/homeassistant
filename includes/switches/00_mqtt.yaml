@@ -41,3 +41,23 @@
             retain: true 
         icon_template: >-
             mdi:air-humidifier
+            
+  - platform: template
+    switches:
+      holiday_mode:
+        friendly_name: "Выходной день"
+        value_template: "{{  is_state('binary_sensor.holiday', 'on') }}"
+        turn_on:
+          service: mqtt.publish
+          data_template:
+            topic: "states/holiday"
+            payload_template: 'ON'
+            retain: true 
+        turn_off:
+          service: mqtt.publish
+          data_template:
+            topic: "states/holiday"
+            payload_template: 'OFF'
+            retain: true 
+        icon_template: >-
+            mdi:account-switch

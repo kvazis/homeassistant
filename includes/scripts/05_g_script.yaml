@@ -1,6 +1,16 @@
   ilife_a4:
     alias: Управление роботом пылесосом
     sequence:
+      - service: xiaomi_aqara.play_ringtone
+        data:
+          gw_mac: 34:CE:00:88:B0:39
+          ringtone_id: 10001
+          ringtone_vol: 50
+      - service: mqtt.publish
+        data_template:
+           topic: "states/error"
+           payload_template: '050'
+           retain: true
       - service: broadlink.send
         data:
           host: 192.168.0.136

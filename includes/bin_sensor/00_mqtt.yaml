@@ -9,3 +9,12 @@
     state_topic: "states/humidification"
     payload_on: "ON"
     payload_off: "OFF"
+    
+  - platform: mqtt
+    name: holiday
+    state_topic: "states/holiday"
+    payload_on: "ON"
+    payload_off: "OFF"
+    
+    
+    

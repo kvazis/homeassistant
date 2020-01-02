@@ -130,9 +130,6 @@
    for:
      minutes: 5
   action:
-#    - service: notify.telegram
-#      data:
-#        message: "Потеря контроля в течении 5 минут - Настольная лампа, ДА.  Время события - {{ states('sensor.time_date') }} . Инициирована перезагрузка"
     - service: switch.turn_off
       entity_id: switch.08_alfawise_relay
     - delay: 00:00:05

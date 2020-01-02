@@ -1,15 +1,64 @@
-21_heater_on:
+21_heater_mode_on:
+ alias: Включение режима бойлера
  sequence:
   - service: mqtt.publish
     data_template:
       topic: "states/water_heater"
-      payload: "Бойлер"
-      retain: true
+      payload_template: 'ON'
+      retain: true 
+
+21_heater_mode_off:
+ alias: Выключение режима бойлера
+ sequence:
+  - service: mqtt.publish
+    data_template:
+      topic: "states/water_heater"
+      payload_template: 'OFF'
+      retain: true 
+
+21_heater_on:
+ alias: Включение бойлера
+ sequence:
+  - service: timer.cancel
+    entity_id: timer.heater
+  - service: timer.start
+    entity_id: timer.heater
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '064'
+       retain: true
 
 21_heater_off:
+ alias: Выключение бойлера
  sequence:
+  - service: timer.cancel
+    entity_id: timer.heater
   - service: mqtt.publish
     data_template:
-      topic: "states/water_heater"
-      payload: "Горячая вода"
-      retain: true
+       topic: "states/error"
+       payload_template: '065'
+       retain: true
+       
+21_heater_impossible:
+ alias: Включение бойлера невозможно
+ sequence:
+  - service: switch.turn_off
+    entity_id: switch.wall_plug_158d00015751f4
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '066'
+       retain: true
+       
+21_heater_manual_on:
+ alias: Включение бойлера вручную
+ sequence:
+  - service: switch.turn_on
+    entity_id: switch.wall_plug_158d00015751f4
+
+21_heater_manual_off:
+ alias: Выключение бойлера вручную
+ sequence:
+  - service: switch.turn_off
+    entity_id: switch.wall_plug_158d00015751f4

@@ -21,9 +21,11 @@
     for:
       minutes: 5
   action:
-    - service: notify.telegram
-      data:
-        message: "Потеря контроля в течении 5 минут - лампочка в прихожей.  Время события - {{ states('sensor.time_date') }} . Инициирована перезагрузка"
+    - service: mqtt.publish
+      data_template:
+         topic: "states/error"
+         payload_template: '011'
+         retain: true
     - service: switch.turn_off
       entity_id: switch.01_sonoff_basic_relay
 

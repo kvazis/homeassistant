@@ -1,0 +1,30 @@
+- alias: telegramm_command_code
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: sensor.mqtt_command_code
+  action:
+    - service: script.turn_on
+      data_template:
+       entity_id: >-
+          {%- if states.sensor.mqtt_command_code.state  == '000' -%}
+          script.stub
+          {%- elif states.sensor.mqtt_command_code.state  == '001' -%}
+          script.mqtt_payload_report
+          {%- elif states.sensor.mqtt_command_code.state  == '002' -%}
+          script.ilife_a4
+          {%- elif states.sensor.mqtt_command_code.state  == '003' -%}
+          script.21_heater_mode_on
+          {%- elif states.sensor.mqtt_command_code.state  == '004' -%}
+          script.21_heater_mode_off
+          {%- elif states.sensor.mqtt_command_code.state  == '005' -%}
+          script.21_heater_manual_on
+          {%- elif states.sensor.mqtt_command_code.state  == '006' -%}
+          script.21_heater_manual_off
+          {%- endif -%}
+    - delay: 00:00:01
+    - service: mqtt.publish
+      data_template:
+        topic: "states/command"
+        payload_template: '000'
+        retain: true

@@ -34,7 +34,12 @@
              or is_state('binary_sensor.dd_bip_olha', 'on')  
              or is_state('binary_sensor.dd_mi_band_4_dima', 'on') 
              or is_state('binary_sensor.dd_arc_sf', 'on')        
-             or is_state('binary_sensor.dd_mi_band_2_ns', 'on')  }}        
+             or is_state('binary_sensor.dd_mi_band_2_ns', 'on') 
+             or is_state('binary_sensor.da_bip_alex', 'on')              
+             or is_state('binary_sensor.da_bip_olha', 'on')  
+             or is_state('binary_sensor.da_mi_band_4_dima', 'on') 
+             or is_state('binary_sensor.da_arc_sf', 'on')        
+             or is_state('binary_sensor.da_mi_band_2_ns', 'on') }}        
              
 # Время работы сценариев в будние дни
   - platform: template
@@ -42,10 +47,11 @@
       weekday_work:
         friendly_name: "Работа дневных сценариев в будние"
         value_template: >-
-          {{ is_state('binary_sensor.weekday_time', 'on')  
+          {{ is_state('binary_sensor.weekday_time', 'on') 
+             and is_state('binary_sensor.holiday', 'off')
              and is_state('binary_sensor.workday_sensor', 'on') }} 
              
-# Время работы сценариев в выходне дни
+# Время работы сценариев в выходные дни
   - platform: template
     sensors:
       weekend_work:
@@ -54,12 +60,22 @@
           {{ is_state('binary_sensor.weekend_time', 'on')  
              and is_state('binary_sensor.workday_sensor', 'off') }} 
              
+# Время работы сценариев в праздничные дни
+  - platform: template
+    sensors:
+      holiday_work:
+        friendly_name: "Работа дневных сценариев в праздники"
+        value_template: >-
+          {{ is_state('binary_sensor.weekend_time', 'on')  
+             and is_state('binary_sensor.holiday', 'on') }} 
+             
 # Время работы дневных сценариев
   - platform: template
     sensors:
       day_work:
         friendly_name: "Работа дневных сценариев"
         value_template: >-
-          {{ is_state('binary_sensor.weekday_work', 'on')  
+          {{ is_state('binary_sensor.weekday_work', 'on')
+             or is_state('binary_sensor.holiday_work', 'on') 
              or is_state('binary_sensor.weekend_work', 'on') }} 
             

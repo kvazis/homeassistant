@@ -83,10 +83,11 @@
    entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
    to: 'on'
   action:
-  - service: notify.telegram
-    data:
-      title: "Обнаружена протечка"
-      message: "Стиральная машина {{ states('sensor.time_date') }}"
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '020'
+       retain: true
   - service: script.turn_on
     entity_id: script.11_warning
       
@@ -99,10 +100,11 @@
    from: 'on'
    to: 'off'
   action:
-  - service: notify.telegram
-    data:
-      title: "Протечка устранена"
-      message: "Стиральная машина {{ states('sensor.time_date') }}"
+  - service: mqtt.publish
+    data_template:
+       topic: "states/error"
+       payload_template: '021'
+       retain: true
   - service: script.turn_on
     entity_id: script.11_all_ok
     

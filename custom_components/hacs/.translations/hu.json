@@ -91,6 +91,7 @@
         "changelog": "Változási napló",
         "downloads": "Letöltések",
         "flag_this": "Megjelölés",
+        "frontend_version": "Frontend verzió",
         "hide": "Elrejtés",
         "hide_beta": "Béta elrejtése",
         "install": "Telepítés",
@@ -150,18 +151,18 @@
     },
     "time": {
         "ago": "ezelőtt",
-        "day": "nap",
-        "days": "nap",
-        "hour": "óra",
-        "hours": "óra",
-        "minute": "perc",
-        "minutes": "perc",
-        "month": "hónap",
-        "months": "hónap",
+        "day": "nappal",
+        "days": "nappal",
+        "hour": "órával",
+        "hours": "órával",
+        "minute": "perccel",
+        "minutes": "perccel",
+        "month": "hónappal",
+        "months": "hónappal",
         "one": "Egy",
-        "second": "másodperc",
-        "seconds": "másodperc",
-        "year": "év",
-        "years": "év"
+        "second": "másodperccel",
+        "seconds": "másodperccel",
+        "year": "évvel",
+        "years": "évvel"
     }
 }

@@ -1,203 +1,204 @@
-- alias: 00_telegramm_photo
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/photo'
-  action:
-    - service: script.turn_on
-      entity_id: script.01_photo_door_t
+# - alias: 00_telegramm_photo
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/photo'
+#   action:
+#     - service: script.turn_on
+#       entity_id: script.01_photo_door_t
       
-- alias: 00_telegramm_robot
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/ilife'
-  action:
-  - service: xiaomi_aqara.play_ringtone
-    data:
-      gw_mac: 34:CE:00:88:B0:39
-      ringtone_id: 10001
-      ringtone_vol: 50
-  - delay: 00:00:05
-  - service: xiaomi_aqara.stop_ringtone
-    data:
-      gw_mac: 34:CE:00:88:B0:39   
-  - service: notify.telegram
-    data:
-      title: 'Пылесос'
-      message: "Робот пылесос вышел на тропу войны {{ states('sensor.time_date') }}"
-  - service: switch.toggle
-    entity_id: switch.ilifea4
+# - alias: 00_telegramm_robot
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/ilife'
+#   action:
+#   - service: xiaomi_aqara.play_ringtone
+#     data:
+#       gw_mac: 34:CE:00:88:B0:39
+#       ringtone_id: 10001
+#       ringtone_vol: 50
+#   - delay: 00:00:05
+#   - service: xiaomi_aqara.stop_ringtone
+#     data:
+#       gw_mac: 34:CE:00:88:B0:39   
+#   - service: mqtt.publish
+#     data_template:
+#       topic: "states/error"
+#       payload_template: '050'
+#       retain: true
+#   - service: switch.toggle
+#     entity_id: switch.ilifea4
 
-- alias: 00_telegramm_command
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/start'
-  action:
-  - service: notify.telegram
-    data:
-      message: 'commands'
-      data:
-        keyboard:
-          - '/photo, /ilife'
-          - '/hscene_on, /hscene_off, /heat_on, /heat_off'
-          - '/gg_off, /dd_off, /da_off'
-          - '/ping, /auto_on, /auto_off'
+# - alias: 00_telegramm_command
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/start'
+#   action:
+#   - service: notify.telegram
+#     data:
+#       message: 'commands'
+#       data:
+#         keyboard:
+#           - '/photo, /ilife'
+#           - '/hscene_on, /hscene_off, /heat_on, /heat_off'
+#           - '/gg_off, /dd_off, /da_off'
+#           - '/ping, /auto_on, /auto_off'
           
-- alias: 00_telegramm_ggoff
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/gg_off'
-  action:
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Освещение в Гостиной - отключено "
-    - service: script.turn_on
-      entity_id: script.05_gg_lightoff
+# - alias: 00_telegramm_ggoff
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/gg_off'
+#   action:
+#     - service: notify.telegram
+#       data:
+#         title: 'Отчет'
+#         message: "Освещение в Гостиной - отключено "
+#     - service: script.turn_on
+#       entity_id: script.05_gg_lightoff
 
-- alias: 00_telegramm_ddoff
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/dd_off'
-  action:
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Освещение в детской Д - отключено "
-    - service: script.turn_on
-      entity_id: script.07_dd_lightoff
+# - alias: 00_telegramm_ddoff
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/dd_off'
+#   action:
+#     - service: notify.telegram
+#       data:
+#         title: 'Отчет'
+#         message: "Освещение в детской Д - отключено "
+#     - service: script.turn_on
+#       entity_id: script.07_dd_lightoff
       
-- alias: 00_telegramm_daoff
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/da_off'
-  action:
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Освещение в детской А - отключено "
-    - service: script.turn_on
-      entity_id: script.08_da_lightoff
+# - alias: 00_telegramm_daoff
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/da_off'
+#   action:
+#     - service: notify.telegram
+#       data:
+#         title: 'Отчет'
+#         message: "Освещение в детской А - отключено "
+#     - service: script.turn_on
+#       entity_id: script.08_da_lightoff
 
-- alias: 00_telegramm_sc_off
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/auto_off'
-  action:
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Сценарии на Raspberry Pi 3 B+ 70 отключены"
-    - service: homeassistant.turn_off
-      entity_id:
-         - group.scenario
-         - group.heater
+# - alias: 00_telegramm_sc_off
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/auto_off'
+#   action:
+#     - service: notify.telegram
+#       data:
+#         title: 'Отчет'
+#         message: "Сценарии на Raspberry Pi 3 B+ 70 отключены"
+#     - service: homeassistant.turn_off
+#       entity_id:
+#          - group.scenario
+#          - group.heater
       
-- alias: 00_telegramm_sc_on
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/auto_on'
-  action:
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Сценарии на Raspberry Pi 3 B+ включены"
-    - service: homeassistant.turn_on
-      entity_id:
-         - group.scenario
-         - group.heater
+# - alias: 00_telegramm_sc_on
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/auto_on'
+#   action:
+#     - service: notify.telegram
+#       data:
+#         title: 'Отчет'
+#         message: "Сценарии на Raspberry Pi 3 B+ включены"
+#     - service: homeassistant.turn_on
+#       entity_id:
+#          - group.scenario
+#          - group.heater
       
-- alias: 00_telegramm_ping
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/ping'
-  action:
-    - service: script.turn_on
-      entity_id: script.telegramm_state
+# - alias: 00_telegramm_ping
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/ping'
+#   action:
+#     - service: script.turn_on
+#       entity_id: script.telegramm_state
         
-- alias: 00_telegramm_hsc_on
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/hscene_on'
-  action:
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Режим нагрева бойлера включен"
-    - service: switch.turn_on
-      entity_id:
-         - switch.heater_mode
+# - alias: 00_telegramm_hsc_on
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/hscene_on'
+#   action:
+#     - service: notify.telegram
+#       data:
+#         title: 'Отчет'
+#         message: "Режим нагрева бойлера включен"
+#     - service: switch.turn_on
+#       entity_id:
+#          - switch.heater_mode
         
-- alias: 00_telegramm_hsc_off
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/hscene_off'
-  action:
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Режим нагрева бойлера выключен"
-    - service: switch.turn_off
-      entity_id:
-         - switch.heater_mode
+# - alias: 00_telegramm_hsc_off
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/hscene_off'
+#   action:
+#     - service: notify.telegram
+#       data:
+#         title: 'Отчет'
+#         message: "Режим нагрева бойлера выключен"
+#     - service: switch.turn_off
+#       entity_id:
+#          - switch.heater_mode
          
-- alias: 00_telegramm_heater_on
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/heat_on'
-  condition:
-   - condition: state
-     entity_id: binary_sensor.boiler
-     state: 'on'
-   - condition: state
-     entity_id: switch.wall_plug_158d00015751f4
-     state: 'off'
-  action:
-  - service: switch.turn_on
-    entity_id: switch.wall_plug_158d00015751f4
+# - alias: 00_telegramm_heater_on
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/heat_on'
+#   condition:
+#   - condition: state
+#      entity_id: binary_sensor.boiler
+#      state: 'on'
+#   - condition: state
+#      entity_id: switch.wall_plug_158d00015751f4
+#      state: 'off'
+#   action:
+#   - service: switch.turn_on
+#     entity_id: switch.wall_plug_158d00015751f4
     
-- alias: 00_telegramm_heater_off
-  initial_state: true
-  trigger:
-  - platform: event
-    event_type: telegram_command
-    event_data:
-      command: '/heat_off'
-  action:
-  - service: switch.turn_off
-    entity_id: switch.wall_plug_158d00015751f4
+# - alias: 00_telegramm_heater_off
+#   initial_state: true
+#   trigger:
+#   - platform: event
+#     event_type: telegram_command
+#     event_data:
+#       command: '/heat_off'
+#   action:
+#   - service: switch.turn_off
+#     entity_id: switch.wall_plug_158d00015751f4

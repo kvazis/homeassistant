@@ -50,6 +50,8 @@
    - platform: numeric_state
      entity_id: sensor.load_158d00010ec4b8
      below: 10
+     for:
+       minutes: 1
   condition:
 ## Увлажнитель включен
      - condition: state
@@ -60,7 +62,8 @@
        entity_id: binary_sensor.day_work
        state: 'on'
   action:
-    - service: notify.telegram
-      data:
-        title: 'Отчет'
-        message: "Детская А, в увлажнителе кончилась вода, или он отключен вручную, время - {{ states('sensor.time_date') }}"
+   - service: mqtt.publish
+     data_template:
+        topic: "states/error"
+        payload_template: '080'
+        retain: true
