@@ -1,0 +1,90 @@
+##################   Modes
+title: Режимы и состояния
+icon: mdi:state-machine
+cards:
+
+      - type: vertical-stack
+        cards:
+
+          - type: markdown
+            content: >
+               **Режим сценариев**
+
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: binary_sensor.day_work
+              icon: mdi:white-balance-sunny
+            - entity: binary_sensor.weekday_work
+              icon: mdi:calendar-plus
+            - entity: binary_sensor.weekend_work
+              icon: mdi:calendar-minus
+            - entity: binary_sensor.holiday_work
+              icon: mdi:calendar-heart
+            - entity: switch.holiday_mode
+
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+               **Бойлер**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: binary_sensor.boiler
+              name: Режим бойлера - 
+            - entity: switch.heater_mode
+              name: Сменить режим нагрева
+            - entity: switch.wall_plug_158d00015751f4
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+             **Увлажнители**
+               
+        - type: custom:vertical-stack-in-card
+          cards:
+          
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: binary_sensor.humidification
+              name: Режим увлажнения воздуха - 
+            - entity: switch.humidification_mode
+              name: Сменить режим увлажнителя
+
+          - type: markdown
+            content: >
+               Гостиная
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: binary_sensor.05_living_hum
+            - entity: fan.gg_humidifier 
+              name: Форсированный режим
+            - entity: sensor.smartmi_mode
+              name: Режим - 
+            - entity: sensor.smartmi_water
+              name: Остаток воды - 
+    
+          - type: markdown
+            content: >
+               Детская Д
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: binary_sensor.07_dd_hum
+            - entity: switch.plug_158d000114a1e1
+
+          - type: markdown
+            content: >
+               Детская А
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: binary_sensor.08_da_hum
+            - entity: switch.plug_158d00010ec4b8
+

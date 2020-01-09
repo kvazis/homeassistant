@@ -8,9 +8,9 @@
           ringtone_vol: 50
       - service: mqtt.publish
         data_template:
-           topic: "states/error"
-           payload_template: '050'
-           retain: true
+          topic: "notification/messages"
+          payload_template: '0500'
+          retain: true
       - service: broadlink.send
         data:
           host: 192.168.0.136

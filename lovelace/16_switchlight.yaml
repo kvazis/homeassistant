@@ -18,6 +18,10 @@ cards:
             filter:
               include:
                - domain: light
+                 options:
+                    secondary_info: last-changed
+                 sort:
+                    method: name
                
       - type: vertical-stack
         cards:
@@ -34,6 +38,10 @@ cards:
             filter:
               include:
                - domain: switch
+                 options:
+                    secondary_info: last-changed
+                 sort:
+                    method: name
                
       - type: vertical-stack
         cards:

@@ -1,0 +1,7 @@
+  base_topic: instance/main
+  include:
+    entities:
+      - sensor.unavailable_now_light
+      - sensor.unavailable_now_switch
+      - sensor.unavailable_now_sensor
+      - sensor.unavailable_now_binary_sensor

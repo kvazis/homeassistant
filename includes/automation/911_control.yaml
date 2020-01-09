@@ -5,8 +5,10 @@
    entity_id: sensor.reserve_state
    to: 'unavailable'
   action:
-    - service: script.turn_on
-      entity_id: script.mqtt_payload_reserve_offline
+    - service: mqtt.publish
+      data_template:
+         topic: "notification/error"
+         payload_template: '021'
 
 - alias: 911_reserve_online
   initial_state: true
@@ -15,8 +17,10 @@
    entity_id: sensor.reserve_state
    from: 'unavailable'
   action:
-    - service: script.turn_on
-      entity_id: script.mqtt_payload_reserve_online
+    - service: mqtt.publish
+      data_template:
+         topic: "notification/error"
+         payload_template: '022'
 
 - alias: 911_scenario_on
   initial_state: true
@@ -32,9 +36,6 @@
       entity_id: group.scenario
       state: 'off'     
   action:
-    - service: notify.telegram
-      data:
-        message: "Бытовые сценарии резервном сервере, Khadas VIM 2 отключены в - {{ states('sensor.time_date') }} . Включение сценариев на основном сервере"
     - service: homeassistant.turn_on
       entity_id:
          - group.scenario
@@ -68,16 +69,10 @@
    entity_id: sensor.rasp3b_state
    to: 'unavailable'
   action:
-     - service: mqtt.publish
-       data_template:
-         topic: "states/test/system/test_offline"
-         payload: '{{(states.sensor.time_date.state)}}'
-         retain: true
-     - service: mqtt.publish
-       data_template:
-         topic: "states/error"
-         payload_template: '005'
-         retain: true  
+    - service: mqtt.publish
+      data_template:
+         topic: "notification/error"
+         payload_template: '031' 
 
 - alias: 911_test_online
   initial_state: true
@@ -86,13 +81,7 @@
    entity_id: sensor.rasp3b_state
    from: 'unavailable'
   action:
-     - service: mqtt.publish
-       data_template:
-         topic: "states/test/system/test_online"
-         payload: '{{(states.sensor.time_date.state)}}'
-         retain: true
-     - service: mqtt.publish
-       data_template:
-         topic: "states/error"
-         payload_template: '006'
-         retain: true  
+    - service: mqtt.publish
+      data_template:
+         topic: "notification/error"
+         payload_template: '032'

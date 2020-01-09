@@ -6,10 +6,6 @@ cards:
       - type: vertical-stack
         cards:
 
-          - type: markdown
-            content: >
-                 **Статус ПО**   
-
           - type: custom:vertical-stack-in-card
             cards:
         
@@ -112,12 +108,12 @@ cards:
       - type: vertical-stack
         cards:
 
-        - type: markdown
-          content: >
-               **Hardware**
-
         - type: custom:vertical-stack-in-card
           cards:
+ 
+          - type: markdown
+            content: >
+                 **Аппаратная часть**
           
           - type: horizontal-stack
             cards:
@@ -238,6 +234,9 @@ cards:
       - type: vertical-stack
         cards:
 
+        - type: custom:vertical-stack-in-card
+          cards:
+
           - type: markdown
             content: >
                  **Hassio instanse**   
@@ -250,6 +249,9 @@ cards:
               - entity: sensor.mqtt_state
                 name: MQTT instanse -
                 icon: mdi:clock-outline
+
+        - type: custom:vertical-stack-in-card
+          cards:
 
           - type: markdown
             content: >
@@ -292,7 +294,9 @@ cards:
                  color: auto
                  name: Скрипты
 
-
+        - type: custom:vertical-stack-in-card
+          cards:
+          
           - type: markdown
             content: >
                **База, резервное копирование**
@@ -311,8 +315,6 @@ cards:
                 show:
                    graph: bar
                 
-                  
-
               - type: entities
                 show_header_toggle: false
                 entities:

@@ -44,6 +44,8 @@
        entity_id: fan.gg_humidifier
        state: 'on'
   action:    
+   - service: timer.cancel
+     entity_id: timer.humidifier
    - service: homeassistant.turn_off
      entity_id: 
        - fan.gg_humidifier
@@ -81,10 +83,34 @@
      event_type: timer.finished
      event_data:
        entity_id: timer.humidifier
+  condition:
+## Увлажнитель включен
+     - condition: state
+       entity_id: fan.gg_humidifier
+       state: 'on'
   action:    
   - service: switch.turn_off
     entity_id: switch.forse_hum
 
+## Отслеживание форсированного режима
+- alias: 05_gg_hum_force
+  initial_state: true
+  trigger:
+## Проверка каждые 3 минуты
+   - platform: time_pattern
+     minutes: '/3' 
+  condition:
+   - condition: state
+     entity_id: timer.humidifier
+     state: 'idle'
+## Форсированный режим
+   - condition: state
+     entity_id: switch.forse_hum
+     state: 'on'
+  action:
+   - service: timer.start
+     entity_id: 
+       - timer.humidifier
 
 
 

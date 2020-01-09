@@ -1,61 +1,7 @@
-##################   People
-title: Люди
-icon: mdi:account-group
+##################   Other
+title: Разное 
+icon: mdi:piano
 cards:
-
-      - type: vertical-stack
-        cards:
-        
-          - type: markdown
-            content: >
-               **Бойлер**
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: binary_sensor.boiler
-              name: Режим бойлера - 
-            - entity: switch.heater_mode
-              name: Сменить режим нагрева
-          - type: markdown
-            content: >
-               **Увлажнители**
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: binary_sensor.humidification
-              name: Режим увлажнения воздуха - 
-            - entity: switch.humidification_mode
-              name: Сменить режим увлажнителя
-            - entity: binary_sensor.05_living_hum
-            - entity: binary_sensor.07_dd_hum
-            - entity: binary_sensor.08_da_hum
-
-          - type: markdown
-            content: >
-               **Режим сценариев**
-
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: binary_sensor.day_work
-              icon: mdi:white-balance-sunny
-            - entity: binary_sensor.weekend_work
-              icon: mdi:calendar-plus
-            - entity: binary_sensor.weekend_work
-              icon: mdi:calendar-minus
-            - entity: binary_sensor.holiday_work
-              icon: mdi:calendar-heart
-            - entity: switch.holiday_mode
-
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: sensor.mqtt_command_code
-              name: Код команды
-            - entity: script.mqtt_payload_online
-              name: Скрипт онлайн
-            - entity: script.mqtt_payload_report
-              name: Скрипт репорт
 
       - type: vertical-stack
         cards:
@@ -151,3 +97,15 @@ cards:
                  - entity: script.talk_08_fresh
                    name: Проветривание
                    icon: mdi:air-filter
+                   
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+               **Скрипты**
+
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: script.broadlink_learn

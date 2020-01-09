@@ -54,17 +54,14 @@ switch.xiaomi_wifi_socket_usb_usb:
   device_class: plug  
   icon: mdi:usb
 switch.wall_switch_ln_right_158d0001a2ccab:
-  friendly_name: Выкл с нулем, правый с розеткой
+  friendly_name: Зарядка ISDT
   device_class: plug  
-  icon: mdi:power-socket-eu
+  icon: mdi:battery
 switch.wall_switch_ln_left_158d0001a2ccab:
-  friendly_name: Выкл с нулем, левый
+  friendly_name: Блок питания Chuwi
   device_class: plug  
-  icon: mdi:power-socket-eu
-switch.xiaomi_euro:
-  friendly_name: Розетка Xiaomi euro
-  device_class: plug  
-  icon: mdi:power-socket-eu
+  icon: mdi:laptop
+
   
 ## Сенсоры
 sensor.illumination_34ce0088b039:

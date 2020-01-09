@@ -88,7 +88,7 @@
           script.21_heater_on
           {%- elif states.switch.wall_plug_158d00015751f4.state == 'on' and  states.binary_sensor.boiler.state  == 'off' -%}
           script.21_heater_impossible
-          {%- elif states.switch.wall_plug_158d00015751f4.state == 'off' -%}
+          {%- elif states.switch.wall_plug_158d00015751f4.state == 'off' and states.binary_sensor.boiler.state  == 'on' -%}
           script.21_heater_off
           {%- endif -%}
 

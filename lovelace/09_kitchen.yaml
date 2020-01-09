@@ -22,6 +22,23 @@ cards:
               entity: light.gateway_light_7811dc64f4c8
               name: Шлюз
 
+          - type: horizontal-stack
+            cards: 
+
+            - type: entity-button
+              entity: light.aqara_04_strip
+              name: Подсветка
+            
+            - type: entity-button
+              entity: script.04_kn_ceiling_on
+              name: Полный свет
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.04_kn_ceiling_on
+              icon: mdi:lightbulb-on-outline
+              
           - type: conditional
             conditions:
               - entity: light.philips_04_ceiling
@@ -32,53 +49,67 @@ cards:
               entities:
                 - entity: sensor.philips_04_ceiling
 
-        - type: horizontal-stack
+        - type: custom:vertical-stack-in-card
           cards: 
 
-          - type: entity-button
-            entity: light.aqara_04_strip
-            name: Подсветка
-            
-          - type: entity-button
-            entity: script.04_kn_ceiling_on
-            name: Полный свет
-            tap_action:
-              action: call-service
-              service: script.turn_on
-              service_data:
-                entity_id: script.04_kn_ceiling_on
-            icon: mdi:lightbulb-on-outline
-            
-          - type: entity-button
-            entity: switch.tv_xiaomi
-            name: Телевизор
-            icon: mdi:television
+          - type: markdown
+            content: >
+                **Xiaomi IR base**
 
-        - type: picture-entity
-          entity: camera.reolink2
-          camera_view: live 
-          show_state: false
-          show_name: false
+          - type: horizontal-stack
+            cards: 
 
-        - type: horizontal-stack
+            - type: entity-button
+              entity: switch.tv_xiaomi
+              name: Телевизор
+              icon: mdi:television
+            
+            - type: entity-button
+              entity: script.mini8_android
+              name: Android Box
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.mini8_android
+              icon: mdi:power-cycle
+
+            - type: entity-button
+              entity: script.xiaomi_learn
+              name: Обучение
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.xiaomi_learn
+              icon: mdi:remote-tv 
+
+        - type: custom:vertical-stack-in-card
           cards: 
 
-          - type: entity-button
-            entity: switch.plug_158d0001291d12
-            name: Телевизор питание
-            icon: mdi:power
+          - type: markdown
+            content: >
+                **Питание**
 
-          - type: entity-button
-            entity: switch.plug_158d0001fa2934
-            name: Холодильник, питание
-            icon: mdi:power
+          - type: horizontal-stack
+            cards: 
+
+            - type: entity-button
+              entity: switch.plug_158d0001291d12
+              name: Телевизор питание
+              icon: mdi:power
+
+            - type: entity-button
+              entity: switch.plug_158d0001fa2934
+              name: Холодильник, питание
+              icon: mdi:power
 
       - type: vertical-stack
         cards:
 
         - type: markdown
           content: >
-              **Кухня - статус**
+              **Кухня - мониторинг**
 
         - type: glance
           show_state: false
@@ -131,6 +162,11 @@ cards:
                highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
                borders: false
 
+        - type: picture-entity
+          entity: camera.reolink2
+          camera_view: live 
+          show_state: false
+          show_name: false
 
         - type: entities
           show_header_toggle: false

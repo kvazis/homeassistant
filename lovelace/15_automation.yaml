@@ -18,8 +18,13 @@ cards:
             filter:
               include:
                - domain: automation
-              exclude:
+                 options:
+                    secondary_info: last-triggered
+                 sort:
+                   method: name
+            exclude:
                - state: 'off'
+
 
           - type: custom:auto-entities
             show_empty: false
@@ -29,8 +34,13 @@ cards:
             filter:
               include:
                - domain: automation
+                 options:
+                    secondary_info: last-triggered
+                 sort:
+                   method: name
               exclude:
                - state: 'on'
+
                
       - type: vertical-stack
         cards:
@@ -47,6 +57,12 @@ cards:
             filter:
               include:
                - domain: script
+                 options:
+                    secondary_info: last-triggered
+                 sort:
+                   method: attribute
+                   attribute: last_triggered
+                   reverse: true
               sort:
                  method: entity_id  
                
@@ -65,3 +81,5 @@ cards:
             filter:
               include:
                - domain: group
+                 sort:
+                    method: name

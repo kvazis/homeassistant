@@ -63,8 +63,8 @@
        entity_id: binary_sensor.day_work
        state: 'on'
   action:
-   - service: mqtt.publish
-     data_template:
-        topic: "states/error"
-        payload_template: '070'
+    - service: mqtt.publish
+      data_template:
+        topic: "notification/messages"
+        payload_template: '0700'
         retain: true

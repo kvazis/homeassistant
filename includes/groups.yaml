@@ -75,6 +75,7 @@
       - automation.05_gg_hum_timer_off
       - automation.05_gg_hum_on
       - automation.05_gg_hum_off
+      - automation.05_gg_hum_force
       - automation.05_gg_air_fresh
       - automation.05_usb_cool_on
       - automation.05_usb_cool_off      

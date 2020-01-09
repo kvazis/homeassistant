@@ -7,8 +7,8 @@
          entity_id: automation.01_enter_photo
        - service: mqtt.publish
          data_template:
-           topic: "states/error"
-           payload_template: '010'
+           topic: "notification/messages"
+           payload_template: '0100'
            retain: true
 
   01_enter_on:

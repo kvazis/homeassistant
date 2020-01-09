@@ -156,6 +156,7 @@ switch: !include_dir_merge_list includes/switches
 script: !include_dir_merge_named includes/scripts
 
 #Вынос в файлы
+mqtt_statestream: !include includes/mqtt_statestream.yaml
 plant: !include includes/plants.yaml
 input_number: !include includes/input_number.yaml
 media_player: !include includes/mplayer.yaml

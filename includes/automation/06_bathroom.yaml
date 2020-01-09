@@ -204,9 +204,9 @@
   action:
   - service: mqtt.publish
     data_template:
-       topic: "states/error"
-       payload_template: '060'
-       retain: true
+      topic: "notification/alarm"
+      payload_template: '0600'
+      retain: true
   - service: script.turn_on
     entity_id: script.11_warning
 
@@ -221,9 +221,9 @@
   action:
   - service: mqtt.publish
     data_template:
-       topic: "states/error"
-       payload_template: '061'
-       retain: true
+      topic: "notification/alarm"
+      payload_template: '0601'
+      retain: true
   - service: script.turn_on
     entity_id: script.11_all_ok
 
@@ -237,9 +237,9 @@
   action:
   - service: mqtt.publish
     data_template:
-       topic: "states/error"
-       payload_template: '062'
-       retain: true
+      topic: "notification/alarm"
+      payload_template: '0602'
+      retain: truee
   - service: script.turn_on
     entity_id: script.11_warning
 
@@ -254,9 +254,9 @@
   action:
   - service: mqtt.publish
     data_template:
-       topic: "states/error"
-       payload_template: '063'
-       retain: true
+      topic: "notification/alarm"
+      payload_template: '0603'
+      retain: true
   - service: script.turn_on
     entity_id: script.11_all_ok
 

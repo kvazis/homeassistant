@@ -2,7 +2,7 @@
     alias: Управление телевизором Xiaomi
     sequence:
       - service: remote.send_command
-        entity_id: 'remote.kitchen_remote'
+        entity_id: remote.kitchen_remote
         data:
           command:
           - raw:Z6VHADsCAACTBgAAuwgAAJERAAATIwAATJoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0AAAAAAAAABAQEBAQEBAQABAQABAQAAAAAAAQAAAQEBBQJAA=
@@ -20,16 +20,17 @@
     alias: Управление TV box Mini8
     sequence:
       - service: remote.send_command
-        entity_id: 'remote.kitchen_remote'
+        entity_id: remote.kitchen_remote
         data:
           command:
           - raw:Z6VVAC0AAAB1AAAAywAAADsCAACcBAAAkwYAALsIAACUEQAAGSMAAC0wAABGQQAATJoAAByiAABkdwEAAAAAAAAAAAB4MzMzMzMzM1NTU1NTU1NTM1MzMzNTM1MzM1NTUzNTM1OzaNNow0CgkSEA=
 
-#   xiaomi_learn:
-#     alias: Обучение Xiaomi IR Base
-#     sequence:
-#       - service: xiaomi_miio.remote_learn_command
-#         entity_id: 'remote.kitchen_remote'
+  xiaomi_learn:
+    alias: Обучение Xiaomi IR Base
+    sequence:
+      - service: xiaomi_miio.remote_learn_command
+        data:
+          entity_id: remote.kitchen_remote
 
   04_kn_ceiling_on:
     sequence:

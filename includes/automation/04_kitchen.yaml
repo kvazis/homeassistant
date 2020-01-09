@@ -140,9 +140,9 @@
   action:
   - service: mqtt.publish
     data_template:
-       topic: "states/error"
-       payload_template: '041'
-       retain: true
+      topic: "notification/alarm"
+      payload_template: '0400'
+      retain: true
   - service: script.turn_on
     entity_id: script.11_warning
 
@@ -158,9 +158,9 @@
   action:
   - service: mqtt.publish
     data_template:
-       topic: "states/error"
-       payload_template: '042'
-       retain: true
+      topic: "notification/alarm"
+      payload_template: '0401'
+      retain: true
   - service: script.turn_on
     entity_id: script.11_all_ok
 
@@ -201,11 +201,11 @@
       entity_id: binary_sensor.vibration_158d0002a8ab8b
       click_type: vibrate
   action:
-  - service: mqtt.publish
-    data_template:
-       topic: "states/error"
-       payload_template: '040'
-       retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "notification/messages"
+        payload_template: '0400'
+        retain: true
     
 ## Запись последнего движения в кухне
 - alias: 04_kitchen_motion_time

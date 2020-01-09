@@ -4,11 +4,16 @@
   - platform: homeassistant
     event: start
   action:  
-    - service: script.turn_on
-      entity_id: script.mqtt_payload_online
-    - delay: 00:01:00
-    - service: script.turn_on
-      entity_id: script.mqtt_payload_report
+    - service: mqtt.publish
+      data_template:
+         topic: "notification/info"
+         payload_template: '011'
+         retain: true
+    - delay: 00:01:10
+    - service: mqtt.publish
+      data_template:
+         topic: "notification/info"
+         payload_template: '012'
 
 - alias: 00_backup_everyday
   initial_state: true

@@ -17,7 +17,7 @@ resources:
 title: Home Assistant - Raspberry Pi 3 B+ 70 Основной сервер
 views:
   - !include lovelace/01_system.yaml
-  - !include lovelace/02_people.yaml
+  - !include lovelace/02_modes.yaml
   - !include lovelace/03_lan.yaml
   - !include lovelace/04_control.yaml
   - !include lovelace/05_power.yaml
@@ -32,5 +32,4 @@ views:
 #   - !include lovelace/14_battery.yaml
   - !include lovelace/15_automation.yaml
   - !include lovelace/16_switchlight.yaml
-#   - !include lovelace/17_powersync.yaml
-
+  - !include lovelace/20_other.yaml
