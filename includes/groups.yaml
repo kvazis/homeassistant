@@ -7,6 +7,8 @@
       - automation.911_mqtt_online
       - automation.911_test_lost
       - automation.911_test_online
+      - automation.911_rasp3_lost
+      - automation.911_rasp3_online
       - automation.00_heater_week_on
       - automation.00_heater_weekend_on
       - automation.00_heater_off

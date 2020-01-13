@@ -15,13 +15,7 @@
     host: 192.168.0.97
     token: d2a2dd48b585340b46fe650cb2f9462b
     model: chuangmi.plug.m1 
-    
-#   - platform: xiaomi_miio
-#     name: xiaomi_euro
-#     host: 192.168.0.99
-#     token: b4d9471bf9f6db8c40014efc41392f48
-#     model: chuangmi.plug.m1 
-    
+
   - platform: xiaomi_miio
     name: wifi_3usb
     host: 192.168.0.101

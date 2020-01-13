@@ -1,0 +1,15 @@
+  - platform: template
+    switches:
+      04_kn_mainlight:
+        friendly_name: "Кухня основной свет"
+        value_template: "{{ is_state('binary_sensor.04_kn_mainlight', 'on') }}"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.04_kn_ceiling_on
+        turn_off:
+          service: script.turn_on
+          data:
+            entity_id: script.04_kn_ceiling_off
+        icon_template: >-
+            mdi:ceiling-light

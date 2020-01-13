@@ -1,5 +1,41 @@
   - platform: template
     sensors:
+      count_automation_on:
+        friendly_name: "Активных автоматизаций - "
+        entity_id:
+          - sensor.time
+        value_template: "{{states.automation | selectattr ('state', 'equalto', 'on') | list | length}}"
+        icon_template: mdi:counter
+        
+  - platform: template
+    sensors:
+      count_automation_off:
+        friendly_name: "Отключенных автоматизаций - "
+        entity_id:
+          - sensor.time
+        value_template: "{{states.automation | selectattr ('state', 'equalto', 'off') | list | length}}"
+        icon_template: mdi:counter
+        
+  - platform: template
+    sensors:
+      count_script_on:
+        friendly_name: "Выполняющихся скриптов - "
+        entity_id:
+          - sensor.time
+        value_template: "{{states.script | selectattr ('state', 'equalto', 'on') | list | length}}"
+        icon_template: mdi:counter
+        
+  - platform: template
+    sensors:
+      count_script_off:
+        friendly_name: "Выключенных скриптов - "
+        entity_id:
+          - sensor.time
+        value_template: "{{states.script | selectattr ('state', 'equalto', 'off') | list | length}}"
+        icon_template: mdi:counter
+
+  - platform: template
+    sensors:
       unavailable_now_light:
         friendly_name: "Всего недоступных светильников - "
         entity_id:

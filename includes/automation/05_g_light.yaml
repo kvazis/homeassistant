@@ -303,7 +303,3 @@
    - service: timer.start
      entity_id: 
        - timer.liv_balc  
-  
-  
-  
-  

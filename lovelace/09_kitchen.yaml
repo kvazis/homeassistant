@@ -30,14 +30,8 @@ cards:
               name: Подсветка
             
             - type: entity-button
-              entity: script.04_kn_ceiling_on
-              name: Полный свет
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                  entity_id: script.04_kn_ceiling_on
-              icon: mdi:lightbulb-on-outline
+              entity: switch.04_kn_mainlight
+
               
           - type: conditional
             conditions:
@@ -48,6 +42,12 @@ cards:
               show_header_toggle: false
               entities:
                 - entity: sensor.philips_04_ceiling
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: binary_sensor.04_kn_mainlight
+          - entity: binary_sensor.04_kn_autolight
 
         - type: custom:vertical-stack-in-card
           cards: 

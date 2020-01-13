@@ -35,16 +35,20 @@
       entity_id: binary_sensor.cube_158d000101bdc6
       action_type: free_fall      
   action:    
-    - service: script.turn_on
-      data_template:
-        entity_id: >-
-         {%- if states.light.philips_04_ceiling.state == 'off'-%}
-         script.04_kn_ceiling_on
-         {%- elif states.light.philips_04_ceiling.state == 'on' and states("sensor.philips_04_ceiling") | int <= 1  -%}
-         script.04_kn_ceiling_off
-         {%- elif states.light.philips_04_ceiling.state == 'on' and states("sensor.philips_04_ceiling") | int >= 2  -%}
-         script.04_kn_ceiling_on
-         {% endif %}  
+    - service: switch.toggle
+      entity_id: switch.04_kn_mainlight 
+  
+  
+    # - service: script.turn_on
+    #   data_template:
+    #     entity_id: >-
+    #      {%- if states.light.philips_04_ceiling.state == 'off'-%}
+    #      script.04_kn_ceiling_on
+    #      {%- elif states.light.philips_04_ceiling.state == 'on' and states("sensor.philips_04_ceiling") | int <= 1  -%}
+    #      script.04_kn_ceiling_off
+    #      {%- elif states.light.philips_04_ceiling.state == 'on' and states("sensor.philips_04_ceiling") | int >= 2  -%}
+    #      script.04_kn_ceiling_on
+    #      {% endif %}  
          
 # Автоматическое включение люстры
 - alias: 04_kn_ceiling_auto_on
@@ -59,6 +63,9 @@
 # Условие И - лампа выключена
    condition: and
    conditions:
+    - condition: state
+      entity_id: switch.04_kn_mainlight
+      state: 'off'
     - condition: state
       entity_id: light.philips_04_ceiling
       state: 'off'
@@ -95,11 +102,8 @@
     to: 'off' 
   condition:
    - condition: state
-     entity_id: light.philips_04_ceiling
+     entity_id: binary_sensor.04_kn_autolight
      state: 'on'
-   - condition: numeric_state
-     entity_id: sensor.philips_04_ceiling
-     above: 1
   action:
     - service: script.turn_on
       entity_id: script.04_kn_ceiling_off

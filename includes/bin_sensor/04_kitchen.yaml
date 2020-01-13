@@ -1,0 +1,18 @@
+# Основное освещение
+  - platform: template
+    sensors:
+      04_kn_mainlight:
+        friendly_name: "Основной свет кухня"
+        value_template: >-
+          {{ is_state('light.philips_04_ceiling', 'on')  
+             and is_state('sensor.philips_04_ceiling', '1') }}
+             
+# Автоматическая подсветка
+  - platform: template
+    sensors:
+      04_kn_autolight:
+        friendly_name: "Автоматический свет кухня"
+        value_template: >-
+          {{ is_state('light.philips_04_ceiling', 'on')  
+             and is_state('binary_sensor.04_kn_mainlight', 'off') }}
+

@@ -7,12 +7,21 @@
     content-type: 'application/json'
   value_template: '{{ value_json.state }}'
   
+# - platform: rest
+#   resource: http://192.168.0.72:8123/api/states/sensor.online_custom
+#   name: rasp3b_state
+#   force_update: true
+#   headers: 
+#     Authorization: !secret rasp3_secret_token
+#     content-type: 'application/json'
+#   value_template: '{{ value_json.state }}'
+  
 - platform: rest
-  resource: http://192.168.0.72:8123/api/states/sensor.online_custom
-  name: rasp3b_state
+  resource: http://192.168.0.74:8123/api/states/sensor.online_custom
+  name: test_state
   force_update: true
   headers: 
-    Authorization: !secret rasp3_secret_token
+    Authorization: !secret orangeplus_secret_token
     content-type: 'application/json'
   value_template: '{{ value_json.state }}'
   
@@ -24,3 +33,8 @@
     Authorization: !secret orange_secret_token
     content-type: 'application/json'
   value_template: '{{ value_json.state }}'
+  
+
+  
+  
+  

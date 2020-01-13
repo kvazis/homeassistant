@@ -208,3 +208,13 @@ cards:
           camera_view: live 
           show_state: false
           show_name: false
+          
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: switch.xiaofang1s_ir_filter
+            - entity: switch.xiaofang1s_ir_led
+            - entity: switch.xiaofang1s_night_mode
+            - entity: switch.xiaofang1s_night_mode_auto
+            - entity: switch.xiaofang1s_motion_detection            
+            - entity: binary_sensor.xiaofang1s_motion_sensor
