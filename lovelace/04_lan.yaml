@@ -310,9 +310,12 @@ cards:
                 show_state: false
                 entities:
                  - entity: binary_sensor.hainst_main
+                   icon: mdi:raspberry-pi
                  - entity: binary_sensor.hainst_reserve
                  - entity: binary_sensor.hainst_test
+                   icon: mdi:raspberry-pi
                  - entity: binary_sensor.hainst_test2
+
                  
              
 

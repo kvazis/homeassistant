@@ -37,32 +37,6 @@ cards:
                 name: Последний Home Assistant -
                 icon: mdi:alpha-v-circle-outline
 
-            - type: markdown
-              content: >
-                 **Недоступно**   
-            - type: horizontal-stack
-              cards:                 
-                 
-              - type: entities
-                show_header_toggle: false
-                entities:
-                - entity: sensor.unavailable_now_light
-                  name: Cветильники - 
-                  icon: mdi:lightbulb-off
-                - entity: sensor.unavailable_now_switch
-                  name: Реле - 
-                  icon: mdi:power-plug-off
-                  
-              - type: entities
-                show_header_toggle: false
-                entities:
-                - entity: sensor.unavailable_now_sensor
-                  name: Сенсоры - 
-                  icon: mdi:credit-card-wireless
-                - entity: sensor.unavailable_now_binary_sensor
-                  name: Бинарники - 
-                  icon: mdi:ab-testing
-
           - type: custom:vertical-stack-in-card
             cards:
      
@@ -79,31 +53,24 @@ cards:
                 name: Бытовые сценарии
                 icon: mdi:format-list-numbered
 
+          - type: custom:vertical-stack-in-card
+            cards:
+
             - type: markdown
               content: >
-                 **Недоступно**   
-            - type: horizontal-stack
-              cards:                 
-                 
-              - type: entities
-                show_header_toggle: false
-                entities:
-                - entity: sensor.reserve_unavailable_now_light
-                  name: Cветильники - 
-                  icon: mdi:lightbulb-off
-                - entity: sensor.reserve_unavailable_now_switch
-                  name: Реле - 
-                  icon: mdi:power-plug-off
-                  
-              - type: entities
-                show_header_toggle: false
-                entities:
-                - entity: sensor.reserve_unavailable_now_sensor
-                  name: Сенсоры - 
-                  icon: mdi:credit-card-wireless
-                - entity: sensor.reserve_unavailable_now_binary_sensor
-                  name: Бинарники - 
-                  icon: mdi:ab-testing
+                   **Hassio instanse**   
+            - type: entities
+              show_header_toggle: false
+              entities:
+              #   - entity: sensor.rasp3b_state
+              #     name: Raspberry 3B в онлайне -
+              #     icon: mdi:clock-outline
+                - entity: sensor.test_state
+                  name: Test instanse -
+                  icon: mdi:clock-outline
+                - entity: sensor.mqtt_state
+                  name: MQTT instanse -
+                  icon: mdi:clock-outline
 
       - type: vertical-stack
         cards:
@@ -233,69 +200,6 @@ cards:
 
       - type: vertical-stack
         cards:
-
-        - type: custom:vertical-stack-in-card
-          cards:
-
-          - type: markdown
-            content: >
-                 **Hassio instanse**   
-          - type: entities
-            show_header_toggle: false
-            entities:
-            #   - entity: sensor.rasp3b_state
-            #     name: Raspberry 3B в онлайне -
-            #     icon: mdi:clock-outline
-              - entity: sensor.test_state
-                name: Test instanse -
-                icon: mdi:clock-outline
-              - entity: sensor.mqtt_state
-                name: MQTT instanse -
-                icon: mdi:clock-outline
-
-        - type: custom:vertical-stack-in-card
-          cards:
-
-          - type: markdown
-            content: >
-                 **Действия**   
-
-          - type: custom:vertical-stack-in-card
-            cards:
-
-            - type: horizontal-stack
-              cards:
-               - type: entity-button
-                 tap_action: call-service
-                 service: script.toggle
-                 entity: script.purge_db
-                 icon: mdi:database
-                 color: auto
-                 name: Сжатие базы
-         
-               - type: entity-button
-                 tap_action: call-service
-                 service: script.toggle
-                 entity: script.ha_restart
-                 icon: mdi:home-assistant
-                 color: auto
-                 name: Reboot
-                 
-               - type: entity-button
-                 tap_action: call-service
-                 service: script.toggle
-                 entity: script.all_scenario_reload
-                 icon: mdi:autorenew
-                 color: auto
-                 name: Сценарии
-                 
-               - type: entity-button
-                 tap_action: call-service
-                 service: script.toggle
-                 entity: script.all_script_reload
-                 icon: mdi:autorenew
-                 color: auto
-                 name: Скрипты
 
         - type: custom:vertical-stack-in-card
           cards:

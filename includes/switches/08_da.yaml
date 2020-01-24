@@ -1,0 +1,19 @@
+  - platform: template
+    switches:
+      holiday_mode_da:
+        friendly_name: "Детская A, режим выходного дня"
+        value_template: "{{  is_state('binary_sensor.da_holiday', 'on') }}"
+        turn_on:
+          service: mqtt.publish
+          data_template:
+            topic: "states/daholiday"
+            payload_template: 'ON'
+            retain: true 
+        turn_off:
+          service: mqtt.publish
+          data_template:
+            topic: "states/daholiday"
+            payload_template: 'OFF'
+            retain: true 
+        icon_template: >-
+            mdi:account-switch

@@ -78,4 +78,3 @@
           {{ is_state('binary_sensor.weekday_work', 'on')
              or is_state('binary_sensor.holiday_work', 'on') 
              or is_state('binary_sensor.weekend_work', 'on') }} 
-            

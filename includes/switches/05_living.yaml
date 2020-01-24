@@ -1,0 +1,47 @@
+  - platform: broadlink
+    host: 192.168.0.136
+    mac: 'B4:43:0D:EE:FF:F4'
+
+  - platform: template
+    switches:
+      movie_mode:
+        friendly_name: "Режим кино"
+        value_template: "{{  is_state('binary_sensor.movie_mode', 'on') }}"
+        turn_on:
+         - service: mqtt.publish
+           data_template:
+             topic: "scene/movie"
+             payload_template: 'ON'
+             retain: true 
+         - service: scene.turn_on
+           entity_id: scene.movie_on
+        turn_off:
+         - service: mqtt.publish
+           data_template:
+             topic: "scene/movie"
+             payload_template: 'OFF'
+             retain: true 
+         - service: scene.turn_on
+           entity_id: scene.movie_off
+        icon_template: >-
+            mdi:filmstrip
+            
+  - platform: template
+    switches:
+      holiday_mode_gg:
+        friendly_name: "Гостиная, режим выходного дня"
+        value_template: "{{  is_state('binary_sensor.gg_holiday', 'on') }}"
+        turn_on:
+          service: mqtt.publish
+          data_template:
+            topic: "states/ggholiday"
+            payload_template: 'ON'
+            retain: true 
+        turn_off:
+          service: mqtt.publish
+          data_template:
+            topic: "states/ggholiday"
+            payload_template: 'OFF'
+            retain: true 
+        icon_template: >-
+            mdi:account-switch

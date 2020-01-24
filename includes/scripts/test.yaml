@@ -1,0 +1,31 @@
+  test_photo:
+    alias: Фото с камеры Reolink E1
+    sequence:
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink4
+              filename: "/config/www/cam_captures/reolink4.jpg"
+       - delay: 00:00:10
+       - service: notify.telegram
+         data:
+              title: "Тест"
+              message: "Фотография" 
+              data:
+                  photo:
+                      - file: /config/www/cam_captures/reolink4.jpg
+                      
+  test_video:
+    alias: Видео с камеры Reolink E1
+    sequence:
+    - service: camera.record
+      data_template:
+        entity_id: camera.reolink4
+        filename: "/config/www/cam_captures/reolink4.mp4"
+        lookback: 5
+        duration: 15
+    - delay: 00:00:30
+    - service: telegram_bot.send_video
+      data_template:
+        target:
+         - !secret chat_id_alex
+        file: "/config/www/cam_captures/reolink4.mp4"

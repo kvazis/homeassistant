@@ -1,5 +1,21 @@
   - platform: template
     sensors:
+      count_automation:
+        friendly_name: "Автоматизаций в системе - "
+        entity_id:
+          - sensor.time
+        value_template: >
+          {%- set domains = ['automation'] -%}
+          {%- for domain in domains -%}
+            {%- for item in states[domain] -%}
+              {% if loop.first %}
+                {{loop.length}}
+              {% endif %}
+            {%- endfor -%}
+          {%- endfor -%}
+
+  - platform: template
+    sensors:
       count_automation_on:
         friendly_name: "Активных автоматизаций - "
         entity_id:
@@ -15,6 +31,22 @@
           - sensor.time
         value_template: "{{states.automation | selectattr ('state', 'equalto', 'off') | list | length}}"
         icon_template: mdi:counter
+
+  - platform: template
+    sensors:
+      count_script:
+        friendly_name: "Cкриптов в системе - "
+        entity_id:
+          - sensor.time
+        value_template: >
+          {%- set domains = ['script'] -%}
+          {%- for domain in domains -%}
+            {%- for item in states[domain] -%}
+              {% if loop.first %}
+                {{loop.length}}
+              {% endif %}
+            {%- endfor -%}
+          {%- endfor -%}
         
   - platform: template
     sensors:

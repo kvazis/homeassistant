@@ -1,45 +1,26 @@
-## Включение увлажнения
-- alias: 08_da_hum_auto_on
-  initial_state: true
-## ТРИГГЕР !!!
-  trigger:
-## Проверка каждые 3 минуты
-   - platform: time_pattern
-     minutes: '/3'
-## УСЛОВИЯ !!!
-  condition:
-## Увлажнитель выключен
-     - condition: state
-       entity_id: switch.plug_158d00010ec4b8
-       state: 'off'
-## Влажность ниже 45 %
-     - condition: numeric_state
-       entity_id: sensor.humidity_158d000159c7e6
-       below: 45
-## Комплексный сенсор для увлажнения
-     - condition: state
-       entity_id: binary_sensor.08_da_hum
-       state: 'on'
-  action:
-  - service: switch.turn_on
-    entity_id: switch.plug_158d00010ec4b8
-    
-    
-## Выключение увлажнения
-- alias: 08_da_hum_auto_off
+- alias: 08_da_hum_auto
+  id: 'Увлажнение в детской А'
   initial_state: true
   trigger:
-## Комплексный сенсор для увлажнения
-   - platform: state
-     entity_id: binary_sensor.08_da_hum
-     to: 'off'
-  condition:
-## Увлажнитель включен
-     - condition: state
-       entity_id: switch.plug_158d00010ec4b8
-       state: 'on'
+    platform: state
+    entity_id:
+      - input_number.humidity_level_da
+      - sensor.08_mean_humidity
+      - binary_sensor.da_hum
   action:
-  - service: switch.turn_off
+    service_template: >-
+      {% set hi = (states('input_number.humidity_level_da') | float) + 5 %}
+      {% set lo = (states('input_number.humidity_level_da') | float) - 5 %}
+      {% set humidity = states('sensor.08_mean_humidity') | float %}
+      {% if humidity > hi %}
+        switch.turn_off
+      {% elif states.binary_sensor.da_hum.state == 'off' %} 
+        switch.turn_off
+      {% elif humidity < lo and states.binary_sensor.da_hum.state == 'on' %}
+        switch.turn_on
+      {% else %}
+        switch.turn_{{states('switch.plug_158d00010ec4b8') | lower}}
+      {% endif %}
     entity_id: switch.plug_158d00010ec4b8
 
 ## Предупреждение о недостатке воды    
@@ -51,7 +32,7 @@
      entity_id: sensor.load_158d00010ec4b8
      below: 10
      for:
-       minutes: 1
+       minutes: 2
   condition:
 ## Увлажнитель включен
      - condition: state
@@ -67,3 +48,8 @@
         topic: "notification/messages"
         payload_template: '0800'
         retain: true
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: F0:B4:29:CC:1F:11
+        ringtone_id: 10011
+        ringtone_vol: 50

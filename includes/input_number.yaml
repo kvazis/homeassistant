@@ -11,3 +11,24 @@
     min: 3000
     max: 5000
     step: 500
+    
+  humidity_level_gg:
+    name: Уровень влажности гостиная
+    initial: 50
+    min: 30
+    max: 60
+    step: 1
+    
+  humidity_level_dd:
+    name: Уровень влажности детская Д
+    initial: 50
+    min: 30
+    max: 60
+    step: 1
+    
+  humidity_level_da:
+    name: Уровень влажности детская А
+    initial: 50
+    min: 30
+    max: 60
+    step: 1

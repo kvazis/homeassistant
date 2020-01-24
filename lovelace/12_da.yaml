@@ -8,7 +8,7 @@ cards:
 
         - type: markdown
           content: >
-              **Детская А - панель управления**
+              **Детская А - управление**
 
         - type: custom:vertical-stack-in-card
           cards: 
@@ -94,17 +94,8 @@ cards:
 
         - type: markdown
           content: >
-              **Детская А - статус**
-
-        - type: glance
-          show_state: false
-          entities:
-           - entity: binary_sensor.08_da_hum
-           - entity: binary_sensor.motion_sensor_158d00016d56f5
-             name: Движение
-           - entity: binary_sensor.door_window_sensor_158d0001583c7b
-             name: Окно
-
+              **Детская А - климат**
+ 
         - type: horizontal-stack
           cards:
             
@@ -191,9 +182,8 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: sensor.mqtt_binary_sensor_158d00016d56f5
-            name: Последнее движение в детской А в - 
-            icon: mdi:run-fast 
+          - entity: input_number.humidity_level_da
+          - entity: binary_sensor.da_hum
           - entity: sensor.da_hum_custom
           
       - type: vertical-stack
@@ -201,7 +191,25 @@ cards:
 
         - type: markdown
           content: >
-              **Детская А - наблюдение**          
+              **Детская А - мониторинг** 
+
+        - type: custom:vertical-stack-in-card
+          cards:
+
+           - type: glance
+             show_state: false
+             entities:
+              - entity: binary_sensor.motion_sensor_158d00016d56f5
+                name: Движение
+              - entity: binary_sensor.door_window_sensor_158d0001583c7b
+                name: Окно
+  
+           - type: entities
+             show_header_toggle: false
+             entities:
+             - entity: sensor.mqtt_binary_sensor_158d00016d56f5
+               name: Последнее движение в детской А в - 
+               icon: mdi:run-fast 
           
         - type: picture-entity
           entity: camera.xiaofang1s

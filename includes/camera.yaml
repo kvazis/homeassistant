@@ -58,6 +58,22 @@
     name: Reolink3_sub
     still_image_url: !secret reolink3_url
     stream_source: !secret reolink3_sub_rtsp
+    
+# Reolink E1 Pro
+# Основной поток
+
+  - platform: generic
+    name: Reolink4
+    still_image_url: !secret reolink4_url
+    stream_source: !secret reolink4_rtsp
+    
+# Reolink E1 Pro
+# Дополнительный поток
+
+  - platform: generic
+    name: Reolink4_sub
+    still_image_url: !secret reolink4_url
+    stream_source: !secret reolink4_sub_rtsp
 
 # Hikvision HDR
 

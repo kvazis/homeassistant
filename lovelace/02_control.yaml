@@ -3,9 +3,142 @@ title: Панель управления
 icon: mdi:keyboard
 cards:
 
+
+############################ Колонка 1 ############################
       - type: vertical-stack
         cards:
 
+          - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                 **Автоматизации и скрипты**   
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.count_automation
+                  icon: mdi:counter
+                - entity: sensor.count_automation_on
+                  icon: mdi:check
+                - entity: sensor.count_script
+                  icon: mdi:counter
+                - entity: sensor.count_script_on
+                  icon: mdi:check
+
+          - type: custom:vertical-stack-in-card
+            cards: 
+            - type: markdown
+              content: >
+                  **Отвалившиеся светильники**
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.unavailable_now_light
+                exclude:
+                 - state: '< 1'
+                 
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: light
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+
+
+          - type: custom:vertical-stack-in-card
+            cards:  
+            - type: markdown
+              content: >
+                  **Отвалившиеся розетки**
+                  
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.unavailable_now_switch
+                exclude:
+                 - state: '< 1'
+                 
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: switch
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+                      
+          - type: custom:vertical-stack-in-card
+            cards:  
+            - type: markdown
+              content: >
+                  **Отвалившиеся сенсоры**
+                  
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.unavailable_now_sensor
+                 - entity_id: sensor.unavailable_now_binary_sensor
+                exclude:
+                 - state: '< 1'
+                 
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: sensor
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+                 - domain: binary_sensor
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+
+          - type: custom:vertical-stack-in-card
+            cards:              
+            - type: markdown
+              content: >
+                  **Сенсоры < 30% заряда**
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*battery*
+                   options:
+                      type: 'custom:battery-entity'
+                exclude:
+                 - state: '> 30.0'
+                      
+############################ Колонка 2 ############################
+      - type: vertical-stack
+        cards:
+ 
           - type: custom:vertical-stack-in-card
             cards:          
             - type: markdown
@@ -43,7 +176,7 @@ cards:
             cards:  
             - type: markdown
               content: >
-                  **Активные розетки > 5 Ватт**
+                  **Активные розетки > 10 Ватт**
             - type: custom:auto-entities
               show_empty: false
               card:
@@ -52,9 +185,7 @@ cards:
               filter:
                 include:
                  - entity_id: sensor.load_total_energy
-                exclude:
-                 - state: '< 5.0'
-                 
+
             - type: custom:auto-entities
               show_empty: false
               card:
@@ -64,25 +195,10 @@ cards:
                 include:
                  - entity_id: sensor.load*
                 exclude:
-                 - state: '< 5.0'
+                 - state: '< 10.0'
                  - entity_id: sensor.load_total_energy
 
-          - type: custom:vertical-stack-in-card
-            cards:  
-            - type: markdown
-              content: >
-                  **Отвалившиеся розетки**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - domain: switch
-                   state: 'unavailable'
-                   options:
-                      secondary_info: last-changed
+
 
           - type: custom:vertical-stack-in-card
             cards:  
@@ -103,33 +219,7 @@ cards:
                 exclude:
                  - entity_id: light.broadlink_07_table
 
-          - type: custom:vertical-stack-in-card
-            cards: 
-            - type: markdown
-              content: >
-                  **Отвалившиеся светильники**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - entity_id: sensor.unavailable_now_light
-                exclude:
-                 - state: '< 1'
-                 
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - domain: light
-                   state: 'unavailable'
-                   options:
-                      secondary_info: last-changed
+
 
           - type: custom:vertical-stack-in-card
             cards:                   
@@ -148,6 +238,7 @@ cards:
                  - domain: timer
                    state: 'idle'
 
+############################ Колонка 3 ############################
       - type: vertical-stack
         cards:
  
@@ -166,6 +257,22 @@ cards:
                 include:
                  - entity_id: binary_sensor.motion_in_home
                  - entity_id: binary_sensor.people_in_home    
+
+          - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                  **Активные BLE метки**
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: sensor.*rssi_summ
+                exclude:
+                 - state: 'unknown'
 
           - type: custom:vertical-stack-in-card
             cards:          
@@ -210,19 +317,19 @@ cards:
             - type: custom:auto-entities
               show_empty: false
               card:
-                type: glance
+                type: entities
                 show_state: false
               filter:
                 include:
                  - entity_id: binary_sensor.door_window*
                 exclude:
                  - state: 'off'
-                 
+
           - type: custom:vertical-stack-in-card
-            cards:          
+            cards:                
             - type: markdown
               content: >
-                  **Активные BLE метки**
+                  **Cенсоры освещения > 500 люмен**
             - type: custom:auto-entities
               show_empty: false
               card:
@@ -230,10 +337,12 @@ cards:
                 show_header_toggle: false
               filter:
                 include:
-                 - entity_id: sensor.*rssi_summ
+                 - entity_id: sensor.illumination* 
                 exclude:
+                 - state: '< 500.0'
                  - state: 'unknown'
 
+                 
           - type: custom:vertical-stack-in-card
             cards:              
             - type: markdown
@@ -250,49 +359,9 @@ cards:
                 exclude:
                  - state: '> 20.0'
 
-          - type: custom:vertical-stack-in-card
-            cards:              
-            - type: markdown
-              content: >
-                  **Сенсоры < 30% заряда**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - entity_id: sensor.*battery*
-                   options:
-                      type: 'custom:battery-entity'
-                exclude:
-                 - state: '> 30.0'
-
+############################ Колонка 4 ############################
       - type: vertical-stack
         cards:
-
-
-          - type: custom:vertical-stack-in-card
-            cards:
-            - type: markdown
-              content: >
-                  **Отвалившиеся климат сенсоры**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - entity_id: sensor.*temperature*
-                   state: 'unknown'
-                 - entity_id: sensor.*temperature*
-                   state: 'unavailable'
-                 - entity_id: sensor.*humidity*
-                   state: 'unknown'
-                 - entity_id: sensor.*humidity*
-                   state: 'unavailable'
-                
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -399,19 +468,3 @@ cards:
                  - state: 'unknown'
                  - state: 'unavailable'
                  
-          - type: custom:vertical-stack-in-card
-            cards:                
-            - type: markdown
-              content: >
-                  **Cенсоры освещения > 500 люмен**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-              filter:
-                include:
-                 - entity_id: sensor.illumination* 
-                exclude:
-                 - state: '< 500.0'
-                 - state: 'unknown'

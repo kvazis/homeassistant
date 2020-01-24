@@ -22,9 +22,34 @@ cards:
             - entity: binary_sensor.holiday_work
               icon: mdi:calendar-heart
             - entity: switch.holiday_mode
+            
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: binary_sensor.gg_away_work
+            - entity: binary_sensor.gg_holiday
+            - entity: switch.holiday_mode_gg
+            - type: divider
+            - entity: binary_sensor.dd_away_work
+            - entity: binary_sensor.dd_holiday
+            - entity: switch.holiday_mode_dd
+            - type: divider
+            - entity: binary_sensor.da_away_work
+            - entity: binary_sensor.da_holiday
+            - entity: switch.holiday_mode_da
+
+
 
       - type: vertical-stack
         cards:
+
+  
+        - type: markdown
+          content: >
+             **Отопление, нагрев**
+
+        - type: custom:vertical-stack-in-card
+          cards:
         
           - type: markdown
             content: >
@@ -37,13 +62,24 @@ cards:
             - entity: switch.heater_mode
               name: Сменить режим нагрева
             - entity: switch.wall_plug_158d00015751f4
-
+            
+        - type: custom:vertical-stack-in-card
+          cards:
+        
+          - type: markdown
+            content: >
+               **Гостиная, отопление**
+   
+          - type: thermostat
+            entity: climate.living1_heater
+            name: Батарея 1
+ 
       - type: vertical-stack
         cards:
 
         - type: markdown
           content: >
-             **Увлажнители**
+             **Увлажнение**
                
         - type: custom:vertical-stack-in-card
           cards:
@@ -76,8 +112,10 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: binary_sensor.07_dd_hum
             - entity: switch.plug_158d000114a1e1
+            - entity: input_number.humidity_level_dd
+            - entity: binary_sensor.dd_hum
+            - entity: sensor.dd_hum_custom
 
           - type: markdown
             content: >
@@ -85,6 +123,8 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: binary_sensor.08_da_hum
             - entity: switch.plug_158d00010ec4b8
+            - entity: input_number.humidity_level_da
+            - entity: binary_sensor.da_hum
+            - entity: sensor.da_hum_custom 
 

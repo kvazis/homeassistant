@@ -1,3 +1,20 @@
+- alias: 05_gg_heater
+  id: 'Режим обогрева в гостиной'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id:
+      - binary_sensor.gg_away_work
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {%- if states.binary_sensor.gg_away_work.state == 'off' -%}
+          script.living_home
+          {%- elif states.binary_sensor.gg_away_work.state == 'on' -%}
+          script.living_away
+          {%- endif -%}  
+
 ## Включение увлажнителя и очистителя  
 - alias: 05_gg_hum_on
   initial_state: true
@@ -111,8 +128,3 @@
    - service: timer.start
      entity_id: 
        - timer.humidifier
-
-
-
-
-      

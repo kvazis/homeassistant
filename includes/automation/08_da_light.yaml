@@ -120,21 +120,22 @@
     - service: script.turn_on
       entity_id: script.08_da_lightoff
       
-# Перезагрузка настольной лампы     
-- alias: 08_da_table_reboot
+# Управление ночным режимы камеры 
+- alias: 08_da_xiaofang
   initial_state: true
   trigger:
-   platform: state
-   entity_id: light.yeelight_08_table
-   to: 'unavailable'
-   for:
-     minutes: 5
+    platform: state
+    entity_id:
+      - sensor.illumination_f0b429cc1f11
   action:
-    - service: switch.turn_off
-      entity_id: switch.08_alfawise_relay
-    - delay: 00:00:05
-    - service: switch.turn_on
-      entity_id: switch.08_alfawise_relay
+    service_template: >-
+      {% set illum = states('sensor.illumination_f0b429cc1f11') | float %}
+      {% if illum >= 200 %}
+        switch.turn_off
+      {% elif illum < 200 %}
+        switch.turn_on
+      {% endif %}
+    entity_id: switch.xiaofang1s_night_mode
       
 ## Запись последнего движения в детской А
 - alias: 08_da_motion_time

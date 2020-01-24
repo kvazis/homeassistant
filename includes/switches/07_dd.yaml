@@ -1,0 +1,30 @@
+  - platform: broadlink
+    host: 192.168.0.98
+    mac: '34:EA:34:A5:37:3B'
+    type: mp1
+    friendly_name: "Детская Д Broadlink"
+    slots:
+      slot_1: 'plug1'
+      slot_2: 'plug2'
+      slot_3: 'plug3'
+      slot_4: 'plug4'
+
+  - platform: template
+    switches:
+      holiday_mode_dd:
+        friendly_name: "Детская Д, режим выходного дня"
+        value_template: "{{  is_state('binary_sensor.dd_holiday', 'on') }}"
+        turn_on:
+          service: mqtt.publish
+          data_template:
+            topic: "states/ddholiday"
+            payload_template: 'ON'
+            retain: true 
+        turn_off:
+          service: mqtt.publish
+          data_template:
+            topic: "states/ddholiday"
+            payload_template: 'OFF'
+            retain: true 
+        icon_template: >-
+            mdi:account-switch

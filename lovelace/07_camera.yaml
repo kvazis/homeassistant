@@ -96,6 +96,7 @@ cards:
         - type: picture-glance
           title: Детская А
           camera_image: camera.xiaofang1s
+          camera_view: live
           entities:
            - entity: switch.plug_158d00010ec4b8
            - entity: light.aqara_08_ceiling
@@ -108,5 +109,21 @@ cards:
              icon: mdi:record-rec 
              tap_action:
                 action: toggle
+                
+        - type: markdown
+          content: >
+              **Reolink E1** 
+             
+        - type: picture-glance
+          title: Гостиная
+          camera_image: camera.reolink4_sub
+          camera_view: live
+          entities:
+           - entity: light.yeelight_05_ceiling1
+           - entity: light.yeelight_05_ceiling2
+           - entity: switch.tv_samsung
+             icon: mdi:television-guide 
+           - entity: switch.movie_mode
+             icon: mdi:movie-roll
 
              

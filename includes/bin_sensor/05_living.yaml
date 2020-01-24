@@ -15,3 +15,26 @@
           {% else %}
             mdi:air-humidifier
           {% endif %}
+          
+  - platform: mqtt
+    name: movie_mode
+    state_topic: "scene/movie"
+    payload_on: "ON"
+    payload_off: "OFF"
+
+  - platform: mqtt
+    name: gg_holiday
+    state_topic: "states/ggholiday"
+    payload_on: "ON"
+    payload_off: "OFF"
+    
+# Время работы away сценариев гостиная
+  - platform: template
+    sensors:
+      gg_away_work:
+        friendly_name: "Работа away сценариев гостиная"
+        value_template: >-
+          {{ is_state('binary_sensor.gg_away_time', 'on') 
+             and is_state('binary_sensor.holiday', 'off')
+             and is_state('binary_sensor.gg_holiday', 'off')
+             and is_state('binary_sensor.workday_sensor', 'on') }} 

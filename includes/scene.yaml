@@ -1,0 +1,29 @@
+  - name: Movie on
+    entities:
+      light.yeelight_05_ceiling1: off
+      light.yeelight_05_ceiling2: off
+      light.aqara_05_wall: off
+      light.yeelight_05_table: off
+      light.yeelight_05_ceiling1_ambilight:
+        state: on
+        brightness_pct: 50
+        rgb_color: [169, 153, 255]
+      light.yeelight_05_ceiling2_ambilight:
+        state: on
+        brightness_pct: 50
+        rgb_color: [169, 153, 255]
+      light.yeelight_05_rgbtvbulb:
+        state: on
+        brightness_pct: 50
+        rgb_color: [169, 153, 255]
+      light.yeelight_05_bedside2:
+        state: on
+        brightness_pct: 50
+        rgb_color: [169, 153, 255]
+        
+  - name: Movie off
+    entities:
+      light.yeelight_05_ceiling1_ambilight: off
+      light.yeelight_05_ceiling2_ambilight: off
+      light.yeelight_05_rgbtvbulb: off
+      light.yeelight_05_bedside2: off

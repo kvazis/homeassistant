@@ -184,14 +184,8 @@
       entity_id: binary_sensor.switch_158d0001531698
       click_type: long_click_press
   action:    
-    - service: script.turn_on
-      data_template:
-        entity_id: >-
-          {%- if states.light.yeelight_05_ceiling1_ambilight.state == 'on' and states.light.yeelight_05_ceiling2_ambilight.state == 'on' -%}
-          script.05_gg_movie_off
-          {%- else -%}
-          script.05_gg_movie_on
-          {%- endif -%}  
+    - service: switch.toggle
+      entity_id: switch.movie_mode
 
 ## Управление телевизором        
 - alias: 05_tv_samsung

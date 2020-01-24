@@ -1,45 +1,26 @@
-## Включение увлажнения
-- alias: 07_dd_hum_auto_on
+- alias: 07_dd_hum_auto
+  id: 'Увлажнение в детской Д'
   initial_state: true
-## ТРИГГЕР !!!
   trigger:
-## Проверка каждые 3 минуты
-   - platform: time_pattern
-     minutes: '/3'
-## УСЛОВИЯ !!!
-  condition:
-## Увлажнитель выключен
-     - condition: state
-       entity_id: switch.plug_158d000114a1e1
-       state: 'off'
-## Влажность ниже 45 %
-     - condition: numeric_state
-       entity_id: sensor.humidity_158d000156e92e
-       below: 45
-## Комплексный сенсор для увлажнения
-     - condition: state
-       entity_id: binary_sensor.07_dd_hum
-       state: 'on'
+    platform: state
+    entity_id:
+      - input_number.humidity_level_dd
+      - sensor.07_mean_humidity
+      - binary_sensor.dd_hum
   action:
-  - service: switch.turn_on
-    entity_id: switch.plug_158d000114a1e1
-
-## Выключение увлажнения    
-- alias: 07_dd_hum_auto_off
-  initial_state: true
-#   initial_state: false
-  trigger:
-## Комплексный сенсор для увлажнения
-   - platform: state
-     entity_id: binary_sensor.07_dd_hum
-     to: 'off'
-  condition:
-## Увлажнитель включен
-     - condition: state
-       entity_id: switch.plug_158d000114a1e1
-       state: 'on'
-  action:
-  - service: switch.turn_off
+    service_template: >-
+      {% set hi = (states('input_number.humidity_level_dd') | float) + 5 %}
+      {% set lo = (states('input_number.humidity_level_dd') | float) - 5 %}
+      {% set humidity = states('sensor.07_mean_humidity') | float %}
+      {% if humidity > hi %}
+        switch.turn_off
+      {% elif states.binary_sensor.dd_hum.state == 'off' %} 
+        switch.turn_off
+      {% elif humidity < lo and states.binary_sensor.dd_hum.state == 'on' %}
+        switch.turn_on
+      {% else %}
+        switch.turn_{{states('switch.plug_158d000114a1e1') | lower}}
+      {% endif %}
     entity_id: switch.plug_158d000114a1e1
     
 ## Предупреждение о недостатке воды
@@ -68,3 +49,8 @@
         topic: "notification/messages"
         payload_template: '0700'
         retain: true
+    - service: xiaomi_aqara.play_ringtone
+      data:
+        gw_mac: 28:6C:07:F0:AD:27
+        ringtone_id: 10011
+        ringtone_vol: 50

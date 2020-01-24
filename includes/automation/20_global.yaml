@@ -1,7 +1,6 @@
 ## Предупреждение о массовом сбое светильников
  - alias: 20_unavailable_yeelight
    initial_state: true
-#  initial_state: false
    trigger:
 ## Проверка каждые 5 минут
     - platform: time_pattern
@@ -13,14 +12,38 @@
       entity_id: sensor.unavailable_now_light
       above: 5
 ## Время работы
-    - condition: time
-      after: '08:00:00'
-      before: '21:29:00'
+    - condition: state
+      entity_id: binary_sensor.day_work
+      state: 'on'
    action:
-     - service: notify.telegram
-       data:
-         message: "Ошибка связи {{ states('sensor.time_date') }} , светильников недоступно - {{ states('sensor.unavailable_now_light') }} "
+    - service: mqtt.publish
+      data_template:
+         topic: "notification/error"
+         payload_template: '100'   
          
+## Предупреждение о массовом сбое розеток
+ - alias: 20_unavailable_switch
+   initial_state: true
+   trigger:
+## Проверка каждые 5 минут
+    - platform: time_pattern
+      minutes: '/5'
+## УСЛОВИЯ !!!
+   condition:
+## Более 5 светильников в оффлайне
+    - condition: numeric_state
+      entity_id: sensor.unavailable_now_switch
+      above: 5
+## Время работы
+    - condition: state
+      entity_id: binary_sensor.day_work
+      state: 'on'
+   action:
+    - service: mqtt.publish
+      data_template:
+         topic: "notification/error"
+         payload_template: '102'   
+
 ## Выключение режима праздничного дня
  - alias: 20_holiday_auto_off
    initial_state: true

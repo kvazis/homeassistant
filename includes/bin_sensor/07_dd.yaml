@@ -1,13 +1,12 @@
 # Условия для включения увлажнения
   - platform: template
     sensors:
-      07_dd_hum:
+      dd_hum:
         friendly_name: "Увлажнение в Детской Д"
         value_template: >-
           {{ is_state('binary_sensor.door_window_sensor_158d0001193697', 'off')  
              and is_state('binary_sensor.door_window_sensor_158d00015843d4', 'off')
              and is_state('light.xiaomi_07_table', 'off')
-             and states('sensor.07_mean_humidity')|float < 55
              and is_state('binary_sensor.humidification', 'on') 
              and is_state('binary_sensor.day_work', 'on') }}
         icon_template: >-
@@ -17,4 +16,19 @@
             mdi:air-humidifier
           {% endif %}
 
-
+  - platform: mqtt
+    name: dd_holiday
+    state_topic: "states/ddholiday"
+    payload_on: "ON"
+    payload_off: "OFF"
+    
+# Время работы away сценариев Детская Д
+  - platform: template
+    sensors:
+      dd_away_work:
+        friendly_name: "Работа away сценариев Детская Д"
+        value_template: >-
+          {{ is_state('binary_sensor.dd_away_time', 'on') 
+             and is_state('binary_sensor.holiday', 'off')
+             and is_state('binary_sensor.dd_holiday', 'off')
+             and is_state('binary_sensor.workday_sensor', 'on') }} 

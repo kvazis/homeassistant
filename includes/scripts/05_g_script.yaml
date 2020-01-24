@@ -36,3 +36,25 @@
       - service: broadlink.learn
         data:
           host: 192.168.0.136
+
+  living_home:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.living1_heater
+          preset_mode: none
+          
+  living_away:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.living1_heater
+          preset_mode: away
+
+          
+#   living_no_home:
+#     sequence:
+#       - service: climate.set_temperature
+#         data:
+#           entity_id: climate.living1_heater
+#           temperature: 19

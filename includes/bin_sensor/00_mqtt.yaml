@@ -15,6 +15,3 @@
     state_topic: "states/holiday"
     payload_on: "ON"
     payload_off: "OFF"
-    
-    
-    
