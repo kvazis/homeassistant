@@ -3,6 +3,7 @@
     name: scenario
     entities:
       - climate.living1_heater
+      - climate.dd_heater
       - automation.telegramm_command_code
       - automation.911_mqtt_lost
       - automation.911_mqtt_online
@@ -75,11 +76,7 @@
       - automation.05_gg_wall_light
       - automation.05_gg_movie_light
       - automation.05_gg_heater
-      - automation.05_gg_hum_auto_on
-      - automation.05_gg_hum_timer_off
-      - automation.05_gg_hum_on
-      - automation.05_gg_hum_off
-      - automation.05_gg_hum_force
+      - automation.05_gg_hum_auto
       - automation.05_gg_air_fresh
       - automation.05_usb_cool_on
       - automation.05_usb_cool_off      
@@ -103,6 +100,7 @@
       - automation.06_bathroom_wleak_shower_on
       - automation.06_bathroom_wleak_shower_off
       - automation.06_bathroom_motion_time
+      - automation.07_dd_heater
       - automation.07_dd_hum_auto
       - automation.07_dd_hum_water_warning
       - automation.07_dd_philips

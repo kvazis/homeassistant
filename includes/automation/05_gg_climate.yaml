@@ -2,129 +2,43 @@
   id: 'Режим обогрева в гостиной'
   initial_state: true
   trigger:
-    platform: state
-    entity_id:
-      - binary_sensor.gg_away_work
+    - platform: time_pattern
+      minutes: '/5'
+    - platform: state
+      entity_id:
+        - binary_sensor.living_heat
   action:
     - service: script.turn_on
       data_template:
         entity_id: >-
-          {%- if states.binary_sensor.gg_away_work.state == 'off' -%}
+          {%- if states.binary_sensor.living_heat.state == 'on' -%}
           script.living_home
-          {%- elif states.binary_sensor.gg_away_work.state == 'on' -%}
+          {%- elif states.binary_sensor.living_heat.state == 'off' -%}
           script.living_away
           {%- endif -%}  
 
 ## Включение увлажнителя и очистителя  
-- alias: 05_gg_hum_on
+- alias: 05_gg_hum_auto
+  id: 'Увлажнение в гостиной'
   initial_state: true
   trigger:
-## Проверка каждые 3 минуты
-   - platform: time_pattern
-     minutes: '/3'
-  condition:
-## Увлажнитель выключен
-     - condition: state
-       entity_id: fan.gg_humidifier
-       state: 'off'
-## Влажность ниже 45 %
-     - condition: numeric_state
-       entity_id: sensor.05_mean_humidity
-       below: 45
-## Комплексный сенсор для увлажнения
-     - condition: state
-       entity_id: binary_sensor.05_living_hum
-       state: 'on'
-  action:    
-   - service: homeassistant.turn_on
-     entity_id: 
-       - fan.gg_humidifier
-       - fan.gg_purifier
-   - service: fan.set_speed
-     entity_id: 
-       - fan.gg_humidifier
-       - fan.gg_purifier
-     data:
-         speed: Auto
-
-## Выключение увлажнителя и очистителя           
-- alias: 05_gg_hum_off
-  initial_state: true
-  trigger:
-## Комплексный сенсор для увлажнения
-   - platform: state
-     entity_id: binary_sensor.05_living_hum
-     to: 'off'
-  condition:
-## Увлажнитель включен
-     - condition: state
-       entity_id: fan.gg_humidifier
-       state: 'on'
-  action:    
-   - service: timer.cancel
-     entity_id: timer.humidifier
-   - service: homeassistant.turn_off
-     entity_id: 
-       - fan.gg_humidifier
-       - fan.gg_purifier
-
-## Форсированный режим увлажнения
-- alias: 05_gg_hum_auto_on
-  initial_state: true
-  trigger:
-## Проверка каждые 3 минуты
-   - platform: time_pattern
-     minutes: '/3'
-  condition:
-## Форсированный режим выключен
-     - condition: state
-       entity_id: switch.forse_hum
-       state: 'off'
-## Увлажнитель включен
-     - condition: state
-       entity_id: fan.gg_humidifier
-       state: 'on'
-## Влажность ниже 40 %
-     - condition: numeric_state
-       entity_id: sensor.05_mean_humidity
-       below: 40
+    platform: state
+    entity_id:
+      - input_number.humidity_level_gg
+      - sensor.05_mean_humidity
+      - binary_sensor.living_hum
   action:
-  - service: switch.turn_on
-    entity_id: switch.forse_hum
-
-## Отключение форсированного режима увлажнения      
-- alias:  05_gg_hum_timer_off
-  initial_state: true
-  trigger:
-   - platform: event
-     event_type: timer.finished
-     event_data:
-       entity_id: timer.humidifier
-  condition:
-## Увлажнитель включен
-     - condition: state
-       entity_id: fan.gg_humidifier
-       state: 'on'
-  action:    
-  - service: switch.turn_off
-    entity_id: switch.forse_hum
-
-## Отслеживание форсированного режима
-- alias: 05_gg_hum_force
-  initial_state: true
-  trigger:
-## Проверка каждые 3 минуты
-   - platform: time_pattern
-     minutes: '/3' 
-  condition:
-   - condition: state
-     entity_id: timer.humidifier
-     state: 'idle'
-## Форсированный режим
-   - condition: state
-     entity_id: switch.forse_hum
-     state: 'on'
-  action:
-   - service: timer.start
-     entity_id: 
-       - timer.humidifier
+    service_template: >-
+      {% set hi = (states('input_number.humidity_level_gg') | float) + 5 %}
+      {% set lo = (states('input_number.humidity_level_gg') | float) - 5 %}
+      {% set humidity = states('sensor.05_mean_humidity') | float %}
+      {% if humidity > hi %}
+        switch.turn_off
+      {% elif states.binary_sensor.living_hum.state == 'off' %} 
+        switch.turn_off
+      {% elif humidity < lo and states.binary_sensor.living_hum.state == 'on' %}
+        switch.turn_on
+      {% else %}
+        switch.turn_{{states('switch.gg_humidifier') | lower}}
+      {% endif %}
+    entity_id: switch.gg_humidifier

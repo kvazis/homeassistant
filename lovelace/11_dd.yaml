@@ -38,7 +38,7 @@ cards:
             cards:
               
             - type: picture-entity
-              entity: switch.plug_158d000114a1e1
+              entity: switch.0x00158d0001a2ccab_switch_left
               tap_action: 
                 action: toggle
               name: Увлажнитель
@@ -77,7 +77,6 @@ cards:
             - type: divider
             - entity: script.07_dd_lightoff
               name: Выключение всего света
-
 
         - type: custom:vertical-stack-in-card
           cards:
@@ -194,7 +193,7 @@ cards:
                borders: false
 
            - type: custom:canvas-gauge-card
-             entity: sensor.load_158d000114a1e1
+             entity: sensor.0x00158d0001a2ccab_power
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -219,6 +218,10 @@ cards:
           - entity: input_number.humidity_level_dd
           - entity: binary_sensor.dd_hum
           - entity: sensor.dd_hum_custom
+
+        - type: thermostat
+          entity: climate.dd_heater
+          name: Батарея 
 
       - type: vertical-stack
         cards:

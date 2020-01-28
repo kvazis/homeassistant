@@ -1,0 +1,17 @@
+  um_daily_0x00158d0001a2ccab:
+    source: sensor.0x00158d0001a2ccab_int
+    cycle: daily
+    tariffs:
+      - electicity
+
+  um_monthly_0x00158d0001a2ccab:
+    source: sensor.0x00158d0001a2ccab_int
+    cycle: monthly
+    tariffs:
+      - electicity
+
+  um_yearly_0x00158d0001a2ccab:
+    source: sensor.0x00158d0001a2ccab_int
+    cycle: yearly
+    tariffs:
+      - electicity

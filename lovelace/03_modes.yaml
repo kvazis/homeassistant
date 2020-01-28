@@ -5,38 +5,58 @@ cards:
 
       - type: vertical-stack
         cards:
+    
+        - type: markdown
+          content: >
+             **Режим сценариев**
 
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: binary_sensor.weekday_work
+            icon: mdi:calendar-plus
+          - entity: binary_sensor.weekend_work
+            icon: mdi:calendar-minus
+          - entity: switch.holiday_mode
+
+        - type: custom:vertical-stack-in-card
+          cards:            
           - type: markdown
             content: >
-               **Режим сценариев**
-
+               Гостиная
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: binary_sensor.day_work
-              icon: mdi:white-balance-sunny
-            - entity: binary_sensor.weekday_work
-              icon: mdi:calendar-plus
-            - entity: binary_sensor.weekend_work
-              icon: mdi:calendar-minus
-            - entity: binary_sensor.holiday_work
-              icon: mdi:calendar-heart
-            - entity: switch.holiday_mode
+            - entity: binary_sensor.living_heat
+            - entity: binary_sensor.living_hum
+            - entity: binary_sensor.living_day_work
+            - entity: switch.living_holiday
             
+        - type: custom:vertical-stack-in-card
+          cards:     
+          - type: markdown
+            content: >
+               Детская Д
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: binary_sensor.gg_away_work
-            - entity: binary_sensor.gg_holiday
-            - entity: switch.holiday_mode_gg
-            - type: divider
-            - entity: binary_sensor.dd_away_work
-            - entity: binary_sensor.dd_holiday
-            - entity: switch.holiday_mode_dd
-            - type: divider
-            - entity: binary_sensor.da_away_work
-            - entity: binary_sensor.da_holiday
-            - entity: switch.holiday_mode_da
+            - entity: binary_sensor.dd_heat
+            - entity: binary_sensor.dd_hum
+            - entity: binary_sensor.dd_day_work
+            - entity: switch.dd_holiday
+            
+        - type: custom:vertical-stack-in-card
+          cards:     
+          - type: markdown
+            content: >
+               Детская А
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: binary_sensor.da_heat
+            - entity: binary_sensor.da_hum
+            - entity: binary_sensor.da_day_work
+            - entity: switch.da_holiday
 
 
 
@@ -65,14 +85,21 @@ cards:
             
         - type: custom:vertical-stack-in-card
           cards:
-        
+
           - type: markdown
             content: >
-               **Гостиная, отопление**
+               **Отопление**
+
+          - type: horizontal-stack
+            cards: 
    
-          - type: thermostat
-            entity: climate.living1_heater
-            name: Батарея 1
+            - type: thermostat
+              entity: climate.living1_heater
+              name: Батарея 1
+            
+            - type: thermostat
+              entity: climate.dd_heater
+              name: Батарея
  
       - type: vertical-stack
         cards:
@@ -98,23 +125,22 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: binary_sensor.05_living_hum
-            - entity: fan.gg_humidifier 
-              name: Форсированный режим
+            - entity: sensor.05_mean_humidity
+            - entity: input_number.humidity_level_gg
+            - entity: switch.gg_humidifier
             - entity: sensor.smartmi_mode
-              name: Режим - 
             - entity: sensor.smartmi_water
               name: Остаток воды - 
-    
+     
           - type: markdown
             content: >
                Детская Д
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: switch.plug_158d000114a1e1
+            - entity: sensor.07_mean_humidity
             - entity: input_number.humidity_level_dd
-            - entity: binary_sensor.dd_hum
+            - entity: switch.0x00158d0001a2ccab_switch_left
             - entity: sensor.dd_hum_custom
 
           - type: markdown
@@ -123,8 +149,7 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: switch.plug_158d00010ec4b8
+            - entity: sensor.08_mean_humidity
             - entity: input_number.humidity_level_da
-            - entity: binary_sensor.da_hum
+            - entity: switch.plug_158d00010ec4b8
             - entity: sensor.da_hum_custom 
-

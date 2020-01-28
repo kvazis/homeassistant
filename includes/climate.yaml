@@ -14,3 +14,20 @@
     keep_alive:
       minutes: 3
     initial_hvac_mode: "heat"
+    
+  - platform: generic_thermostat
+    name: dd_heater
+    heater: switch.0x00158d0001a2ccab_switch_right
+    target_sensor: sensor.07_mean_temperature
+    target_temp: 21
+    away_temp: 19
+    min_temp: 16
+    max_temp: 28
+    ac_mode: false
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      minutes: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat"

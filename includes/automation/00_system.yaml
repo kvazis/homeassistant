@@ -23,4 +23,13 @@
   action:
     - service: script.turn_on
       entity_id: script.ha_backup
+      
+## Обновление карты Zigbee
+- alias: 00_zigbee2mqtt_update
+  initial_state: true
+  trigger:
+    - platform: time_pattern
+      minutes: '/10'
+  action:
+      service: zigbee2mqtt_networkmap.update
 

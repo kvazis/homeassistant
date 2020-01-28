@@ -48,16 +48,45 @@
         friendly_name: "Выходной день"
         value_template: "{{  is_state('binary_sensor.holiday', 'on') }}"
         turn_on:
-          service: mqtt.publish
-          data_template:
-            topic: "states/holiday"
-            payload_template: 'ON'
-            retain: true 
+          - service: mqtt.publish
+            data_template:
+              topic: "states/holiday"
+              payload_template: 'ON'
+              retain: true 
+          - service: mqtt.publish
+            data_template:
+              topic: "states/living_holiday"
+              payload_template: 'ON'
+              retain: true
+          - service: mqtt.publish
+            data_template:
+              topic: "states/dd_holiday"
+              payload_template: 'ON'
+              retain: true 
+          - service: mqtt.publish
+            data_template:
+              topic: "states/da_holiday"
+              payload_template: 'ON'
+              retain: true 
         turn_off:
-          service: mqtt.publish
-          data_template:
-            topic: "states/holiday"
-            payload_template: 'OFF'
-            retain: true 
+          - service: mqtt.publish
+            data_template:
+              topic: "states/holiday"
+              payload_template: 'OFF'
+              retain: true 
+          - service: mqtt.publish
+            data_template:
+              topic: "states/living_holiday"
+              payload_template: 'OFF'
+              retain: true 
+          - service: mqtt.publish
+            data_template:
+              topic: "states/dd_holiday"
+              payload_template: 'OFF'
+          - service: mqtt.publish
+            data_template:
+              topic: "states/da_holiday"
+              payload_template: 'OFF'
+              retain: true 
         icon_template: >-
             mdi:account-switch

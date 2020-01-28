@@ -8,27 +8,51 @@
              and is_state('binary_sensor.door_window_sensor_158d00015843d4', 'off')
              and is_state('light.xiaomi_07_table', 'off')
              and is_state('binary_sensor.humidification', 'on') 
-             and is_state('binary_sensor.day_work', 'on') }}
+             and is_state('binary_sensor.dd_day_work', 'on') }}
         icon_template: >-
-          {% if is_state("binary_sensor.07_dd_hum", "on") %}
+          {% if is_state("binary_sensor.dd_hum", "on") %}
             mdi:water-percent
           {% else %}
             mdi:air-humidifier
           {% endif %}
 
-  - platform: mqtt
-    name: dd_holiday
-    state_topic: "states/ddholiday"
-    payload_on: "ON"
-    payload_off: "OFF"
-    
-# Время работы away сценариев Детская Д
+# Условия для включения отопления
   - platform: template
     sensors:
-      dd_away_work:
-        friendly_name: "Работа away сценариев Детская Д"
+      dd_heat:
+        friendly_name: "Отопление в Детской Д"
         value_template: >-
-          {{ is_state('binary_sensor.dd_away_time', 'on') 
-             and is_state('binary_sensor.holiday', 'off')
-             and is_state('binary_sensor.dd_holiday', 'off')
-             and is_state('binary_sensor.workday_sensor', 'on') }} 
+          {{ is_state('sensor.dima', 'Дом')  }}
+        icon_template: >-
+          {% if is_state("binary_sensor.dd_heat", "on") %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-off
+          {% endif %}
+
+  - platform: mqtt
+    name: dd_holiday
+    state_topic: "states/dd_holiday"
+    payload_on: "ON"
+    payload_off: "OFF"
+
+# Время работы сценариев в праздничные дни
+  - platform: template
+    sensors:
+      dd_holiday_work:
+        friendly_name: "Работа дневных сценариев в праздники, Детская Д"
+        value_template: >-
+          {{ is_state('binary_sensor.weekend_time', 'on')  
+             and is_state('binary_sensor.dd_holiday', 'on') }} 
+
+# Время работы дневных сценариев
+  - platform: template
+    sensors:
+      dd_day_work:
+        friendly_name: "Работа дневных сценариев, Детская Д"
+        value_template: >-
+          {{ is_state('binary_sensor.weekday_work', 'on')
+             or is_state('binary_sensor.weekend_work', 'on')
+             or is_state('binary_sensor.dd_holiday_work', 'on') }}   
+
+

@@ -55,7 +55,7 @@ lovelace:
 #logbook:
 
 # Enables a map showing the location of tracked devices
-#map:
+map:
 
 # Track the sun
 sun:
@@ -123,6 +123,17 @@ hacs:
   python_script: true
   theme: true
 
+
+webhook:
+
+zigbee2mqtt_networkmap:
+
+panel_iframe:
+  networkmap:
+    title: 'Zigbee Map'
+    url: '/local/community/zigbee2mqtt_networkmap/map.html'
+    icon: 'mdi:graphql'
+
 # Роутер
 asuswrt:
   host: !secret asus_ip
@@ -140,6 +151,20 @@ device_tracker:
     new_device_defaults:
       track_new_devices: false
       hide_if_away: false
+
+life360:
+  driving_speed: 20
+  interval_seconds: 10
+  max_gps_accuracy: 200
+  max_update_wait:
+    minutes: 45
+  show_as_state:
+    - driving
+    - moving
+  warning_threshold: 2
+  error_threshold: 3
+
+
       
 # Качество воздуха
 air_quality:
@@ -172,3 +197,4 @@ recorder: !include includes/recorder.yaml
 group: !include includes/groups.yaml
 rest_command: !include includes/rest_command.yaml
 notify: !include includes/notify.yaml
+utility_meter: !include includes/utility_meter.yaml

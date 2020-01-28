@@ -2,10 +2,13 @@
   purge_keep_days: 2
   include:
     entities:
+# Заряд
+       - sensor.360_dima_battery
+       - sensor.360_alex_battery
+       - sensor.360_olga_battery
 # Свичи для сбора истории
        - switch.tv_xiaomi
        - switch.tv_samsung
-       - switch.forse_hum
        - switch.plug_158d000114a1e1
        - switch.plug_158d00010ec4b8
 # Системные сенсоры
@@ -19,6 +22,8 @@
        - sensor.asuswrt_download_speed
        - sensor.asuswrt_upload_speed
 # Сенсоры мощности и напряжения
+       - sensor.0x00158d0001a2ccab_power
+       - sensor.0x00158d0002d7bb2b_power
        - sensor.load_total_energy
        - sensor.load_bwshp2
        - sensor.bwshp2_voltage

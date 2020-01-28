@@ -116,6 +116,7 @@ cards:
               name: Router fan
               icon: mdi:fan
 
+              
 
         - type: custom:vertical-stack-in-card
           cards: 
@@ -160,92 +161,22 @@ cards:
               name: Комод 
               icon: mdi:power-socket-eu 
               
-            - type: entity-button
-              entity: switch.wall_switch_ln_left_158d0001a2ccab 
-              name: Chuwi
-              icon: mdi:laptop
-              
-            - type: entity-button
-              entity: switch.wall_switch_ln_right_158d0001a2ccab 
-              name: ISDT 
-              icon: mdi:battery
 
-
-        - type: entities
-          show_header_toggle: false
-          entities:
-           - entity: binary_sensor.05_living_hum
+        - type: markdown
+          content: >
+                Растения
 
         - type: custom:vertical-stack-in-card
           cards: 
-
-          - type: horizontal-stack
-            cards:
-              
-            - type: picture-entity
-              entity: fan.gg_humidifier
-              tap_action: 
-                action: toggle
-              name: Увлажнитель
-              state_image:
-                "on": /local/pict/smartmi_hum_on.jpg
-                "off": /local/pict/smartmi_hum_off.jpg
-
-            - type: conditional
-              conditions:
-               - entity: fan.gg_humidifier
-                 state: "on"
-              card:            
-                type: entities
-                show_header_toggle: false
-                entities:
-                - entity: sensor.smartmi_mode
-                  name: Режим - 
-                - entity: sensor.smartmi_water
-                  name: Остаток воды - 
-                - entity: sensor.smartmi_hum_custom
-                - entity: switch.forse_hum
-                  tap_action: toggle
-                  name: Форс. режим
-                  icon: mdi:water
-
-          - type: entity-filter
-            show_header_toggle: false
-            entities:
-            - entity: timer.humidifier
-            state_filter:
-              - "active"
-
-
-        - type: custom:vertical-stack-in-card
-          cards: 
-              
-          - type: horizontal-stack
-            cards:
-              
-            - type: picture-entity
-              entity: fan.gg_purifier
-              tap_action: 
-                action: toggle
-              name: Очиститель
-              state_image:
-                "on": /local/pict/airpurifier_on.jpg
-                "off": /local/pict/airpurifier_off.jpg
-
-            - type: conditional
-              conditions:
-               - entity: fan.gg_purifier
-                 state: "on"
-              card:            
-                type: entities
-                show_header_toggle: false
-                entities:
-                - entity: sensor.purifier_mode
-                  name: Режим - 
-                - entity: sensor.purifier_pm25
-                  name: Воздух -
-                - entity: sensor.purifier_filter
-                  name: Расход фильтра -
+          - type: plant-status
+            entity: plant.dieffenbac
+            name: Диффенбахия
+          - type: plant-status
+            entity: plant.yucca
+            name: Юкка
+          - type: plant-status
+            entity: plant.zamiokulkas
+            name: Замиокулькас
 
       - type: vertical-stack
         cards:
@@ -417,7 +348,7 @@ cards:
         - type: thermostat
           entity: climate.living1_heater
           name: Батарея 1
-
+          
         - type: custom:vertical-stack-in-card
           cards: 
 
@@ -443,23 +374,14 @@ cards:
               entity: script.living_away
               icon: mdi:home-remove
               name: Не дома
-              
-              
-        - type: markdown
-          content: >
-                Растения
 
-        - type: custom:vertical-stack-in-card
-          cards: 
-          - type: plant-status
-            entity: plant.dieffenbac
-            name: Диффенбахия
-          - type: plant-status
-            entity: plant.yucca
-            name: Юкка
-          - type: plant-status
-            entity: plant.zamiokulkas
-            name: Замиокулькас
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: input_number.humidity_level_gg
+          - entity: binary_sensor.living_hum
+          - entity: switch.gg_humidifier
 
       - type: vertical-stack
         cards:

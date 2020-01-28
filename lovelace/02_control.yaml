@@ -194,6 +194,7 @@ cards:
               filter:
                 include:
                  - entity_id: sensor.load*
+                 - entity_id: sensor.*_power
                 exclude:
                  - state: '< 10.0'
                  - entity_id: sensor.load_total_energy
@@ -241,12 +242,25 @@ cards:
 ############################ Колонка 3 ############################
       - type: vertical-stack
         cards:
- 
+
           - type: custom:vertical-stack-in-card
             cards:          
             - type: markdown
               content: >
-                  **Присутствие людей**
+                  **Местонахождение**
+
+            - type: glance
+              show_name: false
+              entities:
+              - entity: sensor.alex
+              - entity: sensor.olga
+              - entity: sensor.dima
+
+          - type: custom:vertical-stack-in-card
+            cards:          
+            - type: markdown
+              content: >
+                  **Активность в доме**
 
             - type: custom:auto-entities
               show_empty: false
@@ -385,6 +399,7 @@ cards:
                  - entity_id: sensor.dd_bt_temperature
                  - entity_id: sensor.temperature_158d000159c7e6
                  - entity_id: sensor.da_bt_temperature
+                 - entity_id: sensor.0x00158d0002d7bb2b_temperature
                  - state: '> 18'
                  - state: 'unknown'
                  - state: 'unavailable'
@@ -412,6 +427,7 @@ cards:
                  - entity_id: sensor.dd_bt_temperature
                  - entity_id: sensor.temperature_158d000159c7e6
                  - entity_id: sensor.da_bt_temperature
+                 - entity_id: sensor.0x00158d0002d7bb2b_temperature
                  - state: '< 26'
                  - state: 'unknown'
                  - state: 'unavailable'

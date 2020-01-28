@@ -1,9 +1,6 @@
   heater:
     duration: '01:00:00'
     
-  humidifier:
-    duration: '01:00:00'
-
   camphoto:
     duration: '00:03:00'
     

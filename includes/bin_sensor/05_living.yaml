@@ -1,21 +1,55 @@
 # Условия для включения увлажнения
   - platform: template
     sensors:
-      05_living_hum:
+      living_hum:
         friendly_name: "Увлажнение в гостиной"
         value_template: >-
           {{ is_state('binary_sensor.door_window_sensor_158d000445206b', 'off')  
              and is_state('binary_sensor.door_window_sensor_158d00013ed373', 'off')
              and states('sensor.05_mean_humidity')|float < 55
              and is_state('binary_sensor.humidification', 'on') 
-             and is_state('binary_sensor.day_work', 'on') }}
+             and is_state('binary_sensor.living_day_work', 'on') }}
         icon_template: >-
-          {% if is_state("binary_sensor.05_living_hum", "on") %}
+          {% if is_state("binary_sensor.living_hum", "on") %}
             mdi:water-percent
           {% else %}
             mdi:air-humidifier
           {% endif %}
-          
+
+# Условия для включения отопления
+  - platform: template
+    sensors:
+      living_heat:
+        friendly_name: "Отопление в гостиной"
+        value_template: >-
+          {{ is_state('sensor.alex', 'Дом')  
+             or is_state('sensor.olga', 'Дом') }}
+        icon_template: >-
+          {% if is_state("binary_sensor.living_heat", "on") %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-off
+          {% endif %}
+
+# Время работы сценариев в праздничные дни
+  - platform: template
+    sensors:
+      living_holiday_work:
+        friendly_name: "Работа дневных сценариев в праздники, Гостиная"
+        value_template: >-
+          {{ is_state('binary_sensor.weekend_time', 'on')  
+             and is_state('binary_sensor.living_holiday', 'on') }} 
+
+# Время работы дневных сценариев
+  - platform: template
+    sensors:
+      living_day_work:
+        friendly_name: "Работа дневных сценариев, Гостиная"
+        value_template: >-
+          {{ is_state('binary_sensor.weekday_work', 'on')
+             or is_state('binary_sensor.weekend_work', 'on')
+             or is_state('binary_sensor.living_holiday_work', 'on') }}               
+
   - platform: mqtt
     name: movie_mode
     state_topic: "scene/movie"
@@ -23,18 +57,7 @@
     payload_off: "OFF"
 
   - platform: mqtt
-    name: gg_holiday
-    state_topic: "states/ggholiday"
+    name: living_holiday
+    state_topic: "states/living_holiday"
     payload_on: "ON"
     payload_off: "OFF"
-    
-# Время работы away сценариев гостиная
-  - platform: template
-    sensors:
-      gg_away_work:
-        friendly_name: "Работа away сценариев гостиная"
-        value_template: >-
-          {{ is_state('binary_sensor.gg_away_time', 'on') 
-             and is_state('binary_sensor.holiday', 'off')
-             and is_state('binary_sensor.gg_holiday', 'off')
-             and is_state('binary_sensor.workday_sensor', 'on') }} 

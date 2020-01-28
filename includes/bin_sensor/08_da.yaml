@@ -6,27 +6,51 @@
         value_template: >-
           {{ is_state('binary_sensor.door_window_sensor_158d0001583c7b', 'off')  
              and is_state('binary_sensor.humidification', 'on') 
-             and is_state('binary_sensor.day_work', 'on') }}
+             and is_state('binary_sensor.da_day_work', 'on') }}
         icon_template: >-
-          {% if is_state("binary_sensor.08_da_hum", "on") %}
+          {% if is_state("binary_sensor.da_hum", "on") %}
             mdi:water-percent
           {% else %}
             mdi:air-humidifier
           {% endif %}
+
+# Условия для включения отопления
+  - platform: template
+    sensors:
+      da_heat:
+        friendly_name: "Отопление в Детской А"
+        value_template: >-
+          {{ is_state('binary_sensor.da_away_time', 'off') 
+             or is_state('binary_sensor.da_holiday', 'on')
+             or is_state('binary_sensor.workday_sensor', 'off') }} 
+        icon_template: >-
+          {% if is_state("binary_sensor.da_heat", "on") %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-off
+          {% endif %}
           
   - platform: mqtt
     name: da_holiday
-    state_topic: "states/daholiday"
+    state_topic: "states/da_holiday"
     payload_on: "ON"
-    payload_off: "OFF"          
-             
-# Время работы away сценариев Детская A
+    payload_off: "OFF"   
+    
+# Время работы сценариев в праздничные дни
   - platform: template
     sensors:
-      da_away_work:
-        friendly_name: "Работа away сценариев Детская A"
+      da_holiday_work:
+        friendly_name: "Работа дневных сценариев в праздники, Детская А"
         value_template: >-
-          {{ is_state('binary_sensor.da_away_time', 'on') 
-             and is_state('binary_sensor.holiday', 'off')
-             and is_state('binary_sensor.da_holiday', 'off')
-             and is_state('binary_sensor.workday_sensor', 'on') }} 
+          {{ is_state('binary_sensor.weekend_time', 'on')  
+             and is_state('binary_sensor.da_holiday', 'on') }} 
+
+# Время работы дневных сценариев
+  - platform: template
+    sensors:
+      da_day_work:
+        friendly_name: "Работа дневных сценариев, Детская А"
+        value_template: >-
+          {{ is_state('binary_sensor.weekday_work', 'on')
+             or is_state('binary_sensor.weekend_work', 'on')
+             or is_state('binary_sensor.da_holiday_work', 'on') }}   

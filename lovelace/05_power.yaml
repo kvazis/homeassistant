@@ -725,11 +725,76 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
+
         - type: custom:vertical-stack-in-card
           cards:  
            - type: markdown
              content: >
                 ## Увлажнитель Д
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.0x00158d0001a2ccab_power
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false                 
+
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Потребление** 
+             - type: markdown
+               content: >
+                  **Стоимость** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.um_daily_0x00158d0001a2ccab_electicity
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.um_monthly_0x00158d0001a2ccab_electicity
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.um_yearly_0x00158d0001a2ccab_electicity
+                 name: Год
+                 icon: mdi:counter
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.money_day_0x00158d0001a2ccab
+                 name: День
+                 icon: mdi:cash
+               - entity: sensor.money_month_0x00158d0001a2ccab
+                 name: Месяц
+                 icon: mdi:cash
+               - entity: sensor.money_year_0x00158d0001a2ccab
+                 name: Год
+                 icon: mdi:cash
+
+
+        - type: custom:vertical-stack-in-card
+          cards:  
+           - type: markdown
+             content: >
+                ## Розетка
            - type: horizontal-stack
              cards:      
 

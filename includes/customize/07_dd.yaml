@@ -13,10 +13,15 @@ light.xiaomi_07_table:
   friendly_name: Детская Д, настольная лампа
   icon: mdi:desk-lamp
 ## Реле
-switch.plug_158d000114a1e1:
+#switch.plug_158d000114a1e1:
+switch.0x00158d0001a2ccab_switch_left:
   friendly_name: Детская Д увлажнитель
   device_class: plug  
   icon: mdi:cup-water
+switch.0x00158d0001a2ccab_switch_right:
+  friendly_name: Детская Д батарея
+  device_class: plug  
+  icon: mdi:radiator
 switch.xiaomi_wifi_socket:
   friendly_name: Wi-Fi розетка Xiaomi
   device_class: plug 
@@ -47,6 +52,10 @@ sensor.dd_bt_humidity:
   icon: mdi:water-percent
 
 ##ZigBee
+sensor.0x00158d0001a2ccab_power:
+  friendly_name: Детская Д, увлажнитель
+  icon: mdi:flash
+  unit_of_measurement: 'Вт'
 sensor.illumination_286c07f0ad27:
   friendly_name: Детская Д шлюз освещенность
 binary_sensor.wall_switch_left_158d000163e571:

@@ -154,8 +154,8 @@
         payload: '{{(states.sensor.mqtt_power_month_158d00015751f4.state | float +
                     (states.sensor.load_158d00015751f4.state | float /120000))|round(5)}}'
         retain: true
-##### ДЕТСКАЯ Д  
-##### Увлажнитель Д
+##### ДЕТСКАЯ Д 
+##### Свободная розетка
     - service: mqtt.publish
       data_template:
         topic: "power/158d000114a1e1/today"
@@ -277,7 +277,7 @@
         payload: '{{(states.sensor.mqtt_power_today_158d00015751f4.state | float )|round(5)}}'
         retain: true
 ##### ДЕТСКАЯ Д  
-##### Увлажнитель Д
+##### Свободная розетка
     - service: mqtt.publish
       data_template:
         topic: "power/158d000114a1e1/yesterday"
@@ -371,7 +371,7 @@
         payload: '{{ 0.0 }}'
         retain: true
 ##### ДЕТСКАЯ Д  
-##### Увлажнитель Д        
+##### Свободная розетка       
     - service: mqtt.publish
       data_template:
         topic: "power/158d000114a1e1/today"
@@ -473,9 +473,8 @@
         topic: "power/158d00015751f4/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_158d00015751f4.state | float )|round(5)}}'
         retain: true
-
 ##### ДЕТСКАЯ Д  
-##### Увлажнитель Д  
+##### Свободная розетка   
     - service: mqtt.publish
       data_template:
         topic: "power/158d000114a1e1/lastmonth"
@@ -569,7 +568,7 @@
         payload: '{{ 0.0 }}'
         retain: true
 ##### ДЕТСКАЯ Д  
-##### Увлажнитель Д 
+##### Свободная розетка 
     - service: mqtt.publish
       data_template:
         topic: "power/158d000114a1e1/month"

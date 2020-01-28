@@ -1,0 +1,78 @@
+  - platform: template
+    sensors:
+      alex:
+        friendly_name: 'Алекс находится в - '
+        entity_picture_template: '/local/people/alex.jpg'
+        value_template: >-
+          {% if is_state('device_tracker.life360_alex','home')  
+             or is_state('binary_sensor.kn_bip_alex', 'on') 
+             or is_state('binary_sensor.gg_bip_alex', 'on') 
+             or is_state('binary_sensor.dd_bip_alex', 'on') 
+             or is_state('binary_sensor.da_bip_alex', 'on')  %}
+                Дом
+          {% else %}
+            {{ state_attr('device_tracker.life360_alex','address') }}
+          {% endif %}
+        icon_template: mdi:human-handsup
+        
+  - platform: template
+    sensors:
+      olga:
+        friendly_name: 'Оля находится в - '
+        entity_picture_template: '/local/people/olga.jpg'
+        value_template: >-
+          {% if is_state('device_tracker.life360_olga','home')  
+             or is_state('binary_sensor.kn_bip_olha', 'on') 
+             or is_state('binary_sensor.gg_bip_olha', 'on') 
+             or is_state('binary_sensor.dd_bip_olha', 'on') 
+             or is_state('binary_sensor.da_bip_olha', 'on')  %}
+                Дом
+          {% else %}
+            {{ state_attr('device_tracker.life360_olga','address') }}
+          {% endif %}
+        icon_template: mdi:human-female
+
+  - platform: template
+    sensors:
+      dima:
+        friendly_name: 'Дима находится в - '
+        entity_picture_template: '/local/people/dima.jpg'
+        value_template: >-
+          {% if is_state('device_tracker.life360_dima','home')  
+             or is_state('binary_sensor.kn_mi_band_4_dima', 'on') 
+             or is_state('binary_sensor.gg_mi_band_4_dima', 'on') 
+             or is_state('binary_sensor.dd_mi_band_4_dima', 'on') 
+             or is_state('binary_sensor.da_mi_band_4_dima', 'on')  %}
+                Дом
+          {% else %}
+            {{ state_attr('device_tracker.life360_dima','address') }}
+          {% endif %}
+        icon_template: mdi:human-handsdown
+        
+        
+  - platform: template
+    sensors:
+      360_alex_battery:
+        friendly_name: 'Алекс заряд смартфона - '
+        value_template: "{{ state_attr('device_tracker.life360_alex', 'battery') }}"
+        icon_template: mdi:battery
+        unit_of_measurement: '%'
+        entity_id: device_tracker.life360_alex
+
+  - platform: template
+    sensors:
+      360_olga_battery:
+        friendly_name: 'Ольга заряд смартфона - '
+        value_template: "{{ state_attr('device_tracker.life360_olga', 'battery') }}"
+        icon_template: mdi:battery
+        unit_of_measurement: '%'
+        entity_id: device_tracker.life360_olga
+
+  - platform: template
+    sensors:
+      360_dima_battery:
+        friendly_name: 'Дима заряд смартфона - '
+        value_template: "{{ state_attr('device_tracker.life360_dima', 'battery') }}"
+        icon_template: mdi:battery
+        unit_of_measurement: '%'
+        entity_id: device_tracker.life360_dima

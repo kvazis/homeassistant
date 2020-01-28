@@ -1,3 +1,23 @@
+- alias: 07_dd_heater
+  id: 'Режим обогрева детской Д'
+  initial_state: true
+  trigger:
+    - platform: time_pattern
+      minutes: '/5'
+    - platform: state
+      entity_id:
+        - binary_sensor.dd_heat
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {%- if states.binary_sensor.dd_heat.state == 'on' -%}
+          script.dd_home
+          {%- elif states.binary_sensor.dd_heat.state == 'off' -%}
+          script.dd_away
+          {%- endif -%}  
+
+
 - alias: 07_dd_hum_auto
   id: 'Увлажнение в детской Д'
   initial_state: true
@@ -19,9 +39,9 @@
       {% elif humidity < lo and states.binary_sensor.dd_hum.state == 'on' %}
         switch.turn_on
       {% else %}
-        switch.turn_{{states('switch.plug_158d000114a1e1') | lower}}
+        switch.turn_{{states('switch.0x00158d0001a2ccab_switch_left') | lower}}
       {% endif %}
-    entity_id: switch.plug_158d000114a1e1
+    entity_id: switch.0x00158d0001a2ccab_switch_left
     
 ## Предупреждение о недостатке воды
 - alias: 07_dd_hum_water_warning
@@ -30,14 +50,14 @@
   trigger:
 ## Падение мощности менее 10 Ватт
    - platform: numeric_state
-     entity_id: sensor.load_158d000114a1e1
+     entity_id: sensor.0x00158d0001a2ccab_power
      below: 10
      for:
        minutes: 1
   condition:
 ## Увлажнитель включен
      - condition: state
-       entity_id: switch.plug_158d000114a1e1
+       entity_id: switch.0x00158d0001a2ccab_switch_left
        state: 'on'
 ## Время работы
      - condition: state

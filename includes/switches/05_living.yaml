@@ -28,20 +28,52 @@
             
   - platform: template
     switches:
-      holiday_mode_gg:
+      living_holiday:
         friendly_name: "Гостиная, режим выходного дня"
-        value_template: "{{  is_state('binary_sensor.gg_holiday', 'on') }}"
+        value_template: "{{  is_state('binary_sensor.living_holiday', 'on') }}"
         turn_on:
           service: mqtt.publish
           data_template:
-            topic: "states/ggholiday"
+            topic: "states/living_holiday"
             payload_template: 'ON'
             retain: true 
         turn_off:
           service: mqtt.publish
           data_template:
-            topic: "states/ggholiday"
+            topic: "states/living_holiday"
             payload_template: 'OFF'
             retain: true 
         icon_template: >-
             mdi:account-switch
+
+      tv_samsung:
+        friendly_name: "ТВ Samsung"
+        value_template: "{{ states.sensor.load_158d00012896cb.state | float > 10 }}"
+        turn_on:
+          service: script.turn_on
+          data:
+            entity_id: script.samsung_tv
+        turn_off:
+          service: script.turn_on
+          data:
+            entity_id: script.samsung_tv
+            
+      gg_humidifier:
+        friendly_name: "Увлажнение и очистка"
+        value_template: "{{ is_state('fan.gg_humidifier', 'on') }}"
+        turn_on:
+          - service: homeassistant.turn_on
+            entity_id: 
+              - fan.gg_humidifier
+              - fan.gg_purifier
+          - service: fan.set_speed
+            entity_id: 
+              - fan.gg_humidifier
+              - fan.gg_purifier
+            data:
+                speed: Auto
+        turn_off:
+          - service: homeassistant.turn_off
+            entity_id: 
+              - fan.gg_humidifier
+              - fan.gg_purifier

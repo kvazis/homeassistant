@@ -37,3 +37,17 @@
         - service: switch.turn_on
           entity_id:
            - switch.plug_158d00030a6e78
+           
+  dd_home:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.dd_heater
+          preset_mode: none
+          
+  dd_away:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.dd_heater
+          preset_mode: away
