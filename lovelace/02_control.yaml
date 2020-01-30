@@ -194,7 +194,6 @@ cards:
               filter:
                 include:
                  - entity_id: sensor.load*
-                 - entity_id: sensor.*_power
                 exclude:
                  - state: '< 10.0'
                  - entity_id: sensor.load_total_energy

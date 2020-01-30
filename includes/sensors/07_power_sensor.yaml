@@ -1,39 +1,55 @@
-  - platform: integration
-    source: sensor.0x00158d0001a2ccab_power
-    name: 0x00158d0001a2ccab_int
-    unit_prefix: k
-    unit_time: h
-    unit: 'КВт*ч'
-    round: 3
+#### Выключатель Aqara Zero line - увлажнение и отопление
+  - platform: template
+    sensors:
+      load_158d0001a2ccab:
+        friendly_name: 'Детская Д, увлажнение и отопление'
+        value_template: "{{ (states('sensor.0x00158d0001a2ccab_power')|float)}}"
+        icon_template: mdi:flash
+        unit_of_measurement: 'Вт'
+        entity_id: sensor.0x00158d0001a2ccab_power
+        
+  - platform: mqtt
+    state_topic: "power/158d0001a2ccab/yesterday"
+    name: 'mqtt_power_yesterday_158d0001a2ccab'
+    unit_of_measurement: 'кВт⋅ч'
+        
+  - platform: mqtt
+    state_topic: "power/158d0001a2ccab/today"
+    name: 'mqtt_power_today_158d0001a2ccab'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/158d0001a2ccab/month"
+    name: 'mqtt_power_month_158d0001a2ccab'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/158d0001a2ccab/lastmonth"
+    name: 'mqtt_power_lastmonth_158d0001a2ccab'
+    unit_of_measurement: 'кВт⋅ч'
 
   - platform: template
     sensors:
-      money_day_0x00158d0001a2ccab:
-        friendly_name: "Стоимость за текущий день"
+      money_month_158d0001a2ccab:
+        friendly_name: "Стоимость за текущий месяц"
         unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.um_daily_0x00158d0001a2ccab_electicity.state | float * 1.68)|round(2) }}"
+        value_template: "{{ (states.sensor.mqtt_power_month_158d0001a2ccab.state | float * 1.68)|round(2) }}"
         icon_template: mdi:square-inc-cash 
     
   - platform: template
     sensors:
-      money_month_0x00158d0001a2ccab:
-        friendly_name: "Стоимость за текущий месяц"
+      money_lastmonth_158d0001a2ccab:
+        friendly_name: "Стоимость за прошлый месяц"
         unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.um_monthly_0x00158d0001a2ccab_electicity.state | float * 1.68)|round(2) }}"
+        value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d0001a2ccab.state | float * 1.68)|round(2) }}"
         icon_template: mdi:square-inc-cash 
-        
-  - platform: template
-    sensors:
-      money_year_0x00158d0001a2ccab:
-        friendly_name: "Стоимость за текущий год"
-        unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.um_yearly_0x00158d0001a2ccab_electicity.state | float * 1.68)|round(2) }}"
-        icon_template: mdi:square-inc-cash     
 
+
+#### Розетка Zigbee
   - platform: template
     sensors:
       load_158d000114a1e1:
-        friendly_name: 'Детская Д, розетка'
+        friendly_name: 'Резервная розетка'
         value_template: "{{ state_attr('switch.plug_158d000114a1e1', 'load_power') }}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
@@ -74,7 +90,9 @@
         unit_of_measurement: 'грн'
         value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d000114a1e1.state | float * 1.68)|round(2) }}"
         icon_template: mdi:square-inc-cash 
-        
+
+
+#### Розетка Zigbee - настольная лампа        
   - platform: template
     sensors:
       load_158d00030a6e78:

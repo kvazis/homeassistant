@@ -29,6 +29,26 @@
         icon_template: >-
             mdi:account-switch
             
+  - platform: template
+    switches:
+      dd_tracking:
+        friendly_name: "Детская Д, учитывать местоположение"
+        value_template: "{{  is_state('binary_sensor.dd_tracking', 'on') }}"
+        turn_on:
+          service: mqtt.publish
+          data_template:
+            topic: "states/dd_tracking"
+            payload_template: 'ON'
+            retain: true 
+        turn_off:
+          service: mqtt.publish
+          data_template:
+            topic: "states/dd_tracking"
+            payload_template: 'OFF'
+            retain: true 
+        icon_template: >-
+            mdi:map-marker
+            
       switch_07_table:
         friendly_name: "ДД Настольная лампа"
         value_template: "{{ states.sensor.load_158d00030a6e78.state | float > 5 }}"

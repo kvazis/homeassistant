@@ -50,11 +50,8 @@
         data:
           entity_id: climate.living1_heater
           preset_mode: away
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.living1_heater
+          temperature: 19
 
-          
-#   living_no_home:
-#     sequence:
-#       - service: climate.set_temperature
-#         data:
-#           entity_id: climate.living1_heater
-#           temperature: 19

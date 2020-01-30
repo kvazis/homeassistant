@@ -3,6 +3,7 @@ title: Расход электроэнергии
 icon: mdi:counter
 cards:
 
+
       - type: vertical-stack
         cards:
 
@@ -657,11 +658,8 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
-
-
       - type: vertical-stack
         cards:
-
 
         - type: custom:vertical-stack-in-card
           cards:            
@@ -730,12 +728,12 @@ cards:
           cards:  
            - type: markdown
              content: >
-                ## Увлажнитель Д
+                ## Детская Д, увлажнение и отопление
            - type: horizontal-stack
              cards:      
 
              - type: custom:canvas-gauge-card
-               entity: sensor.0x00158d0001a2ccab_power
+               entity: sensor.load_158d0001a2ccab
                card_height: 180
                gauge:
                   type: "radial-gauge"
@@ -757,38 +755,38 @@ cards:
              cards:
              - type: markdown
                content: >
-                  **Потребление** 
+                  **Текущий** 
              - type: markdown
                content: >
-                  **Стоимость** 
+                  **Прошедший** 
            - type: horizontal-stack
              cards:
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.um_daily_0x00158d0001a2ccab_electicity
+               - entity: sensor.mqtt_power_today_158d0001a2ccab
                  name: День
                  icon: mdi:counter
-               - entity: sensor.um_monthly_0x00158d0001a2ccab_electicity
+               - entity: sensor.mqtt_power_month_158d0001a2ccab
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.um_yearly_0x00158d0001a2ccab_electicity
-                 name: Год
-                 icon: mdi:counter
+               - entity: sensor.money_month_158d0001a2ccab
+                 name: Месяц
+                 icon: mdi:cash
 
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.money_day_0x00158d0001a2ccab
+               - entity: sensor.mqtt_power_yesterday_158d0001a2ccab
                  name: День
-                 icon: mdi:cash
-               - entity: sensor.money_month_0x00158d0001a2ccab
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d0001a2ccab
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d0001a2ccab
                  name: Месяц
                  icon: mdi:cash
-               - entity: sensor.money_year_0x00158d0001a2ccab
-                 name: Год
-                 icon: mdi:cash
-
+ 
 
         - type: custom:vertical-stack-in-card
           cards:  
@@ -912,6 +910,69 @@ cards:
                  name: Месяц
                  icon: mdi:counter
                - entity: sensor.money_lastmonth_158d00030a6e78
+                 name: Месяц
+                 icon: mdi:cash
+
+
+        - type: custom:vertical-stack-in-card
+          cards:  
+           - type: markdown
+             content: >
+                ## Детская А, отопление и рабочий стол
+           - type: horizontal-stack
+             cards:      
+
+             - type: custom:canvas-gauge-card
+               entity: sensor.load_158d0002d7bb2b
+               card_height: 180
+               gauge:
+                  type: "radial-gauge"
+                  title: Мощность Вт
+                  width: 220
+                  height: 200
+                  minValue: 0
+                  maxValue: 2500
+                  startAngle: 45
+                  ticksAngle: 270
+                  valueBox: true
+                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
+                  minorTicks: 4
+                  strokeTicks: true
+                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
+                  borders: false 
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_today_158d0002d7bb2b
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_month_158d0002d7bb2b
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_month_158d0002d7bb2b
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.mqtt_power_yesterday_158d0002d7bb2b
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.mqtt_power_lastmonth_158d0002d7bb2b
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.money_lastmonth_158d0002d7bb2b
                  name: Месяц
                  icon: mdi:cash
                

@@ -6,17 +6,16 @@
       minutes: '/5'
     - platform: state
       entity_id:
-        - binary_sensor.dd_heat
+        - sensor.dd_heat
   action:
     - service: script.turn_on
       data_template:
         entity_id: >-
-          {%- if states.binary_sensor.dd_heat.state == 'on' -%}
+          {%- if states.sensor.dd_heat.state == 'Включен' -%}
           script.dd_home
-          {%- elif states.binary_sensor.dd_heat.state == 'off' -%}
+          {%- elif states.sensor.dd_heat.state == 'Выключен' -%}
           script.dd_away
           {%- endif -%}  
-
 
 - alias: 07_dd_hum_auto
   id: 'Увлажнение в детской Д'

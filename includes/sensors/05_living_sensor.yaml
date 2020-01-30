@@ -1,3 +1,65 @@
+# Время работы дневных сценариев
+  - platform: template
+    sensors:
+      living_day_work:
+        friendly_name: "Режим дневных сценариев, Гостиная -"
+        value_template: >-
+          {%- if is_state('binary_sensor.weekday_time', 'on') and 
+            is_state('binary_sensor.workday_sensor', 'on') and 
+            is_state('binary_sensor.silent_mode', 'off')  and 
+            is_state('binary_sensor.living_holiday', 'off') -%} 
+            Включен
+          
+            {%- elif is_state('binary_sensor.weekend_time', 'on') and 
+            is_state('binary_sensor.workday_sensor', 'off') and 
+            is_state('binary_sensor.silent_mode', 'off')  and 
+            is_state('binary_sensor.living_holiday', 'off') -%} 
+            Включен
+         
+            {%- elif is_state('binary_sensor.weekend_time', 'on') and 
+            is_state('binary_sensor.workday_sensor', 'off') and 
+            is_state('binary_sensor.silent_mode', 'off')  and 
+            is_state('binary_sensor.living_holiday', 'on') -%} 
+            Включен
+           
+           {%- elif is_state('binary_sensor.weekend_time', 'on') and 
+            is_state('binary_sensor.workday_sensor', 'on') and 
+            is_state('binary_sensor.silent_mode', 'off')  and 
+            is_state('binary_sensor.living_holiday', 'on') -%} 
+            Включен    
+        
+            {%- else -%} 
+            Выключен
+            {%- endif %} 
+            
+        icon_template: >-
+          {% if is_state("sensor.living_day_work", "Включен") %}
+            mdi:check-circle
+          {% else %}
+            mdi:close-circle
+          {% endif %}
+
+# Режим отопления
+  - platform: template
+    sensors:
+      living_heat:
+        friendly_name: "Режим отопления, Гостиная -"
+        value_template: >-
+          {%- if is_state('sensor.alex', 'Дом') or 
+             is_state('sensor.olga', 'Дом') -%} 
+             Включен 
+          {%- elif is_state('binary_sensor.living_holiday', 'on') -%} 
+            Включен   
+            {%- else -%} 
+             Выключен
+            {%- endif %} 
+        icon_template: >-
+          {% if is_state("sensor.living_heat", "Включен") %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-off
+          {% endif %}
+
 # Mi Air monitor
   - platform: template
     sensors:

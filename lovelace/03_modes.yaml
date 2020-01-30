@@ -8,15 +8,11 @@ cards:
     
         - type: markdown
           content: >
-             **Режим сценариев**
+             **Режимы автоматизаций**
 
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: binary_sensor.weekday_work
-            icon: mdi:calendar-plus
-          - entity: binary_sensor.weekend_work
-            icon: mdi:calendar-minus
           - entity: switch.holiday_mode
 
         - type: custom:vertical-stack-in-card
@@ -27,10 +23,11 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: binary_sensor.living_heat
+            - entity: sensor.living_heat
             - entity: binary_sensor.living_hum
-            - entity: binary_sensor.living_day_work
+            - entity: sensor.living_day_work
             - entity: switch.living_holiday
+            - entity: switch.silent_mode
             
         - type: custom:vertical-stack-in-card
           cards:     
@@ -40,10 +37,11 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: binary_sensor.dd_heat
+            - entity: sensor.dd_heat
             - entity: binary_sensor.dd_hum
-            - entity: binary_sensor.dd_day_work
+            - entity: sensor.dd_day_work
             - entity: switch.dd_holiday
+            - entity: switch.dd_tracking
             
         - type: custom:vertical-stack-in-card
           cards:     
@@ -53,9 +51,9 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: binary_sensor.da_heat
+            - entity: sensor.da_heat
             - entity: binary_sensor.da_hum
-            - entity: binary_sensor.da_day_work
+            - entity: sensor.da_day_work
             - entity: switch.da_holiday
 
 
@@ -96,10 +94,17 @@ cards:
             - type: thermostat
               entity: climate.living1_heater
               name: Батарея 1
+
+          - type: horizontal-stack
+            cards: 
             
             - type: thermostat
               entity: climate.dd_heater
-              name: Батарея
+              name: Детская Д
+              
+            - type: thermostat
+              entity: climate.da_heater
+              name: Детская А
  
       - type: vertical-stack
         cards:

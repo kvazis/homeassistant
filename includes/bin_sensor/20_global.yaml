@@ -40,22 +40,3 @@
              or is_state('binary_sensor.da_mi_band_4_dima', 'on') 
              or is_state('binary_sensor.da_arc_sf', 'on')        
              or is_state('binary_sensor.da_mi_band_2_ns', 'on') }}        
-             
-# Время работы сценариев в будние дни
-  - platform: template
-    sensors:
-      weekday_work:
-        friendly_name: "Работа дневных сценариев в будние"
-        value_template: >-
-          {{ is_state('binary_sensor.weekday_time', 'on') 
-             and is_state('binary_sensor.holiday', 'off')
-             and is_state('binary_sensor.workday_sensor', 'on') }} 
-             
-# Время работы сценариев в выходные дни
-  - platform: template
-    sensors:
-      weekend_work:
-        friendly_name: "Работа дневных сценариев в выходные"
-        value_template: >-
-          {{ is_state('binary_sensor.weekend_time', 'on')  
-             and is_state('binary_sensor.workday_sensor', 'off') }} 

@@ -29,7 +29,7 @@
   - platform: template
     switches:
       living_holiday:
-        friendly_name: "Гостиная, режим выходного дня"
+        friendly_name: "Режим выходного дня, Гостиная -"
         value_template: "{{  is_state('binary_sensor.living_holiday', 'on') }}"
         turn_on:
           service: mqtt.publish
@@ -41,6 +41,26 @@
           service: mqtt.publish
           data_template:
             topic: "states/living_holiday"
+            payload_template: 'OFF'
+            retain: true 
+        icon_template: >-
+            mdi:account-switch
+            
+  - platform: template
+    switches:
+      silent_mode:
+        friendly_name: "Режим тишины, Гостиная -"
+        value_template: "{{  is_state('binary_sensor.silent_mode', 'on') }}"
+        turn_on:
+          service: mqtt.publish
+          data_template:
+            topic: "states/silent_mode"
+            payload_template: 'ON'
+            retain: true 
+        turn_off:
+          service: mqtt.publish
+          data_template:
+            topic: "states/silent_mode"
             payload_template: 'OFF'
             retain: true 
         icon_template: >-
@@ -59,7 +79,7 @@
             entity_id: script.samsung_tv
             
       gg_humidifier:
-        friendly_name: "Увлажнение и очистка"
+        friendly_name: "Увлажнение и очистка воздуха"
         value_template: "{{ is_state('fan.gg_humidifier', 'on') }}"
         turn_on:
           - service: homeassistant.turn_on

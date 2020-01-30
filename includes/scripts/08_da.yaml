@@ -1,3 +1,22 @@
+  da_home:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.da_heater
+          preset_mode: none
+          
+  da_away:
+    sequence:
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.da_heater
+          preset_mode: away
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.da_heater
+          temperature: 19    
+
+
   08_da_lightoff:
     sequence:
         - service: script.turn_off

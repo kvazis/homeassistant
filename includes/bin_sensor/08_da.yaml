@@ -6,7 +6,7 @@
         value_template: >-
           {{ is_state('binary_sensor.door_window_sensor_158d0001583c7b', 'off')  
              and is_state('binary_sensor.humidification', 'on') 
-             and is_state('binary_sensor.da_day_work', 'on') }}
+             and is_state('sensor.da_day_work', 'Включен') }}
         icon_template: >-
           {% if is_state("binary_sensor.da_hum", "on") %}
             mdi:water-percent
@@ -35,22 +35,3 @@
     state_topic: "states/da_holiday"
     payload_on: "ON"
     payload_off: "OFF"   
-    
-# Время работы сценариев в праздничные дни
-  - platform: template
-    sensors:
-      da_holiday_work:
-        friendly_name: "Работа дневных сценариев в праздники, Детская А"
-        value_template: >-
-          {{ is_state('binary_sensor.weekend_time', 'on')  
-             and is_state('binary_sensor.da_holiday', 'on') }} 
-
-# Время работы дневных сценариев
-  - platform: template
-    sensors:
-      da_day_work:
-        friendly_name: "Работа дневных сценариев, Детская А"
-        value_template: >-
-          {{ is_state('binary_sensor.weekday_work', 'on')
-             or is_state('binary_sensor.weekend_work', 'on')
-             or is_state('binary_sensor.da_holiday_work', 'on') }}   

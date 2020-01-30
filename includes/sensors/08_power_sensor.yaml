@@ -1,3 +1,51 @@
+#### Реле Aqara отопление и рабочий стол
+  - platform: template
+    sensors:
+      load_158d0002d7bb2b:
+        friendly_name: 'Детская А, отопление и рабочий стол'
+        value_template: "{{ (states('sensor.0x00158d0002d7bb2b_power')|float)}}"
+        icon_template: mdi:flash
+        unit_of_measurement: 'Вт'
+        entity_id: sensor.0x00158d0002d7bb2b_power
+        
+  - platform: mqtt
+    state_topic: "power/158d0002d7bb2b/yesterday"
+    name: 'mqtt_power_yesterday_158d0002d7bb2b'
+    unit_of_measurement: 'кВт⋅ч'
+        
+  - platform: mqtt
+    state_topic: "power/158d0002d7bb2b/today"
+    name: 'mqtt_power_today_158d0002d7bb2b'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/158d0002d7bb2b/month"
+    name: 'mqtt_power_month_158d0002d7bb2b'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/158d0002d7bb2b/lastmonth"
+    name: 'mqtt_power_lastmonth_158d0002d7bb2b'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: template
+    sensors:
+      money_month_158d0002d7bb2b:
+        friendly_name: "Стоимость за текущий месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_month_158d0002d7bb2b.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+  - platform: template
+    sensors:
+      money_lastmonth_158d0002d7bb2b:
+        friendly_name: "Стоимость за прошлый месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d0002d7bb2b.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+
+
+#### Розетка Zigbee Xiaomi - увлажнение
   - platform: template
     sensors:
       load_158d00010ec4b8:

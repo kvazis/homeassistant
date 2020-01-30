@@ -117,7 +117,9 @@
               (states.sensor.load_158d00015751f4.state | float) + 
               (states.sensor.load_158d0001d35bc0.state | float) + 
               (states.sensor.load_158d0001fa2934.state | float) + 
-              (states.sensor.load_158d00030a6e78.state | float) + 
+              (states.sensor.load_158d00030a6e78.state | float) +
+              (states.sensor.load_158d0001a2ccab.state | float) +
+              (states.sensor.load_158d0002d7bb2b.state | float) + 
               (states.sensor.load_bwshp2.state | float) + 
               (states.sensor.load_wifi_6port.state | float) + 
               (states.sensor.load_wifi_3usb.state | float) + 

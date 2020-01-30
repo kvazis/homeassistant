@@ -223,6 +223,32 @@ cards:
           entity: climate.dd_heater
           name: Батарея 
 
+        - type: custom:vertical-stack-in-card
+          cards: 
+
+          - type: horizontal-stack
+            cards: 
+
+            - type: entity-button
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.dd_home
+              entity: script.dd_home
+              icon: mdi:home-account
+              name: Дома
+         
+            - type: entity-button
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.dd_away
+              entity: script.dd_away
+              icon: mdi:home-remove
+              name: Не дома
+
       - type: vertical-stack
         cards:
 

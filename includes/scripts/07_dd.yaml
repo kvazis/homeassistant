@@ -51,3 +51,8 @@
         data:
           entity_id: climate.dd_heater
           preset_mode: away
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.dd_heater
+          temperature: 19          
+    

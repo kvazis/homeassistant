@@ -197,4 +197,4 @@ recorder: !include includes/recorder.yaml
 group: !include includes/groups.yaml
 rest_command: !include includes/rest_command.yaml
 notify: !include includes/notify.yaml
-utility_meter: !include includes/utility_meter.yaml
+# utility_meter: !include includes/utility_meter.yaml

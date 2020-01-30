@@ -1,8 +1,9 @@
-- alias: 00_ilife_a4
+- alias: 05_ilife_a4
+  id: Запуск робота пылесоса
   initial_state: true
   trigger:
     platform: time
-    at: '10:00:00'
+    at: '09:00:00'
   condition:
   - condition: time
     weekday:
@@ -10,28 +11,26 @@
       - wed
       - fri
   - condition: state
-    entity_id: binary_sensor.workday_sensor
-    state: 'on'
+    entity_id: sensor.living_day_work
+    state: 'Включен'
   action:
   - service: script.turn_on
     entity_id: script.ilife_a4
     
-- alias: 05_usb_cool_on
+- alias: 05_usb_cool_auto
+  id: Охлаждающая подставка
   initial_state: true
   trigger:
-   - platform: state
-     entity_id: binary_sensor.day_work
-     to: 'on'
+    - platform: time_pattern
+      minutes: '/5'
+    - platform: state
+      entity_id:
+        - sensor.living_day_work
   action:
-  - service: switch.turn_on
-    entity_id: switch.02_sonoff_basic_relay
-    
-- alias: 05_usb_cool_off
-  initial_state: true
-  trigger:
-   - platform: state
-     entity_id: binary_sensor.day_work
-     to: 'off'
-  action:
-  - service: switch.turn_off
+    service_template: >-
+      {%- if states.sensor.living_day_work.state == 'Включен' -%}
+          switch.turn_on
+      {%- elif states.sensor.living_day_work.state == 'Выключен' -%}
+          switch.turn_off
+      {%- endif -%}  
     entity_id: switch.02_sonoff_basic_relay

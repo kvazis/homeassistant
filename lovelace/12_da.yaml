@@ -186,6 +186,36 @@ cards:
           - entity: binary_sensor.da_hum
           - entity: sensor.da_hum_custom
           
+        - type: thermostat
+          entity: climate.da_heater
+          name: Батарея
+
+        - type: custom:vertical-stack-in-card
+          cards: 
+
+          - type: horizontal-stack
+            cards: 
+
+            - type: entity-button
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.da_home
+              entity: script.da_home
+              icon: mdi:home-account
+              name: Дома
+         
+            - type: entity-button
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.da_away
+              entity: script.da_away
+              icon: mdi:home-remove
+              name: Не дома
+          
       - type: vertical-stack
         cards:
 

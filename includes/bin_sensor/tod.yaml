@@ -50,6 +50,11 @@
     name: weekend_time
     after: '10:00'
     before: '22:00'
+    
+  - platform: tod
+    name: dd_away_time
+    after: '08:00'
+    before: '15:00'
 
   - platform: tod
     name: da_away_time

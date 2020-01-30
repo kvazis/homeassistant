@@ -1,11 +1,13 @@
 ############################################################################################################
-##### 30 сек расчет
-- alias: 00_power_counter
+
+- id: Энергомониторинг, расчет каждые 30 секунд
+  alias: 00_power_counter
   initial_state: true
   trigger:
     - platform: time_pattern
       seconds: '/30'
   action:
+
 ##### Общее потребление
     - service: mqtt.publish
       data_template:
@@ -34,6 +36,7 @@
         payload: '{{(states.sensor.mqtt_power_month_bw_relay.state | float +
                     (states.sensor.load_bwshp2.state | float /120000))|round(5)}}'
         retain: true
+
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
     - service: mqtt.publish
@@ -74,6 +77,7 @@
         payload: '{{(states.sensor.mqtt_power_month_158d0001d35bc0.state | float +
                     (states.sensor.load_158d0001d35bc0.state | float /120000))|round(5)}}'
         retain: true
+
 ##### ГОСТИНАЯ
 ##### Телевизор Samsung
     - service: mqtt.publish
@@ -88,7 +92,7 @@
         payload: '{{(states.sensor.mqtt_power_month_wifi_socket_usb.state | float +
                     (states.sensor.load_wifi_socket_usb.state | float /120000))|round(5)}}'
         retain: true
-##### Ноутбук Acer
+##### Гостиная телевизор
     - service: mqtt.publish
       data_template:
         topic: "power/158d00012896cb/today"
@@ -101,7 +105,7 @@
         payload: '{{(states.sensor.mqtt_power_month_158d00012896cb.state | float +
                     (states.sensor.load_158d00012896cb.state | float /120000))|round(5)}}'
         retain: true
-##### Ноутбук HP
+##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
         topic: "power/158d000153dd8e/today"
@@ -140,6 +144,7 @@
         payload: '{{(states.sensor.mqtt_power_month_wifi_3usb.state | float +
                     (states.sensor.load_wifi_3usb.state | float /120000))|round(5)}}'
         retain: true
+
 ##### ВАННАЯ 
 ##### Бойлер
     - service: mqtt.publish
@@ -154,7 +159,20 @@
         payload: '{{(states.sensor.mqtt_power_month_158d00015751f4.state | float +
                     (states.sensor.load_158d00015751f4.state | float /120000))|round(5)}}'
         retain: true
-##### ДЕТСКАЯ Д 
+
+##### ДЕТСКАЯ Д
+##### Выключатель Aqara Zero line - увлажнение и отопление
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001a2ccab/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d0001a2ccab.state | float +
+                    (states.sensor.load_158d0001a2ccab.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001a2ccab/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d0001a2ccab.state | float +
+                    (states.sensor.load_158d0001a2ccab.state | float /120000))|round(5)}}'
 ##### Свободная розетка
     - service: mqtt.publish
       data_template:
@@ -181,7 +199,21 @@
         payload: '{{(states.sensor.mqtt_power_month_158d00030a6e78.state | float +
                     (states.sensor.load_158d00030a6e78.state | float /120000))|round(5)}}'
         retain: true
-##### ДЕТСКАЯ А  
+
+##### ДЕТСКАЯ А 
+##### Реле Aqara отопление и рабочий стол
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0002d7bb2b/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d0002d7bb2b.state | float +
+                    (states.sensor.load_158d0002d7bb2b.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0002d7bb2b/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d0002d7bb2b.state | float +
+                    (states.sensor.load_158d0002d7bb2b.state | float /120000))|round(5)}}'
+        retain: true
 ##### Увлажнитель А
     - service: mqtt.publish
       data_template:
@@ -198,13 +230,15 @@
 
         
 ############################################################################################################
-##### Начало дня    
-- alias: 00_power_new_day
+
+- id: Энергомониторинг, начало нового дня
+  alias: 00_power_new_day
   initial_state: true
   trigger:
     - platform: time
       at: '00:00:05'
   action:
+
 ##### Запись данных за прошедший день
 ##### Общее потребление
     - service: mqtt.publish
@@ -212,6 +246,7 @@
         topic: "power/total_energy/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_total_energy.state | float )|round(5)}}'
         retain: true 
+
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
     - service: mqtt.publish
@@ -219,6 +254,7 @@
         topic: "power/bw_relay/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_bw_relay.state | float )|round(5)}}'
         retain: true 
+
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
     - service: mqtt.publish
@@ -238,6 +274,7 @@
         topic: "power/158d0001d35bc0/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_158d0001d35bc0.state | float )|round(5)}}'
         retain: true 
+
 ##### ГОСТИНАЯ
 ##### Телевизор Samsung
     - service: mqtt.publish
@@ -245,13 +282,13 @@
         topic: "power/wifi_socket_usb/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_wifi_socket_usb.state | float )|round(5)}}'
         retain: true 
-##### Ноутбук Acer
+##### Гостиная телевизор
     - service: mqtt.publish
       data_template:
         topic: "power/158d00012896cb/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_158d00012896cb.state | float )|round(5)}}'
         retain: true 
-##### Ноутбук HP
+##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
         topic: "power/158d000153dd8e/yesterday"
@@ -269,6 +306,7 @@
         topic: "power/wifi_3usb/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_wifi_3usb.state | float )|round(5)}}'
         retain: true
+
 ##### ВАННАЯ 
 ##### Бойлер
     - service: mqtt.publish
@@ -276,7 +314,14 @@
         topic: "power/158d00015751f4/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_158d00015751f4.state | float )|round(5)}}'
         retain: true
-##### ДЕТСКАЯ Д  
+
+##### ДЕТСКАЯ Д
+##### Выключатель Aqara Zero line - увлажнение и отопление
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001a2ccab/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d0001a2ccab.state | float )|round(5)}}'
+        retain: true
 ##### Свободная розетка
     - service: mqtt.publish
       data_template:
@@ -289,7 +334,14 @@
         topic: "power/158d00030a6e78/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_158d00030a6e78.state | float )|round(5)}}'
         retain: true
-##### ДЕТСКАЯ А  
+
+##### ДЕТСКАЯ А 
+##### Реле Aqara отопление и рабочий стол
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0002d7bb2b/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d0002d7bb2b.state | float )|round(5)}}'
+        retain: true'
 ##### Увлажнитель А
     - service: mqtt.publish
       data_template:
@@ -300,12 +352,14 @@
     - delay: 00:00:05
 
 ##### Обнуление данных текущего дня
+
 ##### Общее потребление
     - service: mqtt.publish
       data_template:
         topic: "power/total_energy/today"
         payload: '{{ 0.0 }}'
         retain: true
+
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
     - service: mqtt.publish
@@ -313,6 +367,7 @@
         topic: "power/bw_relay/today"
         payload: '{{ 0.0 }}'
         retain: true
+
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
     - service: mqtt.publish
@@ -332,6 +387,7 @@
         topic: "power/158d0001d35bc0/today"
         payload: '{{ 0.0 }}'
         retain: true        
+
 ##### ГОСТИНАЯ
 ##### Телевизор Samsung
     - service: mqtt.publish
@@ -339,13 +395,13 @@
         topic: "power/wifi_socket_usb/today"
         payload: '{{ 0.0 }}'
         retain: true  
-##### Ноутбук Acer
+##### Гостиная телевизор
     - service: mqtt.publish
       data_template:
         topic: "power/158d00012896cb/today"
         payload: '{{ 0.0 }}'
         retain: true
-##### Ноутбук HP
+##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
         topic: "power/158d000153dd8e/today"
@@ -363,6 +419,7 @@
         topic: "power/wifi_3usb/today"
         payload: '{{ 0.0 }}'
         retain: true
+
 ##### ВАННАЯ 
 ##### Бойлер
     - service: mqtt.publish
@@ -370,7 +427,14 @@
         topic: "power/158d00015751f4/today"
         payload: '{{ 0.0 }}'
         retain: true
-##### ДЕТСКАЯ Д  
+
+##### ДЕТСКАЯ Д
+##### Выключатель Aqara Zero line - увлажнение и отопление      
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001a2ccab/today"
+        payload: '{{ 0.0 }}'
+        retain: true
 ##### Свободная розетка       
     - service: mqtt.publish
       data_template:
@@ -383,7 +447,14 @@
         topic: "power/158d00030a6e78/today"
         payload: '{{ 0.0 }}'
         retain: true
-##### ДЕТСКАЯ А  
+
+##### ДЕТСКАЯ А 
+##### Реле Aqara отопление и рабочий стол       
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0002d7bb2b/today"
+        payload: '{{ 0.0 }}'
+        retain: true
 ##### Увлажнитель А        
     - service: mqtt.publish
       data_template:
@@ -392,8 +463,9 @@
         retain: true
         
 ############################################################################################################
-##### Начало месяца
-- alias: 00_power_new_month
+
+- id: Энергомониторинг, начало нового месяца
+  alias: 00_power_new_month
   initial_state: true
   trigger:
     - platform: time
@@ -402,6 +474,7 @@
     - condition: template
       value_template: '{{ now().day == 1 }}'
   action:
+
 ##### Запись данных за прошедший месяц
 ##### Общее потребление
     - service: mqtt.publish
@@ -409,6 +482,7 @@
         topic: "power/total_energy/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_total_energy.state | float )|round(5)}}'
         retain: true 
+
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
     - service: mqtt.publish
@@ -416,6 +490,7 @@
         topic: "power/bw_relay/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_bw_relay.state | float )|round(5)}}'
         retain: true 
+
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
     - service: mqtt.publish
@@ -435,6 +510,7 @@
         topic: "power/158d0001d35bc0/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_158d0001d35bc0.state | float )|round(5)}}'
         retain: true
+
 ##### ГОСТИНАЯ
 ##### Телевизор Samsung
     - service: mqtt.publish
@@ -442,13 +518,13 @@
         topic: "power/wifi_socket_usb/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_wifi_socket_usb.state | float )|round(5)}}'
         retain: true
-##### Ноутбук Acer
+##### Гостиная телевизор
     - service: mqtt.publish
       data_template:
         topic: "power/158d00012896cb/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_158d00012896cb.state | float )|round(5)}}'
         retain: true
-##### Ноутбук HP
+##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
         topic: "power/158d000153dd8e/lastmonth"
@@ -466,6 +542,7 @@
         topic: "power/wifi_3usb/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_wifi_3usb.state | float )|round(5)}}'
         retain: true
+
 ##### ВАННАЯ 
 ##### Бойлер
     - service: mqtt.publish
@@ -473,7 +550,14 @@
         topic: "power/158d00015751f4/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_158d00015751f4.state | float )|round(5)}}'
         retain: true
-##### ДЕТСКАЯ Д  
+
+##### ДЕТСКАЯ Д 
+#### Выключатель Aqara Zero line - увлажнение и отопление  
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001a2ccab/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d0001a2ccab.state | float )|round(5)}}'
+        retain: true
 ##### Свободная розетка   
     - service: mqtt.publish
       data_template:
@@ -487,7 +571,13 @@
         payload: '{{(states.sensor.mqtt_power_month_158d00030a6e78.state | float )|round(5)}}'
         retain: true
 
-##### ДЕТСКАЯ А  
+##### ДЕТСКАЯ А 
+##### Реле Aqara отопление и рабочий стол
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0002d7bb2b/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d0002d7bb2b.state | float )|round(5)}}'
+        retain: true
 ##### Увлажнитель А
     - service: mqtt.publish
       data_template:
@@ -497,12 +587,14 @@
 
     - delay: 00:00:05
 ##### Обнуление данных текущего месяца
-##### Стиральная машина
+
+##### Общее потребление
     - service: mqtt.publish
       data_template:
         topic: "power/total_energy/month"
         payload: '{{ 0.0 }}'
         retain: true
+
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
     - service: mqtt.publish
@@ -510,6 +602,7 @@
         topic: "power/bw_relay/month"
         payload: '{{ 0.0 }}'
         retain: true
+
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
     - service: mqtt.publish
@@ -529,6 +622,7 @@
         topic: "power/158d0001d35bc0/month"
         payload: '{{ 0.0 }}'
         retain: true
+
 ##### ГОСТИНАЯ
 ##### Телевизор Samsung
     - service: mqtt.publish
@@ -536,13 +630,13 @@
         topic: "power/wifi_socket_usb/month"
         payload: '{{ 0.0 }}'
         retain: true
-##### Ноутбук Acer
+##### Гостиная телевизор
     - service: mqtt.publish
       data_template:
         topic: "power/158d00012896cb/month"
         payload: '{{ 0.0 }}'
         retain: true
-##### Ноутбук HP
+##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
         topic: "power/158d000153dd8e/month"
@@ -560,6 +654,7 @@
         topic: "power/wifi_3usb/month"
         payload: '{{ 0.0 }}'
         retain: true
+
 ##### ВАННАЯ 
 ##### Бойлер
     - service: mqtt.publish
@@ -567,7 +662,14 @@
         topic: "power/158d00015751f4/month"
         payload: '{{ 0.0 }}'
         retain: true
-##### ДЕТСКАЯ Д  
+
+##### ДЕТСКАЯ Д
+##### Выключатель Aqara Zero line - увлажнение и отопление
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0001a2ccab/month"
+        payload: '{{ 0.0 }}'
+        retain: true
 ##### Свободная розетка 
     - service: mqtt.publish
       data_template:
@@ -580,7 +682,14 @@
         topic: "power/158d00030a6e78/month"
         payload: '{{ 0.0 }}'
         retain: true
-##### ДЕТСКАЯ А  
+
+##### ДЕТСКАЯ А
+##### Реле Aqara отопление и рабочий стол       
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d0002d7bb2b/month"
+        payload: '{{ 0.0 }}'
+        retain: true
 ##### Увлажнитель А        
     - service: mqtt.publish
       data_template:
