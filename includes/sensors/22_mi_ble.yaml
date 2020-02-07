@@ -1,0 +1,8 @@
+  - platform: mitemp_bt
+    rounding: True
+    decimals: 2
+    period: 60
+    log_spikes: False
+    use_median: False
+    active_scan: False
+    hci_interface: 0

@@ -368,9 +368,11 @@ cards:
                 show_header_toggle: false
               filter:
                 include:
-                 - entity_id: sensor.*moisture*
+                 - entity_id: sensor.mi_m_*
                 exclude:
                  - state: '> 20.0'
+                 - state: 'unknown'
+                 - state: 'unavailable'
 
 ############################ Колонка 4 ############################
       - type: vertical-stack
@@ -399,6 +401,7 @@ cards:
                  - entity_id: sensor.temperature_158d000159c7e6
                  - entity_id: sensor.da_bt_temperature
                  - entity_id: sensor.0x00158d0002d7bb2b_temperature
+                 - entity_id: sensor.0x00158d0001117040_temperature
                  - state: '> 18'
                  - state: 'unknown'
                  - state: 'unavailable'
@@ -427,6 +430,7 @@ cards:
                  - entity_id: sensor.temperature_158d000159c7e6
                  - entity_id: sensor.da_bt_temperature
                  - entity_id: sensor.0x00158d0002d7bb2b_temperature
+                 - entity_id: sensor.0x00158d0001117040_temperature
                  - state: '< 26'
                  - state: 'unknown'
                  - state: 'unavailable'

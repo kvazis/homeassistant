@@ -115,6 +115,11 @@ cards:
                 action: toggle
               name: Router fan
               icon: mdi:fan
+            - entity: switch.living_usb_fan
+              tap_action: 
+                action: toggle
+              name: Router fan 2
+              icon: mdi:fan
 
               
 
@@ -169,14 +174,22 @@ cards:
         - type: custom:vertical-stack-in-card
           cards: 
           - type: plant-status
-            entity: plant.dieffenbac
+            entity: plant.dieffenbac_ble
             name: Диффенбахия
           - type: plant-status
-            entity: plant.yucca
+            entity: plant.yucca_ble
             name: Юкка
           - type: plant-status
-            entity: plant.zamiokulkas
+            entity: plant.zamiokulkas_ble
             name: Замиокулькас
+          - type: horizontal-stack
+            cards: 
+              - type: plant-status
+                entity: plant.deep_purple_ble
+                name: Deep Purple
+              - type: plant-status
+                entity: plant.true_blue_ble
+                name: True Blue
 
       - type: vertical-stack
         cards:

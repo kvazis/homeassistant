@@ -44,6 +44,10 @@
         data:
           entity_id: climate.dd_heater
           preset_mode: none
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.dd_heater
+          temperature: 22   
           
   dd_away:
     sequence:

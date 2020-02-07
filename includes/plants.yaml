@@ -1,26 +1,63 @@
-  dieffenbac:
+#   dieffenbac:
+#     sensors:
+#       moisture: sensor.dieffenbac_moisture
+#     #   battery: sensor.dieffenbac_battery
+#       temperature: sensor.dieffenbac_temperature
+#       conductivity: sensor.dieffenbac_soil
+#       brightness: sensor.dieffenbac_illuminance
+#     min_moisture: 20
+    
+#   yucca:
+#     sensors:
+#       moisture: sensor.yucca_moisture
+#     #   battery: sensor.yucca_battery
+#       temperature: sensor.yucca_temperature
+#       conductivity: sensor.yucca_soil
+#       brightness: sensor.yucca_illuminance
+#     min_moisture: 20
+    
+#   zamiokulkas:
+#     sensors:
+#       moisture: sensor.zamiokulkas_moisture
+#     #   battery: sensor.zamiokulkas_battery
+#       temperature: sensor.zamiokulkas_temperature
+#       conductivity: sensor.zamiokulkas_soil
+#       brightness: sensor.zamiokulkas_illuminance
+#     min_moisture: 20
+    
+    
+  dieffenbac_ble:
     sensors:
-      moisture: sensor.dieffenbac_moisture
-    #   battery: sensor.dieffenbac_battery
-      temperature: sensor.dieffenbac_temperature
-      conductivity: sensor.dieffenbac_soil
-      brightness: sensor.dieffenbac_illuminance
+      moisture: sensor.mi_m_c47c8d6a0ef3
+      temperature: sensor.mi_t_c47c8d6a0ef3
+      conductivity: sensor.mi_c_c47c8d6a0ef3
+      brightness: sensor.mi_l_c47c8d6a0ef3
     min_moisture: 20
     
-  yucca:
+  yucca_ble:
     sensors:
-      moisture: sensor.yucca_moisture
-    #   battery: sensor.yucca_battery
-      temperature: sensor.yucca_temperature
-      conductivity: sensor.yucca_soil
-      brightness: sensor.yucca_illuminance
+      moisture: sensor.mi_m_c47c8d628a8a
+      temperature: sensor.mi_t_c47c8d628a8a
+      conductivity: sensor.mi_c_c47c8d628a8a
+      brightness: sensor.mi_l_c47c8d628a8a
     min_moisture: 20
     
-  zamiokulkas:
+  zamiokulkas_ble:
     sensors:
-      moisture: sensor.zamiokulkas_moisture
-    #   battery: sensor.zamiokulkas_battery
-      temperature: sensor.zamiokulkas_temperature
-      conductivity: sensor.zamiokulkas_soil
-      brightness: sensor.zamiokulkas_illuminance
+      moisture: sensor.mi_m_80eaca88b765
+      temperature: sensor.mi_t_80eaca88b765
+      conductivity: sensor.mi_c_80eaca88b765
+      brightness: sensor.mi_l_80eaca88b765
+    min_moisture: 20
+    
+  deep_purple_ble:
+    sensors:
+      moisture: sensor.mi_m_c47c8d6d1cf9
+      conductivity: sensor.mi_c_c47c8d6d1cf9
+    min_moisture: 20
+    
+  true_blue_ble:
+    sensors:
+      moisture: sensor.mi_m_c47c8d6d2c7e
+      conductivity: sensor.mi_c_c47c8d6d2c7e
     min_moisture: 20

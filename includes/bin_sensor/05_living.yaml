@@ -11,9 +11,25 @@
              and is_state('sensor.living_day_work', 'Включен') }}
         icon_template: >-
           {% if is_state("binary_sensor.living_hum", "on") %}
-            mdi:water-percent
+          mdi:water-percent
           {% else %}
-            mdi:air-humidifier
+          mdi:air-humidifier
+          {% endif %}
+          
+# Условия для включения отопления
+  - platform: template
+    sensors:
+      living_heat:
+        friendly_name: "Режим отопления, Гостиная -"
+        value_template: >-
+          {{ is_state('binary_sensor.door_window_sensor_158d000445206b', 'off')  
+             and is_state('binary_sensor.door_window_sensor_158d00013ed373', 'off')
+             and is_state('sensor.living_heat_work', 'Включен') }}
+        icon_template: >-
+          {% if is_state("binary_sensor.living_heat", "on") %}
+          mdi:radiator
+          {% else %}
+          mdi:radiator-off
           {% endif %}
 
 # Режим выходного дня
@@ -22,6 +38,13 @@
     state_topic: "states/living_holiday"
     payload_on: "ON"
     payload_off: "OFF"
+    
+# Вентилятор для роутера
+  - platform: mqtt
+    name: living_usb_fan
+    state_topic: "states/living_usb_fan"
+    payload_on: "ON"
+    payload_off: "OFF"    
     
 # Режим тишины
   - platform: mqtt

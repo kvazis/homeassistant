@@ -14,18 +14,16 @@
 # Reolink - RLC-411WS
 # Основной поток
 
-  - platform: generic
+  - platform: ffmpeg
     name: Reolink
-    still_image_url: !secret reolink1_url
-    stream_source: !secret reolink1_rtsp
+    input: !secret reolink1_rtsp
 
 # Reolink - RLC-411WS
 # Дополнительный поток
 
-  - platform: generic
+  - platform: ffmpeg
     name: Reolink_sub
-    still_image_url: !secret reolink1_url
-    stream_source: !secret reolink1_sub_rtsp
+    input: !secret reolink1_sub_rtsp
 
 # Reolink C2 Pro
 # Основной поток
@@ -62,18 +60,16 @@
 # Reolink E1 Pro
 # Основной поток
 
-  - platform: generic
+  - platform: ffmpeg
     name: Reolink4
-    still_image_url: !secret reolink4_url
-    stream_source: !secret reolink4_rtsp
-    
+    input: !secret reolink4_rtsp
+
 # Reolink E1 Pro
 # Дополнительный поток
 
-  - platform: generic
+  - platform: ffmpeg
     name: Reolink4_sub
-    still_image_url: !secret reolink4_url
-    stream_source: !secret reolink4_sub_rtsp
+    input: !secret reolink4_sub_rtsp
 
 # Hikvision HDR
 

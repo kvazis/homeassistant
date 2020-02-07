@@ -33,4 +33,6 @@
       {%- elif states.sensor.living_day_work.state == 'Выключен' -%}
           switch.turn_off
       {%- endif -%}  
-    entity_id: switch.02_sonoff_basic_relay
+    entity_id: 
+       - switch.02_sonoff_basic_relay
+       - switch.living_usb_fan

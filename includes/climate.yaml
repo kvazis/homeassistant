@@ -1,9 +1,9 @@
   - platform: generic_thermostat
     name: living1_heater
-    heater: switch.87874800dc4f22ec37b2
+    heater: switch.sonoff_l1_heater_relay
     target_sensor: sensor.05_mean_temperature
-    target_temp: 21
-    away_temp: 19
+    target_temp: 22
+    away_temp: 18
     min_temp: 16
     max_temp: 28
     ac_mode: false
@@ -16,11 +16,28 @@
     initial_hvac_mode: "heat"
     
   - platform: generic_thermostat
+    name: living2_heater
+    heater: switch.0x00158d000114a1e1_switch
+    target_sensor: sensor.05_mean_temperature
+    target_temp: 22
+    away_temp: 18
+    min_temp: 16
+    max_temp: 28
+    ac_mode: false
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      minutes: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat"    
+
+  - platform: generic_thermostat
     name: dd_heater
     heater: switch.0x00158d0001a2ccab_switch_right
     target_sensor: sensor.07_mean_temperature
-    target_temp: 21
-    away_temp: 19
+    target_temp: 22
+    away_temp: 18
     min_temp: 16
     max_temp: 28
     ac_mode: false
@@ -36,8 +53,8 @@
     name: da_heater
     heater: switch.0x00158d0002d7bb2b_switch_l2
     target_sensor: sensor.08_mean_temperature
-    target_temp: 21
-    away_temp: 19
+    target_temp: 22
+    away_temp: 18
     min_temp: 16
     max_temp: 28
     ac_mode: false

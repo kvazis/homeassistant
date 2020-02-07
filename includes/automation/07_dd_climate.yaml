@@ -6,14 +6,14 @@
       minutes: '/5'
     - platform: state
       entity_id:
-        - sensor.dd_heat
+        - binary_sensor.dd_heat
   action:
     - service: script.turn_on
       data_template:
         entity_id: >-
-          {%- if states.sensor.dd_heat.state == 'Включен' -%}
+          {%- if states.binary_sensor.dd_heat.state == 'on' -%}
           script.dd_home
-          {%- elif states.sensor.dd_heat.state == 'Выключен' -%}
+          {%- elif states.binary_sensor.dd_heat.state == 'off' -%}
           script.dd_away
           {%- endif -%}  
 

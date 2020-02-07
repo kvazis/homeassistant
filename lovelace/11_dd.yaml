@@ -100,10 +100,6 @@ cards:
               name: Колонка Xiaomi
               icon: mdi:speaker-bluetooth
               secondary_info: entity-id
-            - entity: switch.xiaomi_wifi_socket
-              name: Empty
-              icon: mdi:power-socket-eu
-              secondary_info: entity-id
 
       - type: vertical-stack
         cards:
@@ -217,7 +213,6 @@ cards:
           entities:
           - entity: input_number.humidity_level_dd
           - entity: binary_sensor.dd_hum
-          - entity: sensor.dd_hum_custom
 
         - type: thermostat
           entity: climate.dd_heater

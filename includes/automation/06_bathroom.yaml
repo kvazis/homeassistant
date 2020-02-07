@@ -3,12 +3,12 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: switch.wall_switch_right_158d0001117040
+   entity_id: switch.0x00158d0001117040_switch_right
    to: 'off'
   action:
   - delay: 00:00:03
   - service: switch.turn_on
-    entity_id: switch.wall_switch_right_158d0001117040
+    entity_id: switch.0x00158d0001117040_switch_right
 
 ## Автоматическая установка яркости, включение таймера
 - alias: 06_bathroom_light_bright
@@ -45,6 +45,10 @@
 - alias: 06_bathroom_light_on
   initial_state: true
   trigger:
+## Проводной выключатель
+  - platform: state
+    entity_id: sensor.0x00158d0001117040_click
+    to: 'right'
 ## Беспроводный выключатель
   - platform: event
     event_type: xiaomi_aqara.click
@@ -100,6 +104,10 @@
 - alias: 06_bathroom_light_off
   initial_state: true
   trigger:
+## Проводной выключатель
+  - platform: state
+    entity_id: sensor.0x00158d0001117040_click
+    to: 'right'
 ## Беспроводный выключатель
   - platform: event
     event_type: xiaomi_aqara.click
@@ -125,7 +133,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: switch.wall_switch_left_158d0001117040
+   entity_id: switch.0x00158d0001117040_switch_left
    to: 'on'
   action:
   - service: timer.start
@@ -136,7 +144,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: switch.wall_switch_left_158d0001117040
+   entity_id: switch.0x00158d0001117040_switch_left
    to: 'off'
   action:
   - service: timer.cancel
@@ -158,7 +166,7 @@
        click_type: single
   condition:
      - condition: state
-       entity_id: switch.wall_switch_left_158d0001117040
+       entity_id: switch.0x00158d0001117040_switch_left
        state: 'off'
      - condition: time
        after: '08:00:00'
@@ -167,7 +175,7 @@
   - service: timer.start
     entity_id: timer.bathroom
   - service: switch.turn_on
-    entity_id: switch.wall_switch_left_158d0001117040
+    entity_id: switch.0x00158d0001117040_switch_left
 
 ## Выключение вентиляции 
 - alias: 06_bathroom_vent_off
@@ -186,11 +194,11 @@
        click_type: single
   condition:
   - condition: state
-    entity_id: switch.wall_switch_left_158d0001117040
+    entity_id: switch.0x00158d0001117040_switch_left
     state: 'on'
   action:
   - service: switch.turn_off
-    entity_id: switch.wall_switch_left_158d0001117040
+    entity_id: switch.0x00158d0001117040_switch_left
   - service: timer.cancel
     entity_id: timer.bathroom
 

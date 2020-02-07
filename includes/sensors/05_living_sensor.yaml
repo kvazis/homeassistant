@@ -4,60 +4,63 @@
       living_day_work:
         friendly_name: "Режим дневных сценариев, Гостиная -"
         value_template: >-
-          {%- if is_state('binary_sensor.weekday_time', 'on') and 
-            is_state('binary_sensor.workday_sensor', 'on') and 
-            is_state('binary_sensor.silent_mode', 'off')  and 
-            is_state('binary_sensor.living_holiday', 'off') -%} 
-            Включен
-          
-            {%- elif is_state('binary_sensor.weekend_time', 'on') and 
-            is_state('binary_sensor.workday_sensor', 'off') and 
-            is_state('binary_sensor.silent_mode', 'off')  and 
-            is_state('binary_sensor.living_holiday', 'off') -%} 
-            Включен
-         
-            {%- elif is_state('binary_sensor.weekend_time', 'on') and 
-            is_state('binary_sensor.workday_sensor', 'off') and 
-            is_state('binary_sensor.silent_mode', 'off')  and 
-            is_state('binary_sensor.living_holiday', 'on') -%} 
-            Включен
-           
-           {%- elif is_state('binary_sensor.weekend_time', 'on') and 
-            is_state('binary_sensor.workday_sensor', 'on') and 
-            is_state('binary_sensor.silent_mode', 'off')  and 
-            is_state('binary_sensor.living_holiday', 'on') -%} 
-            Включен    
-        
-            {%- else -%} 
-            Выключен
-            {%- endif %} 
+          {%- if is_state('binary_sensor.weekday_time', 'on') 
+              and is_state('binary_sensor.workday_sensor', 'on') 
+              and is_state('binary_sensor.silent_mode', 'off')  
+              and is_state('binary_sensor.living_holiday', 'off') -%} 
             
+          Включен
+           
+          {%- elif is_state('binary_sensor.weekend_time', 'on') 
+              and  is_state('binary_sensor.workday_sensor', 'on') 
+              and  is_state('binary_sensor.silent_mode', 'off')  
+              and  is_state('binary_sensor.living_holiday', 'on') -%} 
+            
+          Включен   
+          
+          {%- elif is_state('binary_sensor.weekend_time', 'on') 
+              and is_state('binary_sensor.workday_sensor', 'off') 
+              and is_state('binary_sensor.silent_mode', 'off') -%} 
+        
+          Включен
+
+          {%- else -%} 
+ 
+          Выключен
+ 
+          {%- endif %} 
         icon_template: >-
           {% if is_state("sensor.living_day_work", "Включен") %}
-            mdi:check-circle
+          mdi:check-circle
           {% else %}
-            mdi:close-circle
+          mdi:close-circle
           {% endif %}
 
 # Режим отопления
   - platform: template
     sensors:
-      living_heat:
-        friendly_name: "Режим отопления, Гостиная -"
+      living_heat_work:
+        friendly_name: "Режим сценариев отопления, Гостиная -"
         value_template: >-
-          {%- if is_state('sensor.alex', 'Дом') or 
-             is_state('sensor.olga', 'Дом') -%} 
-             Включен 
-          {%- elif is_state('binary_sensor.living_holiday', 'on') -%} 
-            Включен   
-            {%- else -%} 
-             Выключен
-            {%- endif %} 
+          {%- if is_state('sensor.alex', 'Дом') 
+              or  is_state('sensor.olga', 'Дом') -%} 
+       
+          Включен 
+      
+          {%- elif is_state('binary_sensor.living_holiday', 'on') 
+              or is_state('binary_sensor.workday_sensor', 'off') -%} 
+          Включен   
+        
+          {%- else -%} 
+        
+          Выключен
+      
+          {%- endif %} 
         icon_template: >-
-          {% if is_state("sensor.living_heat", "Включен") %}
-            mdi:radiator
+          {% if is_state("sensor.living_heat_work", "Включен") %}
+          mdi:check-circle
           {% else %}
-            mdi:radiator-off
+          mdi:close-circle
           {% endif %}
 
 # Mi Air monitor
@@ -202,8 +205,6 @@
        - binary_sensor.switch_158d0001531698   
 # Гостиная, комод, квадратная
        - binary_sensor.switch_158d0001b86d2e 
-# Гостиная, стол, квадратная
-       - binary_sensor.switch_158d0001e8a244
 # Гостиная кубик
        - binary_sensor.cube_158d0001186d82
 # Гостиная, влажность, температура

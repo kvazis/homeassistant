@@ -18,3 +18,5 @@ secrets.yaml
 known_devices.yaml
 core.*
 *gitignore*
+core
+.sonoff.json

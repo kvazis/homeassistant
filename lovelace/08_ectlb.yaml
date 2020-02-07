@@ -260,12 +260,12 @@ cards:
             icon: mdi:hot-tub
 
           - type: entity-button 
-            entity: switch.wall_switch_right_158d0001117040
+            entity: switch.0x00158d0001117040_switch_right
             name: Питание люстры
             icon: mdi:power
 
           - type: entity-button 
-            entity: switch.wall_switch_left_158d0001117040
+            entity: switch.0x00158d0001117040_switch_left
             name: Вентиляция
             icon: mdi:fan
             

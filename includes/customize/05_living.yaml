@@ -53,19 +53,17 @@ switch.xiaomi_wifi_socket_usb_usb:
   friendly_name: USB
   device_class: plug  
   icon: mdi:usb
-switch.wall_switch_ln_right_158d0001a2ccab:
-  friendly_name: Зарядка ISDT
-  device_class: plug  
-  icon: mdi:battery
-switch.wall_switch_ln_left_158d0001a2ccab:
-  friendly_name: Блок питания Chuwi
-  device_class: plug  
-  icon: mdi:laptop
 
   
 ## Сенсоры
 sensor.illumination_34ce0088b039:
   friendly_name: Гостиная шлюз освещенность
+sensor.illumination_f0b429cc3813:
+  friendly_name: Гостиная шлюз 2 освещенность
+sensor.0x00158d0001e8a244_click:
+  friendly_name: Гостиная, стол, квадратная
+sensor.0x00158d0001e8a244_battery:
+  friendly_name: Гостиная, стол, квадратная
 binary_sensor.wall_switch_left_158d00013fc3bc:
   friendly_name: Гостиная вход левая
 binary_sensor.wall_switch_right_158d00013fc3bc:
@@ -82,8 +80,7 @@ binary_sensor.switch_158d0001531698:
   friendly_name: Гостиная, комод, круглая
 binary_sensor.switch_158d0001b86d2e:
   friendly_name: Гостиная, комод, квадратная
-binary_sensor.switch_158d0001e8a244:
-  friendly_name: Гостиная, стол, квадратная
+
 binary_sensor.cube_158d0001186d82:
   friendly_name: Гостиная кубик
   icon: mdi:cube-outline

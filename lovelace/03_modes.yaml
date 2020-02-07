@@ -23,11 +23,14 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: sensor.living_heat
-            - entity: binary_sensor.living_hum
-            - entity: sensor.living_day_work
             - entity: switch.living_holiday
             - entity: switch.silent_mode
+            - entity: sensor.living_day_work
+            - entity: sensor.living_heat_work
+            - entity: binary_sensor.living_hum
+            - entity: binary_sensor.living_heat
+
+
             
         - type: custom:vertical-stack-in-card
           cards:     
@@ -37,12 +40,13 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: sensor.dd_heat
-            - entity: binary_sensor.dd_hum
-            - entity: sensor.dd_day_work
             - entity: switch.dd_holiday
             - entity: switch.dd_tracking
-            
+            - entity: sensor.dd_day_work
+            - entity: sensor.dd_heat_work
+            - entity: binary_sensor.dd_hum
+            - entity: binary_sensor.dd_heat
+
         - type: custom:vertical-stack-in-card
           cards:     
           - type: markdown
@@ -51,12 +55,11 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: sensor.da_heat
-            - entity: binary_sensor.da_hum
-            - entity: sensor.da_day_work
             - entity: switch.da_holiday
-
-
+            - entity: sensor.da_day_work
+            - entity: sensor.da_heat_work
+            - entity: binary_sensor.da_hum
+            - entity: binary_sensor.da_heat
 
       - type: vertical-stack
         cards:
@@ -94,6 +97,10 @@ cards:
             - type: thermostat
               entity: climate.living1_heater
               name: Батарея 1
+              
+            - type: thermostat
+              entity: climate.living2_heater
+              name: Батарея 2
 
           - type: horizontal-stack
             cards: 
@@ -146,7 +153,6 @@ cards:
             - entity: sensor.07_mean_humidity
             - entity: input_number.humidity_level_dd
             - entity: switch.0x00158d0001a2ccab_switch_left
-            - entity: sensor.dd_hum_custom
 
           - type: markdown
             content: >
@@ -157,4 +163,3 @@ cards:
             - entity: sensor.08_mean_humidity
             - entity: input_number.humidity_level_da
             - entity: switch.plug_158d00010ec4b8
-            - entity: sensor.da_hum_custom 

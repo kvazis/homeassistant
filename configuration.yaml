@@ -65,6 +65,11 @@ tuya:
   username: !secret tuya_username
   password: !secret tuya_password
   country_code: 380
+  
+sonoff:
+  username: !secret sonoff_user
+  password: !secret sonoff_psw
+  reload: always 
 
 mqtt:
 #   broker: core-mosquitto
@@ -108,6 +113,9 @@ xiaomi_aqara:
     - mac: 78:11:DC:64:F4:C8
       key: !secret gateway4_api
       host: 192.168.0.83
+    - mac: F0:B4:29:CC:38:13
+      key: !secret gateway5_api
+      host: 192.168.0.84
 
 telegram_bot:
   - platform: polling

@@ -67,28 +67,28 @@
           entity_id: input_number.yeelight_ceiling4_7811dcab9a84_temp
           value: "5000"
 
-  05_gg_movie_on:
-    sequence:
-      - service: light.turn_off
-        entity_id:
-          - light.yeelight_05_ceiling1
-          - light.yeelight_05_ceiling2
-          - light.aqara_05_wall
-      - service: light.turn_on
-        entity_id: 
-          - light.yeelight_05_ceiling1_ambilight
-          - light.yeelight_05_ceiling2_ambilight
-          - light.yeelight_05_rgbtvbulb
-          - light.yeelight_05_bedside2
-        data_template:
-          brightness_pct: 50
-          rgb_color: [169, 153, 255]
+#   05_gg_movie_on:
+#     sequence:
+#       - service: light.turn_off
+#         entity_id:
+#           - light.yeelight_05_ceiling1
+#           - light.yeelight_05_ceiling2
+#           - light.aqara_05_wall
+#       - service: light.turn_on
+#         entity_id: 
+#           - light.yeelight_05_ceiling1_ambilight
+#           - light.yeelight_05_ceiling2_ambilight
+#           - light.yeelight_05_rgbtvbulb
+#           - light.yeelight_05_bedside2
+#         data_template:
+#           brightness_pct: 50
+#           rgb_color: [169, 153, 255]
           
-  05_gg_movie_off:
-    sequence:
-      - service: light.turn_off
-        entity_id:
-          - light.yeelight_05_ceiling1_ambilight
-          - light.yeelight_05_ceiling2_ambilight
-          - light.yeelight_05_rgbtvbulb
-          - light.yeelight_05_bedside2
+#   05_gg_movie_off:
+#     sequence:
+#       - service: light.turn_off
+#         entity_id:
+#           - light.yeelight_05_ceiling1_ambilight
+#           - light.yeelight_05_ceiling2_ambilight
+#           - light.yeelight_05_rgbtvbulb
+#           - light.yeelight_05_bedside2

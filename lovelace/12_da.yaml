@@ -83,7 +83,7 @@ cards:
             tap_action: 
               action: toggle
             icon: mdi:close-circle-outline
-          - entity: switch.08_alfawise_relay
+          - entity: switch.0x00158d0002d7bb2b_switch_l1
             name: Удлинитель
             tap_action: 
               action: toggle 
@@ -184,8 +184,7 @@ cards:
           entities:
           - entity: input_number.humidity_level_da
           - entity: binary_sensor.da_hum
-          - entity: sensor.da_hum_custom
-          
+
         - type: thermostat
           entity: climate.da_heater
           name: Батарея

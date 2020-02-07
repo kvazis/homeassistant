@@ -6,7 +6,7 @@
         value_template: >-
           {% if is_state('device_tracker.life360_alex','home')  
              or is_state('binary_sensor.kn_bip_alex', 'on') 
-             or is_state('binary_sensor.gg_bip_alex', 'on') 
+             or is_state('binary_sensor.gg_alex', 'on') 
              or is_state('binary_sensor.dd_bip_alex', 'on') 
              or is_state('binary_sensor.da_bip_alex', 'on')  %}
                 Дом
@@ -23,7 +23,7 @@
         value_template: >-
           {% if is_state('device_tracker.life360_olga','home')  
              or is_state('binary_sensor.kn_bip_olha', 'on') 
-             or is_state('binary_sensor.gg_bip_olha', 'on') 
+             or is_state('binary_sensor.gg_olha', 'on') 
              or is_state('binary_sensor.dd_bip_olha', 'on') 
              or is_state('binary_sensor.da_bip_olha', 'on')  %}
                 Дом
@@ -40,7 +40,7 @@
         value_template: >-
           {% if is_state('device_tracker.life360_dima','home')  
              or is_state('binary_sensor.kn_mi_band_4_dima', 'on') 
-             or is_state('binary_sensor.gg_mi_band_4_dima', 'on') 
+             or is_state('binary_sensor.gg_dima', 'on') 
              or is_state('binary_sensor.dd_mi_band_4_dima', 'on') 
              or is_state('binary_sensor.da_mi_band_4_dima', 'on')  %}
                 Дом

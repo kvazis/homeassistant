@@ -2,6 +2,16 @@
   purge_keep_days: 2
   include:
     entities:
+# Ноутбуки
+       - binary_sensor.notebook_acer
+       - binary_sensor.notebook_hp
+       - binary_sensor.notebook_sony
+       - binary_sensor.notebook_chuwi
+# Термостаты
+       - climate.living1_heater
+       - climate.living2_heater
+       - climate.dd_heater
+       - climate.da_heater  
 # Заряд
        - sensor.360_dima_battery
        - sensor.360_alex_battery

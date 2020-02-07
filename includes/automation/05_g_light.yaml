@@ -15,6 +15,10 @@
 - alias: 05_gg_cell_1_light
   initial_state: true
   trigger:
+## Квадратная кнопка на столе
+    - platform: state
+      entity_id: sensor.0x00158d0001e8a244_click
+      to: 'single'
 ## Квадратная кнопка на комоде
     - platform: event
       event_type: xiaomi_aqara.click
@@ -53,6 +57,10 @@
 - alias: 05_gg_cell_2_light
   initial_state: true
   trigger:
+## Квадратная кнопка на столе
+    - platform: state
+      entity_id: sensor.0x00158d0001e8a244_click
+      to: 'double'
 ## Квадратная кнопка на комоде
     - platform: event
       event_type: xiaomi_aqara.click
@@ -206,7 +214,7 @@
   action:
     service: script.turn_on
     entity_id: script.samsung_tv
-    
+
 ## Люстра на балконе вкл
 - alias: 05_gg_balkoon_light_on
   initial_state: true

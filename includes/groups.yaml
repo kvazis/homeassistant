@@ -3,6 +3,7 @@
     name: scenario
     entities:
       - climate.living1_heater
+      - climate.living2_heater
       - climate.dd_heater
       - climate.da_heater
       - automation.telegramm_command_code

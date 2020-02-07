@@ -4,64 +4,76 @@
       dd_day_work:
         friendly_name: "Режим дневных сценариев, Детская Д -"
         value_template: >-
-          {%- if is_state('binary_sensor.weekday_time', 'on') and 
-            is_state('binary_sensor.workday_sensor', 'on')  and 
-            is_state('binary_sensor.dd_holiday', 'off') -%} 
-            Включен
+          {%- if is_state('binary_sensor.weekday_time', 'on') 
+              and is_state('binary_sensor.workday_sensor', 'on')  
+              and is_state('binary_sensor.dd_holiday', 'off') -%} 
+
+          Включен
           
-            {%- elif is_state('binary_sensor.weekend_time', 'on') and 
-            is_state('binary_sensor.workday_sensor', 'off') and 
-            is_state('binary_sensor.dd_holiday', 'off') -%} 
-            Включен
-         
-            {%- elif is_state('binary_sensor.weekend_time', 'on') and 
-            is_state('binary_sensor.workday_sensor', 'off') and 
-            is_state('binary_sensor.dd_holiday', 'on') -%} 
-            Включен
-           
-           {%- elif is_state('binary_sensor.weekend_time', 'on') and 
-            is_state('binary_sensor.workday_sensor', 'on') and 
-            is_state('binary_sensor.dd_holiday', 'on') -%} 
-            Включен    
-        
-            {%- else -%} 
-            Выключен
-            {%- endif %} 
+          {%- elif is_state('binary_sensor.weekend_time', 'on') 
+              and  is_state('binary_sensor.workday_sensor', 'on') 
+              and  is_state('binary_sensor.dd_holiday', 'on') -%} 
+          
+          Включен
+          
+          {%- elif is_state('binary_sensor.weekend_time', 'on') 
+              and is_state('binary_sensor.workday_sensor', 'off') -%} 
+            
+          Включен
+
+          {%- else -%} 
+      
+          Выключен
+    
+          {%- endif %} 
             
         icon_template: >-
           {% if is_state("sensor.dd_day_work", "Включен") %}
-            mdi:check-circle
+          mdi:check-circle
           {% else %}
-            mdi:close-circle
+          mdi:close-circle
           {% endif %}
             
 # Режим отопления
   - platform: template
     sensors:
-      dd_heat:
-        friendly_name: "Режим отопления, Детская Д -"
+      dd_heat_work:
+        friendly_name: "Режим сценариев отопления, Детская Д -"
         value_template: >-
           {%- if is_state('sensor.dima', 'Дом') and 
-             is_state('binary_sensor.dd_tracking', 'on') -%} 
-             Включен 
+              is_state('binary_sensor.dd_tracking', 'on') -%} 
+      
+          Включен 
       
           {%- elif is_state('binary_sensor.kn_mi_band_4_dima', 'on') 
-             or is_state('binary_sensor.gg_mi_band_4_dima', 'on') 
-             or is_state('binary_sensor.dd_mi_band_4_dima', 'on') 
-             or is_state('binary_sensor.da_mi_band_4_dima', 'on')  %} 
-             Включен   
-          {%- elif is_state('binary_sensor.dd_away_time', 'off')  %} 
-             Включен             
-          {%- elif is_state('binary_sensor.dd_holiday', 'on') -%} 
-            Включен           
-            {%- else -%} 
-             Выключен
-            {%- endif %} 
+              or is_state('binary_sensor.gg_mi_band_4_dima', 'on') 
+              or is_state('binary_sensor.dd_mi_band_4_dima', 'on') 
+              or is_state('binary_sensor.da_mi_band_4_dima', 'on')  %} 
+      
+          Включен   
+  
+          {%- elif is_state('binary_sensor.dd_away_time', 'off') 
+              and is_state('binary_sensor.workday_sensor', 'on')  
+              and is_state('binary_sensor.dd_holiday', 'off') -%} 
+       
+          Включен             
+    
+          {%- elif is_state('binary_sensor.dd_holiday', 'on') 
+              or is_state('binary_sensor.workday_sensor', 'off') -%} 
+       
+          Включен
+
+          {%- else -%} 
+          
+          Выключен
+        
+          {%- endif %} 
+   
         icon_template: >-
           {% if is_state("sensor.dd_heat", "Включен") %}
-            mdi:radiator
+          mdi:check-circle
           {% else %}
-            mdi:radiator-off
+          mdi:close-circle
           {% endif %}
 
   - platform: template

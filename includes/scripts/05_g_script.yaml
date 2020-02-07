@@ -43,6 +43,19 @@
         data:
           entity_id: climate.living1_heater
           preset_mode: none
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.living1_heater
+          temperature: 22
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.living2_heater
+          preset_mode: none
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.living2_heater
+          temperature: 22          
+        
           
   living_away:
     sequence:
@@ -54,4 +67,13 @@
         data:
           entity_id: climate.living1_heater
           temperature: 19
+      - service: climate.set_preset_mode
+        data:
+          entity_id: climate.living2_heater
+          preset_mode: away
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.living2_heater
+          temperature: 19          
+         
 

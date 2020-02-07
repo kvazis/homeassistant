@@ -93,39 +93,16 @@ cards:
                 entities:
                  - entity: binary_sensor.kn_state
                    name: Состояние - 
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.kn_bip_alex
-                   name: Alex
-                   icon: mdi:watch-variant
-                 - entity: binary_sensor.kn_bip_olha
-                   name: Olha
-                   icon: mdi:watch-variant
-                 - entity: binary_sensor.kn_mi_band_4_dima
-                   name: Dima 
-                   icon: mdi:bluetooth-connect
-                 - entity: binary_sensor.kn_arc_sf                   
-                   name: SF
-                   icon: mdi:bluetooth-connect   
-                 - entity: binary_sensor.kn_mi_band_2_ns
-                   name: NS
-                   icon: mdi:bluetooth-connect
-              - type: glance
-                show_state: true
-                show_name: false
-                entities:
-                 - entity: sensor.kn_bip_alex_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.kn_bip_olha_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.kn_mi_band_4_dima_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.kn_arc_sf_rssi  
-                   icon: mdi:signal-variant
-                 - entity: sensor.kn_mi_band_2_ns_rssi
-                   icon: mdi:signal-variant
-
+              - type: custom:auto-entities
+                show_empty: false
+                card:
+                  type: entities
+                  show_header_toggle: false
+                filter:
+                  include:
+                   - entity_id: sensor.kn*rssi
+                  exclude:
+                   - state: 'unknown'
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -137,38 +114,16 @@ cards:
                 entities:
                  - entity: binary_sensor.gg_state
                    name: Состояние - 
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.gg_bip_alex
-                   name: Alex
-                   icon: mdi:watch-variant
-                 - entity: binary_sensor.gg_bip_olha
-                   name: Olha
-                   icon: mdi:watch-variant
-                 - entity: binary_sensor.gg_mi_band_4_dima
-                   name: Dima
-                   icon: mdi:bluetooth-connect
-                 - entity: binary_sensor.gg_arc_sf                   
-                   name: SF
-                   icon: mdi:bluetooth-connect                   
-                 - entity: binary_sensor.gg_mi_band_2_ns
-                   name: NS
-                   icon: mdi:bluetooth-connect
-              - type: glance
-                show_state: true
-                show_name: false
-                entities:
-                 - entity: sensor.gg_bip_alex_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.gg_bip_olha_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.gg_mi_band_4_dima_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.gg_arc_sf_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.gg_mi_band_2_ns_rssi
-                   icon: mdi:signal-variant
+              - type: custom:auto-entities
+                show_empty: false
+                card:
+                  type: entities
+                  show_header_toggle: false
+                filter:
+                  include:
+                   - entity_id: sensor.gg*rssi
+                  exclude:
+                   - state: 'unknown'
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -180,38 +135,16 @@ cards:
                 entities:
                  - entity: binary_sensor.dd_state
                    name: Состояние -                   
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.dd_bip_alex
-                   name: Alex
-                   icon: mdi:watch-variant
-                 - entity: binary_sensor.dd_bip_olha
-                   name: Olha
-                   icon: mdi:watch-variant
-                 - entity: binary_sensor.dd_mi_band_4_dima
-                   name: Dima
-                   icon: mdi:bluetooth-connect
-                 - entity: binary_sensor.dd_arc_sf                   
-                   name: SF
-                   icon: mdi:bluetooth-connect
-                 - entity: binary_sensor.dd_mi_band_2_ns
-                   name: NS
-                   icon: mdi:bluetooth-connect
-              - type: glance
-                show_state: true
-                show_name: false
-                entities:
-                 - entity: sensor.dd_bip_alex_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.dd_bip_olha_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.dd_mi_band_4_dima_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.dd_arc_sf_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.dd_mi_band_2_ns_rssi
-                   icon: mdi:signal-variant
+              - type: custom:auto-entities
+                show_empty: false
+                card:
+                  type: entities
+                  show_header_toggle: false
+                filter:
+                  include:
+                   - entity_id: sensor.dd*rssi
+                  exclude:
+                   - state: 'unknown'
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -223,38 +156,16 @@ cards:
                 entities:
                  - entity: binary_sensor.da_state
                    name: Состояние -                   
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.da_bip_alex
-                   name: Alex
-                   icon: mdi:watch-variant
-                 - entity: binary_sensor.da_bip_olha
-                   name: Olha
-                   icon: mdi:watch-variant
-                 - entity: binary_sensor.da_mi_band_4_dima
-                   name: Dima
-                   icon: mdi:bluetooth-connect
-                 - entity: binary_sensor.da_arc_sf                   
-                   name: SF
-                   icon: mdi:bluetooth-connect
-                 - entity: binary_sensor.da_mi_band_2_ns
-                   name: NS
-                   icon: mdi:bluetooth-connect
-              - type: glance
-                show_state: true
-                show_name: false
-                entities:
-                 - entity: sensor.da_bip_alex_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.da_bip_olha_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.da_mi_band_4_dima_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.da_arc_sf_rssi
-                   icon: mdi:signal-variant
-                 - entity: sensor.da_mi_band_2_ns_rssi
-                   icon: mdi:signal-variant
+              - type: custom:auto-entities
+                show_empty: false
+                card:
+                  type: entities
+                  show_header_toggle: false
+                filter:
+                  include:
+                   - entity_id: sensor.da*rssi
+                  exclude:
+                   - state: 'unknown'
 
       - type: vertical-stack
         cards:
@@ -264,97 +175,77 @@ cards:
                **Network device Zone**
 
           - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **Home Zone**
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.nas_dlink
-                 - entity: binary_sensor.printer
+            cards: 
+            - type: markdown
+              content: >
+                  **Ноутбуки в сети**
 
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.notebook*
+                exclude:
+                 - state: 'off'
+                   options:
+                      secondary_info: last-changed
+                      
           - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **Media Zone**
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.tv_gg
-                 - entity: binary_sensor.tv_kn
-                 - entity: binary_sensor.tvbox_gg
-                 - entity: binary_sensor.tvbox_kn
+            cards: 
+            - type: markdown
+              content: >
+                  **Отвалившиеся HA instanse**
 
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.hainst*
+                exclude:
+                 - state: 'on'
+                   options:
+                      secondary_info: last-changed
+                      
           - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **Computer Zone**
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.notebook_acer
-                 - entity: binary_sensor.notebook_hp
-                 - entity: binary_sensor.notebook_sony
-                 - entity: binary_sensor.notebook_chuwi
+            cards: 
+            - type: markdown
+              content: >
+                  **Отвалившиеся Zigbee gateway**
 
-
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.gateway*
+                exclude:
+                 - state: 'on'
+                   options:
+                      secondary_info: last-changed
+                      
           - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **Mini server zone**
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.hainst_main
-                   icon: mdi:raspberry-pi
-                 - entity: binary_sensor.hainst_reserve
-                 - entity: binary_sensor.hainst_test
-                   icon: mdi:raspberry-pi
-                 - entity: binary_sensor.hainst_test2
+            cards: 
+            - type: markdown
+              content: >
+                  **Отвалившиеся камеры**
 
-                 
-             
-
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **Gateway zone**
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.gateway_da
-                 - entity: binary_sensor.gateway_dd
-                 - entity: binary_sensor.gateway_gg
-                 - entity: binary_sensor.gateway_kn
-
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **Ip cam zone**
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.camera_xiaofang
-                 - entity: binary_sensor.camera_reolink_411
-                 - entity: binary_sensor.camera_reolink_c2
-                 - entity: binary_sensor.camera_reolink_410
-
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **Controler zone**
-              - type: glance
-                show_state: false
-                entities:
-                 - entity: binary_sensor.irbase_kitchen
-                 - entity: binary_sensor.irbase_gg
-                 - entity: binary_sensor.airmonitor_gg
-
-                   
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - entity_id: binary_sensor.camera*
+                exclude:
+                 - state: 'on'
+                   options:
+                      secondary_info: last-changed
