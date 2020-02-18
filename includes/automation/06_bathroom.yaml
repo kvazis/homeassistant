@@ -1,14 +1,17 @@
 ## Возобновление питания на выключателе люстры
 - alias: 06_bathroom_cell_power
   initial_state: true
-  trigger:       
-   platform: state
-   entity_id: switch.0x00158d0001117040_switch_right
-   to: 'off'
+  trigger:
+    - platform: time_pattern
+      minutes: '/1'
+  condition:
+    - condition: state
+      entity_id: switch.0x00158d0001117040_switch_right
+      state: 'off'
   action:
-  - delay: 00:00:03
-  - service: switch.turn_on
-    entity_id: switch.0x00158d0001117040_switch_right
+   - service: switch.turn_on
+     entity_id: switch.0x00158d0001117040_switch_right
+
 
 ## Автоматическая установка яркости, включение таймера
 - alias: 06_bathroom_light_bright

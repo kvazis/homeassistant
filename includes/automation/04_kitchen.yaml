@@ -6,11 +6,11 @@
       minutes: '/1'
   condition:
     - condition: state
-      entity_id: switch.plug_158d0001fa2934
+      entity_id: switch.0x00158d0001fa2934_switch
       state: 'off'
   action:
    - service: switch.turn_on
-     entity_id: switch.plug_158d0001fa2934
+     entity_id: switch.0x00158d0001fa2934_switch
      
 ## Включение люстры
 - alias: 04_kn_ceiling

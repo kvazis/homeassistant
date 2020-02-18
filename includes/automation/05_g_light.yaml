@@ -220,11 +220,9 @@
   initial_state: true
   trigger:
 ## Выключатель на входе на балкон
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_158d00010b5aee
-      click_type: single 
+  - platform: state
+    entity_id: sensor.0x00158d00010b5aee_click
+    to: 'single' 
   - platform: event
     event_type: timer.started
     event_data:
@@ -249,11 +247,9 @@
   initial_state: true
   trigger:
 ## Выключатель на входе на балкон
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_158d00010b5aee
-      click_type: single  
+  - platform: state
+    entity_id: sensor.0x00158d00010b5aee_click
+    to: 'single' 
   - platform: event
     event_type: timer.finished
     event_data:

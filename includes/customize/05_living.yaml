@@ -16,13 +16,16 @@ light.aqara_05_wall:
   friendly_name: Гостиная свет стена
   icon: mdi:track-light
 light.yeelight_05_bedside2:
-  friendly_name: Гостиная, ночник 2
+  friendly_name: Гостиная, ночник
   icon: mdi:lighthouse
 light.yeelight_05_rgbtvbulb:
   friendly_name: Гостиная ТВ подсветка
   icon: mdi:lightbulb
 light.gateway_light_34ce0088b039:
-  friendly_name: Гостиная шлюз свет
+  friendly_name: Гостиная шлюз 1
+  icon: mdi:star-circle-outline
+light.gateway_light_f0b429cc3813:
+  friendly_name: Гостиная шлюз 2
   icon: mdi:star-circle-outline
 light.yeelight_05_table:
   friendly_name: Гостиная настольная лампа
@@ -33,12 +36,21 @@ switch.wall_switch_left_158d00015723f1:
 switch.wall_switch_right_158d00015723f1:
   friendly_name: Гостиная, питание люстра 1
   icon: mdi:power
-switch.plug_158d00012896cb:
+switch.0x00158d00012896cb_switch:
   friendly_name: Гостиная, питание телевизора
   device_class: plug  
   icon: mdi:power
-switch.plug_158d000153dd8e:
-  friendly_name: Удлинитель - гостиная, стол
+  
+switch.0x04cf8cdf3c764e0a_switch:
+  friendly_name: Гостиная стол удлинитель
+  device_class: plug  
+  icon: mdi:power
+switch.0x00158d000114a1e1_switch:
+  friendly_name: Гостиная отопление батарея 2
+  device_class: plug  
+  icon: mdi:power
+switch.0x00158d000153dd8e_switch:
+  friendly_name: Zigbee розетка, лампа
   device_class: plug  
   icon: mdi:power
 switch.wifi_6port:
@@ -115,16 +127,20 @@ binary_sensor.motion_sensor_158d000449b773:
   friendly_name: Гостиная, балкон движение
 sensor.illumination_158d000449b773:
   friendly_name: Гостиная, балкон освещенность
-binary_sensor.wall_switch_158d00010b5aee:
+sensor.0x00158d00010b5aee_click:
   friendly_name: Балкон выключатель
-sensor.humidity_158d0001a4b9da:
+sensor.0x00158d00010b5aee_battery:
+  friendly_name: Балкон выключатель
+sensor.0x00158d0001a4b9da_humidity:
   friendly_name: Гостиная, балкон влажность
   icon: mdi:water-percent
-sensor.pressure_158d0001a4b9da:
+sensor.0x00158d0001a4b9da_pressure:
   friendly_name: Гостиная, балкон давление
-sensor.temperature_158d0001a4b9da:
+sensor.0x00158d0001a4b9da_temperature:
   friendly_name: Гостиная, балкон температура
   icon: mdi:temperature-celsius
+sensor.0x00158d0001a4b9da_battery:
+  friendly_name: Гостиная, балкон климат
 binary_sensor.door_window_sensor_158d0001a2f5f7:
   friendly_name: Гостиная, балкон окно
   device_class: window 

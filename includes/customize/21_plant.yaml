@@ -1,49 +1,51 @@
 ## Растения
-sensor.dieffenbac_moisture:
+sensor.mi_m_c47c8d6a0ef3:
   friendly_name: Диффенбахия влажность почвы
-sensor.dieffenbac_soil:
+sensor.mi_c_c47c8d6a0ef3:
   friendly_name: Диффенбахия фертильность почвы
-sensor.dieffenbac_temperature:
+sensor.mi_t_c47c8d6a0ef3:
   friendly_name: Диффенбахия температура
   icon: mdi:temperature-celsius
-sensor.dieffenbac_illuminance:
+sensor.mi_l_c47c8d6a0ef3:
   friendly_name: Диффенбахия уровень освещенности
-# sensor.dieffenbac_battery:
-#   friendly_name: Диффенбахия батарейка
 
-sensor.yucca_moisture:
+sensor.mi_m_c47c8d628a8a:
   friendly_name: Юкка влажность почвы
-sensor.yucca_soil:
+sensor.mi_c_c47c8d628a8a:
   friendly_name: Юкка фертильность почвы
-sensor.yucca_temperature:
+sensor.mi_t_c47c8d628a8a:
   friendly_name: Юкка температура
   icon: mdi:temperature-celsius
-sensor.yucca_illuminance:
+sensor.mi_l_c47c8d628a8a:
   friendly_name: Юкка уровень освещенности
-sensor.yucca_battery:
-  friendly_name: Юкка батарейка
-  
-sensor.zamiokulkas_moisture:
+
+sensor.mi_m_80eaca88b765:
   friendly_name: Замиокулькас влажность почвы
-sensor.zamiokulkas_soil:
+sensor.mi_c_80eaca88b765:
   friendly_name: Замиокулькас фертильность почвы
-sensor.zamiokulkas_temperature:
+sensor.mi_t_80eaca88b765:
   friendly_name: Замиокулькас температура
   icon: mdi:temperature-celsius
-sensor.zamiokulkas_illuminance:
+sensor.mi_l_80eaca88b765:
   friendly_name: Замиокулькас уровень освещенности
-sensor.zamiokulkas_battery:
-  friendly_name: Замиокулькас батарейка
 
-# sensor.deep_purple_battery:
-#   friendly_name: Deep Purple батарейка
+sensor.mi_m_c47c8d6d1cf9:
+  friendly_name: Deep Purple влажность почвы
+sensor.mi_c_c47c8d6d1cf9:
+  friendly_name: Deep Purple фертильность почвы
+  
+sensor.mi_m_c47c8d6d2c7e:
+  friendly_name: True Blue влажность почвы
+sensor.mi_c_c47c8d6d2c7e:
+  friendly_name: True Blue фертильность почвы
 
-# sensor.true_blue_battery:
-#   friendly_name: Trueblue батарейка
-
-plant.dieffenbac:
+plant.dieffenbac_ble:
   friendly_name: Диффенбахия
-plant.yucca:
+plant.yucca_ble:
   friendly_name: Юкка
-plant.zamiokulkas:
+plant.zamiokulkas_ble:
   friendly_name: Замиокулькас
+plant.deep_purple_ble:
+  friendly_name: Deep Purple
+plant.true_blue_ble:
+  friendly_name: True Blue

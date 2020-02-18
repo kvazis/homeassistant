@@ -61,11 +61,9 @@
   initial_state: true
   trigger:
 ## Квадратная датчик вибрации
-  - platform: event
-    event_type: xiaomi_aqara.movement
-    event_data:
-      entity_id: binary_sensor.vibration_158d0002a4f77e
-      click_type: vibrate
+    - platform: state
+      entity_id: sensor.0x00158d0002a4f77e_action
+      to: 'vibration'
   condition:
     - condition: state
       entity_id: light.yeelight_03_ceiling

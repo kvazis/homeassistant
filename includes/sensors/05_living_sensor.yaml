@@ -211,13 +211,9 @@
        - sensor.humidity_158d00015aebb6
 # Гостиная, окно
        - binary_sensor.door_window_sensor_158d00013ed373 
-# Выключатель на входе на балкон
-       - binary_sensor.wall_switch_158d00010b5aee
 # Гостиная, балкон дверь
        - binary_sensor.door_window_sensor_158d000445206b
 # Гостиная, балкон движение
        - binary_sensor.motion_sensor_158d000449b773  
-# Гостиная, балкон влажность, температура
-       - sensor.humidity_158d0001a4b9da 
 # Гостиная, балкон окно
        - binary_sensor.door_window_sensor_158d0001a2f5f7

@@ -56,8 +56,8 @@
        - sensor.02_toilet_lywsd02_humidity
        - sensor.temperature_158d0001dcd47e
        - sensor.humidity_158d0001dcd47e
-       - sensor.temperature_158d0001581109
-       - sensor.humidity_158d0001581109
+       - sensor.0x00158d0001581109_temperature
+       - sensor.0x00158d0001581109_humidity
        - sensor.temperature_158d000171ffde
        - sensor.humidity_158d000171ffde
        - sensor.pressure_mmhg_158d000171ffde
@@ -89,4 +89,5 @@
        - sensor.illumination_34ce0088b039
        - sensor.illumination_7811dc64f4c8
        - sensor.illumination_f0b429cc1f11
+       - sensor.illumination_f0b429cc3813
        

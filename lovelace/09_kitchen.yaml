@@ -100,7 +100,7 @@ cards:
               icon: mdi:power
 
             - type: entity-button
-              entity: switch.plug_158d0001fa2934
+              entity: switch.0x00158d0001fa2934_switch
               name: Холодильник, питание
               icon: mdi:power
 
@@ -125,7 +125,7 @@ cards:
           cards:
 
            - type: custom:canvas-gauge-card
-             entity: sensor.temperature_158d0001581109
+             entity: sensor.0x00158d0001581109_temperature
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -144,7 +144,7 @@ cards:
                borders: false
 
            - type: custom:canvas-gauge-card
-             entity: sensor.humidity_158d0001581109
+             entity: sensor.0x00158d0001581109_humidity
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -206,7 +206,7 @@ cards:
           cards:
             
            - type: custom:canvas-gauge-card
-             entity: sensor.temperature_158d000171ffde
+             entity: sensor.0x00158d000171ffde_temperature
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -225,7 +225,7 @@ cards:
                borders: false
 
            - type: custom:canvas-gauge-card
-             entity: sensor.humidity_158d000171ffde
+             entity: sensor.0x00158d000171ffde_humidity
              card_height: 180
              gauge:
                type: "radial-gauge"

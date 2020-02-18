@@ -1,0 +1,10 @@
+  smartmi_mode:
+    name: Humidifier
+    options:
+      - off
+      - silent
+      - medium
+      - high
+      - auto
+    initial: off
+    icon: mdi:air-humidifier

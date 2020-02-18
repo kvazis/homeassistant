@@ -93,7 +93,6 @@
       payload: "{{ states('sensor.time_date')}}"
       retain: true
 
-
 ## Включение съемки при входе     
 - alias: 01_enter_photo_on
   initial_state: true

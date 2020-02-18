@@ -16,7 +16,9 @@
       - automation.00_heater_week_on
       - automation.00_heater_weekend_on
       - automation.00_heater_off
-      - automation.00_heater_notification      
+      - automation.00_heater_notification_on 
+      - automation.00_heater_notification_off
+      - automation.00_heater_check
       - automation.00_power_counter
       - automation.00_power_new_day
       - automation.00_power_new_month

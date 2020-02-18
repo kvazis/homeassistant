@@ -10,8 +10,12 @@ cards:
           content: >
               **Гостиная - панель управления**
 
+
         - type: custom:vertical-stack-in-card
-          cards:        
+          cards:     
+          - type: markdown
+            content: >
+                **Освещение**
           - type: horizontal-stack
             cards:        
             - type: light
@@ -20,50 +24,70 @@ cards:
             - type: light
               entity: light.yeelight_05_ceiling2
               name: Люстра 2
-
-          - type: conditional
-            conditions:
-              - entity: light.yeelight_05_ceiling1
-                state: "on"
-            card:
-              type: entities
-              show_header_toggle: false
-              entities:
-                - entity: input_number.yeelight_05_ceiling1_temp
-                  name: Люстра 1
-                  icon: mdi:temperature-kelvin
-
-          - type: conditional
-            conditions:
-              - entity: light.yeelight_05_ceiling2
-                state: "on"
-            card:
-              type: entities
-              show_header_toggle: false
-              entities:
-                - entity: input_number.yeelight_05_ceiling2_temp
-                  name: Люстра 2
-                  icon: mdi:temperature-kelvin
+            - type: light
+              entity: light.yeelight_05_rgbtvbulb
+              name: Лампа ТВ
 
           - type: horizontal-stack
             cards:        
             - type: light
+              entity: light.yeelight_05_ceiling1_ambilight
+              name: Амбилайт 1
+            - type: light
+              entity: light.yeelight_05_ceiling2_ambilight
+              name: Амбилайт 2
+            - type: light
               entity: light.yeelight_05_bedside2
               name: Ночник
-            - type: light
-              entity: light.yeelight_05_rgbtvbulb
-              name: Лампа ТВ
-                  
-        - type: custom:vertical-stack-in-card
-          cards: 
-
-          - type: markdown
-            content: >
-                **Телевизор**
 
           - type: horizontal-stack
-            cards: 
+            cards:  
+            - type: light
+              entity: light.yeelight_05_table
+              name: Настольная
+            - type: light
+              entity: light.gateway_light_34ce0088b039
+              name: Шлюз 1
+            - type: light
+              entity: light.gateway_light_f0b429cc3813
+              name: Шлюз 2
 
+
+          - type: horizontal-stack
+            cards:    
+            - type: entity-button
+              entity: light.aqara_05_wall 
+              name: Свет, стена
+            - type: entity-button
+              entity: script.05_gg_650_full_on
+              name: Свет 100%
+              icon: mdi:lightbulb-on-outline
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.05_gg_650_full_on
+
+            - type: entity-button
+              entity: script.05_gg_lightoff
+              name: Выкл все
+              icon: mdi:lightbulb
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.05_gg_lightoff
+              
+
+        - type: custom:vertical-stack-in-card
+          cards: 
+          - type: markdown
+            content: >
+                **Управление**
+
+          - type: horizontal-stack
+            cards:    
+            
             - type: entity-button
               entity: switch.movie_mode
               name: Подсветка
@@ -73,55 +97,16 @@ cards:
               entity: switch.tv_samsung
               name: Телевизор
               icon: mdi:television-guide
-
-        - type: glance
-          show_state: false
-          entities:
-            - entity: light.aqara_05_wall
-              name: Свет, стена
-              tap_action: 
-                 action: toggle
-            - entity: light.gateway_light_34ce0088b039
-              name: Шлюз
-              tap_action: 
-                 action: more-info
-            - entity: light.yeelight_05_ceiling1_ambilight
-              name: Амбилайт люстра 1
-              tap_action: 
-                 action: more-info
-              icon: mdi:car-light-high
-            - entity: light.yeelight_05_ceiling2_ambilight
-              name: Амбилайт люстра 2
-              tap_action: 
-                 action: more-info
-              icon: mdi:car-light-high
-            - entity: script.05_gg_650_full_on
-              tap_action: 
-                action: toggle
-              name: Свет 100%
-              icon: mdi:lightbulb-on
-            - entity: script.05_gg_lightoff
-              tap_action: 
-                action: toggle
-              name: Выкл. свет
-              icon: mdi:close-circle-outline
-            - entity: script.ilife_a4
-              tap_action: 
-                action: toggle
+              
+            - type: entity-button
+              entity: script.ilife_a4
               name: iLife A4
               icon: mdi:robot-vacuum
-            - entity: switch.02_sonoff_basic_relay
-              tap_action: 
-                action: toggle
-              name: Router fan
-              icon: mdi:fan
-            - entity: switch.living_usb_fan
-              tap_action: 
-                action: toggle
-              name: Router fan 2
-              icon: mdi:fan
-
-              
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.ilife_a4
 
         - type: custom:vertical-stack-in-card
           cards: 
@@ -137,27 +122,27 @@ cards:
               entity: switch.wall_switch_right_158d00015723f1 
               name: Люстра 1 
               icon: mdi:ceiling-light
-
+              
             - type: entity-button
-              entity: switch.xiaomi_wifi_socket_usb
+              entity: switch.0x00158d000153dd8e_switch
               name: Лампа ТВ
               icon: mdi:lightbulb
 
             - type: entity-button
-              entity: switch.xiaomi_wifi_socket_usb_usb
-              name: BLE Hub
-              icon: mdi:developer-board
-              
-            - type: entity-button
-              entity: switch.plug_158d00012896cb
-              name: Телевизор
-              icon: mdi:television
+              entity: switch.living_usb_fan
+              name: Router fan 
+              icon: mdi:fan
 
           - type: horizontal-stack
             cards: 
-              
+
             - type: entity-button
-              entity: switch.plug_158d000153dd8e 
+              entity: switch.plug_158d00012896cb
+              name: Телевизор
+              icon: mdi:power-socket-eu   
+
+            - type: entity-button
+              entity: switch.0x04cf8cdf3c764e0a_switch 
               name: Стол 
               icon: mdi:power-socket-eu   
               
@@ -358,9 +343,16 @@ cards:
                 highlights: [{"from": 0, "to": 25,"color": "rgba(255, 0, 0, .75)"},{"from": 25, "to": 50,"color": "rgba(255, 140, 0, .75)"},{"from": 50, "to": 75,"color": "rgba(255, 250, 0, .75)"}, {"from": 75, "to": 100,"color": "rgba(10, 255, 0, .75)"}]
                 borders: false
 
-        - type: thermostat
-          entity: climate.living1_heater
-          name: Батарея 1
+        - type: horizontal-stack
+          cards: 
+        
+            - type: thermostat
+              entity: climate.living1_heater
+              name: Батарея 1
+              
+            - type: thermostat
+              entity: climate.living2_heater
+              name: Батарея 2
           
         - type: custom:vertical-stack-in-card
           cards: 
@@ -402,9 +394,33 @@ cards:
         - type: markdown
           content: >
               **Балкон гостиной**
-
-        - type: light
-          entity: light.66633530807d3a766432
+   
+        - type: custom:vertical-stack-in-card
+          cards:   
+          - type: horizontal-stack
+            cards:              
+            - type: light
+              entity: light.66633530807d3a766432
+              name: Балкон
+              
+            - type: custom:canvas-gauge-card
+              entity: sensor.illumination_158d000449b773
+              card_height: 220
+              gauge:
+                 type: "radial-gauge"
+                 title: Освещенность лм
+                 width: 240
+                 height: 240
+                 minValue: 00
+                 maxValue: 1000
+                 startAngle: 45
+                 ticksAngle: 270
+                 valueBox: true
+                 majorTicks: ["0", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000"]
+                 minorTicks: 4
+                 strokeTicks: true
+                 highlights: [{"from": 0, "to": 200,"color": "rgba(0, 0, 0, .75)"},{"from": 200, "to": 400,"color": "rgba(75, 75, 75, .75)"},{"from": 400, "to": 600,"color": "rgba(150, 150, 150, .75)"},{"from": 600, "to": 800,"color": "rgba(200, 200, 200, .75)"},{"from": 800, "to": 1000,"color": "rgba(255, 255, 255, .75)"}]
+                 borders: false              
 
         - type: glance
           show_state: false
@@ -417,13 +433,6 @@ cards:
              name: Движение
            - entity: binary_sensor.door_window_sensor_158d0001a2f5f7
              name: Окно на балконе 
-
-        - type: entities
-          show_header_toggle: false
-          entities:
-           - entity: sensor.illumination_158d000449b773
-             name: Освещенность на балконе -
-             icon: mdi:white-balance-sunny
 
         - type: horizontal-stack
           cards:

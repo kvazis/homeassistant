@@ -66,11 +66,6 @@ tuya:
   password: !secret tuya_password
   country_code: 380
   
-sonoff:
-  username: !secret sonoff_user
-  password: !secret sonoff_psw
-  reload: always 
-
 mqtt:
 #   broker: core-mosquitto
   broker: 192.168.0.77
@@ -194,6 +189,7 @@ scene: !include includes/scene.yaml
 mqtt_statestream: !include includes/mqtt_statestream.yaml
 plant: !include includes/plants.yaml
 input_number: !include includes/input_number.yaml
+input_select: !include includes/input_select.yaml
 media_player: !include includes/mplayer.yaml
 light: !include includes/light.yaml
 yeelight: !include includes/yeelight.yaml

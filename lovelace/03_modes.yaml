@@ -97,7 +97,7 @@ cards:
             - type: thermostat
               entity: climate.living1_heater
               name: Батарея 1
-              
+            
             - type: thermostat
               entity: climate.living2_heater
               name: Батарея 2

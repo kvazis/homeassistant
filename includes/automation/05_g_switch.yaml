@@ -3,16 +3,13 @@
   initial_state: true
   trigger:
     platform: time
-    at: '09:00:00'
+    at: '10:30:00'
   condition:
   - condition: time
     weekday:
       - mon
       - wed
       - fri
-  - condition: state
-    entity_id: sensor.living_day_work
-    state: 'Включен'
   action:
   - service: script.turn_on
     entity_id: script.ilife_a4
@@ -34,5 +31,4 @@
           switch.turn_off
       {%- endif -%}  
     entity_id: 
-       - switch.02_sonoff_basic_relay
        - switch.living_usb_fan

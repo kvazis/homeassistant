@@ -3,11 +3,12 @@
 light.yeelight_06_ceiling:
   friendly_name: Ванная, люстра
   icon: mdi:ceiling-light
+
 ## Реле
-switch.wall_switch_right_158d0001117040:
+switch.0x00158d0001117040_switch_right:
   friendly_name: Ванная, питание лампы
   icon: mdi:power
-switch.wall_switch_left_158d0001117040:
+switch.0x00158d0001117040_switch_left:
   friendly_name: Ванная, вентиляция
   icon: mdi:fan
 switch.wall_plug_158d00015751f4:

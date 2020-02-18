@@ -79,7 +79,7 @@
         retain: true
 
 ##### ГОСТИНАЯ
-##### Телевизор Samsung
+##### wifi + 2 USB
     - service: mqtt.publish
       data_template:
         topic: "power/wifi_socket_usb/today"
@@ -108,6 +108,19 @@
 ##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
+        topic: "power/04cf8cdf3c764e0a/today"
+        payload: '{{(states.sensor.mqtt_power_today_04cf8cdf3c764e0a.state | float +
+                    (states.sensor.load_04cf8cdf3c764e0a.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/04cf8cdf3c764e0a/month"
+        payload: '{{(states.sensor.mqtt_power_month_04cf8cdf3c764e0a.state | float +
+                    (states.sensor.load_04cf8cdf3c764e0a.state | float /120000))|round(5)}}'
+        retain: true
+##### Лампа за телевизором
+    - service: mqtt.publish
+      data_template:
         topic: "power/158d000153dd8e/today"
         payload: '{{(states.sensor.mqtt_power_today_158d000153dd8e.state | float +
                     (states.sensor.load_158d000153dd8e.state | float /120000))|round(5)}}'
@@ -117,6 +130,19 @@
         topic: "power/158d000153dd8e/month"
         payload: '{{(states.sensor.mqtt_power_month_158d000153dd8e.state | float +
                     (states.sensor.load_158d000153dd8e.state | float /120000))|round(5)}}'
+        retain: true
+##### Батарея 2
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/today"
+        payload: '{{(states.sensor.mqtt_power_today_158d000114a1e1.state | float +
+                    (states.sensor.load_158d000114a1e1.state | float /120000))|round(5)}}'
+        retain: true
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/month"
+        payload: '{{(states.sensor.mqtt_power_month_158d000114a1e1.state | float +
+                    (states.sensor.load_158d000114a1e1.state | float /120000))|round(5)}}'
         retain: true
 ##### Удлинитель 6 портов
     - service: mqtt.publish
@@ -173,19 +199,6 @@
         topic: "power/158d0001a2ccab/month"
         payload: '{{(states.sensor.mqtt_power_month_158d0001a2ccab.state | float +
                     (states.sensor.load_158d0001a2ccab.state | float /120000))|round(5)}}'
-##### Свободная розетка
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000114a1e1/today"
-        payload: '{{(states.sensor.mqtt_power_today_158d000114a1e1.state | float +
-                    (states.sensor.load_158d000114a1e1.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000114a1e1/month"
-        payload: '{{(states.sensor.mqtt_power_month_158d000114a1e1.state | float +
-                    (states.sensor.load_158d000114a1e1.state | float /120000))|round(5)}}'
-        retain: true
 ##### Настольная лампа
     - service: mqtt.publish
       data_template:
@@ -276,7 +289,7 @@
         retain: true 
 
 ##### ГОСТИНАЯ
-##### Телевизор Samsung
+##### wifi + 2 USB
     - service: mqtt.publish
       data_template:
         topic: "power/wifi_socket_usb/yesterday"
@@ -291,9 +304,21 @@
 ##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
+        topic: "power/04cf8cdf3c764e0a/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_04cf8cdf3c764e0a.state | float )|round(5)}}'
+        retain: true
+##### Лампа за телевизором
+    - service: mqtt.publish
+      data_template:
         topic: "power/158d000153dd8e/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_158d000153dd8e.state | float )|round(5)}}'
         retain: true
+##### Батарея 2
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/yesterday"
+        payload: '{{(states.sensor.mqtt_power_today_158d000114a1e1.state | float )|round(5)}}'
+        retain: true        
 ##### Удлинитель 6 портов
     - service: mqtt.publish
       data_template:
@@ -321,12 +346,6 @@
       data_template:
         topic: "power/158d0001a2ccab/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_158d0001a2ccab.state | float )|round(5)}}'
-        retain: true
-##### Свободная розетка
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000114a1e1/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_158d000114a1e1.state | float )|round(5)}}'
         retain: true
 ##### Настольная лампа
     - service: mqtt.publish
@@ -389,7 +408,7 @@
         retain: true        
 
 ##### ГОСТИНАЯ
-##### Телевизор Samsung
+##### wifi + 2 USB
     - service: mqtt.publish
       data_template:
         topic: "power/wifi_socket_usb/today"
@@ -404,7 +423,19 @@
 ##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
+        topic: "power/04cf8cdf3c764e0a/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Лампа за телевизором
+    - service: mqtt.publish
+      data_template:
         topic: "power/158d000153dd8e/today"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Батарея 2      
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/today"
         payload: '{{ 0.0 }}'
         retain: true
 ##### Удлинитель 6 портов        
@@ -433,12 +464,6 @@
     - service: mqtt.publish
       data_template:
         topic: "power/158d0001a2ccab/today"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Свободная розетка       
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000114a1e1/today"
         payload: '{{ 0.0 }}'
         retain: true
 ##### Настольная лампа
@@ -512,7 +537,7 @@
         retain: true
 
 ##### ГОСТИНАЯ
-##### Телевизор Samsung
+##### wifi + 2 USB
     - service: mqtt.publish
       data_template:
         topic: "power/wifi_socket_usb/lastmonth"
@@ -527,8 +552,26 @@
 ##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
+        topic: "power/04cf8cdf3c764e0a/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_04cf8cdf3c764e0a.state | float )|round(5)}}'
+        retain: true
+##### Батарея 2
+    - service: mqtt.publish
+      data_template:
         topic: "power/158d000153dd8e/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_158d000153dd8e.state | float )|round(5)}}'
+        retain: true
+##### Лампа за телевизором
+    - service: mqtt.publish
+      data_template:
+        topic: "power/04cf8cdf3c764e0a/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_04cf8cdf3c764e0a.state | float )|round(5)}}'
+        retain: true
+##### Батарея 2 
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/lastmonth"
+        payload: '{{(states.sensor.mqtt_power_month_158d000114a1e1.state | float )|round(5)}}'
         retain: true
 ##### Удлинитель 6 портов          
     - service: mqtt.publish
@@ -557,12 +600,6 @@
       data_template:
         topic: "power/158d0001a2ccab/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_158d0001a2ccab.state | float )|round(5)}}'
-        retain: true
-##### Свободная розетка   
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000114a1e1/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_158d000114a1e1.state | float )|round(5)}}'
         retain: true
 ##### Настольная лампа
     - service: mqtt.publish
@@ -624,7 +661,7 @@
         retain: true
 
 ##### ГОСТИНАЯ
-##### Телевизор Samsung
+##### wifi + 2 USB
     - service: mqtt.publish
       data_template:
         topic: "power/wifi_socket_usb/month"
@@ -639,7 +676,19 @@
 ##### Удлинитель - гостиная, стол
     - service: mqtt.publish
       data_template:
+        topic: "power/04cf8cdf3c764e0a/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Лампа за телевизором
+    - service: mqtt.publish
+      data_template:
         topic: "power/158d000153dd8e/month"
+        payload: '{{ 0.0 }}'
+        retain: true
+##### Батарея 2
+    - service: mqtt.publish
+      data_template:
+        topic: "power/158d000114a1e1/month"
         payload: '{{ 0.0 }}'
         retain: true
 ##### Удлинитель 6 портов  
@@ -670,12 +719,7 @@
         topic: "power/158d0001a2ccab/month"
         payload: '{{ 0.0 }}'
         retain: true
-##### Свободная розетка 
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000114a1e1/month"
-        payload: '{{ 0.0 }}'
-        retain: true
+
 ##### Настольная лампа
     - service: mqtt.publish
       data_template:

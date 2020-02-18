@@ -1,4 +1,50 @@
-#### Розетка Zigbee
+#### Гостиная стол, zigbee euro
+  - platform: template
+    sensors:
+      load_04cf8cdf3c764e0a:
+        friendly_name: 'Гостиная стол удлинитель'
+        value_template: "{{ (states('sensor.0x04cf8cdf3c764e0a_power')|float)}}"
+        icon_template: mdi:flash
+        unit_of_measurement: 'Вт'
+        entity_id: sensor.0x04cf8cdf3c764e0a_power
+        
+  - platform: mqtt
+    state_topic: "power/04cf8cdf3c764e0a/yesterday"
+    name: 'mqtt_power_yesterday_04cf8cdf3c764e0a'
+    unit_of_measurement: 'кВт⋅ч'
+        
+  - platform: mqtt
+    state_topic: "power/04cf8cdf3c764e0a/today"
+    name: 'mqtt_power_today_04cf8cdf3c764e0a'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/04cf8cdf3c764e0a/month"
+    name: 'mqtt_power_month_04cf8cdf3c764e0a'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: mqtt
+    state_topic: "power/04cf8cdf3c764e0a/lastmonth"
+    name: 'mqtt_power_lastmonth_04cf8cdf3c764e0a'
+    unit_of_measurement: 'кВт⋅ч'
+
+  - platform: template
+    sensors:
+      money_month_04cf8cdf3c764e0a:
+        friendly_name: "Стоимость за текущий месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_month_04cf8cdf3c764e0a.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+    
+  - platform: template
+    sensors:
+      money_lastmonth_04cf8cdf3c764e0a:
+        friendly_name: "Стоимость за прошлый месяц"
+        unit_of_measurement: 'грн'
+        value_template: "{{ (states.sensor.mqtt_power_lastmonth_04cf8cdf3c764e0a.state | float * 1.68)|round(2) }}"
+        icon_template: mdi:square-inc-cash 
+
+#### Отопление батарея 2
   - platform: template
     sensors:
       load_158d000114a1e1:
@@ -93,16 +139,17 @@
         icon_template: mdi:square-inc-cash 
 
 
-#Zigbee socket
+#Гостиная телевизор
+
   - platform: template
     sensors:
       load_158d00012896cb:
         friendly_name: 'Гостиная телевизор'
-        value_template: "{{ state_attr('switch.plug_158d00012896cb', 'load_power') }}"
+        value_template: "{{ (states('sensor.0x00158d00012896cb_power')|float)}}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
-        entity_id: switch.plug_158d00012896cb
-
+        entity_id: sensor.0x00158d00012896cb_power
+        
   - platform: mqtt
     state_topic: "power/158d00012896cb/yesterday"
     name: 'mqtt_power_yesterday_158d00012896cb'
@@ -139,17 +186,18 @@
         value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d00012896cb.state | float * 1.68)|round(2) }}"
         icon_template: mdi:square-inc-cash 
 
-#Zigbee socket
-    
+#Zigbee socket - лампа
+
+
   - platform: template
     sensors:
       load_158d000153dd8e:
-        friendly_name: 'Удлинитель - гостиная, стол'
-        value_template: "{{ state_attr('switch.plug_158d000153dd8e', 'load_power') }}"
+        friendly_name: 'Zigbee socket'
+        value_template: "{{ (states('sensor.0x00158d000153dd8e_power')|float)}}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
-        entity_id: switch.plug_158d000153dd8e
-        
+        entity_id: sensor.0x04cf8cdf3c764e0a_power
+
   - platform: mqtt
     state_topic: "power/158d000153dd8e/yesterday"
     name: 'mqtt_power_yesterday_158d000153dd8e'

@@ -74,23 +74,59 @@
     entity_id: switch.wall_plug_158d00015751f4
 
     
-# Уведомление о смене состояния бойлера
-- alias: 00_heater_notification
+# Уведомление при включении бойлера
+- alias: 00_heater_notification_on
   initial_state: true
   trigger:       
    platform: state
    entity_id: switch.wall_plug_158d00015751f4
+   to: 'on'
   action:
     - service: script.turn_on
       data_template:
        entity_id: >-
-          {%- if states.switch.wall_plug_158d00015751f4.state == 'on' and states.binary_sensor.boiler.state  == 'on' -%}
+          {%- if states.binary_sensor.boiler.state  == 'on' -%}
           script.21_heater_on
-          {%- elif states.switch.wall_plug_158d00015751f4.state == 'on' and  states.binary_sensor.boiler.state  == 'off' -%}
+          {%- elif states.binary_sensor.boiler.state  == 'off' -%}
           script.21_heater_impossible
-          {%- elif states.switch.wall_plug_158d00015751f4.state == 'off' and states.binary_sensor.boiler.state  == 'on' -%}
-          script.21_heater_off
+          {% else %}
+          script.stub
           {%- endif -%}
+          
+# Уведомление при выключении бойлера
+- alias: 00_heater_notification_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: switch.wall_plug_158d00015751f4
+   to: 'off'
+  action:
+  - service: timer.cancel
+    entity_id: timer.heater
+  - service: mqtt.publish
+    data_template:
+      topic: "notification/messages"
+      payload_template: '0601'
+      retain: true
+          
+# Проверка состояния бойлера
+- alias: 00_heater_check
+  initial_state: true
+  trigger:
+    - platform: time_pattern
+      minutes: '/5'
+  condition:
+  - condition: state
+    entity_id: timer.heater
+    state: 'idle'
+  - condition: state
+    entity_id: switch.wall_plug_158d00015751f4
+    state: 'on'
+  action:
+   - service: timer.start
+     entity_id: 
+       - timer.heater
+        
 
 
 

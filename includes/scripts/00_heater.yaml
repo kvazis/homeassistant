@@ -29,16 +29,16 @@
       payload_template: '0600'
       retain: true
 
-21_heater_off:
- alias: Выключение бойлера
- sequence:
-  - service: timer.cancel
-    entity_id: timer.heater
-  - service: mqtt.publish
-    data_template:
-      topic: "notification/messages"
-      payload_template: '0601'
-      retain: true
+# 21_heater_off:
+#  alias: Выключение бойлера
+#  sequence:
+#   - service: timer.cancel
+#     entity_id: timer.heater
+#   - service: mqtt.publish
+#     data_template:
+#       topic: "notification/messages"
+#       payload_template: '0601'
+#       retain: true
        
 21_heater_impossible:
  alias: Включение бойлера невозможно
