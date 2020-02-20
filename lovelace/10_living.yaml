@@ -22,23 +22,23 @@ cards:
               entity: light.yeelight_05_ceiling1
               name: Люстра 1
             - type: light
-              entity: light.yeelight_05_ceiling2
-              name: Люстра 2
+              entity: light.yeelight_05_ceiling1_ambilight
+              name: Амбилайт 1
             - type: light
-              entity: light.yeelight_05_rgbtvbulb
-              name: Лампа ТВ
+              entity: light.yeelight_05_ceiling1_nightlight
+              name: Ночник 1
 
           - type: horizontal-stack
             cards:        
             - type: light
-              entity: light.yeelight_05_ceiling1_ambilight
-              name: Амбилайт 1
+              entity: light.yeelight_05_ceiling2
+              name: Люстра 2
             - type: light
               entity: light.yeelight_05_ceiling2_ambilight
               name: Амбилайт 2
             - type: light
-              entity: light.yeelight_05_bedside2
-              name: Ночник
+              entity: light.yeelight_05_ceiling2_nightlight
+              name: Ночник 2
 
           - type: horizontal-stack
             cards:  
@@ -46,11 +46,11 @@ cards:
               entity: light.yeelight_05_table
               name: Настольная
             - type: light
-              entity: light.gateway_light_34ce0088b039
-              name: Шлюз 1
+              entity: light.yeelight_05_rgbtvbulb
+              name: ТВ лампа
             - type: light
-              entity: light.gateway_light_f0b429cc3813
-              name: Шлюз 2
+              entity: light.yeelight_05_bedside2
+              name: Прикроватник
 
 
           - type: horizontal-stack
@@ -137,7 +137,7 @@ cards:
             cards: 
 
             - type: entity-button
-              entity: switch.plug_158d00012896cb
+              entity: switch.0x00158d00012896cb_switch
               name: Телевизор
               icon: mdi:power-socket-eu   
 
@@ -437,7 +437,7 @@ cards:
         - type: horizontal-stack
           cards:
            - type: custom:canvas-gauge-card
-             entity: sensor.temperature_158d0001a4b9da
+             entity: sensor.0x00158d0001a4b9da_temperature
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -456,7 +456,7 @@ cards:
                borders: false
 
            - type: custom:canvas-gauge-card
-             entity: sensor.humidity_158d0001a4b9da
+             entity: sensor.0x00158d0001a4b9da_humidity
              card_height: 180
              gauge:
                type: "radial-gauge"

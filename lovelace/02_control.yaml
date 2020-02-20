@@ -134,6 +134,7 @@ cards:
                       type: 'custom:battery-entity'
                 exclude:
                  - state: '> 30.0'
+                 - state: 'unknown'
                       
 ############################ Колонка 2 ############################
       - type: vertical-stack
@@ -301,6 +302,7 @@ cards:
               filter:
                 include:
                  - entity_id: binary_sensor.motion*
+                 - entity_id: binary_sensor.*occupancy                 
                 exclude:
                  - entity_id: binary_sensor.motion_in_home
                  - state: 'off'
@@ -335,6 +337,7 @@ cards:
               filter:
                 include:
                  - entity_id: binary_sensor.door_window*
+                 - entity_id: binary_sensor.*contact
                 exclude:
                  - state: 'off'
 

@@ -197,7 +197,7 @@ cards:
           name: Балкон, кухня
           show_state: false
           entities:
-           - entity: binary_sensor.door_window_sensor_158d0001a20885
+           - entity: binary_sensor.0x00158d0001a20885_contact
              name: Дверь на балкон
            - entity: binary_sensor.door_window_sensor_158d0001a4a394
              name: Окно на балконе

@@ -1,4 +1,5 @@
 ## Коридор
+
 ## Освещение
 light.yeelight_03_ceiling:
   friendly_name: Коридор, люстра
@@ -6,12 +7,19 @@ light.yeelight_03_ceiling:
 light.yeelight_03_ceiling_ambilight:
   friendly_name: Коридор, люстра амбилайт
   icon: mdi:car-light-high
+light.yeelight_03_ceiling_nightlight:  
+  friendly_name: Коридор, люстра ночник
+  
 ## Сенсоры
-binary_sensor.motion_sensor_158d00010f8920:
+
+## Бинарные сенсоры
+binary_sensor.0x00158d00010f8920_occupancy:
   friendly_name: Коридор, движение
 binary_sensor.switch_158d0001f3fefe:
   friendly_name: Коридор кнопка  
-sensor.0x00158d0002a4f77e_action:
-  friendly_name: Коридор вибродатчик
+
+## Уровень заряда
 sensor.0x00158d0002a4f77e_battery:
-  friendly_name: Коридор вибродатчик, батарейка
+  friendly_name: Коридор вибродатчик
+sensor.0x00158d00010f8920_battery:
+  friendly_name: Коридор, движение

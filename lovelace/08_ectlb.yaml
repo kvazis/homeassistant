@@ -14,13 +14,13 @@ cards:
         - type: glance
           show_state: false
           entities:
-             - entity: binary_sensor.smoke_sensor_158d000149d28b
+             - entity: binary_sensor.0x00158d000149d28b_smoke
                name: Датчик дыма
              - entity: binary_sensor.door_window_sensor_158d000119378d
                name: Входная дверь
              - entity: binary_sensor.motion_sensor_158d00013f7894
                name: Прихожая           
-             - entity: binary_sensor.motion_sensor_158d00010f8920  
+             - entity: binary_sensor.0x00158d00010f8920_occupancy  
                name: Коридор
 
         - type: custom:vertical-stack-in-card
@@ -59,20 +59,6 @@ cards:
           - entity: timer.corridor
           state_filter:
             - "active"
-
-        # - type: entities
-        #   show_header_toggle: false
-        #   entities:
-        #   - entity: sensor.smoke_sensor_158d000149d28b_battery_level
-        #      type: 'custom:battery-entity'   
-        #   - entity: sensor.door_window_sensor_158d000119378d_battery_level
-        #      type: 'custom:battery-entity'   
-        #   - entity: sensor.motion_sensor_158d00013f7894_battery_level
-        #      type: 'custom:battery-entity'   
-        #   - entity: sensor.motion_sensor_158d00010f8920_battery_level 
-        #      type: 'custom:battery-entity'   
-        #   - entity: sensor.switch_158d00010b1963_battery_level 
-        #      type: 'custom:battery-entity' 
 
       - type: vertical-stack
         cards:

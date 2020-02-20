@@ -1,26 +1,40 @@
 ## Прихожая
+
 ## Освещение
 light.yeelight_01_whitebulb:
   friendly_name: Прихожая, лампа
   icon: mdi:lightbulb
+
 ## Реле
 switch.01_sonoff_basic_relay:
   friendly_name: Прихожая, питание лампы
-  icon: mdi:power
+  device_class: plug  
+  icon: mdi:power-socket-eu
+
 ## Сенсоры
+
+## Бинарные сенсоры
 binary_sensor.door_window_sensor_158d000119378d:
   friendly_name: Входная дверь
   device_class: door
+
 binary_sensor.wall_switch_left_158d0001718ca8:
   friendly_name: Прихожая вход левая
 binary_sensor.wall_switch_right_158d0001718ca8:
   friendly_name: Прихожая вход правая
 binary_sensor.wall_switch_both_158d0001718ca8:
   friendly_name: Прихожая вход
+
 binary_sensor.motion_sensor_158d00013f7894:
   friendly_name: Прихожая, движение  
+
 binary_sensor.switch_158d00010b1963:
   friendly_name: Прихожая, шкаф, круглая 
-binary_sensor.smoke_sensor_158d000149d28b:
+
+binary_sensor.0x00158d000149d28b_smoke:
   friendly_name: Прихожая, датчик дыма
   device_class: smoke
+  
+## Уровень заряда
+sensor.0x00158d000149d28b_battery:
+  friendly_name: Прихожая, датчик дыма

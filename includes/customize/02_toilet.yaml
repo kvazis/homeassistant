@@ -1,8 +1,10 @@
 ## Туалет
+
 ## Освещение
 light.yeelight_02_ceiling:
   friendly_name: Туалет, люстра
   icon: mdi:ceiling-light
+
 light.sonoff_02_mirror:
   friendly_name: Туалет, подсветка зеркала
   icon: mdi:spotlight-beam
@@ -10,9 +12,15 @@ light.sonoff_02_mirror:
 ## Реле
 switch.02_sonoff_fan_relay:
   friendly_name: Туалет вентилятор
+  device_class: plug 
   icon: mdi:fan 
+ 
+switch.02_sonoff_mini_relay:
+  friendly_name: Туалет питание подсветки
+  device_class: plug  
+  icon: mdi:power-socket-eu
+
 ## Сенсоры
-#Bluetooth
 sensor.02_toilet_lywsd02_humidity:
   friendly_name: Туалет влажность
   icon: mdi:water-percent
@@ -20,36 +28,48 @@ sensor.02_toilet_lywsd02_temperature:
   friendly_name: Туалет температура
   icon: mdi:temperature-celsius
 
-#Zigbee
-
+## Бинарные сенсоры
 binary_sensor.wall_switch_left_158d000128cd1a:
   friendly_name: Туалет выключатель левая
 binary_sensor.wall_switch_right_158d000128cd1a:
   friendly_name: Туалет выключатель правая
 binary_sensor.wall_switch_both_158d000128cd1a:
   friendly_name: Туалет выключатель  
+  
 binary_sensor.wall_switch_left_158d00027c0e2b: 
   friendly_name: Туалет вход выключатель левая
 binary_sensor.wall_switch_right_158d00027c0e2b: 
   friendly_name: Туалет вход выключатель правая
 binary_sensor.wall_switch_both_158d00027c0e2b:
   friendly_name: Туалет вход выключатель
+  
 binary_sensor.motion_sensor_158d0001a24e71:
   friendly_name: Туалет движение
+  
 sensor.illumination_158d0001a24e71:
   friendly_name: Туалет освещенность 
 
+## Уровень заряда
+
+
 ## Прачечная
+
 ## Освещение
 light.aqara_02_ceiling:
   friendly_name: Прачечная свет
   icon: mdi:lightbulb
+
 ## Реле
 switch.wall_switch_158d00014a1a55:
   friendly_name: Прачечная выключатель
+  device_class: plug  
+  icon: mdi:power-socket-eu
+
 switch.bwshp2_relay:
   friendly_name: Стиральная машина, питание
-  icon: mdi:power
+  device_class: plug  
+  icon: mdi:power-socket-eu
+
 ## Сенсоры
 sensor.load_bwshp2:
   friendly_name: Стиральная машина, потребление
@@ -58,9 +78,15 @@ sensor.load_bwshp2:
 sensor.bwshp2_voltage:
   friendly_name: Напряжение в сети
   unit_of_measurement: В
-binary_sensor.motion_sensor_158d0001ab3350:
-  friendly_name: Прачечная, движение
+
 sensor.illumination_158d0001ab3350:
   friendly_name: Прачечная, освещенность
+
+## Бинарные сенсоры
+binary_sensor.motion_sensor_158d0001ab3350:
+  friendly_name: Прачечная, движение
+
 binary_sensor.water_leak_sensor_158d0002705b7b:
   friendly_name: Прачечная, протечка, стиралка
+  
+## Уровень заряда

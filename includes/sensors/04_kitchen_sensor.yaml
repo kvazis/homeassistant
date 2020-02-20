@@ -97,15 +97,16 @@
         unit_of_measurement: 'грн'
         value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d0001fa2934.state | float * 1.68)|round(2) }}"
         icon_template: mdi:square-inc-cash 
-    
+
+
   - platform: template
     sensors:
       load_158d0001d35bc0:
         friendly_name: 'Кухня LED лента'
-        value_template: "{{ state_attr('switch.wall_plug_158d0001d35bc0', 'load_power') }}"
+        value_template: "{{ (states('sensor.0x00158d0001d35bc0_power')|float)}}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
-        entity_id: switch.wall_plug_158d0001d35bc0
+        entity_id: sensor.0x00158d0001d35bc0_power
 
   - platform: mqtt
     state_topic: "power/158d0001d35bc0/yesterday"

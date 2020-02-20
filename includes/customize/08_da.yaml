@@ -1,38 +1,49 @@
 ## Детская А
+
 ## Освещение
 light.aqara_08_ceiling:
   friendly_name: Детская А, основной свет
   icon: mdi:ceiling-light
+
 light.gateway_light_f0b429cc1f11:
   friendly_name: Детская А шлюз свет
   icon: mdi:star-circle-outline
+
 light.yeelight_08_strip:
   friendly_name: Детская А LED лента
   icon: mdi:led-strip
+
 light.24730816ecfabc996804:
   friendly_name: Детская А настольная лампа
   icon: mdi:desk-lamp
+
 light.yeelight_08_bedside:
   friendly_name: Детская А прикроватник
   icon: mdi:lighthouse
+
 light.philips_08_bedside: 
   friendly_name: Детская А, ночник стол
   icon: mdi:lighthouse
+
 ## Реле
 switch.wall_switch_158d00014a1abd:
   friendly_name: Детская А, выключатель люстры
-  icon: mdi:ceiling-light
-switch.alfawise_relay:
-  friendly_name: Детская А питание настольной лампы
-  icon: mdi:power
+  icon: mdi:power-socket-eu
+
+switch.0x00158d0002d7bb2b_switch_l1:
+  friendly_name: Детская А, питание на стол
+  icon: mdi:power-socket-eu
+  
+switch.0x00158d0002d7bb2b_switch_l2:
+  friendly_name: Детская А, термоголовка
+  icon: mdi:radiator
+
 switch.plug_158d00010ec4b8:
   friendly_name: Детская А увлажнитель
   device_class: plug 
   icon: mdi:cup-water
 
 ## Сенсоры 
-
-# Среднее значение
 sensor.08_mean_humidity:
   friendly_name: Детская А, средняя влажность
   icon: mdi:water-percent  
@@ -40,7 +51,6 @@ sensor.08_mean_temperature:
   friendly_name: Детская А, средняя температура
   icon: mdi:temperature-celsius
 
-#Bluetooth
 sensor.da_bt_battery_level:
   friendly_name: Детская А, BT датчик климата
   device_class:  battery
@@ -51,18 +61,19 @@ sensor.da_bt_humidity:
   friendly_name: Детская А, BT влажность
   icon: mdi:water-percent
 
-##ZigBee  
-  
 sensor.illumination_f0b429cc1f11:
   friendly_name: Детская А шлюз освещенность
-binary_sensor.wall_switch_158d00010b5c6e:
-  friendly_name: Детская А выключатель вход
+  
 sensor.humidity_158d000159c7e6:
   friendly_name: Детская А, влажность
   icon: mdi:water-percent
 sensor.temperature_158d000159c7e6:
   friendly_name: Детская А, температура
   icon: mdi:temperature-celsius
+
+#Бинарные сенсоры
+binary_sensor.wall_switch_158d00010b5c6e:
+  friendly_name: Детская А выключатель вход
 binary_sensor.switch_158d000155d2fb:
   friendly_name: Детская А, кровать
 binary_sensor.switch_158d000186d9a9:
@@ -76,3 +87,5 @@ binary_sensor.motion_sensor_158d00016d56f5:
 binary_sensor.cube_158d00028f6fe6:
   friendly_name: Детская А, кубик
   icon: mdi:cube-outline
+  
+## Уровень заряда

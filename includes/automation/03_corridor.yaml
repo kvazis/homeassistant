@@ -107,10 +107,9 @@
   initial_state: true
   trigger:
 # Датчик движения
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d00010f8920
+  - platform: state
+    entity_id: binary_sensor.0x00158d00010f8920_occupancy
+    to: 'on'
   condition:
     - condition: state
       entity_id: light.yeelight_03_ceiling
@@ -156,10 +155,9 @@
   initial_state: true
   trigger:
 ## Движение в коридоре
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d00010f8920
+  - platform: state
+    entity_id: binary_sensor.0x00158d00010f8920_occupancy
+    to: 'on'
   action: 
   - service: mqtt.publish
     data_template:

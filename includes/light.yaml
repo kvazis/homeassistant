@@ -33,7 +33,7 @@
 ## Кухня
   - platform: switch
     name: aqara_04_strip
-    entity_id: switch.wall_plug_158d0001d35bc0
+    entity_id: switch.0x00158d0001d35bc0_switch
 
 ## Гостиная    
   - platform: switch

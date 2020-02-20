@@ -35,7 +35,7 @@
       pressure_mmhg_158d0001fa8321:
         friendly_name: "Детская Д, балкон давление мм рт. ст. факт"
         unit_of_measurement: 'mmHg'
-        value_template: "{{ (states('sensor.pressure_158d0001fa8321')|float * 0.7500637)|round(2) }}"
+        value_template: "{{ (states('sensor.0x00158d0001fa8321_pressure')|float * 0.7500637)|round(2) }}"
         icon_template: mdi:gauge
         
   - platform: template
@@ -43,5 +43,5 @@
       pressure_mmhg_correct_158d0001fa8321:
         friendly_name: "Детская Д, балкон давление мм рт. ст. + высота"
         unit_of_measurement: 'mmHg'
-        value_template: "{{ (states('sensor.pressure_158d0001fa8321')|float * 0.7500637 + 12.75)|round(2) }}"
+        value_template: "{{ (states('sensor.0x00158d0001fa8321_pressure')|float * 0.7500637 + 12.75)|round(2) }}"
         icon_template: mdi:gauge

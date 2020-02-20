@@ -83,12 +83,6 @@
   scan_interval: 30
 
 - platform: ping
-  host: 192.168.0.84
-  name: gateway_gg2
-  count: 2
-  scan_interval: 30
-  
-- platform: ping
   host: 192.168.0.125
   name: camera_xiaofang
   count: 2

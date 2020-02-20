@@ -22,6 +22,8 @@
       - automation.00_power_counter
       - automation.00_power_new_day
       - automation.00_power_new_month
+      - automation.01_detect_smoke
+      - automation.01_detect_smoke_off
       - automation.01_enter_autoswitch
       - automation.01_enter_reboot
       - automation.01_enter

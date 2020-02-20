@@ -263,7 +263,7 @@ cards:
           cards:
 
            - type: custom:canvas-gauge-card
-             entity: sensor.temperature_158d0001fa8321
+             entity: sensor.0x00158d0001fa8321_temperature
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -282,7 +282,7 @@ cards:
                borders: false
 
            - type: custom:canvas-gauge-card
-             entity: sensor.humidity_158d0001fa8321
+             entity: sensor.0x00158d0001fa8321_humidity
              card_height: 180
              gauge:
                type: "radial-gauge"
