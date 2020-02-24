@@ -3,18 +3,41 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: switch.wall_switch_right_158d00015723f1
+   entity_id: switch.0x00158d00015723f1_switch_right
    from: 'on'
    to: 'off'
   action:
   - delay: 00:00:03
   - service: switch.turn_on
-    entity_id: switch.wall_switch_right_158d00015723f1
+    entity_id: switch.0x00158d00015723f1_switch_right
+
+# Перезагрузка зависшей люстры
+- alias: 05_gg_cell_1_reboot
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_05_ceiling1
+    to: 'unavailable'
+    for:
+      minutes: 5
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "notification/messages"
+        payload_template: '0502'
+        retain: true
+    - service: switch.turn_off
+      entity_id: switch.0x00158d00015723f1_switch_right
+    
 
 ## Люстра 1 гостиная
 - alias: 05_gg_cell_1_light
   initial_state: true
   trigger:
+## Главный выключатель без нуля
+    - platform: state
+      entity_id: sensor.0x00158d00015723f1_click
+      to: 'right'
 ## Квадратная кнопка на столе
     - platform: state
       entity_id: sensor.0x00158d0001e8a244_click
@@ -26,11 +49,9 @@
         entity_id: binary_sensor.switch_158d0001b86d2e
         click_type: single
 ## Переворот кубика на 180 градусов
-    - platform: event
-      event_type: xiaomi_aqara.cube_action
-      event_data:
-        entity_id: binary_sensor.cube_158d0001186d82
-        action_type: flip180
+    - platform: state
+      entity_id: sensor.0x00158d0001186d82_action
+      to: 'flip180' 
 ## Выключатель возле комода - правая кнопка
     - platform: event
       event_type: xiaomi_aqara.click
@@ -68,11 +89,9 @@
         entity_id: binary_sensor.switch_158d0001b86d2e
         click_type: double
 ## Тряска кубика
-    - platform: event
-      event_type: xiaomi_aqara.cube_action
-      event_data:
-        entity_id: binary_sensor.cube_158d0001186d82
-        action_type: shake_air
+    - platform: state
+      entity_id: sensor.0x00158d0001186d82_action
+      to: 'shake' 
 ## Выключатель возле комода - левая кнопка
     - platform: event
       event_type: xiaomi_aqara.click
@@ -128,11 +147,9 @@
   initial_state: true
   trigger:
 ## Подброс кубика
-    - platform: event
-      event_type: xiaomi_aqara.cube_action
-      event_data:
-        entity_id: binary_sensor.cube_158d0001186d82
-        action_type: free_fall
+    - platform: state
+      entity_id: sensor.0x00158d0001186d82_action
+      to: 'fall' 
 ## Выключатель возле комода - обе кнопки
     - platform: event
       event_type: xiaomi_aqara.click
@@ -166,11 +183,9 @@
       entity_id: binary_sensor.switch_158d00010b1963
       click_type: single
 ## Переворот кубика на 90 градусов
-  - platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d0001186d82
-      action_type: flip90
+  - platform: state
+    entity_id: sensor.0x00158d0001186d82_action
+    to: 'flip90' 
 ## Выключатель на входе в комнату - правая кнопка
   - platform: event
     event_type: xiaomi_aqara.click
@@ -206,11 +221,9 @@
       entity_id: binary_sensor.switch_158d0001531698
       click_type: double
 ## Двойной тап кубиком
-  - platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d0001186d82
-      action_type: tap_twice
+  - platform: state
+    entity_id: sensor.0x00158d0001186d82_action
+    to: 'tap' 
   action:
     service: script.turn_on
     entity_id: script.samsung_tv

@@ -39,9 +39,9 @@
       {% elif humidity < lo and states.binary_sensor.da_hum.state == 'on' %}
         switch.turn_on
       {% else %}
-        switch.turn_{{states('switch.plug_158d00010ec4b8') | lower}}
+        switch.turn_{{states('switch.0x00158d00010ec4b8_switch') | lower}}
       {% endif %}
-    entity_id: switch.plug_158d00010ec4b8
+    entity_id: switch.0x00158d00010ec4b8_switch
 
 ## Предупреждение о недостатке воды    
 - alias: 08_da_hum_water_warning

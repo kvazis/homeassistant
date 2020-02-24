@@ -15,34 +15,42 @@ switch.0x00158d0001117040_switch_left:
   device_class: plug  
   icon: mdi:fan
 
-switch.wall_plug_158d00015751f4:
+switch.0x00158d00015751f4_switch:
   friendly_name: Ванная, бойлер
   device_class: plug  
   icon: mdi:hot-tub
 
 ## Сенсоры 
-sensor.illumination_158d0001e547a3:
+sensor.0x00158d0001e547a3_illuminance:
   friendly_name: Ванная, освещенность
 
-sensor.humidity_158d0001dcd47e:
+sensor.0x00158d0001dcd47e_humidity:
   friendly_name: Ванная, влажность
   icon: mdi:water-percent
-sensor.temperature_158d0001dcd47e:
+sensor.0x00158d0001dcd47e_temperature:
   friendly_name: Ванная температура
   icon: mdi:temperature-celsius
+  
+sensor.0x00158d000238a140_click:
+  friendly_name: Ванная выключатель
 
 #Бинарные сенсоры
-binary_sensor.wall_switch_left_158d000238a140:
-  friendly_name: Ванная выключатель левая
-binary_sensor.wall_switch_right_158d000238a140:
-  friendly_name: Ванная выключатель правая
-binary_sensor.wall_switch_both_158d000238a140:
-  friendly_name: Ванная выключатель 
-
-binary_sensor.motion_sensor_158d0001e547a3:
+binary_sensor.0x00158d0001e547a3_occupancy:
   friendly_name: Ванная, движение
 
-binary_sensor.water_leak_sensor_158d0001bb60c2:
+binary_sensor.0x00158d0001bb60c2_water_leak:
   friendly_name: Ванная протечка душевая
-binary_sensor.water_leak_sensor_158d0001d72fa2:
+binary_sensor.0x00158d0001d72fa2_water_leak:
   friendly_name: Ванная протечка раковина
+
+## Уровень заряда  
+sensor.0x00158d0001dcd47e_battery:
+  friendly_name: Ванная климат
+sensor.0x00158d000238a140_battery:
+  friendly_name: Ванная выключатель
+sensor.0x00158d0001bb60c2_battery:
+  friendly_name: Ванная протечка душевая
+sensor.0x00158d0001d72fa2_battery:
+  friendly_name: Ванная протечка раковина
+sensor.0x00158d0001e547a3_battery:
+  friendly_name: Ванная, движение

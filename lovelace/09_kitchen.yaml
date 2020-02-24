@@ -95,7 +95,7 @@ cards:
             cards: 
 
             - type: entity-button
-              entity: switch.plug_158d0001291d12
+              entity: switch.0x00158d0001291d12_switch
               name: Телевизор питание
               icon: mdi:power
 
@@ -118,7 +118,7 @@ cards:
              name: Раковина
            - entity: binary_sensor.motion_sensor_158d0001e16204
              name: Движение
-           - entity: binary_sensor.door_window_sensor_158d0001a99562
+           - entity: binary_sensor.0x00158d0001a99562_contact
              name: Окно 
 
         - type: horizontal-stack
@@ -199,7 +199,7 @@ cards:
           entities:
            - entity: binary_sensor.0x00158d0001a20885_contact
              name: Дверь на балкон
-           - entity: binary_sensor.door_window_sensor_158d0001a4a394
+           - entity: binary_sensor.0x00158d0001a4a394_contact
              name: Окно на балконе
 
         - type: horizontal-stack
@@ -276,10 +276,3 @@ cards:
                 strokeTicks: true
                 highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
-
-        - type: history-graph
-          entities:
-           - entity: sensor.pressure_mmhg_158d000171ffde
-             name: факт 
-           - entity: sensor.pressure_mmhg_correct_158d000171ffde
-             name: коррект 

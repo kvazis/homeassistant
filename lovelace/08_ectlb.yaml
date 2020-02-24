@@ -22,6 +22,8 @@ cards:
                name: Прихожая           
              - entity: binary_sensor.0x00158d00010f8920_occupancy  
                name: Коридор
+             - entity: binary_sensor.cr_light_timer
+               name: Свет               
 
         - type: custom:vertical-stack-in-card
           cards:     
@@ -37,7 +39,7 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: switch.01_sonoff_basic_relay
+          - entity: switch.02_sonoff_basic_relay
             icon: mdi:lightbulb-outline
             tap_action: 
                action: toggle 
@@ -182,17 +184,14 @@ cards:
         - type: glance
           show_state: false
           entities:
-           - entity: binary_sensor.motion_sensor_158d0001e547a3 
-             name: Ванная движение
-           - entity: binary_sensor.water_leak_sensor_158d0001bb60c2
+           - entity: binary_sensor.0x00158d0001e547a3_occupancy
+             name: Движение
+           - entity: binary_sensor.bt_light_timer
+             name: Свет            
+           - entity: binary_sensor.0x00158d0001bb60c2_water_leak
              name: Душевая
-           - entity: binary_sensor.water_leak_sensor_158d0001d72fa2
+           - entity: binary_sensor.0x00158d0001d72fa2_water_leak
              name: Раковина
-           - entity: script.heater_manual
-             tap_action: 
-               action: more-info
-             name: Бойлер
-             icon: mdi:fire 
 
         - type: light
           entity: light.yeelight_06_ceiling
@@ -200,7 +199,7 @@ cards:
         - type: horizontal-stack
           cards:
            - type: custom:canvas-gauge-card
-             entity: sensor.temperature_158d0001dcd47e
+             entity: sensor.0x00158d0001dcd47e_temperature
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -219,7 +218,7 @@ cards:
                borders: false
 
            - type: custom:canvas-gauge-card
-             entity: sensor.humidity_158d0001dcd47e
+             entity: sensor.0x00158d0001dcd47e_humidity
              card_height: 180
              gauge:
                type: "radial-gauge"
@@ -241,7 +240,7 @@ cards:
           cards: 
 
           - type: entity-button
-            entity: switch.wall_plug_158d00015751f4
+            entity: switch.0x00158d00015751f4_switch
             name: Бойлер
             icon: mdi:hot-tub
 

@@ -1,5 +1,6 @@
-# Управление люстрой
-- alias: 07_dd_philips
+
+- id: ДД, ручное управление люстрой
+  alias: 07_dd_philips
   initial_state: true
   trigger:
 # Выключатель у входа
@@ -32,8 +33,8 @@
          script.07_dd_philpis_on
          {% endif %}  
 
-# Автоматическое включение люстры 
-- alias: 07_dd_philips_auto_on
+- id: ДД, автоматическое включение люстры
+  alias: 07_dd_philips_auto_on
   initial_state: true
   trigger:
   - platform: event
@@ -73,8 +74,9 @@
          4
          {% endif %}
         
-# Автоматическое выключение люстры 
-- alias: 07_dd_philips_auto_off
+
+- id: ДД, автоматическое выключение люстры
+  alias: 07_dd_philips_auto_off
   initial_state: true
   trigger:
   - platform: state
@@ -92,8 +94,20 @@
    - service: light.turn_off
      entity_id: light.philips_07_ceiling
 
-# Управление бра 
-- alias: 07_dd_bra
+- id: ДД, отключение люстры после сбоя
+  alias: 07_dd_philips_auto_off_unavailable
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.philips_07_ceiling
+    from: 'unavailable'
+    to: 'on'
+  action:
+   - service: light.turn_off
+     entity_id: light.philips_07_ceiling
+
+- id: ДД, ручное управление бра
+  alias: 07_dd_bra
   initial_state: true
   trigger:
   - platform: event
@@ -116,21 +130,21 @@
         script.07_dd_bra_off
         {%- endif -%}
 
-# Включение питания на настольную лампу
-- alias: 07_table_autoswitch
+- id: ДД, включение питания на настольную лампу
+  alias: 07_table_autoswitch
   initial_state: true
   trigger:
   - platform: state
-    entity_id: switch.plug_158d00030a6e78
+    entity_id: switch.0x00158d00030a6e78_switch
     to: 'off'
   action:
   - delay: 00:00:03
   - service: switch.turn_on
     entity_id:
-      - switch.plug_158d00030a6e78        
+      - switch.0x00158d00030a6e78_switch    
         
-# Выключение всего          
-- alias: 07_dd_all_off
+- id: ДД, выключение всего освещения
+  alias: 07_dd_all_off
   initial_state: true
   trigger:
   - platform: event
@@ -147,8 +161,8 @@
     - service: script.turn_on
       entity_id: script.07_dd_lightoff
 
-# Принтер 
-- alias: 07_hp_toggle
+- id: ДД, ручное управление принтером
+  alias: 07_hp_toggle
   initial_state: true
   trigger:
   - platform: event
@@ -160,8 +174,8 @@
     service: switch.toggle
     entity_id: switch.plug1
         
-## Запись последнего движения в детской Д
-- alias: 07_dd_motion_time
+- id: ДД, запись последнего движения
+  alias: 07_dd_motion_time
   initial_state: true
   trigger:
 ## Движение в детской Д

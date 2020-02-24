@@ -40,11 +40,11 @@ light.aqara_05_wall:
   icon: mdi:track-light
 
 ## Реле
-switch.wall_switch_left_158d00015723f1:
+switch.0x00158d00015723f1_switch_left:
   friendly_name: Гостиная выключатель стена
   device_class: plug 
   icon: mdi:power-socket-eu
-switch.wall_switch_right_158d00015723f1:
+switch.0x00158d00015723f1_switch_right:
   friendly_name: Гостиная, питание люстра 1
   device_class: plug 
   icon: mdi:power-socket-eu
@@ -94,17 +94,36 @@ switch.xiaomi_wifi_socket_usb_usb:
   device_class: plug  
   icon: mdi:usb
 
+## Климатическая техника
+fan.gg_humidifier:
+  friendly_name: Гостиная, увлажнитель Smartmi
+  icon: mdi:air-humidifier
+  
+fan.gg_purifier:
+  friendly_name: Гостиная, очиститель Mi
+  icon: mdi:air-purifier
+  
+air_quality.05_air_monitor:
+  friendly_name: Гостиная, монитор воздуха Mi
+  icon: mdi:tablet-dashboard
+
 ## Сенсоры
+sensor.0x00158d00015723f1_click:
+  friendly_name: Гостиная выключатель без нуля
+
 sensor.illumination_34ce0088b039:
   friendly_name: Гостиная шлюз освещенность
 
 sensor.0x00158d0001e8a244_click:
   friendly_name: Гостиная, комод, квадратная
+  
+sensor.0x00158d0001186d82_action:
+  friendly_name: Гостиная кубик
+  icon: mdi:cube-outline
 
 sensor.humidity_158d00015aebb6:
   friendly_name: Гостиная, влажность
   icon: mdi:water-percent  
-
 sensor.temperature_158d00015aebb6:
   friendly_name: Гостиная, температура
   icon: mdi:temperature-celsius
@@ -137,10 +156,6 @@ binary_sensor.switch_158d0001531698:
 binary_sensor.switch_158d0001b86d2e:
   friendly_name: Гостиная, стол, квадратная
 
-binary_sensor.cube_158d0001186d82:
-  friendly_name: Гостиная кубик
-  icon: mdi:cube-outline
-
 binary_sensor.door_window_sensor_158d00013ed373:
   friendly_name: Гостиная, окно
   device_class: window 
@@ -148,6 +163,9 @@ binary_sensor.door_window_sensor_158d00013ed373:
 ## Уровень заряда
 sensor.0x00158d0001e8a244_battery:
   friendly_name: Гостиная, комод, квадратная
+
+sensor.0x00158d0001186d82_battery:
+  friendly_name: Гостиная кубик
 
 ## Гостиная балкон
 

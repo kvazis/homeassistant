@@ -139,9 +139,3 @@
        - binary_sensor.cube_158d00011063da       
 # Детская Д, влажность
        - sensor.humidity_158d000156e92e
-# Детская Д, окно
-       - binary_sensor.door_window_sensor_158d0001193697      
-# Детская Д, балкон дверь
-       - binary_sensor.door_window_sensor_158d00015843d4
-# Детская Д, балкон окно
-       - binary_sensor.door_window_sensor_158d0001a65b68 

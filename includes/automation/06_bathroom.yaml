@@ -2,15 +2,31 @@
 - alias: 06_bathroom_cell_power
   initial_state: true
   trigger:
-    - platform: time_pattern
-      minutes: '/1'
-  condition:
-    - condition: state
+    - platform: state
       entity_id: switch.0x00158d0001117040_switch_right
-      state: 'off'
+      to: 'off'
   action:
+   - delay: 00:00:03
    - service: switch.turn_on
      entity_id: switch.0x00158d0001117040_switch_right
+     
+# Перезагрузка зависшей лампочки
+- alias: 06_bathroom_cell_reboot
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_06_ceiling
+    to: 'unavailable'
+    for:
+      minutes: 5
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "notification/messages"
+        payload_template: '0603'
+        retain: true
+    - service: switch.turn_off
+      entity_id: switch.0x00158d0001117040_switch_right
 
 
 ## Автоматическая установка яркости, включение таймера
@@ -39,10 +55,6 @@
          30
          {% endif %}
        kelvin: 4000
-  - service: timer.cancel
-    entity_id: timer.bathroom_light
-  - service: timer.start
-    entity_id: timer.bathroom_light
 
 ## Включение света
 - alias: 06_bathroom_light_on
@@ -53,16 +65,13 @@
     entity_id: sensor.0x00158d0001117040_click
     to: 'right'
 ## Беспроводный выключатель
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_left_158d000238a140
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d000238a140_click
+    to: 'left'
 ## Датчик движения
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id:  binary_sensor.motion_sensor_158d0001e547a3
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001e547a3_occupancy
+    to: 'on'
   condition:
     - condition: state
       entity_id: light.yeelight_06_ceiling
@@ -72,36 +81,22 @@
       entity_id:
         - light.yeelight_06_ceiling
 
-## Обновление таймера
-- alias: 06_bathroom_timer_restart
+## Таймер освещения вкл
+- alias: 06_bathroom_light_timer
   initial_state: true
   trigger:
-## Датчик движения
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id:  binary_sensor.motion_sensor_158d0001e547a3
-  condition:
-    - condition: state
-      entity_id: light.yeelight_06_ceiling
-      state: 'on'
-  action:
-  - service: timer.cancel
-    entity_id: timer.bathroom_light
-  - service: timer.start
-    entity_id: timer.bathroom_light
-
-## Отключение таймера
-- alias: 06_bathroom_timer_off
-  initial_state: true
-  trigger:
+## Условия для включения таймера
   - platform: state
-    entity_id: light.yeelight_06_ceiling
-    to: 'off'
+    entity_id:
+      - binary_sensor.bt_light_timer
   action:
-  - service: timer.cancel
-    entity_id: timer.bathroom_light
-
+    service_template: >-  
+          {%- if states.binary_sensor.bt_light_timer.state == 'on' -%}
+          timer.start
+          {%- elif states.binary_sensor.bt_light_timer.state == 'off' -%}
+          timer.cancel
+          {%- endif -%}    
+    entity_id: timer.bathroom_light  
 
 ## Выключение света
 - alias: 06_bathroom_light_off
@@ -112,11 +107,9 @@
     entity_id: sensor.0x00158d0001117040_click
     to: 'right'
 ## Беспроводный выключатель
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_left_158d000238a140
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d000238a140_click
+    to: 'left'
 ## Таймер
   - platform: event
     event_type: timer.finished
@@ -159,14 +152,12 @@
   trigger:
 ## Влажность более 70 процентов
    - platform: numeric_state
-     entity_id: sensor.humidity_158d0001dcd47e
+     entity_id: sensor.0x00158d0001dcd47e_humidity
      above: 70
 ## Беспроводный выключатель
-   - platform: event
-     event_type: xiaomi_aqara.click
-     event_data:
-       entity_id: binary_sensor.wall_switch_right_158d000238a140
-       click_type: single
+   - platform: state
+     entity_id: sensor.0x00158d000238a140_click
+     to: 'right'
   condition:
      - condition: state
        entity_id: switch.0x00158d0001117040_switch_left
@@ -190,11 +181,9 @@
      event_data:
        entity_id: timer.bathroom
 ## Беспроводный выключатель
-   - platform: event
-     event_type: xiaomi_aqara.click
-     event_data:
-       entity_id: binary_sensor.wall_switch_right_158d000238a140
-       click_type: single
+   - platform: state
+     entity_id: sensor.0x00158d000238a140_click
+     to: 'right'
   condition:
   - condition: state
     entity_id: switch.0x00158d0001117040_switch_left
@@ -210,7 +199,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0001d72fa2
+   entity_id: binary_sensor.0x00158d0001d72fa2_water_leak
    to: 'on'
   action:
   - service: mqtt.publish
@@ -226,7 +215,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0001d72fa2
+   entity_id: binary_sensor.0x00158d0001d72fa2_water_leak
    from: 'on'
    to: 'off'
   action:
@@ -243,7 +232,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0001bb60c2
+   entity_id: binary_sensor.0x00158d0001bb60c2_water_leak
    to: 'on'
   action:
   - service: mqtt.publish
@@ -259,7 +248,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0001bb60c2
+   entity_id: binary_sensor.0x00158d0001bb60c2_water_leak
    from: 'on'
    to: 'off'
   action:
@@ -276,10 +265,9 @@
   initial_state: true
   trigger:
 ## Движение в ванной
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001e547a3
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001e547a3_occupancy
+    to: 'on'
   action: 
   - service: mqtt.publish
     data_template:

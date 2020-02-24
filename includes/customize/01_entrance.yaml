@@ -6,7 +6,7 @@ light.yeelight_01_whitebulb:
   icon: mdi:lightbulb
 
 ## Реле
-switch.01_sonoff_basic_relay:
+switch.02_sonoff_basic_relay:
   friendly_name: Прихожая, питание лампы
   device_class: plug  
   icon: mdi:power-socket-eu

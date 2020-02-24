@@ -119,7 +119,7 @@ cards:
             cards: 
 
             - type: entity-button
-              entity: switch.wall_switch_right_158d00015723f1 
+              entity: switch.0x00158d00015723f1_switch_right
               name: Люстра 1 
               icon: mdi:ceiling-light
               
@@ -507,10 +507,3 @@ cards:
                 strokeTicks: true
                 highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
-
-        - type: history-graph
-          entities:
-           - entity: sensor.pressure_mmhg_158d0001a4b9da
-             name: факт 
-           - entity: sensor.pressure_mmhg_correct_158d0001a4b9da
-             name: коррект  

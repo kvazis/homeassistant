@@ -11,15 +11,17 @@ light.yeelight_03_ceiling_nightlight:
   friendly_name: Коридор, люстра ночник
   
 ## Сенсоры
-
+sensor.0x00158d0001f3fefe_click:
+  friendly_name: Коридор шкаф кнопка  
+  
 ## Бинарные сенсоры
 binary_sensor.0x00158d00010f8920_occupancy:
   friendly_name: Коридор, движение
-binary_sensor.switch_158d0001f3fefe:
-  friendly_name: Коридор кнопка  
 
 ## Уровень заряда
 sensor.0x00158d0002a4f77e_battery:
   friendly_name: Коридор вибродатчик
 sensor.0x00158d00010f8920_battery:
   friendly_name: Коридор, движение
+sensor.0x00158d0001f3fefe_battery:
+  friendly_name: Коридор шкаф кнопка 

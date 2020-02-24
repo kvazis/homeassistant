@@ -26,7 +26,7 @@ light.philips_08_bedside:
   icon: mdi:lighthouse
 
 ## Реле
-switch.wall_switch_158d00014a1abd:
+switch.0x00158d00014a1abd_switch:
   friendly_name: Детская А, выключатель люстры
   icon: mdi:power-socket-eu
 
@@ -38,7 +38,7 @@ switch.0x00158d0002d7bb2b_switch_l2:
   friendly_name: Детская А, термоголовка
   icon: mdi:radiator
 
-switch.plug_158d00010ec4b8:
+switch.0x00158d00010ec4b8_switch:
   friendly_name: Детская А увлажнитель
   device_class: plug 
   icon: mdi:cup-water
@@ -70,15 +70,18 @@ sensor.humidity_158d000159c7e6:
 sensor.temperature_158d000159c7e6:
   friendly_name: Детская А, температура
   icon: mdi:temperature-celsius
-
-#Бинарные сенсоры
-binary_sensor.wall_switch_158d00010b5c6e:
+  
+sensor.0x00158d00010b5c6e_click:
   friendly_name: Детская А выключатель вход
-binary_sensor.switch_158d000155d2fb:
-  friendly_name: Детская А, кровать
-binary_sensor.switch_158d000186d9a9:
+
+sensor.0x00158d000186d9a9_click:
   friendly_name: Детская А, стол
-binary_sensor.door_window_sensor_158d0001583c7b:
+  
+sensor.0x00158d000155d2fb_click:  
+  friendly_name: Детская А, кровать
+  
+#Бинарные сенсоры
+binary_sensor.0x00158d0001583c7b_contact:
   friendly_name: Детская А, окно
   device_class: window 
 binary_sensor.motion_sensor_158d00016d56f5:
@@ -89,3 +92,11 @@ binary_sensor.cube_158d00028f6fe6:
   icon: mdi:cube-outline
   
 ## Уровень заряда
+sensor.0x00158d00010b5c6e_battery:
+  friendly_name: Детская А выключатель вход
+sensor.0x00158d0001583c7b_battery:  
+  friendly_name: Детская А, окно  
+sensor.0x00158d000186d9a9_battery:
+  friendly_name: Детская А, стол
+sensor.0x00158d000155d2fb_battery:  
+  friendly_name: Детская А, кровать

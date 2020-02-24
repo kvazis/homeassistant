@@ -5,7 +5,6 @@
     still_image_url: http://192.168.0.125/image.jpg
     stream_source: rtsp://192.168.0.125:554/unicast
 
-
 # Кубик Xiaofang 1s    
   - platform: ffmpeg
     name: Xiaofang1s
@@ -28,35 +27,31 @@
 # Reolink C2 Pro
 # Основной поток
 
-  - platform: generic
+  - platform: ffmpeg
     name: Reolink2
-    still_image_url: !secret reolink2_url
-    stream_source: !secret reolink2_rtsp
-    
+    input: !secret reolink2_rtsp
+
 # Reolink C2 Pro
 # Дополнительный поток
 
-  - platform: generic
+  - platform: ffmpeg
     name: Reolink2_sub
-    still_image_url: !secret reolink2_url
-    stream_source: !secret reolink2_sub_rtsp
-    
+    input: !secret reolink2_sub_rtsp
+
 # Reolink 410
 # Основной поток
 
-  - platform: generic
+  - platform: ffmpeg
     name: Reolink3
-    still_image_url: !secret reolink3_url
-    stream_source: !secret reolink3_rtsp
-    
+    input: !secret reolink3_rtsp
+
 # Reolink 410
 # Дополнительный поток
 
-  - platform: generic
+  - platform: ffmpeg
     name: Reolink3_sub
-    still_image_url: !secret reolink3_url
-    stream_source: !secret reolink3_sub_rtsp
-    
+    input: !secret reolink3_sub_rtsp
+
 # Reolink E1 Pro
 # Основной поток
 

@@ -3,13 +3,13 @@
   initial_state: true
   trigger:
   - platform: state
-    entity_id: switch.01_sonoff_basic_relay
+    entity_id: switch.02_sonoff_basic_relay
     to: 'off'
   action:
   - delay: 00:00:03
   - service: switch.turn_on
     entity_id:
-      - switch.01_sonoff_basic_relay
+      - switch.02_sonoff_basic_relay
       
 # Перезагрузка зависшей лампочки
 - alias: 01_enter_reboot
@@ -27,7 +27,7 @@
         payload_template: '0101'
         retain: true
     - service: switch.turn_off
-      entity_id: switch.01_sonoff_basic_relay
+      entity_id: switch.02_sonoff_basic_relay
 
 ## Включение освещения
 - alias: 01_enter
@@ -182,17 +182,13 @@
       entity_id: binary_sensor.wall_switch_right_158d0001718ca8
       click_type: single
 ## Кнопка, коридор шкаф
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d0001f3fefe
-      click_type: double
+  - platform: state
+    entity_id: sensor.0x00158d0001f3fefe_click
+    to: 'double'
 ## Квадратная кнопка кухня
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d0001a672ef
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d0001a672ef_click
+    to: 'single'
   action: 
   - service: script.turn_on
     data_template:

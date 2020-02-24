@@ -18,15 +18,15 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: sensor.01_sonoff_basic_uptime_custom
-            - entity: sensor.01_sonoff_basic_wifi_signal
+            - entity: sensor.02_sonoff_basic_uptime_custom
+            - entity: sensor.02_sonoff_basic_wifi_signal
               name: Сигнал wi-fi
-            - entity: sensor.01_sonoff_basic_firmware_version
+            - entity: sensor.02_sonoff_basic_firmware_version
               name: Прошивка
           - type: entities
             show_header_toggle: false
             entities:
-            - entity: switch.01_sonoff_basic_relay
+            - entity: switch.02_sonoff_basic_relay
               name: Питание
               tap_action: toggle
 

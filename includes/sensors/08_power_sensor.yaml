@@ -50,10 +50,10 @@
     sensors:
       load_158d00010ec4b8:
         friendly_name: 'Детская А, увлажнитель'
-        value_template: "{{ state_attr('switch.plug_158d00010ec4b8', 'load_power') }}"
+        value_template: "{{ (states('sensor.0x00158d00010ec4b8_power')|float)}}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
-        entity_id: switch.plug_158d00010ec4b8
+        entity_id: sensor.0x00158d00010ec4b8_power
         
   - platform: mqtt
     state_topic: "power/158d00010ec4b8/yesterday"

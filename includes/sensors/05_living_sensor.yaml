@@ -223,8 +223,6 @@
        - binary_sensor.switch_158d0001531698   
 # Гостиная, комод, квадратная
        - binary_sensor.switch_158d0001b86d2e 
-# Гостиная кубик
-       - binary_sensor.cube_158d0001186d82
 # Гостиная, влажность, температура
        - sensor.humidity_158d00015aebb6
 # Гостиная, окно

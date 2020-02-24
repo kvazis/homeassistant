@@ -72,7 +72,7 @@ cards:
             - type: divider
             - entity: light.xiaomi_07_table
               secondary_info: last-changed
-            - entity: switch.plug_158d00030a6e78
+            - entity: switch.0x00158d00030a6e78_switch
               secondary_info: last-changed
             - type: divider
             - entity: script.07_dd_lightoff
@@ -115,7 +115,7 @@ cards:
              entities:
               - entity: binary_sensor.motion_sensor_158d0001a66222
                 name: Движение
-              - entity: binary_sensor.door_window_sensor_158d0001193697
+              - entity: binary_sensor.0x00158d0001193697_contact
                 name: Окно
   
            - type: entities
@@ -254,9 +254,9 @@ cards:
         - type: glance
           show_state: false
           entities:
-           - entity: binary_sensor.door_window_sensor_158d00015843d4
+           - entity: binary_sensor.0x00158d00015843d4_contact
              name: Дверь на балкон
-           - entity: binary_sensor.door_window_sensor_158d0001a65b68
+           - entity: binary_sensor.0x00158d0001a65b68_contact
              name: Окно на балконе
 
         - type: horizontal-stack
@@ -333,10 +333,4 @@ cards:
                 strokeTicks: true
                 highlights: [{"from": 740, "to": 745,"color": "rgba(255, 0, 0, .75)"},{"from": 745, "to": 755,"color": "rgba(255, 255, 0, .75)"},{"from": 755, "to": 765,"color": "rgba(10, 140, 0, .75)"}, {"from": 765, "to": 775,"color": "rgba(255, 255, 0, .75)"}, {"from": 775, "to": 780,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
-
-        - type: history-graph
-          entities:
-           - entity: sensor.pressure_mmhg_158d0001fa8321
-             name: факт 
-           - entity: sensor.pressure_mmhg_correct_158d0001fa8321
-             name: коррект   
+ 

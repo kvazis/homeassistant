@@ -38,7 +38,7 @@
 ## Гостиная    
   - platform: switch
     name: aqara_05_wall
-    entity_id: switch.wall_switch_left_158d00015723f1
+    entity_id: switch.0x00158d00015723f1_switch_left
     
 ## Детская Д
   - platform: switch
@@ -48,5 +48,5 @@
 ## Детская А    
   - platform: switch
     name: aqara_08_ceiling
-    entity_id: switch.wall_switch_158d00014a1abd
+    entity_id: switch.0x00158d00014a1abd_switch
     

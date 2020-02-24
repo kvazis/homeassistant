@@ -1,27 +1,16 @@
-## Включение по движению
+## Включение ночника по движению
 - alias: 08_da_light_auto
   initial_state: true
   trigger:
-## Датчик движения
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id:  binary_sensor.motion_sensor_158d00016d56f5  
+## Условия для срабатывания ночника
+  - platform: state
+    entity_id: binary_sensor.motion_sensor_158d00016d56f5
+    to: 'on'
+## Условия для срабатывания ночника
   condition:
-   condition: and
-   conditions:
-## Выключена люстра
-   - condition: state
-     entity_id: light.aqara_08_ceiling
-     state: 'off'
-## Выключен прикроватник
-   - condition: state
-     entity_id: light.yeelight_08_bedside
-     state: 'off'
-## Вечером    
-   - condition: state
-     entity_id: binary_sensor.tod_full_night
-     state: 'on'
+    - condition: state
+      entity_id: binary_sensor.da_nightlight
+      state: 'on'  
   action:
   - service: light.turn_on
     entity_id: 
@@ -41,23 +30,17 @@
   initial_state: true
   trigger:
 ## Выключатель на входе
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_158d00010b5c6e
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d00010b5c6e_click
+    to: 'single'
 ## Круглая кнопка возле кровати
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d000155d2fb
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d000155d2fb_click
+    to: 'single'
 ## Круглая кнопка на столе
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d000186d9a9
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d000186d9a9_click
+    to: 'single'
   action:    
     - service: script.turn_on
       data_template:
@@ -79,17 +62,13 @@
   initial_state: true
   trigger:
 ## Круглая кнопка возле кровати
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d000155d2fb
-      click_type: double
+  - platform: state
+    entity_id: sensor.0x00158d000155d2fb_click
+    to: 'double'
 ## Круглая кнопка на столе
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d000186d9a9
-      click_type: double
+  - platform: state
+    entity_id: sensor.0x00158d000186d9a9_click
+    to: 'double'
 ## Кубик
   - platform: event
     event_type: xiaomi_aqara.cube_action

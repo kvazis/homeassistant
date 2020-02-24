@@ -17,23 +17,17 @@
   initial_state: true
   trigger:
 ## Выключатель на входе в кухню - правая кнопка
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_right_158d000282a130
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d000282a130_click
+    to: 'right'
 ## Круглая кнопка на стене
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d000154a353
-      click_type: long_click_press
+  - platform: state
+    entity_id: sensor.0x00158d000154a353_click
+    to: 'long'
 ## Подброс кубика
-  - platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d000101bdc6
-      action_type: free_fall      
+  - platform: state
+    entity_id: sensor.0x00158d000101bdc6_action
+    to: 'fall'    
   action:    
     - service: switch.toggle
       entity_id: switch.04_kn_mainlight 
@@ -113,23 +107,17 @@
   initial_state: true
   trigger:
 ## Круглая кнопка на стене
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d000154a353
-      click_type: single
-  - platform: event
+  - platform: state
+    entity_id: sensor.0x00158d000154a353_click
+    to: 'single'
 ## Переворот кубика на 90 градусов
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d000101bdc6
-      action_type: flip90
+  - platform: state
+    entity_id: sensor.0x00158d000101bdc6_action
+    to: 'flip90'  
 ## Выключатель на входе в кухню - левая кнопка
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_left_158d000282a130
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d000282a130_click
+    to: 'left'
   action:
     service: light.toggle
     entity_id: light.aqara_04_strip
@@ -173,26 +161,32 @@
   initial_state: true
   trigger:
 ## Круглая кнопка на стене 
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d000154a353
-      click_type: double 
+  - platform: state
+    entity_id: sensor.0x00158d000154a353_click
+    to: 'double'
 ## Правая клавиша, выключатель на входе   
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_right_158d000282a130
-      click_type: double
+  - platform: state
+    entity_id: sensor.0x00158d000282a130_click
+    to: 'right_double'
 ## Двойной тап кубиком
-  - platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d000101bdc6
-      action_type: tap_twice
+  - platform: state
+    entity_id: sensor.0x00158d000101bdc6_action
+    to: 'tap'  
   action:
     service: script.turn_on
     entity_id: script.xiaomi_tv
+    
+## Включение Android Box       
+- alias: 04_android
+  initial_state: true
+  trigger:
+## Круглая кнопка на стене 
+  - platform: state
+    entity_id: sensor.0x00158d000154a353_click
+    to: 'triple'
+  action:
+    service: script.turn_on
+    entity_id: script.mini8_android
     
 ## Датчик вибрации     
 - alias: 04_photo_on_vibro

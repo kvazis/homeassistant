@@ -59,3 +59,18 @@
     state_topic: "scene/movie"
     payload_on: "ON"
     payload_off: "OFF"
+    
+# Условия для включения таймера освещения
+  - platform: template
+    sensors:
+      lr_b_light_timer:
+        friendly_name: "Таймер сброса освещения балкон гостиная -"
+        value_template: >-
+          {{ is_state('light.66633530807d3a766432', 'on')  
+             and is_state('binary_sensor.motion_sensor_158d000449b773', 'off')  }}
+        icon_template: >-
+          {% if is_state("binary_sensor.lr_b_light_timer", "on") %}
+          mdi:timer
+          {% else %}
+          mdi:timer-off
+          {% endif %}

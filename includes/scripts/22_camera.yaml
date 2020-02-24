@@ -1,193 +1,58 @@
 ## Фотографии с камер
-  01_photo_xiaofang:
-    alias: Фотография Xiaofang и отправка в телеграмм
-    sequence:
-       - service: notify.telegram
-         data:
-           message: "Фото прихожей в  {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.xiaofang
-              filename: "/config/www/cam_captures/xiaofang.jpg"
-       - delay: 00:00:05
-       - service: notify.telegram
-         data:
-              title: "Дверь"
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/xiaofang.jpg
-    #   - service: notify.telegram_olha
-    #      data:
-    #           message: "Фотография" 
-    #           data:
-    #               photo:
-    #                   - file: /config/www/cam_captures/xiaofang.jpg
 
-  01_photo_reolink:
+  photo_xiaofang:
+    alias: Фотография xiaofang и отправка в телеграмм
+    sequence:
+       - service: mqtt.publish
+         data_template:
+           topic: "notification/messages"
+           payload_template: '0001'
+
+  photo_xiaofang1s:
+    alias: Фотография xiaofang 1s и отправка в телеграмм
+    sequence:
+       - service: mqtt.publish
+         data_template:
+           topic: "notification/messages"
+           payload_template: '0002'
+
+  photo_reolink:
     alias: Фотография Reolink 411 и отправка в телеграмм
     sequence:
-       - service: notify.telegram
-         data:
-           message: "Фото, этаж - дверь к лифту в {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink
-              filename: "/config/www/cam_captures/reolink.jpg"
-       - delay: 00:00:05
-       - service: notify.telegram
-         data:
-              title: "Дверь"
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/reolink.jpg
-    #   - service: notify.telegram_olha
-    #      data:
-    #           message: "Фотография" 
-    #           data:
-    #               photo:
-    #                   - file: /config/www/cam_captures/reolink.jpg
+       - service: mqtt.publish
+         data_template:
+           topic: "notification/messages"
+           payload_template: '0003'
 
-                      
-  01_photo_reolink3:
+  photo_reolink2:
+    alias: Фотография Reolink C2 и отправка в телеграмм
+    sequence:
+       - service: mqtt.publish
+         data_template:
+           topic: "notification/messages"
+           payload_template: '0004'
+
+  photo_reolink3:
     alias: Фотография Reolink 410 и отправка в телеграмм
     sequence:
-       - service: notify.telegram
-         data:
-           message: "Фото, этаж - поворот в {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink3
-              filename: "/config/www/cam_captures/reolink3.jpg"
-       - delay: 00:00:05
-       - service: notify.telegram
-         data:
-              title: "Дверь"
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/reolink3.jpg
-    #   - service: notify.telegram_olha
-    #      data:
-    #           message: "Фотография" 
-    #           data:
-    #               photo:
-    #                   - file: /config/www/cam_captures/reolink3.jpg
+       - service: mqtt.publish
+         data_template:
+           topic: "notification/messages"
+           payload_template: '0005'
 
-
-
-  04_photo_reolink2:
-    alias: Фотография Reolink C2 Pro и отправка в телеграмм
+  photo_reolink4:
+    alias: Фотография Reolink E1 и отправка в телеграмм
     sequence:
-       - service: notify.telegram
-         data:
-           message: "Фото, кухня {{ states('sensor.time_date') }}" 
-       - service: notify.telegram_olha
-         data:
-           message: "Фото, кухня {{ states('sensor.time_date') }}" 
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink2
-              filename: "/config/www/cam_captures/reolink2.jpg"
-       - delay: 00:00:05
-       - service: notify.telegram
-         data:
-              message: "Фотография" 
-              data:
-                  photo:
-                      - file: /config/www/cam_captures/reolink2.jpg
-    #   - service: notify.telegram_olha
-    #      data:
-    #           message: "Фотография" 
-    #           data:
-    #               photo:
-    #                   - file: /config/www/cam_captures/reolink2.jpg
-
-  05_photo_xiaofang1s:
-    alias: Фотография Xiaofang1S и отправка в телеграмм
+       - service: mqtt.publish
+         data_template:
+           topic: "notification/messages"
+           payload_template: '0006'
+           
+  video_reolink2:
+    alias: Запись с камеры Реолинк С2 и отправка в телеграмм
     sequence:
-    - service: camera.snapshot
-      data:
-        entity_id: camera.xiaofang1s
-        filename: "/config/www/cam_captures/xiaofang1s.jpg"
-    - delay: 00:00:05
-    - service: telegram_bot.send_photo
-      data_template:
-        target:
-         - !secret chat_id_alex
-         - !secret chat_id_olha
-        file: "/config/www/cam_captures/xiaofang1s.jpg"
-        caption: "Гостиная - {{ states('sensor.time_date') }}"
-
-## Видео с камер
-
-  01_video_reolink:
-    alias: Запись с камеры Реолинк 411
-    sequence:
-    - service: camera.record
-      data_template:
-        entity_id: camera.reolink
-        filename: "/config/www/cam_captures/reolink.mp4"
-        lookback: 5
-        duration: 15
-    - delay: 00:00:35
-    - service: telegram_bot.send_video
-      data_template:
-        target:
-         - !secret chat_id_alex
-        file: "/config/www/cam_captures/reolink.mp4"
-        caption: "Выход к лифту - {{ states('sensor.time') }}"
-        
-  01_video_reolink3:
-    alias: Запись с камеры Реолинк 410
-    sequence:
-    - service: camera.record
-      data_template:
-        entity_id: camera.reolink3
-        filename: "/config/www/cam_captures/reolink3.mp4"
-        lookback: 5
-        duration: 15
-    - delay: 00:00:35
-    - service: telegram_bot.send_video
-      data_template:
-        target:
-         - !secret chat_id_alex
-        file: "/config/www/cam_captures/reolink3.mp4"
-        caption: "Поворот - {{ states('sensor.time') }}"
-
-  04_video_reolink2:
-    alias: Запись с камеры Реолинк С2
-    sequence:
-    - service: camera.record
-      data_template:
-        entity_id: camera.reolink2
-        filename: "/config/www/cam_captures/reolink2.mp4"
-        lookback: 5
-        duration: 15
-    - delay: 00:00:35
-    - service: telegram_bot.send_video
-      data_template:
-        target:
-         - !secret chat_id_alex
-         - !secret chat_id_olha
-        file: "/config/www/cam_captures/reolink2.mp4"
-        caption: "Кухня - {{ states('sensor.time') }}"
-        
-  05_video_xiaofang1s:
-    alias: Запись с камеры Xiaofang 1S
-    sequence:
-    - service: camera.record
-      data_template:
-        entity_id: camera.xiaofang1s
-        filename: "/config/www/cam_captures/xiaofang1s.mp4"
-        # duration: 15
-    - delay: 00:00:35
-    - service: telegram_bot.send_video
-      data_template:
-        target:
-         - !secret chat_id_alex
-         - !secret chat_id_olha
-        file: "/config/www/cam_captures/xiaofang1s.mp4"
-        caption: "Детская А - {{ states('sensor.time') }}"
-
+       - service: mqtt.publish
+         data_template:
+           topic: "notification/messages"
+           payload_template: '0014'
+    

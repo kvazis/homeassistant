@@ -15,16 +15,10 @@ cards:
           camera_image: camera.reolink_sub
           camera_view: live
           entities:
-           - entity: script.01_photo_reolink
+           - entity: script.photo_reolink
              icon: mdi:camera 
              tap_action:
                 action: toggle
-           - entity: script.01_video_reolink
-             icon: mdi:record-rec 
-             tap_action:
-                action: toggle
-             
-
 
         - type: markdown
           content: >
@@ -35,12 +29,8 @@ cards:
           camera_image: camera.reolink3_sub
           camera_view: live
           entities:
-           - entity: script.01_photo_reolink3
+           - entity: script.photo_reolink3
              icon: mdi:camera 
-             tap_action:
-                action: toggle
-           - entity: script.01_video_reolink3
-             icon: mdi:record-rec 
              tap_action:
                 action: toggle
 
@@ -57,7 +47,7 @@ cards:
           entities:
            - entity: light.yeelight_01_whitebulb
            - entity: light.yeelight_03_ceiling
-           - entity: script.01_photo_xiaofang
+           - entity: script.photo_xiaofang
              icon: mdi:camera 
              tap_action:
                 action: toggle
@@ -77,11 +67,11 @@ cards:
            - entity: light.aqara_04_strip
            - entity: switch.tv_xiaomi
              icon: mdi:television-classic
-           - entity: script.04_photo_reolink2
+           - entity: script.photo_reolink2
              icon: mdi:camera 
              tap_action:
                 action: toggle
-           - entity: script.04_video_reolink2
+           - entity: script.video_reolink2
              icon: mdi:record-rec 
              tap_action:
                 action: toggle 
@@ -98,17 +88,14 @@ cards:
           camera_image: camera.xiaofang1s
           camera_view: live
           entities:
-           - entity: switch.plug_158d00010ec4b8
+           - entity: switch.0x00158d00010ec4b8_switch
            - entity: light.aqara_08_ceiling
            - entity: light.24730816ecfabc996804
-           - entity: script.05_photo_xiaofang1s
+           - entity: script.photo_xiaofang1s
              icon: mdi:camera 
              tap_action:
                 action: toggle
-           - entity: script.05_video_xiaofang1s
-             icon: mdi:record-rec 
-             tap_action:
-                action: toggle
+
                 
         - type: markdown
           content: >
@@ -125,5 +112,9 @@ cards:
              icon: mdi:television-guide 
            - entity: switch.movie_mode
              icon: mdi:movie-roll
+           - entity: script.photo_reolink4
+             icon: mdi:camera 
+             tap_action:
+                action: toggle
 
              

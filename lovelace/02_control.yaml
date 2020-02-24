@@ -82,6 +82,29 @@ cards:
                    state: 'unavailable'
                    options:
                       secondary_info: last-changed
+
+          - type: custom:vertical-stack-in-card
+            cards:  
+            - type: markdown
+              content: >
+                  **Отвалившиеся климатическая техника**
+                  
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+              filter:
+                include:
+                 - domain: fan
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+                 - domain: air_quality
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed
+
                       
           - type: custom:vertical-stack-in-card
             cards:  

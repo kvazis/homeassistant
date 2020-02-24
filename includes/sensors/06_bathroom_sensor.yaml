@@ -2,11 +2,11 @@
     sensors:
       load_158d00015751f4:
         friendly_name: 'Бойлер'
-        value_template: "{{ state_attr('switch.wall_plug_158d00015751f4', 'load_power') }}"
+        value_template: "{{ (states('sensor.0x00158d00015751f4_power')|float)}}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
-        entity_id: switch.wall_plug_158d00015751f4
-        
+        entity_id: sensor.0x00158d00015751f4_power
+
   - platform: mqtt
     state_topic: "power/158d00015751f4/yesterday"
     name: 'mqtt_power_yesterday_158d00015751f4'
@@ -47,19 +47,3 @@
   - platform: mqtt
     state_topic: "binary_sensor/158d0001e547a3"
     name: 'mqtt_binary_sensor_158d0001e547a3'
-
-# Заряд батарей
-  - platform: attributes
-    attribute: battery_level
-    unit_of_measurement: "%"
-    entities:
-# Ванная выключатель
-       - binary_sensor.wall_switch_both_158d000238a140
-# Ванная, движение
-       - binary_sensor.motion_sensor_158d0001e547a3
-# Ванная, влажность
-       - sensor.humidity_158d0001dcd47e  
-# Ванная протечка душевая
-       - binary_sensor.water_leak_sensor_158d0001bb60c2
-# Ванная протечка раковина
-       - binary_sensor.water_leak_sensor_158d0001d72fa2

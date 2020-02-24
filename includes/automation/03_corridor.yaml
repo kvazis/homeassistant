@@ -35,17 +35,13 @@
       entity_id: binary_sensor.wall_switch_left_158d0001718ca8
       click_type: single
 ## Кнопка в шкафу
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d0001f3fefe
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d0001f3fefe_click
+    to: 'single'
 ## Квадратная кнопка на кухне
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d0001a672ef
-      click_type: double
+  - platform: state
+    entity_id: sensor.0x00158d0001a672ef_click
+    to: 'double'
   action: 
   - service: script.turn_on
     data_template:
@@ -69,7 +65,7 @@
       entity_id: light.yeelight_03_ceiling
       state: 'off'
     - condition: state
-      entity_id: binary_sensor.motion_sensor_158d00010f8920
+      entity_id: binary_sensor.0x00158d00010f8920_occupancy
       state: 'on'
     - condition: time
       after: '08:00:00'
@@ -87,52 +83,22 @@
         - light.yeelight_03_ceiling
         
 ## Таймер освещения вкл
-- alias: 03_corridor_light_timer_on
+- alias: 03_corridor_light_timer
   initial_state: true
   trigger:
-## Лампочка включается
+## Условия для включения таймера
   - platform: state
-    entity_id: light.yeelight_03_ceiling
-    to: 'on'
+    entity_id:
+      - binary_sensor.cr_light_timer
   action:
-  - service: timer.cancel
-    entity_id: timer.corridor
-  - service: timer.start
-    entity_id: timer.corridor
-#    data_template: 
-#      duration: '00:05:00'
+    service_template: >-  
+          {%- if states.binary_sensor.cr_light_timer.state == 'on' -%}
+          timer.start
+          {%- elif states.binary_sensor.cr_light_timer.state == 'off' -%}
+          timer.cancel
+          {%- endif -%}    
+    entity_id: timer.corridor  
 
-## Таймер освещения обновление
-- alias: 03_corridor_light_timer_reload
-  initial_state: true
-  trigger:
-# Датчик движения
-  - platform: state
-    entity_id: binary_sensor.0x00158d00010f8920_occupancy
-    to: 'on'
-  condition:
-    - condition: state
-      entity_id: light.yeelight_03_ceiling
-      state: 'on'
-  action:
-  - service: timer.cancel
-    entity_id: timer.corridor
-  - service: timer.start
-    entity_id: timer.corridor
-
-
-## Таймер освещения выкл
-- alias: 03_corridor_light_timer_off
-  initial_state: true
-  trigger:
-## Лампочка включается
-  - platform: state
-    entity_id: light.yeelight_03_ceiling
-    to: 'off'
-  action:
-  - service: timer.cancel
-    entity_id: timer.corridor
-        
 ## Автоматическое отключение света       
 - alias: 03_corr_light_auto_off
   initial_state: true
@@ -141,10 +107,6 @@
      event_type: timer.finished
      event_data:
        entity_id: timer.corridor
-  condition:
-    - condition: state
-      entity_id: light.yeelight_03_ceiling
-      state: 'on'
   action:
     - service: light.turn_off
       entity_id:

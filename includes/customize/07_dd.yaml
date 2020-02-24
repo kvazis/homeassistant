@@ -27,7 +27,7 @@ switch.0x00158d0001a2ccab_switch_right:
   device_class: plug  
   icon: mdi:radiator
 
-switch.plug_158d00030a6e78:
+switch.0x00158d00030a6e78_switch:
   friendly_name: Детская Д, питание настольной лампы
   device_class: plug  
   icon: mdi:power-socket-eu
@@ -107,17 +107,18 @@ binary_sensor.cube_158d00011063da:
   friendly_name: Детская Д, кубик
   icon: mdi:cube-outline
 
-binary_sensor.door_window_sensor_158d0001193697:
+binary_sensor.0x00158d0001193697_contact:
   friendly_name: Детская Д, окно
   device_class: window 
+
+## Уровень заряда
+sensor.0x00158d0001193697_battery:
+  friendly_name: Детская Д, окно
+
 
 ## Детская Д балкон
 
 ## Сенсоры 
-binary_sensor.door_window_sensor_158d00015843d4:
-  friendly_name: Детская Д, балкон дверь
-  device_class: door
-
 sensor.0x00158d0001fa8321_humidity:
   friendly_name: Детская Д, балкон влажность
   icon: mdi:water-percent
@@ -127,10 +128,21 @@ sensor.0x00158d0001fa8321_temperature:
   friendly_name: Детская Д, балкон температура
   icon: mdi:temperature-celsius
 
-binary_sensor.door_window_sensor_158d0001a65b68:
+#Бинарные сенсоры
+binary_sensor.0x00158d0001a65b68_contact:
   friendly_name: Детская Д, балкон окно
   device_class: window 
+  
+binary_sensor.0x00158d00015843d4_contact:
+  friendly_name: Детская Д, балкон дверь
+  device_class: door
   
 ## Уровень заряда
 sensor.0x00158d0001fa8321_battery:
   friendly_name: Детская Д, балкон климат
+sensor.0x00158d0001a65b68_battery:
+  friendly_name: Детская Д, балкон окно
+sensor.0x00158d00015843d4_battery:
+  friendly_name: Детская Д, балкон дверь
+
+ 

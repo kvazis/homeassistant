@@ -6,11 +6,9 @@
     at: '05:00:00'
   - platform: time
     at: '20:00:00'
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_both_158d000238a140
-      click_type: both
+  - platform: state
+    entity_id: sensor.0x00158d000238a140_click
+    to: 'both'
   condition:
    - condition: state
      entity_id: binary_sensor.workday_sensor
@@ -19,11 +17,11 @@
      entity_id: binary_sensor.boiler
      state: 'on'
    - condition: state
-     entity_id: switch.wall_plug_158d00015751f4
+     entity_id: switch.0x00158d00015751f4_switch
      state: 'off'
   action:
   - service: switch.turn_on
-    entity_id: switch.wall_plug_158d00015751f4
+    entity_id: switch.0x00158d00015751f4_switch
     
 # Включение бойлера по выходным        
 - alias:  00_heater_weekend_on
@@ -33,11 +31,9 @@
     at: '08:00:00'
   - platform: time
     at: '20:00:00'
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_both_158d000238a140
-      click_type: both
+  - platform: state
+    entity_id: sensor.0x00158d000238a140_click
+    to: 'both'
   condition:
    - condition: state
      entity_id: binary_sensor.workday_sensor
@@ -46,11 +42,11 @@
      entity_id: binary_sensor.boiler
      state: 'on'
    - condition: state
-     entity_id: switch.wall_plug_158d00015751f4
+     entity_id: switch.0x00158d00015751f4_switch
      state: 'off'
   action:
   - service: switch.turn_on
-    entity_id: switch.wall_plug_158d00015751f4
+    entity_id: switch.0x00158d00015751f4_switch
 
 # Выключение бойлера 
 - alias: 00_heater_off
@@ -60,18 +56,16 @@
      event_type: timer.finished
      event_data:
        entity_id: timer.heater
-   - platform: event
-     event_type: xiaomi_aqara.click
-     event_data:
-       entity_id: binary_sensor.wall_switch_both_158d000238a140
-       click_type: both
+   - platform: state
+     entity_id: sensor.0x00158d000238a140_click
+     to: 'both'
   condition:
   - condition: state
-    entity_id: switch.wall_plug_158d00015751f4
+    entity_id: switch.0x00158d00015751f4_switch
     state: 'on'
   action:
   - service: switch.turn_off
-    entity_id: switch.wall_plug_158d00015751f4
+    entity_id: switch.0x00158d00015751f4_switch
 
     
 # Уведомление при включении бойлера
@@ -79,7 +73,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: switch.wall_plug_158d00015751f4
+   entity_id: switch.0x00158d00015751f4_switch
    to: 'on'
   action:
     - service: script.turn_on
@@ -98,7 +92,8 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: switch.wall_plug_158d00015751f4
+   entity_id: switch.0x00158d00015751f4_switch
+   from: 'on'
    to: 'off'
   action:
   - service: timer.cancel
@@ -120,7 +115,7 @@
     entity_id: timer.heater
     state: 'idle'
   - condition: state
-    entity_id: switch.wall_plug_158d00015751f4
+    entity_id: switch.0x00158d00015751f4_switch
     state: 'on'
   action:
    - service: timer.start

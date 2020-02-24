@@ -44,16 +44,16 @@
         value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d0001a2ccab.state | float * 1.68)|round(2) }}"
         icon_template: mdi:square-inc-cash 
 
-#### Розетка Zigbee - настольная лампа        
+#### Розетка Zigbee - настольная лампа      
   - platform: template
     sensors:
       load_158d00030a6e78:
         friendly_name: 'Детская Д, настольная лампа'
-        value_template: "{{ state_attr('switch.plug_158d00030a6e78', 'load_power') }}"
+        value_template: "{{ (states('sensor.0x00158d00030a6e78_power')|float)}}"
         icon_template: mdi:flash
         unit_of_measurement: 'Вт'
-        entity_id: switch.plug_158d00030a6e78
-        
+        entity_id: sensor.0x00158d00030a6e78_power
+
   - platform: mqtt
     state_topic: "power/158d00030a6e78/yesterday"
     name: 'mqtt_power_yesterday_158d00030a6e78'
