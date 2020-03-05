@@ -20,48 +20,44 @@ homeassistant:
   
   whitelist_external_dirs :
    - /config
-   - /config/bash
+# Стандартный набор для интерфейса
+# default_config:
 
-# Enables the frontend
+# Ручная конфигурация
+# Отображение панели настроек в интерфейсе
+config:
+
+# Включение официального интерфейса
 frontend:
   themes: !include_dir_merge_named themes
-
-# # Enables configuration UI
-# config:
-
-# Configure a default setup of Home Assistant (frontend, api, etc)
-default_config:
-
-# Checks for available updates
-
+# Включение карты
+map:
+# Включение поддержки приложения
+mobile_app:
+# Отслеживание солнца
+sun:
+# API для предоставления информации о системе и ее компонентах
+system_health:
+# Сенсор для отображения последней версии НА
 updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
+# Потоковое изображение с камер
+stream:
 
-# Discover some devices automatically
+
+# Автообнаружение устройств
 discovery:
   ignore:
     - yeelight
-
-system_health:
-
-# Stream component for camera
-stream:
+    - homekit
 
 lovelace:
   mode: yaml
 
-# Enables support for tracking state changes over time
+# Включение истории
 #history:
 
-# View all events in a logbook
+# Включение журнала
 #logbook:
-
-# Enables a map showing the location of tracked devices
-map:
-
-# Track the sun
-sun:
 
 #Платформы
 tuya:

@@ -4,7 +4,7 @@
   trigger:
 ## Условия для срабатывания ночника
   - platform: state
-    entity_id: binary_sensor.motion_sensor_158d00016d56f5
+    entity_id: binary_sensor.0x00158d00016d56f5_occupancy
     to: 'on'
 ## Условия для срабатывания ночника
   condition:
@@ -70,11 +70,9 @@
     entity_id: sensor.0x00158d000186d9a9_click
     to: 'double'
 ## Кубик
-  - platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d00028f6fe6
-      action_type: shake_air
+  - platform: state
+    entity_id: sensor.0x00158d00028f6fe6_action
+    to: 'shake' 
   action:    
     - service: script.turn_on
       data_template:
@@ -90,11 +88,9 @@
 - alias: 08_da_alllight_off
   initial_state: true
   trigger:
-  - platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d00028f6fe6
-      action_type: free_fall      
+  - platform: state
+    entity_id: sensor.0x00158d00028f6fe6_action
+    to: 'fall'    
   action:
     - service: script.turn_on
       entity_id: script.08_da_lightoff
@@ -121,10 +117,9 @@
   initial_state: true
   trigger:
 ## Движение в детской А
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d00016d56f5
+  - platform: state
+    entity_id: binary_sensor.0x00158d00016d56f5_occupancy
+    to: 'on'
   action: 
   - service: mqtt.publish
     data_template:

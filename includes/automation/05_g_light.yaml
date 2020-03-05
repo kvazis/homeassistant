@@ -2,14 +2,14 @@
 - alias: 05_gg_cell_1_power
   initial_state: true
   trigger:       
-   platform: state
-   entity_id: switch.0x00158d00015723f1_switch_right
-   from: 'on'
-   to: 'off'
+   - platform: time_pattern
+     minutes: '/1'
+  condition:
+   - condition: template
+     value_template: "{{ states('switch.0x00158d00015723f1_switch_right') != 'on' }}"         
   action:
-  - delay: 00:00:03
-  - service: switch.turn_on
-    entity_id: switch.0x00158d00015723f1_switch_right
+   - service: switch.turn_on
+     entity_id: switch.0x00158d00015723f1_switch_right
 
 # Перезагрузка зависшей люстры
 - alias: 05_gg_cell_1_reboot
@@ -20,6 +20,10 @@
     to: 'unavailable'
     for:
       minutes: 5
+  condition:
+    condition: numeric_state
+    entity_id: sensor.unavailable_now_light
+    below: 5
   action:
     - service: mqtt.publish
       data_template:

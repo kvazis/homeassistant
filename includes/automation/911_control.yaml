@@ -1,3 +1,15 @@
+# - alias: 911_backup_timer
+#   initial_state: true
+#   trigger:
+#   - platform: state
+#     entity_id:
+#       - sensor.reserve_live_ping
+#   action:
+#   - service: timer.start
+#     entity_id: timer.backup
+#     data: 
+#       duration: 00:02:00
+
 - alias: 911_reserve_lost
   initial_state: true
   trigger:
@@ -25,12 +37,9 @@
 - alias: 911_scenario_on
   initial_state: true
   trigger:
-   - platform: state
-     entity_id: sensor.reserve_scenario_group
-     to: 'off'
-   - platform: state
-     entity_id: sensor.reserve_scenario_group
-     to: 'unavailable'
+   platform: state
+   entity_id: sensor.reserve_scenario_group
+   to: 'unavailable'
   condition:
     - condition: state
       entity_id: group.scenario

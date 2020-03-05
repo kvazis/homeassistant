@@ -10,53 +10,27 @@ cards:
            content: >
               **Загрузка канала**
 
-         - type: horizontal-stack
-           cards:
-  
-            - type: custom:canvas-gauge-card
-              entity: sensor.asuswrt_download_speed
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: Прием Мбит/сек
-                width: 220
-                height: 200
-                minValue: 0
-                maxValue: 120
-                startAngle: 45
-                ticksAngle: 270
-                valueBox: true
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 90,"color": "rgba(255, 140, 0, .75)"}, {"from": 90, "to": 120,"color": "rgba(255, 0, 0, .75)"}]
-                borders: false
-
-            - type: custom:canvas-gauge-card
-              entity: sensor.asuswrt_upload_speed
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: Передача Мбит/сек
-                width: 220
-                height: 200
-                minValue: 0
-                maxValue: 120
-                startAngle: 45
-                ticksAngle: 270
-                valueBox: true
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100", "110", "120"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 90,"color": "rgba(255, 140, 0, .75)"}, {"from": 90, "to": 120,"color": "rgba(255, 0, 0, .75)"}]
-                borders: false
-   
          - type: custom:mini-graph-card
            entities:
             - entity: sensor.asuswrt_download_speed
               name: Прием
               color: "#00ff00"
             - entity: sensor.asuswrt_upload_speed
+              name: Передача
+              color: "#0000ff"
+           animate: true
+           line_width: 3
+           icon: mdi:access-point-network
+           show:
+              name: false
+              fill: false
+              
+         - type: custom:mini-graph-card
+           entities:
+            - entity: sensor.rt_ac88u_kb_sec_received
+              name: Прием
+              color: "#00ff00"
+            - entity: sensor.rt_ac88u_kb_sec_sent
               name: Передача
               color: "#0000ff"
            animate: true

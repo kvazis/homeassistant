@@ -1,35 +1,47 @@
   heater:
+    name: Бойлер выкл через -
     duration: '01:00:00'
-    
+
   camphoto:
+    name: Фото на входе через - 
     duration: '00:03:00'
     
   toilet:
+    name: Туалет свет выкл через -
     duration: '00:10:00'
     
   toilet_v:
+    name: Туалет вент. выкл через -
     duration: '00:10:00'
     
   laundry:
+    name: Прачечная свет выкл через -
     duration: '00:10:00'
 
-  bathroom:
+  bathroom: 
+    name: Ванная вент. выкл через -
     duration: '00:10:00'
 
   bathroom_light:
+    name: Ванная свет выкл через -
     duration: '00:10:00'
     
   entrance:
+    name: Свет в прихожей отключится через - 
     duration: '00:05:00'
 
   corridor:
+    name: Свет в коридоре отключится через -
     duration: '00:05:00'
     
   kitchen:
+    name: Кухня свет выкл через -
     duration: '00:30:00'
+
+  liv_balc:
+    name: Свет на балконе гостиной через -
+    duration: '00:05:00'
     
   backup:
-    duration: '00:15:00'
-    
-  liv_balc:
-    duration: '00:05:00'
+    name: Уведомление о резервном сервере через -
+    duration: '00:01:15'

@@ -45,7 +45,7 @@
           {{ is_state('light.aqara_08_ceiling', 'off')  
              and is_state('light.yeelight_08_bedside', 'off') 
              and is_state('light.yeelight_08_strip', 'off') 
-             and is_state('binary_sensor.tod_full_night', 'on') }}
+             and is_state('binary_sensor.da_night_time', 'on') }}
         icon_template: >-
           {% if is_state("binary_sensor.da_nightlight", "on") %}
           mdi:weather-night

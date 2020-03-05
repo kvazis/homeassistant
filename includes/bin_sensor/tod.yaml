@@ -60,3 +60,8 @@
     name: da_away_time
     after: '08:00'
     before: '13:00'
+    
+  - platform: tod
+    name: da_night_time
+    after: sunset
+    before: '07:00'

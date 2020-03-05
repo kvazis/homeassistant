@@ -1,6 +1,6 @@
-  google_backup:
-    url: 'http://192.168.0.70:8055/gb/doBackup'
-    timeout: '300'
+#   google_backup:
+#     url: 'http://192.168.0.70:8055/gb/doBackup'
+#     timeout: '300'
   
 #  sonoff_on:
 #    url: http://192.168.0.209:8081/zeroconf/switch

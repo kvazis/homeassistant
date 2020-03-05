@@ -21,7 +21,9 @@
     - platform: time
       at: '01:00:00'
   action:
-    - service: script.turn_on
-      entity_id: script.ha_backup
+    - service: recorder.purge
+      data:
+          keep_days: 1
+          repack: true
 
 

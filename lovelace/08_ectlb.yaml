@@ -91,64 +91,35 @@ cards:
 
         - type: horizontal-stack
           cards:
-           - type: custom:canvas-gauge-card
-             entity: sensor.02_toilet_lywsd02_temperature
-             card_height: 180
-             gauge:
-               type: "radial-gauge"
-               title: Температура (С)
-               width: 220
-               height: 200
-               minValue: 00
-               maxValue: 40
-               startAngle: 45
-               ticksAngle: 270
-               valueBox: true
-               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-               minorTicks: 4
-               strokeTicks: true
-               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-               borders: false
-
-           - type: custom:canvas-gauge-card
-             entity: sensor.02_toilet_lywsd02_humidity
-             card_height: 180
-             gauge:
-               type: "radial-gauge"
-               title: Влажность (%)
-               width: 220
-               height: 200
-               minValue: 0
-               maxValue: 100
-               startAngle: 45
-               ticksAngle: 270
-               valueBox: true
-               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-               minorTicks: 4
-               strokeTicks: true
-               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-               borders: false
+          
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.02_toilet_lywsd02_temperature
+                name: Температура
+                color: "#FFFF00"
+             animate: true
+             line_width: 3
+             
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.02_toilet_lywsd02_humidity
+                name: Влажность
+                color: "#0000FF"
+             animate: true
+             line_width: 3
 
 
-        - type: horizontal-stack
-          cards: 
-
-          - type: entity-button
-            entity: light.sonoff_02_mirror
-            name: Зеркало свет
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: light.sonoff_02_mirror
             icon: mdi:spotlight
-
-          - type: entity-button
-            entity: switch.02_sonoff_fan_relay
-            name: Вентиляция
+          - entity: switch.0x00158d00014dceb3_switch_right
             icon: mdi:fan
-            
-          - type: entity-button
-            entity: light.aqara_02_ceiling
-            name: Прачечная
+          - entity: light.aqara_02_ceiling
             icon: mdi:ceiling-light
-
-
+          - entity: switch.0x00158d00014dceb3_switch_left
+          
         - type: entities
           show_header_toggle: false
           entities:
@@ -198,62 +169,30 @@ cards:
 
         - type: horizontal-stack
           cards:
-           - type: custom:canvas-gauge-card
-             entity: sensor.0x00158d0001dcd47e_temperature
-             card_height: 180
-             gauge:
-               type: "radial-gauge"
-               title: Температура (С)
-               width: 220
-               height: 200
-               minValue: 00
-               maxValue: 40
-               startAngle: 45
-               ticksAngle: 270
-               valueBox: true
-               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-               minorTicks: 4
-               strokeTicks: true
-               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-               borders: false
+          
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.0x00158d0001dcd47e_temperature
+                name: Температура
+                color: "#FFFF00"
+             animate: true
+             line_width: 3
+             
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.0x00158d0001dcd47e_humidity
+                name: Влажность
+                color: "#0000FF"
+             animate: true
+             line_width: 3
 
-           - type: custom:canvas-gauge-card
-             entity: sensor.0x00158d0001dcd47e_humidity
-             card_height: 180
-             gauge:
-               type: "radial-gauge"
-               title: Влажность (%)
-               width: 220
-               height: 200
-               minValue: 0
-               maxValue: 100
-               startAngle: 45
-               ticksAngle: 270
-               valueBox: true
-               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-               minorTicks: 4
-               strokeTicks: true
-               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-               borders: false
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: switch.0x00158d00015751f4_switch
+          - entity: switch.0x00158d0001117040_switch_right
+          - entity: switch.0x00158d0001117040_switch_left
 
-        - type: horizontal-stack
-          cards: 
-
-          - type: entity-button
-            entity: switch.0x00158d00015751f4_switch
-            name: Бойлер
-            icon: mdi:hot-tub
-
-          - type: entity-button 
-            entity: switch.0x00158d0001117040_switch_right
-            name: Питание люстры
-            icon: mdi:power
-
-          - type: entity-button 
-            entity: switch.0x00158d0001117040_switch_left
-            name: Вентиляция
-            icon: mdi:fan
-            
         - type: entities
           show_header_toggle: false
           entities:

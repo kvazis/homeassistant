@@ -3,7 +3,6 @@ title: Расход электроэнергии
 icon: mdi:counter
 cards:
 
-
       - type: vertical-stack
         cards:
 
@@ -11,28 +10,18 @@ cards:
           cards:
            - type: markdown
              content: >
-                 ## Общее потребление
+                 ## Общий показатель
            - type: horizontal-stack
-             cards:      
+             cards:    
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_total_energy
+                   name: Потребление
+                   color: "#6495ED"
+                show:
+                   graph: bar
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_total_energy
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 10000
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "1000", "2000", "3000", "4000", "5000", "6000", "7000", "8000", "9000", "10000"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 5000,"color": "rgba(10, 255, 0, .75)"},{"from": 5000, "to": 7000,"color": "rgba(255, 255, 0, .75)"},{"from": 7000, "to": 9000,"color": "rgba(255, 140, 0, .75)"}, {"from": 9000, "to": 10000,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -76,45 +65,22 @@ cards:
                  ## Стиральная машина
            - type: horizontal-stack
              cards:      
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_bwshp2
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_bwshp2
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 4000
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "500", "1000", "1500", "2000", "2500", "3000", "3500", "4000"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 2500,"color": "rgba(10, 255, 0, .75)"},{"from": 2500, "to": 3000,"color": "rgba(255, 255, 0, .75)"},{"from": 3000, "to": 3500,"color": "rgba(255, 140, 0, .75)"}, {"from": 3500, "to": 4000,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false
-
-
-             - type: custom:canvas-gauge-card
-               entity: sensor.bwshp2_voltage
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Напряжение В
-                  width: 220
-                  height: 200
-                  minValue: 200
-                  maxValue: 260
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["200", "210", "220", "230", "240", "250", "260"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 200, "to": 210,"color": "rgba(255, 0, 0, .75)"},{"from": 210, "to": 220,"color": "rgba(255, 255, 0, .75)"},{"from": 220, "to": 240,"color": "rgba(10, 255, 0, .75)"}, {"from": 240, "to": 250,"color": "rgba(255, 255, 0, .75)"},{"from": 250, "to": 260,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.bwshp2_voltage
+                   name: Напряжение
+                   color: "#E6E6FA"
+                animate: true
+                line_width: 3
 
            - type: horizontal-stack
              cards:
@@ -160,25 +126,15 @@ cards:
                  ## Кухня телевизор
            - type: horizontal-stack
              cards:      
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d0001291d12
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d0001291d12
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -221,26 +177,16 @@ cards:
              content: >
                  ## Холодильник
            - type: horizontal-stack
-             cards:      
+             cards:     
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d0001fa2934
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar             
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d0001fa2934
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -285,24 +231,14 @@ cards:
            - type: horizontal-stack
              cards:      
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d0001d35bc0
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d0001d35bc0
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar   
+
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -349,27 +285,16 @@ cards:
              content: >
                  ## Гостиная телевизор 
            - type: horizontal-stack
-             cards:      
+             cards:    
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d00012896cb
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar 
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d00012896cb
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false     
-            
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -416,25 +341,15 @@ cards:
            - type: horizontal-stack
              cards:      
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_wifi_socket_usb
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false
-                  
+
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_wifi_socket_usb
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar 
+
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -477,26 +392,15 @@ cards:
              content: >
                  ## Гостиная, батарея 2
            - type: horizontal-stack
-             cards:      
-
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d000114a1e1
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false                 
+             cards: 
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d000114a1e1
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar 
 
            - type: horizontal-stack
              cards:
@@ -542,24 +446,14 @@ cards:
            - type: horizontal-stack
              cards:      
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_04cf8cdf3c764e0a
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false 
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_04cf8cdf3c764e0a
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar 
+
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -604,24 +498,14 @@ cards:
            - type: horizontal-stack
              cards:      
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d000153dd8e
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false 
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d000153dd8e
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar 
+
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -665,26 +549,16 @@ cards:
              content: >
                  ## Гостиная, удлинитель, стойка ТВ
            - type: horizontal-stack
-             cards:      
+             cards:    
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_wifi_6port
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar 
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_wifi_6port
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false 
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -727,26 +601,16 @@ cards:
              content: >
                  ## Гостиная, удлинитель комод
            - type: horizontal-stack
-             cards:      
+             cards:  
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_wifi_3usb
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_wifi_3usb
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false 
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -794,24 +658,14 @@ cards:
            - type: horizontal-stack
              cards:      
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d00015751f4
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false 
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d00015751f4
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar
+
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -855,26 +709,16 @@ cards:
              content: >
                 ## Детская Д, увлажнение и отопление
            - type: horizontal-stack
-             cards:      
-
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d0001a2ccab
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false                 
+             cards:  
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d0001a2ccab
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar
+                
 
            - type: horizontal-stack
              cards:
@@ -919,26 +763,16 @@ cards:
              content: >
                 ## Настольная лампа Д
            - type: horizontal-stack
-             cards:      
+             cards:   
+             
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d00030a6e78
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d00030a6e78
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false 
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -984,24 +818,14 @@ cards:
            - type: horizontal-stack
              cards:      
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d0002d7bb2b
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false 
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d0002d7bb2b
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar
+
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -1046,24 +870,14 @@ cards:
            - type: horizontal-stack
              cards:      
 
-             - type: custom:canvas-gauge-card
-               entity: sensor.load_158d00010ec4b8
-               card_height: 180
-               gauge:
-                  type: "radial-gauge"
-                  title: Мощность Вт
-                  width: 220
-                  height: 200
-                  minValue: 0
-                  maxValue: 2500
-                  startAngle: 45
-                  ticksAngle: 270
-                  valueBox: true
-                  majorTicks: ["0", "250", "500", "750", "1000", "1250", "1500", "1750", "2000", "2250", "2500"]
-                  minorTicks: 4
-                  strokeTicks: true
-                  highlights: [{"from": 0, "to": 1750,"color": "rgba(10, 255, 0, .75)"},{"from": 1750, "to": 2000,"color": "rgba(255, 255, 0, .75)"},{"from": 2000, "to": 2250,"color": "rgba(255, 140, 0, .75)"}, {"from": 2250, "to": 2500,"color": "rgba(255, 0, 0, .75)"}]
-                  borders: false 
+              - type: custom:mini-graph-card
+                entities:
+                 - entity: sensor.load_158d00010ec4b8
+                   name: Потребление
+                   color: "#FFFF00"
+                show:
+                   graph: bar
+
            - type: horizontal-stack
              cards:
              - type: markdown

@@ -20,6 +20,10 @@
     to: 'unavailable'
     for:
       minutes: 5
+  condition:
+    condition: numeric_state
+    entity_id: sensor.unavailable_now_light
+    below: 5
   action:
     - service: mqtt.publish
       data_template:

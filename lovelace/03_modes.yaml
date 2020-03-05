@@ -84,35 +84,43 @@ cards:
               name: Сменить режим нагрева
             - entity: switch.0x00158d00015751f4_switch
             
-        - type: custom:vertical-stack-in-card
-          cards:
+        # - type: custom:vertical-stack-in-card
+        #   cards:
 
-          - type: markdown
-            content: >
-               **Отопление**
+        - type: markdown
+          content: >
+             **Отопление**
 
-          - type: horizontal-stack
-            cards: 
-   
-            - type: thermostat
-              entity: climate.living1_heater
-              name: Батарея 1
-            
-            - type: thermostat
-              entity: climate.living2_heater
-              name: Батарея 2
+        - type: custom:simple-thermostat
+          entity: climate.living_heater
+          step_layout: row
+          name: Гостиная
+          icon: false
+      #   control: false
+          sensors:
+            - entity: sensor.05_mean_humidity
+              name: Humidity
 
-          - type: horizontal-stack
-            cards: 
-            
-            - type: thermostat
-              entity: climate.dd_heater
-              name: Детская Д
+        - type: custom:simple-thermostat
+          entity: climate.dd_heater
+          step_layout: row
+          name: Детская Д
+          icon: false
+      #   control: false
+          sensors:
+            - entity: sensor.07_mean_humidity
+              name: Humidity
               
-            - type: thermostat
-              entity: climate.da_heater
-              name: Детская А
- 
+        - type: custom:simple-thermostat
+          entity: climate.da_heater
+          step_layout: row
+          name: Детская А
+          icon: false
+      #   control: false
+          sensors:
+            - entity: sensor.08_mean_humidity
+              name: Humidity
+
       - type: vertical-stack
         cards:
 

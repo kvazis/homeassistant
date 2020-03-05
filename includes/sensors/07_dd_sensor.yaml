@@ -112,7 +112,7 @@
     name: 07_mean_temperature
     type: mean
     entity_ids:
-      - sensor.temperature_158d000156e92e
+      - sensor.0x00158d000156e92e_temperature
       - sensor.dd_bt_temperature
 
       
@@ -121,21 +121,5 @@
     name: 07_mean_humidity
     type: mean
     entity_ids:
-      - sensor.humidity_158d000156e92e
+      - sensor.0x00158d000156e92e_humidity
       - sensor.dd_bt_humidity
-
-# Заряд батарей
-  - platform: attributes
-    attribute: battery_level
-    unit_of_measurement: "%"
-    entities:
-# Детская Д, вход выключатель
-       - binary_sensor.wall_switch_both_158d000163e571
-# Детская Д, кровать, круглая
-       - binary_sensor.switch_158d00013f82b7
-# Детская Д, движение
-       - binary_sensor.motion_sensor_158d0001a66222
-# Детская Д, кубик
-       - binary_sensor.cube_158d00011063da       
-# Детская Д, влажность
-       - sensor.humidity_158d000156e92e

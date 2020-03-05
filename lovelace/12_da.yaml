@@ -11,37 +11,26 @@ cards:
               **Детская А - управление**
 
         - type: custom:vertical-stack-in-card
-          cards: 
+          cards:
 
           - type: horizontal-stack
-            cards:
-              
-            - type: picture-entity
-              entity: light.aqara_08_ceiling
-              tap_action: 
-                action: toggle
-              name: Люстра
-              state_image:
-                "on": /local/pict/dalighton.jpg
-                "off": /local/pict/dalightoff.jpg
-            
-            - type: picture-entity
-              entity: switch.0x00158d00010ec4b8_switch
-              tap_action: 
-                action: toggle
-              name: Увлажнитель
-              state_image:
-                "on": /local/pict/deermaon.jpg
-                "off": /local/pict/deermaoff.jpg
+            cards: 
 
-        - type: custom:vertical-stack-in-card
-          cards:
+            - type: button
+              entity: light.aqara_08_ceiling
+              name: Люстра
+
+            - type: light
+              entity: light.24730816ecfabc996804
+              name: Лампа
+
 
           - type: horizontal-stack
             cards:        
             - type: light
-              entity: light.24730816ecfabc996804
-              name: Лампа
+              entity: light.philips_08_bedside
+              name: Philips
+              
             - type: light
               entity: light.yeelight_08_bedside
               name: Yeelight
@@ -51,18 +40,18 @@ cards:
             - type: light
               entity: light.yeelight_08_strip
               name: LED лента
+              
             - type: light
-              entity: light.philips_08_bedside
-              name: Philips
-
+              entity: light.gateway_light_f0b429cc1f11
+              name: Шлюз
 
         - type: glance
           show_state: false
           entities:
-          - entity: light.gateway_light_f0b429cc1f11
+          - entity: switch.0x00158d0002d7bb2b_switch_l1
             tap_action: 
               action: toggle
-            name: Шлюз          
+            name: Стол          
           - entity: script.08_da_nightlight
             tap_action: 
               action: toggle
@@ -83,100 +72,38 @@ cards:
             tap_action: 
               action: toggle
             icon: mdi:close-circle-outline
-          - entity: switch.0x00158d0002d7bb2b_switch_l1
-            name: Удлинитель
-            tap_action: 
-              action: toggle 
-            icon: mdi:power-socket-eu
-            
+
       - type: vertical-stack
         cards:
 
         - type: markdown
           content: >
               **Детская А - климат**
- 
-        - type: horizontal-stack
-          cards:
-            
-           - type: custom:canvas-gauge-card
-             entity: sensor.08_mean_temperature
-             card_height: 180
-             gauge:
-               type: "radial-gauge"
-               title: Температура (С)
-               width: 220
-               height: 200
-               minValue: 00
-               maxValue: 40
-               startAngle: 45
-               ticksAngle: 270
-               valueBox: true
-               majorTicks: ["0", "5", "10", "15", "20", "25", "30", "35", "40"]
-               minorTicks: 4
-               strokeTicks: true
-               highlights: [{"from": 0, "to": 15,"color": "rgba(0, 0, 255, .75)"},{"from": 15, "to": 20,"color": "rgba(0, 255, 255, .75)"},{"from": 20, "to": 25,"color": "rgba(10, 255, 0, .75)"},{"from": 25, "to": 30,"color": "rgba(255, 255, 0, .75)"},{"from": 30, "to": 40,"color": "rgba(255, 140, 0, .75)"}]
-               borders: false
-
-           - type: custom:canvas-gauge-card
-             entity: sensor.08_mean_humidity
-             card_height: 180
-             gauge:
-               type: "radial-gauge"
-               title: Влажность (%)
-               width: 220
-               height: 200
-               minValue: 0
-               maxValue: 100
-               startAngle: 45
-               ticksAngle: 270
-               valueBox: true
-               majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-               minorTicks: 4
-               strokeTicks: true
-               highlights: [{"from": 0, "to": 40,"color": "rgba(255, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(0, 255, 255, .75)"},{"from": 60, "to": 100,"color": "rgba(0, 0, 255, .75)"}]
-               borders: false  
 
         - type: horizontal-stack
           cards:
-            
-           - type: custom:canvas-gauge-card
-             entity: sensor.illumination_f0b429cc1f11
-             card_height: 180
-             gauge:
-               type: "radial-gauge"
-               title: Освещенность лм
-               width: 220
-               height: 200
-               minValue: 00
-               maxValue: 1000
-               startAngle: 45
-               ticksAngle: 270
-               valueBox: true
-               majorTicks: ["0", "100", "200", "300", "400", "500", "600", "700", "800", "900", "1000"]
-               minorTicks: 4
-               strokeTicks: true
-               highlights: [{"from": 0, "to": 200,"color": "rgba(0, 0, 0, .75)"},{"from": 200, "to": 400,"color": "rgba(75, 75, 75, .75)"},{"from": 400, "to": 600,"color": "rgba(150, 150, 150, .75)"},{"from": 600, "to": 800,"color": "rgba(200, 200, 200, .75)"},{"from": 800, "to": 1000,"color": "rgba(255, 255, 255, .75)"}]
-               borders: false
 
-           - type: custom:canvas-gauge-card
-             entity: sensor.load_158d00010ec4b8
-             card_height: 180
-             gauge:
-               type: "radial-gauge"
-               title: Увлажнитель Вт
-               width: 220
-               height: 200
-               minValue: 0
-               maxValue: 50
-               startAngle: 45
-               ticksAngle: 270
-               valueBox: true
-               majorTicks: ["0", "10", "20", "30", "40", "50"]
-               minorTicks: 4
-               strokeTicks: true
-               highlights: [{"from": 0, "to": 10,"color": "rgba(255, 0, 0, .75)"},{"from": 10, "to": 50,"color": "rgba(10, 255, 0, .75)"}]
-               borders: false 
+             - type: custom:mini-graph-card
+               entities:
+                - entity: sensor.08_mean_temperature
+                  name: Температура
+                  color: "#FFFF00"
+               animate: true
+               line_width: 3
+             
+             - type: custom:mini-graph-card
+               entities:
+                - entity: sensor.08_mean_humidity
+                  name: Влажность
+                  color: "#0000FF"
+               animate: true
+               line_width: 3
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.illumination_f0b429cc1f11
+          - entity: sensor.load_158d00010ec4b8
 
 
         - type: entities
@@ -184,37 +111,18 @@ cards:
           entities:
           - entity: input_number.humidity_level_da
           - entity: binary_sensor.da_hum
+          - entity: switch.0x00158d00010ec4b8_switch
 
-        - type: thermostat
+        - type: custom:simple-thermostat
           entity: climate.da_heater
-          name: Батарея
+          step_layout: row
+          name: false
+          icon: false
+        #   control: false
+          sensors:
+              - entity: sensor.08_mean_humidity
+                name: Humidity
 
-        - type: custom:vertical-stack-in-card
-          cards: 
-
-          - type: horizontal-stack
-            cards: 
-
-            - type: entity-button
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                  entity_id: script.da_home
-              entity: script.da_home
-              icon: mdi:home-account
-              name: Дома
-         
-            - type: entity-button
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                  entity_id: script.da_away
-              entity: script.da_away
-              icon: mdi:home-remove
-              name: Не дома
-          
       - type: vertical-stack
         cards:
 
@@ -228,7 +136,7 @@ cards:
            - type: glance
              show_state: false
              entities:
-              - entity: binary_sensor.motion_sensor_158d00016d56f5
+              - entity: binary_sensor.0x00158d00016d56f5_occupancy
                 name: Движение
               - entity: binary_sensor.0x00158d0001583c7b_contact
                 name: Окно

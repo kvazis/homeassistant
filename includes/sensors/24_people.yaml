@@ -5,10 +5,10 @@
         entity_picture_template: '/local/people/alex.jpg'
         value_template: >-
           {% if is_state('device_tracker.life360_alex','home')  
-             or is_state('binary_sensor.kn_bip_alex', 'on') 
+             or is_state('binary_sensor.kn_alex', 'on') 
              or is_state('binary_sensor.gg_alex', 'on') 
-             or is_state('binary_sensor.dd_bip_alex', 'on') 
-             or is_state('binary_sensor.da_bip_alex', 'on')  %}
+             or is_state('binary_sensor.dd_alex', 'on') 
+             or is_state('binary_sensor.da_alex', 'on')  %}
                 Дом
           {% else %}
             {{ state_attr('device_tracker.life360_alex','address') }}
@@ -22,10 +22,10 @@
         entity_picture_template: '/local/people/olga.jpg'
         value_template: >-
           {% if is_state('device_tracker.life360_olga','home')  
-             or is_state('binary_sensor.kn_bip_olha', 'on') 
+             or is_state('binary_sensor.kn_olha', 'on') 
              or is_state('binary_sensor.gg_olha', 'on') 
-             or is_state('binary_sensor.dd_bip_olha', 'on') 
-             or is_state('binary_sensor.da_bip_olha', 'on')  %}
+             or is_state('binary_sensor.dd_olha', 'on') 
+             or is_state('binary_sensor.da_olha', 'on')  %}
                 Дом
           {% else %}
             {{ state_attr('device_tracker.life360_olga','address') }}
@@ -39,10 +39,10 @@
         entity_picture_template: '/local/people/dima.jpg'
         value_template: >-
           {% if is_state('device_tracker.life360_dima','home')  
-             or is_state('binary_sensor.kn_mi_band_4_dima', 'on') 
+             or is_state('binary_sensor.kn_dima', 'on') 
              or is_state('binary_sensor.gg_dima', 'on') 
-             or is_state('binary_sensor.dd_mi_band_4_dima', 'on') 
-             or is_state('binary_sensor.da_mi_band_4_dima', 'on')  %}
+             or is_state('binary_sensor.dd_dima', 'on') 
+             or is_state('binary_sensor.da_dima', 'on')  %}
                 Дом
           {% else %}
             {{ state_attr('device_tracker.life360_dima','address') }}

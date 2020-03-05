@@ -2,6 +2,8 @@
   id: 'Режим обогрева в гостиной'
   initial_state: true
   trigger:
+    - platform: homeassistant
+      event: start
     - platform: time_pattern
       minutes: '/5'
     - platform: state
@@ -22,11 +24,13 @@
   id: 'Увлажнение в гостиной'
   initial_state: true
   trigger:
-    platform: state
-    entity_id:
-      - input_number.humidity_level_gg
-      - sensor.05_mean_humidity
-      - binary_sensor.living_hum
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id:
+        - input_number.humidity_level_gg
+        - sensor.05_mean_humidity
+        - binary_sensor.living_hum
   action:
     service_template: >-
       {% set hi = (states('input_number.humidity_level_gg') | float) + 5 %}

@@ -1,0 +1,31 @@
+##################   Other
+title: COVID 19
+icon: mdi:hospital
+cards:
+
+      - type: vertical-stack
+        cards:
+        
+          - type: markdown
+            content: >
+               **Коронавирус Covid 19 Мир**
+
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.worldwide_coronavirus_current
+            - entity: sensor.worldwide_coronavirus_recovered
+            - entity: sensor.worldwide_coronavirus_confirmed
+            - entity: sensor.worldwide_coronavirus_deaths
+          - type: markdown
+            content: >
+               **Коронавирус Covid 19 Украина**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.ukraine_coronavirus_current
+            - entity: sensor.ukraine_coronavirus_recovered
+            - entity: sensor.ukraine_coronavirus_confirmed
+            - entity: sensor.ukraine_coronavirus_deaths
+
+

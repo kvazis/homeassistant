@@ -1,23 +1,25 @@
- 02_change_brightness:
-   sequence:
-    - service: light.turn_on
-      entity_id: light.yeelight_02_ceiling
-      data_template:
-#        transition: '1'
-        brightness: >-
-          {% set n = states.light.yeelight_02_ceiling.attributes.brightness - 90 %}
-          {% if n < 50 %}
-            50
-          {% else %}
-           {{ n | int }}
-          {% endif %}
+#  02_change_brightness:
+#   sequence:
+#     - service: light.turn_on
+#       entity_id:
+#         - light.yeelight_02_ceiling
+#       data_template:
+#          brightness_step_pct: >
+#           {%- if states("binary_sensor.tod_night") == 'on' -%}
+#           -5
+#           {%- elif states("binary_sensor.tod_day") == 'on'  -%}
+#           -45
+#           {%- else -%}
+#           -20
+#           {% endif %}
+#          kelvin: 4000          
           
- 02_mirror_light:
-   sequence:
-    - service: light.turn_off
-      entity_id:
-       - light.yeelight_02_ceiling
-    - service: light.turn_on
-      entity_id:
-       - light.sonoff_02_mirror
+#  02_mirror_light:
+#   sequence:
+#     - service: light.turn_off
+#       entity_id:
+#       - light.yeelight_02_ceiling
+#     - service: light.turn_on
+#       entity_id:
+#       - light.sonoff_02_mirror
 

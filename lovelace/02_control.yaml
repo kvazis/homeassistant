@@ -428,6 +428,7 @@ cards:
                  - entity_id: sensor.da_bt_temperature
                  - entity_id: sensor.0x00158d0002d7bb2b_temperature
                  - entity_id: sensor.0x00158d0001117040_temperature
+                 - entity_id: sensor.0x00158d00015723f1_temperature
                  - state: '> 18'
                  - state: 'unknown'
                  - state: 'unavailable'
@@ -457,6 +458,7 @@ cards:
                  - entity_id: sensor.da_bt_temperature
                  - entity_id: sensor.0x00158d0002d7bb2b_temperature
                  - entity_id: sensor.0x00158d0001117040_temperature
+                 - entity_id: sensor.0x00158d00015723f1_temperature
                  - state: '< 26'
                  - state: 'unknown'
                  - state: 'unavailable'

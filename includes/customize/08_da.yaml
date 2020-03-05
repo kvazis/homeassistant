@@ -64,10 +64,10 @@ sensor.da_bt_humidity:
 sensor.illumination_f0b429cc1f11:
   friendly_name: Детская А шлюз освещенность
   
-sensor.humidity_158d000159c7e6:
+sensor.0x00158d000159c7e6_humidity:
   friendly_name: Детская А, влажность
   icon: mdi:water-percent
-sensor.temperature_158d000159c7e6:
+sensor.0x00158d000159c7e6_temperature:
   friendly_name: Детская А, температура
   icon: mdi:temperature-celsius
   
@@ -80,16 +80,17 @@ sensor.0x00158d000186d9a9_click:
 sensor.0x00158d000155d2fb_click:  
   friendly_name: Детская А, кровать
   
+sensor.0x00158d00028f6fe6_action:
+  friendly_name: Детская А, кубик
+  icon: mdi:cube-outline
+  
 #Бинарные сенсоры
 binary_sensor.0x00158d0001583c7b_contact:
   friendly_name: Детская А, окно
   device_class: window 
-binary_sensor.motion_sensor_158d00016d56f5:
+binary_sensor.0x00158d00016d56f5_occupancy:
   friendly_name: Детская А, движение
   device_class: motion
-binary_sensor.cube_158d00028f6fe6:
-  friendly_name: Детская А, кубик
-  icon: mdi:cube-outline
   
 ## Уровень заряда
 sensor.0x00158d00010b5c6e_battery:
@@ -100,3 +101,9 @@ sensor.0x00158d000186d9a9_battery:
   friendly_name: Детская А, стол
 sensor.0x00158d000155d2fb_battery:  
   friendly_name: Детская А, кровать
+sensor.0x00158d00016d56f5_battery:
+  friendly_name: Детская А, движение
+sensor.0x00158d000159c7e6_battery:
+  friendly_name: Детская А, климат
+sensor.0x00158d00028f6fe6_battery:
+  friendly_name: Детская А, кубик

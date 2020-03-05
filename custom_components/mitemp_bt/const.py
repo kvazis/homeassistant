@@ -1,4 +1,4 @@
-"""Constants for the Xiaomi BLE monitor sensor integration."""
+"""Constants for the Xiaomi passive BLE monitor sensor integration."""
 
 # Configuration options
 CONF_ROUNDING = "rounding"
@@ -31,18 +31,21 @@ CONF_HMAX = 99.9
 
 # Xiaomi sensor types dictionary with offset for adv parser
 XIAOMI_TYPE_DICT = {
-    '209800': ["HHCCJCY01", 1],
-    '20AA01': ["LYWSDCGQ", 0],
-    '205B04': ["LYWSD02", 1],
-    '304703': ["CGG1", 0],
-    '205D01': ["HHCCPOT002", 1]
+    b'\x20\x98\x00': ["HHCCJCY01", 1],
+    b'\x20\xAA\x01': ["LYWSDCGQ", 0],
+    b'\x20\x5B\x04': ["LYWSD02", 1],
+    b'\x30\x47\x03': ["CGG1", 0],
+    b'\x20\x5D\x01': ["HHCCPOT002", 1],
+    b'\x20\xBC\x03': ["GCLS002", 1]
 }
+
 
 # Sensor type indexes dictionary
 # Temperature, Humidity, Moisture, Conductivity, Illuminance, Battery
 # Measurement type T  H  M  C  I  B   9 - no measurement
 MMTS_DICT = {
     'HHCCJCY01' : [0, 9, 1, 2, 3, 9],
+    'GCLS002'   : [0, 9, 1, 2, 3, 9],
     'HHCCPOT002': [9, 9, 0, 1, 9, 9],
     'LYWSDCGQ'  : [0, 1, 9, 9, 9, 2],
     'LYWSD02'   : [0, 1, 9, 9, 9, 9],

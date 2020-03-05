@@ -2,8 +2,7 @@
   scenario:
     name: scenario
     entities:
-      - climate.living1_heater
-      - climate.living2_heater
+      - climate.living_heater
       - climate.dd_heater
       - climate.da_heater
       - automation.telegramm_command_code
@@ -36,6 +35,8 @@
       - automation.01_enter_light_timer_off
       - automation.01_enter_time
       - automation.01_motion_time
+      - automation.02_toilet_power
+      - automation.02_toilet_reboot
       - automation.02_toilet_light      
       - automation.02_toilet_light_on
       - automation.02_toilet_light_off

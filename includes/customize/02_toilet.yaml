@@ -10,10 +10,14 @@ light.sonoff_02_mirror:
   icon: mdi:spotlight-beam
 
 ## Реле
-switch.02_sonoff_fan_relay:
+switch.0x00158d00014dceb3_switch_right:
   friendly_name: Туалет вентилятор
   device_class: plug 
   icon: mdi:fan 
+switch.0x00158d00014dceb3_switch_left:
+  friendly_name: Туалет питание люстры
+  device_class: plug  
+  icon: mdi:power-socket-eu
  
 switch.02_sonoff_mini_relay:
   friendly_name: Туалет питание подсветки
@@ -35,13 +39,6 @@ binary_sensor.wall_switch_right_158d000128cd1a:
   friendly_name: Туалет выключатель правая
 binary_sensor.wall_switch_both_158d000128cd1a:
   friendly_name: Туалет выключатель  
-  
-binary_sensor.wall_switch_left_158d00027c0e2b: 
-  friendly_name: Туалет вход выключатель левая
-binary_sensor.wall_switch_right_158d00027c0e2b: 
-  friendly_name: Туалет вход выключатель правая
-binary_sensor.wall_switch_both_158d00027c0e2b:
-  friendly_name: Туалет вход выключатель
   
 binary_sensor.motion_sensor_158d0001a24e71:
   friendly_name: Туалет движение

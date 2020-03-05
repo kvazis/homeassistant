@@ -28,3 +28,21 @@
         topic: "states/command"
         payload_template: '000'
         retain: true
+        
+        
+- id: Пинг жизни
+  alias: 00_live_ping
+  initial_state: true
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id:
+        - sensor.time_date
+  action:
+  - service: mqtt.publish
+    data_template:
+      topic: "instance/main/sensor/live_ping/state"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true   
+     

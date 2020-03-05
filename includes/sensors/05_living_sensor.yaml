@@ -90,6 +90,24 @@
         icon_template: mdi:alpha-p
         entity_id: air_quality.05_air_monitor
         unit_of_measurement: 'ppm'
+        
+  - platform: template
+    sensors:
+      05_mi_air_temperature:
+        friendly_name: 'Гостиная mi air температура - '
+        value_template: "{{ state_attr('air_quality.05_air_monitor', 'temperature') }}"  
+        icon_template: mdi:temperature-celsius
+        entity_id: air_quality.05_air_monitor
+        unit_of_measurement: '°C'
+        
+  - platform: template
+    sensors:
+      05_mi_air_humidity:
+        friendly_name: 'Гостиная mi air влажность - '
+        value_template: "{{ state_attr('air_quality.05_air_monitor', 'humidity') }}"  
+        icon_template: mdi:water-percent
+        entity_id: air_quality.05_air_monitor
+        unit_of_measurement: '%'
 
 # Аverage temperature
   - platform: min_max
@@ -98,6 +116,8 @@
     entity_ids:
       - sensor.temperature_158d00015aebb6
       - sensor.05_smartmi_temperature
+      - sensor.05_mi_air_temperature
+
       
 # Аverage humidity
   - platform: min_max
@@ -106,6 +126,7 @@
     entity_ids:
       - sensor.humidity_158d00015aebb6
       - sensor.05_smartmi_humidity
+      - sensor.05_mi_air_humidity
 
 
 # Sonoff mini Heater 1

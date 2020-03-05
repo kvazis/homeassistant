@@ -10,11 +10,9 @@
       entity_id: binary_sensor.wall_switch_right_158d000163e571
       click_type: single
 # Кнопка возле кровати
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d00013f82b7
-      click_type: double 
+  - platform: state
+    entity_id: sensor.0x00158d00013f82b7_click
+    to: 'double'
 # Кубик
   - platform: event
     event_type: xiaomi_aqara.cube_action
@@ -115,11 +113,10 @@
     event_data:
       entity_id: binary_sensor.wall_switch_left_158d000163e571
       click_type: single
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d00013f82b7
-      click_type: single  
+# Кнопка возле кровати
+  - platform: state
+    entity_id: sensor.0x00158d00013f82b7_click
+    to: 'single'
   action: 
   - service: script.turn_on
     data_template:

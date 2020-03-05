@@ -1,4 +1,9 @@
 # Код команд для уведомлений
-  - platform: mqtt
-    state_topic: "states/command"
-    name: 'mqtt_command_code'
+ - platform: mqtt
+   state_topic: "states/command"
+   name: 'mqtt_command_code'
+    
+# Отслеживание состояния основного сервера    
+ - platform: mqtt
+   name: "reserve_live_ping"
+   state_topic: "instance/reserve/sensor/live_ping/state"  

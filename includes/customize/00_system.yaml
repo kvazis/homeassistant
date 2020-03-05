@@ -9,3 +9,7 @@ sensor.time:
   friendly_name: Время
 binary_sensor.workday_sensor:
   friendly_name: Рабочий день
+  
+sensor.reserve_live_ping:
+  friendly_name: Последний отзыв от резервного сервера - 
+  icon: mdi:server-network

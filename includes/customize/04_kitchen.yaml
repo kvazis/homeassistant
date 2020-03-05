@@ -34,7 +34,11 @@ sensor.illumination_7811dc64f4c8:
   friendly_name: Кухня шлюз освещенность
 
 sensor.illumination_158d0001e16204:
-  friendly_name: Кухня, освещенность
+  friendly_name: Кухня, ДД освещенность
+  
+sensor.0x04cf8cdf3c772379_illuminance:
+  friendly_name: Кухня, сенсор освещенности
+  unit_of_measurement: 'lx'
 
 sensor.0x00158d0001581109_humidity:
   friendly_name: Кухня влажность
@@ -71,6 +75,8 @@ binary_sensor.vibration_158d0002a8ab8b:
   friendly_name: Кухня конфетница
 
 ## Уровень заряда
+sensor.0x04cf8cdf3c772379_battery:
+  friendly_name: Кухня, сенсор освещенности
 sensor.0x00158d0001581109_battery:
   friendly_name: Кухня климат
 sensor.0x00158d000282a130_battery:

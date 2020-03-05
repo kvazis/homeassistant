@@ -1,12 +1,13 @@
 ## Возобновление питания на выключателе люстры
 - alias: 06_bathroom_cell_power
   initial_state: true
-  trigger:
-    - platform: state
-      entity_id: switch.0x00158d0001117040_switch_right
-      to: 'off'
+  trigger:       
+   - platform: time_pattern
+     minutes: '/1'
+  condition:
+   - condition: template
+     value_template: "{{ states('switch.0x00158d0001117040_switch_right') != 'on' }}"         
   action:
-   - delay: 00:00:03
    - service: switch.turn_on
      entity_id: switch.0x00158d0001117040_switch_right
      
@@ -19,6 +20,10 @@
     to: 'unavailable'
     for:
       minutes: 5
+  condition:
+    condition: numeric_state
+    entity_id: sensor.unavailable_now_light
+    below: 5
   action:
     - service: mqtt.publish
       data_template:

@@ -52,6 +52,7 @@ cards:
               - entity: sensor.reserve_scenario_group
                 name: Бытовые сценарии
                 icon: mdi:format-list-numbered
+              - entity: sensor.reserve_live_ping
 
           - type: custom:vertical-stack-in-card
             cards:
@@ -81,122 +82,182 @@ cards:
           - type: markdown
             content: >
                  **Аппаратная часть**
-          
+
           - type: horizontal-stack
             cards:
   
             - type: custom:canvas-gauge-card
               entity: sensor.processor_use
               card_height: 180
-              background-color: var(--background-image)
               gauge:
                 type: "radial-gauge"
-                title: Processor (%)
-                width: 220
-                height: 200
+                title: CPU (%)
+                borderShadowWidth: 0
+                borderOuterWidth: 0
+                borderMiddleWidth: 0
+                borderInnerWidth: 0
+                width: 200
+                height: 180
                 minValue: 0
                 maxValue: 100
-                startAngle: 45
-                ticksAngle: 270
-                valueBox: true
+                startAngle: 15
+                ticksAngle: 330
+                valueBox: false
+                colorPlate: "#C0C0C0"
                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
                 minorTicks: 4
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
+
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.processor_use
+                 name: CPU Use
+                 color: "#FF00FF"
+              animate: true
+              line_width: 3
+
+          - type: horizontal-stack
+            cards:
 
             - type: custom:canvas-gauge-card
               entity: sensor.cpu_temp
               card_height: 180
               gauge:
                 type: "radial-gauge"
-                title: Processor (C)
-                width: 220
-                height: 200
+                title: CPU (C)
+                borderShadowWidth: 0
+                borderOuterWidth: 0
+                borderMiddleWidth: 0
+                borderInnerWidth: 0
+                width: 200
+                height: 180
                 minValue: 0
                 maxValue: 100
-                startAngle: 45
-                ticksAngle: 270
-                valueBox: true
+                startAngle: 15
+                ticksAngle: 330
+                valueBox: false
+                colorPlate: "#C0C0C0"
                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
                 minorTicks: 4
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
 
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.cpu_temp
+                 name: CPU Temp
+                 color: "#FF0000"
+              animate: true
+              line_width: 3
 
-          - type: custom:canvas-gauge-card
-            entity: sensor.memory_use_percent
-            card_height: 100
-            gauge:
-                type: "linear-gauge"
-                title: Занято ОЗУ (%)
-                width: 450
-                height: 100
-                minValue: 00
+
+          - type: horizontal-stack
+            cards:
+
+            - type: custom:canvas-gauge-card
+              entity: sensor.memory_use_percent
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: RAM (%)
+                borderShadowWidth: 0
+                borderOuterWidth: 0
+                borderMiddleWidth: 0
+                borderInnerWidth: 0
+                width: 200
+                height: 180
+                minValue: 0
                 maxValue: 100
+                startAngle: 15
+                ticksAngle: 330
                 valueBox: false
+                colorPlate: "#C0C0C0"
                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 2
+                minorTicks: 4
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
-                
-          - type: custom:canvas-gauge-card
-            entity: sensor.disk_use_percent
-            card_height: 100
-            gauge:
-                type: "linear-gauge"
-                title: Занято на диске (%)
-                width: 450
-                height: 100
-                minValue: 00
+            
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.memory_use_percent
+                 name: RAM % Use
+                 color: "#FF69B4"
+              animate: true
+              line_width: 3
+
+          - type: horizontal-stack
+            cards:
+
+            - type: custom:canvas-gauge-card
+              entity: sensor.disk_use_percent
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Disk (%)
+                borderShadowWidth: 0
+                borderOuterWidth: 0
+                borderMiddleWidth: 0
+                borderInnerWidth: 0
+                width: 200
+                height: 180
+                minValue: 0
                 maxValue: 100
+                startAngle: 15
+                ticksAngle: 330
                 valueBox: false
+                colorPlate: "#C0C0C0"
                 majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 2
+                minorTicks: 4
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
                 borders: false
-                
-          - type: custom:canvas-gauge-card
-            entity: sensor.disk_free
-            card_height: 100
-            gauge:
-                type: "linear-gauge"
-                title: Свободно на диске (ГБ)
-                width: 450
-                height: 100
-                minValue: 00
+              
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.disk_use_percent
+                 name: Disk % Use
+                 color: "#00FFFF"
+              animate: true
+              line_width: 3
+
+          - type: horizontal-stack
+            cards:
+
+            - type: custom:canvas-gauge-card
+              entity: sensor.disk_free
+              card_height: 180
+              gauge:
+                type: "radial-gauge"
+                title: Disk (%)
+                borderShadowWidth: 0
+                borderOuterWidth: 0
+                borderMiddleWidth: 0
+                borderInnerWidth: 0
+                width: 200
+                height: 180
+                minValue: 0
                 maxValue: 120
+                startAngle: 15
+                ticksAngle: 330
                 valueBox: false
+                colorPlate: "#C0C0C0"
                 majorTicks: ["0", "15", "30", "45", "60", "75", "90", "105", "120"]
-                minorTicks: 2
+                minorTicks: 4
                 strokeTicks: true
                 highlights: [{"from": 0, "to": 5,"color": "rgba(255, 0, 0, .75)"}, {"from": 5, "to": 15,"color": "rgba(255, 140, 0, .75)"}, {"from": 15, "to": 45,"color": "rgba(255, 255, 0, .75)"}, {"from": 45, "to": 120,"color": "rgba(10, 255, 0, .75)"}]
                 borders: false
-
-          - type: custom:vertical-stack-in-card
-            cards:
-     
-            - type: markdown
-              content: >
-                **Графики**
-
-            - type: history-graph
+              
+            - type: custom:mini-graph-card
               entities:
-               - entity: sensor.cpu_temp
-                 name: Температура CPU
-
-            - type: history-graph
-              entities:
-               - entity: sensor.disk_use_percent
-                 name: Диск
-               - entity: sensor.memory_use_percent
-                 name: ОЗУ
-               - entity: sensor.processor_use
-                 name: Процессор
-
+               - entity: sensor.disk_free
+                 name: Disk free
+                 color: "#98FB98"
+              animate: true
+              line_width: 3
 
       - type: vertical-stack
         cards:
@@ -225,27 +286,9 @@ cards:
               - type: entities
                 show_header_toggle: false
                 entities:
-                - entity: script.ha_backup
-                  name: Снапшот
-                  icon: mdi:backup-restore 
-                - entity: counter.backup_stage
-                  name: Фаза бэкапа - 
-                - entity: sensor.backup_phaze
-                  name: Действие - 
-                - entity: timer.backup
-                  name: Фаза завершается через - 
-                - entity: sensor.last_google_backup
-                  icon: mdi:map-clock-outline
-                - entity: sensor.last_google_filecount
-                  icon: mdi:file-search
-                - entity: sensor.last_google_alreadycount
-                  icon: mdi:file-export
-                - entity: sensor.last_google_backedupcount
-                  icon: mdi:google-plus-box
-                - entity: sensor.last_google_deletedcount
-                  icon: mdi:file-remove
-                - entity: sensor.last_google_deletedfromgoogle
-                  icon: mdi:folder-google-drive
+                - entity: sensor.last_google_backup_main
+                - entity: sensor.snapshots_in_google_drive_main
+                - entity: sensor.snapshots_in_hassio_main
 
 #              - type: weather-forecast
 #                entity: weather.openweathermap

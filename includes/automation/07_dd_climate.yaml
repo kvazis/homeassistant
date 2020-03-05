@@ -2,6 +2,8 @@
   id: 'Режим обогрева детской Д'
   initial_state: true
   trigger:
+    - platform: homeassistant
+      event: start
     - platform: time_pattern
       minutes: '/5'
     - platform: state
@@ -21,11 +23,13 @@
   id: 'Увлажнение в детской Д'
   initial_state: true
   trigger:
-    platform: state
-    entity_id:
-      - input_number.humidity_level_dd
-      - sensor.07_mean_humidity
-      - binary_sensor.dd_hum
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id:
+        - input_number.humidity_level_dd
+        - sensor.07_mean_humidity
+        - binary_sensor.dd_hum
   action:
     service_template: >-
       {% set hi = (states('input_number.humidity_level_dd') | float) + 5 %}

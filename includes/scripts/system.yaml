@@ -22,4 +22,4 @@
     sequence:
       - service: homeassistant.update_entity
         entity_id:
-         - sensor.last_boot_custom
+         - sensor.reserve_state
