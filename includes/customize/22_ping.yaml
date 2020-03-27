@@ -31,6 +31,9 @@ binary_sensor.notebook_sony:
 binary_sensor.notebook_chuwi:
   friendly_name: Ноутбук Chuwi
   icon: mdi:laptop
+binary_sensor.notebook_acer_15:
+  friendly_name: Ноутбук Acer 15
+  icon: mdi:laptop
   
 binary_sensor.hainst_main:
   friendly_name: Основной RPB3+

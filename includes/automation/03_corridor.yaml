@@ -82,35 +82,39 @@
       entity_id:
         - light.yeelight_03_ceiling
         
-## Таймер освещения вкл
-- alias: 03_corridor_light_timer
-  initial_state: true
-  trigger:
-## Условия для включения таймера
-  - platform: state
-    entity_id:
-      - binary_sensor.cr_light_timer
-  action:
-    service_template: >-  
-          {%- if states.binary_sensor.cr_light_timer.state == 'on' -%}
-          timer.start
-          {%- elif states.binary_sensor.cr_light_timer.state == 'off' -%}
-          timer.cancel
-          {%- endif -%}    
-    entity_id: timer.corridor  
-
 ## Автоматическое отключение света       
 - alias: 03_corr_light_auto_off
   initial_state: true
   trigger:
-   - platform: event
-     event_type: timer.finished
-     event_data:
-       entity_id: timer.corridor
+  - platform: state
+    entity_id: binary_sensor.0x00158d00010f8920_occupancy
+    to: 'off'
+  condition:
+   - condition: state
+     entity_id: light.yeelight_03_ceiling
+     state: 'on'
   action:
     - service: light.turn_off
       entity_id:
         - light.yeelight_03_ceiling
+        
+## Люстра в коридоре - контроль случайного включения
+- alias: 03_corr_light_power
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_03_ceiling
+    to: 'on' 
+    for:
+        minutes: 3
+  condition:
+    - condition: state
+      entity_id: binary_sensor.0x00158d00010f8920_occupancy
+      state: 'off'
+  action:
+   - service: light.turn_off
+     entity_id:
+      - light.yeelight_03_ceiling
         
 ## Запись последнего движения в коридоре
 - alias: 03_motion_time

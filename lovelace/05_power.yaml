@@ -11,16 +11,13 @@ cards:
            - type: markdown
              content: >
                  ## Общий показатель
-           - type: horizontal-stack
-             cards:    
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_total_energy
-                   name: Потребление
-                   color: "#6495ED"
-                show:
-                   graph: bar
+           - type: iframe
+             url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/euS3ySWgk/power?orgId=1&refresh=1m&panelId=2
+             # aspect_ratio: 65% 
+
+           - type: iframe
+             url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/euS3ySWgk/power?orgId=1&refresh=1m&panelId=6
+             # aspect_ratio: 65% 
 
            - type: horizontal-stack
              cards:
@@ -63,24 +60,9 @@ cards:
            - type: markdown
              content: >
                  ## Стиральная машина
-           - type: horizontal-stack
-             cards:      
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_bwshp2
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar
-
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.bwshp2_voltage
-                   name: Напряжение
-                   color: "#E6E6FA"
-                animate: true
-                line_width: 3
+           - type: iframe
+             url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/euS3ySWgk/power?orgId=1&refresh=1m&panelId=4
+             # aspect_ratio: 65% 
 
            - type: horizontal-stack
              cards:
@@ -124,16 +106,10 @@ cards:
            - type: markdown
              content: >
                  ## Кухня телевизор
-           - type: horizontal-stack
-             cards:      
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d0001291d12
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar
+
+           - type: iframe
+             url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/euS3ySWgk/power?orgId=1&refresh=1m&panelId=8
+             # aspect_ratio: 65% 
 
            - type: horizontal-stack
              cards:

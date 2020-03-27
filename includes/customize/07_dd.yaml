@@ -78,7 +78,7 @@ sensor.0x00158d0001a2ccab_power:
 sensor.illumination_286c07f0ad27:
   friendly_name: Детская Д шлюз освещенность
   
-sensor.illumination_158d0001a66222:
+sensor.0x00158d0001a66222_illuminance:
   friendly_name: Детская Д, освещенность
   
 sensor.0x00158d000156e92e_humidity:
@@ -91,21 +91,17 @@ sensor.0x00158d000156e92e_temperature:
   
 sensor.0x00158d00013f82b7_click:
   friendly_name: Детская Д, кровать, круглая
-
-#Бинарные сенсоры
-binary_sensor.wall_switch_left_158d000163e571:
-  friendly_name: Детская Д, выключатель вход левая
-binary_sensor.wall_switch_right_158d000163e571:
-  friendly_name: Детская Д, выключатель вход правая
-binary_sensor.wall_switch_both_158d000163e571:
-  friendly_name: Детская Д, выключатель  вход
-
-binary_sensor.motion_sensor_158d0001a66222:
-  friendly_name: Детская Д, движение
-
-binary_sensor.cube_158d00011063da:
+  
+sensor.0x00158d000163e571_click:
+  friendly_name: Детская Д, выключатель вход
+  
+sensor.0x00158d00011063da_action:
   friendly_name: Детская Д, кубик
   icon: mdi:cube-outline
+  
+#Бинарные сенсоры
+binary_sensor.0x00158d0001a66222_occupancy:
+  friendly_name: Детская Д, движение
 
 binary_sensor.0x00158d0001193697_contact:
   friendly_name: Детская Д, окно
@@ -121,6 +117,14 @@ sensor.0x00158d00013f82b7_battery:
 sensor.0x00158d000156e92e_battery:
   friendly_name: Детская Д, климат
 
+sensor.0x00158d000163e571_battery:
+  friendly_name: Детская Д, выключатель вход
+  
+sensor.0x00158d0001a66222_battery:
+  friendly_name: Детская Д, движение
+  
+sensor.0x00158d00011063da_battery:
+  friendly_name: Детская Д, кубик
 
 ## Детская Д балкон
 

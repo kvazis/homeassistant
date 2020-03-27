@@ -1,37 +1,3 @@
-# Условия для включения увлажнения
-  - platform: template
-    sensors:
-      living_hum:
-        friendly_name: "Режим увлажнения, Гостиная -"
-        value_template: >-
-          {{ is_state('binary_sensor.door_window_sensor_158d000445206b', 'off')  
-             and is_state('binary_sensor.door_window_sensor_158d00013ed373', 'off')
-             and states('sensor.05_mean_humidity')|float < 55
-             and is_state('binary_sensor.humidification', 'on') 
-             and is_state('sensor.living_day_work', 'Включен') }}
-        icon_template: >-
-          {% if is_state("binary_sensor.living_hum", "on") %}
-          mdi:water-percent
-          {% else %}
-          mdi:air-humidifier
-          {% endif %}
-          
-# Условия для включения отопления
-  - platform: template
-    sensors:
-      living_heat:
-        friendly_name: "Режим отопления, Гостиная -"
-        value_template: >-
-          {{ is_state('binary_sensor.door_window_sensor_158d000445206b', 'off')  
-             and is_state('binary_sensor.door_window_sensor_158d00013ed373', 'off')
-             and is_state('sensor.living_heat_work', 'Включен') }}
-        icon_template: >-
-          {% if is_state("binary_sensor.living_heat", "on") %}
-          mdi:radiator
-          {% else %}
-          mdi:radiator-off
-          {% endif %}
-
 # Режим выходного дня
   - platform: mqtt
     name: living_holiday
@@ -60,17 +26,17 @@
     payload_on: "ON"
     payload_off: "OFF"
     
-# Условия для включения таймера освещения
+# Условия для включения освещения на балконе
   - platform: template
     sensors:
-      lr_b_light_timer:
-        friendly_name: "Таймер сброса освещения балкон гостиная -"
+      lr_balcony_motion:
+        friendly_name: "Условия для включения освещения на балконе -"
         value_template: >-
-          {{ is_state('light.66633530807d3a766432', 'on')  
-             and is_state('binary_sensor.motion_sensor_158d000449b773', 'off')  }}
+          {{ is_state('binary_sensor.0x00158d000449b773_occupancy', 'on')  
+             and states('sensor.0x00158d000449b773_illuminance')|float < 100 }}
         icon_template: >-
-          {% if is_state("binary_sensor.lr_b_light_timer", "on") %}
-          mdi:timer
+          {% if is_state("binary_sensor.lr_balcony_motion", "on") %}
+          mdi:motion-sensor
           {% else %}
-          mdi:timer-off
+          mdi:walk
           {% endif %}

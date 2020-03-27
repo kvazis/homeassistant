@@ -61,7 +61,7 @@ class BatteryEntity extends Polymer.Element {
 	}
 
 	setConfig(config) {
-		this._config = config;
+		this._config = JSON.parse(JSON.stringify(config));
 	}
 
 	displayName() {

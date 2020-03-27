@@ -13,6 +13,7 @@ homeassistant:
   # Customization file
 #   customize: !include customize.yaml
   customize: !include_dir_merge_named includes/customize
+  packages: !include_dir_merge_named includes/packages
   auth_providers:
    - type: homeassistant
    - type: legacy_api_password
@@ -52,7 +53,24 @@ discovery:
 
 lovelace:
   mode: yaml
-
+  resources:
+   - url: /community_plugin/lovelace-auto-entities/auto-entities.js
+     type: module
+   - url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
+     type: js 
+   - url: /community_plugin/canvas-gauge-card/canvas-gauge-card.js
+     type: module
+   - url: /community_plugin/mini-graph-card/mini-graph-card-bundle.js
+     type: module
+   - url: /community_plugin/simple-thermostat/simple-thermostat.js?v=1
+     type: module
+   - url: /community_plugin/lovelace-card-mod/card-mod.js
+     type: module
+   - url: /community_plugin/stack-in-card/stack-in-card.js
+     type: module
+   - url: /community_plugin/lovelace-battery-entity/battery-entity.js
+     type: module
+     
 # Включение истории
 #history:
 
@@ -115,12 +133,12 @@ telegram_bot:
       - !secret chat_id_alex
       - !secret chat_id_olha
       
-# Кастомные карты
-hacs:
-  token: !secret HACS_github
-  appdaemon: true
-  python_script: true
-  theme: true
+# # Кастомные карты
+# hacs:
+#   token: !secret HACS_github
+#   appdaemon: true
+#   python_script: true
+#   theme: true
 
 # Роутер
 asuswrt:
@@ -132,13 +150,12 @@ asuswrt:
     - download
     - upload_speed
     - download_speed
-
 device_tracker:
   - platform: asuswrt
     consider_home: 180
     new_device_defaults:
       track_new_devices: false
-      hide_if_away: false
+
 
 life360:
   driving_speed: 20
@@ -182,7 +199,8 @@ camera: !include includes/camera.yaml
 timer: !include includes/timer.yaml
 counter: !include includes/counter.yaml
 fan: !include includes/fan.yaml
-recorder: !include includes/recorder.yaml 
+recorder: !include includes/recorder.yaml
+influxdb: !include includes/influxdb.yaml
 group: !include includes/groups.yaml
 rest_command: !include includes/rest_command.yaml
 notify: !include includes/notify.yaml

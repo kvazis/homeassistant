@@ -5,59 +5,77 @@ cards:
       - type: vertical-stack
         cards:
 
-        - type: custom:vertical-stack-in-card
-          cards:
- 
-          - type: markdown
-            content: >
-                 **Аппаратная часть**
-          
-          - type: horizontal-stack
-            cards:
-  
-            - type: custom:canvas-gauge-card
-              entity: sensor.processor_use
-              card_height: 180
-              background-color: var(--background-image)
-              gauge:
-                type: "radial-gauge"
-                title: Processor (%)
-                width: 220
-                height: 200
-                minValue: 0
-                maxValue: 100
-                startAngle: 45
-                ticksAngle: 270
-                valueBox: true
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
-                borders: false
-
-            - type: custom:canvas-gauge-card
-              entity: sensor.cpu_temp
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: Processor (C)
-                width: 220
-                height: 200
-                minValue: 0
-                maxValue: 100
-                startAngle: 45
-                ticksAngle: 270
-                valueBox: true
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
-                borders: false
-
+          - type: picture-elements
+            image: /local/plan.png
+            elements:
+            
+            - type: state-icon
+            #   icon: mdi:fan
+              tap_action:
+                action: toggle
+              entity: light.yeelight_01_whitebulb
+              style:
+               top: 20%
+               left: 40% 
+               
+          - type: picture-elements
+            image: /local/plan.png
+            elements:
+            
+            - type: state-icon
+            #   icon: mdi:fan
+              tap_action:
+                action: toggle
+              entity: light.yeelight_01_whitebulb
+              style:
+               top: 20%
+               left: 40% 
+               
       - type: vertical-stack
         cards:
 
-    
+          - type: picture-elements
+            image: /local/plan.png
+            elements:
+            
+            - type: state-icon
+            #   icon: mdi:fan
+              tap_action:
+                action: toggle
+              entity: light.yeelight_01_whitebulb
+              style:
+               top: 20%
+               left: 40% 
+               
+          - type: picture-elements
+            image: /local/plan.png
+            elements:
+            
+            - type: state-icon
+            #   icon: mdi:fan
+              tap_action:
+                action: toggle
+              entity: light.yeelight_01_whitebulb
+              style:
+               top: 20%
+               left: 40% 
+               
+      - type: vertical-stack
+        cards:
+
+          - type: picture-elements
+            image: /local/plan.png
+            elements:
+            
+            - type: state-icon
+            #   icon: mdi:fan
+              tap_action:
+                action: toggle
+              entity: light.yeelight_01_whitebulb
+              style:
+               top: 20%
+               left: 40% 
+               
           - type: picture-elements
             image: /local/plan.png
             elements:

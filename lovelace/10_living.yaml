@@ -85,15 +85,22 @@ cards:
             content: >
                 **Управление**
 
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.movie_mode
-            - entity: switch.tv_samsung
-            - entity: script.ilife_a4
+          - type: horizontal-stack
+            cards:    
+            - type: entity-button
+              entity: switch.movie_mode 
+            - type: entity-button
+              entity: switch.tv_samsung
+              icon: mdi:television
+            - type: entity-button
+              entity: script.ilife_a4
               name: iLife A4
-              icon: mdi:robot-vacuum            
-            
+              icon: mdi:robot-vacuum  
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                  entity_id: script.ilife_a4
 
         - type: custom:vertical-stack-in-card
           cards: 
@@ -101,62 +108,33 @@ cards:
           - type: markdown
             content: >
                 **Питание**
-
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.0x00158d00015723f1_switch_right
-              secondary_info: last-changed             
-            - entity: switch.0x00158d000153dd8e_switch
-              secondary_info: last-changed
-            - entity: switch.living_usb_fan
-              secondary_info: last-changed
-            - type: divider
-            - entity: switch.0x00158d00012896cb_switch
-              secondary_info: last-changed
-            - entity: switch.0x04cf8cdf3c764e0a_switch             
-              secondary_info: last-changed
-            - entity: switch.wifi_3usb 
-              secondary_info: last-changed
-
-        - type: markdown
-          content: >
-                Растения
-
-        - type: custom:vertical-stack-in-card
-          cards: 
-          - type: plant-status
-            entity: plant.dieffenbac_ble
-            name: Диффенбахия
-          - type: plant-status
-            entity: plant.yucca_ble
-            name: Юкка
-          - type: plant-status
-            entity: plant.zamiokulkas_ble
-            name: Замиокулькас
+                
           - type: horizontal-stack
-            cards: 
-              - type: plant-status
-                entity: plant.deep_purple_ble
-                name: Deep Purple
-              - type: plant-status
-                entity: plant.true_blue_ble
-                name: True Blue
+            cards:    
+            - type: entity-button
+              entity: switch.0x00158d00015723f1_switch_right
+            - type: entity-button
+              entity: switch.0x00158d000153dd8e_switch
+            - type: entity-button
+              entity: switch.living_usb_fan
+              
+          - type: horizontal-stack
+            cards:    
+            - type: entity-button
+              entity: switch.0x00158d00012896cb_switch
+            - type: entity-button
+              entity: switch.0x04cf8cdf3c764e0a_switch 
+            - type: entity-button
+              entity: switch.wifi_3usb 
+
 
       - type: vertical-stack
         cards:
         
         - type: markdown
           content: >
-              **Гостиная - мониторинг**
+              **Гостиная - климат**
               
-        - type: picture-entity
-          entity: camera.reolink4_sub
-          camera_view: live 
-          show_state: false
-          show_name: false
-
-
         - type: custom:vertical-stack-in-card
           cards: 
           - type: markdown
@@ -268,50 +246,59 @@ cards:
                 borders: false
   
 
-        - type: horizontal-stack
-          cards: 
-        
-            - type: thermostat
-              entity: climate.living1_heater
-              name: Батарея 1
-              
-            - type: thermostat
-              entity: climate.living2_heater
-              name: Батарея 2
+        - type: custom:simple-thermostat
+          entity: climate.living_heater
+          step_layout: row
+          name: false
+          icon: false
+      #   control: false
+          sensors:
+            - entity: sensor.05_mean_humidity
+              name: Humidity
           
-        - type: custom:vertical-stack-in-card
-          cards: 
-
-          - type: horizontal-stack
-            cards: 
-
-            - type: entity-button
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                  entity_id: script.living_home
-              entity: script.living_home
-              icon: mdi:home-account
-              name: Дома
-         
-            - type: entity-button
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                  entity_id: script.living_away
-              entity: script.living_away
-              icon: mdi:home-remove
-              name: Не дома
-
-
         - type: entities
           show_header_toggle: false
           entities:
           - entity: input_number.humidity_level_gg
           - entity: binary_sensor.living_hum
           - entity: switch.gg_humidifier
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          content: >
+              **Камера**
+
+        - type: picture-entity
+          entity: camera.reolink4_sub
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+        - type: markdown
+          content: >
+                Растения
+
+        - type: custom:vertical-stack-in-card
+          cards: 
+          - type: plant-status
+            entity: plant.dieffenbac_ble
+            name: Диффенбахия
+          - type: plant-status
+            entity: plant.yucca_ble
+            name: Юкка
+          - type: plant-status
+            entity: plant.zamiokulkas_ble
+            name: Замиокулькас
+          - type: horizontal-stack
+            cards: 
+              - type: plant-status
+                entity: plant.deep_purple_ble
+                name: Deep Purple
+              - type: plant-status
+                entity: plant.true_blue_ble
+                name: True Blue
 
       - type: vertical-stack
         cards:
@@ -330,7 +317,7 @@ cards:
 
             - type: custom:mini-graph-card
               entities:
-               - entity: sensor.illumination_158d000449b773
+               - entity: sensor.0x00158d000449b773_illuminance
                  name: Освещенность
                  color: "#FFFFFF"
               animate: true
@@ -339,14 +326,15 @@ cards:
         - type: glance
           show_state: false
           entities:
-           - entity: binary_sensor.door_window_sensor_158d00013ed373
+           - entity: binary_sensor.0x00158d00013ed373_contact
              name: Окно в гостиной
-           - entity: binary_sensor.door_window_sensor_158d000445206b
+           - entity: binary_sensor.0x00158d000445206b_contact
              name: Дверь на балкон
-           - entity: binary_sensor.motion_sensor_158d000449b773
+           - entity: binary_sensor.0x00158d000449b773_occupancy
              name: Движение
-           - entity: binary_sensor.door_window_sensor_158d0001a2f5f7
+           - entity: binary_sensor.0x00158d0001a2f5f7_contact
              name: Окно на балконе 
+           - entity: binary_sensor.lr_balcony_motion
 
 
         - type: horizontal-stack

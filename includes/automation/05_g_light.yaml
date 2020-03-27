@@ -42,26 +42,18 @@
     - platform: state
       entity_id: sensor.0x00158d00015723f1_click
       to: 'right'
-## Квадратная кнопка на столе
+## Квадратная кнопка на комоде
     - platform: state
       entity_id: sensor.0x00158d0001e8a244_click
       to: 'single'
-## Квадратная кнопка на комоде
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.switch_158d0001b86d2e
-        click_type: single
 ## Переворот кубика на 180 градусов
     - platform: state
       entity_id: sensor.0x00158d0001186d82_action
       to: 'flip180' 
 ## Выключатель возле комода - правая кнопка
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_right_158d0001f47e10
-        click_type: single
+    - platform: state
+      entity_id: sensor.0x00158d0001f47e10_click
+      to: 'right'
 ## Выключатель на входе в комнату - левая кнопка
     - platform: event
       event_type: xiaomi_aqara.click
@@ -82,26 +74,18 @@
 - alias: 05_gg_cell_2_light
   initial_state: true
   trigger:
-## Квадратная кнопка на столе
+## Квадратная кнопка  комоде
     - platform: state
       entity_id: sensor.0x00158d0001e8a244_click
       to: 'double'
-## Квадратная кнопка на комоде
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.switch_158d0001b86d2e
-        click_type: double
 ## Тряска кубика
     - platform: state
       entity_id: sensor.0x00158d0001186d82_action
       to: 'shake' 
 ## Выключатель возле комода - левая кнопка
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_left_158d0001f47e10
-        click_type: single
+    - platform: state
+      entity_id: sensor.0x00158d0001f47e10_click
+      to: 'left'
   action:    
     - service: script.turn_on
       data_template:
@@ -155,11 +139,9 @@
       entity_id: sensor.0x00158d0001186d82_action
       to: 'fall' 
 ## Выключатель возле комода - обе кнопки
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_both_158d0001f47e10
-        click_type: both
+    - platform: state
+      entity_id: sensor.0x00158d0001f47e10_click
+      to: 'both'
   action:    
     - service: script.turn_on
       data_template:
@@ -175,11 +157,9 @@
   initial_state: true
   trigger:
 ## Круглая кнопка на комоде
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d0001531698
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d0001531698_click
+    to: 'single'
 ## Круглая кнопка в прихожей
   - platform: event
     event_type: xiaomi_aqara.click
@@ -205,11 +185,9 @@
   initial_state: true
   trigger:
 ## Круглая кнопка на комоде
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d0001531698
-      click_type: long_click_press
+  - platform: state
+    entity_id: sensor.0x00158d0001531698_click
+    to: 'long'
   action:    
     - service: switch.toggle
       entity_id: switch.movie_mode
@@ -219,11 +197,9 @@
   initial_state: true
   trigger:
 ## Круглая кнопка на комоде
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d0001531698
-      click_type: double
+  - platform: state
+    entity_id: sensor.0x00158d0001531698_click
+    to: 'double'
 ## Двойной тап кубиком
   - platform: state
     entity_id: sensor.0x00158d0001186d82_action
@@ -240,10 +216,9 @@
   - platform: state
     entity_id: sensor.0x00158d00010b5aee_click
     to: 'single' 
-  - platform: event
-    event_type: timer.started
-    event_data:
-      entity_id: timer.liv_balc
+  - platform: state
+    entity_id: binary_sensor.lr_balcony_motion
+    to: 'on'
   condition:
    - condition: state
      entity_id: light.66633530807d3a766432
@@ -255,9 +230,6 @@
      data_template:
         brightness_pct: 100
         kelvin: 5500
-   - service: timer.start
-     entity_id: 
-       - timer.liv_balc
 
 ## Люстра на балконе выкл
 - alias: 05_gg_balkoon_light_off
@@ -267,10 +239,9 @@
   - platform: state
     entity_id: sensor.0x00158d00010b5aee_click
     to: 'single' 
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.liv_balc
+  - platform: state
+    entity_id: binary_sensor.0x00158d000449b773_occupancy
+    to: 'off'
   condition:
    - condition: state
      entity_id: light.66633530807d3a766432
@@ -279,42 +250,21 @@
    - service: light.turn_off
      entity_id:
       - light.66633530807d3a766432
-   - service: timer.cancel
-     entity_id: timer.liv_balc
- 
-## Люстра на балконе - обновление таймера по движению
-- alias: 05_gg_balkoon_light_motion
-  initial_state: true
-  trigger:
-## Датчик движения на балконе
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d000449b773
-  condition:
-## Датчик освещения
-   - condition: numeric_state
-     entity_id: sensor.illumination_158d000449b773
-     below: 50
-  action:
-   - service: timer.cancel
-     entity_id: timer.liv_balc 
-   - service: timer.start
-     entity_id: 
-       - timer.liv_balc
-       
-## Люстра на балконе - включение после подачи электричества
+
+## Люстра на балконе - контроль случайного включения
 - alias: 05_gg_balkoon_light_power
   initial_state: true
   trigger:
   - platform: state
     entity_id: light.66633530807d3a766432
-    to: 'on'  
+    to: 'on' 
+    for:
+        minutes: 3
   condition:
-   - condition: state
-     entity_id: timer.liv_balc
-     state: 'idle'
+    - condition: state
+      entity_id: binary_sensor.0x00158d000449b773_occupancy
+      state: 'off'
   action:
-   - service: timer.start
-     entity_id: 
-       - timer.liv_balc  
+   - service: light.turn_off
+     entity_id:
+      - light.66633530807d3a766432

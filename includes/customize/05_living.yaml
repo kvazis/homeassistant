@@ -121,10 +121,10 @@ sensor.0x00158d0001186d82_action:
   friendly_name: Гостиная кубик
   icon: mdi:cube-outline
 
-sensor.humidity_158d00015aebb6:
+sensor.0x00158d00015aebb6_humidity:
   friendly_name: Гостиная, влажность
   icon: mdi:water-percent  
-sensor.temperature_158d00015aebb6:
+sensor.0x00158d00015aebb6_temperature:
   friendly_name: Гостиная, температура
   icon: mdi:temperature-celsius
 
@@ -135,6 +135,12 @@ sensor.05_mean_temperature:
   friendly_name: Гостиная, средняя температура
   icon: mdi:temperature-celsius
 
+sensor.0x00158d0001f47e10_click:
+  friendly_name: Гостиная стена
+  
+sensor.0x00158d0001531698_click:
+  friendly_name: Гостиная, комод, круглая
+
 ## Бинарные сенсоры
 binary_sensor.wall_switch_left_158d00013fc3bc:
   friendly_name: Гостиная вход левая
@@ -143,20 +149,13 @@ binary_sensor.wall_switch_right_158d00013fc3bc:
 binary_sensor.wall_switch_both_158d00013fc3bc:
   friendly_name: Гостиная вход
 
-binary_sensor.wall_switch_left_158d0001f47e10:
-  friendly_name: Гостиная стена левая
-binary_sensor.wall_switch_right_158d0001f47e10:
-  friendly_name: Гостиная стена правая
-binary_sensor.wall_switch_both_158d0001f47e10:
-  friendly_name: Гостиная стена
-  
 binary_sensor.switch_158d0001531698:
   friendly_name: Гостиная, комод, круглая
 
-binary_sensor.switch_158d0001b86d2e:
-  friendly_name: Гостиная, стол, квадратная
+# binary_sensor.switch_158d0001b86d2e:
+#   friendly_name: Гостиная, стол, квадратная
 
-binary_sensor.door_window_sensor_158d00013ed373:
+binary_sensor.0x00158d00013ed373_contact:
   friendly_name: Гостиная, окно
   device_class: window 
 
@@ -166,7 +165,19 @@ sensor.0x00158d0001e8a244_battery:
 
 sensor.0x00158d0001186d82_battery:
   friendly_name: Гостиная кубик
+  
+sensor.0x00158d00013ed373_battery:
+  friendly_name: Гостиная, окно
 
+sensor.0x00158d0001f47e10_battery:  
+  friendly_name: Гостиная стена
+  
+sensor.0x00158d0001531698_battery:
+  friendly_name: Гостиная, комод, круглая
+  
+sensor.0x00158d00015aebb6_battery:
+  friendly_name: Гостиная, климат
+  
 ## Гостиная балкон
 
 ## Освещение
@@ -175,7 +186,7 @@ light.66633530807d3a766432:
   icon: mdi:ceiling-light
 
 ## Сенсоры  
-sensor.illumination_158d000449b773:
+sensor.0x00158d000449b773_illuminance:
   friendly_name: Гостиная, балкон освещенность
 
 sensor.0x00158d0001a4b9da_humidity:
@@ -190,18 +201,24 @@ sensor.0x00158d0001a4b9da_temperature:
   icon: mdi:temperature-celsius
 
 ## Бинарные сенсоры
-binary_sensor.door_window_sensor_158d000445206b:
+binary_sensor.0x00158d000445206b_contact:
   friendly_name: Гостиная, балкон дверь
   device_class: door
 
-binary_sensor.motion_sensor_158d000449b773:
+binary_sensor.0x00158d000449b773_occupancy:
   friendly_name: Гостиная, балкон движение
 
-binary_sensor.door_window_sensor_158d0001a2f5f7:
+binary_sensor.0x00158d0001a2f5f7_contact:
   friendly_name: Гостиная, балкон окно
   device_class: window 
   
 ## Уровень заряда
+sensor.0x00158d000445206b_battery:
+  friendly_name: Гостиная, балкон дверь
+sensor.0x00158d0001a2f5f7_battery:
+  friendly_name: Гостиная, балкон окно
+sensor.0x00158d000449b773_battery:
+  friendly_name: Гостиная, балкон движение
 sensor.0x00158d00010b5aee_battery:
   friendly_name: Балкон выключатель
 sensor.0x00158d0001a4b9da_battery:

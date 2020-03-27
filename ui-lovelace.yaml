@@ -1,18 +1,3 @@
-resources:
-  - url: /community_plugin/lovelace-auto-entities/auto-entities.js
-    type: module
-  - url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
-    type: js 
-  - url: /community_plugin/canvas-gauge-card/canvas-gauge-card.js
-    type: module
-  - url: /community_plugin/mini-graph-card/mini-graph-card-bundle.js
-    type: module
-  - url: /community_plugin/simple-thermostat/simple-thermostat.js?v=1
-    type: module
-  - url: /local/battery-entity.js?v=0.1
-    type: module
-
-    
 title: Home Assistant - Raspberry Pi 3 B+ 70 Основной сервер
 views:
   - !include lovelace/01_system.yaml

@@ -3,295 +3,133 @@ title: Система
 icon: mdi:home-map-marker
 cards:
 
-      - type: vertical-stack
-        cards:
+    - type: vertical-stack
+      style: |
+          ha-card {
+            color: #00FA9A;
+            --paper-item-icon-color: #00FA9A;
+            font-weight: bold;
+            font-size: 16px;
+          }  
+      title: Состояние серверов HA
+      cards:
 
-          - type: custom:vertical-stack-in-card
-            cards:
-        
-            - type: markdown
-              content: >
-                 **Состояние сервера**
+        - type: markdown
+          content: >
+               **Основной сервер** 
+      
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.last_boot_custom
+            name: Сервер в онлайне -
+            icon: mdi:av-timer
+          - entity: sensor.rpi_power_status
+            name: Питание Raspberry Pi 3 B+ 
+            icon: mdi:power-plug
+          - entity: sensor.online_custom
+            name: Home Assistant в онлайне -
+            icon: mdi:clock
+          - type: divider
+          - entity: group.scenario
+            name: Бытовые сценарии - 
+            icon: mdi:format-list-numbered
+          - type: divider
+          - entity: sensor.current_ha
+            name: Установлен Home Assistant -
+            icon: mdi:alpha-v-circle
+          - entity: sensor.version
+            name: Последний Home Assistant -
+            icon: mdi:alpha-v-circle-outline
 
-            - type: entities
-              show_header_toggle: false
-              entities:
-              - entity: sensor.last_boot_custom
-                name: Сервер в онлайне -
-                icon: mdi:av-timer
-              - entity: sensor.rpi_power_status
-                name: Питание Raspberry Pi 3 B+ 
-                icon: mdi:power-plug
-              - entity: sensor.online_custom
-                name: Home Assistant в онлайне -
-                icon: mdi:clock
-              - type: divider
-              - entity: group.scenario
-                name: Бытовые сценарии - 
-                icon: mdi:format-list-numbered
-              - type: divider
-              - entity: sensor.current_ha
-                name: Установлен Home Assistant -
-                icon: mdi:alpha-v-circle
-              - entity: sensor.version
-                name: Последний Home Assistant -
-                icon: mdi:alpha-v-circle-outline
+        - type: markdown
+          content: >
+               **Резервный сервер и MQTT** 
+               
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.reserve_state
+            name: Raspberry 4 B в онлайне -
+            icon: mdi:clock-outline
+          - entity: sensor.reserve_scenario_group
+            name: Бытовые сценарии
+            icon: mdi:format-list-numbered
+          - entity: sensor.reserve_live_ping
+          - type: divider
+          - entity: sensor.mqtt_state
+            name: MQTT instanse -
+            icon: mdi:clock-outline
 
-          - type: custom:vertical-stack-in-card
-            cards:
-     
-            - type: markdown
-              content: >
-                 **Резервный сервер, состояние** 
-            - type: entities
-              show_header_toggle: false
-              entities:
-              - entity: sensor.reserve_state
-                name: Khadas VIM2 в онлайне -
-                icon: mdi:clock-outline
-              - entity: sensor.reserve_scenario_group
-                name: Бытовые сценарии
-                icon: mdi:format-list-numbered
-              - entity: sensor.reserve_live_ping
-
-          - type: custom:vertical-stack-in-card
-            cards:
-
-            - type: markdown
-              content: >
-                   **Hassio instanse**   
-            - type: entities
-              show_header_toggle: false
-              entities:
-              #   - entity: sensor.rasp3b_state
-              #     name: Raspberry 3B в онлайне -
-              #     icon: mdi:clock-outline
-                - entity: sensor.test_state
-                  name: Test instanse -
-                  icon: mdi:clock-outline
-                - entity: sensor.mqtt_state
-                  name: MQTT instanse -
-                  icon: mdi:clock-outline
-
-      - type: vertical-stack
-        cards:
-
-        - type: custom:vertical-stack-in-card
-          cards:
- 
-          - type: markdown
-            content: >
-                 **Аппаратная часть**
-
-          - type: horizontal-stack
-            cards:
-  
-            - type: custom:canvas-gauge-card
-              entity: sensor.processor_use
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: CPU (%)
-                borderShadowWidth: 0
-                borderOuterWidth: 0
-                borderMiddleWidth: 0
-                borderInnerWidth: 0
-                width: 200
-                height: 180
-                minValue: 0
-                maxValue: 100
-                startAngle: 15
-                ticksAngle: 330
-                valueBox: false
-                colorPlate: "#C0C0C0"
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
-                borders: false
-
-            - type: custom:mini-graph-card
-              entities:
-               - entity: sensor.processor_use
-                 name: CPU Use
-                 color: "#FF00FF"
-              animate: true
-              line_width: 3
-
-          - type: horizontal-stack
-            cards:
-
-            - type: custom:canvas-gauge-card
-              entity: sensor.cpu_temp
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: CPU (C)
-                borderShadowWidth: 0
-                borderOuterWidth: 0
-                borderMiddleWidth: 0
-                borderInnerWidth: 0
-                width: 200
-                height: 180
-                minValue: 0
-                maxValue: 100
-                startAngle: 15
-                ticksAngle: 330
-                valueBox: false
-                colorPlate: "#C0C0C0"
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
-                borders: false
-
-            - type: custom:mini-graph-card
-              entities:
-               - entity: sensor.cpu_temp
-                 name: CPU Temp
-                 color: "#FF0000"
-              animate: true
-              line_width: 3
-
-
-          - type: horizontal-stack
-            cards:
-
-            - type: custom:canvas-gauge-card
-              entity: sensor.memory_use_percent
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: RAM (%)
-                borderShadowWidth: 0
-                borderOuterWidth: 0
-                borderMiddleWidth: 0
-                borderInnerWidth: 0
-                width: 200
-                height: 180
-                minValue: 0
-                maxValue: 100
-                startAngle: 15
-                ticksAngle: 330
-                valueBox: false
-                colorPlate: "#C0C0C0"
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
-                borders: false
+        - type: markdown
+          content: >
+               **Испытательный полигон** 
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.rasp3b_state
+              name: Train Raspberry 3B  -
+              icon: mdi:clock-outline
+            - entity: sensor.test_state
+              name: Test Orange Pi One Plus -
+              icon: mdi:clock-outline
             
-            - type: custom:mini-graph-card
-              entities:
-               - entity: sensor.memory_use_percent
-                 name: RAM % Use
-                 color: "#FF69B4"
-              animate: true
-              line_width: 3
+    - type: vertical-stack
+      style: |
+          ha-card {
+            color: #00FA9A;
+            --paper-item-icon-color: #00FA9A;
+            font-weight: bold;
+            font-size: 16px;
+          }  
+      title: Монитор системы
+      cards:
+      
+        - type: iframe
+          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=2
+          # aspect_ratio: 65% 
 
-          - type: horizontal-stack
-            cards:
-
-            - type: custom:canvas-gauge-card
-              entity: sensor.disk_use_percent
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: Disk (%)
-                borderShadowWidth: 0
-                borderOuterWidth: 0
-                borderMiddleWidth: 0
-                borderInnerWidth: 0
-                width: 200
-                height: 180
-                minValue: 0
-                maxValue: 100
-                startAngle: 15
-                ticksAngle: 330
-                valueBox: false
-                colorPlate: "#C0C0C0"
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 40,"color": "rgba(10, 255, 0, .75)"},{"from": 40, "to": 60,"color": "rgba(255, 255, 0, .75)"},{"from": 60, "to": 80,"color": "rgba(255, 140, 0, .75)"}, {"from": 80, "to": 100,"color": "rgba(255, 0, 0, .75)"}]
-                borders: false
-              
-            - type: custom:mini-graph-card
-              entities:
-               - entity: sensor.disk_use_percent
-                 name: Disk % Use
-                 color: "#00FFFF"
-              animate: true
-              line_width: 3
-
-          - type: horizontal-stack
-            cards:
-
-            - type: custom:canvas-gauge-card
-              entity: sensor.disk_free
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: Disk (%)
-                borderShadowWidth: 0
-                borderOuterWidth: 0
-                borderMiddleWidth: 0
-                borderInnerWidth: 0
-                width: 200
-                height: 180
-                minValue: 0
-                maxValue: 120
-                startAngle: 15
-                ticksAngle: 330
-                valueBox: false
-                colorPlate: "#C0C0C0"
-                majorTicks: ["0", "15", "30", "45", "60", "75", "90", "105", "120"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 5,"color": "rgba(255, 0, 0, .75)"}, {"from": 5, "to": 15,"color": "rgba(255, 140, 0, .75)"}, {"from": 15, "to": 45,"color": "rgba(255, 255, 0, .75)"}, {"from": 45, "to": 120,"color": "rgba(10, 255, 0, .75)"}]
-                borders: false
-              
-            - type: custom:mini-graph-card
-              entities:
-               - entity: sensor.disk_free
-                 name: Disk free
-                 color: "#98FB98"
-              animate: true
-              line_width: 3
-
-      - type: vertical-stack
-        cards:
-
-        - type: custom:vertical-stack-in-card
-          cards:
+        - type: iframe
+          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=4
+          # aspect_ratio: 65% 
           
-          - type: markdown
-            content: >
-               **База, резервное копирование**
+        - type: iframe
+          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=6
+          # aspect_ratio: 65% 
+            
+        - type: iframe
+          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=8
+          # aspect_ratio: 65% 
 
-          - type: custom:vertical-stack-in-card
-            cards:
-    
 
-              - type: custom:mini-graph-card
+
+            
+    - type: vertical-stack
+      style: |
+          ha-card {
+            color: #00FA9A;
+            --paper-item-icon-color: #00FA9A;
+            font-weight: bold;
+            font-size: 16px;
+          }  
+      title: Хранилище, бекап
+      cards:
+      
+        - type: iframe
+          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=10
+          # aspect_ratio: 65% 
+
+        - type: iframe
+          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=12
+          # aspect_ratio: 65% 
+            
+        - type: iframe
+          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=14
+          # aspect_ratio: 65% 
                 
-                entities:
-                 - entity: sensor.maria_db_size
-                   name: База данных
-                   color: '#0066ff'
-                icon: mdi:database
-                show:
-                   graph: bar
-                
-              - type: entities
-                show_header_toggle: false
-                entities:
-                - entity: sensor.last_google_backup_main
-                - entity: sensor.snapshots_in_google_drive_main
-                - entity: sensor.snapshots_in_hassio_main
-
-#              - type: weather-forecast
-#                entity: weather.openweathermap
-
-
-
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.last_google_backup_main
+            - entity: sensor.snapshots_in_google_drive_main
+            - entity: sensor.snapshots_in_hassio_main

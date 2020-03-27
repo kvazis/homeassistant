@@ -22,8 +22,6 @@ cards:
                name: Прихожая           
              - entity: binary_sensor.0x00158d00010f8920_occupancy  
                name: Коридор
-             - entity: binary_sensor.cr_light_timer
-               name: Свет               
 
         - type: custom:vertical-stack-in-card
           cards:     

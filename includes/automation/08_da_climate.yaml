@@ -60,7 +60,7 @@
   condition:
 ## Увлажнитель включен
      - condition: state
-       entity_id: switch.plug_158d00010ec4b8
+       entity_id: switch.0x00158d00010ec4b8_switch
        state: 'on'
 ## Время работы 
      - condition: state

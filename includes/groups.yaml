@@ -58,8 +58,8 @@
       - automation.03_corr_entr
       - automation.03_corr_light
       - automation.03_corr_light_on_vibro
-      - automation.03_corridor_light_timer
       - automation.03_corr_light_auto_off
+      - automation.03_corr_light_power      
       - automation.03_motion_time
       - automation.04_kn_ceiling
       - automation.04_kn_ceiling_auto_on
@@ -89,7 +89,6 @@
       - automation.05_tv_samsung
       - automation.05_gg_balkoon_light_on
       - automation.05_gg_balkoon_light_off
-      - automation.05_gg_balkoon_light_motion
       - automation.05_gg_balkoon_light_power
       - automation.06_bathroom_cell_power
       - automation.06_bathroom_cell_reboot      

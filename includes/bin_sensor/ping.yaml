@@ -23,6 +23,12 @@
   scan_interval: 30
   
 - platform: ping
+  host: 192.168.0.24
+  name: notebook_acer_15
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
   host: 192.168.0.29
   name: printer
   count: 2

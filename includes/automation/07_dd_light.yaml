@@ -1,24 +1,19 @@
-
 - id: ДД, ручное управление люстрой
   alias: 07_dd_philips
   initial_state: true
   trigger:
 # Выключатель у входа
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_right_158d000163e571
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d000163e571_click
+    to: 'right'
 # Кнопка возле кровати
   - platform: state
     entity_id: sensor.0x00158d00013f82b7_click
     to: 'double'
 # Кубик
-  - platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d00011063da
-      action_type: flip90
+  - platform: state
+    entity_id: sensor.0x00158d00011063da_action
+    to: 'flip90'  
   action:    
     - service: script.turn_on
       data_template:
@@ -35,10 +30,9 @@
   alias: 07_dd_philips_auto_on
   initial_state: true
   trigger:
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001a66222
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001a66222_occupancy
+    to: 'on'
   condition:
    condition: and
    conditions:
@@ -78,7 +72,7 @@
   initial_state: true
   trigger:
   - platform: state
-    entity_id: binary_sensor.motion_sensor_158d0001a66222
+    entity_id: binary_sensor.0x00158d0001a66222_occupancy
     from: 'on'
     to: 'off' 
   condition:
@@ -108,11 +102,9 @@
   alias: 07_dd_bra
   initial_state: true
   trigger:
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_left_158d000163e571
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d000163e571_click
+    to: 'left'
 # Кнопка возле кровати
   - platform: state
     entity_id: sensor.0x00158d00013f82b7_click
@@ -144,16 +136,12 @@
   alias: 07_dd_all_off
   initial_state: true
   trigger:
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_both_158d000163e571
-      click_type: both
-  - platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d00011063da
-      action_type: free_fall 
+  - platform: state
+    entity_id: sensor.0x00158d000163e571_click
+    to: 'both'
+  - platform: state
+    entity_id: sensor.0x00158d00011063da_action
+    to: 'fall'
   action:
     - service: script.turn_on
       entity_id: script.07_dd_lightoff
@@ -162,11 +150,9 @@
   alias: 07_hp_toggle
   initial_state: true
   trigger:
-  - platform: event
-    event_type: xiaomi_aqara.cube_action
-    event_data:
-      entity_id: binary_sensor.cube_158d00011063da
-      action_type: flip180
+  - platform: state
+    entity_id: sensor.0x00158d00011063da_action
+    to: 'flip180'  
   action:
     service: switch.toggle
     entity_id: switch.plug1
@@ -176,10 +162,9 @@
   initial_state: true
   trigger:
 ## Движение в детской Д
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001a66222
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001a66222_occupancy
+    to: 'on'
   action: 
   - service: mqtt.publish
     data_template:

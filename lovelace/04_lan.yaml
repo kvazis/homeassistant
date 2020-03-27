@@ -10,35 +10,16 @@ cards:
            content: >
               **Загрузка канала**
 
-         - type: custom:mini-graph-card
-           entities:
-            - entity: sensor.asuswrt_download_speed
-              name: Прием
-              color: "#00ff00"
-            - entity: sensor.asuswrt_upload_speed
-              name: Передача
-              color: "#0000ff"
-           animate: true
-           line_width: 3
-           icon: mdi:access-point-network
-           show:
-              name: false
-              fill: false
+         - type: horizontal-stack
+           cards:
+
+              - type: iframe
+                url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&panelId=18
+                aspect_ratio: 75% 
               
-         - type: custom:mini-graph-card
-           entities:
-            - entity: sensor.rt_ac88u_kb_sec_received
-              name: Прием
-              color: "#00ff00"
-            - entity: sensor.rt_ac88u_kb_sec_sent
-              name: Передача
-              color: "#0000ff"
-           animate: true
-           line_width: 3
-           icon: mdi:access-point-network
-           show:
-              name: false
-              fill: false
+              - type: iframe
+                url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&panelId=16
+                aspect_ratio: 75% 
               
          - type: entities
            show_header_toggle: false
