@@ -64,7 +64,7 @@
        state: 'on'
 ## Время работы 
      - condition: state
-       entity_id: binary_sensor.day_work
+       entity_id: binary_sensor.da_hum
        state: 'on'
   action:
     - service: mqtt.publish

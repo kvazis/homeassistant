@@ -14,7 +14,7 @@ switch.02_sonoff_basic_relay:
 ## Сенсоры
 
 ## Бинарные сенсоры
-binary_sensor.door_window_sensor_158d000119378d:
+binary_sensor.0x00158d000119378d_contact:
   friendly_name: Входная дверь
   device_class: door
 
@@ -38,3 +38,5 @@ binary_sensor.0x00158d000149d28b_smoke:
 ## Уровень заряда
 sensor.0x00158d000149d28b_battery:
   friendly_name: Прихожая, датчик дыма
+sensor.0x00158d000119378d_battery:
+  friendly_name: Входная дверь

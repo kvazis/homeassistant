@@ -4,132 +4,174 @@ icon: mdi:home-map-marker
 cards:
 
     - type: vertical-stack
-      style: |
-          ha-card {
-            color: #00FA9A;
-            --paper-item-icon-color: #00FA9A;
-            font-weight: bold;
-            font-size: 16px;
-          }  
-      title: Состояние серверов HA
-      cards:
-
-        - type: markdown
-          content: >
-               **Основной сервер** 
-      
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: sensor.last_boot_custom
-            name: Сервер в онлайне -
-            icon: mdi:av-timer
-          - entity: sensor.rpi_power_status
-            name: Питание Raspberry Pi 3 B+ 
-            icon: mdi:power-plug
-          - entity: sensor.online_custom
-            name: Home Assistant в онлайне -
-            icon: mdi:clock
-          - type: divider
-          - entity: group.scenario
-            name: Бытовые сценарии - 
-            icon: mdi:format-list-numbered
-          - type: divider
-          - entity: sensor.current_ha
-            name: Установлен Home Assistant -
-            icon: mdi:alpha-v-circle
-          - entity: sensor.version
-            name: Последний Home Assistant -
-            icon: mdi:alpha-v-circle-outline
-
-        - type: markdown
-          content: >
-               **Резервный сервер и MQTT** 
-               
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: sensor.reserve_state
-            name: Raspberry 4 B в онлайне -
-            icon: mdi:clock-outline
-          - entity: sensor.reserve_scenario_group
-            name: Бытовые сценарии
-            icon: mdi:format-list-numbered
-          - entity: sensor.reserve_live_ping
-          - type: divider
-          - entity: sensor.mqtt_state
-            name: MQTT instanse -
-            icon: mdi:clock-outline
-
-        - type: markdown
-          content: >
-               **Испытательный полигон** 
-        - type: entities
-          show_header_toggle: false
-          entities:
-            - entity: sensor.rasp3b_state
-              name: Train Raspberry 3B  -
-              icon: mdi:clock-outline
-            - entity: sensor.test_state
-              name: Test Orange Pi One Plus -
-              icon: mdi:clock-outline
-            
-    - type: vertical-stack
-      style: |
-          ha-card {
-            color: #00FA9A;
-            --paper-item-icon-color: #00FA9A;
-            font-weight: bold;
-            font-size: 16px;
-          }  
-      title: Монитор системы
       cards:
       
-        - type: iframe
-          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=2
-          # aspect_ratio: 65% 
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+             **Состояние серверов HA**
 
-        - type: iframe
-          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=4
-          # aspect_ratio: 65% 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
+
+            - type: markdown
+              content: >
+                   **Основной сервер** 
           
-        - type: iframe
-          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=6
-          # aspect_ratio: 65% 
-            
-        - type: iframe
-          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=8
-          # aspect_ratio: 65% 
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: sensor.last_boot_custom
+                name: Сервер в онлайне -
+                icon: mdi:av-timer
+              - entity: sensor.rpi_power_status
+                name: Питание Raspberry Pi 3 B+ 
+                icon: mdi:power-plug
+              - entity: sensor.online_custom
+                name: Home Assistant в онлайне -
+                icon: mdi:clock
+              - type: divider
+              - entity: group.scenario
+                name: Бытовые сценарии - 
+                icon: mdi:format-list-numbered
+              - type: divider
+              - entity: sensor.current_ha
+                name: Установлен Home Assistant -
+                icon: mdi:alpha-v-circle
+              - entity: sensor.version
+                name: Последний Home Assistant -
+                icon: mdi:alpha-v-circle-outline
 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
 
+            - type: markdown
+              content: >
+                   **Резервный сервер и MQTT** 
+                   
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: sensor.reserve_state
+                name: Raspberry 4 B в онлайне -
+                icon: mdi:clock-outline
+              - entity: sensor.reserve_scenario_group
+                name: Бытовые сценарии
+                icon: mdi:format-list-numbered
+              - entity: sensor.reserve_live_ping
+              - type: divider
+              - entity: sensor.mqtt_state
+                name: MQTT instanse -
+                icon: mdi:clock-outline
 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
+
+            - type: markdown
+              content: >
+                   **Испытательный полигон** 
+            - type: entities
+              show_header_toggle: false
+              entities:
+                - entity: sensor.rasp3b_state
+                  name: Train Raspberry 3B  -
+                  icon: mdi:clock-outline
+                - entity: sensor.test_state
+                  name: Test Orange Pi One Plus -
+                  icon: mdi:clock-outline
             
     - type: vertical-stack
-      style: |
-          ha-card {
-            color: #00FA9A;
-            --paper-item-icon-color: #00FA9A;
-            font-weight: bold;
-            font-size: 16px;
-          }  
-      title: Хранилище, бекап
       cards:
       
-        - type: iframe
-          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=10
-          # aspect_ratio: 65% 
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+             **Монитор системы**
+             
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: binary_sensor.workday_sensor
+            - entity: sensor.date
+              name: Текущая дата  -
+              icon: mdi:calendar-month
+            - entity: sensor.time
+              name: Текущее время - 
+              icon: mdi:clock-outline
 
-        - type: iframe
-          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=12
-          # aspect_ratio: 65% 
+      
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.processor_use
+             name: Использование процессора
+             color: "#74ff76"
+          animate: true
+          line_width: 3
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.cpu_temp
+             name: Температура процессора
+             color: "#fff400"
+          animate: true
+          line_width: 3
+          
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.memory_use_percent
+             name: Использование ОЗУ
+             color: "#4b9bff"
+          animate: true
+          line_width: 3 
             
-        - type: iframe
-          url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&refresh=1m&panelId=14
-          # aspect_ratio: 65% 
-                
+
+    - type: vertical-stack
+      cards:
+      
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+             **Хранилище, бекап**
+             
         - type: entities
           show_header_toggle: false
           entities:
             - entity: sensor.last_google_backup_main
             - entity: sensor.snapshots_in_google_drive_main
             - entity: sensor.snapshots_in_hassio_main
+      
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.disk_use_percent
+             name: Использование диска
+             color: "#74ff76"
+          show:
+              graph: bar  
+      
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.disk_free
+             name: Свободно на диске
+             color: "#fff400"
+          show:
+              graph: bar  
+          
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.home_assistant_v2_db
+             name: Объем базы Home Assistant
+             color: "#4b9bff"
+          show:
+              graph: bar  

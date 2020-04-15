@@ -193,7 +193,7 @@
       entity_id: switch.movie_mode
 
 ## Управление телевизором        
-- alias: 05_tv_samsung
+- alias: 05_tv_xiaomi55
   initial_state: true
   trigger:
 ## Круглая кнопка на комоде
@@ -205,8 +205,8 @@
     entity_id: sensor.0x00158d0001186d82_action
     to: 'tap' 
   action:
-    service: script.turn_on
-    entity_id: script.samsung_tv
+    service: switch.toggle
+    entity_id: switch.tv_xiaomi_55
 
 ## Люстра на балконе вкл
 - alias: 05_gg_balkoon_light_on

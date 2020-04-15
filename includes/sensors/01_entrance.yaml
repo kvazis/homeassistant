@@ -26,18 +26,6 @@
           {{ 'Меньше минуты' if time < 60 else days + hours + minutes }}
         icon_template: mdi:clock
         
-# Заряд батарей
-  - platform: attributes
-    attribute: battery_level
-    unit_of_measurement: "%"
-    entities:
-# Входная дверь
-       - binary_sensor.door_window_sensor_158d000119378d
-# Прихожая вход выключатель
-       - binary_sensor.wall_switch_both_158d0001718ca8
-# Прихожая, движение
-       - binary_sensor.motion_sensor_158d00013f7894
-# Прихожая, шкаф, круглая 
-       - binary_sensor.switch_158d00010b1963
+
 
         

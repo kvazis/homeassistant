@@ -44,7 +44,7 @@
  alias: Включение бойлера невозможно
  sequence:
   - service: switch.turn_off
-    entity_id: switch.wall_plug_158d00015751f4
+    entity_id: switch.0x00158d00015751f4_switch
   - service: mqtt.publish
     data_template:
       topic: "notification/messages"
@@ -55,10 +55,10 @@
  alias: Включение бойлера вручную
  sequence:
   - service: switch.turn_on
-    entity_id: switch.wall_plug_158d00015751f4
+    entity_id: switch.0x00158d00015751f4_switch
 
 21_heater_manual_off:
  alias: Выключение бойлера вручную
  sequence:
   - service: switch.turn_off
-    entity_id: switch.wall_plug_158d00015751f4
+    entity_id: switch.0x00158d00015751f4_switch

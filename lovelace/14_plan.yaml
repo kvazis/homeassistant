@@ -2,89 +2,582 @@ title: План
 icon: mdi:floor-plan
 cards:
 
-      - type: vertical-stack
-        cards:
+    - type: vertical-stack
+      cards:
 
-          - type: picture-elements
-            image: /local/plan.png
-            elements:
-            
-            - type: state-icon
-            #   icon: mdi:fan
-              tap_action:
-                action: toggle
-              entity: light.yeelight_01_whitebulb
-              style:
-               top: 20%
-               left: 40% 
-               
-          - type: picture-elements
-            image: /local/plan.png
-            elements:
-            
-            - type: state-icon
-            #   icon: mdi:fan
-              tap_action:
-                action: toggle
-              entity: light.yeelight_01_whitebulb
-              style:
-               top: 20%
-               left: 40% 
-               
-      - type: vertical-stack
-        cards:
+            - type: picture-elements
+              image: /local/plan01.png
+              elements:
 
-          - type: picture-elements
-            image: /local/plan.png
-            elements:
-            
-            - type: state-icon
-            #   icon: mdi:fan
-              tap_action:
-                action: toggle
-              entity: light.yeelight_01_whitebulb
-              style:
-               top: 20%
-               left: 40% 
-               
-          - type: picture-elements
-            image: /local/plan.png
-            elements:
-            
-            - type: state-icon
-            #   icon: mdi:fan
-              tap_action:
-                action: toggle
-              entity: light.yeelight_01_whitebulb
-              style:
-               top: 20%
-               left: 40% 
-               
-      - type: vertical-stack
-        cards:
+                - type: image
+                  entity: camera.reolink
+                  camera_image: camera.reolink_sub
+                  style:
+                    top: 15%
+                    left: 20%
+                    width: 35%
+                    border: 2px solid white
+                    border-radius: 10%
+                    
+                - type: image
+                  entity: camera.xiaofang
+                  camera_image: camera.xiaofang
+                  style:
+                    top: 45%
+                    left: 20%
+                    width: 35%
+                    border: 2px solid white
+                    border-radius: 10%
 
-          - type: picture-elements
-            image: /local/plan.png
-            elements:
+                - type: image
+                  entity: camera.reolink3
+                  camera_image: camera.reolink3_sub
+                  style:
+                    top: 85%
+                    left: 20%
+                    width: 35%
+                    border: 2px solid white
+                    border-radius: 10%
+
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_01_whitebulb
+                  style:
+                     top: 62%
+                     left: 48% 
+                     
+                - type: state-icon
+                  icon: mdi:power
+                  tap_action:
+                      action: toggle
+                  entity: switch.02_sonoff_basic_relay
+                  style:
+                     top: 58%
+                     left: 52% 
+
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_02_ceiling
+                  style:
+                     top: 30%
+                     left: 75% 
+
+                - type: state-icon
+                  icon: mdi:fan
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d00014dceb3_switch_right
+                  style:
+                     top: 30%
+                     left: 82% 
+                     
+                - type: state-icon
+                  icon: mdi:ceiling-light
+                  tap_action:
+                      action: toggle
+                  entity: light.aqara_02_ceiling
+                  style:
+                     top: 30%
+                     left: 96% 
+                     
+                - type: state-icon
+                  icon: mdi:ceiling-light
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_03_ceiling
+                  style:
+                     top: 75%
+                     left: 75% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d000119378d_contact
+                  style:
+                     top: 62%
+                     left: 42% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.motion_sensor_158d00013f7894
+                  style:
+                     top: 75%
+                     left: 50% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d000149d28b_smoke
+                  style:
+                     top: 83%
+                     left: 58% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.motion_sensor_158d0001a24e71
+                  style:
+                     top: 45%
+                     left: 75% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001ab3350_occupancy
+                  style:
+                     top: 45%
+                     left: 96% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.water_leak_sensor_158d0002705b7b
+                  style:
+                     top: 10%
+                     left: 92% 
+
+                - type: state-icon
+                  entity: binary_sensor.0x00158d00010f8920_occupancy
+                  style:
+                     top: 96%
+                     left: 96% 
+                     
+            - type: picture-elements
+              image: /local/plan04.png
+              elements:
+              
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_06_ceiling
+                  style:
+                     top: 69%
+                     left: 62% 
+                     
+                - type: state-icon
+                  icon: mdi:fan
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d0001117040_switch_left
+                  style:
+                     top: 50%
+                     left: 53% 
+                     
+                - type: state-icon
+                  icon: mdi:water-boiler
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d00015751f4_switch
+                  style:
+                     top: 50%
+                     left: 47% 
+                     
+                - type: state-label
+                  entity: sensor.load_158d00015751f4
+                  style:
+                     top: 55%
+                     left: 47% 
+                     
+                - type: state-label
+                  entity: sensor.0x00158d0001dcd47e_temperature
+                  style:
+                     top: 65%
+                     left: 47% 
+                     
+                - type: state-label
+                  entity: sensor.0x00158d0001dcd47e_humidity
+                  style:
+                     top: 68%
+                     left: 47% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001d72fa2_water_leak
+                  style:
+                     top: 50%
+                     left: 75% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001bb60c2_water_leak
+                  style:
+                     top: 90%
+                     left: 75% 
+                     
+            - type: picture-elements
+              image: /local/plan07.png
+              elements:
             
-            - type: state-icon
-            #   icon: mdi:fan
-              tap_action:
-                action: toggle
-              entity: light.yeelight_01_whitebulb
-              style:
-               top: 20%
-               left: 40% 
+                - type: state-icon
+                #   icon: mdi:fan
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_01_whitebulb
+                  style:
+                     top: 20%
+                     left: 40% 
+                     
+    - type: vertical-stack
+      cards:
+
+            - type: picture-elements
+              image: /local/plan02.png
+              elements:
+              
+                - type: image
+                  entity: camera.reolink2
+                  camera_image: camera.reolink2
+                  style:
+                    top: 60%
+                    left: 47%
+                    width: 35%
+                    border: 2px solid white
+                    border-radius: 10%
+            
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.aqara_04_strip
+                  style:
+                     top: 40%
+                     left: 18% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.philips_04_ceiling
+                  style:
+                     top: 30%
+                     left: 50% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_rgbtvbulb
+                  style:
+                     top: 95%
+                     left: 55% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.movie_mode
+                  style:
+                     top: 95%
+                     left: 60% 
+                     
+                - type: state-label
+                  entity: sensor.0x00158d0001581109_temperature 
+                  style:
+                    top: 27%
+                    left: 30%
+                    
+                - type: state-label
+                  entity: sensor.0x00158d0001581109_humidity
+                  style:
+                    top: 30%
+                    left: 30%
+                    
+                - type: state-icon
+                  entity: binary_sensor.water_leak_sensor_158d0001bbeba6
+                  style:
+                     top: 30%
+                     left: 15% 
+                    
+                - type: state-icon
+                  icon: mdi:television
+                  tap_action:
+                      action: toggle
+                  entity: switch.tv_xiaomi
+                  style:
+                     top: 80%
+                     left: 30% 
+                     
+                - type: state-icon
+                  icon: mdi:television
+                  tap_action:
+                      action: toggle
+                  entity: switch.tv_xiaomi_55
+                  style:
+                     top: 95%
+                     left: 50% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001e16204_occupancy
+                  style:
+                     top: 80%
+                     left: 16%
+                     
+                - type: state-label
+                  entity: sensor.load_158d0001fa2934
+                  style:
+                     top: 80%
+                     left: 75% 
+                     
+                - type: state-label
+                  entity: sensor.0x04cf8cdf3c772379_illuminance
+                  style:
+                     top: 30%
+                     left: 75% 
+
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a4a394_contact
+                  style:
+                     top: 55%
+                     left: 85% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a20885_contact
+                  style:
+                     top: 73%
+                     left: 85% 
+                     
+                - type: state-label
+                  entity: sensor.mi_m_80eaca88b765
+                  style:
+                     top: 95%
+                     left: 33%                      
+
+            - type: picture-elements
+              image: /local/plan05.png
+              elements:
+              
+                - type: image
+                  entity: camera.reolink4_sub
+                  camera_image: camera.reolink4_sub
+                  style:
+                    top: 50%
+                    left: 33%
+                    width: 35%
+                    border: 2px solid white
+                    border-radius: 10%
+            
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_ceiling1
+                  style:
+                     top: 30%
+                     left: 40% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_ceiling1_ambilight
+                  style:
+                     top: 30%
+                     left: 45% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.aqara_05_wall
+                  style:
+                     top: 69%
+                     left: 40% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_bedside2
+                  style:
+                     top: 69%
+                     left: 72% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_table
+                  style:
+                     top: 5%
+                     left: 85% 
+                     
+                - type: state-icon
+                  icon: mdi:brightness-auto
+                  tap_action:
+                      action: toggle
+                  entity: switch.gg_humidifier_mode_auto
+                  style:
+                     top: 63%
+                     left: 75% 
+            
+                - type: state-icon
+                  icon: mdi:speedometer-slow
+                  tap_action:
+                      action: toggle
+                  entity: switch.gg_humidifier_mode_silent
+                  style:
+                     top: 63%
+                     left: 79% 
+                     
+                - type: state-icon
+                  icon: mdi:speedometer-medium
+                  tap_action:
+                      action: toggle
+                  entity: switch.gg_humidifier_mode_medium
+                  style:
+                     top: 63%
+                     left: 83% 
+
+                - type: state-icon
+                  icon: mdi:speedometer
+                  tap_action:
+                      action: toggle
+                  entity: switch.gg_humidifier_mode_high
+                  style:
+                     top: 63%
+                     left: 87% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.notebook_hp
+                  style:
+                     top: 5%
+                     left: 75% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.notebook_acer
+                  style:
+                     top: 5%
+                     left: 95% 
+                     
+                - type: state-label
+                  entity: sensor.05_mean_temperature
+                  style:
+                     top: 5%
+                     left: 25% 
+                     
+                - type: state-label
+                  entity: sensor.05_mean_humidity
+                  style:
+                     top: 5%
+                     left: 40% 
+                     
+                - type: state-label
+                  entity: sensor.05_mi_air_pm25
+                  style:
+                     top: 10%
+                     left: 25% 
+                     
+                - type: state-label
+                  entity: sensor.05_mi_air_tvoc
+                  style:
+                     top: 10%
+                     left: 40% 
+                     
+                - type: state-label
+                  entity: sensor.05_mi_air_co2a
+                  style:
+                     top: 10%
+                     left: 57% 
+
+                - type: state-label
+                  entity: sensor.mi_m_c47c8d628a8a
+                  style:
+                     top: 69%
+                     left: 95% 
+                     
+                     
+            - type: picture-elements
+              image: /local/plan08.png
+              elements:
+            
+                - type: state-icon
+                #   icon: mdi:fan
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_01_whitebulb
+                  style:
+                     top: 20%
+                     left: 40% 
                
-          - type: picture-elements
-            image: /local/plan.png
-            elements:
-            
-            - type: state-icon
-            #   icon: mdi:fan
-              tap_action:
-                action: toggle
-              entity: light.yeelight_01_whitebulb
-              style:
-               top: 20%
-               left: 40% 
+    - type: vertical-stack
+      cards:
+
+            - type: picture-elements
+              image: /local/plan03.png
+              elements:
+              
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a4a394_contact
+                  style:
+                     top: 55%
+                     left: 36% 
+                     
+                - type: state-label
+                  entity: sensor.0x00158d000171ffde_temperature
+                  style:
+                    top: 65%
+                    left: 30%
+                    
+                - type: state-label
+                  entity: sensor.0x00158d000171ffde_humidity
+                  style:
+                    top: 70%
+                    left: 30%
+                    
+                - type: state-label
+                  entity: sensor.pressure_mmhg_158d000171ffde
+                  style:
+                    top: 75%
+                    left: 30%
+                    
+                - type: state-label
+                  entity: sensor.mi_m_c47c8d6d2c7e
+                  style:
+                     top: 90%
+                     left: 27%  
+                     
+                - type: state-label
+                  entity: sensor.mi_m_c47c8d6d1cf9
+                  style:
+                     top: 90%
+                     left: 36%   
+                     
+            - type: picture-elements
+              image: /local/plan06.png
+              elements:
+              
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_ceiling2
+                  style:
+                     top: 30%
+                     left: 15% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_ceiling2_ambilight
+                  style:
+                     top: 30%
+                     left: 20% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.66633530807d3a766432
+                  style:
+                     top: 90%
+                     left: 27% 
+                     
+                - type: state-label
+                  entity: sensor.mi_m_c47c8d6a0ef3
+                  style:
+                     top: 69%
+                     left: 5% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d00013ed373_contact
+                  style:
+                     top: 71%
+                     left: 13% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d000445206b_contact
+                  style:
+                     top: 71%
+                     left: 27% 
+                     
+            - type: picture-elements
+              image: /local/plan09.png
+              elements:
+              
+                - type: state-icon
+                #   icon: mdi:fan
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_01_whitebulb
+                  style:
+                     top: 20%
+                     left: 40% 
+               

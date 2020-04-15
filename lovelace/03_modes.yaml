@@ -3,24 +3,20 @@ title: Режимы и состояния
 icon: mdi:state-machine
 cards:
 
-      - type: vertical-stack
-        cards:
-    
+    - type: vertical-stack
+      cards:
+      
         - type: markdown
           style: |
               ha-card {
-                color: #5ddef4;
-                font-weight: bold;
                 font-size: 26px;
-              }
+              }          
           content: >
              **Режимы автоматизаций**
 
         - type: entities
           style: |
                   ha-card {
-                    color: #5ddef4;
-                    font-weight: bold;
                     font-size: 18px;
                   }
           show_header_toggle: false
@@ -28,107 +24,101 @@ cards:
           - entity: switch.holiday_mode
             name: Режим выходного дня - 
 
-        - type: custom:vertical-stack-in-card
-          cards:            
-          - type: markdown
-            style: |
-                  ha-card {
-                    color: #5ddef4;
-                    font-weight: bold;
-                    font-size: 22px;
-                  }
-            content: >
-               Гостиная
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:           
+            - type: markdown
+              style: |
+                    ha-card {
+                      font-size: 18px;
+                    }
+              content: >
+                 Гостиная
                
-          - type: glance
-            show_state: false
-            show_name: false            
-            entities:
-            - entity: sensor.living_day_work
-            # - entity: sensor.living_heat_work
-            - entity: binary_sensor.living_hum
-            - entity: binary_sensor.living_heat
+            - type: glance
+              show_state: false
+              show_name: false            
+              entities:
+              - entity: sensor.living_day_work
+              # - entity: sensor.living_heat_work
+              - entity: binary_sensor.living_hum
+              - entity: binary_sensor.living_heat
 
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.living_holiday
-            - entity: switch.silent_mode
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: switch.living_holiday
+              - entity: switch.silent_mode
 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:    
+            - type: markdown
+              style: |
+                    ha-card {
+                      font-size: 18px;
+                    }
+              content: >
+                 Детская Д
 
-            
-        - type: custom:vertical-stack-in-card
-          cards:     
-          - type: markdown
-            style: |
-                  ha-card {
-                    color: #5ddef4;
-                    font-weight: bold;
-                    font-size: 22px;
-                  }
-            content: >
-               Детская Д
-
-          - type: glance
-            show_state: false
-            show_name: false            
-            entities:        
-            - entity: sensor.dd_day_work
-            # - entity: sensor.dd_heat_work
-            - entity: binary_sensor.dd_hum
-            - entity: binary_sensor.dd_heat
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.dd_holiday
-            - entity: switch.dd_tracking
+            - type: glance
+              show_state: false
+              show_name: false            
+              entities:        
+              - entity: sensor.dd_day_work
+              # - entity: sensor.dd_heat_work
+              - entity: binary_sensor.dd_hum
+              - entity: binary_sensor.dd_heat
+   
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: switch.dd_holiday
+              - entity: switch.dd_tracking
 
 
-        - type: custom:vertical-stack-in-card
-          cards:     
-          - type: markdown
-            style: |
-                  ha-card {
-                    color: #5ddef4;
-                    font-weight: bold;
-                    font-size: 22px;
-                  }
-            content: >
-               Детская А
-          - type: glance
-            show_state: false
-            show_name: false            
-            entities:  
-            - entity: sensor.da_day_work
-            # - entity: sensor.da_heat_work
-            - entity: binary_sensor.da_hum
-            - entity: binary_sensor.da_heat
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.da_holiday
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:    
+     
+            - type: markdown
+              style: |
+                    ha-card {
+                      font-size: 18px;
+                    }
+              content: >
+                 Детская А
+                 
+            - type: glance
+              show_state: false
+              show_name: false            
+              entities:  
+              - entity: sensor.da_day_work
+              # - entity: sensor.da_heat_work
+              - entity: binary_sensor.da_hum
+              - entity: binary_sensor.da_heat
+   
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: switch.da_holiday
 
 
-      - type: vertical-stack
-        cards:
+    - type: vertical-stack
+      cards:
 
-  
         - type: markdown
           style: |
               ha-card {
-                color: #5ddef4;
-                font-weight: bold;
                 font-size: 26px;
-              }
+              }          
           content: >
              **Отопление, нагрев**
 
-          
+
         - type: entities
           style: |
                   ha-card {
-                    color: #5ddef4;
-                    font-weight: bold;
                     font-size: 18px;
                   }
           show_header_toggle: false
@@ -139,15 +129,14 @@ cards:
               name: Режим нагрева бойлера - 
             # - entity: switch.0x00158d00015751f4_switch
             
-        - type: custom:vertical-stack-in-card
-          cards:
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
 
             - type: markdown
               style: |
                       ha-card {
-                        color: #5ddef4;
-                        font-weight: bold;
-                        font-size: 22px;
+                        font-size: 18px;
                       }
               content: >
                  **Гостиная**
@@ -162,15 +151,14 @@ cards:
             #     - entity: sensor.05_mean_humidity
             #       name: Humidity
 
-        - type: custom:vertical-stack-in-card
-          cards:
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
 
             - type: markdown
               style: |
                       ha-card {
-                        color: #5ddef4;
-                        font-weight: bold;
-                        font-size: 22px;
+                        font-size: 18px;
                       }
               content: >
                  **Детская Д**
@@ -185,15 +173,14 @@ cards:
             #     - entity: sensor.07_mean_humidity
             #       name: Humidity
 
-        - type: custom:vertical-stack-in-card
-          cards:
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
 
             - type: markdown
               style: |
                       ha-card {
-                        color: #5ddef4;
-                        font-weight: bold;
-                        font-size: 22px;
+                        font-size: 18px;
                       }
               content: >
                  **Детская А**
@@ -208,16 +195,14 @@ cards:
             #     - entity: sensor.08_mean_humidity
             #       name: Humidity
 
-      - type: vertical-stack
-        cards:
+    - type: vertical-stack
+      cards:
 
         - type: markdown
           style: |
               ha-card {
-                color: #5ddef4;
-                font-weight: bold;
                 font-size: 26px;
-              }
+              }          
           content: >
              **Влажность**
                
@@ -226,8 +211,6 @@ cards:
         - type: entities
           style: |
                   ha-card {
-                    color: #5ddef4;
-                    font-weight: bold;
                     font-size: 18px;
                   }
           show_header_toggle: false
@@ -237,62 +220,77 @@ cards:
             - entity: switch.humidification_mode
               name: Режим увлажнителя -
 
-        - type: custom:vertical-stack-in-card
-          cards:
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
 
-          - type: markdown
-            style: |
+            - type: markdown
+              style: |
+                      ha-card {
+                        font-size: 18px;
+                      }
+              content: >
+                   **Гостиная**
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: sensor.05_mean_humidity
+              - entity: input_number.humidity_level_gg
+              - entity: sensor.smartmi_water
+                name: Остаток воды - 
+                
+            - type: custom:stack-in-card
+              mode: horizontal
+              cards: 
+                - type: button
+                  entity: switch.gg_humidifier_mode_auto
+                  name: Auto
+                  icon: mdi:brightness-auto
+                - type: button
+                  entity: switch.gg_humidifier_mode_silent
+                  name: Silent
+                  icon: mdi:speedometer-slow
+                - type: button
+                  entity: switch.gg_humidifier_mode_medium
+                  name: Medium
+                  icon: mdi:speedometer-medium
+                - type: button
+                  entity: switch.gg_humidifier_mode_high
+                  name: High
+                  icon: mdi:speedometer
+      
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+            - type: markdown
+              style: |
+                      ha-card {
+                        font-size: 18px;
+                      }
+              content: >
+                 Детская Д
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: sensor.07_mean_humidity
+              - entity: input_number.humidity_level_dd
+              - entity: switch.0x00158d0001a2ccab_switch_left
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+            - type: markdown
+              style: |
                     ha-card {
-                      color: #5ddef4;
-                      font-weight: bold;
-                      font-size: 22px;
-                    }
-            content: >
-                 **Гостиная**
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: sensor.05_mean_humidity
-            - entity: input_number.humidity_level_gg
-            - entity: switch.gg_humidifier
-            # - entity: sensor.smartmi_mode
-            - entity: sensor.smartmi_water
-              name: Остаток воды - 
-     
-        - type: custom:vertical-stack-in-card
-          cards:
-
-          - type: markdown
-            style: |
-                    ha-card {
-                      color: #5ddef4;
-                      font-weight: bold;
-                      font-size: 22px;
-                    }
-            content: >
-               Детская Д
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: sensor.07_mean_humidity
-            - entity: input_number.humidity_level_dd
-            - entity: switch.0x00158d0001a2ccab_switch_left
-
-        - type: custom:vertical-stack-in-card
-          cards:
-
-          - type: markdown
-            style: |
-                    ha-card {
-                      color: #5ddef4;
-                      font-weight: bold;
-                      font-size: 22px;
-                    }
-            content: >
-               Детская А
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: sensor.08_mean_humidity
-            - entity: input_number.humidity_level_da
-            - entity: switch.0x00158d00010ec4b8_switch
+                        font-size: 18px;
+                      }
+              content: >
+                 Детская А
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: sensor.08_mean_humidity
+              - entity: input_number.humidity_level_da
+              - entity: switch.0x00158d00010ec4b8_switch

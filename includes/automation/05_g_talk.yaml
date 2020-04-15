@@ -1,7 +1,7 @@
 ## Проветривание
 - alias: 05_gg_air_fresh
   initial_state: true
-# Проверка каждые 15 минут
+# Проверка каждые 30 минут
   trigger:
     - platform: time_pattern
       minutes: '/30'
@@ -11,11 +11,11 @@
     conditions:
 # День
       - condition: state
-        entity_id: binary_sensor.day_work
+        entity_id:  binary_sensor.weekend_time
         state: 'on'
 # Закрыто окно  
       - condition: state
-        entity_id: binary_sensor.door_window_sensor_158d00013ed373
+        entity_id: binary_sensor.0x00158d00013ed373_contact
         state: 'off'  
 # Дополнительные условия 
       - condition: or

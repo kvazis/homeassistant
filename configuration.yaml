@@ -54,23 +54,23 @@ discovery:
 lovelace:
   mode: yaml
   resources:
-   - url: /community_plugin/lovelace-auto-entities/auto-entities.js
+   - url: /hacsfiles/lovelace-auto-entities/auto-entities.js
      type: module
-   - url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
+   - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
      type: js 
-   - url: /community_plugin/canvas-gauge-card/canvas-gauge-card.js
+   - url: /hacsfiles/canvas-gauge-card/canvas-gauge-card.js
      type: module
-   - url: /community_plugin/mini-graph-card/mini-graph-card-bundle.js
+   - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
      type: module
-   - url: /community_plugin/simple-thermostat/simple-thermostat.js?v=1
+   - url: /hacsfiles/simple-thermostat/simple-thermostat.js?v=1
      type: module
-   - url: /community_plugin/lovelace-card-mod/card-mod.js
+   - url: /hacsfiles/lovelace-card-mod/card-mod.js
      type: module
-   - url: /community_plugin/stack-in-card/stack-in-card.js
+   - url: /hacsfiles/stack-in-card/stack-in-card.js
      type: module
-   - url: /community_plugin/lovelace-battery-entity/battery-entity.js
+   - url: /hacsfiles/lovelace-battery-entity/battery-entity.js
      type: module
-     
+
 # Включение истории
 #history:
 
@@ -85,7 +85,7 @@ tuya:
   
 mqtt:
 #   broker: core-mosquitto
-  broker: 192.168.0.77
+  broker: 192.168.0.71
   discovery: true
   discovery_prefix: homeassistant
   username: mqtt
@@ -200,7 +200,6 @@ timer: !include includes/timer.yaml
 counter: !include includes/counter.yaml
 fan: !include includes/fan.yaml
 recorder: !include includes/recorder.yaml
-influxdb: !include includes/influxdb.yaml
 group: !include includes/groups.yaml
 rest_command: !include includes/rest_command.yaml
 notify: !include includes/notify.yaml

@@ -1,7 +1,7 @@
-  - platform: samsungtv
-    host: 192.168.0.10
-    name: Samsung TV
+#   - platform: xiaomi_tv
+#     host: 192.168.0.10
+#     name: xiaomi55
     
   - platform: xiaomi_tv
     host: 192.168.0.11
-    name: Xiaomi TV
+    name: xiaomi32

@@ -7,11 +7,16 @@ cards:
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
           content: >
               **Детская А - управление**
 
-        - type: custom:vertical-stack-in-card
-          cards:
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
 
           - type: horizontal-stack
             cards: 
@@ -19,10 +24,72 @@ cards:
             - type: button
               entity: light.aqara_08_ceiling
               name: Люстра
+              
+            - type: button
+              entity: script.08_da_nightlight
+              name: Ночник
+              icon: mdi:weather-night
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                entity_id: script.08_da_nightlight
+                
+            - type: button
+              entity: script.08_da_light_circle_1
+              name: Подсветка
+              icon: mdi:star
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                entity_id: script.08_da_light_circle_1
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+                
+          - type: horizontal-stack
+            cards: 
+            
+            - type: button
+              entity: script.08_da_nightlight_off
+              name: Выключение подсветки
+              icon: mdi:star-off
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                entity_id: script.08_da_nightlight_off
+                
+            - type: button
+              entity: script.08_da_lightoff
+              name: Свет выкл
+              icon: mdi:close-circle-outline
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                entity_id: script.08_da_lightoff
+                
+            - type: button
+              entity: switch.0x00158d0002d7bb2b_switch_l1
+              name: Стол питание
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
+
+          - type: horizontal-stack
+            cards:
 
             - type: light
               entity: light.24730816ecfabc996804
               name: Лампа
+              
+            - type: light
+              entity: light.yeelight_08_strip
+              name: LED лента
 
 
           - type: horizontal-stack
@@ -35,48 +102,65 @@ cards:
               entity: light.yeelight_08_bedside
               name: Yeelight
 
-          - type: horizontal-stack
-            cards:        
-            - type: light
-              entity: light.yeelight_08_strip
-              name: LED лента
-              
-            - type: light
-              entity: light.gateway_light_f0b429cc1f11
-              name: Шлюз
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Детская А - мониторинг** 
 
         - type: glance
           show_state: false
           entities:
-          - entity: switch.0x00158d0002d7bb2b_switch_l1
-            tap_action: 
-              action: toggle
-            name: Стол          
-          - entity: script.08_da_nightlight
-            tap_action: 
-              action: toggle
-            name: Ночник
-            icon: mdi:weather-night
-          - entity: script.08_da_light_circle_1
-            tap_action: 
-              action: toggle
-            name: Подсветка
-            icon: mdi:star
-          - entity: script.08_da_nightlight_off
-            tap_action: 
-              action: toggle
-            name: Выключение подсветки
-            icon: mdi:star-off
-          - entity: script.08_da_lightoff
-            name: Свет выкл
-            tap_action: 
-              action: toggle
-            icon: mdi:close-circle-outline
+           - entity: binary_sensor.0x00158d00016d56f5_occupancy
+             name: Движение
+           - entity: binary_sensor.0x00158d0001583c7b_contact
+             name: Окно
+           - entity: binary_sensor.da_nightlight
+             name: Ночник
+   
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.mqtt_binary_sensor_158d00016d56f5
+             name: Движение
+             icon: mdi:run-fast 
+           - entity: sensor.load_158d00010ec4b8
+             name: Увлажнитель
+           - entity: sensor.load_158d0002d7bb2b
+             name: Стол и отопление
+           - entity: binary_sensor.notebook_chuwi
+             name: Chuwi
+          
+        - type: picture-entity
+          entity: camera.xiaofang1s
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: switch.xiaofang1s_ir_filter
+            - entity: switch.xiaofang1s_ir_led
+            - entity: switch.xiaofang1s_night_mode
+            - entity: switch.xiaofang1s_night_mode_auto
+            # - entity: switch.xiaofang1s_motion_detection            
+            # - entity: binary_sensor.xiaofang1s_motion_sensor
+
 
       - type: vertical-stack
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
           content: >
               **Детская А - климат**
 
@@ -122,46 +206,3 @@ cards:
           sensors:
               - entity: sensor.08_mean_humidity
                 name: Humidity
-
-      - type: vertical-stack
-        cards:
-
-        - type: markdown
-          content: >
-              **Детская А - мониторинг** 
-
-        - type: custom:vertical-stack-in-card
-          cards:
-
-           - type: glance
-             show_state: false
-             entities:
-              - entity: binary_sensor.0x00158d00016d56f5_occupancy
-                name: Движение
-              - entity: binary_sensor.0x00158d0001583c7b_contact
-                name: Окно
-              - entity: binary_sensor.da_nightlight
-                name: Ночник
-  
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_binary_sensor_158d00016d56f5
-               name: Последнее движение в детской А в - 
-               icon: mdi:run-fast 
-          
-        - type: picture-entity
-          entity: camera.xiaofang1s
-          camera_view: live 
-          show_state: false
-          show_name: false
-          
-        - type: entities
-          show_header_toggle: false
-          entities:
-            - entity: switch.xiaofang1s_ir_filter
-            - entity: switch.xiaofang1s_ir_led
-            - entity: switch.xiaofang1s_night_mode
-            - entity: switch.xiaofang1s_night_mode_auto
-            - entity: switch.xiaofang1s_motion_detection            
-            - entity: binary_sensor.xiaofang1s_motion_sensor

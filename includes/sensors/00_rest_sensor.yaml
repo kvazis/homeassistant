@@ -54,7 +54,7 @@
   value_template: '{{ value_json.state }}'
   
 - platform: rest
-  resource: http://192.168.0.77:8123/api/states/sensor.online_custom
+  resource: http://192.168.0.71:8123/api/states/sensor.online_custom
   name: mqtt_state
   force_update: true
   headers: 

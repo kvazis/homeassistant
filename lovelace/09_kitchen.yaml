@@ -7,11 +7,16 @@ cards:
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
           content: >
               **Кухня - панель управления**
 
-        - type: custom:vertical-stack-in-card
-          cards: 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:   
 
           - type: horizontal-stack
             cards:        
@@ -21,6 +26,7 @@ cards:
             - type: light
               entity: light.gateway_light_7811dc64f4c8
               name: Шлюз
+
 
           - type: horizontal-stack
             cards: 
@@ -43,58 +49,93 @@ cards:
               entities:
                 - entity: sensor.philips_04_ceiling
 
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: binary_sensor.04_kn_mainlight
-          - entity: binary_sensor.04_kn_autolight
-
-        - type: custom:vertical-stack-in-card
+        - type: custom:stack-in-card
+          mode: horizontal
           cards: 
-
-          - type: markdown
-            content: >
-                **Xiaomi IR base**
-
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.tv_xiaomi
+            - type: button
+              entity: switch.tv_xiaomi
               name: Телевизор
               icon: mdi:television
-            - entity: script.mini8_android
+            - type: button
+              entity: script.mini8_android
               name: Android Box
               icon: mdi:power-cycle
-            - entity: script.xiaomi_learn
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                entity_id: script.mini8_android
+            - type: button
+              entity: script.xiaomi_learn
               name: Обучение
               icon: mdi:remote-tv 
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                entity_id: script.xiaomi_learn
 
-        - type: custom:vertical-stack-in-card
+        - type: custom:stack-in-card
+          mode: horizontal
           cards: 
+            - type: button
+              entity: switch.0x00158d0001291d12_switch
+              name: Питание телевизора
+            - type: button
+              entity: switch.0x00158d0001fa2934_switch
+              name: Питание холодильника                
 
-          - type: markdown
-            content: >
-                **Питание**
-                
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.0x00158d0001291d12_switch
-            - entity: switch.0x00158d0001fa2934_switch
+
+      - type: vertical-stack
+        cards:
+        
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Кухня - мониторинг**
+              
+        - type: picture-entity
+          entity: camera.reolink2
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.04_kn_light
+           - entity: binary_sensor.04_kn_mainlight
+           - entity: binary_sensor.04_kn_autolight
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x04cf8cdf3c772379_illuminance
+             name: Освещенность
+             color: "#FFFAFA"
+          animate: true
+          line_width: 3
+
 
       - type: vertical-stack
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
           content: >
-              **Кухня - мониторинг**
+              **Кухня - сенсоры**
 
         - type: glance
           show_state: false
           entities:
            - entity: binary_sensor.water_leak_sensor_158d0001bbeba6 
              name: Раковина
-           - entity: binary_sensor.motion_sensor_158d0001e16204
+           - entity: binary_sensor.0x00158d0001e16204_occupancy
              name: Движение
            - entity: binary_sensor.0x00158d0001a99562_contact
              name: Окно 
@@ -107,7 +148,7 @@ cards:
               - entity: sensor.0x00158d0001581109_temperature 
                 name: Температура
                 color: "#FFFF00"
-             animate: tr ue
+             animate: true
              line_width: 3
              
            - type: custom:mini-graph-card
@@ -117,45 +158,35 @@ cards:
                 color: "#0000FF"
              animate: true
              line_width: 3
-
-        - type: custom:mini-graph-card
+              
+        - type: glance
+          show_state: true
           entities:
-           - entity: sensor.0x04cf8cdf3c772379_illuminance
-             name: Освещенность
-             color: "#FFFAFA"
-          animate: true
-          line_width: 3
-
-
-
-        - type: picture-entity
-          entity: camera.reolink2
-          camera_view: live 
-          show_state: false
-          show_name: false
-
-        - type: entities
-          show_header_toggle: false
+           - entity: sensor.load_158d0001291d12
+             name: Телевизор
+           - entity: sensor.load_158d0001fa2934
+             name: Холодильник
+           - entity: sensor.load_158d0001d35bc0
+             name: LED лента
+             
+        - type: glance
+          show_state: true
           entities:
-          - entity: sensor.mqtt_binary_sensor_158d0001e16204
-            name: Последнее движение в кухне в - 
-            icon: mdi:run-fast 
-          - entity: sensor.illumination_7811dc64f4c8
-            name: Уровень освещенности шлюз
-          - entity: sensor.illumination_158d0001e16204
-            name: Уровень освещенности дд
-          - entity: sensor.xiaomi_tv_custom
-          - entity: sensor.load_158d0001291d12
-            name: Телевизор, текущее потребление
-          - entity: sensor.load_158d0001fa2934
-            name: Холодильник, текущее потребление
-          - entity: sensor.load_158d0001d35bc0
-            name: Led лента, потребление
+           - entity: sensor.mqtt_binary_sensor_158d0001e16204
+             name: Движение
+             icon: mdi:run-fast
+           - entity: sensor.xiaomi_tv_custom
+             name: Телевизор работал
+
 
       - type: vertical-stack
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
           content: >
               **Кухонный балкон**
 

@@ -3,134 +3,162 @@ title: Локальная сеть
 icon: mdi:lan
 cards:
 
-      - type: vertical-stack
-        cards:
+    - type: vertical-stack
+      cards:
 
-         - type: markdown
-           content: >
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
               **Загрузка канала**
 
-         - type: horizontal-stack
-           cards:
+        - type: custom:stack-in-card
+          mode: horizontal
+          cards: 
 
-              - type: iframe
-                url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&panelId=18
-                aspect_ratio: 75% 
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.asuswrt_download_speed
+                 name: Download
+                 color: "#47ff00"
+              animate: true
+              line_width: 3
               
-              - type: iframe
-                url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/mpi2iIZgk/system?orgId=1&panelId=16
-                aspect_ratio: 75% 
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.asuswrt_upload_speed
+                 name: Upload
+                 color: "#e700ff"
+              animate: true
+              line_width: 3
               
-         - type: entities
-           show_header_toggle: false
-           entities:
-             - entity: sensor.asuswrt_download
-               name: Принято сегодня - 
-               icon: mdi:download
-             - entity: sensor.asuswrt_upload
-               name: Отправлено сегодня - 
-               icon: mdi:upload
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: sensor.asuswrt_download
+             name: Принято сегодня - 
+             icon: mdi:download
+           - entity: sensor.asuswrt_upload
+             name: Отправлено сегодня - 
+             icon: mdi:upload
 
-      - type: vertical-stack
-        cards:
+    - type: vertical-stack
+      cards:
 
-          - type: markdown
-            content: >
-               **Bluetooth device Zone**
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Bluetooth device Zone**
 
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **BLE шлюз кухня**
-              - type: entities
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+          
+            - type: markdown
+              content: >
+                 **BLE шлюз кухня**
+            - type: entities
+              show_header_toggle: false
+              entities:
+               - entity: binary_sensor.kn_state
+                 name: Состояние - 
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
                 show_header_toggle: false
-                entities:
-                 - entity: binary_sensor.kn_state
-                   name: Состояние - 
-              - type: custom:auto-entities
-                show_empty: false
-                card:
-                  type: entities
-                  show_header_toggle: false
-                filter:
-                  include:
-                   - entity_id: sensor.kn*rssi
-                  exclude:
-                   - state: 'unknown'
+              filter:
+                include:
+                 - entity_id: sensor.kn*rssi
+                exclude:
+                 - state: 'unknown'
 
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **BLE шлюз гостиная**
-              - type: entities
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+            - type: markdown
+              content: >
+                 **BLE шлюз гостиная**
+            - type: entities
+              show_header_toggle: false
+              entities:
+               - entity: binary_sensor.gg_state
+                 name: Состояние - 
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
                 show_header_toggle: false
-                entities:
-                 - entity: binary_sensor.gg_state
-                   name: Состояние - 
-              - type: custom:auto-entities
-                show_empty: false
-                card:
-                  type: entities
-                  show_header_toggle: false
-                filter:
-                  include:
-                   - entity_id: sensor.gg*rssi
-                  exclude:
-                   - state: 'unknown'
+              filter:
+                include:
+                 - entity_id: sensor.gg*rssi
+                exclude:
+                 - state: 'unknown'
 
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **BLE шлюз детская Д**
-              - type: entities
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+            - type: markdown
+              content: >
+                 **BLE шлюз детская Д**
+            - type: entities
+              show_header_toggle: false
+              entities:
+               - entity: binary_sensor.dd_state
+                 name: Состояние -                   
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
                 show_header_toggle: false
-                entities:
-                 - entity: binary_sensor.dd_state
-                   name: Состояние -                   
-              - type: custom:auto-entities
-                show_empty: false
-                card:
-                  type: entities
-                  show_header_toggle: false
-                filter:
-                  include:
-                   - entity_id: sensor.dd*rssi
-                  exclude:
-                   - state: 'unknown'
+              filter:
+                include:
+                 - entity_id: sensor.dd*rssi
+                exclude:
+                 - state: 'unknown'
 
-          - type: custom:vertical-stack-in-card
-            cards:
-              - type: markdown
-                content: >
-                   **BLE шлюз детская А**
-              - type: entities
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+   
+            - type: markdown
+              content: >
+                 **BLE шлюз детская А**
+            - type: entities
+              show_header_toggle: false
+              entities:
+               - entity: binary_sensor.da_state
+                 name: Состояние -                   
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
                 show_header_toggle: false
-                entities:
-                 - entity: binary_sensor.da_state
-                   name: Состояние -                   
-              - type: custom:auto-entities
-                show_empty: false
-                card:
-                  type: entities
-                  show_header_toggle: false
-                filter:
-                  include:
-                   - entity_id: sensor.da*rssi
-                  exclude:
-                   - state: 'unknown'
+              filter:
+                include:
+                 - entity_id: sensor.da*rssi
+                exclude:
+                 - state: 'unknown'
 
-      - type: vertical-stack
-        cards:
+    - type: vertical-stack
+      cards:
 
-          - type: markdown
-            content: >
-               **Network device Zone**
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+             **Network device Zone**
 
-          - type: custom:vertical-stack-in-card
-            cards: 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
             - type: markdown
               content: >
                   **Ноутбуки в сети**
@@ -148,8 +176,9 @@ cards:
                    options:
                       secondary_info: last-changed
                       
-          - type: custom:vertical-stack-in-card
-            cards: 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
             - type: markdown
               content: >
                   **Отвалившиеся HA instanse**
@@ -167,8 +196,9 @@ cards:
                    options:
                       secondary_info: last-changed
                       
-          - type: custom:vertical-stack-in-card
-            cards: 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
             - type: markdown
               content: >
                   **Отвалившиеся Zigbee gateway**
@@ -186,8 +216,9 @@ cards:
                    options:
                       secondary_info: last-changed
                       
-          - type: custom:vertical-stack-in-card
-            cards: 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
             - type: markdown
               content: >
                   **Отвалившиеся камеры**

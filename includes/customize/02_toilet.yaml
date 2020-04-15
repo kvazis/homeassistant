@@ -57,7 +57,7 @@ light.aqara_02_ceiling:
   icon: mdi:lightbulb
 
 ## Реле
-switch.wall_switch_158d00014a1a55:
+switch.0x00158d00014a1a55_switch:
   friendly_name: Прачечная выключатель
   device_class: plug  
   icon: mdi:power-socket-eu
@@ -76,14 +76,16 @@ sensor.bwshp2_voltage:
   friendly_name: Напряжение в сети
   unit_of_measurement: В
 
-sensor.illumination_158d0001ab3350:
+sensor.0x00158d0001ab3350_illuminance:
   friendly_name: Прачечная, освещенность
 
 ## Бинарные сенсоры
-binary_sensor.motion_sensor_158d0001ab3350:
+binary_sensor.0x00158d0001ab3350_occupancy:
   friendly_name: Прачечная, движение
 
 binary_sensor.water_leak_sensor_158d0002705b7b:
   friendly_name: Прачечная, протечка, стиралка
   
 ## Уровень заряда
+sensor.0x00158d0001ab3350_battery:
+  friendly_name: Прачечная, движение

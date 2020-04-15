@@ -6,19 +6,28 @@ cards:
       - type: vertical-stack
         cards:
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
-                 ## Общий показатель
-           - type: iframe
-             url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/euS3ySWgk/power?orgId=1&refresh=1m&panelId=2
-             # aspect_ratio: 65% 
+        - type: markdown
+          style: |
+              ha-card {
+                color: #17fe00;
+                font-weight: bold;
+                # font-size: 16px;
+              } 
+          content: >
+               ## Общий показатель
 
-           - type: iframe
-             url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/euS3ySWgk/power?orgId=1&refresh=1m&panelId=6
-             # aspect_ratio: 65% 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
 
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_total_energy
+                name: Потребление
+                color: "#17fe00"
+             show:
+                graph: bar   
+              
            - type: horizontal-stack
              cards:
              - type: markdown
@@ -55,14 +64,21 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
-                 ## Стиральная машина
-           - type: iframe
-             url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/euS3ySWgk/power?orgId=1&refresh=1m&panelId=4
-             # aspect_ratio: 65% 
+        - type: markdown
+          content: >
+                ## Стиральная машина
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_bwshp2
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar 
 
            - type: horizontal-stack
              cards:
@@ -101,15 +117,21 @@ cards:
                  icon: mdi:cash
 
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
-                 ## Кухня телевизор
+        - type: markdown
+          content: >
+              ## Кухня телевизор
 
-           - type: iframe
-             url: http://192.168.0.70:8123/api/hassio_ingress/m0ostdEJnnhQj6CKrKdvVDiTrhOGmXBO24Xlp9U71uQ/d-solo/euS3ySWgk/power?orgId=1&refresh=1m&panelId=8
-             # aspect_ratio: 65% 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d0001291d12
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar 
 
            - type: horizontal-stack
              cards:
@@ -147,21 +169,22 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
-                 ## Холодильник
-           - type: horizontal-stack
-             cards:     
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d0001fa2934
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar             
+
+        - type: markdown
+          content: >
+              ## Холодильник
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d0001fa2934
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar             
 
            - type: horizontal-stack
              cards:
@@ -199,21 +222,21 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
-                 ## LED лента
-           - type: horizontal-stack
-             cards:      
+        - type: markdown
+          content: >
+              ## LED лента
 
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d0001d35bc0
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar   
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d0001d35bc0
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar   
 
            - type: horizontal-stack
              cards:
@@ -252,24 +275,26 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
+
+
       - type: vertical-stack
         cards:
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
-                 ## Гостиная телевизор 
-           - type: horizontal-stack
-             cards:    
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d00012896cb
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar 
+        - type: markdown
+          content: >
+              ## Гостиная телевизор 
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d00012896cb
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar 
 
            - type: horizontal-stack
              cards:
@@ -307,24 +332,21 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
+        - type: markdown
+          content: >
+              ## Xiaomi wi-fi + 2 USB
 
-        - type: custom:vertical-stack-in-card
-          cards:
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
 
-           - type: markdown
-             content: >
-                 ## Xiaomi wi-fi + 2 USB
-           - type: horizontal-stack
-             cards:      
-
-
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_wifi_socket_usb
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar 
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_wifi_socket_usb
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar 
 
            - type: horizontal-stack
              cards:
@@ -362,21 +384,21 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
-        - type: custom:vertical-stack-in-card
+        - type: markdown
+          content: >
+              ## Гостиная, батарея 2
+
+        - type: custom:stack-in-card
+          mode: vertical
           cards:  
-           - type: markdown
-             content: >
-                 ## Гостиная, батарея 2
-           - type: horizontal-stack
-             cards: 
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d000114a1e1
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d000114a1e1
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar 
 
            - type: horizontal-stack
              cards:
@@ -414,21 +436,21 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
+        - type: markdown
+          content: >
                  ## Гостиная, удлинитель, стол
-           - type: horizontal-stack
-             cards:      
 
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_04cf8cdf3c764e0a
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_04cf8cdf3c764e0a
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar 
 
            - type: horizontal-stack
              cards:
@@ -465,22 +487,23 @@ cards:
                - entity: sensor.money_lastmonth_04cf8cdf3c764e0a
                  name: Месяц
                  icon: mdi:cash
-                 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
-                 ## Гостиная, лампа за телевизором
-           - type: horizontal-stack
-             cards:      
 
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d000153dd8e
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar 
+
+        - type: markdown
+          content: >
+              ## Гостиная, лампа за телевизором
+                 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+               - entity: sensor.load_158d000153dd8e
+                 name: Потребление
+                 color: "#FFFF00"
+             show:
+                 graph: bar 
 
            - type: horizontal-stack
              cards:
@@ -518,22 +541,21 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
+        - type: markdown
+          content: >
+              ## Гостиная, удлинитель, стойка ТВ
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
-                 ## Гостиная, удлинитель, стойка ТВ
-           - type: horizontal-stack
-             cards:    
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_wifi_6port
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_wifi_6port
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar 
 
            - type: horizontal-stack
              cards:
@@ -571,21 +593,22 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: markdown
-             content: >
-                 ## Гостиная, удлинитель комод
-           - type: horizontal-stack
-             cards:  
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_wifi_3usb
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar
+
+        - type: markdown
+          content: >
+              ## Гостиная, удлинитель комод
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_wifi_3usb
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar
 
            - type: horizontal-stack
              cards:
@@ -623,24 +646,25 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
+
       - type: vertical-stack
         cards:
 
-        - type: custom:vertical-stack-in-card
-          cards:            
-           - type: markdown
-             content: >
-                ## Бойлер
-           - type: horizontal-stack
-             cards:      
+        - type: markdown
+          content: >
+             ## Бойлер
 
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d00015751f4
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:           
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d00015751f4
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar
 
            - type: horizontal-stack
              cards:
@@ -678,22 +702,21 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
+        - type: markdown
+          content: >
+             ## Детская Д, увлажнение и отопление
 
-        - type: custom:vertical-stack-in-card
-          cards:  
-           - type: markdown
-             content: >
-                ## Детская Д, увлажнение и отопление
-           - type: horizontal-stack
-             cards:  
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d0001a2ccab
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d0001a2ccab
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar
                 
 
            - type: horizontal-stack
@@ -732,22 +755,21 @@ cards:
                  name: Месяц
                  icon: mdi:cash
  
+        - type: markdown
+          content: >
+              ## Настольная лампа Д
 
-        - type: custom:vertical-stack-in-card
-          cards:  
-           - type: markdown
-             content: >
-                ## Настольная лампа Д
-           - type: horizontal-stack
-             cards:   
-             
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d00030a6e78
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d00030a6e78
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar
 
            - type: horizontal-stack
              cards:
@@ -785,22 +807,21 @@ cards:
                  name: Месяц
                  icon: mdi:cash
 
+        - type: markdown
+          content: >
+             ## Детская А, отопление и рабочий стол
 
-        - type: custom:vertical-stack-in-card
-          cards:  
-           - type: markdown
-             content: >
-                ## Детская А, отопление и рабочий стол
-           - type: horizontal-stack
-             cards:      
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
 
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d0002d7bb2b
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d0002d7bb2b
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar
 
            - type: horizontal-stack
              cards:
@@ -837,22 +858,23 @@ cards:
                - entity: sensor.money_lastmonth_158d0002d7bb2b
                  name: Месяц
                  icon: mdi:cash
-               
-        - type: custom:vertical-stack-in-card
-          cards:  
-           - type: markdown
-             content: >
-                ## Увлажнитель А
-           - type: horizontal-stack
-             cards:      
 
-              - type: custom:mini-graph-card
-                entities:
-                 - entity: sensor.load_158d00010ec4b8
-                   name: Потребление
-                   color: "#FFFF00"
-                show:
-                   graph: bar
+
+        - type: markdown
+          content: >
+             ## Увлажнитель А
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.load_158d00010ec4b8
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                 graph: bar
 
            - type: horizontal-stack
              cards:

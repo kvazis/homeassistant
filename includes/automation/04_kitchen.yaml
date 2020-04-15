@@ -32,48 +32,18 @@
     - service: switch.toggle
       entity_id: switch.04_kn_mainlight 
   
-  
-    # - service: script.turn_on
-    #   data_template:
-    #     entity_id: >-
-    #      {%- if states.light.philips_04_ceiling.state == 'off'-%}
-    #      script.04_kn_ceiling_on
-    #      {%- elif states.light.philips_04_ceiling.state == 'on' and states("sensor.philips_04_ceiling") | int <= 1  -%}
-    #      script.04_kn_ceiling_off
-    #      {%- elif states.light.philips_04_ceiling.state == 'on' and states("sensor.philips_04_ceiling") | int >= 2  -%}
-    #      script.04_kn_ceiling_on
-    #      {% endif %}  
-         
 # Автоматическое включение люстры
 - alias: 04_kn_ceiling_auto_on
   initial_state: true
   trigger:
 # Датчик движения
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001e16204
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001e16204_occupancy
+    to: 'on'
   condition:
-# Условие И - лампа выключена
-   condition: and
-   conditions:
-    - condition: state
-      entity_id: switch.04_kn_mainlight
-      state: 'off'
-    - condition: state
-      entity_id: light.philips_04_ceiling
-      state: 'off'
-# Второе условие И - одно из двух
-    - condition: or
-      conditions:
-# Освещенность ниже 800 с шлюза
-         - condition: numeric_state
-           entity_id: sensor.illumination_7811dc64f4c8
-           below: 800
-# Время между закатом и рассветом
-         - condition: state
-           entity_id: binary_sensor.tod_full_night
-           state: 'on'
+   - condition: state
+     entity_id: binary_sensor.04_kn_light
+     state: 'on'
   action:
     - service: script.turn_on
       data_template:
@@ -91,7 +61,7 @@
   initial_state: true
   trigger:
   - platform: state
-    entity_id: binary_sensor.motion_sensor_158d0001e16204
+    entity_id: binary_sensor.0x00158d0001e16204_occupancy
     from: 'on'
     to: 'off' 
   condition:

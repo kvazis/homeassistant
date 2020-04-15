@@ -7,15 +7,17 @@ cards:
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
           content: >
               **Гостиная - панель управления**
 
 
-        - type: custom:vertical-stack-in-card
-          cards:     
-          - type: markdown
-            content: >
-                **Освещение**
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:       
           - type: horizontal-stack
             cards:        
             - type: light
@@ -79,18 +81,15 @@ cards:
                   entity_id: script.05_gg_lightoff
               
 
-        - type: custom:vertical-stack-in-card
-          cards: 
-          - type: markdown
-            content: >
-                **Управление**
-
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:   
           - type: horizontal-stack
             cards:    
             - type: entity-button
               entity: switch.movie_mode 
             - type: entity-button
-              entity: switch.tv_samsung
+              entity: switch.tv_xiaomi_55
               icon: mdi:television
             - type: entity-button
               entity: script.ilife_a4
@@ -102,13 +101,10 @@ cards:
                 service_data:
                   entity_id: script.ilife_a4
 
-        - type: custom:vertical-stack-in-card
-          cards: 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
 
-          - type: markdown
-            content: >
-                **Питание**
-                
           - type: horizontal-stack
             cards:    
             - type: entity-button
@@ -127,22 +123,61 @@ cards:
             - type: entity-button
               entity: switch.wifi_3usb 
 
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+              **Гостиная - мониторинг**
+
+        - type: picture-entity
+          entity: camera.reolink4_sub
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+        # - type: markdown
+        #   content: >
+        #         Растения
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
+          - type: plant-status
+            entity: plant.dieffenbac_ble
+            name: Диффенбахия
+          - type: plant-status
+            entity: plant.yucca_ble
+            name: Юкка
+          - type: plant-status
+            entity: plant.zamiokulkas_ble
+            name: Замиокулькас
+          - type: horizontal-stack
+            cards: 
+              - type: plant-status
+                entity: plant.deep_purple_ble
+                name: Deep Purple
+              - type: plant-status
+                entity: plant.true_blue_ble
+                name: True Blue
 
       - type: vertical-stack
         cards:
         
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
           content: >
               **Гостиная - климат**
               
-        - type: custom:vertical-stack-in-card
-          cards: 
-          - type: markdown
-            content: >
-                  Мониторинг качества воздуха
-              
-          - type: horizontal-stack
-            cards:
+        - type: horizontal-stack
+          cards:
 
              - type: custom:mini-graph-card
                entities:
@@ -160,8 +195,8 @@ cards:
                animate: true
                line_width: 3
             
-          - type: horizontal-stack
-            cards:
+        - type: horizontal-stack
+          cards:
             
              - type: custom:mini-graph-card
                entities:
@@ -187,65 +222,6 @@ cards:
                animate: true
                line_width: 3
 
-        - type: custom:vertical-stack-in-card
-          cards:
-
-          - type: markdown
-            content: >
-                  Увлажнитель и очиститель воздуха
-
-          - type: horizontal-stack
-            cards:
-  
-            - type: custom:canvas-gauge-card
-              entity: sensor.smartmi_water
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: Уровень воды (%)
-                borderShadowWidth: 0
-                borderOuterWidth: 0
-                borderMiddleWidth: 0
-                borderInnerWidth: 0
-                width: 200
-                height: 180
-                minValue: 0
-                maxValue: 100
-                startAngle: 15
-                ticksAngle: 330
-                valueBox: false
-                colorPlate: "#C0C0C0"
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 25,"color": "rgba(255, 0, 0, .75)"},{"from": 25, "to": 50,"color": "rgba(255, 140, 0, .75)"},{"from": 50, "to": 75,"color": "rgba(255, 250, 0, .75)"}, {"from": 75, "to": 100,"color": "rgba(10, 255, 0, .75)"}]
-                borders: false
-
-            - type: custom:canvas-gauge-card
-              entity: sensor.purifier_filter
-              card_height: 180
-              gauge:
-                type: "radial-gauge"
-                title: Расход фильтра (%)
-                borderShadowWidth: 0
-                borderOuterWidth: 0
-                borderMiddleWidth: 0
-                borderInnerWidth: 0
-                width: 200
-                height: 180
-                minValue: 0
-                maxValue: 100
-                startAngle: 15
-                ticksAngle: 330
-                valueBox: false
-                colorPlate: "#C0C0C0"
-                majorTicks: ["0", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"]
-                minorTicks: 4
-                strokeTicks: true
-                highlights: [{"from": 0, "to": 25,"color": "rgba(255, 0, 0, .75)"},{"from": 25, "to": 50,"color": "rgba(255, 140, 0, .75)"},{"from": 50, "to": 75,"color": "rgba(255, 250, 0, .75)"}, {"from": 75, "to": 100,"color": "rgba(10, 255, 0, .75)"}]
-                borders: false
-  
-
         - type: custom:simple-thermostat
           entity: climate.living_heater
           step_layout: row
@@ -255,55 +231,47 @@ cards:
           sensors:
             - entity: sensor.05_mean_humidity
               name: Humidity
-          
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: input_number.humidity_level_gg
-          - entity: binary_sensor.living_hum
-          - entity: switch.gg_humidifier
 
-      - type: vertical-stack
-        cards:
-
-        - type: markdown
-          content: >
-              **Камера**
-
-        - type: picture-entity
-          entity: camera.reolink4_sub
-          camera_view: live 
-          show_state: false
-          show_name: false
-
-        - type: markdown
-          content: >
-                Растения
-
-        - type: custom:vertical-stack-in-card
+        - type: custom:stack-in-card
+          mode: vertical
           cards: 
-          - type: plant-status
-            entity: plant.dieffenbac_ble
-            name: Диффенбахия
-          - type: plant-status
-            entity: plant.yucca_ble
-            name: Юкка
-          - type: plant-status
-            entity: plant.zamiokulkas_ble
-            name: Замиокулькас
-          - type: horizontal-stack
-            cards: 
-              - type: plant-status
-                entity: plant.deep_purple_ble
-                name: Deep Purple
-              - type: plant-status
-                entity: plant.true_blue_ble
-                name: True Blue
+          
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: sensor.05_mean_humidity
+              - entity: input_number.humidity_level_gg
+              - entity: sensor.smartmi_water
+                name: Остаток воды - 
+                
+            - type: custom:stack-in-card
+              mode: horizontal
+              cards: 
+                - type: button
+                  entity: switch.gg_humidifier_mode_auto
+                  name: Auto
+                  icon: mdi:brightness-auto
+                - type: button
+                  entity: switch.gg_humidifier_mode_silent
+                  name: Silent
+                  icon: mdi:speedometer-slow
+                - type: button
+                  entity: switch.gg_humidifier_mode_medium
+                  name: Medium
+                  icon: mdi:speedometer-medium
+                - type: button
+                  entity: switch.gg_humidifier_mode_high
+                  name: High
+                  icon: mdi:speedometer
 
       - type: vertical-stack
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
           content: >
               **Балкон гостиной**
    

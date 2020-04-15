@@ -9,7 +9,6 @@ lr_climate:
             value_template: >-
               {{ is_state('binary_sensor.0x00158d000445206b_contact', 'off')  
                  and is_state('binary_sensor.0x00158d00013ed373_contact', 'off')
-                 and states('sensor.05_mean_humidity')|float < 55
                  and is_state('binary_sensor.humidification', 'on') 
                  and is_state('sensor.living_day_work', 'Включен') }}
             icon_template: >-
@@ -20,8 +19,6 @@ lr_climate:
               {% endif %}
               
     # Условия для включения отопления
-      - platform: template
-        sensors:
           living_heat:
             friendly_name: "Режим отопления, Гостиная -"
             value_template: >-
@@ -76,8 +73,6 @@ lr_climate:
               {% endif %}
     
     # Режим отопления
-      - platform: template
-        sensors:
           living_heat_work:
             friendly_name: "Режим сценариев отопления, Гостиная -"
             value_template: >-
@@ -120,3 +115,72 @@ lr_climate:
           - sensor.0x00158d00015aebb6_humidity
           - sensor.05_smartmi_humidity
           - sensor.05_mi_air_humidity
+          
+    switch:
+    
+      - platform: template
+        switches:
+
+          gg_humidifier_mode_auto:
+            friendly_name: "Увлажнитель авто"
+            value_template: >-
+              {{ is_state('fan.gg_humidifier', 'on')
+                 and is_state_attr('fan.gg_humidifier', 'mode', 'auto') }}
+            turn_on:
+              - service: homeassistant.turn_on
+                entity_id: fan.gg_humidifier
+              - service: fan.set_speed
+                entity_id: fan.gg_humidifier
+                data:
+                    speed: Auto
+            turn_off:
+              - service: homeassistant.turn_off
+                entity_id: fan.gg_humidifier
+                    
+          gg_humidifier_mode_silent:
+            friendly_name: "Увлажнитель тихий"
+            value_template: >-
+              {{ is_state('fan.gg_humidifier', 'on')
+                 and is_state_attr('fan.gg_humidifier', 'mode', 'silent') }}
+            turn_on:
+              - service: homeassistant.turn_on
+                entity_id: fan.gg_humidifier
+              - service: fan.set_speed
+                entity_id: fan.gg_humidifier
+                data:
+                    speed: Silent
+            turn_off:
+              - service: homeassistant.turn_off
+                entity_id: fan.gg_humidifier
+                    
+          gg_humidifier_mode_medium:
+            friendly_name: "Увлажнитель средний"
+            value_template: >-
+              {{ is_state('fan.gg_humidifier', 'on')
+                 and is_state_attr('fan.gg_humidifier', 'mode', 'medium') }}
+            turn_on:
+              - service: homeassistant.turn_on
+                entity_id: fan.gg_humidifier
+              - service: fan.set_speed
+                entity_id: fan.gg_humidifier
+                data:
+                    speed: Medium
+            turn_off:
+              - service: homeassistant.turn_off
+                entity_id: fan.gg_humidifier
+                    
+          gg_humidifier_mode_high:
+            friendly_name: "Увлажнитель максимальный"
+            value_template: >-
+              {{ is_state('fan.gg_humidifier', 'on')
+                 and is_state_attr('fan.gg_humidifier', 'mode', 'high') }}
+            turn_on:
+              - service: homeassistant.turn_on
+                entity_id: fan.gg_humidifier
+              - service: fan.set_speed
+                entity_id: fan.gg_humidifier
+                data:
+                    speed: High
+            turn_off:
+              - service: homeassistant.turn_off
+                entity_id: fan.gg_humidifier

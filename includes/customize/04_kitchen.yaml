@@ -33,7 +33,7 @@ switch.0x00158d0001291d12_switch:
 sensor.illumination_7811dc64f4c8:
   friendly_name: Кухня шлюз освещенность
 
-sensor.illumination_158d0001e16204:
+sensor.0x00158d0001e16204_illuminance:
   friendly_name: Кухня, ДД освещенность
   
 sensor.0x04cf8cdf3c772379_illuminance:
@@ -61,7 +61,7 @@ sensor.0x00158d000101bdc6_action:
   icon: mdi:cube-outline
 
 ## Бинарные сенсоры
-binary_sensor.motion_sensor_158d0001e16204:
+binary_sensor.0x00158d0001e16204_occupancy:
   friendly_name: Кухня, движение
 
 binary_sensor.0x00158d0001a99562_contact:
@@ -75,6 +75,8 @@ binary_sensor.vibration_158d0002a8ab8b:
   friendly_name: Кухня конфетница
 
 ## Уровень заряда
+sensor.0x00158d0001e16204_battery:
+  friendly_name: Кухня, движение
 sensor.0x04cf8cdf3c772379_battery:
   friendly_name: Кухня, сенсор освещенности
 sensor.0x00158d0001581109_battery:

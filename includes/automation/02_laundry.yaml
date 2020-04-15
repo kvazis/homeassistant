@@ -1,12 +1,11 @@
-# Включение света на 15 секунд по движению
+# Включение света секунд по движению
 - alias: 02_laundry_motion
   initial_state: true
   trigger:
 # Датчик движения
-   platform: event
-   event_type: xiaomi_aqara.motion
-   event_data:
-     entity_id: binary_sensor.motion_sensor_158d0001ab3350
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001ab3350_occupancy
+    to: 'on'
   condition:
   - condition: state
     entity_id: light.aqara_02_ceiling
@@ -14,45 +13,16 @@
   action:
   - service: light.turn_on
     entity_id: light.aqara_02_ceiling
-  - service: timer.cancel
-    entity_id: timer.laundry
-  - service: timer.start
-    entity_id: 
-      - timer.laundry
-    data_template: 
-        duration: 00:01:00
-
-## Таймер освещения обновление
-- alias: 02_laundry_light_timer_reload
-  initial_state: true
-  trigger:
-# Датчик движения
-   platform: event
-   event_type: xiaomi_aqara.motion
-   event_data:
-     entity_id: binary_sensor.motion_sensor_158d0001ab3350
-  condition:
-    - condition: state
-      entity_id: light.aqara_02_ceiling
-      state: 'on'
-  action:
-  - service: timer.cancel
-    entity_id: timer.laundry
-  - service: timer.start
-    entity_id: 
-      - timer.laundry
-    data_template: 
-        duration: 00:01:00
 
 # Выключение освещения       
 - alias: 02_laundry_light_off
   initial_state: true
   trigger:
-# Отсчет таймера
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.laundry
+# Датчик движения
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001ab3350_occupancy
+    from: 'on'
+    to: 'off' 
   condition:
   - condition: state
     entity_id: light.aqara_02_ceiling

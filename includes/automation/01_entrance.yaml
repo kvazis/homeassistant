@@ -39,7 +39,7 @@
   trigger:
 ## Открытие входной двери
    platform: state
-   entity_id: binary_sensor.door_window_sensor_158d000119378d
+   entity_id: binary_sensor.0x00158d000119378d_contact
    from: 'off'
    to: 'on'
   action: 
@@ -58,7 +58,7 @@
   trigger:
 ## Открытие входной двери
    platform: state
-   entity_id: binary_sensor.door_window_sensor_158d000119378d
+   entity_id: binary_sensor.0x00158d000119378d_contact
    from: 'off'
    to: 'on'
   action: 
@@ -71,7 +71,7 @@
   trigger:
 ## Открытие входной двери
    platform: state
-   entity_id: binary_sensor.door_window_sensor_158d000119378d
+   entity_id: binary_sensor.0x00158d000119378d_contact
    from: 'off'
    to: 'on'
   action: 

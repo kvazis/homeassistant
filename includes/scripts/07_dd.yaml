@@ -47,7 +47,7 @@
       - service: climate.set_temperature
         data:
           entity_id: climate.dd_heater
-          temperature: 23  
+          temperature: 22  
           
   dd_away:
     sequence:

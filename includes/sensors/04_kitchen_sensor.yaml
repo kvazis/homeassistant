@@ -167,15 +167,3 @@
           {%- set days = '{} д. '.format(days) if days > 0 else '' %}
           {{ 'Меньше минуты' if time < 60 else days + hours + minutes }}
         icon_template: mdi:clock
-        
-# Заряд батарей
-  - platform: attributes
-    attribute: battery_level
-    unit_of_measurement: "%"
-    entities:
-# Кухня движение
-       - binary_sensor.motion_sensor_158d0001ab3350
-# Кухня раковина, протечка
-       - binary_sensor.water_leak_sensor_158d0001bbeba6
-# Кухня конфетница
-       - binary_sensor.vibration_158d0002a8ab8b

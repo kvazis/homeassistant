@@ -48,7 +48,6 @@
       - automation.02_toilet_vent_timer
       - automation.02_toilet_vent_timer_off
       - automation.02_laundry_motion
-      - automation.02_laundry_light_timer_reload
       - automation.02_laundry_light_off
       - automation.02_laundry_power
       - automation.02_laundry_wleak_washmash_on
@@ -86,7 +85,7 @@
       - automation.05_gg_air_fresh
       - automation.05_ilife_a4
       - automation.05_usb_cool_auto     
-      - automation.05_tv_samsung
+      - automation.05_tv_xiaomi55
       - automation.05_gg_balkoon_light_on
       - automation.05_gg_balkoon_light_off
       - automation.05_gg_balkoon_light_power

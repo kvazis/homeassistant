@@ -24,7 +24,7 @@
 ## Санузел
   - platform: switch
     name: aqara_02_ceiling
-    entity_id: switch.wall_switch_158d00014a1a55
+    entity_id: switch.0x00158d00014a1a55_switch
 
   - platform: switch
     name: sonoff_02_mirror

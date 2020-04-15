@@ -31,18 +31,29 @@
         - input_number.humidity_level_gg
         - sensor.05_mean_humidity
         - binary_sensor.living_hum
+        - sensor.time
   action:
     service_template: >-
-      {% set hi = (states('input_number.humidity_level_gg') | float) + 5 %}
-      {% set lo = (states('input_number.humidity_level_gg') | float) - 5 %}
-      {% set humidity = states('sensor.05_mean_humidity') | float %}
-      {% if humidity > hi %}
+        {% if states.binary_sensor.living_hum.state == 'off' %}
         switch.turn_off
-      {% elif states.binary_sensor.living_hum.state == 'off' %} 
-        switch.turn_off
-      {% elif humidity < lo and states.binary_sensor.living_hum.state == 'on' %}
+        {% else %}
         switch.turn_on
-      {% else %}
-        switch.turn_{{states('switch.gg_humidifier') | lower}}
-      {% endif %}
-    entity_id: switch.gg_humidifier
+        {% endif %}
+    data_template:
+        entity_id: >-
+            {% set current = states('input_number.humidity_level_gg') | float %}
+            {% set low = (states('input_number.humidity_level_gg') | float) - 5 %}
+            {% set medium = (states('input_number.humidity_level_gg') | float) - 10 %}
+            {% set high = (states('input_number.humidity_level_gg') | float) - 15 %}
+            {% set humidity = states('sensor.05_mean_humidity') | float %}
+            {% if humidity < high %} 
+            switch.gg_humidifier_mode_high
+            {% elif humidity < medium %} 
+            switch.gg_humidifier_mode_medium
+            {% elif humidity < low %} 
+            switch.gg_humidifier_mode_low
+            {% else %} 
+            switch.gg_humidifier_mode_auto
+            {% endif %}
+            
+        

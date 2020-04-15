@@ -7,11 +7,16 @@ cards:
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }              
           content: >
               **Детская Д - панель управления**
 
-        - type: custom:vertical-stack-in-card
-          cards:
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
 
           - type: horizontal-stack
             cards:        
@@ -21,6 +26,9 @@ cards:
             - type: light
               entity: light.yeelight_07_whitebulb
               name: Бра
+            - type: light
+              entity: light.gateway_light_286c07f0ad27
+              name: Шлюз
 
           - type: conditional
             conditions:
@@ -32,81 +40,96 @@ cards:
               entities:
                 - entity: sensor.philips_07_ceiling
 
-        - type: custom:vertical-stack-in-card
-          cards:
-               
-          - type: markdown
-            content: >
-                **Дополнительное освещение**  
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
 
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: light.gateway_light_286c07f0ad27
-              name: Шлюз
+          - type: horizontal-stack
+            cards: 
+
+            - type: button
+              entity: light.xiaomi_07_table
+              name: Лампа
+              
+            - type: button
+              entity: switch.0x00158d00030a6e78_switch
+              name: Питание
+              
+            - type: button
+              entity: script.07_dd_lightoff
+              name: Свет выкл
+              icon: mdi:close-circle-outline
+              tap_action:
+                action: call-service
+                service: script.turn_on
+                service_data:
+                entity_id: script.07_dd_lightoff
+
+            - type: button
+              entity: light.gateway_light_286c07f0ad27
               icon: mdi:star-circle-outline
-            - type: divider
-            - entity: light.xiaomi_07_table
-              secondary_info: last-changed
-            - entity: switch.0x00158d00030a6e78_switch
-              secondary_info: last-changed
-            - type: divider
-            - entity: script.07_dd_lightoff
-              name: Выключение всего света
+              name: Шлюз
 
-        - type: custom:vertical-stack-in-card
-          cards:
-               
-          - type: markdown
-            content: >
-                **Питание**       
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:  
 
-          - type: entities
-            show_header_toggle: false
-            entities:
-            
-            - entity: switch.plug1
+          - type: horizontal-stack
+            cards: 
+
+            - type: button
+              entity: switch.plug1
               name: Принтер
               icon: mdi:printer
-              secondary_info: entity-id
-            - entity: switch.plug2
-              name: Зарядная USB станция
+
+            - type: button
+              entity: switch.plug2
+              name: USB станция
               icon: mdi:power-socket-eu
-              secondary_info: entity-id
-            - entity: switch.plug3
-              name: Asus RT-AC66U B1
+              
+            - type: button
+              entity: switch.plug3
+              name: RT-AC66U B1
               icon: mdi:router-wireless
-              secondary_info: entity-id
-            - entity: switch.plug4
-              name: Колонка Xiaomi
+              
+            - type: button
+              entity: switch.plug4
+              name: Колонка
               icon: mdi:speaker-bluetooth
-              secondary_info: entity-id
+              
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.mqtt_binary_sensor_158d0001a66222
+             name: Движение
+             icon: mdi:run-fast
+           - entity: sensor.load_158d0001a2ccab
+             name: Увлажнитель
+           - entity: sensor.load_158d00030a6e78
+             name: Лампа
+           - entity: binary_sensor.notebook_acer_15
+             name: Acer 15
+
 
       - type: vertical-stack
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }      
           content: >
-              **Детская Д - статус**
+              **Детская Д - сенсоры**
 
-        - type: custom:vertical-stack-in-card
-          cards:
-           - type: glance
-             show_state: false
-             entities:
+        - type: glance
+          show_state: false
+          entities:
               - entity: binary_sensor.0x00158d0001a66222_occupancy
                 name: Движение
               - entity: binary_sensor.0x00158d0001193697_contact
                 name: Окно
-  
-           - type: entities
-             show_header_toggle: false
-             entities:
-             - entity: sensor.mqtt_binary_sensor_158d0001a66222
-               name: Последнее движение в детской Д в - 
-               icon: mdi:run-fast
- 
- 
+
         - type: horizontal-stack
           cards:
 
@@ -129,12 +152,6 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: sensor.illumination_286c07f0ad27
-          - entity: sensor.0x00158d0001a2ccab_power     
-
-        - type: entities
-          show_header_toggle: false
-          entities:
           - entity: input_number.humidity_level_dd
           - entity: binary_sensor.dd_hum
           - entity: switch.0x00158d0001a2ccab_switch_left
@@ -153,6 +170,10 @@ cards:
         cards:
 
         - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }      
           content: >
               **Детская Д балкон**
 

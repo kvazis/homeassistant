@@ -42,7 +42,7 @@
   
 - platform: ping
   host: 192.168.0.71
-  name: hainst_reserve
+  name: hainst_mqtt
   count: 2
   scan_interval: 30
   
@@ -59,11 +59,11 @@
   scan_interval: 30
 
 - platform: ping
-  host: 192.168.0.77
+  host: 192.168.0.75
   name: hainst_mqtt
   count: 2
   scan_interval: 30
-  
+
 - platform: ping
   host: 192.168.0.80
   name: gateway_da

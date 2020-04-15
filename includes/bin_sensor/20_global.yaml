@@ -8,7 +8,7 @@
           {{ is_state('binary_sensor.0x00158d00010f8920_occupancy', 'on')
              or is_state('binary_sensor.motion_sensor_158d0001a24e71', 'on')
              or is_state('binary_sensor.0x00158d0001a66222_occupancy', 'on')
-             or is_state('binary_sensor.motion_sensor_158d0001e16204', 'on')
+             or is_state('binary_sensor.0x00158d0001e16204_occupancy', 'on')
              or is_state('binary_sensor.0x00158d0001e547a3_occupancy', 'on')
              or is_state('binary_sensor.0x00158d000449b773_occupancy', 'on')             
              or is_state('binary_sensor.0x00158d00016d56f5_occupancy', 'on')  }}   
