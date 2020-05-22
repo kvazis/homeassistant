@@ -54,38 +54,18 @@
          50
          {% endif %}
        kelvin: 4000
-  - service: timer.cancel
-    entity_id: timer.toilet
-  - service: timer.start
-    entity_id: 
-      - timer.toilet
-    data_template: 
-        duration: > 
-         {%- if states("binary_sensor.tod_long_day") == 'on' -%}
-         00:10:00
-         {%- else -%}
-         00:05:00
-         {% endif %}
 
 ## Таймер освещения обновление
 - alias: 02_toilet_light_timer_reload
   initial_state: true
   trigger:
-# Датчик движения
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001a24e71
-  condition:
-    - condition: state
-      entity_id: light.yeelight_02_ceiling
-      state: 'on'
+# Условия для обновления таймера освещения
+  - platform: state
+    entity_id: binary_sensor.tt_light_timer
+    to: 'on'
   action:
-  - service: timer.cancel
+    service: timer.start
     entity_id: timer.toilet
-  - service: timer.start
-    entity_id: 
-      - timer.toilet
     data_template: 
         duration: > 
          {%- if states("binary_sensor.tod_long_day") == 'on' -%}
@@ -99,7 +79,7 @@
   initial_state: true
   trigger:
   - platform: state
-    entity_id: light.yeelight_02_ceiling
+    entity_id: binary_sensor.tt_light_timer
     to: 'off'
   action:
   - service: timer.cancel
@@ -113,17 +93,14 @@
   - platform: state
     entity_id: sensor.0x00158d00014dceb3_click
     to: 'left'
-# Датчик движения
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id:  binary_sensor.motion_sensor_158d0001a24e71
+## Датчик движения
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001a24e71_occupancy
+    to: 'on'
 # Выключатель в туалете
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_left_158d000128cd1a
-      click_type: single  
+  - platform: state
+    entity_id: sensor.0x00158d000128cd1a_click
+    to: 'left'
   condition:
   - condition: state
     entity_id: light.yeelight_02_ceiling
@@ -147,11 +124,9 @@
     entity_id: sensor.0x00158d00014dceb3_click
     to: 'left'
 # Выключатель в туалете
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_left_158d000128cd1a
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d000128cd1a_click
+    to: 'left'
   condition:
   - condition: state
     entity_id: light.yeelight_02_ceiling
@@ -161,21 +136,22 @@
     entity_id:
       - light.yeelight_02_ceiling
  
-# Выключение освещения с задержкой  
+# Вентилатор и выключение освещения с задержкой  
 - alias: 02_toilet_light_off_delay
   initial_state: true
   trigger:
 # Выключатель в туалете
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_both_158d000128cd1a
-      click_type: both   
+  - platform: state
+    entity_id: sensor.0x00158d000128cd1a_click
+    to: 'both'
   condition:
   - condition: state
     entity_id: light.yeelight_02_ceiling
     state: 'on'
   action:
+  - service: switch.toggle
+    entity_id: 
+         - switch.0x00158d00014dceb3_switch_right
   - service: light.turn_on
     entity_id:
       - light.yeelight_02_ceiling
@@ -203,11 +179,9 @@
   initial_state: true
   trigger:
 # Выключатель в туалете
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_right_158d000128cd1a
-      click_type: single   
+  - platform: state
+    entity_id: sensor.0x00158d000128cd1a_click
+    to: 'right' 
   action:
   - service: switch.toggle
     entity_id: 
@@ -255,10 +229,9 @@
   initial_state: true
   trigger:
 ## Движение в туалете
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001a24e71
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001a24e71_occupancy
+    to: 'on'
   action: 
   - service: mqtt.publish
     data_template:

@@ -50,7 +50,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
+   entity_id: binary_sensor.0x00158d0002705b7b_water_leak
    to: 'on'
   action:
   - service: mqtt.publish
@@ -66,7 +66,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0002705b7b
+   entity_id: binary_sensor.0x00158d0002705b7b_water_leak
    from: 'on'
    to: 'off'
   action:
@@ -83,10 +83,9 @@
   initial_state: true
   trigger:
 ## Движение в прачечной
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001ab3350
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001ab3350_occupancy
+    to: 'on'
   action: 
   - service: mqtt.publish
     data_template:

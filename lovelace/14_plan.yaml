@@ -6,6 +6,11 @@ cards:
       cards:
 
             - type: picture-elements
+              style: |
+                  ha-card {
+                    color: #000000;
+                    font-weight: bold;
+                  } 
               image: /local/plan01.png
               elements:
 
@@ -42,20 +47,11 @@ cards:
                 - type: state-icon
                   tap_action:
                       action: toggle
-                  entity: light.yeelight_01_whitebulb
+                  entity: light.0x00158d000420dbab_light
                   style:
                      top: 62%
                      left: 48% 
                      
-                - type: state-icon
-                  icon: mdi:power
-                  tap_action:
-                      action: toggle
-                  entity: switch.02_sonoff_basic_relay
-                  style:
-                     top: 58%
-                     left: 52% 
-
                 - type: state-icon
                   tap_action:
                       action: toggle
@@ -98,7 +94,7 @@ cards:
                      left: 42% 
                      
                 - type: state-icon
-                  entity: binary_sensor.motion_sensor_158d00013f7894
+                  entity: binary_sensor.0x00158d00013f7894_occupancy
                   style:
                      top: 75%
                      left: 50% 
@@ -110,7 +106,7 @@ cards:
                      left: 58% 
                      
                 - type: state-icon
-                  entity: binary_sensor.motion_sensor_158d0001a24e71
+                  entity: binary_sensor.0x00158d0001a24e71_occupancy
                   style:
                      top: 45%
                      left: 75% 
@@ -122,7 +118,7 @@ cards:
                      left: 96% 
                      
                 - type: state-icon
-                  entity: binary_sensor.water_leak_sensor_158d0002705b7b
+                  entity: binary_sensor.0x00158d0002705b7b_water_leak
                   style:
                      top: 10%
                      left: 92% 
@@ -134,6 +130,11 @@ cards:
                      left: 96% 
                      
             - type: picture-elements
+              style: |
+                  ha-card {
+                    color: #000000;
+                    font-weight: bold;
+                  } 
               image: /local/plan04.png
               elements:
               
@@ -193,23 +194,116 @@ cards:
                      top: 90%
                      left: 75% 
                      
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001e547a3_occupancy
+                  style:
+                     top: 57%
+                     left: 88% 
+                     
             - type: picture-elements
+              style: |
+                  ha-card {
+                    color: #000000;
+                    font-weight: bold;
+                  } 
               image: /local/plan07.png
               elements:
+              
+                - type: image
+                  entity: camera.xiaofang1s
+                  camera_image: camera.xiaofang1s
+                  style:
+                    top: 15%
+                    left: 40%
+                    width: 35%
+                    border: 2px solid white
+                    border-radius: 10%
             
                 - type: state-icon
-                #   icon: mdi:fan
                   tap_action:
                       action: toggle
-                  entity: light.yeelight_01_whitebulb
+                  entity: light.aqara_08_ceiling
                   style:
-                     top: 20%
-                     left: 40% 
+                     top: 50%
+                     left: 75% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.gateway_light_f0b429cc1f11
+                  style:
+                     top: 3%
+                     left: 90% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.24730816ecfabc996804
+                  style:
+                     top: 65%
+                     left: 45% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.philips_08_bedside
+                  style:
+                     top: 75%
+                     left: 45% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d00010ec4b8_switch
+                  style:
+                     top: 25%
+                     left: 95% 
+
+                - type: state-icon
+                  entity:  binary_sensor.notebook_chuwi
+                  style:
+                     top: 70%
+                     left: 50% 
+                     
+                - type: state-icon
+                  entity:  binary_sensor.0x00158d0001583c7b_contact
+                  style:
+                     top: 93%
+                     left: 71% 
+                     
+                - type: state-icon
+                  entity: climate.da_heater
+                  style:
+                     top: 40%
+                     left: 65% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d00016d56f5_occupancy
+                  style:
+                     top: 5%
+                     left: 82% 
+                     
+                - type: state-label
+                  entity: sensor.08_mean_temperature
+                  style:
+                    top: 25%
+                    left: 80%
+                    
+                - type: state-label
+                  entity: sensor.08_mean_humidity
+                  style:
+                    top: 30%
+                    left: 80%
                      
     - type: vertical-stack
       cards:
 
             - type: picture-elements
+              style: |
+                  ha-card {
+                    color: #000000;
+                    font-weight: bold;
+                  } 
               image: /local/plan02.png
               elements:
               
@@ -245,7 +339,7 @@ cards:
                   entity: light.yeelight_05_rgbtvbulb
                   style:
                      top: 95%
-                     left: 55% 
+                     left: 45% 
                      
                 - type: state-icon
                   tap_action:
@@ -253,12 +347,12 @@ cards:
                   entity: switch.movie_mode
                   style:
                      top: 95%
-                     left: 60% 
+                     left: 50% 
                      
                 - type: state-label
                   entity: sensor.0x00158d0001581109_temperature 
                   style:
-                    top: 27%
+                    top: 25%
                     left: 30%
                     
                 - type: state-label
@@ -289,7 +383,7 @@ cards:
                   entity: switch.tv_xiaomi_55
                   style:
                      top: 95%
-                     left: 50% 
+                     left: 40% 
                      
                 - type: state-icon
                   entity: binary_sensor.0x00158d0001e16204_occupancy
@@ -328,6 +422,11 @@ cards:
                      left: 33%                      
 
             - type: picture-elements
+              style: |
+                  ha-card {
+                    color: #000000;
+                    font-weight: bold;
+                  } 
               image: /local/plan05.png
               elements:
               
@@ -428,61 +527,189 @@ cards:
                   style:
                      top: 5%
                      left: 95% 
+
+                - type: state-label
+                  entity: sensor.asuswrt_download_speed
+                  style:
+                     top: 5%
+                     left: 30% 
+
+                - type: state-label
+                  entity: sensor.asuswrt_upload_speed
+                  style:
+                     top: 10%
+                     left: 35% 
+
                      
                 - type: state-label
                   entity: sensor.05_mean_temperature
                   style:
-                     top: 5%
+                     top: 25%
                      left: 25% 
                      
                 - type: state-label
                   entity: sensor.05_mean_humidity
                   style:
-                     top: 5%
-                     left: 40% 
+                     top: 30%
+                     left: 25% 
                      
                 - type: state-label
                   entity: sensor.05_mi_air_pm25
                   style:
-                     top: 10%
-                     left: 25% 
+                     top: 25%
+                     left: 65% 
                      
                 - type: state-label
                   entity: sensor.05_mi_air_tvoc
                   style:
-                     top: 10%
-                     left: 40% 
+                     top: 30%
+                     left: 65% 
                      
                 - type: state-label
                   entity: sensor.05_mi_air_co2a
                   style:
-                     top: 10%
-                     left: 57% 
+                     top: 35%
+                     left: 65% 
 
                 - type: state-label
                   entity: sensor.mi_m_c47c8d628a8a
                   style:
                      top: 69%
                      left: 95% 
+
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_07_whitebulb
+                  style:
+                     top: 90%
+                     left: 85% 
+                     
+                - type: state-label
+                  entity: sensor.07_mean_temperature
+                  style:
+                     top: 85%
+                     left: 40% 
+
+                - type: state-label
+                  entity: sensor.07_mean_humidity
+                  style:
+                     top: 90%
+                     left: 40% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a66222_occupancy
+                  style:
+                     top: 88%
+                     left: 12% 
                      
                      
             - type: picture-elements
+              style: |
+                  ha-card {
+                    color: #000000;
+                    font-weight: bold;
+                  } 
               image: /local/plan08.png
               elements:
-            
+              
                 - type: state-icon
-                #   icon: mdi:fan
                   tap_action:
                       action: toggle
-                  entity: light.yeelight_01_whitebulb
+                  entity: light.philips_07_ceiling
                   style:
                      top: 20%
+                     left: 50% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_08_strip
+                  style:
+                     top: 18%
+                     left: 5% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_08_bedside
+                  style:
+                     top: 25%
+                     left: 5% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.xiaomi_07_table
+                  style:
+                     top: 50%
+                     left: 80% 
+                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d0001a2ccab_switch_left
+                  style:
+                     top: 35%
+                     left: 80% 
+                     
+                - type: state-icon
+                  entity: climate.dd_heater
+                  style:
+                     top: 30%
                      left: 40% 
-               
+            
+                - type: state-icon
+                  entity: binary_sensor.notebook_acer_15
+                  style:
+                     top: 52%
+                     left: 70% 
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d00015843d4_contact
+                  style:
+                     top: 65%
+                     left: 25%
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001193697_contact
+                  style:
+                     top: 68%
+                     left: 50%
+                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a65b68_contact
+                  style:
+                     top: 93%
+                     left: 40%
+                     
+                - type: state-label
+                  entity: sensor.0x00158d0001fa8321_temperature
+                  style:
+                     top: 75%
+                     left: 35% 
+
+                - type: state-label
+                  entity: sensor.0x00158d0001fa8321_humidity
+                  style:
+                     top: 80%
+                     left: 35% 
+                     
+                - type: state-label
+                  entity: sensor.pressure_mmhg_158d0001fa8321
+                  style:
+                     top: 85%
+                     left: 35% 
+                     
     - type: vertical-stack
       cards:
 
             - type: picture-elements
+              style: |
+                  ha-card {
+                    color: #000000;
+                    font-weight: bold;
+                  } 
               image: /local/plan03.png
               elements:
               
@@ -523,6 +750,11 @@ cards:
                      left: 36%   
                      
             - type: picture-elements
+              style: |
+                  ha-card {
+                    color: #000000;
+                    font-weight: bold;
+                  } 
               image: /local/plan06.png
               elements:
               
@@ -532,6 +764,12 @@ cards:
                   entity: light.yeelight_05_ceiling2
                   style:
                      top: 30%
+                     left: 15% 
+                     
+                - type: state-icon
+                  entity: climate.living_heater
+                  style:
+                     top: 40%
                      left: 15% 
                      
                 - type: state-icon
@@ -548,13 +786,31 @@ cards:
                   entity: light.66633530807d3a766432
                   style:
                      top: 90%
-                     left: 27% 
+                     left: 40% 
                      
                 - type: state-label
                   entity: sensor.mi_m_c47c8d6a0ef3
                   style:
                      top: 69%
                      left: 5% 
+                     
+                - type: state-label
+                  entity: sensor.0x00158d0001a4b9da_temperature
+                  style:
+                     top: 85%
+                     left: 15% 
+
+                - type: state-label
+                  entity: sensor.0x00158d0001a4b9da_humidity
+                  style:
+                     top: 90%
+                     left: 15% 
+                     
+                - type: state-label
+                  entity: sensor.pressure_mmhg_158d0001a4b9da
+                  style:
+                     top: 95%
+                     left: 15% 
                      
                 - type: state-icon
                   entity: binary_sensor.0x00158d00013ed373_contact
@@ -569,15 +825,42 @@ cards:
                      left: 27% 
                      
             - type: picture-elements
+              style: |
+                  ha-card {
+                    color: #000000;
+                    font-weight: bold;
+                    font-size: 16px;
+                  } 
               image: /local/plan09.png
               elements:
               
                 - type: state-icon
-                #   icon: mdi:fan
-                  tap_action:
-                      action: toggle
-                  entity: light.yeelight_01_whitebulb
+                  entity: binary_sensor.0x00158d0001a2f5f7_contact
                   style:
-                     top: 20%
-                     left: 40% 
+                     top: 8%
+                     left: 25% 
+                     
+                - type: state-label
+                  entity: weather.openweathermap
+                  attribute: temperature
+                  suffix: " °C"
+                  style:
+                    top: 50%
+                    left: 50%
+                    
+                - type: state-label
+                  entity: weather.openweathermap
+                  attribute: humidity
+                  suffix: " %"
+                  style:
+                    top: 55%
+                    left: 50%
+                    
+                - type: state-label
+                  entity: weather.openweathermap
+                  attribute: wind_speed
+                  suffix: " км/ч"
+                  style:
+                    top: 60%
+                    left: 50%
                

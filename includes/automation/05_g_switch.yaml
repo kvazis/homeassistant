@@ -31,4 +31,4 @@
           switch.turn_off
       {%- endif -%}  
     entity_id: 
-       - switch.living_usb_fan
+       - switch.xiaomi_wifi_socket_usb_usb

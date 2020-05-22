@@ -112,7 +112,8 @@ cards:
             - type: entity-button
               entity: switch.0x00158d000153dd8e_switch
             - type: entity-button
-              entity: switch.living_usb_fan
+              entity: switch.xiaomi_wifi_socket_usb_usb
+              icon: mdi:fan 
               
           - type: horizontal-stack
             cards:    

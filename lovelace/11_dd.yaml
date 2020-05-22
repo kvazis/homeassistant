@@ -107,8 +107,31 @@ cards:
              name: Увлажнитель
            - entity: sensor.load_158d00030a6e78
              name: Лампа
-           - entity: binary_sensor.notebook_acer_15
-             name: Acer 15
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+             
+            - type: entities
+              show_header_toggle: false
+              entities:
+               - entity: binary_sensor.notebook_acer_15
+                 name: Acer 15
+                 secondary_info: last-changed
+                 
+            - type: custom:logbook-card
+              entity: binary_sensor.notebook_acer_15
+              max_items: 5
+              title: История включений
+              duration_labels:
+                second:  '${value} секунда'
+                seconds: '${value} секунд'
+                minute:  '${value} минута'
+                minutes: '${value} минут'
+                hour:    '${value} час'
+                hours:   '${value} часов'
+                day:     '${value} день'
+                days:    '${value} дней'
 
 
       - type: vertical-stack

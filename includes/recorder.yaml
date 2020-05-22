@@ -6,7 +6,9 @@
        - switch.tv_xiaomi
        - switch.tv_xiaomi_55
 # Сенсор объема
-       - sensor.home_assistant_v2_db 
+       - sensor.home_assistant_v2_db
+# Сенсор Youtube просмотров
+       - sensor.youtube_views
 # Ноутбуки
        - binary_sensor.notebook_acer
        - binary_sensor.notebook_hp
@@ -101,7 +103,7 @@
        - sensor.08_mean_humidity
 # Сенсоры освещенности
        - sensor.0x04cf8cdf3c772379_illuminance
-       - sensor.illumination_158d0001a24e71
+       - sensor.0x00158d0001a24e71_illuminance
        - sensor.0x00158d0001a66222_illuminance
        - sensor.0x00158d0001ab3350_illuminance
        - sensor.0x04cf8cdf3c772379_illuminance

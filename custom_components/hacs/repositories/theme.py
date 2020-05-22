@@ -44,8 +44,11 @@ class HacsTheme(HacsRepository):
                     self.logger.error(error)
         return self.validate.success
 
-    async def registration(self):
+    async def registration(self, ref=None):
         """Registration."""
+        if ref is not None:
+            self.ref = ref
+            self.force_branch = True
         if not await self.validate_repository():
             return False
 
@@ -56,12 +59,9 @@ class HacsTheme(HacsRepository):
         find_file_name(self)
         self.content.path.local = f"{self.hacs.system.config_path}/themes/{self.data.file_name.replace('.yaml', '')}"
 
-    async def update_repository(self):  # lgtm[py/similar-function]
+    async def update_repository(self, ignore_issues=False):
         """Update."""
-        if self.hacs.github.ratelimits.remaining == 0:
-            return
-        # Run common update steps.
-        await self.common_update()
+        await self.common_update(ignore_issues)
 
         # Get theme objects.
         if self.data.content_in_root:

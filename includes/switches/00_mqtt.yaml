@@ -24,6 +24,30 @@
           
   - platform: template
     switches:
+      radiator_mode:
+        friendly_name: "Режим отопления"
+        value_template: "{{  is_state('binary_sensor.radiator', 'on') }}"
+        turn_on:
+          service: mqtt.publish
+          data_template:
+            topic: "states/radiator"
+            payload_template: 'ON'
+            retain: true 
+        turn_off:
+          service: mqtt.publish
+          data_template:
+            topic: "states/radiator"
+            payload_template: 'OFF'
+            retain: true 
+        icon_template: >-
+          {% if is_state('switch.radiator_mode', 'on') %}
+            mdi:radiator
+          {% else %}
+            mdi:radiator-off
+          {% endif %}
+          
+  - platform: template
+    switches:
       humidification_mode:
         friendly_name: "Режим увлажнения воздуха"
         value_template: "{{  is_state('binary_sensor.humidification', 'on') }}"

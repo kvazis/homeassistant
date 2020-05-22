@@ -59,6 +59,9 @@ sensor.0x00158d0001a672ef_click:
 sensor.0x00158d000101bdc6_action:
   friendly_name: Кухня кубик
   icon: mdi:cube-outline
+  
+sensor.0x00158d0002a8ab8b_action:
+  friendly_name: Кухня конфетница
 
 ## Бинарные сенсоры
 binary_sensor.0x00158d0001e16204_occupancy:
@@ -68,13 +71,14 @@ binary_sensor.0x00158d0001a99562_contact:
   friendly_name: Кухня окно
   device_class: window 
 
-binary_sensor.water_leak_sensor_158d0001bbeba6:
+binary_sensor.0x00158d0001bbeba6_water_leak:
   friendly_name: Кухня раковина, протечка
 
-binary_sensor.vibration_158d0002a8ab8b:
-  friendly_name: Кухня конфетница
-
 ## Уровень заряда
+sensor.0x00158d0002a8ab8b_battery:
+  friendly_name: Кухня конфетница
+sensor.0x00158d0001bbeba6_battery:
+  friendly_name: Кухня раковина, протечка
 sensor.0x00158d0001e16204_battery:
   friendly_name: Кухня, движение
 sensor.0x04cf8cdf3c772379_battery:

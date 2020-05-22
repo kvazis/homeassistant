@@ -3,24 +3,22 @@
   initial_state: true
   trigger:
 ## Нажатие на две кнопки одновременно
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_both_158d00013fc3bc
-      click_type: both
+  - platform: state
+    entity_id: sensor.0x00158d00013fc3bc_click
+    to: 'both'
   action: 
   - service: script.turn_on
     data_template:
      entity_id: >-
-        {%- if states.light.yeelight_03_ceiling.state == 'off' and states.light.yeelight_01_whitebulb.state  == 'off' -%}
+        {%- if states.light.yeelight_03_ceiling.state == 'off' and states('light.0x00158d000420dbab_light')  == 'off' -%}
         script.01_enter_on
-        {%- elif states.light.yeelight_03_ceiling.state == 'off' and states.light.yeelight_01_whitebulb.state  == 'on' and (as_timestamp (now()) -as_timestamp(states.light.yeelight_01_whitebulb.last_changed) <= 15) -%}
+        {%- elif states.light.yeelight_03_ceiling.state == 'off' and states('light.0x00158d000420dbab_light')  == 'on' and (as_timestamp (now()) -as_timestamp(states['light.0x00158d000420dbab_light'].last_changed)|int <= 15) -%}
         script.03_corr_on
-        {%- elif states.light.yeelight_03_ceiling.state == 'on' and states.light.yeelight_01_whitebulb.state  == 'on' -%}
+        {%- elif states.light.yeelight_03_ceiling.state == 'on' and states('light.0x00158d000420dbab_light')  == 'on' -%}
         script.01_enter_off, script.03_corr_off
-        {%- elif states.light.yeelight_03_ceiling.state == 'off' and states.light.yeelight_01_whitebulb.state  == 'on' and (as_timestamp (now()) -as_timestamp(states.light.yeelight_01_whitebulb.last_changed) > 15) -%}
+        {%- elif states.light.yeelight_03_ceiling.state == 'off' and states('light.0x00158d000420dbab_light')  == 'on' and (as_timestamp (now()) -as_timestamp(states['light.0x00158d000420dbab_light'].last_changed)|int > 15) -%}
         script.01_enter_off
-        {%- elif states.light.yeelight_03_ceiling.state == 'on' and states.light.yeelight_01_whitebulb.state  == 'off' -%}
+        {%- elif states.light.yeelight_03_ceiling.state == 'on' and states('light.0x00158d000420dbab_light')  == 'off' -%}
         script.03_corr_off
         {%- endif -%}   
 
@@ -29,11 +27,9 @@
   initial_state: true
   trigger:
 ## Выключатель на входе
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_left_158d0001718ca8
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d0001718ca8_click
+    to: 'left'
 ## Кнопка в шкафу
   - platform: state
     entity_id: sensor.0x00158d0001f3fefe_click

@@ -6,6 +6,7 @@ from homeassistant.loader import async_get_custom_components
 from custom_components.hacs.hacsbase.exceptions import HacsException
 from custom_components.hacs.helpers.filters import get_first_directory_in_directory
 from custom_components.hacs.helpers.information import get_integration_manifest
+from custom_components.hacs.helpers.action import run_action_checks
 from custom_components.hacs.repositories.repository import HacsRepository
 
 
@@ -45,7 +46,12 @@ class HacsIntegration(HacsRepository):
         try:
             await get_integration_manifest(self)
         except HacsException as exception:
+            if self.hacs.action:
+                raise HacsException(exception)
             self.logger.error(exception)
+
+        if self.hacs.action:
+            await run_action_checks(self)
 
         # Handle potential errors
         if self.validate.errors:
@@ -54,8 +60,11 @@ class HacsIntegration(HacsRepository):
                     self.logger.error(error)
         return self.validate.success
 
-    async def registration(self):
+    async def registration(self, ref=None):
         """Registration."""
+        if ref is not None:
+            self.ref = ref
+            self.force_branch = True
         if not await self.validate_repository():
             return False
 
@@ -65,11 +74,9 @@ class HacsIntegration(HacsRepository):
         # Set local path
         self.content.path.local = self.localpath
 
-    async def update_repository(self):
+    async def update_repository(self, ignore_issues=False):
         """Update."""
-        if self.hacs.github.ratelimits.remaining == 0:
-            return
-        await self.common_update()
+        await self.common_update(ignore_issues)
 
         if self.data.content_in_root:
             self.content.path.remote = ""

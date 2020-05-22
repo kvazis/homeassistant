@@ -127,6 +127,7 @@ cards:
             #   name: Режим бойлера - 
             - entity: switch.heater_mode
               name: Режим нагрева бойлера - 
+            - entity: switch.radiator_mode
             # - entity: switch.0x00158d00015751f4_switch
             
         - type: custom:stack-in-card

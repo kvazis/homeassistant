@@ -10,44 +10,6 @@
 #     data: 
 #       duration: 00:02:00
 
-- alias: 911_reserve_lost
-  initial_state: true
-  trigger:
-   platform: state
-   entity_id: sensor.reserve_state
-   to: 'unavailable'
-  action:
-    - service: mqtt.publish
-      data_template:
-         topic: "notification/error"
-         payload_template: '021'
-
-- alias: 911_reserve_online
-  initial_state: true
-  trigger:
-   platform: state
-   entity_id: sensor.reserve_state
-   from: 'unavailable'
-  action:
-    - service: mqtt.publish
-      data_template:
-         topic: "notification/error"
-         payload_template: '022'
-
-- alias: 911_scenario_on
-  initial_state: true
-  trigger:
-   platform: state
-   entity_id: sensor.reserve_scenario_group
-   to: 'unavailable'
-  condition:
-    - condition: state
-      entity_id: group.scenario
-      state: 'off'     
-  action:
-    - service: homeassistant.turn_on
-      entity_id:
-         - group.scenario
 
 - alias: 911_mqtt_lost
   initial_state: true

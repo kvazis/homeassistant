@@ -6,7 +6,7 @@
      minutes: '/1'
   condition:
    - condition: template
-     value_template: "{{ states('switch.0x00158d00015723f1_switch_right') != 'on' }}"         
+     value_template: "{{ states('switch.0x00158d00015723f1_switch_right') != 'on' }}"
   action:
    - service: switch.turn_on
      entity_id: switch.0x00158d00015723f1_switch_right
@@ -42,6 +42,10 @@
     - platform: state
       entity_id: sensor.0x00158d00015723f1_click
       to: 'right'
+## Выключатель на столе - левая кнопка
+    - platform: state
+      entity_id: sensor.0x00158d00027c0e2b_click
+      to: 'left'
 ## Квадратная кнопка на комоде
     - platform: state
       entity_id: sensor.0x00158d0001e8a244_click
@@ -55,11 +59,9 @@
       entity_id: sensor.0x00158d0001f47e10_click
       to: 'right'
 ## Выключатель на входе в комнату - левая кнопка
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_left_158d00013fc3bc
-        click_type: single
+    - platform: state
+      entity_id: sensor.0x00158d00013fc3bc_click
+      to: 'left'
   action:    
     - service: script.turn_on
       data_template:
@@ -78,6 +80,10 @@
     - platform: state
       entity_id: sensor.0x00158d0001e8a244_click
       to: 'double'
+## Выключатель на столе - правая кнопка
+    - platform: state
+      entity_id: sensor.0x00158d00027c0e2b_click
+      to: 'right'
 ## Тряска кубика
     - platform: state
       entity_id: sensor.0x00158d0001186d82_action
@@ -96,40 +102,6 @@
           script.05_gg_650_2_off
           {%- endif -%}  
 
-## Люстра 1 гостиная - цветовая температура
-- alias: 05_gg_cell_1_light_temp
-  initial_state: true
-  trigger:
-## Слайдер
-   - platform: state
-     entity_id: input_number.yeelight_05_ceiling1_temp
-  condition:
-   - condition: state
-     entity_id: light.yeelight_05_ceiling1
-     state: 'on'
-  action: 
-   - service: light.turn_on
-     data_template:
-       entity_id: light.yeelight_05_ceiling1
-       kelvin: "{{ trigger.to_state.state | int }}"
-
-## Люстра 2 гостиная - цветовая температура
-- alias: 05_gg_cell_2_light_temp
-  initial_state: true
-  trigger:
-## Слайдер
-   - platform: state
-     entity_id: input_number.yeelight_05_ceiling2_temp
-  condition:
-   - condition: state
-     entity_id: light.yeelight_05_ceiling2
-     state: 'on'
-  action: 
-   - service: light.turn_on
-     data_template:
-       entity_id: light.yeelight_05_ceiling2
-       kelvin: "{{ trigger.to_state.state | int }}"
-
 ## Полное освещение
 - alias: 05_gg_full_light
   initial_state: true
@@ -142,12 +114,16 @@
     - platform: state
       entity_id: sensor.0x00158d0001f47e10_click
       to: 'both'
+## Выключатель на столе - обе кнопки
+    - platform: state
+      entity_id: sensor.0x00158d00027c0e2b_click
+      to: 'both'
   action:    
     - service: script.turn_on
       data_template:
         entity_id: >-
-          {%- if states.light.yeelight_05_ceiling1.state == 'on' and states.light.yeelight_05_ceiling2.state == 'on' -%}
-          script.05_gg_650_1_off, script.05_gg_650_2_off
+          {%- if states.light.yeelight_05_ceiling1.state == 'on' and states.light.yeelight_05_ceiling2.state == 'on' and states.light.yeelight_05_table.state == 'on' -%}
+          script.05_gg_650_full_off
           {%- else -%}
           script.05_gg_650_full_on
           {%- endif -%}  
@@ -161,21 +137,21 @@
     entity_id: sensor.0x00158d0001531698_click
     to: 'single'
 ## Круглая кнопка в прихожей
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d00010b1963
-      click_type: single
+  - platform: state
+    entity_id: sensor.0x00158d00010b1963_click
+    to: 'single'
+## Выключатель на столе - левая кнопка х2
+  - platform: state
+    entity_id: sensor.0x00158d00027c0e2b_click
+    to: 'left_double'
 ## Переворот кубика на 90 градусов
   - platform: state
     entity_id: sensor.0x00158d0001186d82_action
     to: 'flip90' 
 ## Выключатель на входе в комнату - правая кнопка
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_right_158d00013fc3bc
-      click_type: single   
+  - platform: state
+    entity_id: sensor.0x00158d00013fc3bc_click
+    to: 'right'
   action:
     service: light.toggle
     entity_id: light.aqara_05_wall
@@ -188,6 +164,10 @@
   - platform: state
     entity_id: sensor.0x00158d0001531698_click
     to: 'long'
+## Выключатель на столе - правая кнопка х2
+  - platform: state
+    entity_id: sensor.0x00158d00027c0e2b_click
+    to: 'right_double'
   action:    
     - service: switch.toggle
       entity_id: switch.movie_mode
@@ -219,6 +199,9 @@
   - platform: state
     entity_id: binary_sensor.lr_balcony_motion
     to: 'on'
+  - platform: state
+    entity_id: sensor.0x00158d0001b86d2e_click
+    to: 'single' 
   condition:
    - condition: state
      entity_id: light.66633530807d3a766432
@@ -238,6 +221,9 @@
 ## Выключатель на входе на балкон
   - platform: state
     entity_id: sensor.0x00158d00010b5aee_click
+    to: 'single' 
+  - platform: state
+    entity_id: sensor.0x00158d0001b86d2e_click
     to: 'single' 
   - platform: state
     entity_id: binary_sensor.0x00158d000449b773_occupancy

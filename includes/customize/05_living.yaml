@@ -85,12 +85,12 @@ switch.wifi_3usb:
   icon: mdi:power-socket-eu
 
 switch.xiaomi_wifi_socket_usb:
-  friendly_name: Mi wi-fi розетка 220V
+  friendly_name: Часы в гостиной
   device_class: plug  
   icon: mdi:power-socket-eu
 
 switch.xiaomi_wifi_socket_usb_usb:
-  friendly_name: Mi wi-fi розетка USB
+  friendly_name: Вентилятор для роутера
   device_class: plug  
   icon: mdi:usb
 
@@ -134,6 +134,9 @@ sensor.05_mean_humidity:
 sensor.05_mean_temperature:
   friendly_name: Гостиная, средняя температура
   icon: mdi:temperature-celsius
+  
+sensor.0x00158d00013fc3bc_click:
+  friendly_name: Гостиная вход
 
 sensor.0x00158d0001f47e10_click:
   friendly_name: Гостиная стена
@@ -142,24 +145,15 @@ sensor.0x00158d0001531698_click:
   friendly_name: Гостиная, комод, круглая
 
 ## Бинарные сенсоры
-binary_sensor.wall_switch_left_158d00013fc3bc:
-  friendly_name: Гостиная вход левая
-binary_sensor.wall_switch_right_158d00013fc3bc:
-  friendly_name: Гостиная вход правая
-binary_sensor.wall_switch_both_158d00013fc3bc:
-  friendly_name: Гостиная вход
-
-binary_sensor.switch_158d0001531698:
-  friendly_name: Гостиная, комод, круглая
-
-# binary_sensor.switch_158d0001b86d2e:
-#   friendly_name: Гостиная, стол, квадратная
 
 binary_sensor.0x00158d00013ed373_contact:
   friendly_name: Гостиная, окно
   device_class: window 
 
 ## Уровень заряда
+sensor.0x00158d00013fc3bc_battery:
+  friendly_name: Гостиная вход
+  
 sensor.0x00158d0001e8a244_battery:
   friendly_name: Гостиная, комод, квадратная
 
@@ -182,23 +176,26 @@ sensor.0x00158d00015aebb6_battery:
 
 ## Освещение
 light.66633530807d3a766432:
-  friendly_name: Балкон люстра
+  friendly_name: Гостиная балкон люстра
   icon: mdi:ceiling-light
 
 ## Сенсоры  
 sensor.0x00158d000449b773_illuminance:
-  friendly_name: Гостиная, балкон освещенность
+  friendly_name: Гостиная балкон освещенность
 
 sensor.0x00158d0001a4b9da_humidity:
-  friendly_name: Гостиная, балкон влажность
+  friendly_name: Гостиная балкон влажность
   icon: mdi:water-percent
 
 sensor.0x00158d0001a4b9da_pressure:
-  friendly_name: Гостиная, балкон давление
+  friendly_name: Гостиная балкон давление
 
 sensor.0x00158d0001a4b9da_temperature:
-  friendly_name: Гостиная, балкон температура
+  friendly_name: Гостиная балкон температура
   icon: mdi:temperature-celsius
+
+sensor.0x00158d0001b86d2e_click:
+  friendly_name: Гостиная балкон квадратная
 
 ## Бинарные сенсоры
 binary_sensor.0x00158d000445206b_contact:
@@ -213,6 +210,8 @@ binary_sensor.0x00158d0001a2f5f7_contact:
   device_class: window 
   
 ## Уровень заряда
+sensor.0x00158d0001b86d2e_battery:
+  friendly_name: Гостиная балкон квадратная
 sensor.0x00158d000445206b_battery:
   friendly_name: Гостиная, балкон дверь
 sensor.0x00158d0001a2f5f7_battery:

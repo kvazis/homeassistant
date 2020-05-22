@@ -26,24 +26,22 @@ cards:
               name: Люстра
               
             - type: button
-              entity: script.08_da_nightlight
               name: Ночник
               icon: mdi:weather-night
               tap_action:
                 action: call-service
                 service: script.turn_on
                 service_data:
-                entity_id: script.08_da_nightlight
+                    entity_id: script.08_da_nightlight
                 
             - type: button
-              entity: script.08_da_light_circle_1
               name: Подсветка
               icon: mdi:star
               tap_action:
                 action: call-service
                 service: script.turn_on
                 service_data:
-                entity_id: script.08_da_light_circle_1
+                    entity_id: script.08_da_light_circle_1
 
         - type: custom:stack-in-card
           mode: vertical
@@ -53,24 +51,22 @@ cards:
             cards: 
             
             - type: button
-              entity: script.08_da_nightlight_off
               name: Выключение подсветки
               icon: mdi:star-off
               tap_action:
                 action: call-service
                 service: script.turn_on
                 service_data:
-                entity_id: script.08_da_nightlight_off
+                    entity_id: script.08_da_nightlight_off
                 
             - type: button
-              entity: script.08_da_lightoff
               name: Свет выкл
               icon: mdi:close-circle-outline
               tap_action:
                 action: call-service
                 service: script.turn_on
                 service_data:
-                entity_id: script.08_da_lightoff
+                    entity_id: script.08_da_lightoff
                 
             - type: button
               entity: switch.0x00158d0002d7bb2b_switch_l1
@@ -123,19 +119,6 @@ cards:
            - entity: binary_sensor.da_nightlight
              name: Ночник
    
-        - type: glance
-          show_state: true
-          entities:
-           - entity: sensor.mqtt_binary_sensor_158d00016d56f5
-             name: Движение
-             icon: mdi:run-fast 
-           - entity: sensor.load_158d00010ec4b8
-             name: Увлажнитель
-           - entity: sensor.load_158d0002d7bb2b
-             name: Стол и отопление
-           - entity: binary_sensor.notebook_chuwi
-             name: Chuwi
-          
         - type: picture-entity
           entity: camera.xiaofang1s
           camera_view: live 
@@ -152,6 +135,32 @@ cards:
             # - entity: switch.xiaofang1s_motion_detection            
             # - entity: binary_sensor.xiaofang1s_motion_sensor
 
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.mqtt_binary_sensor_158d00016d56f5
+             name: Движение
+             icon: mdi:run-fast 
+           - entity: sensor.load_158d00010ec4b8
+             name: Увлажнитель
+           - entity: sensor.load_158d0002d7bb2b
+             name: Стол и отопление
+           - entity: binary_sensor.notebook_chuwi
+             name: Chuwi
+             
+        - type: custom:logbook-card
+          entity: binary_sensor.notebook_chuwi
+          max_items: 5
+          title: История включений
+          duration_labels:
+            second:  '${value} секунда'
+            seconds: '${value} секунд'
+            minute:  '${value} минута'
+            minutes: '${value} минут'
+            hour:    '${value} час'
+            hours:   '${value} часов'
+            day:     '${value} день'
+            days:    '${value} дней'
 
       - type: vertical-stack
         cards:

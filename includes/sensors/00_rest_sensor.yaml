@@ -17,23 +17,23 @@
 #     content-type: 'application/json'
 #   value_template: '{{ value_json.state }}'
   
-- platform: rest
-  resource: http://192.168.0.75:8123/api/states/group.scenario
-  name: reserve_scenario_group
-  force_update: true
-  headers: 
-    Authorization: !secret rasp4_secret_token
-    content-type: 'application/json'
-  value_template: '{{ value_json.state }}'
+# - platform: rest
+#   resource: http://192.168.0.75:8123/api/states/group.scenario
+#   name: reserve_scenario_group
+#   force_update: true
+#   headers: 
+#     Authorization: !secret rasp4_secret_token
+#     content-type: 'application/json'
+#   value_template: '{{ value_json.state }}'
   
-- platform: rest
-  resource: http://192.168.0.75:8123/api/states/sensor.online_custom
-  name: reserve_state
-  force_update: true
-  headers: 
-    Authorization: !secret rasp4_secret_token
-    content-type: 'application/json'
-  value_template: '{{ value_json.state }}'
+# - platform: rest
+#   resource: http://192.168.0.75:8123/api/states/sensor.online_custom
+#   name: reserve_state
+#   force_update: true
+#   headers: 
+#     Authorization: !secret rasp4_secret_token
+#     content-type: 'application/json'
+#   value_template: '{{ value_json.state }}'
   
 - platform: rest
   resource: http://192.168.0.72:8123/api/states/sensor.online_custom

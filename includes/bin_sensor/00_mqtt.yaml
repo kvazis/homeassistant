@@ -15,3 +15,9 @@
     state_topic: "states/holiday"
     payload_on: "ON"
     payload_off: "OFF"
+    
+  - platform: mqtt
+    name: radiator
+    state_topic: "states/radiator"
+    payload_on: "ON"
+    payload_off: "OFF"

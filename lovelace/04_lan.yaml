@@ -64,6 +64,7 @@ cards:
                  **BLE шлюз кухня**
             - type: entities
               show_header_toggle: false
+              state_color: true
               entities:
                - entity: binary_sensor.kn_state
                  name: Состояние - 
@@ -86,6 +87,7 @@ cards:
                  **BLE шлюз гостиная**
             - type: entities
               show_header_toggle: false
+              state_color: true
               entities:
                - entity: binary_sensor.gg_state
                  name: Состояние - 
@@ -108,6 +110,7 @@ cards:
                  **BLE шлюз детская Д**
             - type: entities
               show_header_toggle: false
+              state_color: true
               entities:
                - entity: binary_sensor.dd_state
                  name: Состояние -                   
@@ -131,6 +134,7 @@ cards:
                  **BLE шлюз детская А**
             - type: entities
               show_header_toggle: false
+              state_color: true
               entities:
                - entity: binary_sensor.da_state
                  name: Состояние -                   
@@ -168,6 +172,7 @@ cards:
               card:
                 type: entities
                 show_header_toggle: false
+                state_color: true
               filter:
                 include:
                  - entity_id: binary_sensor.notebook*
@@ -188,6 +193,7 @@ cards:
               card:
                 type: entities
                 show_header_toggle: false
+                state_color: true
               filter:
                 include:
                  - entity_id: binary_sensor.hainst*
@@ -208,6 +214,7 @@ cards:
               card:
                 type: entities
                 show_header_toggle: false
+                state_color: true
               filter:
                 include:
                  - entity_id: binary_sensor.gateway*
@@ -228,6 +235,7 @@ cards:
               card:
                 type: entities
                 show_header_toggle: false
+                state_color: true
               filter:
                 include:
                  - entity_id: binary_sensor.camera*

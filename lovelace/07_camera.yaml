@@ -45,7 +45,7 @@ cards:
           title: Прихожая, входная дверь
           camera_image: camera.xiaofang
           entities:
-           - entity: light.yeelight_01_whitebulb
+           - entity: light.0x00158d000420dbab_light
            - entity: light.yeelight_03_ceiling
            - entity: script.photo_xiaofang
              icon: mdi:camera 
@@ -108,7 +108,7 @@ cards:
           entities:
            - entity: light.yeelight_05_ceiling1
            - entity: light.yeelight_05_ceiling2
-           - entity: switch.tv_samsung
+           - entity: switch.tv_xiaomi_55
              icon: mdi:television-guide 
            - entity: switch.movie_mode
              icon: mdi:movie-roll

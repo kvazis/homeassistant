@@ -1,57 +1,3 @@
-# Включение питания на лампу
-- alias: 01_enter_autoswitch
-  initial_state: true
-  trigger:
-  - platform: state
-    entity_id: switch.02_sonoff_basic_relay
-    to: 'off'
-  action:
-  - delay: 00:00:03
-  - service: switch.turn_on
-    entity_id:
-      - switch.02_sonoff_basic_relay
-      
-# Перезагрузка зависшей лампочки
-- alias: 01_enter_reboot
-  initial_state: true
-  trigger:
-  - platform: state
-    entity_id: light.yeelight_01_whitebulb
-    to: 'unavailable'
-    for:
-      minutes: 5
-  condition:
-    condition: numeric_state
-    entity_id: sensor.unavailable_now_light
-    below: 5
-  action:
-    - service: mqtt.publish
-      data_template:
-        topic: "notification/messages"
-        payload_template: '0101'
-        retain: true
-    - service: switch.turn_off
-      entity_id: switch.02_sonoff_basic_relay
-
-## Включение освещения
-- alias: 01_enter
-  initial_state: true
-  trigger:
-## Открытие входной двери
-   platform: state
-   entity_id: binary_sensor.0x00158d000119378d_contact
-   from: 'off'
-   to: 'on'
-  action: 
-    - service: script.turn_on
-      data_template:
-       entity_id: >-
-          {%- if states.light.yeelight_01_whitebulb.state  == 'off' and (as_timestamp (now()) -as_timestamp(states.light.yeelight_01_whitebulb.last_changed) > 120) -%}
-          script.01_enter_on
-          {%- else -%}
-          script.stub
-          {%- endif -%} 
-
 ## Фото при входе и отключение
 - alias: 01_enter_photo
   initial_state: true
@@ -64,6 +10,18 @@
   action: 
     - service: script.turn_on
       entity_id: script.01_photo_door_t
+      
+## Включение съемки при входе     
+- alias: 01_enter_photo_on
+  initial_state: true
+  trigger:
+   - platform: event
+     event_type: timer.finished
+     event_data:
+       entity_id: timer.camphoto
+  action:
+    - service: automation.turn_on
+      entity_id: automation.01_enter_photo
 
 ## Запись последнего открытия двери
 - alias: 01_enter_time
@@ -86,10 +44,9 @@
   initial_state: true
   trigger:
 ## Движение в прихожей
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d00013f7894
+  - platform: state
+    entity_id: binary_sensor.0x00158d00013f7894_occupancy
+    to: 'on'
   action: 
   - service: mqtt.publish
     data_template:
@@ -97,112 +54,6 @@
       payload: "{{ states('sensor.time_date')}}"
       retain: true
 
-## Включение съемки при входе     
-- alias: 01_enter_photo_on
-  initial_state: true
-  trigger:
-   - platform: event
-     event_type: timer.finished
-     event_data:
-       entity_id: timer.camphoto
-  action:
-    - service: automation.turn_on
-      entity_id: automation.01_enter_photo
-
-## Таймер освещения вкл
-- alias: 01_enter_light_timer_on
-  initial_state: true
-  trigger:
-## Лампочка включается
-  - platform: state
-    entity_id: light.yeelight_01_whitebulb
-    to: 'on'
-  action:
-  - service: timer.cancel
-    entity_id: timer.entrance
-  - service: timer.start
-    entity_id: timer.entrance
-#    data_template: 
-#      duration: '00:05:00'
-
-## Таймер освещения обновление
-- alias: 01_enter_light_timer_reload
-  initial_state: true
-  trigger:
-# Датчик движения
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d00013f7894
-  condition:
-    - condition: state
-      entity_id: light.yeelight_01_whitebulb
-      state: 'on'
-  action:
-  - service: timer.cancel
-    entity_id: timer.entrance
-  - service: timer.start
-    entity_id: timer.entrance
-
-    
-## Таймер освещения выкл
-- alias: 01_enter_light_timer_off
-  initial_state: true
-  trigger:
-## Лампочка включается
-  - platform: state
-    entity_id: light.yeelight_01_whitebulb
-    to: 'off'
-  action:
-  - service: timer.cancel
-    entity_id: timer.entrance
-
-## Автоматическое выключение света
-- alias: 01_enter_light_auto_off
-  initial_state: true
-  trigger:
-## Таймер выключился
-   - platform: event
-     event_type: timer.finished
-     event_data:
-       entity_id: timer.entrance
-  condition:
-    - condition: state
-      entity_id: light.yeelight_01_whitebulb
-      state: 'on'
-  action:
-    - service: light.turn_off
-      entity_id:
-        - light.yeelight_01_whitebulb
-        
-## Ручное управление светом
-- alias: 01_enter_light
-  initial_state: true
-  trigger:
-## Выключатель у входной двери
-  - platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.wall_switch_right_158d0001718ca8
-      click_type: single
-## Кнопка, коридор шкаф
-  - platform: state
-    entity_id: sensor.0x00158d0001f3fefe_click
-    to: 'double'
-## Квадратная кнопка кухня
-  - platform: state
-    entity_id: sensor.0x00158d0001a672ef_click
-    to: 'single'
-  action: 
-  - service: script.turn_on
-    data_template:
-     entity_id: >-
-        {%- if states.light.yeelight_01_whitebulb.state  == 'off' -%}
-        script.01_enter_on
-        {%- elif states.light.yeelight_01_whitebulb.state  == 'on' -%}
-        script.01_enter_off
-        {%- endif -%} 
-        
 ## Обнаружение дыма
 - alias: 01_detect_smoke
   initial_state: true

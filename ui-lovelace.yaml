@@ -17,7 +17,7 @@ views:
   - !include lovelace/15_automation.yaml
   - !include lovelace/16_switchlight.yaml
   - !include lovelace/20_other.yaml
-  - !include lovelace/21_test.yaml
+  - !include lovelace/21_webstat.yaml
   
   
   

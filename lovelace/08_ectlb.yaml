@@ -22,8 +22,10 @@ cards:
                name: Датчик дыма
              - entity: binary_sensor.0x00158d000119378d_contact
                name: Входная дверь
-             - entity: binary_sensor.motion_sensor_158d00013f7894
-               name: Прихожая           
+             - entity: binary_sensor.0x00158d00013f7894_occupancy
+               name: Прихожая   
+             - entity: binary_sensor.en_light_on
+               name: Свет в прихожей
              - entity: binary_sensor.0x00158d00010f8920_occupancy  
                name: Коридор
 
@@ -31,7 +33,7 @@ cards:
           mode: horizontal
           cards:        
             - type: light
-              entity: light.yeelight_01_whitebulb
+              entity: light.0x00158d000420dbab_light
               name: Прихожая
             - type: light
               entity: light.yeelight_03_ceiling
@@ -50,15 +52,6 @@ cards:
            - entity: sensor.mqtt_binary_sensor_158d00010f8920
              icon: mdi:run-fast
              name: Коридор
-
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: switch.02_sonoff_basic_relay
-            icon: mdi:lightbulb-outline
-            tap_action: 
-               action: toggle 
-
 
         - type: entity-filter
           show_header_toggle: false
@@ -83,11 +76,13 @@ cards:
         - type: glance
           show_state: false
           entities:
-           - entity: binary_sensor.motion_sensor_158d0001a24e71  
+           - entity: binary_sensor.0x00158d0001a24e71_occupancy
              name: Туалет движение
+           - entity: binary_sensor.tt_light_timer
+             name: Автосвет
            - entity: binary_sensor.0x00158d0001ab3350_occupancy
              name: Прачечная движение
-           - entity: binary_sensor.water_leak_sensor_158d0002705b7b
+           - entity: binary_sensor.0x00158d0002705b7b_water_leak
              name: Прачечная протечка
 
 
@@ -105,7 +100,7 @@ cards:
         - type: glance
           show_state: true
           entities:
-           - entity: sensor.illumination_158d0001a24e71
+           - entity: sensor.0x00158d0001a24e71_illuminance
              name: Освещенность
            - entity: sensor.mqtt_binary_sensor_158d0001a24e71
              icon: mdi:run-fast
@@ -166,8 +161,10 @@ cards:
           entities:
            - entity: binary_sensor.0x00158d0001e547a3_occupancy
              name: Движение
-           - entity: binary_sensor.bt_light_timer
-             name: Свет            
+           - entity: binary_sensor.bt_light_on
+             name: Автосвет
+           - entity: binary_sensor.bt_light_night_on
+             name: Автосвет ночь
            - entity: binary_sensor.0x00158d0001bb60c2_water_leak
              name: Душевая
            - entity: binary_sensor.0x00158d0001d72fa2_water_leak
@@ -181,6 +178,8 @@ cards:
           entities:
            - entity: sensor.load_158d00015751f4
              name: Бойлер потребление
+           - entity: sensor.bt_heater_voltage
+             name: Бойлер напряжение
            - entity: sensor.mqtt_binary_sensor_158d0001e547a3
              icon: mdi:run-fast
              name: Движение

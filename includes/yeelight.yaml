@@ -2,10 +2,10 @@
 
 
   devices:
- ## Прихожая
-      192.168.0.105:
-        name: yeelight_01_whitebulb
-        transition: 200
+#  ## Прихожая
+#       192.168.0.105:
+#         name: yeelight_01_whitebulb
+#         transition: 200
 ## Санузел
       192.168.0.106:
         name: yeelight_02_ceiling

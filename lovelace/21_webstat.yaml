@@ -1,0 +1,30 @@
+##################   Other
+title: Web info
+icon: mdi:web
+cards:
+
+      - type: vertical-stack
+        cards:
+
+          - type: markdown
+            style: |
+                ha-card {
+                  font-size: 16px;
+                }  
+            content: >
+               **Youtube**
+  
+          - type: entities
+            style: |
+                ha-card {
+                  font-size: 14px;
+                }  
+            show_header_toggle: false
+            entities:
+            - entity: sensor.social_blade
+              name: Подписчиков на канале - 
+              icon: mdi:account-group
+            - entity: sensor.youtube_views
+              icon: mdi:eye-outline
+            - entity: sensor.youtube_views_today
+              icon: mdi:eye-plus-outline

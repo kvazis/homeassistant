@@ -1,0 +1,40 @@
+youtube:
+
+    sensor:
+    
+        - platform: socialblade
+          channel_id: UCcq9onYHbs6go3kDpfBoqhg
+          
+        - platform: mqtt
+          state_topic: "states/youtube"
+          name: 'youtube_views_yesterday'
+          
+        - platform: template
+          sensors:
+
+              youtube_views:
+                friendly_name: 'Просмотров всего - '
+                value_template: '{{ states.sensor.social_blade.attributes["total_views"] }}'
+        
+              youtube_views_today:
+                friendly_name: 'Просмотров сегодня - '
+                # entity_id: sensor.time
+                value_template: '{{(states.sensor.youtube_views.state | int - (states.sensor.youtube_views_yesterday.state | int ))}}'
+            
+    automation:
+
+         ##### Запись данных за прошедший день
+        - id: Количество просмотров, начало нового дня
+          alias: youtube_views_new_day
+          initial_state: true
+          trigger:
+            - platform: time
+              at: '00:00:00'
+          action:
+            - service: mqtt.publish
+              data_template:
+                topic: "states/youtube"
+                payload: '{{ (states.sensor.youtube_views.state | int ) }}'
+                retain: true 
+
+    

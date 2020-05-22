@@ -5,12 +5,12 @@
     payload_on: "ON"
     payload_off: "OFF"
     
-# Вентилятор для роутера
-  - platform: mqtt
-    name: living_usb_fan
-    state_topic: "states/living_usb_fan"
-    payload_on: "ON"
-    payload_off: "OFF"    
+# # Вентилятор для роутера
+#   - platform: mqtt
+#     name: living_usb_fan
+#     state_topic: "states/living_usb_fan"
+#     payload_on: "ON"
+#     payload_off: "OFF"    
     
 # Режим тишины
   - platform: mqtt

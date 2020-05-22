@@ -15,15 +15,15 @@
          topic: "notification/info"
          payload_template: '012'
 
-- alias: 00_backup_everyday
-  initial_state: true
-  trigger:
-    - platform: time
-      at: '01:00:00'
-  action:
-    - service: recorder.purge
-      data:
-          keep_days: 1
-          repack: true
+# - alias: 00_backup_everyday
+#   initial_state: true
+#   trigger:
+#     - platform: time
+#       at: '01:00:00'
+#   action:
+#     - service: recorder.purge
+#       data:
+#           keep_days: 1
+#           repack: true
 
 

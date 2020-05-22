@@ -11,22 +11,5 @@
            payload_template: '0100'
            retain: true
 
-  01_enter_on:
-    alias: Включение лампочки в прихожей
-    sequence:
-      - service: light.turn_on
-        entity_id:
-          -  light.yeelight_01_whitebulb
-        data_template:
-          brightness_pct: 100
-          kelvin: 4000
-          
-  01_enter_off:
-    alias: Выключение лампочки в прихожей
-    sequence:
-      - service: light.turn_off
-        entity_id:
-          -  light.yeelight_01_whitebulb
-
 
                  

@@ -70,6 +70,10 @@ lovelace:
      type: module
    - url: /hacsfiles/lovelace-battery-entity/battery-entity.js
      type: module
+   - url: /hacsfiles/air-visual-card/air-visual-card.js
+     type: module
+   - url: /hacsfiles/logbook-card/logbook-card.js
+     type: module
 
 # Включение истории
 #history:
@@ -133,13 +137,6 @@ telegram_bot:
       - !secret chat_id_alex
       - !secret chat_id_olha
       
-# # Кастомные карты
-# hacs:
-#   token: !secret HACS_github
-#   appdaemon: true
-#   python_script: true
-#   theme: true
-
 # Роутер
 asuswrt:
   host: !secret asus_ip
@@ -169,7 +166,11 @@ life360:
   warning_threshold: 2
   error_threshold: 3
 
-
+airvisual:
+    api_key: !secret api_airvisual
+    geographies:
+        latitude: !secret latitude_coord
+        longitude: !secret longitude_coord
       
 # Качество воздуха
 air_quality:

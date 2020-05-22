@@ -31,24 +31,22 @@ sensor.02_toilet_lywsd02_humidity:
 sensor.02_toilet_lywsd02_temperature:
   friendly_name: Туалет температура
   icon: mdi:temperature-celsius
+sensor.0x00158d000128cd1a_click:
+  friendly_name: Туалет выключатель на стене
 
 ## Бинарные сенсоры
-binary_sensor.wall_switch_left_158d000128cd1a:
-  friendly_name: Туалет выключатель левая
-binary_sensor.wall_switch_right_158d000128cd1a:
-  friendly_name: Туалет выключатель правая
-binary_sensor.wall_switch_both_158d000128cd1a:
-  friendly_name: Туалет выключатель  
-  
-binary_sensor.motion_sensor_158d0001a24e71:
+binary_sensor.0x00158d0001a24e71_occupancy:
   friendly_name: Туалет движение
   
-sensor.illumination_158d0001a24e71:
+sensor.0x00158d0001a24e71_illuminance:
   friendly_name: Туалет освещенность 
 
 ## Уровень заряда
-
-
+sensor.0x00158d0001a24e71_battery:
+  friendly_name: Туалет движение
+sensor.0x00158d000128cd1a_battery:
+  friendly_name: Туалет выключатель на стене
+  
 ## Прачечная
 
 ## Освещение
@@ -83,9 +81,12 @@ sensor.0x00158d0001ab3350_illuminance:
 binary_sensor.0x00158d0001ab3350_occupancy:
   friendly_name: Прачечная, движение
 
-binary_sensor.water_leak_sensor_158d0002705b7b:
+binary_sensor.0x00158d0002705b7b_water_leak:
   friendly_name: Прачечная, протечка, стиралка
   
 ## Уровень заряда
 sensor.0x00158d0001ab3350_battery:
   friendly_name: Прачечная, движение
+sensor.0x00158d0002705b7b_battery: 
+  friendly_name: Прачечная, протечка, стиралка
+  

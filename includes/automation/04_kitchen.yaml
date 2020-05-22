@@ -97,7 +97,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0001bbeba6
+   entity_id: binary_sensor.0x00158d0001bbeba6_water_leak
    to: 'on'
   action:
   - service: mqtt.publish
@@ -114,7 +114,7 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.water_leak_sensor_158d0001bbeba6
+   entity_id: binary_sensor.0x00158d0001bbeba6_water_leak
    from: 'on'
    to: 'off'
   action:
@@ -163,11 +163,9 @@
   initial_state: true
   trigger:
 ## Датчик вибрации
-  - platform: event
-    event_type: xiaomi_aqara.movement
-    event_data:
-      entity_id: binary_sensor.vibration_158d0002a8ab8b
-      click_type: vibrate
+    - platform: state
+      entity_id: sensor.0x00158d0002a8ab8b_action
+      to: 'vibration'
   action:
     - service: mqtt.publish
       data_template:

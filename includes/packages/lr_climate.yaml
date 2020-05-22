@@ -24,6 +24,7 @@ lr_climate:
             value_template: >-
               {{ is_state('binary_sensor.0x00158d000445206b_contact', 'off')  
                  and is_state('binary_sensor.0x00158d00013ed373_contact', 'off')
+                 and is_state('binary_sensor.radiator', 'on')
                  and is_state('sensor.living_heat_work', 'Включен') }}
             icon_template: >-
               {% if is_state("binary_sensor.living_heat", "on") %}
@@ -133,9 +134,17 @@ lr_climate:
                 entity_id: fan.gg_humidifier
                 data:
                     speed: Auto
+              - service: homeassistant.turn_on
+                entity_id: fan.gg_purifier
+              - service: fan.set_speed
+                entity_id: fan.gg_purifier
+                data:
+                    speed: Auto
             turn_off:
               - service: homeassistant.turn_off
-                entity_id: fan.gg_humidifier
+                entity_id: 
+                   - fan.gg_humidifier
+                   - fan.gg_purifier
                     
           gg_humidifier_mode_silent:
             friendly_name: "Увлажнитель тихий"
@@ -149,9 +158,17 @@ lr_climate:
                 entity_id: fan.gg_humidifier
                 data:
                     speed: Silent
+              - service: homeassistant.turn_on
+                entity_id: fan.gg_purifier
+              - service: fan.set_speed
+                entity_id: fan.gg_purifier
+                data:
+                    speed: Auto
             turn_off:
               - service: homeassistant.turn_off
-                entity_id: fan.gg_humidifier
+                entity_id: 
+                   - fan.gg_humidifier
+                   - fan.gg_purifier
                     
           gg_humidifier_mode_medium:
             friendly_name: "Увлажнитель средний"
@@ -165,9 +182,17 @@ lr_climate:
                 entity_id: fan.gg_humidifier
                 data:
                     speed: Medium
+              - service: homeassistant.turn_on
+                entity_id: fan.gg_purifier
+              - service: fan.set_speed
+                entity_id: fan.gg_purifier
+                data:
+                    speed: Auto
             turn_off:
               - service: homeassistant.turn_off
-                entity_id: fan.gg_humidifier
+                entity_id: 
+                   - fan.gg_humidifier
+                   - fan.gg_purifier
                     
           gg_humidifier_mode_high:
             friendly_name: "Увлажнитель максимальный"
@@ -181,6 +206,14 @@ lr_climate:
                 entity_id: fan.gg_humidifier
                 data:
                     speed: High
+              - service: homeassistant.turn_on
+                entity_id: fan.gg_purifier
+              - service: fan.set_speed
+                entity_id: fan.gg_purifier
+                data:
+                    speed: Auto
             turn_off:
               - service: homeassistant.turn_off
-                entity_id: fan.gg_humidifier
+                entity_id: 
+                   - fan.gg_humidifier
+                   - fan.gg_purifier

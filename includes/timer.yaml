@@ -18,14 +18,6 @@
     name: Ванная вент. выкл через -
     duration: '00:10:00'
 
-  bathroom_light:
-    name: Ванная свет выкл через -
-    duration: '00:10:00'
-    
-  entrance:
-    name: Свет в прихожей отключится через - 
-    duration: '00:05:00'
-
   kitchen:
     name: Кухня свет выкл через -
     duration: '00:30:00'

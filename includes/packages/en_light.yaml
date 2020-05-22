@@ -1,0 +1,169 @@
+en_light:
+
+    binary_sensor:
+    
+      - platform: tod
+        name: en_night
+        after: '22:00'
+        before: '06:00'
+        
+    # Сенсор автоотключения света 
+      - platform: template
+        sensors:
+        
+          en_light_on:
+            friendly_name: "Свет в прихожей"
+            value_template: >-
+              {{ is_state('light.0x00158d000420dbab_light', 'on')  
+                 and is_state('binary_sensor.0x00158d00013f7894_occupancy', 'off')  }}
+            icon_template: >-
+              {% if is_state("binary_sensor.en_light_on", "on") %}
+              mdi:timer
+              {% else %}
+              mdi:timer-off
+              {% endif %}
+              
+          en_light_night_on:
+            friendly_name: "Свет в прихожей ночью"
+            value_template: >-
+              {{ is_state('light.0x00158d000420dbab_light', 'on')  
+                 and is_state('binary_sensor.0x00158d00013f7894_occupancy', 'off')  
+                 and is_state('binary_sensor.en_night', 'on') 
+              }}
+            icon_template: >-
+              {% if is_state("binary_sensor.en_light_night_on", "on") %}
+              mdi:timer-sand-full
+              {% else %}
+              mdi:timer-sand-empty
+              {% endif %}
+
+    timer:
+    
+        entrance:
+          name: Свет в прихожей отключится через - 
+          duration: '00:03:00'
+              
+    automation:
+
+      - id: Прихожая, включение освещения
+        alias: 01_enter_light_on
+        initial_state: true
+        trigger:
+        ## Выключатель, вход
+        - platform: state
+          entity_id: sensor.0x00158d0001718ca8_click
+          to: 'right'
+        ## Кнопка, коридор шкаф
+        - platform: state
+          entity_id: sensor.0x00158d0001f3fefe_click
+          to: 'double'
+        ## Квадратная кнопка кухня
+        - platform: state
+          entity_id: sensor.0x00158d0001a672ef_click
+          to: 'single'
+        condition:
+        - condition: state
+          entity_id: light.0x00158d000420dbab_light
+          state: 'off'
+        action: 
+        - service: script.turn_on
+          entity_id: script.01_enter_on
+
+      - id: Прихожая, выключение освещения
+        alias: 01_enter_light_off
+        initial_state: true
+        trigger:
+        ## Таймер выключился
+        - platform: event
+          event_type: timer.finished
+          event_data:
+            entity_id: timer.entrance
+        ## Выключатель, вход
+        - platform: state
+          entity_id: sensor.0x00158d0001718ca8_click
+          to: 'right'
+        ## Кнопка, коридор шкаф
+        - platform: state
+          entity_id: sensor.0x00158d0001f3fefe_click
+          to: 'double'
+        ## Квадратная кнопка кухня
+        - platform: state
+          entity_id: sensor.0x00158d0001a672ef_click
+          to: 'single'
+        condition:
+        - condition: state
+          entity_id: light.0x00158d000420dbab_light
+          state: 'on'
+        action:
+        - service: script.turn_on
+          entity_id: script.01_enter_off
+
+      - id: Прихожая, включение света при открытии двери
+        alias: 01_enter_light_door_on
+        initial_state: true
+        trigger:
+        ## Открытие входной двери
+        - platform: state
+          entity_id: binary_sensor.0x00158d000119378d_contact
+          from: 'off'
+          to: 'on'
+        condition:
+        - condition: template
+          value_template: "{{(as_timestamp (now()) -as_timestamp(states['light.0x00158d000420dbab_light'].last_changed))|int > 180 }}"
+        action:
+        - service: script.turn_on
+          entity_id: script.01_enter_on
+
+      - id: Прихожая, отключение лампы ночью
+        alias: 01_enter_light_auto_off
+        initial_state: true
+        trigger:
+        - platform: state
+          entity_id: binary_sensor.en_light_night_on
+          to: 'on'
+          for:
+            seconds: 30
+        action:
+        - service: light.turn_off
+          entity_id: light.0x00158d000420dbab_light
+              
+      - id: Прихожая, запуск таймера освещения
+        alias: 01_enter_light_timer_on
+        initial_state: true
+        trigger:
+        ## Сенсор автоотключения света включается
+        - platform: state
+          entity_id: binary_sensor.en_light_on
+          to: 'on'
+        action:
+        - service: timer.start
+          entity_id: timer.entrance
+            
+      - id: Прихожая, отключение таймера освещения
+        alias: 01_enter_light_timer_off
+        initial_state: true
+        trigger:
+      ## енсор автоотключения света выключается
+        - platform: state
+          entity_id: binary_sensor.en_light_on
+          to: 'off'
+        action:
+        - service: timer.cancel
+          entity_id: timer.entrance
+          
+    script:
+    
+        01_enter_on:
+          alias: Включение лампочки в прихожей
+          sequence:
+            - service: light.turn_on
+              entity_id: light.0x00158d000420dbab_light
+              data_template:
+                brightness_pct: 100
+                kelvin: 4500
+                
+        01_enter_off:
+          alias: Включение лампочки в прихожей
+          sequence:
+            - service: light.turn_off
+              entity_id: light.0x00158d000420dbab_light

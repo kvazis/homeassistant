@@ -450,6 +450,7 @@ cards:
                    options:
                       type: 'custom:battery-entity'
                 exclude:
+                 - entity_id: sensor.mi_8_lite_battery_state
                  - state: '> 30.0'
                  - state: 'unknown'
 
@@ -674,6 +675,18 @@ cards:
 ############################ Колонка 4 ############################
     - type: vertical-stack
       cards:
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+      
+            - type: weather-forecast
+              entity: weather.openweathermap
+          
+            - type: custom:air-visual-card
+              air_pollution_level: sensor.u_s_air_pollution_level
+              air_quality_index: sensor.u_s_air_quality_index
+              main_pollutant: sensor.u_s_main_pollutant
 
         - type: custom:stack-in-card
           mode: vertical
@@ -921,11 +934,3 @@ cards:
                 exclude:
                  - state: '< 500.0'
                  - state: 'unknown'
-
-                 
-
-                 
-
-
-
-
