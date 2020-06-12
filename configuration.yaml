@@ -89,7 +89,7 @@ tuya:
   
 mqtt:
 #   broker: core-mosquitto
-  broker: 192.168.0.71
+  broker: 192.168.0.75
   discovery: true
   discovery_prefix: homeassistant
   username: mqtt
@@ -165,20 +165,19 @@ life360:
     - moving
   warning_threshold: 2
   error_threshold: 3
-
-airvisual:
-    api_key: !secret api_airvisual
-    geographies:
-        latitude: !secret latitude_coord
-        longitude: !secret longitude_coord
-      
+  
 # Качество воздуха
 air_quality:
   - platform: xiaomi_miio
-    name: 05_air_monitor
+    name: mijia_air_monitor
     host: 192.168.0.142
     token: 5233595a56594a4e55724b4967513542
-  
+    
+  - platform: xiaomi_miio
+    name: cleargrass_air_monitor
+    host: 192.168.0.143
+    token: 566e6c386d4b7163634e5158794a5451
+
 #Вынос в папки
 sensor: !include_dir_merge_list includes/sensors
 binary_sensor: !include_dir_merge_list includes/bin_sensor

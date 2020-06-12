@@ -7,3 +7,17 @@
  - platform: mqtt
    name: "reserve_live_ping"
    state_topic: "instance/reserve/sensor/live_ping/state"  
+
+# # Air Visual   
+
+#  - platform: mqtt
+#   name: "u_s_air_pollution_level"
+#   state_topic: "exchange/sensor/u_s_air_pollution_level/state" 
+   
+#  - platform: mqtt
+#   name: "u_s_air_quality_index"
+#   state_topic: "exchange/sensor/u_s_air_quality_index/state"
+   
+#  - platform: mqtt
+#   name: "u_s_main_pollutant"
+#   state_topic: "exchange/sensor/u_s_main_pollutant/state" 

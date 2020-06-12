@@ -2,9 +2,6 @@
   scenario:
     name: scenario
     entities:
-      - climate.living_heater
-      - climate.dd_heater
-      - climate.da_heater
       - automation.telegramm_command_code
       - automation.911_mqtt_lost
       - automation.911_mqtt_online
@@ -12,15 +9,14 @@
       - automation.911_test_online
       - automation.911_rasp3_lost
       - automation.911_rasp3_online
-      - automation.00_heater_week_on
-      - automation.00_heater_weekend_on
-      - automation.00_heater_off
-      - automation.00_heater_notification_on 
-      - automation.00_heater_notification_off
-      - automation.00_heater_check
       - automation.00_power_counter
       - automation.00_power_new_day
       - automation.00_power_new_month
+      - automation.boiler_impossible
+      - automation.boiler_on
+      - automation.boiler_off
+      - automation.boiler_notify_on      
+      - automation.boiler_notify_off      
       - automation.01_detect_smoke
       - automation.01_detect_smoke_off
       - automation.01_enter_photo
@@ -46,11 +42,11 @@
       - automation.02_laundry_wleak_washmash_off
       - automation.02_laundry_motion_time   
       - automation.02_toilet_motion_time
-      - automation.03_corr_entr
-      - automation.03_corr_light
+      - automation.03_corr_light_on
       - automation.03_corr_light_on_vibro
-      - automation.03_corr_light_auto_off
-      - automation.03_corr_light_power      
+      - automation.03_corr_light_night
+      - automation.03_corr_light_off
+      - automation.03_corr_entr
       - automation.03_motion_time
       - automation.04_kn_ceiling
       - automation.04_kn_ceiling_auto_on
@@ -70,9 +66,11 @@
       - automation.05_gg_full_light
       - automation.05_gg_wall_light
       - automation.05_gg_movie_light
+      - automation.lr_table_lamp
       - automation.05_gg_heater
       - automation.05_gg_hum_auto
-      - automation.05_gg_air_fresh
+      - automation.living_air_fresh
+      - automation.living_silent_off
       - automation.05_ilife_a4
       - automation.05_usb_cool_auto     
       - automation.05_tv_xiaomi55
@@ -108,6 +106,7 @@
       - automation.08_da_heater
       - automation.08_da_hum_auto
       - automation.08_da_hum_water_warning
+      - automation.da_air_fresh      
       - automation.08_da_light_auto
       - automation.08_da_light
       - automation.08_da_light_circle

@@ -55,4 +55,17 @@
             switch.gg_humidifier_mode_auto
             {% endif %}
             
+- id: Отключение режима тишины
+  alias: living_silent_off
+  initial_state: true
+  trigger:
+## Завершение таймера
+   - platform: event
+     event_type: timer.finished
+     event_data:
+       entity_id: timer.lr_silent
+  action:
+    - service: switch.turn_off
+      entity_id: switch.silent_mode
+            
         

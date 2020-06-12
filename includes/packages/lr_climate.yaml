@@ -105,7 +105,7 @@ lr_climate:
         entity_ids:
           - sensor.0x00158d00015aebb6_temperature
           - sensor.05_smartmi_temperature
-          - sensor.05_mi_air_temperature
+          - sensor.cleargrass_air_temperature
     
           
     # Cредняя влажность
@@ -115,7 +115,7 @@ lr_climate:
         entity_ids:
           - sensor.0x00158d00015aebb6_humidity
           - sensor.05_smartmi_humidity
-          - sensor.05_mi_air_humidity
+          - sensor.cleargrass_air_humidity
           
     switch:
     

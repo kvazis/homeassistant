@@ -177,6 +177,26 @@ cards:
           content: >
               **Гостиная - климат**
               
+        - type: glance
+          show_state: false
+          state_color: true
+          entities:
+           - entity: sensor.living_day_work
+           - entity: binary_sensor.living_hum
+           - entity: binary_sensor.living_heat
+           - entity: binary_sensor.cleargrass_air
+             name: Воздух
+           - entity: binary_sensor.living_air
+             name: Проветрить
+
+        - type: custom:mini-graph-card
+          entities:
+            - entity: sensor.cleargrass_air_co2
+              name: СО2 
+              color: "#A52A2A"
+          animate: true
+          line_width: 3
+              
         - type: horizontal-stack
           cards:
 
@@ -198,27 +218,19 @@ cards:
             
         - type: horizontal-stack
           cards:
-            
+
              - type: custom:mini-graph-card
                entities:
-                - entity: sensor.05_mi_air_pm25
-                  name: РМ 2.5
-                  color: "#A52A2A"
-               animate: true
-               line_width: 3
-            
-             - type: custom:mini-graph-card
-               entities:
-                - entity: sensor.05_mi_air_tvoc
+                - entity: sensor.cleargrass_air_tvoc
                   name: ЛОВ
                   color: "#F4A460"
                animate: true
                line_width: 3
 
-             - type: custom:mini-graph-card
+             - type: custom:mini-graph-card  
                entities:
-                - entity: sensor.05_mi_air_co2a
-                  name: СО2
+                - entity: sensor.cleargrass_air_pm25
+                  name: РМ 2.5
                   color: "#800000"
                animate: true
                line_width: 3
@@ -275,6 +287,19 @@ cards:
               }  
           content: >
               **Балкон гостиной**
+              
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.0x00158d00013ed373_contact
+             name: Окно в гостиной
+           - entity: binary_sensor.0x00158d000445206b_contact
+             name: Дверь на балкон
+           - entity: binary_sensor.0x00158d000449b773_occupancy
+             name: Движение
+           - entity: binary_sensor.0x00158d0001a2f5f7_contact
+             name: Окно на балконе 
+           - entity: binary_sensor.lr_balcony_motion
    
         - type: custom:vertical-stack-in-card
           cards:   
@@ -292,20 +317,6 @@ cards:
               animate: true
               line_width: 3
               
-        - type: glance
-          show_state: false
-          entities:
-           - entity: binary_sensor.0x00158d00013ed373_contact
-             name: Окно в гостиной
-           - entity: binary_sensor.0x00158d000445206b_contact
-             name: Дверь на балкон
-           - entity: binary_sensor.0x00158d000449b773_occupancy
-             name: Движение
-           - entity: binary_sensor.0x00158d0001a2f5f7_contact
-             name: Окно на балконе 
-           - entity: binary_sensor.lr_balcony_motion
-
-
         - type: horizontal-stack
           cards:
 

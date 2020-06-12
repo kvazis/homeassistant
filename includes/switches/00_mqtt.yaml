@@ -1,29 +1,5 @@
   - platform: template
     switches:
-      heater_mode:
-        friendly_name: "Режим нагрева"
-        value_template: "{{  is_state('binary_sensor.boiler', 'on') }}"
-        turn_on:
-          service: mqtt.publish
-          data_template:
-            topic: "states/water_heater"
-            payload_template: 'ON'
-            retain: true 
-        turn_off:
-          service: mqtt.publish
-          data_template:
-            topic: "states/water_heater"
-            payload_template: 'OFF'
-            retain: true 
-        icon_template: >-
-          {% if is_state('switch.heater_mode', 'on') %}
-            mdi:water-boiler
-          {% else %}
-            mdi:water-boiler-off
-          {% endif %}
-          
-  - platform: template
-    switches:
       radiator_mode:
         friendly_name: "Режим отопления"
         value_template: "{{  is_state('binary_sensor.radiator', 'on') }}"
@@ -114,3 +90,23 @@
               retain: true 
         icon_template: >-
             mdi:account-switch
+            
+  - platform: template
+    switches:
+      vacancy:
+        friendly_name: "Отпуск"
+        value_template: "{{  is_state('binary_sensor.vacancy', 'on') }}"
+        turn_on:
+          service: mqtt.publish
+          data_template:
+            topic: "states/vacancy"
+            payload_template: 'ON'
+            retain: true 
+        turn_off:
+          service: mqtt.publish
+          data_template:
+            topic: "states/vacancy"
+            payload_template: 'OFF'
+            retain: true 
+        icon_template: >-
+            mdi:palm-tree

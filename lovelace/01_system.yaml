@@ -14,78 +14,69 @@ cards:
           content: >
              **Состояние серверов HA**
 
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:  
+        - type: markdown
+          content: >
+               **Основной сервер** 
+      
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.last_boot_custom
+            name: Сервер в онлайне -
+            icon: mdi:av-timer
+          - entity: sensor.rpi_power_status
+            name: Питание Raspberry Pi 4 B 4GB - 
+            icon: mdi:power-plug
+          - entity: sensor.online_custom
+            name: Home Assistant в онлайне -
+            icon: mdi:clock
+          - type: divider
+          - entity: group.scenario
+            name: Бытовые сценарии - 
+            icon: mdi:format-list-numbered
+          - type: divider
+          - entity: sensor.current_ha
+            name: Установлен Home Assistant -
+            icon: mdi:alpha-v-circle
+          - entity: sensor.version
+            name: Последний Home Assistant -
+            icon: mdi:alpha-v-circle-outline
 
-            - type: markdown
-              content: >
-                   **Основной сервер** 
-          
-            - type: entities
-              show_header_toggle: false
-              entities:
-              - entity: sensor.last_boot_custom
-                name: Сервер в онлайне -
-                icon: mdi:av-timer
-              - entity: sensor.rpi_power_status
-                name: Питание Raspberry Pi 3 B+ 
-                icon: mdi:power-plug
-              - entity: sensor.online_custom
-                name: Home Assistant в онлайне -
-                icon: mdi:clock
-              - type: divider
-              - entity: group.scenario
-                name: Бытовые сценарии - 
-                icon: mdi:format-list-numbered
-              - type: divider
-              - entity: sensor.current_ha
-                name: Установлен Home Assistant -
-                icon: mdi:alpha-v-circle
-              - entity: sensor.version
-                name: Последний Home Assistant -
-                icon: mdi:alpha-v-circle-outline
 
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:  
+        - type: markdown
+          content: >
+               **Резервный сервер и MQTT** 
+               
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.reserve_state
+            name: Raspberry Pi 4 B 2GB в онлайне -
+            icon: mdi:clock-outline
+          - entity: sensor.reserve_scenario_group
+            name: Бытовые сценарии
+            icon: mdi:format-list-numbered
+          - entity: sensor.reserve_live_ping
+          - type: divider
+          - entity: sensor.mqtt_state
+            name: MQTT instanse -
+            icon: mdi:clock-outline
 
-            - type: markdown
-              content: >
-                   **Резервный сервер и MQTT** 
-                   
-            - type: entities
-              show_header_toggle: false
-              entities:
-              - entity: sensor.reserve_state
-                name: Raspberry 4 B в онлайне -
-                icon: mdi:clock-outline
-              - entity: sensor.reserve_scenario_group
-                name: Бытовые сценарии
-                icon: mdi:format-list-numbered
-              - entity: sensor.reserve_live_ping
-              - type: divider
-              - entity: sensor.mqtt_state
-                name: MQTT instanse -
-                icon: mdi:clock-outline
 
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:  
+        - type: markdown
+          content: >
+               **Испытательный полигон** 
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.rasp3b_state
+              name: Train Raspberry 3B  -
+              icon: mdi:clock-outline
+            # - entity: sensor.test_state
+            #   name: Test Raspberry 3B + -
+            #   icon: mdi:clock-outline
 
-            - type: markdown
-              content: >
-                   **Испытательный полигон** 
-            - type: entities
-              show_header_toggle: false
-              entities:
-                - entity: sensor.rasp3b_state
-                  name: Train Raspberry 3B  -
-                  icon: mdi:clock-outline
-                - entity: sensor.test_state
-                  name: Test Orange Pi One Plus -
-                  icon: mdi:clock-outline
-            
+
     - type: vertical-stack
       cards:
       

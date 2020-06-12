@@ -5,10 +5,14 @@
 # Свичи для сбора истории
        - switch.tv_xiaomi
        - switch.tv_xiaomi_55
+       - switch.0x00158d00015751f4_switch
 # Сенсор объема
        - sensor.home_assistant_v2_db
 # Сенсор Youtube просмотров
        - sensor.youtube_views
+# Роутеры
+       - binary_sensor.asus_main
+       - binary_sensor.asus_mesh
 # Ноутбуки
        - binary_sensor.notebook_acer
        - binary_sensor.notebook_hp
@@ -23,9 +27,6 @@
        - sensor.360_dima_battery
        - sensor.360_alex_battery
        - sensor.360_olga_battery
-# Свичи для сбора истории
-       - switch.tv_xiaomi
-       - switch.tv_samsung
 # Системные сенсоры
        - sensor.processor_use
        - sensor.cpu_temp
@@ -48,6 +49,9 @@
        - sensor.load_158d0001fa2934
 # Кухня LED лента
        - sensor.load_158d0001d35bc0
+# Кухня Heiman
+       - sensor.0x000d6f0014bb14b4_power
+       - sensor.0x000d6f0014bb14b4_voltage
 # Гостиная телевизор
        - sensor.load_158d00012896cb
 # Xiaomi wi-fi + 2 USB
@@ -64,7 +68,7 @@
        - sensor.load_wifi_6port
 # Бойлер
        - sensor.load_158d00015751f4
-       - sensor.bt_heater_voltage
+       - sensor.0x00158d00015751f4_voltage
 # Детская Д, увлажнение и отопление
        - sensor.load_158d0001a2ccab
 # Детская Д, настольная лампа
@@ -77,8 +81,6 @@
        - sensor.smartmi_water
        - sensor.purifier_filter
 # Климат сенсоры
-       - sensor.02_toilet_lywsd02_temperature
-       - sensor.02_toilet_lywsd02_humidity
        - sensor.0x00158d0001dcd47e_temperature
        - sensor.0x00158d0001dcd47e_humidity
        - sensor.0x00158d0001581109_temperature
@@ -88,9 +90,6 @@
        - sensor.pressure_mmhg_158d000171ffde
        - sensor.05_mean_temperature
        - sensor.05_mean_humidity
-       - sensor.05_mi_air_pm25
-       - sensor.05_mi_air_tvoc
-       - sensor.05_mi_air_co2a
        - sensor.0x00158d0001a4b9da_temperature
        - sensor.0x00158d0001a4b9da_humidity
        - sensor.pressure_mmhg_158d0001a4b9da
@@ -101,6 +100,12 @@
        - sensor.pressure_mmhg_158d0001fa8321
        - sensor.08_mean_temperature
        - sensor.08_mean_humidity
+       - sensor.cleargrass_air_co2
+       - sensor.cleargrass_air_pm25
+       - sensor.cleargrass_air_tvoc
+       - sensor.mijia_air_co2a
+       - sensor.mijia_air_pm25
+       - sensor.mijia_air_tvoc
 # Сенсоры освещенности
        - sensor.0x04cf8cdf3c772379_illuminance
        - sensor.0x00158d0001a24e71_illuminance

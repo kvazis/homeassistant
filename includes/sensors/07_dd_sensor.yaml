@@ -114,12 +114,3 @@
     entity_ids:
       - sensor.0x00158d000156e92e_temperature
       - sensor.dd_bt_temperature
-
-      
-# Аverage humidity
-  - platform: min_max
-    name: 07_mean_humidity
-    type: mean
-    entity_ids:
-      - sensor.0x00158d000156e92e_humidity
-      - sensor.dd_bt_humidity

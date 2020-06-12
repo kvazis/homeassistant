@@ -1,0 +1,286 @@
+bolier:
+
+    binary_sensor:
+    
+      - platform: mqtt
+        name: boiler
+        state_topic: "states/water_heater"
+        payload_on: "ON"
+        payload_off: "OFF"
+    
+      - platform: tod
+        name: boiler_work_morning
+        after: '05:00'
+        before: '06:00'
+        
+      - platform: tod
+        name: boiler_hd_morning
+        after: '08:00'
+        before: '09:00'
+        
+      - platform: tod
+        name: boiler_evening
+        after: '20:00'
+        before: '21:00'  
+        
+    # Условия для включения бойлера
+      - platform: template
+        sensors:
+        
+          boiler_work_morning_on:
+            friendly_name: "Работа бойлера, будние - утро"
+            value_template: >-
+              {{ is_state('binary_sensor.boiler_work_morning', 'on')  
+                 and is_state('binary_sensor.workday_sensor', 'on')
+                 and is_state('binary_sensor.holiday', 'off')  
+                 and is_state('binary_sensor.boiler', 'on')  }}
+            icon_template: >-
+              {% if is_state("binary_sensor.boiler_work_morning_on", "on") %}
+              mdi:timer
+              {% else %}
+              mdi:timer-off
+              {% endif %}
+              
+          boiler_hd_morning_on:
+            friendly_name: "Работа бойлера, выходные - утро"
+            value_template: >-
+              {{ is_state('binary_sensor.boiler_hd_morning', 'on')  
+                 and is_state('binary_sensor.hd_global', 'on')
+                 and is_state('binary_sensor.boiler', 'on')  }}
+            icon_template: >-
+              {% if is_state("binary_sensor.boiler_hd_morning_on", "on") %}
+              mdi:timer
+              {% else %}
+              mdi:timer-off
+              {% endif %}
+              
+          boiler_evening_on:
+            friendly_name: "Работа бойлера, вечер"
+            value_template: >-
+              {{ is_state('binary_sensor.boiler_evening', 'on')  
+                 and is_state('binary_sensor.boiler', 'on')  }}
+            icon_template: >-
+              {% if is_state("binary_sensor.boiler_evening_on", "on") %}
+              mdi:timer
+              {% else %}
+              mdi:timer-off
+              {% endif %}
+              
+          boiler_on:
+            friendly_name: "Условия для включения бойлера"
+            value_template: >-
+              {{ is_state('binary_sensor.boiler_work_morning_on', 'on')  
+                 or is_state('binary_sensor.boiler_hd_morning_on', 'on')
+                 or is_state('binary_sensor.boiler_evening_on', 'on')  }}
+            icon_template: >-
+              {% if is_state("binary_sensor.boiler_on", "on") %}
+              mdi:water-boiler
+              {% else %}
+              mdi:water-boiler-off
+              {% endif %}
+              
+    switch:
+    
+      - platform: template
+        switches:
+          heater_mode:
+            friendly_name: "Режим нагрева бойлера"
+            value_template: "{{  is_state('binary_sensor.boiler', 'on') }}"
+            turn_on:
+              service: mqtt.publish
+              data_template:
+                topic: "states/water_heater"
+                payload_template: 'ON'
+                retain: true 
+            turn_off:
+              service: mqtt.publish
+              data_template:
+                topic: "states/water_heater"
+                payload_template: 'OFF'
+                retain: true 
+            icon_template: >-
+              {% if is_state('switch.heater_mode', 'on') %}
+                mdi:water-boiler
+              {% else %}
+                mdi:water-boiler-off
+              {% endif %}
+              
+    timer:
+
+        heater:
+          name: Бойлер выкл через -
+          duration: '01:00:00'
+          
+    automation:
+    
+      - id: Проверка корректности включения бойлера
+        alias: boiler_impossible
+        initial_state: true
+        trigger:
+         - platform: state
+           entity_id: switch.0x00158d00015751f4_switch
+           to: 'on'
+        condition:
+         - condition: state
+           entity_id: binary_sensor.boiler
+           state: 'off'
+        action:
+         - service: switch.turn_off
+           entity_id: switch.0x00158d00015751f4_switch
+         - service: mqtt.publish
+           data_template:
+             topic: "notification/messages"
+             payload_template: '0602'
+             retain: true
+    
+      - id: Включение бойлера
+        alias: boiler_on
+        initial_state: true
+        trigger:    
+         - platform: state
+           entity_id: binary_sensor.boiler_on
+           from: 'off'
+           to: 'on'
+         - platform: state
+           entity_id: sensor.0x00158d000238a140_click
+           to: 'both'
+        condition:
+         - condition: state
+           entity_id: switch.0x00158d00015751f4_switch
+           state: 'off'
+        action:
+         - service: switch.turn_on
+           entity_id: switch.0x00158d00015751f4_switch
+           
+      - id: Выключение бойлера
+        alias: boiler_off
+        initial_state: true
+        trigger:    
+         - platform: state
+           entity_id: binary_sensor.boiler_on
+           from: 'on'
+           to: 'off'
+         - platform: state
+           entity_id: sensor.0x00158d000238a140_click
+           to: 'both'
+         - platform: event
+           event_type: timer.finished
+           event_data:
+             entity_id: timer.heater
+        condition:
+         - condition: state
+           entity_id: switch.0x00158d00015751f4_switch
+           state: 'on'
+        action:
+         - service: switch.turn_off
+           entity_id: switch.0x00158d00015751f4_switch
+    
+      - id: Уведомление при включении бойлера
+        alias: boiler_notify_on
+        initial_state: true
+        trigger:
+         - platform: state
+           entity_id: switch.0x00158d00015751f4_switch
+           to: 'on'
+        condition:
+         - condition: state
+           entity_id: binary_sensor.boiler
+           state: 'on'
+        action:
+         - service: mqtt.publish
+           data_template:
+             topic: "notification/messages"
+             payload_template: '0600'
+             retain: true
+             
+      - id: Уведомление при выключении бойлера
+        alias: boiler_notify_off
+        initial_state: true
+        trigger:
+         - platform: state
+           entity_id: switch.0x00158d00015751f4_switch
+           to: 'off'
+        condition:
+         - condition: state
+           entity_id: binary_sensor.boiler
+           state: 'on'
+        action:
+         - service: mqtt.publish
+           data_template:
+             topic: "notification/messages"
+             payload_template: '0601'
+             retain: true
+             
+      - id: Запуск таймера при ручном включении бойлера
+        alias: boiler_timer_on
+        initial_state: true
+        trigger:
+         - platform: state
+           entity_id: switch.0x00158d00015751f4_switch
+           to: 'on'
+           for:
+             minutes: 1
+        condition:
+         - condition: state
+           entity_id: binary_sensor.boiler
+           state: 'on'
+         - condition: state
+           entity_id: binary_sensor.boiler_on
+           state: 'off'
+        action:
+          - service: timer.start
+            entity_id: timer.heater
+            
+      - id: Отключение таймера при ручном включении бойлера
+        alias: boiler_timer_off
+        initial_state: true
+        trigger:
+         - platform: state
+           entity_id: switch.0x00158d00015751f4_switch
+           to: 'off'
+           for:
+             minutes: 1
+        condition:
+         - condition: state
+           entity_id: timer.heater
+           state: 'active'
+        action:
+          - service: timer.cancel
+            entity_id: timer.heater
+            
+    script:
+    
+        boiler_mode_on:
+         alias: Включение режима бойлера
+         sequence:
+          - service: mqtt.publish
+            data_template:
+              topic: "states/water_heater"
+              payload_template: 'ON'
+              retain: true 
+        
+        boiler_mode_off:
+         alias: Выключение режима бойлера
+         sequence:
+          - service: mqtt.publish
+            data_template:
+              topic: "states/water_heater"
+              payload_template: 'OFF'
+              retain: true
+              
+        boiler_manual_on:
+         alias: Включение бойлера вручную
+         sequence:
+          - service: switch.turn_on
+            entity_id: switch.0x00158d00015751f4_switch
+        
+        boiler_manual_off:
+         alias: Выключение бойлера вручную
+         sequence:
+          - service: switch.turn_off
+            entity_id: switch.0x00158d00015751f4_switch
+    
+    
+    
+    
+    

@@ -44,6 +44,10 @@
   - platform: switch
     name: xiaomi_07_table
     entity_id: switch.switch_07_table
+    
+  - platform: switch
+    name: dd_balcony
+    entity_id: switch.0x680ae2fffe71ae63_switch
 
 ## Детская А    
   - platform: switch

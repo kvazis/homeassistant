@@ -1,0 +1,131 @@
+##################  ECTLB
+title: Этаж, вход, коридор
+icon: mdi:exit-run
+cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+              **Мониторинг**
+
+        - type: picture-entity
+          entity: camera.reolink_sub
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+        - type: picture-entity
+          entity: camera.xiaofang
+          show_state: false
+          show_name: false
+          
+        - type: picture-entity
+          entity: camera.reolink3_sub
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+      - type: vertical-stack
+        cards:
+
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Прихожая**
+ 
+        - type: glance
+          show_state: false
+          entities:
+             - entity: binary_sensor.0x00158d000149d28b_smoke
+               name: Датчик дыма
+             - entity: binary_sensor.0x00158d000119378d_contact
+               name: Входная дверь
+             - entity: binary_sensor.0x00158d00013f7894_occupancy
+               name: Движение  
+             - entity: binary_sensor.en_light_on
+               name: Автосвет
+             - entity: binary_sensor.en_night
+               name: Ночь
+
+   
+        - type: light
+          entity: light.0x00158d000420dbab_light
+          name: Прихожая
+
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.mqtt_binary_sensor_158d000119378d
+             name: Входная дверь
+             icon: mdi:door
+           - entity: sensor.mqtt_binary_sensor_158d00013f7894
+             icon: mdi:run-fast
+             name: Прихожая
+
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.camphoto
+          - entity: timer.entrance
+          state_filter:
+            - "active"
+
+      - type: vertical-stack
+        cards:            
+            
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Коридор**
+ 
+        - type: glance
+          show_state: false
+          entities:
+             - entity: binary_sensor.0x00158d00010f8920_occupancy  
+               name: Движение
+             - entity: binary_sensor.cr_light_on
+               name: Автосвет
+             - entity: binary_sensor.cr_night
+               name: Ночь
+
+        - type: custom:stack-in-card
+          mode: horizontal
+          cards: 
+
+            - type: light
+              entity: light.yeelight_03_ceiling
+              name: Основной
+            - type: light
+              entity: light.yeelight_03_ceiling_ambilight
+              name: Амбилайт
+            - type: light
+              entity: light.yeelight_03_ceiling_nightlight
+              name: Ночник
+
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.mqtt_binary_sensor_158d00010f8920
+             icon: mdi:run-fast
+             name: Коридор
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.corridor
+          state_filter:
+            - "active"

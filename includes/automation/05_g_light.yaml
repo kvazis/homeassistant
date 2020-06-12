@@ -34,8 +34,8 @@
       entity_id: switch.0x00158d00015723f1_switch_right
     
 
-## Люстра 1 гостиная
-- alias: 05_gg_cell_1_light
+- id: Гостиная, люстра 1
+  alias: 05_gg_cell_1_light
   initial_state: true
   trigger:
 ## Главный выключатель без нуля
@@ -46,10 +46,10 @@
     - platform: state
       entity_id: sensor.0x00158d00027c0e2b_click
       to: 'left'
-## Квадратная кнопка на комоде
+## 3 кнопка Aqara Opple
     - platform: state
-      entity_id: sensor.0x00158d0001e8a244_click
-      to: 'single'
+      entity_id: sensor.0x04cf8cdf3c79360a_action
+      to: 'button_3_single'
 ## Переворот кубика на 180 градусов
     - platform: state
       entity_id: sensor.0x00158d0001186d82_action
@@ -72,14 +72,14 @@
           script.05_gg_650_1_off
           {%- endif -%}  
 
-## Люстра 2 гостиная
-- alias: 05_gg_cell_2_light
+- id: Гостиная, люстра 2
+  alias: 05_gg_cell_2_light
   initial_state: true
   trigger:
-## Квадратная кнопка  комоде
+## 4 кнопка Aqara Opple
     - platform: state
-      entity_id: sensor.0x00158d0001e8a244_click
-      to: 'double'
+      entity_id: sensor.0x04cf8cdf3c79360a_action
+      to: 'button_4_single'
 ## Выключатель на столе - правая кнопка
     - platform: state
       entity_id: sensor.0x00158d00027c0e2b_click
@@ -101,9 +101,27 @@
           {%- else -%}
           script.05_gg_650_2_off
           {%- endif -%}  
+          
+- id: Гостиная, настольная лампа
+  alias: lr_table_lamp
+  initial_state: true
+  trigger:
+## 1 кнопка Aqara Opple
+    - platform: state
+      entity_id: sensor.0x04cf8cdf3c79360a_action
+      to: 'button_1_single'
+  action:    
+    - service: script.turn_on
+      data_template:
+        entity_id: >-
+          {%- if states.light.yeelight_05_table.state == 'off' -%}
+          script.lr_table_lamp_on
+          {%- else -%}
+          script.lr_table_lamp_off
+          {%- endif -%}  
 
-## Полное освещение
-- alias: 05_gg_full_light
+- id: Гостиная, полное освещение
+  alias: 05_gg_full_light
   initial_state: true
   trigger:
 ## Подброс кубика
@@ -128,14 +146,14 @@
           script.05_gg_650_full_on
           {%- endif -%}  
 
-## Светильники на стене
-- alias: 05_gg_wall_light
+- id: Гостиная, светильники на стене
+  alias: 05_gg_wall_light
   initial_state: true
   trigger:
-## Круглая кнопка на комоде
+## 2 кнопка Aqara Opple
   - platform: state
-    entity_id: sensor.0x00158d0001531698_click
-    to: 'single'
+    entity_id: sensor.0x04cf8cdf3c79360a_action
+    to: 'button_2_single'
 ## Круглая кнопка в прихожей
   - platform: state
     entity_id: sensor.0x00158d00010b1963_click
@@ -156,14 +174,14 @@
     service: light.toggle
     entity_id: light.aqara_05_wall
     
-## Режим просмотра фильмов
-- alias: 05_gg_movie_light
+- id: Гостиная, подсветка для ТВ
+  alias: 05_gg_movie_light
   initial_state: true
   trigger:
-## Круглая кнопка на комоде
+## 6 кнопка Aqara Opple
   - platform: state
-    entity_id: sensor.0x00158d0001531698_click
-    to: 'long'
+    entity_id: sensor.0x04cf8cdf3c79360a_action
+    to: 'button_6_single'
 ## Выключатель на столе - правая кнопка х2
   - platform: state
     entity_id: sensor.0x00158d00027c0e2b_click
@@ -172,14 +190,14 @@
     - service: switch.toggle
       entity_id: switch.movie_mode
 
-## Управление телевизором        
-- alias: 05_tv_xiaomi55
+- id: Гостиная, управление ТВ      
+  alias: 05_tv_xiaomi55
   initial_state: true
   trigger:
-## Круглая кнопка на комоде
+## 5 кнопка Aqara Opple
   - platform: state
-    entity_id: sensor.0x00158d0001531698_click
-    to: 'double'
+    entity_id: sensor.0x04cf8cdf3c79360a_action
+    to: 'button_5_single'
 ## Двойной тап кубиком
   - platform: state
     entity_id: sensor.0x00158d0001186d82_action

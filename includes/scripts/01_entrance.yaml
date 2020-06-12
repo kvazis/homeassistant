@@ -10,6 +10,3 @@
            topic: "notification/messages"
            payload_template: '0100'
            retain: true
-
-
-                 

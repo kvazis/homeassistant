@@ -683,10 +683,44 @@ cards:
             - type: weather-forecast
               entity: weather.openweathermap
           
-            - type: custom:air-visual-card
-              air_pollution_level: sensor.u_s_air_pollution_level
-              air_quality_index: sensor.u_s_air_quality_index
-              main_pollutant: sensor.u_s_main_pollutant
+            # - type: custom:air-visual-card
+            #   air_pollution_level: sensor.u_s_air_pollution_level
+            #   air_quality_index: sensor.u_s_air_quality_index
+            #   main_pollutant: sensor.u_s_main_pollutant
+            
+            
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+       
+            - type: markdown
+              style: |
+                  ha-card {
+                    color: #B0E0E6;
+                    font-weight: bold;
+                    font-size: 16px;
+                  } 
+              content: >
+                  **CO2 > 1500 ppm**
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+                style: |
+                    ha-card {
+                      color: #B0E0E6;
+                      --paper-item-icon-color: #B0E0E6;
+                      --iron-icon-stroke-color: #B0E0E6;
+                      font-weight: bold;
+                      font-size: 14px;
+                    }
+              filter:
+                include:
+                 - entity_id: sensor.*co2*
+                exclude:
+                 - state: '< 1500'
+
 
         - type: custom:stack-in-card
           mode: vertical
@@ -719,18 +753,7 @@ cards:
                  - entity_id: sensor.*temperature*
                 exclude:
                  - entity_id: sensor.*battery*
-                 - entity_id: sensor.temperature_158d00015aebb6
-                 - entity_id: sensor.05_mi_air_temperature
-                 - entity_id: sensor.05_smartmi_temperature
-                 - entity_id: sensor.temperature_158d000156e92e
-                 - entity_id: sensor.dd_bt_temperature
-                 - entity_id: sensor.temperature_158d000159c7e6
-                 - entity_id: sensor.da_bt_temperature
-                 - entity_id: sensor.0x00158d0002d7bb2b_temperature
-                 - entity_id: sensor.0x00158d0001117040_temperature
-                 - entity_id: sensor.0x00158d00015723f1_temperature
-                 - entity_id: sensor.0x00158d00014dceb3_temperature
-                 - entity_id: sensor.dd_wd_n_2ch_temperature
+                 - entity_id: sensor.*_switch_temperature*
                  - state: '> 18'
                  - state: 'unknown'
                  - state: 'unavailable'
@@ -767,18 +790,7 @@ cards:
                  - entity_id: sensor.*temperature*
                 exclude:
                  - entity_id: sensor.*battery*
-                 - entity_id: sensor.temperature_158d00015aebb6
-                 - entity_id: sensor.05_mi_air_temperature
-                 - entity_id: sensor.05_smartmi_temperature
-                 - entity_id: sensor.temperature_158d000156e92e
-                 - entity_id: sensor.dd_bt_temperature
-                 - entity_id: sensor.temperature_158d000159c7e6
-                 - entity_id: sensor.da_bt_temperature
-                 - entity_id: sensor.0x00158d0002d7bb2b_temperature
-                 - entity_id: sensor.0x00158d0001117040_temperature
-                 - entity_id: sensor.0x00158d00015723f1_temperature
-                 - entity_id: sensor.0x00158d00014dceb3_temperature
-                 - entity_id: sensor.dd_wd_n_2ch_temperature
+                 - entity_id: sensor.*_switch_temperature*
                  - state: '< 26'
                  - state: 'unknown'
                  - state: 'unavailable'
@@ -895,7 +907,7 @@ cards:
                     }
               filter:
                 include:
-                 - entity_id: sensor.mi_m_*
+                 - entity_id: sensor.*moisture*
                 exclude:
                  - state: '> 20.0'
                  - state: 'unknown'

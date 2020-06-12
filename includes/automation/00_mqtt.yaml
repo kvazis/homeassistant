@@ -14,13 +14,15 @@
           {%- elif states.sensor.mqtt_command_code.state  == '002' -%}
           script.ilife_a4
           {%- elif states.sensor.mqtt_command_code.state  == '003' -%}
-          script.21_heater_mode_on
+          script.boiler_mode_on
           {%- elif states.sensor.mqtt_command_code.state  == '004' -%}
-          script.21_heater_mode_off
+          script.boiler_mode_off
           {%- elif states.sensor.mqtt_command_code.state  == '005' -%}
-          script.21_heater_manual_on
+          script.boiler_manual_on
           {%- elif states.sensor.mqtt_command_code.state  == '006' -%}
-          script.21_heater_manual_off
+          script.boiler_manual_off
+          {%- elif states.sensor.mqtt_command_code.state  == '007' -%}
+          script.vacancy
           {%- endif -%}
     - delay: 00:00:01
     - service: mqtt.publish

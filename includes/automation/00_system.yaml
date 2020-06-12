@@ -1,4 +1,5 @@
-- alias: 00_start
+- id: Запуск инстанса
+  alias: start
   initial_state: true
   trigger:
   - platform: homeassistant
@@ -14,6 +15,23 @@
       data_template:
          topic: "notification/info"
          payload_template: '012'
+         
+- id: Отключение термостатов
+  alias: check_thermodtate
+  initial_state: true
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition:
+  - condition: state
+    entity_id: binary_sensor.radiator
+    state: 'off'
+  action: 
+   - service: climate.turn_off
+     entity_id: 
+      - climate.living_heater
+      - climate.dd_heater
+      - climate.da_heater
 
 # - alias: 00_backup_everyday
 #   initial_state: true
@@ -25,5 +43,7 @@
 #       data:
 #           keep_days: 1
 #           repack: true
+
+
 
 

@@ -48,8 +48,9 @@ Google Light Theme:
   # Cards
   ha-card-border-radius: "10px"
   ha-card-box-shadow: 1px 1px 5px 0px rgb(230, 230, 230)
-  paper-card-background-color: "#FFFFFF"
-  paper-listbox-background-color: "#FFFFFF"
+  paper-dialog-background-color: "#FFFFFF"
+  paper-card-background-color: var(--paper-dialog-background-color)
+  paper-listbox-background-color: var(--paper-dialog-background-color)
   # Switches
   switch-checked-button-color: "#5F9BEA"
   switch-checked-track-color: "#75a2f0"

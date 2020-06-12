@@ -77,6 +77,10 @@
         payload: '{{(states.sensor.mqtt_power_month_158d0001d35bc0.state | float +
                     (states.sensor.load_158d0001d35bc0.state | float /120000))|round(5)}}'
         retain: true
+##### Розетка Heiman
+    - service: script.turn_on
+      entity_id: script.000d6f0014bb14b4_day
+    
 
 ##### ГОСТИНАЯ
 ##### wifi + 2 USB
@@ -287,6 +291,9 @@
         topic: "power/158d0001d35bc0/yesterday"
         payload: '{{(states.sensor.mqtt_power_today_158d0001d35bc0.state | float )|round(5)}}'
         retain: true 
+##### Розетка Heiman
+    - service: script.turn_on
+      entity_id: script.000d6f0014bb14b4_yesterday
 
 ##### ГОСТИНАЯ
 ##### wifi + 2 USB
@@ -535,6 +542,9 @@
         topic: "power/158d0001d35bc0/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_158d0001d35bc0.state | float )|round(5)}}'
         retain: true
+##### Розетка Heiman
+    - service: script.turn_on
+      entity_id: script.000d6f0014bb14b4_lastmonth
 
 ##### ГОСТИНАЯ
 ##### wifi + 2 USB

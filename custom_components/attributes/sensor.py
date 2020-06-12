@@ -77,9 +77,6 @@ def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
         if device_state is not None:
             device_friendly_name = device_state.attributes.get('friendly_name')
         else:
-            device_friendly_name = None
-
-        if device_friendly_name is None:
             device_friendly_name = device.split(".", 1)[1]
 
         friendly_name = config.get(ATTR_FRIENDLY_NAME, device_friendly_name)
@@ -222,16 +219,16 @@ class AttributeSensor(RestoreEntity):
         if entity_state is not None:
             device_friendly_name = entity_state.attributes.get('friendly_name')
         else:
-            device_friendly_name = None
-
-        if device_friendly_name is not None:
             self._name = device_friendly_name
 
         try:
             self._state = self._template.async_render()
         except TemplateError as ex:
-            if ex.args and ex.args[0].startswith(
-                    "UndefinedError: 'None' has no attribute"):
+            if ex.args and (
+                    ex.args[0].startswith(
+                        "UndefinedError: 'None' has no attribute") or
+                    ex.args[0].startswith(
+                        "UndefinedError: 'mappingproxy object' has no attribute")):
                 # Common during HA startup - so just a warning
                 _LOGGER.warning('Could not render attribute sensor for %s,'
                                 ' the state is unknown.', self._entity)
@@ -244,8 +241,11 @@ class AttributeSensor(RestoreEntity):
             try:
                 self._icon = self._icon_template.async_render()
             except TemplateError as ex:
-                if ex.args and ex.args[0].startswith(
-                        "UndefinedError: 'None' has no attribute"):
+                if ex.args and (
+                        ex.args[0].startswith(
+                            "UndefinedError: 'None' has no attribute") or
+                        ex.args[0].startswith(
+                            "UndefinedError: 'mappingproxy object' has no attribute")):
                     # Common during HA startup - so just a warning
                     _LOGGER.warning('Could not render icon template %s,'
                                     ' the state is unknown.', self._name)

@@ -1,13 +1,13 @@
-  - platform: mitemp_bt
-    rounding: True
-    decimals: 2
-    period: 60
-    log_spikes: False
-    use_median: False
-    active_scan: True
-    hci_interface:
-                  - 0
-                  - 1
+#   - platform: mitemp_bt
+#     rounding: True
+#     decimals: 2
+#     period: 60
+#     log_spikes: False
+#     use_median: False
+#     active_scan: True
+#     hci_interface:
+#                   - 0
+#                   - 1
     
   - platform: min_max
     name: best_alex_rssi

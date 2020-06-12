@@ -94,12 +94,4 @@
     entity_ids:
       - sensor.0x00158d000159c7e6_temperature
       - sensor.da_bt_temperature
-
-      
-# Аverage humidity
-  - platform: min_max
-    name: 08_mean_humidity
-    type: mean
-    entity_ids:
-      - sensor.0x00158d000159c7e6_humidity
-      - sensor.da_bt_humidity
+      - sensor.mijia_air_temperature

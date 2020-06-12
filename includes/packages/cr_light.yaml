@@ -1,0 +1,212 @@
+cr_light:
+
+    binary_sensor:
+    
+      - platform: tod
+        name: cr_night
+        after: '22:00'
+        before: '08:00'
+        
+    # Сенсор автоотключения света 
+      - platform: template
+        sensors:
+        
+          cr_light_on:
+            friendly_name: "Свет в коридоре"
+            value_template: >-
+              {{ is_state('light.yeelight_03_ceiling', 'on')  
+                 and is_state('binary_sensor.0x00158d00010f8920_occupancy', 'off')  }}
+            icon_template: >-
+              {% if is_state("binary_sensor.cr_light_on", "on") %}
+              mdi:timer
+              {% else %}
+              mdi:timer-off
+              {% endif %}
+
+    timer:
+    
+        corridor:
+          name: Свет в коридоре отключится через - 
+          duration: '00:03:00'
+          
+    automation:
+    
+        - id: Коридор, включение освещения
+          alias: 03_corr_light_on
+          initial_state: true
+          trigger:
+        ## Выключатель на входе
+          - platform: state
+            entity_id: sensor.0x00158d0001718ca8_click
+            to: 'left'
+        ## Кнопка в шкафу
+          - platform: state
+            entity_id: sensor.0x00158d0001f3fefe_click
+            to: 'single'
+        ## Квадратная кнопка на кухне
+          - platform: state
+            entity_id: sensor.0x00158d0001a672ef_click
+            to: 'double'
+          condition:
+            - condition: state
+              entity_id: light.yeelight_03_ceiling
+              state: 'off'
+          action: 
+            - service: light.turn_on
+              entity_id:
+                - light.yeelight_03_ceiling
+              data_template:
+                brightness_pct: 75
+                kelvin: 4000
+                
+        - id: Коридор, освещение по датчику вибрации
+          alias: 03_corr_light_on_vibro
+          initial_state: true
+          trigger:
+        ## Квадратная датчик вибрации
+            - platform: state
+              entity_id: sensor.0x00158d0002a4f77e_action
+              to: 'vibration'
+          condition:
+            - condition: state
+              entity_id: light.yeelight_03_ceiling
+              state: 'off'
+            - condition: state
+              entity_id: binary_sensor.0x00158d00010f8920_occupancy
+              state: 'on'
+            - condition: state
+              entity_id: binary_sensor.cr_night
+              state: 'off'
+          action:
+            - service: light.turn_on
+              entity_id:
+                - light.yeelight_03_ceiling
+              data_template:
+                brightness_pct: 75
+                kelvin: 4000
+            - delay: 00:00:15
+            - service: light.turn_off
+              entity_id:
+                - light.yeelight_03_ceiling
+                
+        - id: Коридор, ночная подсветка
+          alias: 03_corr_light_night
+          initial_state: true
+          trigger:
+        ## Сенсор движения
+            - platform: state
+              entity_id: binary_sensor.0x00158d00010f8920_occupancy
+              to: 'on'
+          condition:
+            - condition: state
+              entity_id: light.yeelight_03_ceiling
+              state: 'off'
+            - condition: state
+              entity_id: binary_sensor.cr_night
+              state: 'on'
+          action:
+            - service: light.turn_on
+              entity_id: light.yeelight_03_ceiling_ambilight
+              data_template:
+                 brightness_pct: 50
+                 rgb_color: [0, 100, 255]
+            - delay: 00:00:10
+            - service: light.turn_off
+              entity_id: light.yeelight_03_ceiling_ambilight
+
+                
+        - id: Коридор, выключение освещения
+          alias: 03_corr_light_off
+          initial_state: true
+          trigger:
+        ## Таймер выключился
+          - platform: event
+            event_type: timer.finished
+            event_data:
+              entity_id: timer.corridor
+        ## Выключатель на входе
+          - platform: state
+            entity_id: sensor.0x00158d0001718ca8_click
+            to: 'left'
+        ## Кнопка в шкафу
+          - platform: state
+            entity_id: sensor.0x00158d0001f3fefe_click
+            to: 'single'
+        ## Квадратная кнопка на кухне
+          - platform: state
+            entity_id: sensor.0x00158d0001a672ef_click
+            to: 'double'
+          condition:
+            - condition: state
+              entity_id: light.yeelight_03_ceiling
+              state: 'on'
+          action: 
+            - service: light.turn_off
+              entity_id:
+                - light.yeelight_03_ceiling
+                
+        - id: Коридор и прихожая, управление освещением
+          alias: 03_corr_entr
+          initial_state: true
+          trigger:
+        ## Нажатие на две кнопки одновременно
+          - platform: state
+            entity_id: sensor.0x00158d00013fc3bc_click
+            to: 'both'
+          action: 
+          - service: script.turn_on
+            data_template:
+             entity_id: >-
+                {%- if states.light.yeelight_03_ceiling.state == 'off' and states('light.0x00158d000420dbab_light')  == 'off' -%}
+                script.01_enter_on
+                {%- elif states.light.yeelight_03_ceiling.state == 'off' and states('light.0x00158d000420dbab_light')  == 'on' and (as_timestamp (now()) -as_timestamp(states['light.0x00158d000420dbab_light'].last_changed)|int <= 15) -%}
+                script.03_corr_on
+                {%- elif states.light.yeelight_03_ceiling.state == 'on' and states('light.0x00158d000420dbab_light')  == 'on' -%}
+                script.01_enter_off, script.03_corr_off
+                {%- elif states.light.yeelight_03_ceiling.state == 'off' and states('light.0x00158d000420dbab_light')  == 'on' and (as_timestamp (now()) -as_timestamp(states['light.0x00158d000420dbab_light'].last_changed)|int > 15) -%}
+                script.01_enter_off
+                {%- elif states.light.yeelight_03_ceiling.state == 'on' and states('light.0x00158d000420dbab_light')  == 'off' -%}
+                script.03_corr_off
+                {%- endif -%}  
+                
+        - id: Коридор, запуск таймера освещения
+          alias: 03_enter_light_timer_on
+          initial_state: true
+          trigger:
+          ## Сенсор автоотключения света включается
+          - platform: state
+            entity_id: binary_sensor.cr_light_on
+            to: 'on'
+          action:
+          - service: timer.start
+            entity_id: timer.corridor
+            
+        - id: Коридор, отключение таймера освещения
+          alias: 03_enter_light_timer_off
+          initial_state: true
+          trigger:
+        ## Сенсор автоотключения света выключается
+          - platform: state
+            entity_id: binary_sensor.cr_light_on
+            to: 'off'
+          action:
+          - service: timer.cancel
+            entity_id: timer.corridor
+          
+    script:
+          03_corr_on:
+            alias: Включение люстры в коридоре
+            sequence:
+              - service: light.turn_on
+                entity_id:
+                  -  light.yeelight_03_ceiling
+                data_template:
+                  brightness_pct: 80
+                  kelvin: 4000
+                  
+          03_corr_off:
+            alias: Выключение люстры в коридоре
+            sequence:
+              - service: light.turn_off
+                entity_id:
+                  -  light.yeelight_03_ceiling

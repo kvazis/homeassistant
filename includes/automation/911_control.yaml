@@ -20,7 +20,7 @@
   action:
     - service: notify.telegram
       data:
-        message: "Потеря связи с MQTT сервером, Khadas VIM 2 - {{ states('sensor.time_date') }} ."
+        message: "Потеря связи с MQTT сервером - {{ states('sensor.time_date') }} ."
 
 - alias: 911_mqtt_online
   initial_state: true
@@ -31,7 +31,7 @@
   action:
     - service: notify.telegram
       data:
-        message: "Связь с MQTT сервером, Khadas VIM 2 восстановлена в - {{ states('sensor.time_date') }} ."
+        message: "Связь с MQTT сервером восстановлена в - {{ states('sensor.time_date') }} ."
         
 - alias: 911_rasp3_lost
   initial_state: true

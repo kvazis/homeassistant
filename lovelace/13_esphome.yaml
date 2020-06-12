@@ -19,27 +19,6 @@ cards:
           cards: 
           - type: markdown
             content: >
-               **Прихожая - Sonoff Basic - питание лампы**
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: sensor.02_sonoff_basic_uptime_custom
-            - entity: sensor.02_sonoff_basic_wifi_signal
-              name: Сигнал wi-fi
-            - entity: sensor.02_sonoff_basic_firmware_version
-              name: Прошивка
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.02_sonoff_basic_relay
-              name: Питание
-              tap_action: toggle
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards: 
-          - type: markdown
-            content: >
                **Туалет - Sonoff mini - подсветка зеркала**
           - type: entities
             show_header_toggle: false

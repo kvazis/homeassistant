@@ -1,0 +1,131 @@
+dd_humidification:
+
+    binary_sensor:
+    
+      - platform: mqtt
+        name: dd_hum_mode
+        state_topic: "states/dd_hum"
+        payload_on: "ON"
+        payload_off: "OFF"
+    
+
+    # Условия для включения увлажнения
+      - platform: template
+        sensors:
+          dd_hum:
+            friendly_name: "Режим увлажнения, Детская Д -"
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d0001193697_contact', 'off')  
+                 and is_state('binary_sensor.0x00158d00015843d4_contact', 'off')
+                 and is_state('binary_sensor.dd_hum_mode', 'on')
+                 and is_state('light.xiaomi_07_table', 'off')
+                 and is_state('binary_sensor.humidification', 'on') 
+                 and is_state('sensor.dd_day_work', 'Включен') }}
+            icon_template: >-
+              {% if is_state("binary_sensor.dd_hum", "on") %}
+              mdi:water-percent
+              {% else %}
+              mdi:air-humidifier
+              {% endif %}
+              
+    sensor:
+    
+    # Аverage humidity
+      - platform: min_max
+        name: 07_mean_humidity
+        type: mean
+        entity_ids:
+          - sensor.0x00158d000156e92e_humidity
+          - sensor.dd_bt_humidity
+              
+    input_number:
+
+      humidity_level_dd:
+        name: Уровень влажности детская Д
+        initial: 50
+        min: 30
+        max: 60
+        step: 1
+              
+    switch:
+    
+      - platform: template
+        switches:
+          dd_hum_mode:
+            friendly_name: "Детская Д, режим увлажнения воздуха"
+            value_template: "{{  is_state('binary_sensor.dd_hum_mode', 'on') }}"
+            turn_on:
+              service: mqtt.publish
+              data_template:
+                topic: "states/dd_hum"
+                payload_template: 'ON'
+                retain: true 
+            turn_off:
+              service: mqtt.publish
+              data_template:
+                topic: "states/dd_hum"
+                payload_template: 'OFF'
+                retain: true 
+            icon_template: >-
+                mdi:air-humidifier
+                
+    automation:
+            
+    - alias: 07_dd_hum_auto
+      id: 'Увлажнение в детской Д'
+      initial_state: true
+      trigger:
+        - platform: homeassistant
+          event: start
+        - platform: state
+          entity_id:
+            - input_number.humidity_level_dd
+            - sensor.07_mean_humidity
+            - binary_sensor.dd_hum
+      action:
+        service_template: >-
+          {% set hi = (states('input_number.humidity_level_dd') | float) + 5 %}
+          {% set lo = (states('input_number.humidity_level_dd') | float) - 5 %}
+          {% set humidity = states('sensor.07_mean_humidity') | float %}
+          {% if humidity > hi %}
+            switch.turn_off
+          {% elif states.binary_sensor.dd_hum.state == 'off' %} 
+            switch.turn_off
+          {% elif humidity < lo and states.binary_sensor.dd_hum.state == 'on' %}
+            switch.turn_on
+          {% else %}
+            switch.turn_{{states('switch.0x00158d0001a2ccab_switch_left') | lower}}
+          {% endif %}
+        entity_id: switch.0x00158d0001a2ccab_switch_left
+        
+    ## Предупреждение о недостатке воды
+    - alias: 07_dd_hum_water_warning
+      initial_state: true
+    #   initial_state: false
+      trigger:
+    ## Падение мощности менее 10 Ватт
+       - platform: numeric_state
+         entity_id: sensor.0x00158d0001a2ccab_power
+         below: 10
+         for:
+           minutes: 1
+      condition:
+    ## Увлажнитель включен
+         - condition: state
+           entity_id: switch.0x00158d0001a2ccab_switch_left
+           state: 'on'
+    ## Время работы
+         - condition: state
+           entity_id: binary_sensor.dd_hum
+           state: 'on'
+      action:
+        - service: mqtt.publish
+          data_template:
+            topic: "notification/messages"
+            payload_template: '0700'
+            retain: true
+        - service: xiaomi_aqara.play_ringtone
+          data:
+            gw_mac: 28:6C:07:F0:AD:27
+            ringtone_id: 10011
+            ringtone_vol: 50

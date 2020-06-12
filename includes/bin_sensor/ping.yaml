@@ -1,4 +1,16 @@
 - platform: ping
+  host: 192.168.0.1
+  name: asus_main
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.208
+  name: asus_mesh
+  count: 2
+  scan_interval: 30
+
+- platform: ping
   host: 192.168.0.20
   name: notebook_acer
   count: 2
@@ -42,7 +54,7 @@
   
 - platform: ping
   host: 192.168.0.71
-  name: hainst_mqtt
+  name: hainst_reserve
   count: 2
   scan_interval: 30
   
@@ -51,9 +63,9 @@
   name: hainst_education
   count: 2
   scan_interval: 30
-
+  
 - platform: ping
-  host: 192.168.0.74
+  host: 192.168.0.73
   name: hainst_test
   count: 2
   scan_interval: 30

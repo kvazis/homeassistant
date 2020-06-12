@@ -5,10 +5,25 @@
          - light.yeelight_05_ceiling1
          - light.yeelight_05_ceiling2
          - light.aqara_05_wall
-         - light.philips_05_bedside
-         - light.yeelight_05_bedside
+         - light.yeelight_05_table
+         - light.yeelight_05_bedside2
          - light.yeelight_05_rgbtvbulb
          - light.gateway_light_34ce0088b039
+         
+  lr_table_lamp_on:
+    sequence:
+      - service: light.turn_on
+        entity_id:
+          - light.yeelight_05_table
+        data_template:
+          brightness_pct: 100 
+          kelvin: 4000
+
+  lr_table_lamp_off:
+    sequence:
+      - service: light.turn_off
+        entity_id:
+          - light.yeelight_05_table
 
 
   05_gg_650_1_on:

@@ -1,4 +1,4 @@
-title: Home Assistant - Raspberry Pi 3 B+ 70 Основной сервер
+title: Home Assistant - Raspberry Pi 4 B, 4 GB 70 Основной сервер
 views:
   - !include lovelace/01_system.yaml
   - !include lovelace/02_control.yaml
@@ -7,6 +7,7 @@ views:
   - !include lovelace/05_power.yaml
   - !include lovelace/06_hikvision.yaml
   - !include lovelace/07_camera.yaml
+  - !include lovelace/08_enter.yaml
   - !include lovelace/08_ectlb.yaml
   - !include lovelace/09_kitchen.yaml
   - !include lovelace/10_living.yaml

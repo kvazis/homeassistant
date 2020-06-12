@@ -274,6 +274,59 @@ cards:
                - entity: sensor.money_lastmonth_158d0001d35bc0
                  name: Месяц
                  icon: mdi:cash
+                 
+        - type: markdown
+          content: >
+              ## Микроволновка
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+
+           - type: custom:mini-graph-card
+             entities:
+              - entity: sensor.0x000d6f0014bb14b4_power
+                name: Потребление
+                color: "#FFFF00"
+             show:
+                graph: bar   
+
+           - type: horizontal-stack
+             cards:
+             - type: markdown
+               content: >
+                  **Текущий** 
+             - type: markdown
+               content: >
+                  **Прошедший** 
+           - type: horizontal-stack
+             cards:  
+             
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.000d6f0014bb14b4_power_today
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.000d6f0014bb14b4_power_month
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.000d6f0014bb14b4_money_month
+                 name: Месяц
+                 icon: mdi:cash
+
+             - type: entities
+               show_header_toggle: false
+               entities:
+               - entity: sensor.000d6f0014bb14b4_power_yesterday
+                 name: День
+                 icon: mdi:counter
+               - entity: sensor.000d6f0014bb14b4_power_lastmonth
+                 name: Месяц
+                 icon: mdi:counter
+               - entity: sensor.000d6f0014bb14b4_money_lastmonth
+                 name: Месяц
+                 icon: mdi:cash                 
 
 
 

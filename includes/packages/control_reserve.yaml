@@ -3,7 +3,7 @@ control_reserve:
     sensor:
     
         - platform: rest
-          resource: http://192.168.0.73:8123/api/states/group.scenario
+          resource: http://192.168.0.71:8123/api/states/group.scenario
           name: reserve_scenario_group
           force_update: true
           headers: 
@@ -12,7 +12,7 @@ control_reserve:
           value_template: '{{ value_json.state }}'
           
         - platform: rest
-          resource: http://192.168.0.73:8123/api/states/sensor.online_custom
+          resource: http://192.168.0.71:8123/api/states/sensor.online_custom
           name: reserve_state
           force_update: true
           headers: 

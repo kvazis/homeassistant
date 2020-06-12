@@ -178,10 +178,9 @@
   initial_state: true
   trigger:
 ## Движение в кухне
-  - platform: event
-    event_type: xiaomi_aqara.motion
-    event_data:
-      entity_id: binary_sensor.motion_sensor_158d0001e16204
+  - platform: state
+    entity_id: binary_sensor.0x00158d0001e16204_occupancy
+    to: 'on'
   action: 
   - service: mqtt.publish
     data_template:

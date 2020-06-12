@@ -203,6 +203,9 @@ cards:
         - type: glance
           show_state: false
           entities:
+           - entity: light.dd_balcony
+             tap_action:
+                action: toggle
            - entity: binary_sensor.0x00158d00015843d4_contact
              name: Дверь на балкон
            - entity: binary_sensor.0x00158d0001a65b68_contact

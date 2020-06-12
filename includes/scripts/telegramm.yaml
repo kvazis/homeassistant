@@ -29,3 +29,8 @@
              {{"\U0001F50C"}} недоступно - {{ states('sensor.unavailable_now_switch') }} 
              Сенсоров недоступно - {{ states('sensor.unavailable_now_sensor') }} 
              Бинарных сенсоров недоступно - {{ states('sensor.unavailable_now_binary_sensor') }} 
+             
+  vacancy:
+    sequence:
+     - service: switch.toggle
+       entity_id: switch.vacancy

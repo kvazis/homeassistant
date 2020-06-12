@@ -15,6 +15,10 @@ light.gateway_light_286c07f0ad27:
 light.xiaomi_07_table:
   friendly_name: Детская Д, настольная лампа
   icon: mdi:desk-lamp
+  
+light.dd_balcony:
+  friendly_name: Детская Д, балкон
+  icon: mdi:ceiling-light
 
 ## Реле
 switch.0x00158d0001a2ccab_switch_left:
@@ -154,5 +158,3 @@ sensor.0x00158d0001a65b68_battery:
   friendly_name: Детская Д, балкон окно
 sensor.0x00158d00015843d4_battery:
   friendly_name: Детская Д, балкон дверь
-
- 

@@ -1,7 +1,3 @@
-  heater:
-    name: Бойлер выкл через -
-    duration: '01:00:00'
-
   camphoto:
     name: Фото на входе через - 
     duration: '00:03:00'
@@ -21,4 +17,8 @@
   kitchen:
     name: Кухня свет выкл через -
     duration: '00:30:00'
+    
+  lr_silent:
+    name: Гостиная, режим тишины выкл через -
+    duration: '01:00:00'
 

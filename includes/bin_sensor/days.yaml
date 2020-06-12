@@ -1,0 +1,17 @@
+  - platform: workday
+    country: UA
+    
+  - platform: template
+    sensors:
+    
+      hd_global:
+        friendly_name: "Выходной день"
+        value_template: >-
+          {{ is_state('binary_sensor.holiday', 'on')  
+             or is_state('binary_sensor.workday_sensor', 'off')  }}
+        icon_template: >-
+          {% if is_state("binary_sensor.hd_global", "on") %}
+          mdi:calendar-star
+          {% else %}
+          mdi:calendar
+          {% endif %}

@@ -12,7 +12,35 @@ cards:
                 font-size: 26px;
               }          
           content: >
-              **Загрузка канала**
+              **Ядро сети**
+              
+        - type: custom:logbook-card
+          entity: binary_sensor.asus_main
+          max_items: 5
+          title: Основной роутер Asus RT-AC88U
+          duration_labels:
+            second:  '${value} секунда'
+            seconds: '${value} секунд'
+            minute:  '${value} минута'
+            minutes: '${value} минут'
+            hour:    '${value} час'
+            hours:   '${value} часов'
+            day:     '${value} день'
+            days:    '${value} дней'
+            
+        - type: custom:logbook-card
+          entity: binary_sensor.asus_mesh
+          max_items: 5
+          title: Mesh роутер Asus RT-AC66U B1
+          duration_labels:
+            second:  '${value} секунда'
+            seconds: '${value} секунд'
+            minute:  '${value} минута'
+            minutes: '${value} минут'
+            hour:    '${value} час'
+            hours:   '${value} часов'
+            day:     '${value} день'
+            days:    '${value} дней'
 
         - type: custom:stack-in-card
           mode: horizontal
@@ -43,7 +71,7 @@ cards:
            - entity: sensor.asuswrt_upload
              name: Отправлено сегодня - 
              icon: mdi:upload
-
+             
     - type: vertical-stack
       cards:
 

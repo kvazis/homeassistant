@@ -21,11 +21,19 @@ switch.0x00158d00015751f4_switch:
   icon: mdi:hot-tub
 
 ## Сенсоры 
+sensor.bt_lywsd02_humidity:
+  friendly_name: Ванная влажность BLE
+  icon: mdi:water-percent
+sensor.bt_lywsd02_temperature:
+  friendly_name: Ванная температура BLE
+  icon: mdi:temperature-celsius
+
+
 sensor.0x00158d0001e547a3_illuminance:
-  friendly_name: Ванная, освещенность
+  friendly_name: Ванная освещенность
 
 sensor.0x00158d0001dcd47e_humidity:
-  friendly_name: Ванная, влажность
+  friendly_name: Ванная влажность
   icon: mdi:water-percent
 sensor.0x00158d0001dcd47e_temperature:
   friendly_name: Ванная температура
@@ -36,7 +44,7 @@ sensor.0x00158d000238a140_click:
 
 #Бинарные сенсоры
 binary_sensor.0x00158d0001e547a3_occupancy:
-  friendly_name: Ванная, движение
+  friendly_name: Ванная движение
 
 binary_sensor.0x00158d0001bb60c2_water_leak:
   friendly_name: Ванная протечка душевая

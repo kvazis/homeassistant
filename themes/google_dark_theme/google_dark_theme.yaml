@@ -49,8 +49,9 @@ Google Dark Theme:
   # Cards
   ha-card-border-radius: "10px"
   ha-card-box-shadow: 1px 1px 5px 0px rgb(12, 12, 14)
-  paper-card-background-color: "#202124"
-  paper-listbox-background-color: "#202124"
+  paper-dialog-background-color: "#202124"
+  paper-card-background-color: var(--paper-dialog-background-color)
+  paper-listbox-background-color: var(--paper-dialog-background-color)
   # Switches
   switch-checked-button-color: "#5F9BEA"
   switch-checked-track-color: "#404D64"

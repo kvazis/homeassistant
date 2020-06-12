@@ -1,101 +1,40 @@
 ##################  ECTLB
-title: ПКТПВ
-icon: mdi:exit-run
+title: Санузлы, прачечная
+icon: mdi:toilet
 cards:
 
       - type: vertical-stack
         cards:
 
-
         - type: markdown
           style: |
               ha-card {
                 font-size: 26px;
               }   
           content: >
-              **Прихожая, коридор**
- 
-        - type: glance
-          show_state: false
-          entities:
-             - entity: binary_sensor.0x00158d000149d28b_smoke
-               name: Датчик дыма
-             - entity: binary_sensor.0x00158d000119378d_contact
-               name: Входная дверь
-             - entity: binary_sensor.0x00158d00013f7894_occupancy
-               name: Прихожая   
-             - entity: binary_sensor.en_light_on
-               name: Свет в прихожей
-             - entity: binary_sensor.0x00158d00010f8920_occupancy  
-               name: Коридор
-
-        - type: custom:stack-in-card
-          mode: horizontal
-          cards:        
-            - type: light
-              entity: light.0x00158d000420dbab_light
-              name: Прихожая
-            - type: light
-              entity: light.yeelight_03_ceiling
-              name: Коридор
-
-
-        - type: glance
-          show_state: true
-          entities:
-           - entity: sensor.mqtt_binary_sensor_158d000119378d
-             name: Входная дверь
-             icon: mdi:door
-           - entity: sensor.mqtt_binary_sensor_158d00013f7894
-             icon: mdi:run-fast
-             name: Прихожая
-           - entity: sensor.mqtt_binary_sensor_158d00010f8920
-             icon: mdi:run-fast
-             name: Коридор
-
-        - type: entity-filter
-          show_header_toggle: false
-          entities:
-          - entity: timer.camphoto
-          - entity: timer.entrance
-          - entity: timer.corridor
-          state_filter:
-            - "active"
-
-      - type: vertical-stack
-        cards:
-
-        - type: markdown
-          style: |
-              ha-card {
-                font-size: 26px;
-              }   
-          content: >
-              **Туалет, прачечная**
+              **Туалет**
 
         - type: glance
           show_state: false
           entities:
            - entity: binary_sensor.0x00158d0001a24e71_occupancy
-             name: Туалет движение
+             name: Движение
            - entity: binary_sensor.tt_light_timer
              name: Автосвет
-           - entity: binary_sensor.0x00158d0001ab3350_occupancy
-             name: Прачечная движение
-           - entity: binary_sensor.0x00158d0002705b7b_water_leak
-             name: Прачечная протечка
-
 
         - type: custom:stack-in-card
           mode: horizontal
-          cards:        
+          cards:  
+          
             - type: light
               entity: light.yeelight_02_ceiling
-              name: Туалет
-            - type: button
-              entity: light.aqara_02_ceiling
-              name: Прачечная
-              icon: mdi:ceiling-light
+              name: Люстра
+
+            - type: light
+              entity: light.sonoff_02_mirror
+              name: Зеркало
+              icon: mdi:mirror
+
 
         - type: glance
           show_state: true
@@ -105,36 +44,17 @@ cards:
            - entity: sensor.mqtt_binary_sensor_158d0001a24e71
              icon: mdi:run-fast
              name: Туалет
-           - entity: sensor.mqtt_binary_sensor_158d0001ab3350
-             icon: mdi:run-fast
-             name: Прачечная
+
 
         - type: custom:stack-in-card
           mode: horizontal
           cards:        
-            - type: button
-              entity: light.sonoff_02_mirror
-              name: Подсветка
             - type: button
               entity: switch.0x00158d00014dceb3_switch_right
               name: Вентилятор
             - type: button
               entity: switch.0x00158d00014dceb3_switch_left
               name: Питание люстра
-
-        - type: custom:stack-in-card
-          mode: horizontal
-          cards:        
-            - type: button
-              entity: switch.bwshp2_relay
-              name: Стиральная машина
-              icon: mdi:washing-machine
-            - type: glance
-              show_state: true
-              entities:
-               - entity: sensor.load_bwshp2
-                 name: Потребление
-
 
         - type: entity-filter
           show_header_toggle: false
@@ -144,7 +64,52 @@ cards:
           state_filter:
             - "active"
 
-            
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Прачечная**
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.0x00158d0001ab3350_occupancy
+             name: Движение
+           - entity: binary_sensor.0x00158d0002705b7b_water_leak
+             name: Стиралка протечка
+
+        - type: custom:stack-in-card
+          mode: horizontal
+          cards: 
+          
+            - type: light
+              entity: light.aqara_02_ceiling
+              name: Свет
+              icon: mdi:ceiling-light
+          
+            - type: button
+              entity: switch.bwshp2_relay
+              name: Стиральная машина
+              icon: mdi:washing-machine
+
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.load_bwshp2
+             name: Стиралка потребление
+             icon: mdi:flash
+           - entity: sensor.bwshp2_voltage
+             name: Стиралка напряжение
+           - entity: sensor.mqtt_binary_sensor_158d0001ab3350
+             icon: mdi:run-fast
+             name: Прачечная
+           
+
       - type: vertical-stack
         cards:
 
@@ -169,16 +134,23 @@ cards:
              name: Душевая
            - entity: binary_sensor.0x00158d0001d72fa2_water_leak
              name: Раковина
+             
+        - type: custom:stack-in-card
+          mode: horizontal
+          cards: 
 
-        - type: light
-          entity: light.yeelight_06_ceiling
+            - type: light
+              entity: light.yeelight_06_ceiling
+            - type: button
+              entity: switch.0x00158d00015751f4_switch
+              name: Бойлер
 
         - type: glance
           show_state: true
           entities:
            - entity: sensor.load_158d00015751f4
              name: Бойлер потребление
-           - entity: sensor.bt_heater_voltage
+           - entity: sensor.0x00158d00015751f4_voltage
              name: Бойлер напряжение
            - entity: sensor.mqtt_binary_sensor_158d0001e547a3
              icon: mdi:run-fast
@@ -187,9 +159,6 @@ cards:
         - type: custom:stack-in-card
           mode: horizontal
           cards: 
-            - type: button
-              entity: switch.0x00158d00015751f4_switch
-              name: Бойлер
             - type: button
               entity: switch.0x00158d0001117040_switch_left
               name: Вентилятор

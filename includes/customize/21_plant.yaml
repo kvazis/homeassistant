@@ -1,42 +1,42 @@
 ## Растения
-sensor.mi_m_c47c8d6a0ef3:
+sensor.dieffenbac_moisture:
   friendly_name: Диффенбахия влажность почвы
-sensor.mi_c_c47c8d6a0ef3:
+sensor.dieffenbac_conductivity:
   friendly_name: Диффенбахия фертильность почвы
-sensor.mi_t_c47c8d6a0ef3:
+sensor.dieffenbac_temperature:
   friendly_name: Диффенбахия температура
   icon: mdi:temperature-celsius
-sensor.mi_l_c47c8d6a0ef3:
+sensor.dieffenbac_illuminance:
   friendly_name: Диффенбахия уровень освещенности
 
-sensor.mi_m_c47c8d628a8a:
+sensor.yucca_moisture:
   friendly_name: Юкка влажность почвы
-sensor.mi_c_c47c8d628a8a:
+sensor.yucca_conductivity:
   friendly_name: Юкка фертильность почвы
-sensor.mi_t_c47c8d628a8a:
+sensor.yucca_temperature:
   friendly_name: Юкка температура
   icon: mdi:temperature-celsius
-sensor.mi_l_c47c8d628a8a:
+sensor.yucca_illuminance:
   friendly_name: Юкка уровень освещенности
 
-sensor.mi_m_80eaca88b765:
+sensor.zamiokulkas_moisture:
   friendly_name: Замиокулькас влажность почвы
-sensor.mi_c_80eaca88b765:
+sensor.zamiokulkas_conductivity:
   friendly_name: Замиокулькас фертильность почвы
-sensor.mi_t_80eaca88b765:
+sensor.zamiokulkas_temperature:
   friendly_name: Замиокулькас температура
   icon: mdi:temperature-celsius
-sensor.mi_l_80eaca88b765:
+sensor.zamiokulkas_illuminance:
   friendly_name: Замиокулькас уровень освещенности
 
-sensor.mi_m_c47c8d6d1cf9:
+sensor.deep_purple_moisture:
   friendly_name: Deep Purple влажность почвы
-sensor.mi_c_c47c8d6d1cf9:
+sensor.deep_purple_conductivity:
   friendly_name: Deep Purple фертильность почвы
   
-sensor.mi_m_c47c8d6d2c7e:
+sensor.true_blue_moisture:
   friendly_name: True Blue влажность почвы
-sensor.mi_c_c47c8d6d2c7e:
+sensor.true_blue_conductivity:
   friendly_name: True Blue фертильность почвы
 
 plant.dieffenbac_ble:

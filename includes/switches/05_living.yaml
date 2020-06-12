@@ -73,19 +73,23 @@
         friendly_name: "Режим тишины, Гостиная -"
         value_template: "{{  is_state('binary_sensor.silent_mode', 'on') }}"
         turn_on:
-          service: mqtt.publish
-          data_template:
-            topic: "states/silent_mode"
-            payload_template: 'ON'
-            retain: true 
+          - service: mqtt.publish
+            data_template:
+              topic: "states/silent_mode"
+              payload_template: 'ON'
+              retain: true
+          - service: timer.start
+            entity_id: timer.lr_silent
         turn_off:
-          service: mqtt.publish
-          data_template:
-            topic: "states/silent_mode"
-            payload_template: 'OFF'
-            retain: true 
+          - service: mqtt.publish
+            data_template:
+              topic: "states/silent_mode"
+              payload_template: 'OFF'
+              retain: true
+          - service: timer.cancel
+            entity_id: timer.lr_silent
         icon_template: >-
-            mdi:account-switch
+            mdi:volume-off
 
       tv_xiaomi_55:
         friendly_name: "ТВ Xiaomi 55"

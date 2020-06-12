@@ -362,7 +362,7 @@ cards:
                     left: 30%
                     
                 - type: state-icon
-                  entity: binary_sensor.water_leak_sensor_158d0001bbeba6
+                  entity: binary_sensor.0x00158d0001bbeba6_water_leak
                   style:
                      top: 30%
                      left: 15% 
@@ -682,6 +682,14 @@ cards:
                   style:
                      top: 93%
                      left: 40%
+
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.dd_balcony
+                  style:
+                     top: 75%
+                     left: 50% 
                      
                 - type: state-label
                   entity: sensor.0x00158d0001fa8321_temperature

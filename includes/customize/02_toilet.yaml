@@ -25,12 +25,7 @@ switch.02_sonoff_mini_relay:
   icon: mdi:power-socket-eu
 
 ## Сенсоры
-sensor.02_toilet_lywsd02_humidity:
-  friendly_name: Туалет влажность
-  icon: mdi:water-percent
-sensor.02_toilet_lywsd02_temperature:
-  friendly_name: Туалет температура
-  icon: mdi:temperature-celsius
+
 sensor.0x00158d000128cd1a_click:
   friendly_name: Туалет выключатель на стене
 
