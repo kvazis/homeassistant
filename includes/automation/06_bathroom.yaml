@@ -26,7 +26,7 @@
   trigger:
 ## Влажность более 70 процентов
    - platform: numeric_state
-     entity_id: sensor.0x00158d0001dcd47e_humidity
+     entity_id: sensor.06_mean_humidity
      above: 70
 ## Беспроводный выключатель
    - platform: state

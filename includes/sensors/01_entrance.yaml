@@ -1,12 +1,12 @@
 # Время последнего открытия входной двери
   - platform: mqtt
-    state_topic: "binary_sensor/158d000119378d"
-    name: 'mqtt_binary_sensor_158d000119378d'
+    state_topic: "date_time/158d000119378d/changed"
+    name: '0x00158d000119378d_changed'
 
 # Время фиксации движения в прихожей
   - platform: mqtt
-    state_topic: "binary_sensor/158d00013f7894"
-    name: 'mqtt_binary_sensor_158d00013f7894'
+    state_topic: "date_time/158d00013f7894/changed"
+    name: '0x00158d00013f7894_changed'
     
 # # Реле Sonoff Basic в онлайне
 #   - platform: template

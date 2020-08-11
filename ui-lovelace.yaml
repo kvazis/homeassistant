@@ -2,23 +2,25 @@ title: Home Assistant - Raspberry Pi 4 B, 4 GB 70 Основной сервер
 views:
   - !include lovelace/01_system.yaml
   - !include lovelace/02_control.yaml
-  - !include lovelace/03_modes.yaml
-  - !include lovelace/04_lan.yaml
-  - !include lovelace/05_power.yaml
-  - !include lovelace/06_hikvision.yaml
-  - !include lovelace/07_camera.yaml
-  - !include lovelace/08_enter.yaml
-  - !include lovelace/08_ectlb.yaml
-  - !include lovelace/09_kitchen.yaml
-  - !include lovelace/10_living.yaml
-  - !include lovelace/11_dd.yaml
-  - !include lovelace/12_da.yaml
-  - !include lovelace/13_esphome.yaml
-  - !include lovelace/14_plan.yaml
-  - !include lovelace/15_automation.yaml
-  - !include lovelace/16_switchlight.yaml
-  - !include lovelace/20_other.yaml
-  - !include lovelace/21_webstat.yaml
+  - !include lovelace/03_map.yaml
+  - !include lovelace/04_climate.yaml
+  - !include lovelace/05_outdoor.yaml
+  - !include lovelace/06_lan.yaml
+  - !include lovelace/07_power.yaml
+  - !include lovelace/08_hikvision.yaml
+  - !include lovelace/09_camera.yaml
+  - !include lovelace/19_plan_map.yaml
+  - !include lovelace/20_enter.yaml
+  - !include lovelace/21_toilet.yaml
+  - !include lovelace/22_bathroom.yaml
+  - !include lovelace/23_kitchen.yaml
+  - !include lovelace/24_living.yaml
+  - !include lovelace/25_dd.yaml
+  - !include lovelace/26_da.yaml
+  - !include lovelace/30_esphome.yaml
+  - !include lovelace/31_automation.yaml
+  - !include lovelace/32_switchlight.yaml
+  - !include lovelace/33_other.yaml
   
   
   

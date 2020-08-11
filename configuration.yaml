@@ -27,6 +27,8 @@ homeassistant:
 # Ручная конфигурация
 # Отображение панели настроек в интерфейсе
 config:
+#Сканирование доступных устройств в сети
+ssdp:
 
 # Включение официального интерфейса
 frontend:
@@ -43,13 +45,23 @@ system_health:
 updater:
 # Потоковое изображение с камер
 stream:
+# Включение истории
+history:
 
+# Включение журнала
+logbook:
+
+panel_iframe:
+  sls_gateway:
+    title: 'SLS Gateway'
+    icon: mdi:zigbee
+    url: 'http://192.168.0.84'
 
 # Автообнаружение устройств
-discovery:
-  ignore:
-    - yeelight
-    - homekit
+# discovery:
+#   ignore:
+#     - yeelight
+#     - homekit
 
 lovelace:
   mode: yaml
@@ -62,7 +74,9 @@ lovelace:
      type: module
    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
      type: module
-   - url: /hacsfiles/simple-thermostat/simple-thermostat.js?v=1
+   - url: /hacsfiles/simple-thermostat/simple-thermostat.js
+     type: module
+   - url: /hacsfiles/weather-card/weather-card.js
      type: module
    - url: /hacsfiles/lovelace-card-mod/card-mod.js
      type: module
@@ -74,18 +88,16 @@ lovelace:
      type: module
    - url: /hacsfiles/logbook-card/logbook-card.js
      type: module
-
-# Включение истории
-#history:
-
-# Включение журнала
-#logbook:
-
+   - url: /hacsfiles/entity-attributes-card/entity-attributes-card.js
+     type: module
+   - url: /hacsfiles/entity-attributes-card/entity-attributes-card.js
+     type: module
+     
 #Платформы
-tuya:
-  username: !secret tuya_username
-  password: !secret tuya_password
-  country_code: 380
+# tuya:
+#   username: !secret tuya_username
+#   password: !secret tuya_password
+#   country_code: 380
   
 mqtt:
 #   broker: core-mosquitto
@@ -114,22 +126,6 @@ remote:
     timeout: 30
     hidden: false
 
-xiaomi_aqara:
-  discovery_retry: 10
-  gateways:
-    - mac: F0:B4:29:CC:1F:11
-      key: !secret gateway1_api
-      host: 192.168.0.80
-    - mac: 28:6C:07:F0:AD:27
-      key: !secret gateway2_api
-      host: 192.168.0.81
-    - mac: 34:CE:00:88:B0:39
-      key: !secret gateway3_api
-      host: 192.168.0.82
-    - mac: 78:11:DC:64:F4:C8
-      key: !secret gateway4_api
-      host: 192.168.0.83
-
 telegram_bot:
   - platform: polling
     api_key: !secret api_key_70
@@ -143,6 +139,7 @@ asuswrt:
   username: !secret asus_user
   password: !secret asus_password
   sensors:
+    - devices
     - upload
     - download
     - upload_speed

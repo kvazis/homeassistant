@@ -3,6 +3,7 @@
     name: scenario
     entities:
       - automation.telegramm_command_code
+      - automation.geiger_reload
       - automation.911_mqtt_lost
       - automation.911_mqtt_online
       - automation.911_test_lost
@@ -17,10 +18,10 @@
       - automation.boiler_off
       - automation.boiler_notify_on      
       - automation.boiler_notify_off      
-      - automation.01_detect_smoke
-      - automation.01_detect_smoke_off
+      - automation.en_detect_smoke
+      - automation.en_detect_smoke_off
       - automation.01_enter_photo
-      - automation.01_enter_photo_on
+    #   - automation.01_enter_photo_on
       - automation.01_enter_time
       - automation.01_motion_time
       - automation.01_enter_light_on

@@ -43,10 +43,10 @@ cr_light:
           - platform: state
             entity_id: sensor.0x00158d0001f3fefe_click
             to: 'single'
-        ## Квадратная кнопка на кухне
+        ## 6 клавишник на входе
           - platform: state
-            entity_id: sensor.0x00158d0001a672ef_click
-            to: 'double'
+            entity_id: sensor.0x04cf8cdf3c794209_action
+            to: 'button_3_single'
           condition:
             - condition: state
               entity_id: light.yeelight_03_ceiling
@@ -132,10 +132,10 @@ cr_light:
           - platform: state
             entity_id: sensor.0x00158d0001f3fefe_click
             to: 'single'
-        ## Квадратная кнопка на кухне
+        ## 6 клавишник на входе
           - platform: state
-            entity_id: sensor.0x00158d0001a672ef_click
-            to: 'double'
+            entity_id: sensor.0x04cf8cdf3c794209_action
+            to: 'button_3_single'
           condition:
             - condition: state
               entity_id: light.yeelight_03_ceiling

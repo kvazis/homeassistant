@@ -14,8 +14,6 @@
             {%- endfor -%}
           {%- endfor -%}
 
-  - platform: template
-    sensors:
       count_automation_on:
         friendly_name: "Активных автоматизаций - "
         entity_id:
@@ -23,8 +21,6 @@
         value_template: "{{states.automation | selectattr ('state', 'equalto', 'on') | list | length}}"
         icon_template: mdi:counter
         
-  - platform: template
-    sensors:
       count_automation_off:
         friendly_name: "Отключенных автоматизаций - "
         entity_id:
@@ -32,8 +28,6 @@
         value_template: "{{states.automation | selectattr ('state', 'equalto', 'off') | list | length}}"
         icon_template: mdi:counter
 
-  - platform: template
-    sensors:
       count_script:
         friendly_name: "Cкриптов в системе - "
         entity_id:
@@ -48,8 +42,6 @@
             {%- endfor -%}
           {%- endfor -%}
         
-  - platform: template
-    sensors:
       count_script_on:
         friendly_name: "Выполняющихся скриптов - "
         entity_id:
@@ -57,8 +49,6 @@
         value_template: "{{states.script | selectattr ('state', 'equalto', 'on') | list | length}}"
         icon_template: mdi:counter
         
-  - platform: template
-    sensors:
       count_script_off:
         friendly_name: "Выключенных скриптов - "
         entity_id:
@@ -66,35 +56,84 @@
         value_template: "{{states.script | selectattr ('state', 'equalto', 'off') | list | length}}"
         icon_template: mdi:counter
 
-  - platform: template
-    sensors:
+
+      count_light:
+        friendly_name: "Светильников в системе - "
+        entity_id:
+          - sensor.time
+        value_template: >
+          {%- set domains = ['light'] -%}
+          {%- for domain in domains -%}
+            {%- for item in states[domain] -%}
+              {% if loop.first %}
+                {{loop.length}}
+              {% endif %}
+            {%- endfor -%}
+          {%- endfor -%}
+
       unavailable_now_light:
         friendly_name: "Всего недоступных светильников - "
         entity_id:
           - sensor.time
         value_template: "{{states.light | selectattr ('state', 'equalto', 'unavailable') | list | length}}"
         icon_template: mdi:counter
+
+      count_switch:
+        friendly_name: "Реле в системе - "
+        entity_id:
+          - sensor.time
+        value_template: >
+          {%- set domains = ['switch'] -%}
+          {%- for domain in domains -%}
+            {%- for item in states[domain] -%}
+              {% if loop.first %}
+                {{loop.length}}
+              {% endif %}
+            {%- endfor -%}
+          {%- endfor -%}
         
-  - platform: template
-    sensors:
       unavailable_now_switch:
         friendly_name: "Всего недоступных реле - "
         entity_id:
           - sensor.time
         value_template: "{{states.switch | selectattr ('state', 'equalto', 'unavailable') | list | length}}"
         icon_template: mdi:counter
+
+      count_sensor:
+        friendly_name: "Сенсоров в системе - "
+        entity_id:
+          - sensor.time
+        value_template: >
+          {%- set domains = ['sensor'] -%}
+          {%- for domain in domains -%}
+            {%- for item in states[domain] -%}
+              {% if loop.first %}
+                {{loop.length}}
+              {% endif %}
+            {%- endfor -%}
+          {%- endfor -%}
         
-  - platform: template
-    sensors:
       unavailable_now_sensor:
         friendly_name: "Всего недоступных сенсоров - "
         entity_id:
           - sensor.time
         value_template: "{{states.sensor | selectattr ('state', 'equalto', 'unavailable') | list | length}}"
         icon_template: mdi:counter
+
+      count_binary_sensor:
+        friendly_name: "Бинарных сенсоров в системе - "
+        entity_id:
+          - sensor.time
+        value_template: >
+          {%- set domains = ['binary_sensor'] -%}
+          {%- for domain in domains -%}
+            {%- for item in states[domain] -%}
+              {% if loop.first %}
+                {{loop.length}}
+              {% endif %}
+            {%- endfor -%}
+          {%- endfor -%}
         
-  - platform: template
-    sensors:
       unavailable_now_binary_sensor:
         friendly_name: "Всего недоступных бинарных сенсоров - "
         entity_id:
@@ -102,8 +141,6 @@
         value_template: "{{states.binary_sensor | selectattr ('state', 'equalto', 'unavailable') | list | length}}"
         icon_template: mdi:counter
         
-  - platform: template
-    sensors:
       load_total_energy:
         friendly_name: 'Суммарное потребление'
         unit_of_measurement: "Вт"
@@ -113,14 +150,14 @@
               (states.sensor.load_158d000114a1e1.state | float) + 
               (states.sensor.load_158d00012896cb.state | float) + 
               (states.sensor.load_158d0001291d12.state | float) + 
-              (states.sensor.load_158d000153dd8e.state | float) + 
-              (states.sensor.load_158d00015751f4.state | float) + 
+              (states('sensor.0x00158d000153dd8e_power') | float) +
+              (states('sensor.0x00158d00015751f4_power') | float) + 
               (states.sensor.load_158d0001d35bc0.state | float) + 
-              (states.sensor.load_158d0001fa2934.state | float) + 
+              (states('sensor.0x00158d0001fa2934_power') | float) +
               (states.sensor.load_158d00030a6e78.state | float) +
               (states.sensor.load_158d0001a2ccab.state | float) +
               (states.sensor.load_158d0002d7bb2b.state | float) + 
-              (states.sensor.load_04cf8cdf3c764e0a.state | float) + 
+              (states('sensor.0x04cf8cdf3c764e0a_power') | float) +
               (states.sensor.load_bwshp2.state | float) + 
               (states.sensor.load_wifi_6port.state | float) + 
               (states.sensor.load_wifi_3usb.state | float) +

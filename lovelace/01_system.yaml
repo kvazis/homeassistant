@@ -24,6 +24,8 @@ cards:
           - entity: sensor.last_boot_custom
             name: Сервер в онлайне -
             icon: mdi:av-timer
+          - entity: sensor.local_ip
+            name: IP адрес - 
           - entity: sensor.rpi_power_status
             name: Питание Raspberry Pi 4 B 4GB - 
             icon: mdi:power-plug
@@ -72,9 +74,9 @@ cards:
             - entity: sensor.rasp3b_state
               name: Train Raspberry 3B  -
               icon: mdi:clock-outline
-            # - entity: sensor.test_state
-            #   name: Test Raspberry 3B + -
-            #   icon: mdi:clock-outline
+            - entity: sensor.test_state
+              name: Test Raspberry 3B + -
+              icon: mdi:clock-outline
 
 
     - type: vertical-stack
@@ -100,30 +102,71 @@ cards:
               name: Текущее время - 
               icon: mdi:clock-outline
 
-      
         - type: custom:mini-graph-card
           entities:
            - entity: sensor.processor_use
              name: Использование процессора
-             color: "#74ff76"
+          color_thresholds:
+            - value: 20
+              color: "#7FFF00"
+            - value: 40
+              color: "#98FB98"
+            - value: 60
+              color: "#FFFF00"
+            - value: 80
+              color: "#FF8C00"
+            - value: 100
+              color: "#DC143C"
           animate: true
-          line_width: 3
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
 
         - type: custom:mini-graph-card
           entities:
            - entity: sensor.cpu_temp
              name: Температура процессора
-             color: "#fff400"
+          color_thresholds:
+            - value: 20
+              color: "#7FFF00"
+            - value: 40
+              color: "#98FB98"
+            - value: 60
+              color: "#FFFF00"
+            - value: 80
+              color: "#FF8C00"
+            - value: 100
+              color: "#DC143C"
           animate: true
-          line_width: 3
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
           
         - type: custom:mini-graph-card
           entities:
            - entity: sensor.memory_use_percent
              name: Использование ОЗУ
-             color: "#4b9bff"
+          color_thresholds:
+            - value: 20
+              color: "#7FFF00"
+            - value: 40
+              color: "#98FB98"
+            - value: 60
+              color: "#FFFF00"
+            - value: 80
+              color: "#FF8C00"
+            - value: 100
+              color: "#DC143C"
           animate: true
-          line_width: 3 
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
             
 
     - type: vertical-stack
@@ -148,22 +191,66 @@ cards:
           entities:
            - entity: sensor.disk_use_percent
              name: Использование диска
-             color: "#74ff76"
-          show:
-              graph: bar  
+          color_thresholds:
+            - value: 20
+              color: "#7FFF00"
+            - value: 40
+              color: "#98FB98"
+            - value: 60
+              color: "#FFFF00"
+            - value: 80
+              color: "#FF8C00"
+            - value: 100
+              color: "#DC143C"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
       
         - type: custom:mini-graph-card
           entities:
            - entity: sensor.disk_free
              name: Свободно на диске
-             color: "#fff400"
-          show:
-              graph: bar  
+          color_thresholds:
+            - value: 25
+              color: "#DC143C"
+            - value: 50
+              color: "#FF8C00"
+            - value: 75
+              color: "#FFFF00"
+            - value: 90
+              color: "#98FB98"
+            - value: 110
+              color: "#7FFF00"
+        #   show:
+        #       graph: bar
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
           
         - type: custom:mini-graph-card
           entities:
            - entity: sensor.home_assistant_v2_db
              name: Объем базы Home Assistant
-             color: "#4b9bff"
-          show:
-              graph: bar  
+          color_thresholds:
+            - value: 500
+              color: "#7FFF00"
+            - value: 750
+              color: "#98FB98"
+            - value: 1000
+              color: "#FFFF00"
+            - value: 1250
+              color: "#FF8C00"
+            - value: 1500
+              color: "#DC143C"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72

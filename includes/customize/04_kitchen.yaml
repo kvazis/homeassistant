@@ -2,11 +2,11 @@
 
 ## Освещение
 light.philips_04_ceiling:
-  friendly_name: Кухня, основной свет
+  friendly_name: Кухня основной свет
   icon: mdi:ceiling-light
 
 light.aqara_04_strip:
-  friendly_name: Кухня, рабочая зона
+  friendly_name: Кухня рабочая зона
   icon: mdi:led-strip
 
 light.gateway_light_7811dc64f4c8:
@@ -15,29 +15,49 @@ light.gateway_light_7811dc64f4c8:
 
 ## Реле
 switch.0x00158d0001d35bc0_switch:
-  friendly_name: Кухня, питание LED ленты
+  friendly_name: Кухня питание LED ленты
   device_class: plug  
   icon: mdi:power-socket-eu
 
 switch.0x00158d0001fa2934_switch:
-  friendly_name: Кухня, холодильник
+  friendly_name: Кухня холодильник
   device_class: plug  
   icon: mdi:fridge
 
 switch.0x00158d0001291d12_switch:
-  friendly_name: Кухня, питание телевизора
+  friendly_name: Кухня питание телевизора
+  device_class: plug  
+  icon: mdi:power-socket-eu
+  
+switch.0x000d6f0014bb14b4_switch:
+  friendly_name: Кухня питание аэрогриля
   device_class: plug  
   icon: mdi:power-socket-eu
 
 ## Сенсоры
+
+sensor.0x000d6f0014bb14b4_power:
+  friendly_name: Аэрогиль
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
+  
+sensor.0x00158d0001fa2934_power:
+  friendly_name: Холодильник
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
+  
+sensor.kn_heiman_socket_voltage:
+  friendly_name: Кухня Heiman
+  unit_of_measurement: 'В'
+  
 sensor.illumination_7811dc64f4c8:
   friendly_name: Кухня шлюз освещенность
 
 sensor.0x00158d0001e16204_illuminance:
-  friendly_name: Кухня, ДД освещенность
+  friendly_name: Кухня ДД освещенность
   
 sensor.0x04cf8cdf3c772379_illuminance:
-  friendly_name: Кухня, сенсор освещенности
+  friendly_name: Кухня освещенность
   unit_of_measurement: 'lx'
 
 sensor.0x00158d0001581109_humidity:
@@ -50,12 +70,6 @@ sensor.0x00158d0001581109_temperature:
 sensor.0x00158d000282a130_click:
   friendly_name: Кухня выключатель вход
  
-sensor.0x00158d000154a353_click:
-  friendly_name: Кухня, вход, круглая
-  
-sensor.0x00158d0001a672ef_click:
-  friendly_name: Кухня, вход, квадратная
-  
 sensor.0x00158d000101bdc6_action:
   friendly_name: Кухня кубик
   icon: mdi:cube-outline
@@ -72,17 +86,17 @@ binary_sensor.0x00158d0001a99562_contact:
   device_class: window 
 
 binary_sensor.0x00158d0001bbeba6_water_leak:
-  friendly_name: Кухня раковина, протечка
+  friendly_name: Кухня раковина протечка
 
 ## Уровень заряда
 sensor.0x00158d0002a8ab8b_battery:
   friendly_name: Кухня конфетница
 sensor.0x00158d0001bbeba6_battery:
-  friendly_name: Кухня раковина, протечка
+  friendly_name: Кухня раковина протечка
 sensor.0x00158d0001e16204_battery:
   friendly_name: Кухня, движение
 sensor.0x04cf8cdf3c772379_battery:
-  friendly_name: Кухня, сенсор освещенности
+  friendly_name: Кухня датчик света
 sensor.0x00158d0001581109_battery:
   friendly_name: Кухня климат
 sensor.0x00158d000282a130_battery:
@@ -100,27 +114,27 @@ sensor.0x00158d000101bdc6_battery:
 
 ## Сенсоры
 sensor.0x00158d000171ffde_humidity:
-  friendly_name: Кухня, балкон, влажность
+  friendly_name: Кухня балкон влажность
   icon: mdi:water-percent
 sensor.0x00158d000171ffde_pressure:
-  friendly_name: Кухня, балкон, давление
+  friendly_name: Кухня балкон давление
 sensor.0x00158d000171ffde_temperature:
-  friendly_name: Кухня, балкон температура
+  friendly_name: Кухня балкон температура
   icon: mdi:temperature-celsius
   
 ## Бинарные сенсоры
 binary_sensor.0x00158d0001a20885_contact:
-  friendly_name: Кухня, балкон дверь
+  friendly_name: Кухня балкон дверь
   device_class: door
 binary_sensor.0x00158d0001a4a394_contact:
-  friendly_name: Кухня, балкон окно
+  friendly_name: Кухня балкон окно
   device_class: window 
   
 ## Уровень заряда
 sensor.0x00158d0001a20885_battery:
-  friendly_name: Кухня, балкон дверь
+  friendly_name: Кухня балкон дверь
 sensor.0x00158d000171ffde_battery:
-  friendly_name: Кухня, балкон климат
+  friendly_name: Кухня балкон климат
 sensor.0x00158d0001a4a394_battery:
-  friendly_name: Кухня, балкон окно
+  friendly_name: Кухня балкон окно
 

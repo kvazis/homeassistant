@@ -12,3 +12,14 @@
           {% else %}
           mdi:timer-off
           {% endif %}
+          
+      washer:
+        friendly_name: "Стирка"
+        value_template: >-
+          {{ states('sensor.load_bwshp2')|float > 3 }}
+        icon_template: >-
+          {% if is_state("binary_sensor.washer", "on") %}
+          mdi:washing-machine
+          {% else %}
+          mdi:washing-machine-off
+          {% endif %}

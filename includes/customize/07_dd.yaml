@@ -132,7 +132,21 @@ sensor.0x00158d00011063da_battery:
 
 ## Детская Д балкон
 
+## Реле
+switch.0x00158d000153dd8e_switch:
+  friendly_name: Питание счетчика Гейгера
+  device_class: plug  
+  icon: mdi:power-socket-eu
+
 ## Сенсоры 
+sensor.0x00158d000153dd8e_power:
+  friendly_name: Счетчик Гейгера
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
+sensor.0x00124b001d3bdce0_radiation_dose_per_hour:
+  friendly_name: Радиоактивный фон
+  icon: mdi:radioactive
+  unit_of_measurement: мкР/ч
 sensor.0x00158d0001fa8321_humidity:
   friendly_name: Детская Д, балкон влажность
   icon: mdi:water-percent

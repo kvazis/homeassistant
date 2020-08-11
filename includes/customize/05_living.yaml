@@ -1,4 +1,9 @@
-## Гостиная 
+## Гостиная
+
+## Роутер
+sensor.asuswrt_devices_connected:
+  friendly_name: Количество устройств в сети
+  icon: mdi:lan-connect
 
 ## Освещение
 light.yeelight_05_ceiling1:
@@ -9,7 +14,6 @@ light.yeelight_05_ceiling1_ambilight:
   icon: mdi:car-light-high
 light.yeelight_05_ceiling1_nightlight:
   friendly_name: Гостиная, люстра 1 ночник
-
 light.yeelight_05_ceiling2:
   friendly_name: Гостиная, люстра 2
   icon: mdi:ceiling-light
@@ -18,11 +22,9 @@ light.yeelight_05_ceiling2_ambilight:
   icon: mdi:car-light-high
 light.yeelight_05_ceiling2_nightlight:
   friendly_name: Гостиная, люстра 2 ночник
-
 light.yeelight_05_bedside2:
-  friendly_name: Гостиная, ночник
+  friendly_name: Гостиная ночник
   icon: mdi:lighthouse
-
 light.yeelight_05_rgbtvbulb:
   friendly_name: Гостиная ТВ подсветка
   icon: mdi:lightbulb
@@ -30,11 +32,9 @@ light.yeelight_05_rgbtvbulb:
 light.yeelight_05_table:
   friendly_name: Гостиная настольная лампа
   icon: mdi:desk-lamp
-
 light.gateway_light_34ce0088b039:
   friendly_name: Гостиная шлюз 1
   icon: mdi:star-circle-outline  
-  
 light.aqara_05_wall:
   friendly_name: Гостиная свет стена
   icon: mdi:track-light
@@ -45,50 +45,37 @@ switch.0x00158d00015723f1_switch_left:
   device_class: plug 
   icon: mdi:power-socket-eu
 switch.0x00158d00015723f1_switch_right:
-  friendly_name: Гостиная, питание люстра 1
+  friendly_name: Гостиная питание люстра 1
   device_class: plug 
   icon: mdi:power-socket-eu
-
 switch.0x00158d00012896cb_switch:
-  friendly_name: Гостиная, питание телевизора
+  friendly_name: Гостиная питание телевизора
   device_class: plug 
   icon: mdi:power-socket-eu
-  
 switch.0x04cf8cdf3c764e0a_switch:
   friendly_name: Гостиная стол удлинитель
   device_class: plug  
   icon: mdi:power-socket-eu
-
-switch.sonoff_l1_heater_relay:
+switch.0x00124b001e722013_switch:
   friendly_name: Гостиная, термоголовка 1
   device_class: plug  
   icon: mdi:radiator
-
 switch.0x00158d000114a1e1_switch:
-  friendly_name: Гостиная, термоголовка 2
+  friendly_name: Гостиная термоголовка 2
   device_class: plug  
   icon: mdi:radiator
-
-switch.0x00158d000153dd8e_switch:
-  friendly_name: Zigbee розетка, лампа
-  device_class: plug  
-  icon: mdi:power-socket-eu
-
 switch.wifi_6port:
   friendly_name: Удлинитель 6 розеток
   device_class: plug  
   icon: mdi:power-socket-eu
-  
 switch.wifi_3usb:
   friendly_name: Удлинитель 3 розетки 3 USB
   device_class: plug  
   icon: mdi:power-socket-eu
-
 switch.xiaomi_wifi_socket_usb:
   friendly_name: Часы в гостиной
   device_class: plug  
   icon: mdi:power-socket-eu
-
 switch.xiaomi_wifi_socket_usb_usb:
   friendly_name: Вентилятор для роутера
   device_class: plug  
@@ -96,82 +83,92 @@ switch.xiaomi_wifi_socket_usb_usb:
 
 ## Климатическая техника
 fan.gg_humidifier:
-  friendly_name: Гостиная, увлажнитель Smartmi
+  friendly_name: Гостиная увлажнитель Smartmi
   icon: mdi:air-humidifier
-  
 fan.gg_purifier:
-  friendly_name: Гостиная, очиститель Mi
+  friendly_name: Гостиная очиститель Mi
   icon: mdi:air-purifier
-  
 air_quality.05_air_monitor:
-  friendly_name: Гостиная, монитор воздуха Mi
+  friendly_name: Гостиная монитор воздуха Mi
   icon: mdi:tablet-dashboard
 
 ## Сенсоры
+sensor.0x04cf8cdf3c764e0a_power:
+  friendly_name: Гостиная стол удлинитель
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
 sensor.0x00158d00015723f1_click:
   friendly_name: Гостиная выключатель без нуля
-
 sensor.illumination_34ce0088b039:
   friendly_name: Гостиная шлюз освещенность
-
-sensor.0x00158d0001e8a244_click:
-  friendly_name: Гостиная, комод, квадратная
-  
 sensor.0x00158d0001186d82_action:
   friendly_name: Гостиная кубик
   icon: mdi:cube-outline
-
 sensor.0x00158d00015aebb6_humidity:
-  friendly_name: Гостиная, влажность
+  friendly_name: Гостиная влажность
   icon: mdi:water-percent  
 sensor.0x00158d00015aebb6_temperature:
-  friendly_name: Гостиная, температура
+  friendly_name: Гостиная температура
   icon: mdi:temperature-celsius
-
 sensor.05_mean_humidity:
-  friendly_name: Гостиная, средняя влажность
+  friendly_name: Гостиная средняя влажность
   icon: mdi:water-percent  
 sensor.05_mean_temperature:
-  friendly_name: Гостиная, средняя температура
+  friendly_name: Гостиная средняя температура
   icon: mdi:temperature-celsius
-  
 sensor.0x00158d00013fc3bc_click:
   friendly_name: Гостиная вход
-
 sensor.0x00158d0001f47e10_click:
   friendly_name: Гостиная стена
-  
-sensor.0x00158d0001531698_click:
-  friendly_name: Гостиная, комод, круглая
 
 ## Бинарные сенсоры
-
+binary_sensor.0xec1bbdfffe302df1_occupancy:
+  friendly_name: Гостиная движение
 binary_sensor.0x00158d00013ed373_contact:
-  friendly_name: Гостиная, окно
+  friendly_name: Гостиная окно
   device_class: window 
+binary_sensor.0xec1bbdfffedf6a6a_contact:
+  friendly_name: Гостиная окно 2
+  device_class: window 
+binary_sensor.0xec1bbdfffedf6a6a_battery:
+  friendly_name: Гостиная окно 2
 
 ## Уровень заряда
 sensor.0x00158d00013fc3bc_battery:
-  friendly_name: Гостиная вход
-  
-sensor.0x00158d0001e8a244_battery:
-  friendly_name: Гостиная, комод, квадратная
-
+  friendly_name: Гостиная выключатель вход
 sensor.0x00158d0001186d82_battery:
   friendly_name: Гостиная кубик
-  
 sensor.0x00158d00013ed373_battery:
-  friendly_name: Гостиная, окно
-
+  friendly_name: Гостиная окно
+sensor.0xec1bbdfffedf6a6a_battery:
+  friendly_name: Гостиная окно 2
 sensor.0x00158d0001f47e10_battery:  
   friendly_name: Гостиная стена
-  
-sensor.0x00158d0001531698_battery:
-  friendly_name: Гостиная, комод, круглая
-  
 sensor.0x00158d00015aebb6_battery:
-  friendly_name: Гостиная, климат
+  friendly_name: Гостиная климат
   
+## Уровень сигнала
+sensor.0x00158d00015723f1_linkquality:
+  friendly_name: Гостиная выключатель без нуля
+switch.0x00158d000114a1e1_linkquality:
+  friendly_name: Гостиная термоголовка 2
+sensor.0x00158d00012896cb_linkquality:
+  friendly_name: Гостиная питание телевизора
+sensor.0x04cf8cdf3c764e0a_linkquality:
+  friendly_name: Гостиная стол удлинитель
+sensor.0x00158d00013fc3bc_linkquality:
+  friendly_name: Гостиная выключатель вход
+sensor.0x00158d0001186d82_linkquality:
+  friendly_name: Гостиная кубик
+sensor.0x00158d00013ed373_linkquality:
+  friendly_name: Гостиная окно
+sensor.0xec1bbdfffedf6a6a_linkquality:
+  friendly_name: Гостиная окно 2
+sensor.0x00158d0001f47e10_linkquality:  
+  friendly_name: Гостиная стена
+sensor.0x00158d00015aebb6_linkquality:
+  friendly_name: Гостиная климат
+
 ## Гостиная балкон
 
 ## Освещение
@@ -182,18 +179,14 @@ light.66633530807d3a766432:
 ## Сенсоры  
 sensor.0x00158d000449b773_illuminance:
   friendly_name: Гостиная балкон освещенность
-
 sensor.0x00158d0001a4b9da_humidity:
   friendly_name: Гостиная балкон влажность
   icon: mdi:water-percent
-
 sensor.0x00158d0001a4b9da_pressure:
   friendly_name: Гостиная балкон давление
-
 sensor.0x00158d0001a4b9da_temperature:
   friendly_name: Гостиная балкон температура
   icon: mdi:temperature-celsius
-
 sensor.0x00158d0001b86d2e_click:
   friendly_name: Гостиная балкон квадратная
 
@@ -201,10 +194,8 @@ sensor.0x00158d0001b86d2e_click:
 binary_sensor.0x00158d000445206b_contact:
   friendly_name: Гостиная, балкон дверь
   device_class: door
-
 binary_sensor.0x00158d000449b773_occupancy:
   friendly_name: Гостиная, балкон движение
-
 binary_sensor.0x00158d0001a2f5f7_contact:
   friendly_name: Гостиная, балкон окно
   device_class: window 
@@ -213,12 +204,26 @@ binary_sensor.0x00158d0001a2f5f7_contact:
 sensor.0x00158d0001b86d2e_battery:
   friendly_name: Гостиная балкон квадратная
 sensor.0x00158d000445206b_battery:
-  friendly_name: Гостиная, балкон дверь
+  friendly_name: Гостиная балкон дверь
 sensor.0x00158d0001a2f5f7_battery:
   friendly_name: Гостиная, балкон окно
 sensor.0x00158d000449b773_battery:
-  friendly_name: Гостиная, балкон движение
+  friendly_name: Гостиная балкон движение
 sensor.0x00158d00010b5aee_battery:
   friendly_name: Балкон выключатель
 sensor.0x00158d0001a4b9da_battery:
-  friendly_name: Гостиная, балкон климат
+  friendly_name: Гостиная балкон климат
+  
+## Уровень сигнала
+sensor.0x00158d0001b86d2e_linkquality:
+  friendly_name: Гостиная балкон квадратная
+sensor.0x00158d000445206b_linkquality:
+  friendly_name: Гостиная балкон дверь
+sensor.0x00158d0001a2f5f7_linkquality:
+  friendly_name: Гостиная, балкон окно
+sensor.0x00158d000449b773_linkquality:
+  friendly_name: Гостиная балкон движение
+sensor.0x00158d00010b5aee_linkquality:
+  friendly_name: Балкон выключатель
+sensor.0x00158d0001a4b9da_linkquality:
+  friendly_name: Гостиная балкон климат

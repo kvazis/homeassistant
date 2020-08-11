@@ -1,0 +1,84 @@
+p_00158d00015751f4:
+# Розетка Aqara, ванная - бойлер
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/158d00015751f4/yesterday"
+        name: 'mqtt_power_yesterday_158d00015751f4'
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/158d00015751f4/today"
+        name: 'mqtt_power_today_158d00015751f4'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/158d00015751f4/month"
+        name: 'mqtt_power_month_158d00015751f4'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/158d00015751f4/lastmonth"
+        name: 'mqtt_power_lastmonth_158d00015751f4'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: template
+        sensors:
+          money_month_158d00015751f4:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states.sensor.mqtt_power_month_158d00015751f4.state | float * 1.68)|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          money_lastmonth_158d00015751f4:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d00015751f4.state | float * 1.68)|round(2) }}"
+            icon_template: mdi:square-inc-cash
+            
+    script:
+          
+          00158d00015751f4_day:
+            alias: 00158d00015751f4 энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/158d00015751f4/today"
+                payload: "{{(states('sensor.158d00015751f4_power_today') | float + (states('sensor.0x00158d00015751f4_power') | float /120000))|round(3) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/158d00015751f4/month"
+                payload: "{{(states('sensor.158d00015751f4_power_month') | float + (states('sensor.0x00158d00015751f4_power') | float /120000))|round(3) }}"
+                retain: true
+
+          00158d00015751f4_yesterday:
+            alias: 00158d00015751f4 энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/158d00015751f4/yesterday"
+                payload: "{{states('sensor.158d00015751f4_power_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/158d00015751f4/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          00158d00015751f4_lastmonth:
+            alias: 00158d00015751f4 энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/158d00015751f4/lastmonth"
+                payload: "{{states('sensor.158d00015751f4_power_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/158d00015751f4/month"
+                payload: "{{ 0.0 }}"
+                retain: true

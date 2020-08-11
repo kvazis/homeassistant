@@ -8,6 +8,9 @@
 #     hci_interface:
 #                   - 0
 #                   - 1
+#     encryptors:
+#              '58:2D:34:51:C8:5E': '5ccf631bc57201f2fdc3189ccf03103c'
+#     whitelist: True
     
   - platform: min_max
     name: best_alex_rssi

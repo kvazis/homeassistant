@@ -39,6 +39,13 @@ sensor.0x00158d0001dcd47e_temperature:
   friendly_name: Ванная температура
   icon: mdi:temperature-celsius
   
+sensor.06_mean_humidity:
+  friendly_name: Ванная, средняя влажность
+  icon: mdi:water-percent  
+sensor.06_mean_temperature:
+  friendly_name: Ванная, средняя температура
+  icon: mdi:temperature-celsius
+  
 sensor.0x00158d000238a140_click:
   friendly_name: Ванная выключатель
 

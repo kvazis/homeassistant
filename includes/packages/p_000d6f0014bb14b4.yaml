@@ -45,12 +45,12 @@ p_000d6f0014bb14b4:
             - service: mqtt.publish
               data_template:
                 topic: "power/000d6f0014bb14b4/today"
-                payload: "{{(states('sensor.000d6f0014bb14b4_power_today') | float + (states('sensor.0x000d6f0014bb14b4_power') | float /120000))|round(5) }}"
+                payload: "{{(states('sensor.000d6f0014bb14b4_power_today') | float + (states('sensor.0x000d6f0014bb14b4_power') | float /120000))|round(3) }}"
                 retain: true
             - service: mqtt.publish
               data_template:
                 topic: "power/000d6f0014bb14b4/month"
-                payload: "{{(states('sensor.000d6f0014bb14b4_power_month') | float + (states('sensor.0x000d6f0014bb14b4_power') | float /120000))|round(5) }}"
+                payload: "{{(states('sensor.000d6f0014bb14b4_power_month') | float + (states('sensor.0x000d6f0014bb14b4_power') | float /120000))|round(3) }}"
                 retain: true
 
           000d6f0014bb14b4_yesterday:

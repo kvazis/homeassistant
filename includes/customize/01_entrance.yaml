@@ -2,43 +2,45 @@
 
 ## Освещение
 light.0x00158d000420dbab_light:
-  friendly_name: Прихожая, лампа
+  friendly_name: Прихожая лампа Е27
   icon: mdi:lightbulb
-
-# ## Реле
-# switch.02_sonoff_basic_relay:
-#   friendly_name: Прихожая, питание лампы
-#   device_class: plug  
-#   icon: mdi:power-socket-eu
-
 ## Сенсоры
 sensor.0x00158d0001718ca8_click:
   friendly_name: Прихожая выключатель вход
-
-
 ## Бинарные сенсоры
 binary_sensor.0x00158d000119378d_contact:
   friendly_name: Входная дверь
   device_class: door
-
 binary_sensor.0x00158d00013f7894_occupancy:
-  friendly_name: Прихожая, движение  
-
+  friendly_name: Прихожая движение  
 sensor.0x00158d00010b1963_click:
-  friendly_name: Прихожая, шкаф, круглая 
-
+  friendly_name: Прихожая шкаф, круглая 
 binary_sensor.0x00158d000149d28b_smoke:
-  friendly_name: Прихожая, датчик дыма
+  friendly_name: Прихожая датчик дыма
   device_class: smoke
   
 ## Уровень заряда
 sensor.0x00158d000149d28b_battery:
-  friendly_name: Прихожая, датчик дыма
+  friendly_name: Прихожая датчик дыма
 sensor.0x00158d000119378d_battery:
   friendly_name: Входная дверь
 sensor.0x00158d00010b1963_battery:
-  friendly_name: Прихожая, шкаф, круглая 
+  friendly_name: Прихожая шкаф, круглая 
 sensor.0x00158d0001718ca8_battery:
   friendly_name: Прихожая выключатель вход
 sensor.0x00158d00013f7894_battery:
-  friendly_name: Прихожая, движение  
+  friendly_name: Прихожая движение  
+  
+## Уровень сигнала
+sensor.0x00158d000420dbab_linkquality:
+  friendly_name: Прихожая лампа Е27
+sensor.0x00158d000149d28b_linkquality:
+  friendly_name: Прихожая датчик дыма
+sensor.0x00158d000119378d_linkquality:
+  friendly_name: Входная дверь
+sensor.0x00158d00010b1963_linkquality:
+  friendly_name: Прихожая шкаф, круглая 
+sensor.0x00158d0001718ca8_linkquality:
+  friendly_name: Прихожая выключатель вход
+sensor.0x00158d00013f7894_linkquality:
+  friendly_name: Прихожая движение 

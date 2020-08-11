@@ -12,7 +12,7 @@
   name: test_state
   force_update: true
   headers: 
-    Authorization: !secret orangeplus_secret_token
+    Authorization: !secret rasp3bplus_secret_token
     content-type: 'application/json'
   value_template: '{{ value_json.state }}'
   

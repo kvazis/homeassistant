@@ -2,9 +2,8 @@
 
 ## Освещение
 light.yeelight_02_ceiling:
-  friendly_name: Туалет, люстра
+  friendly_name: Туалет люстра
   icon: mdi:ceiling-light
-
 light.sonoff_02_mirror:
   friendly_name: Туалет, подсветка зеркала
   icon: mdi:spotlight-beam
@@ -18,29 +17,44 @@ switch.0x00158d00014dceb3_switch_left:
   friendly_name: Туалет питание люстры
   device_class: plug  
   icon: mdi:power-socket-eu
- 
 switch.02_sonoff_mini_relay:
   friendly_name: Туалет питание подсветки
   device_class: plug  
   icon: mdi:power-socket-eu
 
 ## Сенсоры
-
 sensor.0x00158d000128cd1a_click:
   friendly_name: Туалет выключатель на стене
+sensor.0xec1bbdfffe6f3394_temperature:
+  friendly_name: Туалет температура
+sensor.0xec1bbdfffe6f3394_humidity:
+  friendly_name: Туалет влажность
+sensor.0x00158d0001a24e71_illuminance:
+  friendly_name: Туалет освещенность 
 
 ## Бинарные сенсоры
 binary_sensor.0x00158d0001a24e71_occupancy:
   friendly_name: Туалет движение
   
-sensor.0x00158d0001a24e71_illuminance:
-  friendly_name: Туалет освещенность 
-
 ## Уровень заряда
 sensor.0x00158d0001a24e71_battery:
   friendly_name: Туалет движение
 sensor.0x00158d000128cd1a_battery:
   friendly_name: Туалет выключатель на стене
+sensor.0xec1bbdfffe6f3394_battery:
+  friendly_name: Туалет климат
+  
+## Уровень сигнала
+sensor.0x00158d00014dceb3_linkquality:
+  friendly_name: Туалет выключатель на входе
+sensor.0x00158d0001a24e71_linkquality:
+  friendly_name: Туалет движение
+sensor.0x00158d000128cd1a_linkquality:
+  friendly_name: Туалет выключатель на стене
+sensor.0xec1bbdfffe6f3394_linkquality:
+  friendly_name: Туалет климат
+sensor.0x00124b0018e85a23_linkquality:
+  friendly_name: Туалет CC2531
   
 ## Прачечная
 
@@ -54,7 +68,6 @@ switch.0x00158d00014a1a55_switch:
   friendly_name: Прачечная выключатель
   device_class: plug  
   icon: mdi:power-socket-eu
-
 switch.bwshp2_relay:
   friendly_name: Стиральная машина, питание
   device_class: plug  
@@ -68,20 +81,36 @@ sensor.load_bwshp2:
 sensor.bwshp2_voltage:
   friendly_name: Напряжение в сети
   unit_of_measurement: В
-
 sensor.0x00158d0001ab3350_illuminance:
   friendly_name: Прачечная, освещенность
+sensor.0xec1bbdfffe8d6ac9_temperature:
+  friendly_name: Прачечная, температура
+sensor.0xec1bbdfffe8d6ac9_humidity:
+  friendly_name: Прачечная, влажность
+  
+  
 
 ## Бинарные сенсоры
 binary_sensor.0x00158d0001ab3350_occupancy:
-  friendly_name: Прачечная, движение
-
+  friendly_name: Прачечная движение
 binary_sensor.0x00158d0002705b7b_water_leak:
-  friendly_name: Прачечная, протечка, стиралка
+  friendly_name: Прачечная протечка
   
 ## Уровень заряда
 sensor.0x00158d0001ab3350_battery:
-  friendly_name: Прачечная, движение
+  friendly_name: Прачечная движение
 sensor.0x00158d0002705b7b_battery: 
-  friendly_name: Прачечная, протечка, стиралка
+  friendly_name: Прачечная протечка
+sensor.0xec1bbdfffe8d6ac9_battery: 
+  friendly_name: Прачечная климат
+  
+## Уровень сигнала
+sensor.0x00158d00014a1a55_linkquality:
+  friendly_name: Прачечная выключатель
+sensor.0x00158d0001ab3350_linkquality:
+  friendly_name: Прачечная движение
+sensor.0x00158d0002705b7b_linkquality: 
+  friendly_name: Прачечная протечка
+sensor.0xec1bbdfffe8d6ac9_linkquality: 
+  friendly_name: Прачечная климат
   

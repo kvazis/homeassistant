@@ -1,0 +1,394 @@
+##################   Климат
+title: Климат
+icon: mdi:home-thermometer
+cards:
+
+############################ Колонка 1 ############################
+
+    - type: vertical-stack
+      cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }     
+          content: >
+              **Кухня**
+              
+        - type: glance
+          show_state: true
+          show_name: true
+          state_color: true
+          entities:
+          - entity: binary_sensor.kn_heat_valve
+            name: Кран термостата
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.0x00158d0001581109_temperature 
+                 name: Температура
+              color_thresholds:
+                - value: 10
+                  color: "#191970"
+                - value: 15
+                  color: "#0000FF"
+                - value: 20
+                  color: "#ADD8E6"
+                - value: 25
+                  color: "#E0FFFF"
+                - value: 30
+                  color: "#FFFF00"
+                - value: 50
+                  color: "#FFD700"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+
+            - type: custom:simple-thermostat
+              entity: climate.0xec1bbdfffe9466c5_climate
+              step_layout: row
+              name: false
+              icon: false
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: lock.0xec1bbdfffe9466c5_child_lock
+                name: Блокировка клавиатуры
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d0001581109_humidity
+             name: Влажность
+          color_thresholds:
+            - value: 20
+              color: "#FFFF00"
+            - value: 30
+              color: "#FAFAD2"
+            - value: 40
+              color: "#E0FFFF"
+            - value: 50
+              color: "#7FFFD4"
+            - value: 60
+              color: "#00CED1"
+            - value: 80
+              color: "#0000FF"
+            - value: 100
+              color: "#000080"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+############################ Колонка 2 ############################
+
+    - type: vertical-stack
+      cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Гостиная**
+              
+        - type: glance
+          show_state: true
+          show_name: true
+          state_color: true
+          entities:
+          - entity: binary_sensor.living_heat
+            name: Режим отопления
+          - entity: binary_sensor.living_hum
+            name: Режим увлажнения
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.05_mean_temperature
+                 name: Температура
+              color_thresholds:
+                - value: 10
+                  color: "#191970"
+                - value: 15
+                  color: "#0000FF"
+                - value: 20
+                  color: "#ADD8E6"
+                - value: 25
+                  color: "#E0FFFF"
+                - value: 30
+                  color: "#FFFF00"
+                - value: 50
+                  color: "#FFD700"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+              
+            - type: custom:simple-thermostat
+              entity: climate.living_heater
+              step_layout: row
+              name: false
+              icon: false
+              
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+         
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.05_mean_humidity
+                 name: Влажность
+              color_thresholds:
+                - value: 20
+                  color: "#FFFF00"
+                - value: 30
+                  color: "#FAFAD2"
+                - value: 40
+                  color: "#E0FFFF"
+                - value: 50
+                  color: "#7FFFD4"
+                - value: 60
+                  color: "#00CED1"
+                - value: 80
+                  color: "#0000FF"
+                - value: 100
+                  color: "#000080"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: input_number.humidity_level_gg
+              - entity: sensor.smartmi_water
+                name: Остаток воды - 
+                
+            - type: custom:stack-in-card
+              mode: horizontal
+              cards: 
+                - type: button
+                  entity: switch.gg_humidifier_mode_auto
+                  name: Auto
+                  icon: mdi:brightness-auto
+                - type: button
+                  entity: switch.gg_humidifier_mode_silent
+                  name: Silent
+                  icon: mdi:speedometer-slow
+                - type: button
+                  entity: switch.gg_humidifier_mode_medium
+                  name: Medium
+                  icon: mdi:speedometer-medium
+                - type: button
+                  entity: switch.gg_humidifier_mode_high
+                  name: High
+                  icon: mdi:speedometer
+
+############################ Колонка 3 ############################
+
+    - type: vertical-stack
+      cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Детская Д**
+              
+        - type: glance
+          show_state: true
+          show_name: true
+          state_color: true
+          entities:
+          - entity: binary_sensor.dd_heat
+            name: Режим отопления
+          - entity: binary_sensor.dd_hum
+            name: Режим увлажнения
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.07_mean_temperature
+                 name: Температура
+              color_thresholds:
+                - value: 10
+                  color: "#191970"
+                - value: 15
+                  color: "#0000FF"
+                - value: 20
+                  color: "#ADD8E6"
+                - value: 25
+                  color: "#E0FFFF"
+                - value: 30
+                  color: "#FFFF00"
+                - value: 50
+                  color: "#FFD700"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+              
+            - type: custom:simple-thermostat
+              entity: climate.dd_heater
+              step_layout: row
+              name: false
+              icon: false
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+         
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.07_mean_humidity
+                 name: Влажность
+              color_thresholds:
+                - value: 20
+                  color: "#FFFF00"
+                - value: 30
+                  color: "#FAFAD2"
+                - value: 40
+                  color: "#E0FFFF"
+                - value: 50
+                  color: "#7FFFD4"
+                - value: 60
+                  color: "#00CED1"
+                - value: 80
+                  color: "#0000FF"
+                - value: 100
+                  color: "#000080"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+          
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: input_number.humidity_level_dd
+              - entity: switch.0x00158d0001a2ccab_switch_left
+              - entity: switch.dd_hum_mode
+              
+############################ Колонка 3 ############################
+
+    - type: vertical-stack
+      cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Детская А**
+              
+        - type: glance
+          show_state: true
+          show_name: true
+          state_color: true
+          entities:
+          - entity: binary_sensor.da_heat
+            name: Режим отопления
+          - entity: binary_sensor.da_hum
+            name: Режим увлажнения
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+              
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.08_mean_temperature
+                 name: Температура
+              color_thresholds:
+                - value: 10
+                  color: "#191970"
+                - value: 15
+                  color: "#0000FF"
+                - value: 20
+                  color: "#ADD8E6"
+                - value: 25
+                  color: "#E0FFFF"
+                - value: 30
+                  color: "#FFFF00"
+                - value: 50
+                  color: "#FFD700"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+          
+            - type: custom:simple-thermostat
+              entity: climate.da_heater
+              step_layout: row
+              name: false
+              icon: false
+            #   control: false
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+         
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.08_mean_humidity
+                 name: Влажность
+              color_thresholds:
+                - value: 20
+                  color: "#FFFF00"
+                - value: 30
+                  color: "#FAFAD2"
+                - value: 40
+                  color: "#E0FFFF"
+                - value: 50
+                  color: "#7FFFD4"
+                - value: 60
+                  color: "#00CED1"
+                - value: 80
+                  color: "#0000FF"
+                - value: 100
+                  color: "#000080"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+          
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: input_number.humidity_level_da
+              - entity: switch.0x00158d00010ec4b8_switch
+              - entity: switch.da_hum_mode

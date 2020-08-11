@@ -1,36 +1,23 @@
-  test_photo:
-    alias: Фото с камеры Reolink E1
+  tuya_set:
     sequence:
-       - service: camera.snapshot
-         data:
-              entity_id: camera.reolink4
-              filename: "/config/www/cam_captures/reolink4.jpg"
-       - delay: 00:00:10
-    #   - service: notify.telegram
-    #      data:
-    #           title: "Тест"
-    #           message: "Фотография" 
-    #           data:
-    #               photo:
-    #                   - file: /config/www/cam_captures/reolink4.jpg
-       - service: telegram_bot.send_photo
-         data_template:
-           target:
-            - !secret chat_id_alex
-           file: "/config/www/cam_captures/reolink4.jpg"
-            
-                      
-  test_video:
-    alias: Видео с камеры Reolink E1
+      - service: climate.set_temperature
+        data:
+          entity_id: climate.0xec1bbdfffe9466c5_climate
+          temperature: 22
+
+
+  cast:          
     sequence:
-    - service: camera.record
-      data_template:
-        entity_id: camera.reolink4
-        filename: "/config/www/cam_captures/reolink4.mp4"
-        duration: 2
-    - delay: 00:00:10
-    - service: telegram_bot.send_video
-      data_template:
-        target:
-         - !secret chat_id_alex
-        file: "/config/www/cam_captures/reolink4.mp4"
+    - data:
+        entity_id: media_player.mitv_mssp1
+        media_content_type: cast
+        media_content_id: '
+          {
+            "app_name": "youtube",
+            "media_id": "KCkmIyC6v00"
+          }'
+      service: media_player.play_media
+    # # - delay: 00:00:30
+    #   wait_template: '{{ is_state("media_player.mitv_mssp1", "idle") }}'
+    # - service: switch.turn_off
+    #   entity_id: switch.tv_xiaomi_55

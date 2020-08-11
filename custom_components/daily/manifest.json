@@ -1,0 +1,13 @@
+{
+  "domain": "daily",
+  "name": "Daily Sensor",
+  "config_flow": true,
+  "documentation": "https://github.com/jeroenterheerdt/HADailySensor",
+  "issue_tracker": "https://github.com/jeroenterheerdt/HADailySensor/issues",
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "codeowners": ["@jeroenterheerdt"]
+}

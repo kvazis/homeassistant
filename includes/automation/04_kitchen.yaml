@@ -20,10 +20,10 @@
   - platform: state
     entity_id: sensor.0x00158d000282a130_click
     to: 'right'
-## Круглая кнопка на стене
+## 6 клавишник на входе
   - platform: state
-    entity_id: sensor.0x00158d000154a353_click
-    to: 'long'
+    entity_id: sensor.0x04cf8cdf3c794209_action
+    to: 'button_1_single'
 ## Подброс кубика
   - platform: state
     entity_id: sensor.0x00158d000101bdc6_action
@@ -76,10 +76,10 @@
 - alias: 04_kn_led_toggle
   initial_state: true
   trigger:
-## Круглая кнопка на стене
-  - platform: state
-    entity_id: sensor.0x00158d000154a353_click
-    to: 'single'
+# ## Круглая кнопка на стене
+#   - platform: state
+#     entity_id: sensor.0x00158d000154a353_click
+#     to: 'single'
 ## Переворот кубика на 90 градусов
   - platform: state
     entity_id: sensor.0x00158d000101bdc6_action
@@ -130,10 +130,10 @@
 - alias: 04_tv_xiaomi
   initial_state: true
   trigger:
-## Круглая кнопка на стене 
+## 6 клавишник на входе
   - platform: state
-    entity_id: sensor.0x00158d000154a353_click
-    to: 'double'
+    entity_id: sensor.0x04cf8cdf3c794209_action
+    to: 'button_5_single'
 ## Правая клавиша, выключатель на входе   
   - platform: state
     entity_id: sensor.0x00158d000282a130_click
@@ -150,10 +150,10 @@
 - alias: 04_android
   initial_state: true
   trigger:
-## Круглая кнопка на стене 
+## 6 клавишник на входе
   - platform: state
-    entity_id: sensor.0x00158d000154a353_click
-    to: 'triple'
+    entity_id: sensor.0x04cf8cdf3c794209_action
+    to: 'button_6_double'
   action:
     service: script.turn_on
     entity_id: script.mini8_android

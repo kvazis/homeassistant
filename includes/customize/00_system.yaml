@@ -1,6 +1,3 @@
-## Тестовые
-binary_sensor.switch_158d0002af829b:
-  friendly_name: Квадратная с тряской
 
 ## Системные
 sun.sun:

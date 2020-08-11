@@ -17,7 +17,7 @@
          payload_template: '012'
          
 - id: Отключение термостатов
-  alias: check_thermodtate
+  alias: check_thermostate
   initial_state: true
   trigger:
   - platform: homeassistant
@@ -32,18 +32,36 @@
       - climate.living_heater
       - climate.dd_heater
       - climate.da_heater
+      
+- id: Контроль счетчика радиации
+  alias: geiger_control
+  initial_state: false
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id:
+        - sensor.0x00124b001d3bdce0_radioactive_events_per_minute
+  action:
+  - service: timer.cancel
+    entity_id: timer.geiger
+  - service: timer.start
+    entity_id: timer.geiger
+ 
 
-# - alias: 00_backup_everyday
-#   initial_state: true
-#   trigger:
-#     - platform: time
-#       at: '01:00:00'
-#   action:
-#     - service: recorder.purge
-#       data:
-#           keep_days: 1
-#           repack: true
-
-
-
-
+- id: Перезапуск счетчика радиации
+  alias: geiger_reload
+  initial_state: false
+  trigger:
+   - platform: event
+     event_type: timer.finished
+     event_data:
+       entity_id: timer.geiger
+  action: 
+    - service: switch.turn_off
+      entity_id: switch.0x00158d000153dd8e_switch
+    - delay: 00:00:10
+    - service: switch.turn_on
+      entity_id: switch.0x00158d000153dd8e_switch
+    - service: timer.start
+      entity_id: timer.geiger

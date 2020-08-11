@@ -37,7 +37,7 @@ air_mijia:
           mijia_air_co2a:
             friendly_name: 'Mijia air СО2а - '
             value_template: "{{ state_attr('air_quality.mijia_air_monitor', 'carbon_dioxide_equivalent') }}"  
-            icon_template: mdi:periodic-table-co2
+            icon_template: mdi:molecule-co2
             entity_id: air_quality.mijia_air_monitor
             unit_of_measurement: 'ppm'
             

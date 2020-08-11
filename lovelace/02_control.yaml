@@ -11,67 +11,101 @@ cards:
         - type: custom:stack-in-card
           mode: vertical
           cards:
+      
             - type: markdown
               style: |
-                  ha-card {
-                    color: #00BFFF;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
+                   ha-card {
+                     color: #00BFFF;
+                     font-weight: bold;
+                     font-size: 16px;
+                   }          
               content: >
-                  **Местонахождение**
+                 **Работа автоматизаций**
     
-            - type: glance
-              show_name: false
+            - type: entities
               style: |
-                  ha-card {
-                    color: #00BFFF;
-                    --paper-item-icon-color: #00BFFF;
-                    --iron-icon-stroke-color: #FFFFE0;
-                    font-weight: bold;
-                    font-size: 14px;
-                  } 
+                   ha-card {
+                     color: #00BFFF;
+                     --paper-item-icon-color: #00BFFF;
+                     --iron-icon-stroke-color: #FFFFE0;
+                     font-weight: bold;
+                     font-size: 14px;
+                   } 
+              show_header_toggle: false
               entities:
-              - entity: sensor.alex
-              - entity: sensor.olga
-              - entity: sensor.dima
+              - entity: switch.holiday_mode
+                name: Режим выходного дня - 
+              - entity: switch.vacancy
+                name: Отпуск -
 
         - type: custom:stack-in-card
           mode: vertical
           cards:
-
+      
             - type: markdown
               style: |
-                  ha-card {
-                    color: #00BFFF;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
+                   ha-card {
+                     color: #00BFFF;
+                     font-weight: bold;
+                     font-size: 16px;
+                   }          
               content: >
-                  **Активность в доме**
+                 **Глобальные режимы**
     
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #00BFFF;
-                      --paper-item-icon-color: #FFA500;
-                      --iron-icon-stroke-color: #FFFFE0;
-                      font-weight: bold;
-                      font-size: 14px;
-                    }  
-              filter:
-                include:
-                 - entity_id: binary_sensor.motion_in_home
-                   options:
-                      secondary_info: last-changed
-                 - entity_id: binary_sensor.people_in_home   
-                   options:
-                      secondary_info: last-changed
+            - type: entities
+              style: |
+                   ha-card {
+                     color: #00BFFF;
+                     --paper-item-icon-color: #00BFFF;
+                     --iron-icon-stroke-color: #FFFFE0;
+                     font-weight: bold;
+                     font-size: 14px;
+                   } 
+              show_header_toggle: false
+              entities:
+              - entity: switch.humidification_mode
+                name: Увлажнение воздуха -
+              - entity: switch.radiator_mode
+                name: Отопление -
+              - entity: switch.heater_mode
+                name: Режим нагрева бойлера -
 
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+                
+            - type: markdown
+              style: |
+                   ha-card {
+                     color: #00BFFF;
+                     font-weight: bold;
+                     font-size: 16px;
+                   }          
+              content: >
+                 **Локальные режимы**
+    
+            - type: entities
+              style: |
+                   ha-card {
+                     color: #00BFFF;
+                     --paper-item-icon-color: #00BFFF;
+                     --iron-icon-stroke-color: #FFFFE0;
+                     font-weight: bold;
+                     font-size: 14px;
+                   } 
+              show_header_toggle: false
+              entities:
+              - entity: switch.living_holiday
+              - entity: switch.silent_mode              
+              - type: divider
+              - entity: switch.dd_holiday
+              - entity: switch.dd_tracking
+              - entity: switch.dd_hum_mode              
+              - type: divider
+              - entity: switch.da_holiday
+              - entity: switch.da_hum_mode
+                
 
         - type: custom:stack-in-card
           mode: vertical
@@ -86,25 +120,28 @@ cards:
                   } 
               content: >
                  **Автоматизации и скрипты**   
-            - type: entities
+            - type: glance
               style: |
                   ha-card {
                     color: #00BFFF;
-                    --paper-item-icon-color: #00BFFF;
+                    --paper-item-icon-color: #E6E6FA;
                     font-weight: bold;
                     font-size: 14px;
                   } 
-              show_header_toggle: false
               entities:
                 - entity: sensor.count_automation
                   icon: mdi:counter
+                  name: Auto
                 - entity: sensor.count_automation_on
                   icon: mdi:check
+                  name: Enabled
                 - entity: sensor.count_script
                   icon: mdi:counter
+                  name: Scripts
                 - entity: sensor.count_script_on
                   icon: mdi:check
-
+                  name: Run
+                  
         - type: custom:stack-in-card
           mode: vertical
           cards:
@@ -117,99 +154,33 @@ cards:
                     font-size: 16px;
                   } 
               content: >
-                  **Телевизоры**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_state: false
-                style: |
-                    ha-card {
-                      color: #00BFFF;
-                      --paper-item-icon-color: #00BFFF;
-                      font-weight: bold;
-                      font-size: 14px;
-                    } 
-              filter:
-                include:
-                 - entity_id: switch.tv_*
-                 - entity_id: sensor.*_tv_custom
-                exclude:
-                 - state: 'off'
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-
-            - type: markdown
+                 **Сущности**   
+            - type: glance
               style: |
                   ha-card {
                     color: #00BFFF;
+                    --paper-item-icon-color: #E6E6FA;
                     font-weight: bold;
-                    font-size: 16px;
+                    font-size: 14px;
                   } 
-              content: >
-                  **Ноутбуки**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_state: false
-                style: |
-                    ha-card {
-                      color: #00BFFF;
-                      --paper-item-icon-color: #00BFFF;
-                      font-weight: bold;
-                      font-size: 14px;
-                    } 
-              filter:
-                include:
-                 - entity_id: binary_sensor.notebook*
-                   options:
-                      secondary_info: last-changed
-                exclude:
-                 - state: 'off'
+              entities:
+                - entity: sensor.count_light
+                  icon: mdi:ceiling-light
+                  name: Light
+                - entity: sensor.count_switch
+                  icon: mdi:power-plug
+                  name: Switch
+                - entity: sensor.count_sensor
+                  icon: mdi:leak
+                  name: Sensor
+                - entity: sensor.count_binary_sensor
+                  icon: mdi:matrix
+                  name: Binary
+
 
 ############################ Колонка 2 ############################
     - type: vertical-stack
       cards:
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-
-            - type: markdown
-              style: |
-                  ha-card {
-                    color: #FA8072;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
-              content: >
-                  **Аварийные датчики**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #FA8072;
-                      --paper-item-icon-color: #FA8072;
-                      --iron-icon-stroke-color: #FA8072;
-                      font-weight: bold;
-                      font-size: 14px;
-                    }
-              filter:
-                include:
-                 - entity_id: binary_sensor.water*
-                   options:
-                      secondary_info: last-changed
-                 - entity_id: binary_sensor.smoke*
-                   options:
-                      secondary_info: last-changed
-                exclude:
-                 - state: 'off'
 
         - type: custom:stack-in-card
           mode: vertical
@@ -232,8 +203,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FA8072;
-                      --paper-item-icon-color: #FA8072;
-                      --iron-icon-stroke-color: #FA8072;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -253,8 +224,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FA8072;
-                      --paper-item-icon-color: #FA8072;
-                      --iron-icon-stroke-color: #FA8072;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -287,8 +258,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FA8072;
-                      --paper-item-icon-color: #FA8072;
-                      --iron-icon-stroke-color: #FA8072;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -308,8 +279,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FA8072;
-                      --paper-item-icon-color: #FA8072;
-                      --iron-icon-stroke-color: #FA8072;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -342,8 +313,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FA8072;
-                      --paper-item-icon-color: #FA8072;
-                      --iron-icon-stroke-color: #FA8072;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -380,8 +351,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FA8072;
-                      --paper-item-icon-color: #FA8072;
-                      --iron-icon-stroke-color: #FA8072;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -404,8 +375,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FA8072;
-                      --paper-item-icon-color: #FA8072;
-                      --iron-icon-stroke-color: #FA8072;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     }  
@@ -451,6 +422,8 @@ cards:
                       type: 'custom:battery-entity'
                 exclude:
                  - entity_id: sensor.mi_8_lite_battery_state
+                 - entity_id: sensor.ipad_aleksei_battery_state
+                 - entity_id: sensor.0xec1bbdfffe9466c5_battery
                  - state: '> 30.0'
                  - state: 'unknown'
 
@@ -479,7 +452,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FFA500;
-                      --paper-item-icon-color: #FFA500;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -495,7 +469,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FFA500;
-                      --paper-item-icon-color: #FFA500;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -527,7 +502,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FFA500;
-                      --paper-item-icon-color: #FFA500;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -535,6 +511,73 @@ cards:
                 include:
                  - domain: light
                    state: 'on'
+                   options:
+                      secondary_info: last-changed
+                      
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: markdown
+              style: |
+                  ha-card {
+                    color: #FFA500;
+                    font-weight: bold;
+                    font-size: 16px;
+                  } 
+              content: >
+                  **Телевизоры**
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_state: false
+                style: |
+                    ha-card {
+                      color: #FFA500;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
+                      font-weight: bold;
+                      font-size: 14px;
+                    } 
+              filter:
+                include:
+                 - entity_id: switch.tv_*
+                 - entity_id: sensor.*_tv_custom
+                exclude:
+                 - state: 'off'
+                 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: markdown
+              style: |
+                  ha-card {
+                    color: #FFA500;
+                    font-weight: bold;
+                    font-size: 16px;
+                  } 
+              content: >
+                  **Ноутбуки**
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_state: false
+                style: |
+                    ha-card {
+                      color: #FFA500;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
+                      font-weight: bold;
+                      font-size: 14px;
+                    } 
+              filter:
+                include:
+                 - entity_id: binary_sensor.notebook*
+                exclude:
+                 - state: 'off'
                    options:
                       secondary_info: last-changed
 
@@ -559,7 +602,8 @@ cards:
                 style: |
                     ha-card {
                       color: #FFA500;
-                      --paper-item-icon-color: #FFA500;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -570,6 +614,84 @@ cards:
                  - domain: timer
                    state: 'idle'
 
+############################ Колонка 4 ############################
+    - type: vertical-stack
+      cards:
+      
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: markdown
+              style: |
+                  ha-card {
+                    color: #00FA9A;
+                    font-weight: bold;
+                    font-size: 16px;
+                  } 
+              content: >
+                  **Аварийные датчики**
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+                style: |
+                    ha-card {
+                      color: #00FA9A;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
+                      font-weight: bold;
+                      font-size: 14px;
+                    }
+              filter:
+                include:
+                 - entity_id: binary_sensor.*water_leak
+                   options:
+                      secondary_info: last-changed
+                 - entity_id: binary_sensor.*smoke
+                   options:
+                      secondary_info: last-changed
+                exclude:
+                 - state: 'off'
+                 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: markdown
+              style: |
+                  ha-card {
+                    color: #00FA9A;
+                    font-weight: bold;
+                    font-size: 16px;
+                  } 
+              content: >
+                  **Активность в доме**
+                  
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+                style: |
+                    ha-card {
+                      color: #00FA9A;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
+                      font-weight: bold;
+                      font-size: 14px;
+                    } 
+              filter:
+                include:
+                 - entity_id: binary_sensor.motion_in_home
+                   options:
+                      secondary_info: last-changed
+                 - entity_id: binary_sensor.people_in_home   
+                   options:
+                      secondary_info: last-changed
+                      
         - type: custom:stack-in-card
           mode: vertical
           cards:
@@ -577,7 +699,7 @@ cards:
             - type: markdown
               style: |
                   ha-card {
-                    color: #FFA500;
+                    color: #00FA9A;
                     font-weight: bold;
                     font-size: 16px;
                   } 
@@ -590,12 +712,12 @@ cards:
                 show_header_toggle: false
                 style: |
                     ha-card {
-                      color: #FFA500;
-                      --paper-item-icon-color: #FFA500;
-                      --iron-icon-stroke-color: #FFFFE0;
+                      color: #00FA9A;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
-                    }  
+                    }   
               filter:
                 include:
                  - entity_id: sensor.*rssi_summ
@@ -609,27 +731,28 @@ cards:
             - type: markdown
               style: |
                   ha-card {
-                    color: #FFA500;
+                    color: #00FA9A;
                     font-weight: bold;
                     font-size: 16px;
                   } 
               content: >
-                  **Активные датчики движения**
+                  **Датчики движения**
                   
             - type: custom:auto-entities
               show_empty: false
               card:
-                type: glance
-                show_state: false
+                type: entities
                 style: |
                     ha-card {
-                      color: #FFA500;
+                      color: #00FA9A;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
-                    }  
+                    } 
+                show_state: false
               filter:
                 include:
-                 - entity_id: binary_sensor.motion*
                  - entity_id: binary_sensor.*occupancy                 
                 exclude:
                  - entity_id: binary_sensor.motion_in_home
@@ -642,7 +765,7 @@ cards:
             - type: markdown
               style: |
                   ha-card {
-                    color: #FFA500;
+                    color: #00FA9A;
                     font-weight: bold;
                     font-size: 16px;
                   } 
@@ -654,9 +777,9 @@ cards:
                 type: entities
                 style: |
                     ha-card {
-                      color: #FFA500;
-                      --paper-item-icon-color: #FFA500;
-                      --iron-icon-stroke-color: #FFFFE0;
+                      color: #00FA9A;
+                      --paper-item-icon-color: #E6E6FA;
+                      --iron-icon-stroke-color: #E6E6FA;
                       font-weight: bold;
                       font-size: 14px;
                     } 
@@ -671,278 +794,3 @@ cards:
                       secondary_info: last-changed                 
                 exclude:
                  - state: 'off'
-
-############################ Колонка 4 ############################
-    - type: vertical-stack
-      cards:
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-      
-            - type: weather-forecast
-              entity: weather.openweathermap
-          
-            # - type: custom:air-visual-card
-            #   air_pollution_level: sensor.u_s_air_pollution_level
-            #   air_quality_index: sensor.u_s_air_quality_index
-            #   main_pollutant: sensor.u_s_main_pollutant
-            
-            
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-       
-            - type: markdown
-              style: |
-                  ha-card {
-                    color: #B0E0E6;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
-              content: >
-                  **CO2 > 1500 ppm**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #B0E0E6;
-                      --paper-item-icon-color: #B0E0E6;
-                      --iron-icon-stroke-color: #B0E0E6;
-                      font-weight: bold;
-                      font-size: 14px;
-                    }
-              filter:
-                include:
-                 - entity_id: sensor.*co2*
-                exclude:
-                 - state: '< 1500'
-
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-       
-            - type: markdown
-              style: |
-                  ha-card {
-                    color: #B0E0E6;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
-              content: >
-                  **Температура < 18 C**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #B0E0E6;
-                      --paper-item-icon-color: #B0E0E6;
-                      --iron-icon-stroke-color: #B0E0E6;
-                      font-weight: bold;
-                      font-size: 14px;
-                    }
-              filter:
-                include:
-                 - entity_id: sensor.*temperature*
-                exclude:
-                 - entity_id: sensor.*battery*
-                 - entity_id: sensor.*_switch_temperature*
-                 - state: '> 18'
-                 - state: 'unknown'
-                 - state: 'unavailable'
-                 
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-       
-            - type: markdown
-              style: |
-                  ha-card {
-                    color: #FFFACD;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
-              content: >
-                  **Температура > 26 C**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #FFFACD;
-                      --paper-item-icon-color: #FFFACD;
-                      --iron-icon-stroke-color: #FFFACD;
-                      font-weight: bold;
-                      font-size: 14px;
-                    }
-              filter:
-                include:
-                 - entity_id: sensor.*temperature*
-                exclude:
-                 - entity_id: sensor.*battery*
-                 - entity_id: sensor.*_switch_temperature*
-                 - state: '< 26'
-                 - state: 'unknown'
-                 - state: 'unavailable'
-                 
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-          
-            - type: markdown
-              style: |
-                  ha-card {
-                    color: #FFD700;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
-              content: >
-                  **Влажность < 40%**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #FFD700;
-                      --paper-item-icon-color: #FFD700;
-                      --iron-icon-stroke-color: #FFD700;
-                      font-weight: bold;
-                      font-size: 14px;
-                    }
-              filter:
-                include:
-                 - entity_id: sensor.*humidity*
-                exclude:
-                 - entity_id: sensor.*battery*
-                 - entity_id: sensor.humidity_158d00015aebb6
-                 - entity_id: sensor.05_mi_air_humidity
-                 - entity_id: sensor.05_smartmi_humidity
-                 - entity_id: sensor.humidity_158d000156e92e
-                 - entity_id: sensor.dd_bt_humidity
-                 - entity_id: sensor.humidity_158d000159c7e6
-                 - entity_id: sensor.da_bt_humidity
-                 - state: '> 40'
-                 - state: 'unknown'
-                 - state: 'unavailable'
-                 
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-          
-            - type: markdown
-              style: |
-                  ha-card {
-                    color: #00FFFF;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
-              content: >
-                  **Влажность > 60%**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #00FFFF;
-                      --paper-item-icon-color: #00FFFF;
-                      --iron-icon-stroke-color: #00FFFF;
-                      font-weight: bold;
-                      font-size: 14px;
-                    }
-              filter:
-                include:
-                 - entity_id: sensor.*humidity*
-                exclude:
-                 - entity_id: sensor.*battery*
-                 - entity_id: sensor.humidity_158d00015aebb6
-                 - entity_id: sensor.05_mi_air_humidity
-                 - entity_id: sensor.05_smartmi_humidity
-                 - entity_id: sensor.humidity_158d000156e92e
-                 - entity_id: sensor.dd_bt_humidity
-                 - entity_id: sensor.humidity_158d000159c7e6
-                 - entity_id: sensor.da_bt_humidi
-                 - state: '< 60'
-                 - state: 'unknown'
-                 - state: 'unavailable'
-                 
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-          
-            - type: markdown
-              style: |
-                  ha-card {
-                    color: #FFD700;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
-              content: >
-                  **Растения < 20% влажности почвы**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #FFD700;
-                      --paper-item-icon-color: #FFD700;
-                      --iron-icon-stroke-color: #FFD700;
-                      font-weight: bold;
-                      font-size: 14px;
-                    }
-              filter:
-                include:
-                 - entity_id: sensor.*moisture*
-                exclude:
-                 - state: '> 20.0'
-                 - state: 'unknown'
-                 - state: 'unavailable'
-
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-          
-            - type: markdown
-              style: |
-                  ha-card {
-                    color: #DCDCDC;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
-              content: >
-                  **Cенсоры освещения > 500 люмен**
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #DCDCDC;
-                      --paper-item-icon-color: #DCDCDC;
-                      --iron-icon-stroke-color: #DCDCDC;
-                      font-weight: bold;
-                      font-size: 14px;
-                    }
-              filter:
-                include:
-                 - entity_id: sensor.illumination* 
-                exclude:
-                 - state: '< 500.0'
-                 - state: 'unknown'

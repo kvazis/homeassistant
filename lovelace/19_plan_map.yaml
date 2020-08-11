@@ -1,0 +1,464 @@
+title: План
+panel: true
+icon: mdi:floor-plan
+cards:
+
+    - type: vertical-stack
+      cards:
+
+            - type: picture-elements
+              style: |
+                   ha-card {
+                     color: #000000;
+                     font-weight: bold;
+                     font-size: 14px;
+                   }   
+              image: /local/plan.png
+              elements:
+
+                # - type: image
+                #   entity: camera.reolink
+                #   camera_image: camera.reolink_sub
+                #   style:
+                #     top: 5%
+                #     left: 8%
+                #     width: 15%
+                #     border: 1px solid white
+                #     border-radius: 10%
+                    
+                # - type: image
+                #   entity: camera.xiaofang
+                #   camera_image: camera.xiaofang
+                #   style:
+                #     top: 20%
+                #     left: 8%
+                #     width: 15%
+                #     border: 1px solid white
+                #     border-radius: 10%
+
+                # - type: image
+                #   entity: camera.reolink3
+                #   camera_image: camera.reolink3_sub
+                #   style:
+                #     top: 35%
+                #     left: 8%
+                #     width: 15%
+                #     border: 1px solid white
+                #     border-radius: 10%
+                
+# Свет в прихожей                    
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.0x00158d000420dbab_light
+                  style:
+                     top: 20%
+                     left: 18% 
+
+# Входная дверь                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d000119378d_contact
+                  style:
+                     top: 20%
+                     left: 15% 
+                     
+# Движение в прихожей                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d00013f7894_occupancy
+                  style:
+                     top: 23%
+                     left: 18% 
+                     
+# Датчик дыма
+                - type: state-icon
+                  entity: binary_sensor.0x00158d000149d28b_smoke
+                  style:
+                     top: 28%
+                     left: 20% 
+
+# Движение в туалете 
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a24e71_occupancy
+                  style:
+                     top: 15%
+                     left: 25% 
+
+# Свет в туалете 
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_02_ceiling
+                  style:
+                     top:  10%
+                     left: 25% 
+
+# Свет в туалете - зеркало
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.sonoff_02_mirror
+                  icon: mdi:mirror
+                  style:
+                     top:  10%
+                     left: 23% 
+
+# Вентиляция в туалете                      
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d00014dceb3_switch_right
+                  style:
+                     top:  10%
+                     left: 27% 
+
+# Движение в прачечной
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001ab3350_occupancy
+                  style:
+                     top: 15%
+                     left: 33% 
+
+# Свет в прачечной
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.aqara_02_ceiling
+                  style:
+                     top:  10%
+                     left: 33% 
+                     
+# Протечка возле стиральной машине в прачечной
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0002705b7b_water_leak
+                  style:
+                     top: 3%
+                     left: 31% 
+
+# Режим стирки                    
+                - type: state-icon
+                  entity: binary_sensor.washer
+                  style:
+                     top: 3%
+                     left: 33% 
+                     
+# Движение в коридоре
+                - type: state-icon
+                  entity: binary_sensor.0x00158d00010f8920_occupancy
+                  style:
+                     top: 27%
+                     left: 35% 
+
+# Свет в коридоре
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_03_ceiling
+                  style:
+                     top:  33%
+                     left: 29% 
+
+# Протечка под раковиной в кухне                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001bbeba6_water_leak
+                  style:
+                     top: 10%
+                     left: 39% 
+
+# Подсветка рабочей поверхности в кухне                   
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.aqara_04_strip
+                  style:
+                     top: 15%
+                     left: 39% 
+                     
+                # - type: image
+                #   entity: camera.reolink2
+                #   camera_image: camera.reolink2
+                #   style:
+                #     top: 18%
+                #     left: 49%
+                #     width: 15%
+                #     border: 1px solid white
+                #     border-radius: 10%
+                
+# Люстра в кухне                
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.philips_04_ceiling
+                  style:
+                     top: 20%
+                     left: 49% 
+
+# Датчик освещения в кухне                    
+                - type: state-label
+                  entity: sensor.0x04cf8cdf3c772379_illuminance
+                  style:
+                     top: 25%
+                     left: 59% 
+
+
+# Подсветка шлюза в кухне                     
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.gateway_light_7811dc64f4c8
+                  style:
+                     top: 27%
+                     left: 59% 
+
+# Движение в кухне
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001e16204_occupancy
+                  style:
+                     top: 27%
+                     left: 39% 
+
+# Дверь на балкон                   
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a20885_contact
+                  style:
+                     top: 24%
+                     left: 62% 
+
+# Окно на балкон
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a99562_contact
+                  style:
+                     top: 18%
+                     left: 62% 
+
+# Телевизор в кухне
+                - type: state-icon
+                  icon: mdi:television
+                  tap_action:
+                      action: toggle
+                  entity: switch.tv_xiaomi
+                  style:
+                     top: 22%
+                     left: 49% 
+
+# Потребление - холодильник
+                - type: state-label
+                  entity: sensor.0x00158d0001fa2934_power
+                  style:
+                     top: 23%
+                     left: 59% 
+                     
+# Потребление - микроволновка                     
+                - type: state-label
+                  entity: sensor.0x000d6f0014bb14b4_power
+                  style:
+                     top: 3%
+                     left: 59% 
+
+# Окно на балконе                     
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a4a394_contact
+                  style:
+                     top: 18%
+                     left: 79%
+                     
+                     
+# Атмосферное давление                     
+                - type: state-label
+                  entity: sensor.mean_pressure
+                  style:
+                     top: 10%
+                     left: 79%
+                     
+# Телевизор в гостиной
+                - type: state-icon
+                  icon: mdi:television
+                  tap_action:
+                      action: toggle
+                  entity: switch.tv_xiaomi_55
+                  style:
+                     top: 31%
+                     left: 49% 
+                     
+# Подсветка шлюза  в гостиной
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.gateway_light_34ce0088b039
+                  style:
+                     top: 31%
+                     left: 47% 
+                     
+# ТВ RGB лампа в гостиной
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_rgbtvbulb
+                  style:
+                     top: 31%
+                     left: 51% 
+
+# Вентилятор роутера                    
+                - type: state-icon
+                  icon: mdi:fan 
+                  tap_action:
+                      action: toggle
+                  entity: switch.xiaomi_wifi_socket_usb_usb
+                  style:
+                     top: 33%
+                     left: 51% 
+                     
+# Устройств в сети
+                - type: state-label
+                  entity: sensor.asuswrt_devices_connected
+                  style:
+                     top: 33%
+                     left: 47% 
+                     
+# Ноутбук HP                     
+                - type: state-icon
+                  entity: binary_sensor.notebook_hp
+                  style:
+                     top: 35%
+                     left: 59% 
+                     
+# Ноутбук Acer                     
+                - type: state-icon
+                  entity: binary_sensor.notebook_acer
+                  style:
+                     top: 35%
+                     left: 62% 
+                     
+
+# Потребление - стол, гостиная
+                - type: state-label
+                  entity: sensor.0x04cf8cdf3c764e0a_power
+                  style:
+                     top: 32%
+                     left: 66% 
+                     
+# Люстра 1 в гостиной
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_ceiling1
+                  style:
+                     top: 44%
+                     left: 49% 
+                     
+# Люстра 2 в гостиной
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_ceiling2
+                  style:
+                     top: 44%
+                     left: 69% 
+                     
+# Прикроватник в гостиной
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_bedside2
+                  style:
+                     top: 54%
+                     left: 59% 
+
+# Отопление
+
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: climate.living_heater
+                  style:
+                     top: 49%
+                     left: 62% 
+
+                - type: state-label
+                  entity: climate.living_heater
+                  style:
+                     top: 49%
+                     left: 66%
+                     
+# Увлажнитель в гостиной 1
+                - type: state-icon
+                  icon: mdi:brightness-auto
+                  tap_action:
+                      action: toggle
+                  entity: switch.gg_humidifier_mode_auto
+                  style:
+                     top: 51%
+                     left: 62% 
+                     
+# Увлажнитель в гостиной 2
+                - type: state-icon
+                  icon: mdi:speedometer-slow
+                  tap_action:
+                      action: toggle
+                  entity: switch.gg_humidifier_mode_silent
+                  style:
+                     top: 51%
+                     left: 64% 
+
+# Увлажнитель в гостиной 3
+                - type: state-icon
+                  icon: mdi:speedometer-medium
+                  tap_action:
+                      action: toggle
+                  entity: switch.gg_humidifier_mode_medium
+                  style:
+                     top: 51%
+                     left: 66% 
+
+# Увлажнитель в гостиной 4
+                - type: state-icon
+                  icon: mdi:speedometer
+                  tap_action:
+                      action: toggle
+                  entity: switch.gg_humidifier_mode_high
+                  style:
+                     top: 51%
+                     left: 68% 
+                     
+# Окно на балкон
+                - type: state-icon
+                  entity: binary_sensor.0x00158d00013ed373_contact
+                  style:
+                     top: 57%
+                     left: 71% 
+                     
+# Дверь на балкон
+                - type: state-icon
+                  entity: binary_sensor.0x00158d000445206b_contact
+                  style:
+                     top: 57%
+                     left: 76% 
+                     
+# Движение на балконе
+                - type: state-icon
+                  entity: binary_sensor.0x00158d000449b773_occupancy
+                  style:
+                     top: 59%
+                     left: 76% 
+                     
+# Люстра на балконе
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.66633530807d3a766432
+                  style:
+                     top: 65%
+                     left: 72% 
+                     
+# Окно на балконе
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a2f5f7_contact
+                  style:
+                     top: 70%
+                     left: 75% 
+                     
+# Радиация                     
+                - type: state-label
+                  entity: sensor.radiation_max
+                  style:
+                     top: 78%
+                     left: 75%

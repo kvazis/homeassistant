@@ -150,6 +150,12 @@
 
 - platform: ping
   host: 192.168.0.142
-  name: airmonitor_gg
+  name: airmonitor_mijia
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.143
+  name: airmonitor_cleargrass
   count: 2
   scan_interval: 30

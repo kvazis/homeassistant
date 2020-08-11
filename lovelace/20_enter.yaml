@@ -1,0 +1,192 @@
+##################  ECTLB
+title: Этаж, вход, коридор
+icon: mdi:exit-run
+cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+              **Мониторинг**
+
+        - type: picture-entity
+          entity: camera.reolink_sub
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+        - type: picture-entity
+          entity: camera.xiaofang
+          show_state: false
+          show_name: false
+          
+        - type: picture-entity
+          entity: camera.reolink3_sub
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+      - type: vertical-stack
+        cards:
+
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Прихожая**
+ 
+        - type: glance
+          show_state: false
+          entities:
+             - entity: binary_sensor.0x00158d000119378d_contact
+               name: Входная дверь
+             - entity: binary_sensor.0x00158d00013f7894_occupancy
+               name: Движение  
+             - entity: binary_sensor.en_light_on
+               name: Автосвет
+             - entity: binary_sensor.en_night
+               name: Ночь
+
+   
+        - type: light
+          entity: light.0x00158d000420dbab_light
+          name: Прихожая
+          
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.0x00158d000119378d_changed
+            name: Входная дверь открывалась в -
+            icon: mdi:door
+          - entity: sensor.0x00158d00013f7894_changed
+            name: Последнее движение в -
+            icon: mdi:run-fast
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: binary_sensor.0x00158d000149d28b_smoke
+            name: Датчик дыма
+          - entity: sensor.0x00158d000149d28b_sensitivity
+            name: Уровень чувствительности - 
+          - entity: sensor.0x00158d000149d28b_alarm
+            name: Последняя сработка - 
+          - entity: script.en_smoke_selftest
+            name: Самотестирование
+          - entity: sensor.0x00158d000149d28b_selftest
+            name: Последний тест - 
+            
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.cgd1_temperature
+             name: Температура
+          color_thresholds:
+            - value: 10
+              color: "#191970"
+            - value: 15
+              color: "#0000FF"
+            - value: 20
+              color: "#ADD8E6"
+            - value: 25
+              color: "#E0FFFF"
+            - value: 30
+              color: "#FFFF00"
+            - value: 50
+              color: "#FFD700"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+         
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.cgd1_humidity
+             name: Влажность
+          color_thresholds:
+            - value: 20
+              color: "#FFFF00"
+            - value: 30
+              color: "#FAFAD2"
+            - value: 40
+              color: "#E0FFFF"
+            - value: 50
+              color: "#7FFFD4"
+            - value: 60
+              color: "#00CED1"
+            - value: 80
+              color: "#0000FF"
+            - value: 100
+              color: "#000080"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.camphoto
+          - entity: timer.entrance
+          state_filter:
+            - "active"
+
+      - type: vertical-stack
+        cards:            
+            
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Коридор**
+ 
+        - type: glance
+          show_state: false
+          entities:
+             - entity: binary_sensor.0x00158d00010f8920_occupancy  
+               name: Движение
+             - entity: binary_sensor.cr_light_on
+               name: Автосвет
+             - entity: binary_sensor.cr_night
+               name: Ночь
+
+        - type: custom:stack-in-card
+          mode: horizontal
+          cards: 
+
+            - type: light
+              entity: light.yeelight_03_ceiling
+              name: Основной
+            - type: light
+              entity: light.yeelight_03_ceiling_ambilight
+              name: Амбилайт
+            - type: light
+              entity: light.yeelight_03_ceiling_nightlight
+              name: Ночник
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: sensor.mqtt_binary_sensor_158d00010f8920
+             name: Последнее движение в -
+             icon: mdi:run-fast
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.corridor
+          state_filter:
+            - "active"

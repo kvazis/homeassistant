@@ -1,0 +1,276 @@
+##################  Toilet
+title: Санузлы, прачечная
+icon: mdi:toilet
+cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Туалет**
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.0x00158d0001a24e71_occupancy
+             name: Движение
+           - entity: binary_sensor.tt_light_timer
+             name: Автосвет
+
+        - type: custom:stack-in-card
+          mode: horizontal
+          cards:  
+          
+            - type: light
+              entity: light.yeelight_02_ceiling
+              name: Люстра
+
+            - type: light
+              entity: light.sonoff_02_mirror
+              name: Зеркало
+              icon: mdi:mirror
+
+
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.0x00158d0001a24e71_illuminance
+             name: Освещенность
+           - entity: sensor.mqtt_binary_sensor_158d0001a24e71
+             icon: mdi:run-fast
+             name: Туалет
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0xec1bbdfffe6f3394_temperature
+             name: Температура
+          color_thresholds:
+            - value: 10
+              color: "#191970"
+            - value: 15
+              color: "#0000FF"
+            - value: 20
+              color: "#ADD8E6"
+            - value: 25
+              color: "#E0FFFF"
+            - value: 30
+              color: "#FFFF00"
+            - value: 50
+              color: "#FFD700"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0xec1bbdfffe6f3394_humidity
+             name: Влажность
+          color_thresholds:
+            - value: 20
+              color: "#FFFF00"
+            - value: 30
+              color: "#FAFAD2"
+            - value: 40
+              color: "#E0FFFF"
+            - value: 50
+              color: "#7FFFD4"
+            - value: 60
+              color: "#00CED1"
+            - value: 80
+              color: "#0000FF"
+            - value: 100
+              color: "#000080"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+
+        - type: custom:stack-in-card
+          mode: horizontal
+          cards:        
+            - type: button
+              entity: switch.0x00158d00014dceb3_switch_right
+              name: Вентилятор
+            - type: button
+              entity: switch.0x00158d00014dceb3_switch_left
+              name: Питание люстра
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.toilet
+          - entity: timer.toilet_v
+          state_filter:
+            - "active"
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Прачечная**
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.0x00158d0001ab3350_occupancy
+             name: Движение
+           - entity: binary_sensor.0x00158d0002705b7b_water_leak
+             name: Датчик протечки
+
+        - type: light
+          entity: light.aqara_02_ceiling
+          name: Свет
+          icon: mdi:ceiling-light
+          
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.0x00158d0001ab3350_illuminance
+             name: Освещенность
+           - entity: sensor.mqtt_binary_sensor_158d0001ab3350
+             icon: mdi:run-fast
+             name: Прачечная
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0xec1bbdfffe8d6ac9_temperature
+             name: Температура
+          color_thresholds:
+            - value: 10
+              color: "#191970"
+            - value: 15
+              color: "#0000FF"
+            - value: 20
+              color: "#ADD8E6"
+            - value: 25
+              color: "#E0FFFF"
+            - value: 30
+              color: "#FFFF00"
+            - value: 50
+              color: "#FFD700"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0xec1bbdfffe8d6ac9_humidity
+             name: Влажность
+          color_thresholds:
+            - value: 20
+              color: "#FFFF00"
+            - value: 30
+              color: "#FAFAD2"
+            - value: 40
+              color: "#E0FFFF"
+            - value: 50
+              color: "#7FFFD4"
+            - value: 60
+              color: "#00CED1"
+            - value: 80
+              color: "#0000FF"
+            - value: 100
+              color: "#000080"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+             
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Стиральная машина**
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: switch.bwshp2_relay
+             name: Питание
+           - entity: binary_sensor.washer
+              
+        - type: custom:logbook-card
+          entity: binary_sensor.washer
+          max_items: 5
+          title: История стирок
+          duration_labels:
+            second:  '${value} секунда'
+            seconds: '${value} секунд'
+            minute:  '${value} минута'
+            minutes: '${value} минут'
+            hour:    '${value} час'
+            hours:   '${value} часов'
+            day:     '${value} день'
+            days:    '${value} дней'
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.load_bwshp2
+             name: Энергопотребление
+          color_thresholds:
+            - value: 50
+              color: "#98FB98"
+            - value: 100
+              color: "#006400"
+            - value: 500
+              color: "#8A2BE2"
+            - value: 1000
+              color: "#4B0082"
+            - value: 2000
+              color: "#A52A2A"
+            - value: 3500
+              color: "#800000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 2
+          group_by: hour
+          hours_to_show: 36
+          
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.bwshp2_voltage
+             name: Напряжение в сети
+          color_thresholds:
+            - value: 215
+              color: "#DC143C"
+            - value: 220
+              color: "#FFFFE0"
+            - value: 230
+              color: "#00FF00"
+            - value: 240
+              color: "#FFFFE0"
+            - value: 300
+              color: "#DC143C"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 2
+          group_by: hour
+          hours_to_show: 36

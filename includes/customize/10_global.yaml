@@ -1,0 +1,5 @@
+sensor.mean_pressure:
+  friendly_name: Атмосферное давление
+  device_class: pressure
+  icon: mdi:gauge
+  unit_of_measurement: мм рт. ст.

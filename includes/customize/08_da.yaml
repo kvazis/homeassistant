@@ -2,7 +2,7 @@
 
 ## Освещение
 light.aqara_08_ceiling:
-  friendly_name: Детская А, основной свет
+  friendly_name: Детская А основной свет
   icon: mdi:ceiling-light
 
 light.gateway_light_f0b429cc1f11:
@@ -22,20 +22,20 @@ light.yeelight_08_bedside:
   icon: mdi:lighthouse
 
 light.philips_08_bedside: 
-  friendly_name: Детская А, ночник стол
+  friendly_name: Детская А ночник стол
   icon: mdi:lighthouse
 
 ## Реле
 switch.0x00158d00014a1abd_switch:
-  friendly_name: Детская А, выключатель люстры
+  friendly_name: Детская А выключатель люстры
   icon: mdi:power-socket-eu
 
 switch.0x00158d0002d7bb2b_switch_l1:
-  friendly_name: Детская А, питание на стол
+  friendly_name: Детская А питание на стол
   icon: mdi:power-socket-eu
   
 switch.0x00158d0002d7bb2b_switch_l2:
-  friendly_name: Детская А, термоголовка
+  friendly_name: Детская А термоголовка
   icon: mdi:radiator
 
 switch.0x00158d00010ec4b8_switch:
@@ -45,65 +45,88 @@ switch.0x00158d00010ec4b8_switch:
 
 ## Сенсоры 
 sensor.08_mean_humidity:
-  friendly_name: Детская А, средняя влажность
+  friendly_name: Детская А средняя влажность
   icon: mdi:water-percent  
 sensor.08_mean_temperature:
-  friendly_name: Детская А, средняя температура
+  friendly_name: Детская А средняя температура
   icon: mdi:temperature-celsius
+sensor.0x04cf8cdf3c78ca91_illuminance:
+  friendly_name: Детская А освещенность
 
 sensor.da_bt_battery_level:
-  friendly_name: Детская А, BT датчик климата
+  friendly_name: Детская А BT датчик климата
   device_class:  battery
 sensor.da_bt_temperature:
-  friendly_name: Детская А, BT температура
+  friendly_name: Детская А BT температура
   icon: mdi:temperature-celsius
 sensor.da_bt_humidity:
-  friendly_name: Детская А, BT влажность
+  friendly_name: Детская А BT влажность
   icon: mdi:water-percent
 
 sensor.illumination_f0b429cc1f11:
-  friendly_name: Детская А шлюз освещенность
+  friendly_name: Детская А освещенность
+  unit_of_measurement: 'lx'
   
 sensor.0x00158d000159c7e6_humidity:
-  friendly_name: Детская А, влажность
+  friendly_name: Детская А влажность
   icon: mdi:water-percent
 sensor.0x00158d000159c7e6_temperature:
-  friendly_name: Детская А, температура
+  friendly_name: Детская А температура
   icon: mdi:temperature-celsius
   
 sensor.0x00158d00010b5c6e_click:
   friendly_name: Детская А выключатель вход
 
 sensor.0x00158d000186d9a9_click:
-  friendly_name: Детская А, стол
+  friendly_name: Детская А кнопка стол
   
 sensor.0x00158d000155d2fb_click:  
-  friendly_name: Детская А, кровать
+  friendly_name: Детская А кнопка кровать
   
 sensor.0x00158d00028f6fe6_action:
-  friendly_name: Детская А, кубик
+  friendly_name: Детская А кубик
   icon: mdi:cube-outline
   
 #Бинарные сенсоры
 binary_sensor.0x00158d0001583c7b_contact:
-  friendly_name: Детская А, окно
+  friendly_name: Детская А окно
   device_class: window 
 binary_sensor.0x00158d00016d56f5_occupancy:
-  friendly_name: Детская А, движение
+  friendly_name: Детская А датчик движения
   device_class: motion
   
+## Уровень cигнала
+sensor.0x04cf8cdf3c78ca91_linkquality:
+  friendly_name: Детская А датчик света
+sensor.0x00158d00010b5c6e_linkquality:
+  friendly_name: Детская А выключатель вход
+sensor.0x00158d0001583c7b_linkquality: 
+  friendly_name: Детская А окно  
+sensor.0x00158d000186d9a9_linkquality:
+  friendly_name: Детская А кнопка стол
+sensor.0x00158d000155d2fb_linkquality: 
+  friendly_name: Детская А кнопка кровать
+sensor.0x00158d00016d56f5_linkquality:
+  friendly_name: Детская А датчик движения
+sensor.0x00158d000159c7e6_linkquality:
+  friendly_name: Детская А климат
+sensor.0x00158d00028f6fe6_linkquality:
+  friendly_name: Детская А, кубик
+
 ## Уровень заряда
+sensor.0x04cf8cdf3c78ca91_battery:
+  friendly_name: Детская А датчик света
 sensor.0x00158d00010b5c6e_battery:
   friendly_name: Детская А выключатель вход
 sensor.0x00158d0001583c7b_battery:  
-  friendly_name: Детская А, окно  
+  friendly_name: Детская А окно  
 sensor.0x00158d000186d9a9_battery:
-  friendly_name: Детская А, стол
+  friendly_name: Детская А кнопка стол
 sensor.0x00158d000155d2fb_battery:  
-  friendly_name: Детская А, кровать
+  friendly_name: Детская А кнопка кровать
 sensor.0x00158d00016d56f5_battery:
-  friendly_name: Детская А, движение
+  friendly_name: Детская А датчик движения
 sensor.0x00158d000159c7e6_battery:
-  friendly_name: Детская А, климат
+  friendly_name: Детская А климат
 sensor.0x00158d00028f6fe6_battery:
   friendly_name: Детская А, кубик

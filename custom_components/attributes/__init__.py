@@ -1,1 +1,0 @@
-"""Attributes breakout sensor"""

@@ -1,0 +1,27 @@
+{
+  "title": "Daily Sensor",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Daily Sensor",
+        "description": "If you need help with the configuration, please see https://github.com/jeroenterheerdt/HADailySensor",
+        "data": {
+          "name": "Unique name of the instance",
+          "sensor": "The entity that will provide input to the daily sensor",
+          "operation": "The operation to be applied to the sensor",
+          "unit_of_measurement": "The unit of measurement",
+          "interval": "Refresh interval in minutes"
+        }
+      }
+    },
+    "error": {
+      "intervalnotvalid": "Specified interval is not valid. Needs to be >0 minutes.",
+      "name": "Specify an unique name for this instance.",
+      "operationnotfound": "Specify a supported operation",
+      "sensornotfound": "One or more of the sensors specified do not exist",
+      "unknown": "[%key:common::config_flow::error::unknown%]"
+    },
+    "abort": {
+    }
+  }
+}

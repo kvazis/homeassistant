@@ -1,48 +1,17 @@
-  - platform: template
-    sensors:
-      load_158d00015751f4:
-        friendly_name: 'Бойлер'
-        value_template: "{{ (states('sensor.0x00158d00015751f4_power')|float)}}"
-        icon_template: mdi:flash
-        unit_of_measurement: 'Вт'
-        entity_id: sensor.0x00158d00015751f4_power
+  - platform: min_max
+    name: 06_mean_temperature
+    type: mean
+    entity_ids:
+      - sensor.0x00158d0001dcd47e_temperature
+      - sensor.bt_lywsd02_temperature
 
-  - platform: mqtt
-    state_topic: "power/158d00015751f4/yesterday"
-    name: 'mqtt_power_yesterday_158d00015751f4'
-    unit_of_measurement: 'кВт⋅ч'
-        
-  - platform: mqtt
-    state_topic: "power/158d00015751f4/today"
-    name: 'mqtt_power_today_158d00015751f4'
-    unit_of_measurement: 'кВт⋅ч'
+  - platform: min_max
+    name: 06_mean_humidity
+    type: mean
+    entity_ids:
+      - sensor.0x00158d0001dcd47e_humidity
+      - sensor.bt_lywsd02_humidity
 
-  - platform: mqtt
-    state_topic: "power/158d00015751f4/month"
-    name: 'mqtt_power_month_158d00015751f4'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: mqtt
-    state_topic: "power/158d00015751f4/lastmonth"
-    name: 'mqtt_power_lastmonth_158d00015751f4'
-    unit_of_measurement: 'кВт⋅ч'
-
-  - platform: template
-    sensors:
-      money_month_158d00015751f4:
-        friendly_name: "Стоимость за текущий месяц"
-        unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.mqtt_power_month_158d00015751f4.state | float * 1.68)|round(2) }}"
-        icon_template: mdi:square-inc-cash 
-    
-  - platform: template
-    sensors:
-      money_lastmonth_158d00015751f4:
-        friendly_name: "Стоимость за прошлый месяц"
-        unit_of_measurement: 'грн'
-        value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d00015751f4.state | float * 1.68)|round(2) }}"
-        icon_template: mdi:square-inc-cash 
-        
 # Время фиксации движения в ванной
   - platform: mqtt
     state_topic: "binary_sensor/158d0001e547a3"

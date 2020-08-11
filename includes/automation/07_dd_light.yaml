@@ -6,10 +6,10 @@
   - platform: state
     entity_id: sensor.0x00158d000163e571_click
     to: 'right'
-# Кнопка возле кровати
+# Выключатель возле кровати
   - platform: state
-    entity_id: sensor.0x00158d00013f82b7_click
-    to: 'double'
+    entity_id: sensor.0x00158d0003d50723_action
+    to: 'left'
 # Кубик
   - platform: state
     entity_id: sensor.0x00158d00011063da_action
@@ -105,10 +105,10 @@
   - platform: state
     entity_id: sensor.0x00158d000163e571_click
     to: 'left'
-# Кнопка возле кровати
+# Выключатель возле кровати
   - platform: state
-    entity_id: sensor.0x00158d00013f82b7_click
-    to: 'single'
+    entity_id: sensor.0x00158d0003d50723_action
+    to: 'right'
   action: 
   - service: script.turn_on
     data_template:
@@ -136,9 +136,15 @@
   alias: 07_dd_all_off
   initial_state: true
   trigger:
+# Выключатель на входе
   - platform: state
     entity_id: sensor.0x00158d000163e571_click
     to: 'both'
+# Выключатель возле кровати
+  - platform: state
+    entity_id: sensor.0x00158d0003d50723_action
+    to: 'both'
+# Кубик 
   - platform: state
     entity_id: sensor.0x00158d00011063da_action
     to: 'fall'
@@ -150,6 +156,11 @@
   alias: 07_hp_toggle
   initial_state: true
   trigger:
+# Кнопка на принтере
+  - platform: state
+    entity_id: sensor.0x00158d00013f82b7_click
+    to: 'single'   
+# Кубик 
   - platform: state
     entity_id: sensor.0x00158d00011063da_action
     to: 'flip180'  

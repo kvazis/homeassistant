@@ -177,18 +177,8 @@
 
 ##### ВАННАЯ 
 ##### Бойлер
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00015751f4/today"
-        payload: '{{(states.sensor.mqtt_power_today_158d00015751f4.state | float +
-                    (states.sensor.load_158d00015751f4.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00015751f4/month"
-        payload: '{{(states.sensor.mqtt_power_month_158d00015751f4.state | float +
-                    (states.sensor.load_158d00015751f4.state | float /120000))|round(5)}}'
-        retain: true
+    - service: script.turn_on
+      entity_id: script.00158d00015751f4_day
 
 ##### ДЕТСКАЯ Д
 ##### Выключатель Aqara Zero line - увлажнение и отопление
@@ -341,11 +331,8 @@
 
 ##### ВАННАЯ 
 ##### Бойлер
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00015751f4/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_158d00015751f4.state | float )|round(5)}}'
-        retain: true
+    - service: script.turn_on
+      entity_id: script.00158d00015751f4_yesterday
 
 ##### ДЕТСКАЯ Д
 ##### Выключатель Aqara Zero line - увлажнение и отопление
@@ -455,14 +442,6 @@
     - service: mqtt.publish
       data_template:
         topic: "power/wifi_3usb/today"
-        payload: '{{ 0.0 }}'
-        retain: true
-
-##### ВАННАЯ 
-##### Бойлер
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00015751f4/today"
         payload: '{{ 0.0 }}'
         retain: true
 
@@ -598,11 +577,8 @@
 
 ##### ВАННАЯ 
 ##### Бойлер
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00015751f4/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_158d00015751f4.state | float )|round(5)}}'
-        retain: true
+    - service: script.turn_on
+      entity_id: script.00158d00015751f4_lastmonth
 
 ##### ДЕТСКАЯ Д 
 #### Выключатель Aqara Zero line - увлажнение и отопление  
@@ -711,14 +687,6 @@
     - service: mqtt.publish
       data_template:
         topic: "power/wifi_3usb/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-
-##### ВАННАЯ 
-##### Бойлер
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00015751f4/month"
         payload: '{{ 0.0 }}'
         retain: true
 

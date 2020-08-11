@@ -39,7 +39,7 @@ air_cleargrass:
           cleargrass_air_co2:
             friendly_name: 'Cleargrass air СО2 - '
             value_template: "{{ state_attr('air_quality.cleargrass_air_monitor', 'carbon_dioxide') }}"  
-            icon_template: mdi:periodic-table-co2
+            icon_template: mdi:molecule-co2
             entity_id: air_quality.cleargrass_air_monitor
             unit_of_measurement: 'ppm'
             
