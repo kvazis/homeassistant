@@ -1,5 +1,5 @@
-#   db_url: !secret db_link
-  db_url: sqlite:////config/home-assistant_v2.db
+  db_url: !secret db_link
+#   db_url: sqlite:////config/home-assistant_v2.db
   purge_keep_days: 3
   auto_purge: true
   include:
@@ -10,6 +10,7 @@
        - switch.0x00158d00015751f4_switch
 # Сенсор объема
        - sensor.home_assistant_v2_db
+       - sensor.maria_db
 # Сенсор Youtube просмотров
        - sensor.youtube_views
        - sensor.youtube_views_today
@@ -27,15 +28,21 @@
        - binary_sensor.notebook_chuwi
        - binary_sensor.notebook_acer_15
 # Термостаты
+       - climate.kn_heater
        - climate.living_heater
        - climate.dd_heater
        - climate.da_heater
-       - climate.0xec1bbdfffe9466c5_climate
 # Заряд гаджетов
        - sensor.360_alex_battery
        - sensor.ipad_aleksei_battery_level
        - sensor.360_olga_battery
        - sensor.360_dima_battery
+# Влажность растений
+       - sensor.dieffenbac_moisture
+       - sensor.yucca_moisture
+       - sensor.zamiokulkas_moisture
+       - sensor.deep_purple_moisture
+       - sensor.true_blue_moisture
 # Местоположение
        - device_tracker.life360_alex
        - device_tracker.life360_olga
@@ -53,52 +60,60 @@
 # Сенсоры мощности и напряжения
 
 # Суммарное потребление
-       - sensor.load_total_energy
-# Стиральная машина   
-       - sensor.load_bwshp2
-       - sensor.bwshp2_voltage
+       - sensor.total_power
+       - sensor.total_power_today
+# Стиральная машина
+       - sensor.0x842e14fffe51c5ae_power
+       - sensor.0x842e14fffe51c5ae_voltage
+       - sensor.0x842e14fffe51c5ae_current
        - binary_sensor.washer
+# Чайник  
+       - sensor.bw_shp_2_power
+       - sensor.bw_shp_2_voltage
 # Кухня телевизор
-       - sensor.load_158d0001291d12
+       - sensor.0x00158d0001291d12_power
 # Холодильник
        - sensor.0x00158d0001fa2934_power
 # Кухня LED лента
-       - sensor.load_158d0001d35bc0
+       - sensor.0x00158d0001d35bc0_power
 # Кухня Heiman
        - sensor.0x000d6f0014bb14b4_power
        - sensor.0x000d6f0014bb14b4_voltage
 # Гостиная телевизор
-       - sensor.load_158d00012896cb
+       - sensor.0x00158d00012896cb_power
 # Xiaomi wi-fi + 2 USB
-       - sensor.load_wifi_socket_usb
-# Питание счетчика Гейгера)
+       - sensor.wifi_2usb_power
+# Гостиная ночник
        - sensor.0x00158d000153dd8e_power
-# Отопление батарея 2
-       - sensor.load_158d000114a1e1
+# Гостиная батарея 2
+       - sensor.0x00158d000114a1e1_power
 # Гостиная стол удлинитель
        - sensor.0x04cf8cdf3c764e0a_power
 # Удлинитель - гостиная, комод
        - sensor.load_wifi_3usb
 # Удлинитель - гостиная, стойка ТВ
-       - sensor.load_wifi_6port
+       - sensor.wifi_6port_power
 # Бойлер
        - sensor.0x00158d00015751f4_power
        - sensor.0x00158d00015751f4_voltage
 # Детская Д, увлажнение и отопление
-       - sensor.load_158d0001a2ccab
+       - sensor.0x00158d0001a2ccab_power
 # Детская Д, настольная лампа
-       - sensor.load_158d00030a6e78
+       - sensor.0x00158d00030a6e78_power
 # Детская А, отопление и рабочий стол       
-       - sensor.load_158d0002d7bb2b
+       - sensor.0x00158d0002d7bb2b_power
 # Детская А, увлажнитель
-       - sensor.load_158d00010ec4b8
+       - sensor.0x00158d00010ec4b8_power
 # Сенсоры расхода
        - sensor.smartmi_water
        - sensor.purifier_filter
 # Счетчик Гейгера
        - sensor.0x00124b001d3bdce0_radiation_dose_per_hour
        - sensor.0x00124b001d3bdce0_radioactive_events_per_minute
+# Датчики движения
+       - binary_sensor.mijia_night_light_occupancy
 # Климат сенсоры
+       - sensor.0x00124b001ed165de_co2
        - sensor.0x00158d0001dcd47e_temperature
        - sensor.0x00158d0001dcd47e_humidity
        - sensor.0x00158d0001581109_temperature
@@ -142,7 +157,7 @@
        - sensor.0x00158d0001ab3350_illuminance
        - sensor.0x04cf8cdf3c772379_illuminance
        - sensor.0x00158d0001e547a3_illuminance
-       - sensor.illumination_286c07f0ad27
+       - sensor.dd_light_sensor_illuminance
        - sensor.illumination_34ce0088b039
        - sensor.illumination_7811dc64f4c8
        - sensor.illumination_f0b429cc1f11

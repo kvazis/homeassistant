@@ -87,9 +87,16 @@ cards:
               entity: switch.0x00158d0001fa2934_switch
               name: Холодильник
               icon: mdi:power-socket-eu
+        - type: custom:stack-in-card
+          mode: horizontal
+          cards: 
             - type: button
               entity: switch.0x000d6f0014bb14b4_switch
               name: Аэрогриль
+              icon: mdi:power-socket-eu
+            - type: button
+              entity: switch.bw_shp_2_relay
+              name: Чайник
               icon: mdi:power-socket-eu
 
 
@@ -104,44 +111,61 @@ cards:
           content: >
               **Мониторинг**
               
-        - type: glance
-          show_state: false
-          entities:
-           - entity: binary_sensor.04_kn_light
-           - entity: binary_sensor.04_kn_mainlight
-           - entity: binary_sensor.04_kn_autolight
-              
         - type: picture-entity
           entity: camera.reolink2
           camera_view: live 
           show_state: false
           show_name: false
-          
-        - type: glance
-          show_state: true
+
+        - type: entities
+          show_header_toggle: false
           entities:
-           - entity: sensor.load_158d0001291d12
+           - entity: sensor.mqtt_binary_sensor_158d0001e16204
+             name: Движение
+             icon: mdi:run-fas
+          
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: sensor.0x00158d0001291d12_power
              name: Телевизор
              icon: mdi:television
            - entity: sensor.0x00158d0001fa2934_power
              name: Холодильник
              icon: mdi:fridge
-           - entity: sensor.load_158d0001d35bc0
+           - entity: sensor.0x00158d0001d35bc0_power
              name: LED лента
              icon: mdi:led-strip-variant
            - entity: sensor.0x000d6f0014bb14b4_power
              name: Аэрогриль
              icon: mdi:grill
-             
-        - type: glance
-          show_state: true
-          entities:
-           - entity: sensor.mqtt_binary_sensor_158d0001e16204
-             name: Движение
-             icon: mdi:run-fast
-           - entity: sensor.xiaomi_tv_custom
-             name: Телевизор работал
+           - entity: sensor.bw_shp_2_power
+             name: Чайник
+             icon: mdi:kettle
 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+               - entity: sensor.xiaomi_tv_custom
+                 name: Телевизор работал
+                 
+            - type: custom:logbook-card
+              entity: switch.tv_xiaomi
+              max_items: 5
+              title: История включений
+              duration_labels:
+                second:  '${value} секунда'
+                seconds: '${value} секунд'
+                minute:  '${value} минута'
+                minutes: '${value} минут'
+                hour:    '${value} час'
+                hours:   '${value} часов'
+                day:     '${value} день'
+                days:    '${value} дней'
 
       - type: vertical-stack
         cards:
@@ -157,12 +181,75 @@ cards:
         - type: glance
           show_state: false
           entities:
+           - entity: binary_sensor.04_kn_light
+             name: Автосвет
            - entity: binary_sensor.0x00158d0001bbeba6_water_leak 
              name: Раковина
            - entity: binary_sensor.0x00158d0001e16204_occupancy
              name: Движение
            - entity: binary_sensor.0x00158d0001a99562_contact
              name: Окно 
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x04cf8cdf3c772379_illuminance
+             name: Освещенность
+          color_thresholds:
+              - value: 100
+                color: "#000000"
+              - value: 1000
+                color: "#2F4F4F"
+              - value: 5000
+                color: "#708090"
+              - value: 10000
+                color: "#A9A9A9"
+              - value: 20000
+                color: "#D3D3D3"
+              - value: 82000
+                color: "#FFFFFF"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+            - type: markdown
+              content: >
+                   **Ночник Mijia**              
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: binary_sensor.mijia_night_light_occupancy
+                secondary_info: last-changed
+              - entity: binary_sensor.mijia_night_light_status
+                secondary_info: last-changed
+              - entity: sensor.mijia_night_light_time
+                secondary_info: last-changed
+              - entity: sensor.mijia_night_light_battery
+                secondary_info: last-changed
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Климат**
+
+        - type: glance
+          show_state: false
+          entities:
+          - entity: binary_sensor.kitchen_heat
+            name: Отопление
+          - entity: binary_sensor.kn_heat_valve
+            name: Кран 
 
         - type: custom:mini-graph-card
           entities:
@@ -214,114 +301,8 @@ cards:
           group_by: hour
           hours_to_show: 72
           
-        - type: custom:mini-graph-card
-          entities:
-           - entity: sensor.0x04cf8cdf3c772379_illuminance
-             name: Освещенность
-          color_thresholds:
-              - value: 100
-                color: "#000000"
-              - value: 1000
-                color: "#2F4F4F"
-              - value: 5000
-                color: "#708090"
-              - value: 10000
-                color: "#A9A9A9"
-              - value: 20000
-                color: "#D3D3D3"
-              - value: 82000
-                color: "#FFFFFF"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72
-              
-      - type: vertical-stack
-        cards:
-
-        - type: markdown
-          style: |
-              ha-card {
-                font-size: 26px;
-              }  
-          content: >
-              **Балкон**
-
-        - type: glance
-          name: Балкон, кухня
-          show_state: false
-          entities:
-           - entity: binary_sensor.0x00158d0001a20885_contact
-             name: Дверь на балкон
-           - entity: binary_sensor.0x00158d0001a4a394_contact
-             name: Окно на балконе
-
-        - type: custom:mini-graph-card
-          entities:
-           - entity: sensor.0x00158d000171ffde_temperature
-             name: Температура
-          color_thresholds:
-            - value: 10
-              color: "#191970"
-            - value: 15
-              color: "#0000FF"
-            - value: 20
-              color: "#ADD8E6"
-            - value: 25
-              color: "#E0FFFF"
-            - value: 30
-              color: "#FFFF00"
-            - value: 50
-              color: "#FFD700"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72
-             
-        - type: custom:mini-graph-card
-          entities:
-           - entity: sensor.0x00158d000171ffde_humidity
-             name: Влажность
-          color_thresholds:
-            - value: 20
-              color: "#FFFF00"
-            - value: 30
-              color: "#FAFAD2"
-            - value: 40
-              color: "#E0FFFF"
-            - value: 50
-              color: "#7FFFD4"
-            - value: 60
-              color: "#00CED1"
-            - value: 80
-              color: "#0000FF"
-            - value: 100
-              color: "#000080"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72
-             
-        - type: custom:mini-graph-card
-          entities:
-           - entity: sensor.pressure_mmhg_158d000171ffde
-             name: Давление
-          color_thresholds:
-              - value: 735
-                color: "#FFDEAD"
-              - value: 765
-                color: "#228B22"
-              - value: 850
-                color: "#A52A2A"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72
+        - type: custom:simple-thermostat
+          entity: climate.kn_heater
+          step_layout: row
+          name: false
+          icon: false

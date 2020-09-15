@@ -2,27 +2,6 @@
     host: 192.168.0.136
     mac: 'B4:43:0D:EE:FF:F4'
 
-
-  - platform: template
-    switches:
-      gg_radiator:
-        friendly_name: "Отопление"
-        value_template: >-
-          {{ is_state('switch.0x00124b001e722013_switch', 'on')  
-             or is_state('switch.0x00158d000114a1e1_switch', 'on') }}
-        turn_on:
-          - service: switch.turn_on
-            entity_id: 
-              - switch.0x00124b001e722013_switch
-              - switch.0x00158d000114a1e1_switch
-        turn_off:
-          - service: switch.turn_off
-            entity_id: 
-              - switch.0x00124b001e722013_switch
-              - switch.0x00158d000114a1e1_switch
-        icon_template: >-
-            mdi:radiator
-
   - platform: template
     switches:
       movie_mode:
@@ -47,53 +26,9 @@
         icon_template: >-
             mdi:filmstrip
             
-  - platform: template
-    switches:
-      living_holiday:
-        friendly_name: "Режим выходного дня, Гостиная -"
-        value_template: "{{  is_state('binary_sensor.living_holiday', 'on') }}"
-        turn_on:
-          service: mqtt.publish
-          data_template:
-            topic: "states/living_holiday"
-            payload_template: 'ON'
-            retain: true 
-        turn_off:
-          service: mqtt.publish
-          data_template:
-            topic: "states/living_holiday"
-            payload_template: 'OFF'
-            retain: true 
-        icon_template: >-
-            mdi:account-switch
-            
-  - platform: template
-    switches:
-      silent_mode:
-        friendly_name: "Режим тишины, Гостиная -"
-        value_template: "{{  is_state('binary_sensor.silent_mode', 'on') }}"
-        turn_on:
-          - service: mqtt.publish
-            data_template:
-              topic: "states/silent_mode"
-              payload_template: 'ON'
-              retain: true
-          - service: timer.start
-            entity_id: timer.lr_silent
-        turn_off:
-          - service: mqtt.publish
-            data_template:
-              topic: "states/silent_mode"
-              payload_template: 'OFF'
-              retain: true
-          - service: timer.cancel
-            entity_id: timer.lr_silent
-        icon_template: >-
-            mdi:volume-off
-
       tv_xiaomi_55:
         friendly_name: "ТВ Xiaomi 55"
-        value_template: "{{ states.sensor.load_158d00012896cb.state | float > 10 }}"
+        value_template: "{{ states('sensor.0x00158d00012896cb_power') | float > 10 }}"
         turn_on:
           service: script.turn_on
           data:

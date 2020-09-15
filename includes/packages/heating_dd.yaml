@@ -1,0 +1,79 @@
+heating_dd:
+
+    binary_sensor:
+    
+    # Условия для включения отопления
+      - platform: template
+        sensors:
+          dd_heat:
+            friendly_name: "Режим отопления, Детская Д -"
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d0001193697_contact', 'off')  
+                 and is_state('binary_sensor.0x00158d00015843d4_contact', 'off')
+                 and is_state('binary_sensor.away', 'off')
+                 and is_state('binary_sensor.radiator', 'on') }}
+            icon_template: >-
+              {% if is_state("binary_sensor.dd_heat", "on") %}
+              mdi:radiator
+              {% else %}
+              mdi:radiator-off
+              {% endif %}
+
+    sensor:
+              
+      - platform: min_max
+        name: 07_mean_temperature
+        type: mean
+        entity_ids:
+          - sensor.0x00158d000156e92e_temperature
+          - sensor.dd_bt_temperature
+
+    automation:              
+
+      - id: Обгрев Детской Д
+        alias: dd_heating
+        initial_state: true
+        trigger:
+          - platform: homeassistant
+            event: start
+          - platform: time_pattern
+            minutes: '/5'
+          - platform: state
+            entity_id:
+              - binary_sensor.dd_heat
+        action:
+          - service: script.turn_on
+            data_template:
+              entity_id: >-
+                {%- if states.binary_sensor.dd_heat.state == 'on' -%}
+                script.dd_home
+                {%- elif states.binary_sensor.dd_heat.state == 'off' -%}
+                script.dd_away
+                {%- endif -%}  
+                  
+    script:
+    
+        dd_home:
+          alias: Обгрев Детской Д, режим дом
+          sequence:
+            - service: climate.set_preset_mode
+              data:
+                entity_id: climate.dd_heater
+                preset_mode: none
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.dd_heater
+                temperature: 22
+                
+                  
+        dd_away:
+          alias: Обгрев Детской Д, режим away
+          sequence:
+            - service: climate.set_preset_mode
+              data:
+                entity_id: climate.dd_heater
+                preset_mode: away
+            - service: climate.set_temperature
+              data:
+                entity_id: climate.dd_heater
+                temperature: 19

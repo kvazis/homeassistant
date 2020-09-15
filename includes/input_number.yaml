@@ -1,6 +1,6 @@
-  humidity_level_gg:
-    name: Уровень влажности гостиная
-    initial: 50
-    min: 30
-    max: 60
-    step: 1
+#   humidity_level_gg:
+#     name: Уровень влажности гостиная
+#     initial: 50
+#     min: 30
+#     max: 60
+#     step: 1

@@ -235,8 +235,8 @@ cards:
           
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.home_assistant_v2_db
-             name: Объем базы Home Assistant
+           - entity: sensor.maria_db          
+             name: Объем базы Maria DB
           color_thresholds:
             - value: 500
               color: "#7FFF00"

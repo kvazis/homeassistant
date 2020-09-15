@@ -23,12 +23,6 @@
   scan_interval: 30
   
 - platform: ping
-  host: 192.168.0.22
-  name: notebook_sony
-  count: 2
-  scan_interval: 30
-  
-- platform: ping
   host: 192.168.0.23
   name: notebook_chuwi
   count: 2
@@ -65,14 +59,14 @@
   scan_interval: 30
   
 - platform: ping
-  host: 192.168.0.73
-  name: hainst_test
+  host: 192.168.0.74
+  name: hainst_mqtt
   count: 2
   scan_interval: 30
-
+  
 - platform: ping
   host: 192.168.0.75
-  name: hainst_mqtt
+  name: hainst_test
   count: 2
   scan_interval: 30
 
@@ -97,6 +91,12 @@
 - platform: ping
   host: 192.168.0.83
   name: gateway_kn
+  count: 2
+  scan_interval: 30
+  
+- platform: ping
+  host: 192.168.0.85
+  name: gateway_SLS
   count: 2
   scan_interval: 30
 

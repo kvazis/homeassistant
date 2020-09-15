@@ -41,9 +41,9 @@
      state: 'off'
    - condition: or
      conditions:
-         - condition: numeric_state
-           entity_id: sensor.illumination_286c07f0ad27
-           below: 800
+        #  - condition: numeric_state
+        #   entity_id: sensor.illumination_286c07f0ad27
+        #   below: 800
          - condition: sun
            after: sunset
          - condition: sun

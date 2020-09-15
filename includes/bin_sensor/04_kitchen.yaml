@@ -38,16 +38,4 @@
           {% else %}
           mdi:close-circle-outline
           {% endif %}
-          
-      kn_heat_valve:
-        friendly_name: "Термостат кухня -"
-        value_template: >-
-              {{ state_attr('climate.0xec1bbdfffe9466c5_climate', 'position') | int == 100}}
-        device_class: lock
-        icon_template: >-
-          {% if is_state("binary_sensor.kn_heat_valve", "on") %}
-          mdi:valve-open
-          {% else %}
-          mdi:valve-closed
-          {% endif %}
 

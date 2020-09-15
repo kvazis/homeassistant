@@ -1,4 +1,4 @@
-da_humidification:
+hum_da:
 
     binary_sensor:
     

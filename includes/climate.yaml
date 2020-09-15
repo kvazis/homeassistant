@@ -1,6 +1,6 @@
   - platform: generic_thermostat
     name: living_heater
-    heater: switch.gg_radiator
+    heater: switch.lr_radiator
     target_sensor: sensor.05_mean_temperature
     target_temp: 22
     away_temp: 18
@@ -15,22 +15,22 @@
       minutes: 3
     initial_hvac_mode: "heat"
     
-#   - platform: generic_thermostat
-#     name: living2_heater
-#     heater: switch.0x00158d000114a1e1_switch
-#     target_sensor: sensor.05_mean_temperature
-#     target_temp: 22
-#     away_temp: 18
-#     min_temp: 16
-#     max_temp: 28
-#     ac_mode: false
-#     cold_tolerance: 0.5
-#     hot_tolerance: 0.5
-#     min_cycle_duration:
-#       minutes: 5
-#     keep_alive:
-#       minutes: 3
-#     initial_hvac_mode: "heat"    
+  - platform: generic_thermostat
+    name: kn_heater
+    heater: switch.kn_radiator
+    target_sensor: sensor.0x00158d0001581109_temperature
+    target_temp: 22
+    away_temp: 18
+    min_temp: 16
+    max_temp: 28
+    ac_mode: false
+    cold_tolerance: 0.5
+    hot_tolerance: 0.5
+    min_cycle_duration:
+      minutes: 5
+    keep_alive:
+      minutes: 3
+    initial_hvac_mode: "heat"
 
   - platform: generic_thermostat
     name: dd_heater

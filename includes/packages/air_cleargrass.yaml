@@ -22,7 +22,7 @@ air_cleargrass:
               {{ is_state('binary_sensor.0x00158d000445206b_contact', 'off')  
                  and is_state('binary_sensor.0x00158d00013ed373_contact', 'off')
                  and is_state('binary_sensor.cleargrass_air', 'on')
-                 and is_state('binary_sensor.vacancy', 'off')
+                 and is_state('binary_sensor.away', 'off')
                  and is_state('sensor.living_day_work', 'Включен') }}
             icon_template: >-
               {% if is_state("binary_sensor.living_air", "on") %}

@@ -211,7 +211,7 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
-           - entity: switch.bwshp2_relay
+           - entity: switch.0x842e14fffe51c5ae_switch
              name: Питание
            - entity: binary_sensor.washer
               
@@ -231,7 +231,7 @@ cards:
              
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.load_bwshp2
+           - entity: sensor.0x842e14fffe51c5ae_power
              name: Энергопотребление
           color_thresholds:
             - value: 50
@@ -255,16 +255,16 @@ cards:
           
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.bwshp2_voltage
+           - entity: sensor.0x842e14fffe51c5ae_voltage
              name: Напряжение в сети
           color_thresholds:
-            - value: 215
+            - value: 205
               color: "#DC143C"
-            - value: 220
+            - value: 210
               color: "#FFFFE0"
-            - value: 230
+            - value: 220
               color: "#00FF00"
-            - value: 240
+            - value: 230
               color: "#FFFFE0"
             - value: 300
               color: "#DC143C"

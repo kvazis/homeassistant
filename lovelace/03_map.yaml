@@ -96,3 +96,4 @@ cards:
           default_zoom: 15
           entities:
             - device_tracker.life360_dima
+

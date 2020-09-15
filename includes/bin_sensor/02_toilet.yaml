@@ -16,7 +16,7 @@
       washer:
         friendly_name: "Стирка"
         value_template: >-
-          {{ states('sensor.load_bwshp2')|float > 3 }}
+          {{ states('sensor.0x842e14fffe51c5ae_power')|float > 3 }}
         icon_template: >-
           {% if is_state("binary_sensor.washer", "on") %}
           mdi:washing-machine

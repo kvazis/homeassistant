@@ -7,134 +7,31 @@
     - platform: time_pattern
       seconds: '/30'
   action:
-
-##### Общее потребление
-    - service: mqtt.publish
-      data_template:
-        topic: "power/total_energy/today"
-        payload: '{{(states.sensor.mqtt_power_today_total_energy.state | float +
-                    (states.sensor.load_total_energy.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/total_energy/month"
-        payload: '{{(states.sensor.mqtt_power_month_total_energy.state | float +
-                    (states.sensor.load_total_energy.state | float /120000))|round(5)}}'
-        retain: true  
-  
+    - service: script.turn_on
+      entity_id:
+##### Общее энергопотребление
+        - script.total_power_day
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
-    - service: mqtt.publish
-      data_template:
-        topic: "power/bw_relay/today"
-        payload: '{{(states.sensor.mqtt_power_today_bw_relay.state | float +
-                    (states.sensor.load_bwshp2.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/bw_relay/month"
-        payload: '{{(states.sensor.mqtt_power_month_bw_relay.state | float +
-                    (states.sensor.load_bwshp2.state | float /120000))|round(5)}}'
-        retain: true
-
+        - script.842e14fffe51c5ae_day
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001291d12/today"
-        payload: '{{(states.sensor.mqtt_power_today_158d0001291d12.state | float +
-                    (states.sensor.load_158d0001291d12.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001291d12/month"
-        payload: '{{(states.sensor.mqtt_power_month_158d0001291d12.state | float +
-                    (states.sensor.load_158d0001291d12.state | float /120000))|round(5)}}'
-        retain: true
+        - script.00158d0001291d12_day
 ##### Холодильник
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001fa2934/today"
-        payload: '{{(states.sensor.mqtt_power_today_158d0001fa2934.state | float +
-                    (states.sensor.load_158d0001fa2934.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001fa2934/month"
-        payload: '{{(states.sensor.mqtt_power_month_158d0001fa2934.state | float +
-                    (states.sensor.load_158d0001fa2934.state | float /120000))|round(5)}}'
-        retain: true
+        - script.00158d0001fa2934_day
 ##### LED лента
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001d35bc0/today"
-        payload: '{{(states.sensor.mqtt_power_today_158d0001d35bc0.state | float +
-                    (states.sensor.load_158d0001d35bc0.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001d35bc0/month"
-        payload: '{{(states.sensor.mqtt_power_month_158d0001d35bc0.state | float +
-                    (states.sensor.load_158d0001d35bc0.state | float /120000))|round(5)}}'
-        retain: true
+        - script.00158d0001d35bc0_day
 ##### Розетка Heiman
-    - service: script.turn_on
-      entity_id: script.000d6f0014bb14b4_day
-    
-
+        -  script.000d6f0014bb14b4_day
+##### Розетка Blitzwolf BW SHP-2
+        - script.bw_shp_2_day
 ##### ГОСТИНАЯ
 ##### wifi + 2 USB
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_socket_usb/today"
-        payload: '{{(states.sensor.mqtt_power_today_wifi_socket_usb.state | float +
-                    (states.sensor.load_wifi_socket_usb.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_socket_usb/month"
-        payload: '{{(states.sensor.mqtt_power_month_wifi_socket_usb.state | float +
-                    (states.sensor.load_wifi_socket_usb.state | float /120000))|round(5)}}'
-        retain: true
+        - script.wifi_2usb_day
 ##### Гостиная телевизор
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00012896cb/today"
-        payload: '{{(states.sensor.mqtt_power_today_158d00012896cb.state | float +
-                    (states.sensor.load_158d00012896cb.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00012896cb/month"
-        payload: '{{(states.sensor.mqtt_power_month_158d00012896cb.state | float +
-                    (states.sensor.load_158d00012896cb.state | float /120000))|round(5)}}'
-        retain: true
+        - script.00158d00012896cb_day
 ##### Удлинитель - гостиная, стол
-    - service: mqtt.publish
-      data_template:
-        topic: "power/04cf8cdf3c764e0a/today"
-        payload: '{{(states.sensor.mqtt_power_today_04cf8cdf3c764e0a.state | float +
-                    (states.sensor.load_04cf8cdf3c764e0a.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/04cf8cdf3c764e0a/month"
-        payload: '{{(states.sensor.mqtt_power_month_04cf8cdf3c764e0a.state | float +
-                    (states.sensor.load_04cf8cdf3c764e0a.state | float /120000))|round(5)}}'
-        retain: true
-##### Лампа за телевизором
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000153dd8e/today"
-        payload: '{{(states.sensor.mqtt_power_today_158d000153dd8e.state | float +
-                    (states.sensor.load_158d000153dd8e.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000153dd8e/month"
-        payload: '{{(states.sensor.mqtt_power_month_158d000153dd8e.state | float +
-                    (states.sensor.load_158d000153dd8e.state | float /120000))|round(5)}}'
-        retain: true
+        - script.04cf8cdf3c764e0a_day
 ##### Батарея 2
     - service: mqtt.publish
       data_template:
@@ -149,18 +46,8 @@
                     (states.sensor.load_158d000114a1e1.state | float /120000))|round(5)}}'
         retain: true
 ##### Удлинитель 6 портов
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_6port/today"
-        payload: '{{(states.sensor.mqtt_power_today_wifi_6port.state | float +
-                    (states.sensor.load_wifi_6port.state | float /120000))|round(5)}}'
-        retain: true
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_6port/month"
-        payload: '{{(states.sensor.mqtt_power_month_wifi_6port.state | float +
-                    (states.sensor.load_wifi_6port.state | float /120000))|round(5)}}'
-        retain: true
+    - service: script.turn_on
+      entity_id: script.wifi_6port_day
 ##### Удлинитель 3+3
     - service: mqtt.publish
       data_template:
@@ -181,6 +68,9 @@
       entity_id: script.00158d00015751f4_day
 
 ##### ДЕТСКАЯ Д
+##### Ноутбук
+    - service: script.turn_on
+      entity_id: script.00158d000153dd8e_day
 ##### Выключатель Aqara Zero line - увлажнение и отопление
     - service: mqtt.publish
       data_template:
@@ -245,71 +135,31 @@
     - platform: time
       at: '00:00:05'
   action:
-
-##### Запись данных за прошедший день
-##### Общее потребление
-    - service: mqtt.publish
-      data_template:
-        topic: "power/total_energy/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_total_energy.state | float )|round(5)}}'
-        retain: true 
-
+    - service: script.turn_on
+      entity_id:
+##### Общее энергопотребление
+        - script.total_power_yesterday
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
-    - service: mqtt.publish
-      data_template:
-        topic: "power/bw_relay/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_bw_relay.state | float )|round(5)}}'
-        retain: true 
-
+        - script.842e14fffe51c5ae_yesterday
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001291d12/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_158d0001291d12.state | float )|round(5)}}'
-        retain: true 
+        - script.00158d0001291d12_yesterday
 ##### Холодильник
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001fa2934/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_158d0001fa2934.state | float )|round(5)}}'
-        retain: true 
+        - script.00158d0001fa2934_yesterday
 ##### Кухня LED лента
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001d35bc0/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_158d0001d35bc0.state | float )|round(5)}}'
-        retain: true 
+        - script.00158d0001d35bc0_yesterday
 ##### Розетка Heiman
-    - service: script.turn_on
-      entity_id: script.000d6f0014bb14b4_yesterday
-
+        - script.000d6f0014bb14b4_yesterday
+##### Розетка Blitzwolf BW SHP-2
+        - script.bw_shp_2_yesterday
 ##### ГОСТИНАЯ
 ##### wifi + 2 USB
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_socket_usb/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_wifi_socket_usb.state | float )|round(5)}}'
-        retain: true 
+        - script.wifi_2usb_yesterday
 ##### Гостиная телевизор
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00012896cb/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_158d00012896cb.state | float )|round(5)}}'
-        retain: true 
+        - script.00158d00012896cb_yesterday
 ##### Удлинитель - гостиная, стол
-    - service: mqtt.publish
-      data_template:
-        topic: "power/04cf8cdf3c764e0a/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_04cf8cdf3c764e0a.state | float )|round(5)}}'
-        retain: true
-##### Лампа за телевизором
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000153dd8e/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_158d000153dd8e.state | float )|round(5)}}'
-        retain: true
+        - script.04cf8cdf3c764e0a_yesterday
 ##### Батарея 2
     - service: mqtt.publish
       data_template:
@@ -317,11 +167,8 @@
         payload: '{{(states.sensor.mqtt_power_today_158d000114a1e1.state | float )|round(5)}}'
         retain: true        
 ##### Удлинитель 6 портов
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_6port/yesterday"
-        payload: '{{(states.sensor.mqtt_power_today_wifi_6port.state | float )|round(5)}}'
-        retain: true
+    - service: script.turn_on
+      entity_id: script.wifi_6port_yesterday
 ##### Удлинитель 3+3        
     - service: mqtt.publish
       data_template:
@@ -335,6 +182,9 @@
       entity_id: script.00158d00015751f4_yesterday
 
 ##### ДЕТСКАЯ Д
+##### Ноутбук
+    - service: script.turn_on
+      entity_id: script.00158d000153dd8e_yesterday
 ##### Выключатель Aqara Zero line - увлажнение и отопление
     - service: mqtt.publish
       data_template:
@@ -365,77 +215,11 @@
     - delay: 00:00:05
 
 ##### Обнуление данных текущего дня
-
-##### Общее потребление
-    - service: mqtt.publish
-      data_template:
-        topic: "power/total_energy/today"
-        payload: '{{ 0.0 }}'
-        retain: true
-
-##### ПРАЧЕЧНАЯ
-##### Стиральная машина
-    - service: mqtt.publish
-      data_template:
-        topic: "power/bw_relay/today"
-        payload: '{{ 0.0 }}'
-        retain: true
-
-##### КУХНЯ  
-##### Телевизор Xiaomi
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001291d12/today"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Холодильник
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001fa2934/today"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Кухня LED лента        
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001d35bc0/today"
-        payload: '{{ 0.0 }}'
-        retain: true        
-
 ##### ГОСТИНАЯ
-##### wifi + 2 USB
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_socket_usb/today"
-        payload: '{{ 0.0 }}'
-        retain: true  
-##### Гостиная телевизор
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00012896cb/today"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Удлинитель - гостиная, стол
-    - service: mqtt.publish
-      data_template:
-        topic: "power/04cf8cdf3c764e0a/today"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Лампа за телевизором
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000153dd8e/today"
-        payload: '{{ 0.0 }}'
-        retain: true
 ##### Батарея 2      
     - service: mqtt.publish
       data_template:
         topic: "power/158d000114a1e1/today"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Удлинитель 6 портов        
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_6port/today"
         payload: '{{ 0.0 }}'
         retain: true
 ##### Удлинитель 3+3 
@@ -485,76 +269,36 @@
     - condition: template
       value_template: '{{ now().day == 1 }}'
   action:
-
-##### Запись данных за прошедший месяц
-##### Общее потребление
-    - service: mqtt.publish
-      data_template:
-        topic: "power/total_energy/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_total_energy.state | float )|round(5)}}'
-        retain: true 
-
+    - service: script.turn_on
+      entity_id:
+##### Общее энергопотребление
+        - script.total_power_lastmonth
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
-    - service: mqtt.publish
-      data_template:
-        topic: "power/bw_relay/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_bw_relay.state | float )|round(5)}}'
-        retain: true 
-
+        - script.842e14fffe51c5ae_lastmonth
 ##### КУХНЯ  
 ##### Телевизор Xiaomi
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001291d12/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_158d0001291d12.state | float )|round(5)}}'
-        retain: true 
+        - script.00158d0001291d12_lastmonth
 ##### Холодильник
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001fa2934/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_158d0001fa2934.state | float )|round(5)}}'
-        retain: true 
+        - script.00158d0001fa2934_lastmonth
 ##### Кухня LED лента  
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001d35bc0/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_158d0001d35bc0.state | float )|round(5)}}'
-        retain: true
+        - script.00158d0001d35bc0_lastmonth
 ##### Розетка Heiman
-    - service: script.turn_on
-      entity_id: script.000d6f0014bb14b4_lastmonth
-
+        - script.000d6f0014bb14b4_lastmonth
+##### Розетка Blitzwolf BW SHP-2
+        - script.bw_shp_2_lastmonth
 ##### ГОСТИНАЯ
 ##### wifi + 2 USB
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_socket_usb/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_wifi_socket_usb.state | float )|round(5)}}'
-        retain: true
+        - script.wifi_2usb_lastmonth
 ##### Гостиная телевизор
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00012896cb/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_158d00012896cb.state | float )|round(5)}}'
-        retain: true
+        - script.00158d00012896cb_lastmonth
 ##### Удлинитель - гостиная, стол
-    - service: mqtt.publish
-      data_template:
-        topic: "power/04cf8cdf3c764e0a/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_04cf8cdf3c764e0a.state | float )|round(5)}}'
-        retain: true
+        - script.04cf8cdf3c764e0a_lastmonth
 ##### Батарея 2
     - service: mqtt.publish
       data_template:
         topic: "power/158d000153dd8e/lastmonth"
         payload: '{{(states.sensor.mqtt_power_month_158d000153dd8e.state | float )|round(5)}}'
-        retain: true
-##### Лампа за телевизором
-    - service: mqtt.publish
-      data_template:
-        topic: "power/04cf8cdf3c764e0a/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_04cf8cdf3c764e0a.state | float )|round(5)}}'
         retain: true
 ##### Батарея 2 
     - service: mqtt.publish
@@ -563,11 +307,8 @@
         payload: '{{(states.sensor.mqtt_power_month_158d000114a1e1.state | float )|round(5)}}'
         retain: true
 ##### Удлинитель 6 портов          
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_6port/lastmonth"
-        payload: '{{(states.sensor.mqtt_power_month_wifi_6port.state | float )|round(5)}}'
-        retain: true
+    - service: script.turn_on
+      entity_id: script.wifi_6port_lastmonth
 ##### Удлинитель 3+3 
     - service: mqtt.publish
       data_template:
@@ -580,7 +321,10 @@
     - service: script.turn_on
       entity_id: script.00158d00015751f4_lastmonth
 
-##### ДЕТСКАЯ Д 
+##### ДЕТСКАЯ Д
+##### Ноутбук
+    - service: script.turn_on
+      entity_id: script.00158d000153dd8e_lastmonth
 #### Выключатель Aqara Zero line - увлажнение и отопление  
     - service: mqtt.publish
       data_template:
@@ -610,77 +354,11 @@
 
     - delay: 00:00:05
 ##### Обнуление данных текущего месяца
-
-##### Общее потребление
-    - service: mqtt.publish
-      data_template:
-        topic: "power/total_energy/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-
-##### ПРАЧЕЧНАЯ
-##### Стиральная машина
-    - service: mqtt.publish
-      data_template:
-        topic: "power/bw_relay/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-
-##### КУХНЯ  
-##### Телевизор Xiaomi
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001291d12/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Холодильник
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001fa2934/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Кухня LED лента 
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d0001d35bc0/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-
 ##### ГОСТИНАЯ
-##### wifi + 2 USB
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_socket_usb/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Гостиная телевизор
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d00012896cb/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Удлинитель - гостиная, стол
-    - service: mqtt.publish
-      data_template:
-        topic: "power/04cf8cdf3c764e0a/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Лампа за телевизором
-    - service: mqtt.publish
-      data_template:
-        topic: "power/158d000153dd8e/month"
-        payload: '{{ 0.0 }}'
-        retain: true
 ##### Батарея 2
     - service: mqtt.publish
       data_template:
         topic: "power/158d000114a1e1/month"
-        payload: '{{ 0.0 }}'
-        retain: true
-##### Удлинитель 6 портов  
-    - service: mqtt.publish
-      data_template:
-        topic: "power/wifi_6port/month"
         payload: '{{ 0.0 }}'
         retain: true
 ##### Удлинитель 3+3 

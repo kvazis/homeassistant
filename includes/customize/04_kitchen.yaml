@@ -20,9 +20,9 @@ switch.0x00158d0001d35bc0_switch:
   icon: mdi:power-socket-eu
 
 switch.0x00158d0001fa2934_switch:
-  friendly_name: Кухня холодильник
+  friendly_name: Холодильник
   device_class: plug  
-  icon: mdi:fridge
+  icon: mdi:power-socket-eu
 
 switch.0x00158d0001291d12_switch:
   friendly_name: Кухня питание телевизора
@@ -30,7 +30,12 @@ switch.0x00158d0001291d12_switch:
   icon: mdi:power-socket-eu
   
 switch.0x000d6f0014bb14b4_switch:
-  friendly_name: Кухня питание аэрогриля
+  friendly_name: Аэрогриль
+  device_class: plug  
+  icon: mdi:power-socket-eu
+
+switch.bw_shp_2_relay:
+  friendly_name: Чайник
   device_class: plug  
   icon: mdi:power-socket-eu
 
@@ -41,14 +46,35 @@ sensor.0x000d6f0014bb14b4_power:
   icon_template: mdi:flash
   unit_of_measurement: 'Вт'
   
+sensor.0x00158d0001d35bc0_power:
+  friendly_name: Кухня LED лента
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
+  
 sensor.0x00158d0001fa2934_power:
   friendly_name: Холодильник
   icon_template: mdi:flash
   unit_of_measurement: 'Вт'
   
+sensor.0x00158d0001291d12_power:
+  friendly_name: Кухня телевизор
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
+
+sensor.bw_shp_2_power:
+  friendly_name: Чайник
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
+  icon: mdi:flash
+  
 sensor.kn_heiman_socket_voltage:
-  friendly_name: Кухня Heiman
+  friendly_name: Аэрогиль
   unit_of_measurement: 'В'
+
+sensor.bw_shp_2_voltage:
+  friendly_name: Чайник
+  unit_of_measurement: 'В'
+
   
 sensor.illumination_7811dc64f4c8:
   friendly_name: Кухня шлюз освещенность
@@ -76,10 +102,13 @@ sensor.0x00158d000101bdc6_action:
   
 sensor.0x00158d0002a8ab8b_action:
   friendly_name: Кухня конфетница
+  
+sensor.mijia_night_light_time:
+  friendly_name: Кухня BT ночник время
 
 ## Бинарные сенсоры
 binary_sensor.0x00158d0001e16204_occupancy:
-  friendly_name: Кухня, движение
+  friendly_name: Кухня движение
 
 binary_sensor.0x00158d0001a99562_contact:
   friendly_name: Кухня окно
@@ -87,6 +116,12 @@ binary_sensor.0x00158d0001a99562_contact:
 
 binary_sensor.0x00158d0001bbeba6_water_leak:
   friendly_name: Кухня раковина протечка
+  
+binary_sensor.mijia_night_light_occupancy:
+  friendly_name: Кухня BT ночник движение
+  
+binary_sensor.mijia_night_light_status:
+  friendly_name: Кухня BT ночник статус
 
 ## Уровень заряда
 sensor.0x00158d0002a8ab8b_battery:
@@ -109,6 +144,8 @@ sensor.0x00158d0001a672ef_battery:
   friendly_name: Кухня, вход, квадратная
 sensor.0x00158d000101bdc6_battery:
   friendly_name: Кухня кубик
+sensor.mijia_night_light_battery:
+  friendly_name: Кухня BT ночник
 
 ## Кухня балкон
 
@@ -137,4 +174,3 @@ sensor.0x00158d000171ffde_battery:
   friendly_name: Кухня балкон климат
 sensor.0x00158d0001a4a394_battery:
   friendly_name: Кухня балкон окно
-

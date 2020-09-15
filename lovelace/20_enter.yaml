@@ -3,33 +3,6 @@ title: Этаж, вход, коридор
 icon: mdi:exit-run
 cards:
 
-      - type: vertical-stack
-        cards:
-
-        - type: markdown
-          style: |
-              ha-card {
-                font-size: 26px;
-              }          
-          content: >
-              **Мониторинг**
-
-        - type: picture-entity
-          entity: camera.reolink_sub
-          camera_view: live 
-          show_state: false
-          show_name: false
-          
-        - type: picture-entity
-          entity: camera.xiaofang
-          show_state: false
-          show_name: false
-          
-        - type: picture-entity
-          entity: camera.reolink3_sub
-          camera_view: live 
-          show_state: false
-          show_name: false
 
       - type: vertical-stack
         cards:
@@ -83,7 +56,31 @@ cards:
             name: Самотестирование
           - entity: sensor.0x00158d000149d28b_selftest
             name: Последний тест - 
-            
+
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.camphoto
+          - entity: timer.entrance
+          state_filter:
+            - "active"
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+              **Мониторинг**
+
+        - type: picture-entity
+          entity: camera.xiaofang
+          show_state: false
+          show_name: false
+
         - type: custom:mini-graph-card
           entities:
            - entity: sensor.cgd1_temperature
@@ -134,14 +131,6 @@ cards:
           group_by: hour
           hours_to_show: 72
 
-        - type: entity-filter
-          show_header_toggle: false
-          entities:
-          - entity: timer.camphoto
-          - entity: timer.entrance
-          state_filter:
-            - "active"
-
       - type: vertical-stack
         cards:            
             
@@ -157,12 +146,14 @@ cards:
           show_state: false
           entities:
              - entity: binary_sensor.0x00158d00010f8920_occupancy  
-               name: Движение
+               name: Коридор
              - entity: binary_sensor.cr_light_on
                name: Автосвет
              - entity: binary_sensor.cr_night
                name: Ночь
-
+             - entity: binary_sensor.0xec1bbdfffe302df1_occupancy
+               name: Проход
+               
         - type: custom:stack-in-card
           mode: horizontal
           cards: 
@@ -173,16 +164,20 @@ cards:
             - type: light
               entity: light.yeelight_03_ceiling_ambilight
               name: Амбилайт
-            - type: light
-              entity: light.yeelight_03_ceiling_nightlight
-              name: Ночник
+            # - type: light
+            #   entity: light.yeelight_03_ceiling_nightlight
+            #   name: Ночник
 
         - type: entities
           show_header_toggle: false
           entities:
            - entity: sensor.mqtt_binary_sensor_158d00010f8920
-             name: Последнее движение в -
+             name: Последнее движение в коридоре -
              icon: mdi:run-fast
+           - entity: sensor.mqtt_binary_sensor_1bbdfffe302df1
+             name: Последнее движение в проходе -
+             icon: mdi:run-fast
+             
 
         - type: entity-filter
           show_header_toggle: false

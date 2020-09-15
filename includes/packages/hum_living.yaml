@@ -1,7 +1,13 @@
-lr_climate:
+hum_living:
 
     binary_sensor:
-    # Условия для включения увлажнения
+    
+      - platform: mqtt
+        name: lr_hum_mode
+        state_topic: "states/lr_hum"
+        payload_on: "ON"
+        payload_off: "OFF"
+        
       - platform: template
         sensors:
           living_hum:
@@ -9,7 +15,9 @@ lr_climate:
             value_template: >-
               {{ is_state('binary_sensor.0x00158d000445206b_contact', 'off')  
                  and is_state('binary_sensor.0x00158d00013ed373_contact', 'off')
-                 and is_state('binary_sensor.humidification', 'on') 
+                 and is_state('binary_sensor.0xec1bbdfffedf6a6a_contact', 'off')
+                 and is_state('binary_sensor.silent_mode', 'off')
+                 and is_state('binary_sensor.lr_hum_mode', 'on') 
                  and is_state('sensor.living_day_work', 'Включен') }}
             icon_template: >-
               {% if is_state("binary_sensor.living_hum", "on") %}
@@ -18,96 +26,9 @@ lr_climate:
               mdi:air-humidifier
               {% endif %}
               
-    # Условия для включения отопления
-          living_heat:
-            friendly_name: "Режим отопления, Гостиная -"
-            value_template: >-
-              {{ is_state('binary_sensor.0x00158d000445206b_contact', 'off')  
-                 and is_state('binary_sensor.0x00158d00013ed373_contact', 'off')
-                 and is_state('binary_sensor.radiator', 'on')
-                 and is_state('sensor.living_heat_work', 'Включен') }}
-            icon_template: >-
-              {% if is_state("binary_sensor.living_heat", "on") %}
-              mdi:radiator
-              {% else %}
-              mdi:radiator-off
-              {% endif %}
               
     sensor:
     
-    # Время работы дневных сценариев
-      - platform: template
-        sensors:
-          living_day_work:
-            friendly_name: "Режим дневных сценариев, Гостиная -"
-            value_template: >-
-              {%- if is_state('binary_sensor.weekday_time', 'on') 
-                  and is_state('binary_sensor.workday_sensor', 'on') 
-                  and is_state('binary_sensor.silent_mode', 'off')  
-                  and is_state('binary_sensor.living_holiday', 'off') -%} 
-                
-              Включен
-               
-              {%- elif is_state('binary_sensor.weekend_time', 'on') 
-                  and  is_state('binary_sensor.workday_sensor', 'on') 
-                  and  is_state('binary_sensor.silent_mode', 'off')  
-                  and  is_state('binary_sensor.living_holiday', 'on') -%} 
-                
-              Включен   
-              
-              {%- elif is_state('binary_sensor.weekend_time', 'on') 
-                  and is_state('binary_sensor.workday_sensor', 'off') 
-                  and is_state('binary_sensor.silent_mode', 'off') -%} 
-            
-              Включен
-    
-              {%- else -%} 
-     
-              Выключен
-     
-              {%- endif %} 
-            icon_template: >-
-              {% if is_state("sensor.living_day_work", "Включен") %}
-              mdi:check-circle
-              {% else %}
-              mdi:close-circle
-              {% endif %}
-    
-    # Режим отопления
-          living_heat_work:
-            friendly_name: "Режим сценариев отопления, Гостиная -"
-            value_template: >-
-              {%- if is_state('sensor.alex', 'Дом') 
-                  or  is_state('sensor.olga', 'Дом') -%} 
-           
-              Включен 
-          
-              {%- elif is_state('binary_sensor.living_holiday', 'on') 
-                  or is_state('binary_sensor.workday_sensor', 'off') -%} 
-              Включен   
-            
-              {%- else -%} 
-            
-              Выключен
-          
-              {%- endif %} 
-            icon_template: >-
-              {% if is_state("sensor.living_heat_work", "Включен") %}
-              mdi:check-circle
-              {% else %}
-              mdi:close-circle
-              {% endif %}
-              
-    # Cредняя температура
-      - platform: min_max
-        name: 05_mean_temperature
-        type: mean
-        entity_ids:
-          - sensor.0x00158d00015aebb6_temperature
-          - sensor.05_smartmi_temperature
-          - sensor.cleargrass_air_temperature
-    
-          
     # Cредняя влажность
       - platform: min_max
         name: 05_mean_humidity
@@ -121,6 +42,24 @@ lr_climate:
     
       - platform: template
         switches:
+        
+          lr_hum_mode:
+            friendly_name: "Гостиная, режим увлажнения воздуха"
+            value_template: "{{  is_state('binary_sensor.lr_hum_mode', 'on') }}"
+            turn_on:
+              service: mqtt.publish
+              data_template:
+                topic: "states/lr_hum"
+                payload_template: 'ON'
+                retain: true 
+            turn_off:
+              service: mqtt.publish
+              data_template:
+                topic: "states/lr_hum"
+                payload_template: 'OFF'
+                retain: true 
+            icon_template: >-
+                mdi:air-humidifier
 
           gg_humidifier_mode_auto:
             friendly_name: "Увлажнитель авто"
@@ -217,3 +156,50 @@ lr_climate:
                 entity_id: 
                    - fan.gg_humidifier
                    - fan.gg_purifier
+                   
+    input_number:
+
+          humidity_level_gg:
+            name: Уровень влажности гостиная
+            initial: 50
+            min: 30
+            max: 60
+            step: 1
+                   
+    automation:
+    
+        ## Включение увлажнителя и очистителя  
+        - alias: 05_gg_hum_auto
+          id: 'Увлажнение в гостиной'
+          initial_state: true
+          trigger:
+            - platform: time_pattern
+              minutes: '/5'
+            - platform: state
+              entity_id:
+                - input_number.humidity_level_gg
+                - sensor.05_mean_humidity
+                - binary_sensor.living_hum
+          action:
+            service_template: >-
+                {% if states.binary_sensor.living_hum.state == 'off' %}
+                switch.turn_off
+                {% else %}
+                switch.turn_on
+                {% endif %}
+            data_template:
+                entity_id: >-
+                    {% set current = states('input_number.humidity_level_gg') | float %}
+                    {% set low = (states('input_number.humidity_level_gg') | float) - 5 %}
+                    {% set medium = (states('input_number.humidity_level_gg') | float) - 10 %}
+                    {% set high = (states('input_number.humidity_level_gg') | float) - 15 %}
+                    {% set humidity = states('sensor.05_mean_humidity') | float %}
+                    {% if humidity < high %} 
+                    switch.gg_humidifier_mode_high
+                    {% elif humidity < medium %} 
+                    switch.gg_humidifier_mode_medium
+                    {% elif humidity < low %} 
+                    switch.gg_humidifier_mode_low
+                    {% else %} 
+                    switch.gg_humidifier_mode_auto
+                    {% endif %}

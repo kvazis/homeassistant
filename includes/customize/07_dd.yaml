@@ -1,174 +1,261 @@
 ## Детская Д
 ## Освещение
 light.philips_07_ceiling:
-  friendly_name: Детская Д, основной свет
+  friendly_name: Детская Д основной свет
   icon: mdi:ceiling-light
 
 light.yeelight_07_whitebulb:
-  friendly_name: Детская Д, бра
+  friendly_name: Детская Д бра
   icon: mdi:lightbulb  
 
-light.gateway_light_286c07f0ad27:
-  friendly_name: Детская Д шлюз свет
-  icon: mdi:star-circle-outline
-
 light.xiaomi_07_table:
-  friendly_name: Детская Д, настольная лампа
+  friendly_name: Детская Д настольная лампа
   icon: mdi:desk-lamp
-  
-light.dd_balcony:
-  friendly_name: Детская Д, балкон
-  icon: mdi:ceiling-light
 
-## Реле
+## Питание
+## Выключатель Aqara 2 канала с нулевой линией
 switch.0x00158d0001a2ccab_switch_left:
   friendly_name: Детская Д увлажнитель
   device_class: plug  
   icon: mdi:cup-water
-  
 switch.0x00158d0001a2ccab_switch_right:
-  friendly_name: Детская Д, термоголовка
+  friendly_name: Детская Д термоголовка
   device_class: plug  
   icon: mdi:radiator
-
+sensor.0x00158d0001a2ccab_power:
+  friendly_name: Детская Д увлажнитель/батарея
+  icon: mdi:flash
+  unit_of_measurement: 'Вт'
+sensor.0x00158d0001a2ccab_action:
+  friendly_name: Детская Д увлажнитель/батарея
+sensor.0x00158d0001a2ccab_click:
+  friendly_name: Детская Д увлажнитель/батарея
+sensor.0x00158d0001a2ccab_switch_temperature:
+  friendly_name: Детская Д увлажнитель/батарея
+  
+## Питание настольной лампы
 switch.0x00158d00030a6e78_switch:
-  friendly_name: Детская Д, питание настольной лампы
+  friendly_name: Детская Д питание настольной лампы
   device_class: plug  
   icon: mdi:power-socket-eu
-  
+sensor.0x00158d00030a6e78_power:
+  friendly_name: Детская Д питание настольной лампы
+  icon: mdi:flash
+  unit_of_measurement: 'Вт'
+sensor.0x00158d00030a6e78_consumption:
+  friendly_name: Детская Д питание настольной лампы
+  icon_template: mdi:gauge
+  unit_of_measurement: 'КВт*ч'
+sensor.0x00158d00030a6e78_switch_temperature:
+  friendly_name: Детская Д питание настольной лампы
+sensor.0x00158d00030a6e78_voltage:
+  friendly_name: Детская Д питание настольной лампы
+sensor.0x00158d00030a6e78_linkquality:
+  friendly_name: Детская Д питание настольной лампы
+
+## Питание ноутбука
+switch.0x00158d000153dd8e_switch:
+  friendly_name: Детская Д ноутбук
+  device_class: plug  
+  icon: mdi:power-socket-eu
+sensor.0x00158d000153dd8e_power:
+  friendly_name: Детская Д ноутбук
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
+sensor.0x00158d000153dd8e_consumption:
+  friendly_name: Детская Д ноутбук
+  icon_template: mdi:gauge
+  unit_of_measurement: 'КВт*ч'
+sensor.0x00158d000153dd8e_switch_temperature:
+  friendly_name: Детская Д ноутбук
+sensor.0x00158d000153dd8e_voltage:
+  friendly_name: Детская Д ноутбук
+sensor.0x00158d000153dd8e_linkquality:
+  friendly_name: Детская Д ноутбук
+
+## Удлинитель Broadlink
 switch.plug1:
   friendly_name: Broadlink розетка 1 - Принтер HP
   device_class: plug  
   icon: mdi:power-socket-eu
-  
 switch.plug2:
   friendly_name: Broadlink розетка 2 - Зарядка
   device_class: plug  
   icon: mdi:power-socket-eu
-
 switch.plug3:
   friendly_name: Broadlink розетка 3 - Роутер
   device_class: plug  
   icon: mdi:power-socket-eu
-  
 switch.plug4:
   friendly_name: Broadlink розетка 4 - Колонка
   device_class: plug  
   icon: mdi:power-socket-eu
 
-## Сенсоры 
+## Датчики 
+
+## Логические
 sensor.07_mean_humidity:
-  friendly_name: Детская Д, средняя влажность
+  friendly_name: Детская Д средняя влажность
   icon: mdi:water-percent  
 sensor.07_mean_temperature:
-  friendly_name: Детская Д, средняя температура
+  friendly_name: Детская Д средняя температура
   icon: mdi:temperature-celsius
 
+## Bluetooth датчик климата 
 sensor.dd_bt_battery_level:
-  friendly_name: Детская Д, BT датчик климата
+  friendly_name: Детская Д BT датчик климата
   device_class: battery 
 sensor.dd_bt_temperature:
-  friendly_name: Детская Д, BT температура
+  friendly_name: Детская Д BT температура
   icon: mdi:temperature-celsius
 sensor.dd_bt_humidity:
-  friendly_name: Детская Д, BT влажность
+  friendly_name: Детская Д BT влажность
   icon: mdi:water-percent
 
-sensor.0x00158d0001a2ccab_power:
-  friendly_name: Детская Д, увлажнитель/батарея
-  icon: mdi:flash
-  unit_of_measurement: 'Вт'
-
-sensor.illumination_286c07f0ad27:
-  friendly_name: Детская Д шлюз освещенность
+## Датчик освещенности
+sensor.dd_light_sensor_illuminance:
+  friendly_name: Детская Д освещенность
+  unit_of_measurement: 'lx'
+sensor.dd_light_sensor_illuminance_lux:
+  friendly_name: Детская Д освещенность
+sensor.dd_light_sensor_battery:
+  friendly_name: Детская Д освещенность
+sensor.dd_light_sensor_linkquality:
+  friendly_name: Детская Д освещенность
   
+## Датчик CO2
+sensor.0x00124b001ed165de_co2:
+  friendly_name: Детская Д CO2
+sensor.0x00124b001ed165de_linkquality:
+  friendly_name: Детская Д CO2
+sensor.0x00124b001ed165de_temperature:
+  friendly_name: Детская Д CO2
+
+## Датчик движения
+binary_sensor.0x00158d0001a66222_occupancy:
+  friendly_name: Детская Д движение
 sensor.0x00158d0001a66222_illuminance:
-  friendly_name: Детская Д, освещенность
+  friendly_name: Детская Д движение
+sensor.0x00158d0001a66222_battery:
+  friendly_name: Детская Д движение
+sensor.0x00158d0001a66222_linkquality:
+  friendly_name: Детская Д движение
   
+## Датчик климата  
 sensor.0x00158d000156e92e_humidity:
-  friendly_name: Детская Д, влажность
+  friendly_name: Детская Д влажность
   icon: mdi:water-percent
-
 sensor.0x00158d000156e92e_temperature:
-  friendly_name: Детская Д, температура
+  friendly_name: Детская Д температура
   icon: mdi:temperature-celsius
+sensor.0x00158d000156e92e_battery:
+  friendly_name: Детская Д климат
+sensor.0x00158d000156e92e_linkquality:
+  friendly_name: Детская Д климат  
+
+## Датчик на окне
+binary_sensor.0x00158d0001193697_contact:
+  friendly_name: Детская Д окно
+  device_class: window 
+sensor.0x00158d0001193697_battery:
+  friendly_name: Детская Д окно
+sensor.0x00158d0001583c7b_linkquality:
+  friendly_name: Детская Д окно
   
-sensor.0x00158d00013f82b7_click:
-  friendly_name: Детская Д, кровать, круглая
-  
+
+## Выключатели, кнопки
+
+## Выключатель на входе
+sensor.0x00158d000163e571_action:
+  friendly_name: Детская Д выключатель вход
 sensor.0x00158d000163e571_click:
-  friendly_name: Детская Д, выключатель вход
+  friendly_name: Детская Д выключатель вход
+sensor.0x00158d000163e571_battery:
+  friendly_name: Детская Д выключатель вход
+sensor.0x00158d000163e571_linkquality:
+  friendly_name: Детская Д выключатель вход
+
+## Выключатель возле кровати
+sensor.0x00158d0003d50723_action:
+  friendly_name: Детская Д выключатель кровать
+sensor.0x00158d0003d50723_battery:
+  friendly_name: Детская Д выключатель кровать
+sensor.0x00158d0003d50723_linkquality:
+  friendly_name: Детская Д выключатель кровать
+
+## Кнопка на принтере
+sensor.0x00158d00013f82b7_action:
+  friendly_name: Детская Д принтер круглая
+sensor.0x00158d00013f82b7_click:
+  friendly_name: Детская Д принтер круглая
+sensor.0x00158d00013f82b7_battery:
+  friendly_name: Детская Д принтер круглая
+sensor.0x00158d00013f82b7_linkquality:
+  friendly_name: Детская Д принтер круглая
+  
+## Кубик
   
 sensor.0x00158d00011063da_action:
-  friendly_name: Детская Д, кубик
+  friendly_name: Детская Д кубик
   icon: mdi:cube-outline
-  
-#Бинарные сенсоры
-binary_sensor.0x00158d0001a66222_occupancy:
-  friendly_name: Детская Д, движение
-
-binary_sensor.0x00158d0001193697_contact:
-  friendly_name: Детская Д, окно
-  device_class: window 
-
-## Уровень заряда
-sensor.0x00158d0001193697_battery:
-  friendly_name: Детская Д, окно
-  
-sensor.0x00158d00013f82b7_battery:
-  friendly_name: Детская Д, кровать, круглая
-
-sensor.0x00158d000156e92e_battery:
-  friendly_name: Детская Д, климат
-
-sensor.0x00158d000163e571_battery:
-  friendly_name: Детская Д, выключатель вход
-  
-sensor.0x00158d0001a66222_battery:
-  friendly_name: Детская Д, движение
-  
 sensor.0x00158d00011063da_battery:
-  friendly_name: Детская Д, кубик
+  friendly_name: Детская Д кубик
+sensor.0x00158d00011063da_linkquality:
+  friendly_name: Детская Д кубик
 
 ## Детская Д балкон
+## Освещение
+light.dd_balcony:
+  friendly_name: Детская Д балкон
+  icon: mdi:ceiling-light
+## Питание
+## Выключатель Lonsonho
+switch.0x680ae2fffe71ae63_switch:
+  friendly_name: Детская Д выключатель балкона
+sensor.0x680ae2fffe71ae63_linkquality:
+  friendly_name: Детская Д выключатель балкона
 
-## Реле
-switch.0x00158d000153dd8e_switch:
-  friendly_name: Питание счетчика Гейгера
-  device_class: plug  
-  icon: mdi:power-socket-eu
-
-## Сенсоры 
-sensor.0x00158d000153dd8e_power:
-  friendly_name: Счетчик Гейгера
-  icon_template: mdi:flash
-  unit_of_measurement: 'Вт'
+## Датчики
+## Счетчик Гейгера
 sensor.0x00124b001d3bdce0_radiation_dose_per_hour:
   friendly_name: Радиоактивный фон
   icon: mdi:radioactive
   unit_of_measurement: мкР/ч
+sensor.0x00124b001d3bdce0_radioactive_events_per_minute:
+  friendly_name: Активность радиоактивных частиц
+  icon: mdi:radioactive
+  unit_of_measurement: μR/мин
+sensor.0x00124b001d3bdce0_linkquality:
+  friendly_name: Счетчик Гейгера
+  
+## Датчик климата 
 sensor.0x00158d0001fa8321_humidity:
-  friendly_name: Детская Д, балкон влажность
+  friendly_name: Детская Д балкон влажность
   icon: mdi:water-percent
 sensor.0x00158d0001fa8321_pressure:
-  friendly_name: Детская Д, балкон давление
+  friendly_name: Детская Д балкон давление
 sensor.0x00158d0001fa8321_temperature:
-  friendly_name: Детская Д, балкон температура
+  friendly_name: Детская Д балкон температура
   icon: mdi:temperature-celsius
-
-#Бинарные сенсоры
-binary_sensor.0x00158d0001a65b68_contact:
-  friendly_name: Детская Д, балкон окно
-  device_class: window 
-  
-binary_sensor.0x00158d00015843d4_contact:
-  friendly_name: Детская Д, балкон дверь
-  device_class: door
-  
-## Уровень заряда
 sensor.0x00158d0001fa8321_battery:
-  friendly_name: Детская Д, балкон климат
-sensor.0x00158d0001a65b68_battery:
-  friendly_name: Детская Д, балкон окно
+  friendly_name: Детская Д балкон климат
+sensor.0x00158d0001fa8321_linkquality:
+  friendly_name: Детская Д балкон климат
+
+## Датчик на двери 
+binary_sensor.0x00158d00015843d4_contact:
+  friendly_name: Детская Д балкон дверь
+  device_class: door
 sensor.0x00158d00015843d4_battery:
-  friendly_name: Детская Д, балкон дверь
+  friendly_name: Детская Д балкон дверь
+sensor.0x00158d00015843d4_linkquality:
+  friendly_name: Детская Д балкон дверь
+
+## Датчик на окне
+binary_sensor.0x00158d0001a65b68_contact:
+  friendly_name: Детская Д балкон окно
+  device_class: window 
+sensor.0x00158d0001a65b68_battery:
+  friendly_name: Детская Д балкон окно
+sensor.0x00158d0001a65b68_linkquality:
+  friendly_name: Детская Д балкон окно

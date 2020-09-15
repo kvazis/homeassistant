@@ -2,41 +2,55 @@ p_00158d00015751f4:
 # Розетка Aqara, ванная - бойлер
 
     sensor:
+
+      - platform: mqtt
+        state_topic: "zigbee2mqtt/BT heater"
+        availability_topic: "zigbee2mqtt/bridge/state"
+        device: 
+          identifiers: "zigbee2mqtt_0x00158d00015751f4"
+          manufacturer: "Xiaomi"
+          model: "Aqara socket Zigbee (QBCZ11LM)"
+          name: "BT heater"
+          sw_version: "Zigbee2MQTT 1.14.4"
+        unit_of_measurement: "V"
+        name: '0x00158d00015751f4_voltage'
+        icon: "mdi:alpha-v"
+        value_template: "{{ value_json.voltage }}"
     
       - platform: mqtt
-        state_topic: "power/158d00015751f4/yesterday"
-        name: 'mqtt_power_yesterday_158d00015751f4'
+        state_topic: "power/00158d00015751f4/today"
+        name: '00158d00015751f4_power_today'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/00158d00015751f4/yesterday"
+        name: '00158d00015751f4_power_yesterday'
         unit_of_measurement: 'кВт⋅ч'
             
       - platform: mqtt
-        state_topic: "power/158d00015751f4/today"
-        name: 'mqtt_power_today_158d00015751f4'
+        state_topic: "power/00158d00015751f4/month"
+        name: '00158d00015751f4_power_month'
         unit_of_measurement: 'кВт⋅ч'
     
       - platform: mqtt
-        state_topic: "power/158d00015751f4/month"
-        name: 'mqtt_power_month_158d00015751f4'
+        state_topic: "power/00158d00015751f4/lastmonth"
+        name: '00158d00015751f4_power_lastmonth'
         unit_of_measurement: 'кВт⋅ч'
-    
-      - platform: mqtt
-        state_topic: "power/158d00015751f4/lastmonth"
-        name: 'mqtt_power_lastmonth_158d00015751f4'
-        unit_of_measurement: 'кВт⋅ч'
-    
+        
       - platform: template
         sensors:
-          money_month_158d00015751f4:
+          00158d00015751f4_money_month:
             friendly_name: "Стоимость за текущий месяц"
             unit_of_measurement: 'грн'
-            value_template: "{{ (states.sensor.mqtt_power_month_158d00015751f4.state | float * 1.68)|round(2) }}"
+            value_template: "{{ (states('sensor.00158d00015751f4_power_month') | float * 1.68)|round(2) }}"
             icon_template: mdi:square-inc-cash 
         
-          money_lastmonth_158d00015751f4:
+          00158d00015751f4_money_lastmonth:
             friendly_name: "Стоимость за прошлый месяц"
             unit_of_measurement: 'грн'
-            value_template: "{{ (states.sensor.mqtt_power_lastmonth_158d00015751f4.state | float * 1.68)|round(2) }}"
-            icon_template: mdi:square-inc-cash
-            
+            value_template: "{{ (states('sensor.00158d00015751f4_power_lastmonth') | float * 1.68)|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
     script:
           
           00158d00015751f4_day:
@@ -44,13 +58,13 @@ p_00158d00015751f4:
             sequence:
             - service: mqtt.publish
               data_template:
-                topic: "power/158d00015751f4/today"
-                payload: "{{(states('sensor.158d00015751f4_power_today') | float + (states('sensor.0x00158d00015751f4_power') | float /120000))|round(3) }}"
+                topic: "power/00158d00015751f4/today"
+                payload: "{{(states('sensor.00158d00015751f4_power_today') | float + (states('sensor.0x00158d00015751f4_power') | float /120000))|round(5) }}"
                 retain: true
             - service: mqtt.publish
               data_template:
-                topic: "power/158d00015751f4/month"
-                payload: "{{(states('sensor.158d00015751f4_power_month') | float + (states('sensor.0x00158d00015751f4_power') | float /120000))|round(3) }}"
+                topic: "power/00158d00015751f4/month"
+                payload: "{{(states('sensor.00158d00015751f4_power_month') | float + (states('sensor.0x00158d00015751f4_power') | float /120000))|round(5) }}"
                 retain: true
 
           00158d00015751f4_yesterday:
@@ -58,13 +72,13 @@ p_00158d00015751f4:
             sequence:
             - service: mqtt.publish
               data_template:                
-                topic: "power/158d00015751f4/yesterday"
-                payload: "{{states('sensor.158d00015751f4_power_today') | float}}"
+                topic: "power/00158d00015751f4/yesterday"
+                payload: "{{states('sensor.00158d00015751f4_power_today') | float}}"
                 retain: true
             - delay: 00:00:05
             - service: mqtt.publish
               data_template:                
-                topic: "power/158d00015751f4/today"
+                topic: "power/00158d00015751f4/today"
                 payload: "{{ 0.0 }}"
                 retain: true
                 
@@ -73,12 +87,12 @@ p_00158d00015751f4:
             sequence:
             - service: mqtt.publish
               data_template:                
-                topic: "power/158d00015751f4/lastmonth"
-                payload: "{{states('sensor.158d00015751f4_power_month') | float}}"
+                topic: "power/00158d00015751f4/lastmonth"
+                payload: "{{states('sensor.00158d00015751f4_power_month') | float}}"
                 retain: true
             - delay: 00:00:05
             - service: mqtt.publish
               data_template:                
-                topic: "power/158d00015751f4/month"
+                topic: "power/00158d00015751f4/month"
                 payload: "{{ 0.0 }}"
                 retain: true

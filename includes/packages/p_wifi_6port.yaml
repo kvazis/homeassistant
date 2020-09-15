@@ -1,0 +1,93 @@
+p_wifi_6port:
+# Гостиная удлинитель 6 портов, тв
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/wifi_6port/today"
+        name: 'wifi_6port_power_today'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/wifi_6port/yesterday"
+        name: 'wifi_6port_power_yesterday'
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/wifi_6port/month"
+        name: 'wifi_6port_power_month'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/wifi_6port/lastmonth"
+        name: 'wifi_6port_power_lastmonth'
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: template
+        sensors:
+        
+          wifi_6port_power:
+            friendly_name: 'Удлинитель - гостиная, стойка ТВ'
+            value_template: "{{ state_attr('switch.wifi_6port', 'load_power') }}"
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            entity_id: switch.wifi_6port        
+
+          wifi_6port_money_month:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.wifi_6port_power_month') | float * 1.68)|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          wifi_6port_money_lastmonth:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.wifi_6port_power_lastmonth') | float * 1.68)|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+            
+    script:
+          
+          wifi_6port_day:
+            alias: wifi_6port энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/wifi_6port/today"
+                payload: "{{(states('sensor.wifi_6port_power_today') | float + (states('sensor.wifi_6port_power') | float /120000))|round(5) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/wifi_6port/month"
+                payload: "{{(states('sensor.wifi_6port_power_month') | float + (states('sensor.wifi_6port_power') | float /120000))|round(5) }}"
+                retain: true
+
+          wifi_6port_yesterday:
+            alias: wifi_6port энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/wifi_6port/yesterday"
+                payload: "{{states('sensor.wifi_6port_power_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/wifi_6port/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          wifi_6port_lastmonth:
+            alias: wifi_6port энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/wifi_6port/lastmonth"
+                payload: "{{states('sensor.wifi_6port_power_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/wifi_6port/month"
+                payload: "{{ 0.0 }}"
+                retain: true
+    

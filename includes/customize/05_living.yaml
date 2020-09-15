@@ -97,6 +97,14 @@ sensor.0x04cf8cdf3c764e0a_power:
   friendly_name: Гостиная стол удлинитель
   icon_template: mdi:flash
   unit_of_measurement: 'Вт'
+sensor.0x00158d00012896cb_power:
+  friendly_name: Гостиная телевизор
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
+sensor.0x00158d000114a1e1_power:
+  friendly_name: Гостиная батарея 2
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
 sensor.0x00158d00015723f1_click:
   friendly_name: Гостиная выключатель без нуля
 sensor.illumination_34ce0088b039:
@@ -120,9 +128,11 @@ sensor.0x00158d00013fc3bc_click:
   friendly_name: Гостиная вход
 sensor.0x00158d0001f47e10_click:
   friendly_name: Гостиная стена
+sensor.0x00158d0005414857_illuminance:
+  friendly_name: Гостиная ДД освещенность
 
 ## Бинарные сенсоры
-binary_sensor.0xec1bbdfffe302df1_occupancy:
+binary_sensor.0x00158d0005414857_occupancy:
   friendly_name: Гостиная движение
 binary_sensor.0x00158d00013ed373_contact:
   friendly_name: Гостиная окно
@@ -146,6 +156,8 @@ sensor.0x00158d0001f47e10_battery:
   friendly_name: Гостиная стена
 sensor.0x00158d00015aebb6_battery:
   friendly_name: Гостиная климат
+sensor.0x00158d0005414857_battery:
+  friendly_name: Гостиная движение
   
 ## Уровень сигнала
 sensor.0x00158d00015723f1_linkquality:
@@ -168,6 +180,8 @@ sensor.0x00158d0001f47e10_linkquality:
   friendly_name: Гостиная стена
 sensor.0x00158d00015aebb6_linkquality:
   friendly_name: Гостиная климат
+sensor.0x00158d0005414857_linkquality:
+  friendly_name: Гостиная движение
 
 ## Гостиная балкон
 

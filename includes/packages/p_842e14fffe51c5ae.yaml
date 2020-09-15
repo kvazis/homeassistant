@@ -1,0 +1,84 @@
+p_842e14fffe51c5ae:
+# Розетка Blitzwolf BW SHP-13
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/842e14fffe51c5ae/today"
+        name: '842e14fffe51c5ae_power_today'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/842e14fffe51c5ae/yesterday"
+        name: '842e14fffe51c5ae_power_yesterday'
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/842e14fffe51c5ae/month"
+        name: '842e14fffe51c5ae_power_month'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/842e14fffe51c5ae/lastmonth"
+        name: '842e14fffe51c5ae_power_lastmonth'
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: template
+        sensors:
+          842e14fffe51c5ae_money_month:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.842e14fffe51c5ae_power_month') | float * 1.68)|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          842e14fffe51c5ae_money_lastmonth:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.842e14fffe51c5ae_power_lastmonth') | float * 1.68)|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+    script:
+          
+          842e14fffe51c5ae_day:
+            alias: 842e14fffe51c5ae энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/842e14fffe51c5ae/today"
+                payload: "{{(states('sensor.842e14fffe51c5ae_power_today') | float + (states('sensor.0x842e14fffe51c5ae_power') | float /120000))|round(5) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/842e14fffe51c5ae/month"
+                payload: "{{(states('sensor.842e14fffe51c5ae_power_month') | float + (states('sensor.0x842e14fffe51c5ae_power') | float /120000))|round(5) }}"
+                retain: true
+
+          842e14fffe51c5ae_yesterday:
+            alias: 842e14fffe51c5ae энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/842e14fffe51c5ae/yesterday"
+                payload: "{{states('sensor.842e14fffe51c5ae_power_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/842e14fffe51c5ae/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          842e14fffe51c5ae_lastmonth:
+            alias: 842e14fffe51c5ae энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/842e14fffe51c5ae/lastmonth"
+                payload: "{{states('sensor.842e14fffe51c5ae_power_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/842e14fffe51c5ae/month"
+                payload: "{{ 0.0 }}"
+                retain: true

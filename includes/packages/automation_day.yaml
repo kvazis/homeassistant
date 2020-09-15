@@ -1,0 +1,289 @@
+automation_day:
+
+
+    binary_sensor:
+
+# Выходные и будние
+      - platform: workday
+        country: UA
+
+# Время работы в выходные и будние
+
+      - platform: tod
+        name: weekday_time
+        after: '07:00'
+        before: '22:00'
+    
+      - platform: tod
+        name: weekend_time
+        after: '10:00'
+        before: '22:00'
+
+# Режим выходного дня общий
+
+      - platform: template
+        sensors:
+          holiday:
+            friendly_name: "Режим выходного дня"
+            value_template: >-
+              {{ is_state('binary_sensor.living_holiday', 'on')  
+                 and is_state('binary_sensor.dd_holiday', 'on') 
+                 and is_state('binary_sensor.da_holiday', 'on') }}
+            icon_template: >-
+              {% if is_state("binary_sensor.holiday", "on") %}
+              mdi:calendar-weekend
+              {% else %}
+              mdi:calendar-weekend-outline
+              {% endif %}
+
+    # Режим выходного дня гостиная
+      - platform: mqtt
+        name: living_holiday
+        state_topic: "states/living_holiday"
+        payload_on: "ON"
+        payload_off: "OFF"
+    
+    # Режим тишины гостиная
+      - platform: mqtt
+        name: silent_mode
+        state_topic: "states/silent_mode"
+        payload_on: "ON"
+        payload_off: "OFF"
+        
+    # Режим выходного дня детская Д
+      - platform: mqtt
+        name: dd_holiday
+        state_topic: "states/dd_holiday"
+        payload_on: "ON"
+        payload_off: "OFF"
+
+    # Режим выходного дня детская А
+      - platform: mqtt
+        name: da_holiday
+        state_topic: "states/da_holiday"
+        payload_on: "ON"
+        payload_off: "OFF"   
+
+    sensor: 
+    
+      - platform: template
+        sensors:
+          living_day_work:
+            friendly_name: "Гостиная ДС"
+            value_template: >-
+              {%- if is_state('binary_sensor.weekday_time', 'on') 
+                  and is_state('binary_sensor.workday_sensor', 'on') 
+                  and is_state('binary_sensor.silent_mode', 'off')  
+                  and is_state('binary_sensor.living_holiday', 'off') -%} 
+                
+              Включен
+               
+              {%- elif is_state('binary_sensor.weekend_time', 'on') 
+                  and  is_state('binary_sensor.workday_sensor', 'on') 
+                  and  is_state('binary_sensor.silent_mode', 'off')  
+                  and  is_state('binary_sensor.living_holiday', 'on') -%} 
+                
+              Включен   
+              
+              {%- elif is_state('binary_sensor.weekend_time', 'on') 
+                  and is_state('binary_sensor.workday_sensor', 'off') 
+                  and is_state('binary_sensor.silent_mode', 'off') -%} 
+            
+              Включен
+    
+              {%- else -%} 
+     
+              Выключен
+     
+              {%- endif %} 
+            icon_template: >-
+              {% if is_state("sensor.living_day_work", "Включен") %}
+              mdi:check-circle
+              {% else %}
+              mdi:close-circle
+              {% endif %}    
+    
+          dd_day_work:
+            friendly_name: "Детская Д ДС"
+            value_template: >-
+              {%- if is_state('binary_sensor.weekday_time', 'on') 
+                  and is_state('binary_sensor.workday_sensor', 'on')  
+                  and is_state('binary_sensor.dd_holiday', 'off') -%} 
+    
+              Включен
+              
+              {%- elif is_state('binary_sensor.weekend_time', 'on') 
+                  and  is_state('binary_sensor.workday_sensor', 'on') 
+                  and  is_state('binary_sensor.dd_holiday', 'on') -%} 
+              
+              Включен
+              
+              {%- elif is_state('binary_sensor.weekend_time', 'on') 
+                  and is_state('binary_sensor.workday_sensor', 'off') -%} 
+                
+              Включен
+    
+              {%- else -%} 
+          
+              Выключен
+        
+              {%- endif %} 
+                
+            icon_template: >-
+              {% if is_state("sensor.dd_day_work", "Включен") %}
+              mdi:check-circle
+              {% else %}
+              mdi:close-circle
+              {% endif %}    
+
+          da_day_work:
+            friendly_name: "Детская А ДС"
+            value_template: >-
+              {%- if is_state('binary_sensor.weekday_time', 'on') 
+                  and is_state('binary_sensor.workday_sensor', 'on')  
+                  and is_state('binary_sensor.da_holiday', 'off') -%} 
+    
+              Включен
+              
+              {%- elif is_state('binary_sensor.weekend_time', 'on') 
+                  and  is_state('binary_sensor.workday_sensor', 'on') 
+                  and  is_state('binary_sensor.da_holiday', 'on') -%} 
+              
+              Включен
+              
+              {%- elif is_state('binary_sensor.weekend_time', 'on') 
+                  and is_state('binary_sensor.workday_sensor', 'off') -%} 
+                
+              Включен
+    
+              {%- else -%} 
+          
+              Выключен
+        
+              {%- endif %} 
+                
+            icon_template: >-
+              {% if is_state("sensor.da_day_work", "Включен") %}
+              mdi:check-circle
+              {% else %}
+              mdi:close-circle
+              {% endif %}
+
+        
+    switch:
+    
+      - platform: template
+        switches:
+        
+          holiday_mode:
+            friendly_name: "Выходной день"
+            value_template: "{{  is_state('binary_sensor.holiday', 'on') }}"
+            turn_on:
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/living_holiday"
+                  payload_template: 'ON'
+                  retain: true
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/dd_holiday"
+                  payload_template: 'ON'
+                  retain: true 
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/da_holiday"
+                  payload_template: 'ON'
+                  retain: true 
+            turn_off:
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/living_holiday"
+                  payload_template: 'OFF'
+                  retain: true 
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/dd_holiday"
+                  payload_template: 'OFF'
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/da_holiday"
+                  payload_template: 'OFF'
+                  retain: true 
+            icon_template: >-
+                mdi:account-switch 
+
+          living_holiday:
+            friendly_name: "Режим выходного дня, Гостиная -"
+            value_template: "{{  is_state('binary_sensor.living_holiday', 'on') }}"
+            turn_on:
+              service: mqtt.publish
+              data_template:
+                topic: "states/living_holiday"
+                payload_template: 'ON'
+                retain: true 
+            turn_off:
+              service: mqtt.publish
+              data_template:
+                topic: "states/living_holiday"
+                payload_template: 'OFF'
+                retain: true 
+            icon_template: >-
+                mdi:account-switch
+    
+          silent_mode:
+            friendly_name: "Режим тишины, Гостиная -"
+            value_template: "{{  is_state('binary_sensor.silent_mode', 'on') }}"
+            turn_on:
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/silent_mode"
+                  payload_template: 'ON'
+                  retain: true
+              - service: timer.start
+                entity_id: timer.lr_silent
+            turn_off:
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/silent_mode"
+                  payload_template: 'OFF'
+                  retain: true
+              - service: timer.cancel
+                entity_id: timer.lr_silent
+            icon_template: >-
+                mdi:volume-off    
+    
+          dd_holiday:
+            friendly_name: "Детская Д, режим выходного дня"
+            value_template: "{{  is_state('binary_sensor.dd_holiday', 'on') }}"
+            turn_on:
+              service: mqtt.publish
+              data_template:
+                topic: "states/dd_holiday"
+                payload_template: 'ON'
+                retain: true 
+            turn_off:
+              service: mqtt.publish
+              data_template:
+                topic: "states/dd_holiday"
+                payload_template: 'OFF'
+                retain: true 
+            icon_template: >-
+                mdi:account-switch
+                
+          da_holiday:
+            friendly_name: "Детская A, режим выходного дня"
+            value_template: "{{  is_state('binary_sensor.da_holiday', 'on') }}"
+            turn_on:
+              service: mqtt.publish
+              data_template:
+                topic: "states/da_holiday"
+                payload_template: 'ON'
+                retain: true 
+            turn_off:
+              service: mqtt.publish
+              data_template:
+                topic: "states/da_holiday"
+                payload_template: 'OFF'
+                retain: true 
+            icon_template: >-
+                mdi:account-switch

@@ -3,25 +3,25 @@
   name: rasp3b_state
   force_update: true
   headers: 
-    Authorization: !secret rasp3_secret_token
-    content-type: 'application/json'
-  value_template: '{{ value_json.state }}'
-  
-- platform: rest
-  resource: http://192.168.0.73:8123/api/states/sensor.online_custom
-  name: test_state
-  force_update: true
-  headers: 
-    Authorization: !secret rasp3bplus_secret_token
+    Authorization: !secret train_secret_token
     content-type: 'application/json'
   value_template: '{{ value_json.state }}'
   
 - platform: rest
   resource: http://192.168.0.75:8123/api/states/sensor.online_custom
+  name: test_state
+  force_update: true
+  headers: 
+    Authorization: !secret test_secret_token
+    content-type: 'application/json'
+  value_template: '{{ value_json.state }}'
+  
+- platform: rest
+  resource: http://192.168.0.74:8123/api/states/sensor.online_custom
   name: mqtt_state
   force_update: true
   headers: 
-    Authorization: !secret orange_secret_token
+    Authorization: !secret mqtt_secret_token
     content-type: 'application/json'
   value_template: '{{ value_json.state }}'
   

@@ -11,7 +11,7 @@
     sequence:
       - service: light.turn_off
         entity_id:
-          -  light.yeelight_07_whitebulb
+          - light.yeelight_07_whitebulb
           
   07_dd_philpis_on:
     sequence:
@@ -24,7 +24,7 @@
     sequence:
       - service: light.turn_off
         entity_id:
-          -  light.philips_07_ceiling
+          - light.philips_07_ceiling
           
   07_dd_lightoff:
     sequence:
@@ -37,26 +37,4 @@
         - service: switch.turn_on
           entity_id:
            - switch.plug_158d00030a6e78
-           
-  dd_home:
-    sequence:
-      - service: climate.set_preset_mode
-        data:
-          entity_id: climate.dd_heater
-          preset_mode: none
-      - service: climate.set_temperature
-        data:
-          entity_id: climate.dd_heater
-          temperature: 22  
-          
-  dd_away:
-    sequence:
-      - service: climate.set_preset_mode
-        data:
-          entity_id: climate.dd_heater
-          preset_mode: away
-      - service: climate.set_temperature
-        data:
-          entity_id: climate.dd_heater
-          temperature: 19          
     

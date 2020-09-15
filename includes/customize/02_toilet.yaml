@@ -68,19 +68,25 @@ switch.0x00158d00014a1a55_switch:
   friendly_name: Прачечная выключатель
   device_class: plug  
   icon: mdi:power-socket-eu
-switch.bwshp2_relay:
-  friendly_name: Стиральная машина, питание
+switch.0x842e14fffe51c5ae_switch:
+  friendly_name: Стиральная машина питание
   device_class: plug  
   icon: mdi:power-socket-eu
 
 ## Сенсоры
-sensor.load_bwshp2:
-  friendly_name: Стиральная машина, потребление
+sensor.0x842e14fffe51c5ae_power:
+  friendly_name: Стиральная машина потребление
   unit_of_measurement: Вт
   device_class: power
-sensor.bwshp2_voltage:
-  friendly_name: Напряжение в сети
+
+sensor.0x842e14fffe51c5ae_voltage:
+  friendly_name: Стиральная машина напряжение
   unit_of_measurement: В
+  
+sensor.0x842e14fffe51c5ae_current:
+  friendly_name: Стиральная машина ток
+  unit_of_measurement: А
+  
 sensor.0x00158d0001ab3350_illuminance:
   friendly_name: Прачечная, освещенность
 sensor.0xec1bbdfffe8d6ac9_temperature:
@@ -105,6 +111,8 @@ sensor.0xec1bbdfffe8d6ac9_battery:
   friendly_name: Прачечная климат
   
 ## Уровень сигнала
+sensor.0x842e14fffe51c5ae_linkquality:
+  friendly_name: Стиральная машина
 sensor.0x00158d00014a1a55_linkquality:
   friendly_name: Прачечная выключатель
 sensor.0x00158d0001ab3350_linkquality:
@@ -113,4 +121,3 @@ sensor.0x00158d0002705b7b_linkquality:
   friendly_name: Прачечная протечка
 sensor.0xec1bbdfffe8d6ac9_linkquality: 
   friendly_name: Прачечная климат
-  

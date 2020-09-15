@@ -1,0 +1,329 @@
+##################   Balcony
+title: Балконы
+icon: mdi:home-floor-b
+cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Балкон гостиная**
+              
+        - type: glance
+          show_state: false
+          entities:
+           - entity: light.66633530807d3a766432
+             name: Свет
+             tap_action:
+                action: toggle
+           - entity: binary_sensor.0x00158d000445206b_contact
+             name: Дверь
+           - entity: binary_sensor.0x00158d0001a2f5f7_contact
+             name: Окно
+           - entity: binary_sensor.0x00158d000449b773_occupancy
+             name: Движение
+           - entity: binary_sensor.lr_balcony_motion
+             name: Автосвет
+           
+        # - type: light
+        #   entity: light.66633530807d3a766432
+        #   name: Свет
+   
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d0001a4b9da_temperature
+             name: Температура
+          color_thresholds:
+            - value: 10
+              color: "#191970"
+            - value: 15
+              color: "#0000FF"
+            - value: 20
+              color: "#ADD8E6"
+            - value: 25
+              color: "#E0FFFF"
+            - value: 30
+              color: "#FFFF00"
+            - value: 50
+              color: "#FFD700"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+         
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d0001a4b9da_humidity
+             name: Влажность
+          color_thresholds:
+            - value: 20
+              color: "#FFFF00"
+            - value: 30
+              color: "#FAFAD2"
+            - value: 40
+              color: "#E0FFFF"
+            - value: 50
+              color: "#7FFFD4"
+            - value: 60
+              color: "#00CED1"
+            - value: 80
+              color: "#0000FF"
+            - value: 100
+              color: "#000080"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.pressure_mmhg_158d0001a4b9da
+             name: Давление
+          color_thresholds:
+              - value: 735
+                color: "#FFDEAD"
+              - value: 765
+                color: "#228B22"
+              - value: 850
+                color: "#A52A2A"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d000449b773_illuminance
+             name: Освещенность
+          color_thresholds:
+              - value: 100
+                color: "#000000"
+              - value: 300
+                color: "#2F4F4F"
+              - value: 500
+                color: "#708090"
+              - value: 800
+                color: "#A9A9A9"
+              - value: 1000
+                color: "#D3D3D3"
+              - value: 2000
+                color: "#FFFFFF"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }      
+          content: >
+              **Балкон ДД**
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: light.dd_balcony
+             name: Свет
+             tap_action:
+                action: toggle
+           - entity: binary_sensor.0x00158d00015843d4_contact
+             name: Дверь на балкон
+           - entity: binary_sensor.0x00158d0001a65b68_contact
+             name: Окно на балконе
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d0001fa8321_temperature
+             name: Температура
+          color_thresholds:
+            - value: 10
+              color: "#191970"
+            - value: 15
+              color: "#0000FF"
+            - value: 20
+              color: "#ADD8E6"
+            - value: 25
+              color: "#E0FFFF"
+            - value: 30
+              color: "#FFFF00"
+            - value: 50
+              color: "#FFD700"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+         
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d0001fa8321_humidity
+             name: Влажность
+          color_thresholds:
+            - value: 20
+              color: "#FFFF00"
+            - value: 30
+              color: "#FAFAD2"
+            - value: 40
+              color: "#E0FFFF"
+            - value: 50
+              color: "#7FFFD4"
+            - value: 60
+              color: "#00CED1"
+            - value: 80
+              color: "#0000FF"
+            - value: 100
+              color: "#000080"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.pressure_mmhg_158d0001fa8321
+             name: Давление
+          color_thresholds:
+              - value: 735
+                color: "#FFDEAD"
+              - value: 765
+                color: "#228B22"
+              - value: 850
+                color: "#A52A2A"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+          
+        - type: custom:mini-graph-card
+          icon: mdi:radioactive
+          entities:
+            - entity: sensor.0x00124b001d3bdce0_radiation_dose_per_hour
+              name: Радиация мкР/ч
+          color_thresholds:
+            - value: 20
+              color: "#00FFFF"
+            - value: 30
+              color: "#008080"
+            - value: 50
+              color: "#FFFF00"
+            - value: 9999
+              color: "#FF0000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 7
+          
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Балкон кухня**
+
+        - type: glance
+          name: Балкон, кухня
+          show_state: false
+          entities:
+           - entity: binary_sensor.0x00158d0001a20885_contact
+             name: Дверь на балкон
+           - entity: binary_sensor.0x00158d0001a4a394_contact
+             name: Окно на балконе
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d000171ffde_temperature
+             name: Температура
+          color_thresholds:
+            - value: 10
+              color: "#191970"
+            - value: 15
+              color: "#0000FF"
+            - value: 20
+              color: "#ADD8E6"
+            - value: 25
+              color: "#E0FFFF"
+            - value: 30
+              color: "#FFFF00"
+            - value: 50
+              color: "#FFD700"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d000171ffde_humidity
+             name: Влажность
+          color_thresholds:
+            - value: 20
+              color: "#FFFF00"
+            - value: 30
+              color: "#FAFAD2"
+            - value: 40
+              color: "#E0FFFF"
+            - value: 50
+              color: "#7FFFD4"
+            - value: 60
+              color: "#00CED1"
+            - value: 80
+              color: "#0000FF"
+            - value: 100
+              color: "#000080"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.pressure_mmhg_158d000171ffde
+             name: Давление
+          color_thresholds:
+              - value: 735
+                color: "#FFDEAD"
+              - value: 765
+                color: "#228B22"
+              - value: 850
+                color: "#A52A2A"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72

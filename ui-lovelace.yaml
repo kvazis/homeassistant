@@ -3,7 +3,8 @@ views:
   - !include lovelace/01_system.yaml
   - !include lovelace/02_control.yaml
   - !include lovelace/03_map.yaml
-  - !include lovelace/04_climate.yaml
+  - !include lovelace/04_heat.yaml
+  - !include lovelace/04_hum.yaml
   - !include lovelace/05_outdoor.yaml
   - !include lovelace/06_lan.yaml
   - !include lovelace/07_power.yaml
@@ -17,6 +18,7 @@ views:
   - !include lovelace/24_living.yaml
   - !include lovelace/25_dd.yaml
   - !include lovelace/26_da.yaml
+  - !include lovelace/27_balcony.yaml
   - !include lovelace/30_esphome.yaml
   - !include lovelace/31_automation.yaml
   - !include lovelace/32_switchlight.yaml

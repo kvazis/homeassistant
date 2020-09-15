@@ -44,6 +44,14 @@ switch.0x00158d00010ec4b8_switch:
   icon: mdi:cup-water
 
 ## Сенсоры 
+sensor.0x00158d0002d7bb2b_power:
+  friendly_name: Детская А отопление и рабочий стол 
+  icon: mdi:flash
+  unit_of_measurement: 'Вт'
+sensor.0x00158d00010ec4b8_power:
+  friendly_name: Детская А увлажнитель 
+  icon: mdi:flash
+  unit_of_measurement: 'Вт'
 sensor.08_mean_humidity:
   friendly_name: Детская А средняя влажность
   icon: mdi:water-percent  
@@ -52,6 +60,7 @@ sensor.08_mean_temperature:
   icon: mdi:temperature-celsius
 sensor.0x04cf8cdf3c78ca91_illuminance:
   friendly_name: Детская А освещенность
+  unit_of_measurement: 'lx'
 
 sensor.da_bt_battery_level:
   friendly_name: Детская А BT датчик климата
@@ -64,8 +73,7 @@ sensor.da_bt_humidity:
   icon: mdi:water-percent
 
 sensor.illumination_f0b429cc1f11:
-  friendly_name: Детская А освещенность
-  unit_of_measurement: 'lx'
+  friendly_name: Детская А шлюз освещенность
   
 sensor.0x00158d000159c7e6_humidity:
   friendly_name: Детская А влажность

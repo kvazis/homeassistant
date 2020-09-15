@@ -16,11 +16,20 @@ switch.0x00158d0001117040_switch_left:
   icon: mdi:fan
 
 switch.0x00158d00015751f4_switch:
-  friendly_name: Ванная, бойлер
+  friendly_name: Бойлер
   device_class: plug  
   icon: mdi:hot-tub
 
 ## Сенсоры 
+sensor.0x00158d00015751f4_power:
+  friendly_name: Бойлер потребление
+  unit_of_measurement: Вт
+  device_class: power
+
+sensor.0x00158d00015751f4_voltage:
+  friendly_name: Бойлер напряжение
+  unit_of_measurement: В
+  
 sensor.bt_lywsd02_humidity:
   friendly_name: Ванная влажность BLE
   icon: mdi:water-percent
@@ -68,4 +77,18 @@ sensor.0x00158d0001bb60c2_battery:
 sensor.0x00158d0001d72fa2_battery:
   friendly_name: Ванная протечка раковина
 sensor.0x00158d0001e547a3_battery:
+  friendly_name: Ванная, движение
+  
+## Уровень сигнала
+sensor.0x00158d00015751f4_linkquality:
+  friendly_name: Бойлер
+sensor.0x00158d0001dcd47e_linkquality:
+  friendly_name: Ванная климат
+sensor.0x00158d000238a140_linkquality:
+  friendly_name: Ванная выключатель
+sensor.0x00158d0001bb60c2_linkquality:
+  friendly_name: Ванная протечка душевая
+sensor.0x00158d0001d72fa2_linkquality:
+  friendly_name: Ванная протечка раковина
+sensor.0x00158d0001e547a3_linkquality:
   friendly_name: Ванная, движение

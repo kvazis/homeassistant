@@ -8,35 +8,6 @@ cards:
     - type: vertical-stack
       cards:
 
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-      
-            - type: markdown
-              style: |
-                   ha-card {
-                     color: #00BFFF;
-                     font-weight: bold;
-                     font-size: 16px;
-                   }          
-              content: >
-                 **Работа автоматизаций**
-    
-            - type: entities
-              style: |
-                   ha-card {
-                     color: #00BFFF;
-                     --paper-item-icon-color: #00BFFF;
-                     --iron-icon-stroke-color: #FFFFE0;
-                     font-weight: bold;
-                     font-size: 14px;
-                   } 
-              show_header_toggle: false
-              entities:
-              - entity: switch.holiday_mode
-                name: Режим выходного дня - 
-              - entity: switch.vacancy
-                name: Отпуск -
 
         - type: custom:stack-in-card
           mode: vertical
@@ -63,8 +34,6 @@ cards:
                    } 
               show_header_toggle: false
               entities:
-              - entity: switch.humidification_mode
-                name: Увлажнение воздуха -
               - entity: switch.radiator_mode
                 name: Отопление -
               - entity: switch.heater_mode
@@ -74,16 +43,56 @@ cards:
         - type: custom:stack-in-card
           mode: vertical
           cards:
-                
+
             - type: markdown
               style: |
                    ha-card {
                      color: #00BFFF;
                      font-weight: bold;
                      font-size: 16px;
-                   }          
+                   } 
               content: >
-                 **Локальные режимы**
+                  **Активность в доме**
+
+            - type: entities
+              style: |
+                   ha-card {
+                     color: #00BFFF;
+                     --paper-item-icon-color: #00BFFF;
+                     --iron-icon-stroke-color: #FFFFE0;
+                     font-weight: bold;
+                     font-size: 14px;
+                   } 
+              show_header_toggle: false
+              entities:
+                 - entity: switch.away
+                 - entity: switch.vacancy
+                 - entity: binary_sensor.occupancy 
+                   secondary_info: last-changed
+                 - entity: binary_sensor.people_in_home   
+                   secondary_info: last-changed
+                 - entity: binary_sensor.motion_in_home
+                   secondary_info: last-changed
+                 - entity: binary_sensor.working_tech
+                   secondary_info: last-changed
+                 - entity: binary_sensor.working_light
+                   secondary_info: last-changed
+                 - entity: binary_sensor.time_away
+                   secondary_info: last-changed 
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+      
+            - type: markdown
+              style: |
+                   ha-card {
+                     color: #00BFFF;
+                     font-weight: bold;
+                     font-size: 16px;
+                   } 
+              content: >
+                 **Работа автоматизаций**
     
             - type: entities
               style: |
@@ -96,16 +105,18 @@ cards:
                    } 
               show_header_toggle: false
               entities:
+              - entity: switch.holiday_mode
+                name: Режим выходного дня - 
+              - type: divider
               - entity: switch.living_holiday
-              - entity: switch.silent_mode              
+              - entity: switch.silent_mode
+              - entity: sensor.living_day_work
               - type: divider
               - entity: switch.dd_holiday
-              - entity: switch.dd_tracking
-              - entity: switch.dd_hum_mode              
+              - entity: sensor.dd_day_work
               - type: divider
               - entity: switch.da_holiday
-              - entity: switch.da_hum_mode
-                
+              - entity: sensor.da_day_work
 
         - type: custom:stack-in-card
           mode: vertical
@@ -141,6 +152,26 @@ cards:
                 - entity: sensor.count_script_on
                   icon: mdi:check
                   name: Run
+ 
+            - type: custom:auto-entities
+              show_empty: false
+              card:
+                type: entities
+                show_header_toggle: false
+                style: |
+                  ha-card {
+                    color: #00BFFF;
+                    --paper-item-icon-color: #E6E6FA;
+                    font-weight: bold;
+                    font-size: 14px;
+                  }
+              filter:
+                include:
+                 - domain: automation
+                   state: 'unavailable'
+                   options:
+                      secondary_info: last-changed  
+  
                   
         - type: custom:stack-in-card
           mode: vertical
@@ -459,7 +490,7 @@ cards:
                     } 
               filter:
                 include:
-                 - entity_id: sensor.load_total_energy
+                 - entity_id: sensor.power_total
     
             - type: custom:auto-entities
               show_empty: false
@@ -476,7 +507,11 @@ cards:
                     } 
               filter:
                 include:
-                 - entity_id: sensor.load*
+                 - entity_id: sensor.*_power
+                 - entity_id: sensor.load_bwshp2
+                 - entity_id: sensor.load_wifi_6port
+                 - entity_id: sensor.load_wifi_3usb
+                 - entity_id: sensor.load_wifi_socket_usb
                 exclude:
                  - state: '< 10.0'
                  - entity_id: sensor.load_total_energy
@@ -656,42 +691,7 @@ cards:
                 exclude:
                  - state: 'off'
                  
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
 
-            - type: markdown
-              style: |
-                  ha-card {
-                    color: #00FA9A;
-                    font-weight: bold;
-                    font-size: 16px;
-                  } 
-              content: >
-                  **Активность в доме**
-                  
-            - type: custom:auto-entities
-              show_empty: false
-              card:
-                type: entities
-                show_header_toggle: false
-                style: |
-                    ha-card {
-                      color: #00FA9A;
-                      --paper-item-icon-color: #E6E6FA;
-                      --iron-icon-stroke-color: #E6E6FA;
-                      font-weight: bold;
-                      font-size: 14px;
-                    } 
-              filter:
-                include:
-                 - entity_id: binary_sensor.motion_in_home
-                   options:
-                      secondary_info: last-changed
-                 - entity_id: binary_sensor.people_in_home   
-                   options:
-                      secondary_info: last-changed
-                      
         - type: custom:stack-in-card
           mode: vertical
           cards:
@@ -755,7 +755,7 @@ cards:
                 include:
                  - entity_id: binary_sensor.*occupancy                 
                 exclude:
-                 - entity_id: binary_sensor.motion_in_home
+                 - entity_id: binary_sensor.occupancy
                  - state: 'off'
 
         - type: custom:stack-in-card

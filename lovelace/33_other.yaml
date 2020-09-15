@@ -73,23 +73,6 @@ cards:
 
               - type: markdown
                 content: >
-                  _Детская Д_
-    
-              - type: entities
-                show_header_toggle: false
-                entities:
-                 - entity: script.talk_smart_done
-                   name: Хватит играть
-                   icon: mdi:cellphone-off
-                 - entity: script.talk_inet
-                   name: Интернет активен
-                   icon: mdi:internet-explorer
-                 - entity: script.talk_07_fresh
-                   name: Проветривание
-                   icon: mdi:air-filter
-
-              - type: markdown
-                content: >
                   _Детская А_
     
               - type: entities
@@ -101,10 +84,7 @@ cards:
                  - entity: script.talk_sleep
                    name: Спать
                    icon: mdi:sleep
-                 - entity: script.talk_08_fresh
-                   name: Проветривание
-                   icon: mdi:air-filter
-                   
+
       - type: vertical-stack
         cards:
         

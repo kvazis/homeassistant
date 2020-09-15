@@ -1,24 +1,3 @@
-# Режим выходного дня
-  - platform: mqtt
-    name: living_holiday
-    state_topic: "states/living_holiday"
-    payload_on: "ON"
-    payload_off: "OFF"
-    
-# # Вентилятор для роутера
-#   - platform: mqtt
-#     name: living_usb_fan
-#     state_topic: "states/living_usb_fan"
-#     payload_on: "ON"
-#     payload_off: "OFF"    
-    
-# Режим тишины
-  - platform: mqtt
-    name: silent_mode
-    state_topic: "states/silent_mode"
-    payload_on: "ON"
-    payload_off: "OFF"
-    
 # Режим подсветки для ТВ
   - platform: mqtt
     name: movie_mode

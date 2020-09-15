@@ -1,21 +1,3 @@
-# Sonoff mini Heater 1
-  - platform: template
-    sensors:
-      sonoff_l1_heater_uptime_custom:
-        friendly_name: "Sonoff mini Heater 1, гостиная в онлайне"
-        entity_id:
-          - sensor.sonoff_l1_heater_uptime
-        value_template: >
-          {%- set time = states('sensor.sonoff_l1_heater_uptime') | int %}
-          {%- set minutes = ((time % 3600) // 60) %}
-          {%- set minutes = '{} мин.'.format(minutes) if minutes > 0 else '' %}
-          {%- set hours = ((time % 86400) // 3600) %}
-          {%- set hours = '{} ч. '.format(hours) if hours > 0 else '' %}
-          {%- set days = (time // 86400) %}
-          {%- set days = '{} д. '.format(days) if days > 0 else '' %}
-          {{ 'Меньше минуты' if time < 60 else days + hours + minutes }}
-        icon_template: mdi:clock
-        
 # BLE Hub ESP 32 в онлайне
   - platform: template
     sensors:
