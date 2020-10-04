@@ -18,8 +18,8 @@
   trigger:
 ## Выключатель на входе в кухню - правая кнопка
   - platform: state
-    entity_id: sensor.0x00158d000282a130_click
-    to: 'right'
+    entity_id: sensor.0x00158d000282a130_action
+    to: 'single_right'
 ## 6 клавишник на входе
   - platform: state
     entity_id: sensor.0x04cf8cdf3c794209_action

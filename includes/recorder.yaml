@@ -90,7 +90,7 @@
 # Гостиная стол удлинитель
        - sensor.0x04cf8cdf3c764e0a_power
 # Удлинитель - гостиная, комод
-       - sensor.load_wifi_3usb
+       - sensor.wifi_3usb_power
 # Удлинитель - гостиная, стойка ТВ
        - sensor.wifi_6port_power
 # Бойлер
@@ -150,6 +150,8 @@
        - sensor.mean_pressure
        - sensor.0xec1bbdfffe8d6ac9_temperature
        - sensor.0xec1bbdfffe8d6ac9_humidity
+       - sensor.0xec1bbdfffe4534c0_temperature
+       - sensor.0xec1bbdfffe4534c0_humidity
 # Сенсоры освещенности
        - sensor.0x04cf8cdf3c772379_illuminance
        - sensor.0x00158d0001a24e71_illuminance

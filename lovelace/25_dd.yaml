@@ -59,43 +59,42 @@ cards:
                 entity_id: script.07_dd_lightoff
 
         - type: custom:stack-in-card
-          mode: horizontal
-          cards:  
-            - type: button
-              entity: switch.0x00158d00030a6e78_switch
-              name: Настольная лампа
-              
-            - type: button
-              entity: switch.0x00158d000153dd8e_switch
-              name: Ноутбук
+          mode: vertical
+          cards: 
+          - type: markdown
+            content: >
+               **Управление питанием**
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: switch.0x00158d00030a6e78_switch
+                name: Настольная лампа
+                icon: mdi:power-socket-eu
+              - entity: switch.0x00158d000153dd8e_switch
+                name: Ноутбук Acer 15
+                icon: mdi:power-socket-eu
 
         - type: custom:stack-in-card
           mode: vertical
-          cards:  
-
-          - type: horizontal-stack
-            cards: 
-
-            - type: button
-              entity: switch.plug1
-              name: Принтер
-              icon: mdi:printer
-
-            - type: button
-              entity: switch.plug2
-              name: Зарядка
-              icon: mdi:power-socket-eu
-              
-            - type: button
-              entity: switch.plug3
-              name: RT-AC66U B1
-              icon: mdi:router-wireless
-              
-            - type: button
-              entity: switch.plug4
-              name: Колонка
-              icon: mdi:speaker-bluetooth
-              
+          cards: 
+          - type: markdown
+            content: >
+               **Broadlink 4 socket**
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: switch.plug1
+                name: Принтер
+                icon: mdi:printer
+              - entity: switch.plug2
+                name: Зарядная станция
+                icon: mdi:power-socket-eu
+              - entity: switch.plug3
+                name: Asus RT-AC66U B1
+                icon: mdi:router-wireless
+              - entity: switch.plug4
+                name: Колонка XiaoAI
+                icon: mdi:speaker-bluetooth
 
       - type: vertical-stack
         cards:
@@ -111,19 +110,13 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
+           - entity: sensor.dd_day_work
+             name: Дневной режим
            - entity: sensor.mqtt_binary_sensor_158d0001a66222
              name: Движение
              icon: mdi:run-fast
-             
-        - type: entities
-          show_header_toggle: false
-          entities:
-           - entity: sensor.0x00158d0001a2ccab_power
-             name: Увлажнитель/отопление
-           - entity: sensor.0x00158d00030a6e78_power
-             name: Лампа
-           - entity: sensor.0x00158d000153dd8e_power
-             name: Ноутбук
+           - entity: binary_sensor.dd_air
+             name: Уведомление             
              
         - type: custom:stack-in-card
           mode: vertical
@@ -159,17 +152,57 @@ cards:
                 font-size: 26px;
               }      
           content: >
+              **Устройства**
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: sensor.0x00158d0001a2ccab_power
+             name: Увлажнитель/отопление
+           - entity: sensor.0x00158d00030a6e78_power
+             name: Лампа
+           - entity: sensor.0x00158d000153dd8e_power
+             name: Ноутбук
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+          - type: markdown
+            content: >
+               **Детская Д, ESP 32 BLE шлюз**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.dd_esp32_uptime_custom
+            - entity: sensor.dd_esp32_wi_fi
+              name: Сигнал wi-fi
+            - entity: sensor.dd_esp32_firmware_version
+              name: Прошивка
+            - entity: switch.dd_esp32_restart
+              name: Перезагрузка
+              icon: mdi:reload
+              
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }      
+          content: >
               **Сенсоры**
 
         - type: glance
           show_state: false
           entities:
-              - entity: sensor.dd_day_work
-                name: Сценарии
               - entity: binary_sensor.0x00158d0001a66222_occupancy
                 name: Движение
               - entity: binary_sensor.0x00158d0001193697_contact
                 name: Окно
+              - entity: binary_sensor.0x00158d00015843d4_contact
+                name: Балкон
 
         - type: custom:mini-graph-card
           entities:
@@ -194,46 +227,6 @@ cards:
           points_per_hour: 1
           group_by: hour
           hours_to_show: 72
-
-        - type: custom:mini-graph-card
-          entities:
-            - entity: sensor.0x00124b001ed165de_co2
-              name: СО2 
-          color_thresholds:
-            - value: 1000
-              color: "#00FFFF"
-            - value: 2000
-              color: "#00FF00"
-            - value: 3000
-              color: "#FFFF00"
-            - value: 9999
-              color: "#FF0000"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72  
-
-      - type: vertical-stack
-        cards:
-
-        - type: markdown
-          style: |
-              ha-card {
-                font-size: 26px;
-              }      
-          content: >
-              **Климат**
-
-
-        - type: glance
-          show_state: false
-          entities:
-          - entity: binary_sensor.dd_heat
-            name: Отопление
-          - entity: binary_sensor.dd_hum
-            name: Увлажнение
 
         - type: custom:mini-graph-card
           entities:
@@ -285,19 +278,22 @@ cards:
           group_by: hour
           hours_to_show: 72
 
-        - type: custom:simple-thermostat
-          entity: climate.dd_heater
-          step_layout: row
-          name: false
-          icon: false
-        #   control: false
-          sensors:
-              - entity: sensor.07_mean_humidity
-                name: Humidity
-
-        - type: entities
-          show_header_toggle: false
+        - type: custom:mini-graph-card
           entities:
-          - entity: input_number.humidity_level_dd
-          - entity: binary_sensor.dd_hum
-          - entity: switch.0x00158d0001a2ccab_switch_left
+            - entity: sensor.0x00124b001ed165de_co2
+              name: СО2 
+          color_thresholds:
+            - value: 1000
+              color: "#00FFFF"
+            - value: 2000
+              color: "#00FF00"
+            - value: 3000
+              color: "#FFFF00"
+            - value: 9999
+              color: "#FF0000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72  

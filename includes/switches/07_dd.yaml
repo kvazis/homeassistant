@@ -1,13 +1,13 @@
-  - platform: broadlink
-    host: 192.168.0.98
-    mac: '34:EA:34:A5:37:3B'
-    type: mp1
-    friendly_name: "Детская Д Broadlink"
-    slots:
-      slot_1: 'plug1'
-      slot_2: 'plug2'
-      slot_3: 'plug3'
-      slot_4: 'plug4'
+#   - platform: broadlink
+#     host: 192.168.0.98
+#     mac: '34:EA:34:A5:37:3B'
+#     type: mp1
+#     friendly_name: "Детская Д Broadlink"
+#     slots:
+#       slot_1: 'plug1'
+#       slot_2: 'plug2'
+#       slot_3: 'plug3'
+#       slot_4: 'plug4'
       
   - platform: template
     switches:

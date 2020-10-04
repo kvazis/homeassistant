@@ -12,10 +12,12 @@ en_light:
         sensors:
         
           en_light_on:
-            friendly_name: "Свет в прихожей"
+            friendly_name: "Свет в прихожей днем"
             value_template: >-
               {{ is_state('light.0x00158d000420dbab_light', 'on')  
-                 and is_state('binary_sensor.0x00158d00013f7894_occupancy', 'off')  }}
+                 and is_state('binary_sensor.0x00158d00013f7894_occupancy', 'off')  
+                 and is_state('binary_sensor.en_night', 'off') 
+              }}
             icon_template: >-
               {% if is_state("binary_sensor.en_light_on", "on") %}
               mdi:timer
@@ -45,8 +47,8 @@ en_light:
               
     automation:
 
-      - id: Прихожая, включение освещения
-        alias: 01_enter_light_on
+      - id: Прихожая, управление освещением
+        alias: enter_light
         initial_state: true
         trigger:
         ## Выключатель, вход
@@ -63,41 +65,18 @@ en_light:
           to: 'button_4_single'
         condition:
         - condition: state
-          entity_id: light.0x00158d000420dbab_light
-          state: 'off'
+          entity_id: switch.control_mode
+          state: 'on'
         action: 
         - service: script.turn_on
-          entity_id: script.01_enter_on
-
-      - id: Прихожая, выключение освещения
-        alias: 01_enter_light_off
-        initial_state: true
-        trigger:
-        ## Таймер выключился
-        - platform: event
-          event_type: timer.finished
-          event_data:
-            entity_id: timer.entrance
-        ## Выключатель, вход
-        - platform: state
-          entity_id: sensor.0x00158d0001718ca8_click
-          to: 'right'
-        ## Кнопка, коридор шкаф
-        - platform: state
-          entity_id: sensor.0x00158d0001f3fefe_click
-          to: 'double'
-        ## 6 клавишник на входе
-        - platform: state
-          entity_id: sensor.0x04cf8cdf3c794209_action
-          to: 'button_4_single'
-        condition:
-        - condition: state
-          entity_id: light.0x00158d000420dbab_light
-          state: 'on'
-        action:
-        - service: script.turn_on
-          entity_id: script.01_enter_off
-
+          data_template:
+            entity_id: >-
+              {%- if states("light.0x00158d000420dbab_light") == 'off' -%}
+              script.01_enter_on
+              {%- elif states("light.0x00158d000420dbab_light") == 'on' -%}
+              script.01_enter_off
+              {%- endif -%}         
+        
       - id: Прихожая, включение света при открытии двери
         alias: 01_enter_light_door_on
         initial_state: true
@@ -110,19 +89,32 @@ en_light:
         condition:
         - condition: template
           value_template: "{{(as_timestamp (now()) -as_timestamp(states['light.0x00158d000420dbab_light'].last_changed))|int > 180 }}"
+        - condition: state
+          entity_id: switch.control_mode
+          state: 'on'
         action:
         - service: script.turn_on
           entity_id: script.01_enter_on
 
-      - id: Прихожая, отключение лампы ночью
+      - id: Прихожая, автоматическое отключение света
         alias: 01_enter_light_auto_off
         initial_state: true
         trigger:
+        ## Лампочка включилась на 30 сек
         - platform: state
           entity_id: binary_sensor.en_light_night_on
           to: 'on'
           for:
             seconds: 30
+        ## Таймер выключился
+        - platform: event
+          event_type: timer.finished
+          event_data:
+            entity_id: timer.entrance
+        condition:
+        - condition: state
+          entity_id: switch.control_mode
+          state: 'on'
         action:
         - service: light.turn_off
           entity_id: light.0x00158d000420dbab_light

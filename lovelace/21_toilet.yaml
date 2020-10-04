@@ -31,7 +31,7 @@ cards:
               name: Люстра
 
             - type: light
-              entity: light.sonoff_02_mirror
+              entity: light.tt_mirror
               name: Зеркало
               icon: mdi:mirror
 

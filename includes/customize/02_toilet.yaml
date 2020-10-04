@@ -1,14 +1,25 @@
 ## Туалет
 
 ## Освещение
+## Люстра Yeelight
 light.yeelight_02_ceiling:
   friendly_name: Туалет люстра
   icon: mdi:ceiling-light
+
+## Питание
+
+## Реле Lonsonho
 light.sonoff_02_mirror:
   friendly_name: Туалет, подсветка зеркала
   icon: mdi:spotlight-beam
+switch.0xec1bbdfffea37571_switch:
+  friendly_name: Туалет питание подсветки
+  device_class: plug  
+  icon: mdi:power-socket-eu
+sensor.0xec1bbdfffea37571_linkquality:
+  friendly_name: Туалет питание подсветки
 
-## Реле
+## Выключатель Aqara на входе, без нуля
 switch.0x00158d00014dceb3_switch_right:
   friendly_name: Туалет вентилятор
   device_class: plug 
@@ -17,45 +28,55 @@ switch.0x00158d00014dceb3_switch_left:
   friendly_name: Туалет питание люстры
   device_class: plug  
   icon: mdi:power-socket-eu
-switch.02_sonoff_mini_relay:
-  friendly_name: Туалет питание подсветки
-  device_class: plug  
-  icon: mdi:power-socket-eu
+sensor.0x00158d00014dceb3_linkquality:
+  friendly_name: Туалет выключатель на входе
+sensor.0x00158d00014dceb3_click:
+  friendly_name: Туалет выключатель на входе
+sensor.0x00158d00014dceb3_action:
+  friendly_name: Туалет выключатель на входе
+sensor.0x00158d00014dceb3_switch_temperature:
+  friendly_name: Туалет выключатель на входе
 
-## Сенсоры
-sensor.0x00158d000128cd1a_click:
-  friendly_name: Туалет выключатель на стене
+## Zigbee роутер
+binary_sensor.0x00124b0018e85a23_led:
+  friendly_name: Туалет CC2531
+sensor.0x00124b0018e85a23_linkquality:
+  friendly_name: Туалет CC2531
+
+## Датчики
+
+## Датчик климата Blitzwolf
 sensor.0xec1bbdfffe6f3394_temperature:
   friendly_name: Туалет температура
 sensor.0xec1bbdfffe6f3394_humidity:
   friendly_name: Туалет влажность
-sensor.0x00158d0001a24e71_illuminance:
-  friendly_name: Туалет освещенность 
-
-## Бинарные сенсоры
-binary_sensor.0x00158d0001a24e71_occupancy:
-  friendly_name: Туалет движение
-  
-## Уровень заряда
-sensor.0x00158d0001a24e71_battery:
-  friendly_name: Туалет движение
-sensor.0x00158d000128cd1a_battery:
-  friendly_name: Туалет выключатель на стене
 sensor.0xec1bbdfffe6f3394_battery:
   friendly_name: Туалет климат
-  
-## Уровень сигнала
-sensor.0x00158d00014dceb3_linkquality:
-  friendly_name: Туалет выключатель на входе
-sensor.0x00158d0001a24e71_linkquality:
-  friendly_name: Туалет движение
-sensor.0x00158d000128cd1a_linkquality:
-  friendly_name: Туалет выключатель на стене
 sensor.0xec1bbdfffe6f3394_linkquality:
   friendly_name: Туалет климат
-sensor.0x00124b0018e85a23_linkquality:
-  friendly_name: Туалет CC2531
   
+## Датчик движения  
+binary_sensor.0x00158d0001a24e71_occupancy:
+  friendly_name: Туалет движение
+sensor.0x00158d0001a24e71_illuminance:
+  friendly_name: Туалет освещенность 
+sensor.0x00158d0001a24e71_battery:
+  friendly_name: Туалет движение
+sensor.0x00158d0001a24e71_linkquality:
+  friendly_name: Туалет движение
+  
+## Выключатели, кнопки
+
+## Выключатель на стене внутри
+sensor.0x00158d000128cd1a_click:
+  friendly_name: Туалет выключатель на стене
+sensor.0x00158d000128cd1a_action:
+  friendly_name: Туалет выключатель на стене
+sensor.0x00158d000128cd1a_battery:
+  friendly_name: Туалет выключатель на стене
+sensor.0x00158d000128cd1a_linkquality:
+  friendly_name: Туалет выключатель на стене
+
 ## Прачечная
 
 ## Освещение
@@ -63,61 +84,63 @@ light.aqara_02_ceiling:
   friendly_name: Прачечная свет
   icon: mdi:lightbulb
 
-## Реле
+## Питание
+## Выключатель Aqara на входе, без нуля
 switch.0x00158d00014a1a55_switch:
   friendly_name: Прачечная выключатель
   device_class: plug  
   icon: mdi:power-socket-eu
+sensor.0x00158d00014a1a55_click:
+  friendly_name: Прачечная выключатель
+sensor.0x00158d00014a1a55_action:
+  friendly_name: Прачечная выключатель
+sensor.0x00158d00014a1a55_linkquality:
+  friendly_name: Прачечная выключатель
+
+## Розетка Blitzwolf  
 switch.0x842e14fffe51c5ae_switch:
   friendly_name: Стиральная машина питание
   device_class: plug  
   icon: mdi:power-socket-eu
-
-## Сенсоры
 sensor.0x842e14fffe51c5ae_power:
   friendly_name: Стиральная машина потребление
   unit_of_measurement: Вт
   device_class: power
-
 sensor.0x842e14fffe51c5ae_voltage:
   friendly_name: Стиральная машина напряжение
   unit_of_measurement: В
-  
 sensor.0x842e14fffe51c5ae_current:
   friendly_name: Стиральная машина ток
   unit_of_measurement: А
-  
-sensor.0x00158d0001ab3350_illuminance:
-  friendly_name: Прачечная, освещенность
+sensor.0x842e14fffe51c5ae_linkquality:
+  friendly_name: Стиральная машина
+
+## Датчики
+
+## Датчик климата Blitzwolf
 sensor.0xec1bbdfffe8d6ac9_temperature:
   friendly_name: Прачечная, температура
 sensor.0xec1bbdfffe8d6ac9_humidity:
   friendly_name: Прачечная, влажность
-  
-  
-
-## Бинарные сенсоры
-binary_sensor.0x00158d0001ab3350_occupancy:
-  friendly_name: Прачечная движение
-binary_sensor.0x00158d0002705b7b_water_leak:
-  friendly_name: Прачечная протечка
-  
-## Уровень заряда
-sensor.0x00158d0001ab3350_battery:
-  friendly_name: Прачечная движение
-sensor.0x00158d0002705b7b_battery: 
-  friendly_name: Прачечная протечка
 sensor.0xec1bbdfffe8d6ac9_battery: 
   friendly_name: Прачечная климат
-  
-## Уровень сигнала
-sensor.0x842e14fffe51c5ae_linkquality:
-  friendly_name: Стиральная машина
-sensor.0x00158d00014a1a55_linkquality:
-  friendly_name: Прачечная выключатель
-sensor.0x00158d0001ab3350_linkquality:
-  friendly_name: Прачечная движение
-sensor.0x00158d0002705b7b_linkquality: 
-  friendly_name: Прачечная протечка
 sensor.0xec1bbdfffe8d6ac9_linkquality: 
   friendly_name: Прачечная климат
+
+## Датчик движения
+binary_sensor.0x00158d0001ab3350_occupancy:
+  friendly_name: Прачечная движение
+sensor.0x00158d0001ab3350_illuminance:
+  friendly_name: Прачечная, освещенность
+sensor.0x00158d0001ab3350_battery:
+  friendly_name: Прачечная движение
+sensor.0x00158d0001ab3350_linkquality:
+  friendly_name: Прачечная движение
+  
+## Датчик протечки
+binary_sensor.0x00158d0002705b7b_water_leak:
+  friendly_name: Прачечная протечка
+sensor.0x00158d0002705b7b_battery: 
+  friendly_name: Прачечная протечка
+sensor.0x00158d0002705b7b_linkquality: 
+  friendly_name: Прачечная протечка

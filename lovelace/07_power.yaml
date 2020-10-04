@@ -6,6 +6,18 @@ cards:
       - type: vertical-stack
         cards:
 
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.power_rate
+            name: Тариф -
+            icon: mdi:cash
+          - entity: input_text.power_rate
+            name: Ручной ввод
+          - entity: script.power_rate
+            name: Сохранить тариф
+            icon: mdi:cash
+
         - type: markdown
           style: |
               ha-card {
@@ -771,26 +783,26 @@ cards:
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_today_158d000114a1e1
+               - entity: sensor.00158d000114a1e1_power_today
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_month_158d000114a1e1
+               - entity: sensor.00158d000114a1e1_power_month
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_month_158d000114a1e1
+               - entity: sensor.00158d000114a1e1_money_month
                  name: Месяц
                  icon: mdi:cash
 
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_yesterday_158d000114a1e1
+               - entity: sensor.00158d000114a1e1_power_yesterday
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_lastmonth_158d000114a1e1
+               - entity: sensor.00158d000114a1e1_power_lastmonth
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_lastmonth_158d000114a1e1
+               - entity: sensor.00158d000114a1e1_money_lastmonth
                  name: Месяц
                  icon: mdi:cash
 
@@ -946,7 +958,7 @@ cards:
 
            - type: custom:mini-graph-card
              entities:
-              - entity: sensor.load_wifi_3usb
+              - entity: sensor.wifi_3usb_power
                 name: Потребление
              color_thresholds:
                 - value: 100
@@ -983,26 +995,26 @@ cards:
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_today_wifi_3usb
+               - entity: sensor.wifi_3usb_power_today
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_month_wifi_3usb
+               - entity: sensor.wifi_3usb_power_month
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_month_wifi_3usb
+               - entity: sensor.wifi_3usb_money_month
                  name: Месяц
                  icon: mdi:cash
 
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_yesterday_wifi_3usb
+               - entity: sensor.wifi_3usb_power_yesterday
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_lastmonth_wifi_3usb
+               - entity: sensor.wifi_3usb_power_lastmonth
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_lastmonth_wifi_3usb
+               - entity: sensor.wifi_3usb_money_lastmonth
                  name: Месяц
                  icon: mdi:cash
 
@@ -1058,26 +1070,26 @@ cards:
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_today_158d0001a2ccab
+               - entity: sensor.00158d0001a2ccab_power_today
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_month_158d0001a2ccab
+               - entity: sensor.00158d0001a2ccab_power_month
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_month_158d0001a2ccab
+               - entity: sensor.00158d0001a2ccab_money_month
                  name: Месяц
                  icon: mdi:cash
 
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_yesterday_158d0001a2ccab
+               - entity: sensor.00158d0001a2ccab_power_yesterday
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_lastmonth_158d0001a2ccab
+               - entity: sensor.00158d0001a2ccab_power_lastmonth
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_lastmonth_158d0001a2ccab
+               - entity: sensor.00158d0001a2ccab_money_lastmonth
                  name: Месяц
                  icon: mdi:cash
  
@@ -1128,26 +1140,26 @@ cards:
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_today_158d00030a6e78
+               - entity: sensor.00158d00030a6e78_power_today
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_month_158d00030a6e78
+               - entity: sensor.00158d00030a6e78_power_month
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_month_158d00030a6e78
+               - entity: sensor.00158d00030a6e78_money_month
                  name: Месяц
                  icon: mdi:cash
 
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_yesterday_158d00030a6e78
+               - entity: sensor.00158d00030a6e78_power_yesterday
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_lastmonth_158d00030a6e78
+               - entity: sensor.00158d00030a6e78_power_lastmonth
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_lastmonth_158d00030a6e78
+               - entity: sensor.00158d00030a6e78_money_lastmonth
                  name: Месяц
                  icon: mdi:cash
                  
@@ -1268,26 +1280,26 @@ cards:
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_today_158d0002d7bb2b
+               - entity: sensor.00158d0002d7bb2b_power_today
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_month_158d0002d7bb2b
+               - entity: sensor.00158d0002d7bb2b_power_month
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_month_158d0002d7bb2b
+               - entity: sensor.00158d0002d7bb2b_money_month
                  name: Месяц
                  icon: mdi:cash
 
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_yesterday_158d0002d7bb2b
+               - entity: sensor.00158d0002d7bb2b_power_yesterday
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_lastmonth_158d0002d7bb2b
+               - entity: sensor.00158d0002d7bb2b_power_lastmonth
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_lastmonth_158d0002d7bb2b
+               - entity: sensor.00158d0002d7bb2b_money_lastmonth
                  name: Месяц
                  icon: mdi:cash
 
@@ -1339,25 +1351,25 @@ cards:
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_today_158d00010ec4b8
+               - entity: sensor.00158d00010ec4b8_power_today
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_month_158d00010ec4b8
+               - entity: sensor.00158d00010ec4b8_power_month
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_month_158d00010ec4b8
+               - entity: sensor.00158d00010ec4b8_money_month
                  name: Месяц
                  icon: mdi:cash
 
              - type: entities
                show_header_toggle: false
                entities:
-               - entity: sensor.mqtt_power_yesterday_158d00010ec4b8
+               - entity: sensor.00158d00010ec4b8_power_yesterday
                  name: День
                  icon: mdi:counter
-               - entity: sensor.mqtt_power_lastmonth_158d00010ec4b8
+               - entity: sensor.00158d00010ec4b8_power_lastmonth
                  name: Месяц
                  icon: mdi:counter
-               - entity: sensor.money_lastmonth_158d00010ec4b8
+               - entity: sensor.00158d00010ec4b8_money_lastmonth
                  name: Месяц
                  icon: mdi:cash

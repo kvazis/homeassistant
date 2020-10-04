@@ -206,17 +206,29 @@
     service: switch.toggle
     entity_id: switch.tv_xiaomi_55
 
-## Люстра на балконе вкл
-- alias: 05_gg_balkoon_light_on
+
+
+## Люстра на балконе
+- alias: 05_gg_balkoon_light_toggle
   initial_state: true
   trigger:
-## Выключатель на входе на балкон
+# Выключатель на входе на балкон
   - platform: state
     entity_id: sensor.0x00158d00010b5aee_action
     to: 'single' 
   - platform: state
     entity_id: sensor.0x00158d0001b86d2e_action
     to: 'single' 
+  action:
+   - service: light.toggle
+     entity_id:
+      - light.66633530807d3a766432
+
+
+## Люстра на балконе вкл
+- alias: 05_gg_balkoon_light_on
+  initial_state: true
+  trigger:
   - platform: state
     entity_id: binary_sensor.lr_balcony_motion
     to: 'on'
@@ -236,13 +248,6 @@
 - alias: 05_gg_balkoon_light_off
   initial_state: true
   trigger:
-## Выключатель на входе на балкон
-  - platform: state
-    entity_id: sensor.0x00158d00010b5aee_action
-    to: 'single' 
-  - platform: state
-    entity_id: sensor.0x00158d0001b86d2e_action
-    to: 'single' 
   - platform: state
     entity_id: binary_sensor.0x00158d000449b773_occupancy
     to: 'off'
@@ -272,3 +277,33 @@
    - service: light.turn_off
      entity_id:
       - light.66633530807d3a766432
+      
+- id: Гостиная, запись последнего движения
+  alias: lr_motion_time
+  initial_state: true
+  trigger:
+## Движение в гостиной
+  - platform: state
+    entity_id: binary_sensor.0x00158d0005414857_occupancy
+    to: 'on'
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d0005414857"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true
+      
+- id: Гостиная балкон, запись последнего движения
+  alias: lr_b_motion_time
+  initial_state: true
+  trigger:
+## Движение на балконе гостиной
+  - platform: state
+    entity_id: binary_sensor.0x00158d000449b773_occupancy
+    to: 'on'
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d000449b773"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true

@@ -4,10 +4,11 @@
 
   - platform: template
     sensors:
-       online_custom:
-         
+       
+      online_custom:
+         friendly_name: "Home Assistant в онлайне -"
          value_template: >
-           {% set uptime = states.sensor.online.state | int %}
+           {% set uptime = states('sensor.online') | int %}
            {% set minutes = (( uptime % 60) / 1) | int %}
            {% set hours = ((uptime % 1440) / 60) | int %}
            {% set days = (uptime / 1440) | int %}
@@ -33,14 +34,10 @@
              {% endif %}
              
 # Время с последней перезагрузки
-  - platform: template
-    sensors:
       last_boot_custom:
-        friendly_name: "Последняя перезагрузка"
-        entity_id:
-          - sensor.time
+        friendly_name: "Сервер в онлайне -"
         value_template: >
-           {% set uptime = as_timestamp (now()) -as_timestamp(states.sensor.last_boot.state) | int %}
+           {% set uptime = as_timestamp (now()) -as_timestamp(states('sensor.last_boot')) | int %}
            {% set minutes = (( uptime % 3600) / 60) | int %}
            {% set hours = ((uptime % 86400) / 3600) | int %}
            {% set days = (uptime / 86400) | int %}

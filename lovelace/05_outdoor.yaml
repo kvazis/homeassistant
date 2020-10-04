@@ -66,59 +66,92 @@ cards:
           content: >
              **Датчики**
 
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: sensor.radiation_max
-            name: Максимальный фон сегодня -
-            icon: mdi:radioactive             
-
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+    
+            - type: custom:mini-graph-card
+              icon: mdi:radioactive
+              entities:
+                - entity: sensor.0x00124b001d3bdce0_radiation_dose_per_hour
+                  name: Радиация мкР/ч
+              color_thresholds:
+                - value: 20
+                  color: "#00FFFF"
+                - value: 30
+                  color: "#008080"
+                - value: 50
+                  color: "#FFFF00"
+                - value: 9999
+                  color: "#FF0000"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+          
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: sensor.radiation_max
+                name: Максимальный фон сегодня -
+                icon: mdi:radioactive 
+          
         - type: custom:mini-graph-card
-          icon: mdi:radioactive
           entities:
-            - entity: sensor.0x00124b001d3bdce0_radiation_dose_per_hour
-              name: Радиация мкР/ч
+           - entity: sensor.0x00158d0001a4b9da_temperature
+             name: Температура
           color_thresholds:
+            - value: -20
+              color: "#191970"
+            - value: 0
+              color: "#0000FF"
+            - value: 10
+              color: "#ADD8E6"
             - value: 20
-              color: "#00FFFF"
-            - value: 30
-              color: "#008080"
-            - value: 50
+              color: "#E0FFFF"
+            - value: 25
               color: "#FFFF00"
-            - value: 9999
-              color: "#FF0000"
+            - value: 50
+              color: "#FFD700"
           animate: true
           line_width: 2
           hour24: true
           points_per_hour: 1
           group_by: hour
           hours_to_show: 72
-          
-        # - type: custom:mini-graph-card
-        #   icon: mdi:radioactive
-        #   entities:
-        #     - entity: sensor.0x00124b001d3bdce0_radioactive_events_per_minute
-        #       name: Радиация - частиц в минуту
-        #   color_thresholds:
-        #     - value: 20
-        #       color: "#00FFFF"
-        #     - value: 30
-        #       color: "#008080"
-        #     - value: 50
-        #       color: "#FFFF00"
-        #     - value: 9999
-        #       color: "#FF0000"
-        #   animate: true
-        #   line_width: 2
-        #   hour24: true
-        #   points_per_hour: 1
-        #   group_by: hour
-        #   hours_to_show: 72
+         
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d0001a4b9da_humidity
+             name: Влажность
+          color_thresholds:
+            - value: 20
+              color: "#FFFF00"
+            - value: 30
+              color: "#FAFAD2"
+            - value: 40
+              color: "#E0FFFF"
+            - value: 50
+              color: "#7FFFD4"
+            - value: 60
+              color: "#00CED1"
+            - value: 80
+              color: "#0000FF"
+            - value: 100
+              color: "#000080"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
 
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.mean_pressure
-             name: Атмосферное давление
+           - entity: sensor.pressure_mmhg_158d0001a4b9da
+             name: Давление
           color_thresholds:
               - value: 735
                 color: "#FFDEAD"

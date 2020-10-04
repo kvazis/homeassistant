@@ -27,7 +27,7 @@ p_wifi_2usb:
         sensors:
         
           wifi_2usb_power:
-            friendly_name: 'Xiaomi wi-fi + 2 US'
+            friendly_name: 'Xiaomi wi-fi + 2 USB'
             value_template: "{{ state_attr('switch.xiaomi_wifi_socket_usb', 'load_power') }}"
             icon_template: mdi:flash
             unit_of_measurement: 'Вт'

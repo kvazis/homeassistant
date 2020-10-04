@@ -151,9 +151,7 @@ cards:
                name: Автосвет
              - entity: binary_sensor.cr_night
                name: Ночь
-             - entity: binary_sensor.0xec1bbdfffe302df1_occupancy
-               name: Проход
-               
+
         - type: custom:stack-in-card
           mode: horizontal
           cards: 
@@ -174,10 +172,6 @@ cards:
            - entity: sensor.mqtt_binary_sensor_158d00010f8920
              name: Последнее движение в коридоре -
              icon: mdi:run-fast
-           - entity: sensor.mqtt_binary_sensor_1bbdfffe302df1
-             name: Последнее движение в проходе -
-             icon: mdi:run-fast
-             
 
         - type: entity-filter
           show_header_toggle: false

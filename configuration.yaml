@@ -82,7 +82,7 @@ lovelace:
      type: module
    - url: /hacsfiles/stack-in-card/stack-in-card.js
      type: module
-   - url: /hacsfiles/lovelace-battery-entity/battery-entity.js
+   - url: /hacsfiles/battery-state-card/battery-state-card.js
      type: module
    - url: /hacsfiles/air-visual-card/air-visual-card.js
      type: module

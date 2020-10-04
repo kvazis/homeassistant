@@ -1,22 +1,13 @@
-# - alias: 911_backup_timer
-#   initial_state: true
-#   trigger:
-#   - platform: state
-#     entity_id:
-#       - sensor.reserve_live_ping
-#   action:
-#   - service: timer.start
-#     entity_id: timer.backup
-#     data: 
-#       duration: 00:02:00
-
-
 - alias: 911_mqtt_lost
   initial_state: true
   trigger:
    platform: state
    entity_id: sensor.mqtt_state
    to: 'unavailable'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
     - service: notify.telegram
       data:
@@ -28,41 +19,25 @@
    platform: state
    entity_id: sensor.mqtt_state
    from: 'unavailable'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
     - service: notify.telegram
       data:
         message: "Связь с MQTT сервером восстановлена в - {{ states('sensor.time_date') }} ."
         
-- alias: 911_rasp3_lost
-  initial_state: true
-  trigger:
-   platform: state
-   entity_id: sensor.rasp3b_state
-   to: 'unavailable'
-  action:
-    - service: mqtt.publish
-      data_template:
-         topic: "notification/error"
-         payload_template: '031' 
-
-- alias: 911_rasp3_online
-  initial_state: true
-  trigger:
-   platform: state
-   entity_id: sensor.rasp3b_state
-   from: 'unavailable'
-  action:
-    - service: mqtt.publish
-      data_template:
-         topic: "notification/error"
-         payload_template: '032'
-         
 - alias: 911_test_lost
   initial_state: true
   trigger:
    platform: state
    entity_id: sensor.test_state
    to: 'unavailable'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
     - service: mqtt.publish
       data_template:
@@ -75,6 +50,10 @@
    platform: state
    entity_id: sensor.test_state
    from: 'unavailable'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
     - service: mqtt.publish
       data_template:

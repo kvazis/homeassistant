@@ -4,81 +4,80 @@ p_00158d0001fa2934:
     sensor:
     
       - platform: mqtt
-        state_topic: "power/00158d0001fa2934/today"
-        name: '00158d0001fa2934_power_today'
-        unit_of_measurement: 'кВт⋅ч'
-    
-      - platform: mqtt
         state_topic: "power/00158d0001fa2934/yesterday"
         name: '00158d0001fa2934_power_yesterday'
         unit_of_measurement: 'кВт⋅ч'
             
       - platform: mqtt
-        state_topic: "power/00158d0001fa2934/month"
-        name: '00158d0001fa2934_power_month'
-        unit_of_measurement: 'кВт⋅ч'
-    
-      - platform: mqtt
         state_topic: "power/00158d0001fa2934/lastmonth"
         name: '00158d0001fa2934_power_lastmonth'
         unit_of_measurement: 'кВт⋅ч'
         
+      - platform: mqtt
+        state_topic: "power/00158d0001fa2934/temp"
+        name: '00158d0001fa2934_power_temp'
+        unit_of_measurement: 'кВт⋅ч'
+
+      - platform: mqtt
+        state_topic: "power/00158d0001fa2934/temp_month"
+        name: '00158d0001fa2934_power_temp_month'
+        unit_of_measurement: 'кВт⋅ч'
+        
+        
       - platform: template
         sensors:
+        
+          00158d0001fa2934_power_today:
+            friendly_name: "Потребление за день"
+            unit_of_measurement: 'кВт⋅ч'
+            value_template: "{{ (states('sensor.0x00158d0001fa2934_consumption') | float - (states('sensor.00158d0001fa2934_power_temp') | float))|round(5) }}"
+            icon_template: mdi:counter
+
+          00158d0001fa2934_power_month:
+            friendly_name: "Потребление за день"
+            unit_of_measurement: 'кВт⋅ч'
+            value_template: "{{ (states('sensor.0x00158d0001fa2934_consumption') | float - (states('sensor.00158d0001fa2934_power_temp_month') | float))|round(5) }}"
+            icon_template: mdi:counter
+            
+            
           00158d0001fa2934_money_month:
             friendly_name: "Стоимость за текущий месяц"
             unit_of_measurement: 'грн'
-            value_template: "{{ (states('sensor.00158d0001fa2934_power_month') | float * 1.68)|round(2) }}"
+            value_template: "{{ (states('sensor.00158d0001fa2934_power_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
             icon_template: mdi:square-inc-cash 
         
           00158d0001fa2934_money_lastmonth:
             friendly_name: "Стоимость за прошлый месяц"
             unit_of_measurement: 'грн'
-            value_template: "{{ (states('sensor.00158d0001fa2934_power_lastmonth') | float * 1.68)|round(2) }}"
+            value_template: "{{ (states('sensor.00158d0001fa2934_power_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
             icon_template: mdi:square-inc-cash 
-        
+            
     script:
-          
-          00158d0001fa2934_day:
-            alias: 00158d0001fa2934 энергомониторинг день
-            sequence:
-            - service: mqtt.publish
-              data_template:
-                topic: "power/00158d0001fa2934/today"
-                payload: "{{(states('sensor.00158d0001fa2934_power_today') | float + (states('sensor.0x00158d0001fa2934_power') | float /120000))|round(5) }}"
-                retain: true
-            - service: mqtt.publish
-              data_template:
-                topic: "power/00158d0001fa2934/month"
-                payload: "{{(states('sensor.00158d0001fa2934_power_month') | float + (states('sensor.0x00158d0001fa2934_power') | float /120000))|round(5) }}"
-                retain: true
 
           00158d0001fa2934_yesterday:
             alias: 00158d0001fa2934 энергомониторинг смена дня
             sequence:
             - service: mqtt.publish
               data_template:                
+                topic: "power/00158d0001fa2934/temp"
+                payload: "{{states('sensor.0x00158d0001fa2934_consumption') | float}}"
+                retain: true
+            - service: mqtt.publish
+              data_template:                
                 topic: "power/00158d0001fa2934/yesterday"
                 payload: "{{states('sensor.00158d0001fa2934_power_today') | float}}"
                 retain: true
-            - delay: 00:00:05
-            - service: mqtt.publish
-              data_template:                
-                topic: "power/00158d0001fa2934/today"
-                payload: "{{ 0.0 }}"
-                retain: true
-                
+
           00158d0001fa2934_lastmonth:
             alias: 00158d0001fa2934 энергомониторинг смена месяца
             sequence:
             - service: mqtt.publish
               data_template:                
-                topic: "power/00158d0001fa2934/lastmonth"
-                payload: "{{states('sensor.00158d0001fa2934_power_month') | float}}"
+                topic: "power/00158d0001fa2934/temp_month"
+                payload: "{{states('sensor.0x00158d0001fa2934_consumption') | float}}"
                 retain: true
-            - delay: 00:00:05
             - service: mqtt.publish
               data_template:                
-                topic: "power/00158d0001fa2934/month"
-                payload: "{{ 0.0 }}"
+                topic: "power/00158d0001fa2934/lastmonth"
+                payload: "{{states('sensor.00158d0001fa2934_power_month') | float}}"
                 retain: true

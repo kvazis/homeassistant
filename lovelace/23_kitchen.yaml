@@ -77,29 +77,27 @@ cards:
                     entity_id: script.xiaomi_learn
 
         - type: custom:stack-in-card
-          mode: horizontal
+          mode: vertical
           cards: 
-            - type: button
-              entity: switch.0x00158d0001291d12_switch
-              name: Телевизор
-              icon: mdi:power-socket-eu
-            - type: button
-              entity: switch.0x00158d0001fa2934_switch
-              name: Холодильник
-              icon: mdi:power-socket-eu
-        - type: custom:stack-in-card
-          mode: horizontal
-          cards: 
-            - type: button
-              entity: switch.0x000d6f0014bb14b4_switch
-              name: Аэрогриль
-              icon: mdi:power-socket-eu
-            - type: button
-              entity: switch.bw_shp_2_relay
-              name: Чайник
-              icon: mdi:power-socket-eu
-
-
+          - type: markdown
+            content: >
+               **Управление питанием**
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: switch.0x00158d0001291d12_switch
+                name: Телевизор
+                icon: mdi:power-socket-eu
+              - entity: switch.0x00158d0001fa2934_switch
+                name: Холодильник
+                icon: mdi:power-socket-eu
+              - entity: switch.0x000d6f0014bb14b4_switch
+                name: Аэрогриль
+                icon: mdi:power-socket-eu
+              - entity: switch.bw_shp_2_relay
+                name: Чайник
+                icon: mdi:power-socket-eu
+                
       - type: vertical-stack
         cards:
         
@@ -122,27 +120,8 @@ cards:
           entities:
            - entity: sensor.mqtt_binary_sensor_158d0001e16204
              name: Движение
-             icon: mdi:run-fas
+             icon: mdi:run-fast
           
-        - type: entities
-          show_header_toggle: false
-          entities:
-           - entity: sensor.0x00158d0001291d12_power
-             name: Телевизор
-             icon: mdi:television
-           - entity: sensor.0x00158d0001fa2934_power
-             name: Холодильник
-             icon: mdi:fridge
-           - entity: sensor.0x00158d0001d35bc0_power
-             name: LED лента
-             icon: mdi:led-strip-variant
-           - entity: sensor.0x000d6f0014bb14b4_power
-             name: Аэрогриль
-             icon: mdi:grill
-           - entity: sensor.bw_shp_2_power
-             name: Чайник
-             icon: mdi:kettle
-
         - type: custom:stack-in-card
           mode: vertical
           cards:
@@ -166,6 +145,72 @@ cards:
                 hours:   '${value} часов'
                 day:     '${value} день'
                 days:    '${value} дней'
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Устройства**
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: sensor.0x00158d0001291d12_power
+             name: Телевизор
+             icon: mdi:television
+           - entity: sensor.0x00158d0001fa2934_power
+             name: Холодильник
+             icon: mdi:fridge
+           - entity: sensor.0x00158d0001d35bc0_power
+             name: LED лента
+             icon: mdi:led-strip-variant
+           - entity: sensor.0x000d6f0014bb14b4_power
+             name: Аэрогриль
+             icon: mdi:grill
+           - entity: sensor.bw_shp_2_power
+             name: Чайник
+             icon: mdi:kettle
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+          - type: markdown
+            content: >
+               **Кухня, ESP 32 BLE шлюз**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.kn_esp32_uptime_custom
+            - entity: sensor.kn_esp32_wi_fi
+              name: Сигнал wi-fi
+            - entity: sensor.kn_esp32_firmware_version
+              name: Прошивка
+            - entity: switch.kn_esp32_restart
+              name: Перезагрузка
+              icon: mdi:reload
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+            - type: markdown
+              content: >
+                   **Ночник Mijia**              
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: binary_sensor.mijia_night_light_occupancy
+                secondary_info: last-changed
+              - entity: binary_sensor.mijia_night_light_status
+                secondary_info: last-changed
+              - entity: sensor.mijia_night_light_time
+                secondary_info: last-changed
+              - entity: sensor.mijia_night_light_battery
+                secondary_info: last-changed
 
       - type: vertical-stack
         cards:
@@ -213,43 +258,6 @@ cards:
           points_per_hour: 1
           group_by: hour
           hours_to_show: 72
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards: 
-            - type: markdown
-              content: >
-                   **Ночник Mijia**              
-            - type: entities
-              show_header_toggle: false
-              entities:
-              - entity: binary_sensor.mijia_night_light_occupancy
-                secondary_info: last-changed
-              - entity: binary_sensor.mijia_night_light_status
-                secondary_info: last-changed
-              - entity: sensor.mijia_night_light_time
-                secondary_info: last-changed
-              - entity: sensor.mijia_night_light_battery
-                secondary_info: last-changed
-
-      - type: vertical-stack
-        cards:
-
-        - type: markdown
-          style: |
-              ha-card {
-                font-size: 26px;
-              }   
-          content: >
-              **Климат**
-
-        - type: glance
-          show_state: false
-          entities:
-          - entity: binary_sensor.kitchen_heat
-            name: Отопление
-          - entity: binary_sensor.kn_heat_valve
-            name: Кран 
 
         - type: custom:mini-graph-card
           entities:
@@ -300,9 +308,3 @@ cards:
           points_per_hour: 1
           group_by: hour
           hours_to_show: 72
-          
-        - type: custom:simple-thermostat
-          entity: climate.kn_heater
-          step_layout: row
-          name: false
-          icon: false

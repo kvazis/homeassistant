@@ -3,6 +3,10 @@
   trigger:
   - platform: state
     entity_id: sensor.mqtt_command_code
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
     - service: script.turn_on
       data_template:

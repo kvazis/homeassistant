@@ -26,13 +26,14 @@ cards:
             icon: mdi:av-timer
           - entity: sensor.local_ip
             name: IP адрес - 
-          - entity: sensor.rpi_power_status
+          - entity: binary_sensor.rpi_power_status
             name: Питание Raspberry Pi 4 B 4GB - 
             icon: mdi:power-plug
           - entity: sensor.online_custom
             name: Home Assistant в онлайне -
             icon: mdi:clock
           - type: divider
+          - entity: switch.control_mode
           - entity: group.scenario
             name: Бытовые сценарии - 
             icon: mdi:format-list-numbered

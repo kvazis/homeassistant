@@ -1,6 +1,6 @@
-  - platform: broadlink
-    host: 192.168.0.136
-    mac: 'B4:43:0D:EE:FF:F4'
+#   - platform: broadlink
+#     host: 192.168.0.136
+#     mac: 'B4:43:0D:EE:FF:F4'
 
   - platform: template
     switches:

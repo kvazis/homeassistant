@@ -160,6 +160,9 @@ away:
             minutes: 5
         condition:
          - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
+         - condition: state
            entity_id: switch.away
            state: 'off'
         action:
@@ -175,6 +178,9 @@ away:
           from: 'off'
           to: 'on'
         condition:
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
          - condition: state
            entity_id: switch.away
            state: 'on'

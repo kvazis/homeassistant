@@ -227,6 +227,16 @@ sensor.0x00124b001d3bdce0_radioactive_events_per_minute:
   unit_of_measurement: μR/мин
 sensor.0x00124b001d3bdce0_linkquality:
   friendly_name: Счетчик Гейгера
+
+## Датчик движение
+binary_sensor.0xec1bbdfffe4521a3_occupancy:
+  friendly_name: Детская Д балкон движение
+sensor.0xec1bbdfffe4521a3_battery:
+  friendly_name: Детская Д балкон движение
+sensor.0xec1bbdfffe4521a3_linkquality:
+  friendly_name: Детская Д балкон движение
+sensor.0xec1bbdfffe4521a3_voltage:
+  friendly_name: Детская Д балкон движение
   
 ## Датчик климата 
 sensor.0x00158d0001fa8321_humidity:
@@ -258,4 +268,11 @@ binary_sensor.0x00158d0001a65b68_contact:
 sensor.0x00158d0001a65b68_battery:
   friendly_name: Детская Д балкон окно
 sensor.0x00158d0001a65b68_linkquality:
+  friendly_name: Детская Д балкон окно
+  
+## Датчик на окне 2
+binary_sensor.dd_balcony_window_2_contact:
+  friendly_name: Детская Д балкон окно 2
+  device_class: window 
+sensor.dd_balcony_window_2_linkquality:
   friendly_name: Детская Д балкон окно

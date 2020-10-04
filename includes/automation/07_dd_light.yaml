@@ -182,3 +182,18 @@
       topic: "binary_sensor/158d0001a66222"
       payload: "{{ states('sensor.time_date')}}"
       retain: true
+      
+- id: ДД балкон, запись последнего движения
+  alias: 07_dd_b_motion_time
+  initial_state: true
+  trigger:
+## Движение в детской Д балкон
+  - platform: state
+    entity_id: binary_sensor.0xec1bbdfffe4521a3_occupancy
+    to: 'on'
+  action: 
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/1bbdfffe4521a3"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true

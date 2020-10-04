@@ -27,8 +27,8 @@
     entity_id: switch.0x00158d00014a1a55_switch
 
   - platform: switch
-    name: sonoff_02_mirror
-    entity_id: switch.02_sonoff_mini_relay
+    name: tt_mirror
+    entity_id: switch.0xec1bbdfffea37571_switch
 
 ## Кухня
   - platform: switch

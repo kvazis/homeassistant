@@ -11,6 +11,11 @@
     state_topic: "binary_sensor/158d0001a66222"
     name: 'mqtt_binary_sensor_158d0001a66222'
     
+# Время фиксации движения в детской Д балкон
+  - platform: mqtt
+    state_topic: "binary_sensor/1bbdfffe4521a3"
+    name: 'mqtt_binary_sensor_1bbdfffe4521a3'
+    
 # BLE Hub ESP 32 в онлайне
   - platform: template
     sensors:

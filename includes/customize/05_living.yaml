@@ -193,14 +193,6 @@ light.66633530807d3a766432:
 ## Сенсоры  
 sensor.0x00158d000449b773_illuminance:
   friendly_name: Гостиная балкон освещенность
-sensor.0x00158d0001a4b9da_humidity:
-  friendly_name: Гостиная балкон влажность
-  icon: mdi:water-percent
-sensor.0x00158d0001a4b9da_pressure:
-  friendly_name: Гостиная балкон давление
-sensor.0x00158d0001a4b9da_temperature:
-  friendly_name: Гостиная балкон температура
-  icon: mdi:temperature-celsius
 sensor.0x00158d0001b86d2e_click:
   friendly_name: Гостиная балкон квадратная
 
@@ -225,8 +217,7 @@ sensor.0x00158d000449b773_battery:
   friendly_name: Гостиная балкон движение
 sensor.0x00158d00010b5aee_battery:
   friendly_name: Балкон выключатель
-sensor.0x00158d0001a4b9da_battery:
-  friendly_name: Гостиная балкон климат
+
   
 ## Уровень сигнала
 sensor.0x00158d0001b86d2e_linkquality:
@@ -239,5 +230,30 @@ sensor.0x00158d000449b773_linkquality:
   friendly_name: Гостиная балкон движение
 sensor.0x00158d00010b5aee_linkquality:
   friendly_name: Балкон выключатель
-sensor.0x00158d0001a4b9da_linkquality:
+
+
+## Alfawise датчик климата
+sensor.0xec1bbdfffe4534c0_humidity:
+  friendly_name: Гостиная балкон влажность
+  icon: mdi:water-percent
+sensor.0xec1bbdfffe4534c0_temperature:
+  friendly_name: Гостиная балкон температура
+  icon: mdi:temperature-celsius
+sensor.0xec1bbdfffe4534c0_battery:
   friendly_name: Гостиная балкон климат
+sensor.0xec1bbdfffe4534c0_linkquality:
+  friendly_name: Гостиная балкон климат
+  
+## Aqara наружный датчик
+sensor.0x00158d0001a4b9da_humidity:
+  friendly_name: Гостиная балкон outside влажность
+  icon: mdi:water-percent
+sensor.0x00158d0001a4b9da_pressure:
+  friendly_name: Гостиная балкон outside давление
+sensor.0x00158d0001a4b9da_temperature:
+  friendly_name: Гостиная балкон outside температура
+  icon: mdi:temperature-celsius
+sensor.0x00158d0001a4b9da_battery:
+  friendly_name: Гостиная балкон климат outside
+sensor.0x00158d0001a4b9da_linkquality:
+  friendly_name: Гостиная балкон климат outside

@@ -1,7 +1,18 @@
 p_total:
 # Общее энергопотребление
 
+    input_text:
+     
+      power_rate:
+        name: Тариф за электроэнергию
+        initial: грн за кВт⋅ч 
+
     sensor:
+    
+      - platform: mqtt
+        state_topic: "power/rate"
+        name: power_rate
+        unit_of_measurement: 'грн за кВт⋅ч'
 
       - platform: mqtt
         state_topic: "power/total_energy/today"
@@ -47,22 +58,31 @@ p_total:
                   (states('sensor.0x842e14fffe51c5ae_power') | float) +
                   (states('sensor.bw_shp_2_power') | float) +
                   (states('sensor.wifi_6port_power') | float) + 
-                  (states('sensor.load_wifi_3usb') | float) + 
-                  (states('sensor.load_wifi_socket_usb') | float) ) | round(3)}}"
+                  (states('sensor.wifi_3usb_power') | float) + 
+                  (states('sensor.wifi_2usb_power') | float) ) | round(3)}}"
                   
           total_money_month:
             friendly_name: "Стоимость за текущий месяц"
             unit_of_measurement: 'грн'
-            value_template: "{{ (states('sensor.total_power_month') | float * 1.68)|round(2) }}"
+            value_template: "{{ (states('sensor.total_power_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
             icon_template: mdi:square-inc-cash 
         
           total_money_lastmonth:
             friendly_name: "Стоимость за прошлый месяц"
             unit_of_measurement: 'грн'
-            value_template: "{{ (states('sensor.total_power_lastmonth') | float * 1.68)|round(2) }}"
+            value_template: "{{ (states('sensor.total_power_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
             icon_template: mdi:square-inc-cash 
             
     script:
+
+          power_rate:
+            alias: Ручной ввод тарифа за электроэнергию
+            sequence:          
+                - service: mqtt.publish
+                  data_template:                
+                    topic: "power/rate"
+                    payload: "{{states('input_text.power_rate')}}"
+
           
           total_power_day:
             alias: Общий энергомониторинг день

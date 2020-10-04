@@ -18,6 +18,10 @@ en_smoke:
            - platform: state
              entity_id: binary_sensor.0x00158d000149d28b_smoke
              to: 'on'
+          condition:
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on'
           action:
             - service: mqtt.publish
               data_template:
@@ -40,6 +44,10 @@ en_smoke:
              entity_id: binary_sensor.0x00158d000149d28b_smoke
              from: 'on'
              to: 'off'
+          condition:
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on'
           action:
             - service: mqtt.publish
               data_template:

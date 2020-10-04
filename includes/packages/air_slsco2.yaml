@@ -1,0 +1,40 @@
+air_slsco2:
+
+    binary_sensor:
+      - platform: template
+        sensors:
+          dd_air:
+            friendly_name: "Уведомление о проветривании детская Д - "
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d0001193697_contact', 'off')  
+                 and is_state('binary_sensor.0x00158d00015843d4_contact', 'off') 
+                 and states('sensor.0x00124b001ed165de_co2')|float > 1000 
+                 and is_state('binary_sensor.away', 'off')
+                 and is_state('sensor.dd_day_work', 'Включен') }}
+            icon_template: >-
+              {% if is_state("binary_sensor.da_air", "on") %}
+              mdi:alarm-note
+              {% else %}
+              mdi:alarm-off
+              {% endif %}
+
+    automation:
+    
+        - id: Детская Д, уведомление о проветривании
+          alias: dd_air_fresh
+          initial_state: true
+        # Проверка каждые 30 минут
+          trigger:
+            - platform: time_pattern
+              minutes: '/30'
+          condition:
+            - condition: state
+              entity_id:  binary_sensor.dd_air
+              state: 'on'
+          action:
+           - service: mqtt.publish
+             data_template:
+               topic: "notification/messages"
+               payload_template: '0701'
+               retain: true
+

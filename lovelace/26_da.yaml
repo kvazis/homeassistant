@@ -12,7 +12,7 @@ cards:
                 font-size: 26px;
               }   
           content: >
-              **Детская А - управление**
+              **Панель управления**
               
         - type: custom:stack-in-card
         #   mode: vertical
@@ -84,28 +84,25 @@ cards:
                 service_data:
                     entity_id: script.08_da_nightlight_off
 
+
         - type: custom:stack-in-card
           mode: vertical
-          cards:
-                
-          - type: horizontal-stack
-            cards: 
-
-            - type: button
-              name: Свет выкл
-              icon: mdi:close-circle-outline
-              tap_action:
-                action: call-service
-                service: script.turn_on
-                service_data:
-                    entity_id: script.08_da_lightoff
-                
-            - type: button
-              entity: switch.0x00158d0002d7bb2b_switch_l1
-              name: Стол питание
-            - type: button
-              entity: switch.da_holiday
-              name: Режим выходного дня
+          cards: 
+          - type: markdown
+            content: >
+               **Управление питанием**
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: switch.0x00158d0002d7bb2b_switch_l1
+                name: Питание стола
+                icon: mdi:power-socket-eu
+              - entity: switch.0x00158d0002d7bb2b_switch_l2
+                name: Питание термоголовки
+                icon: mdi:power-socket-eu
+              - entity: switch.0x00158d00010ec4b8_switch
+                name: Питание увлажнителя
+                icon: mdi:power-socket-eu
 
       - type: vertical-stack
         cards:
@@ -116,7 +113,7 @@ cards:
                 font-size: 26px;
               }   
           content: >
-              **Детская А - мониторинг** 
+              **Мониторинг** 
 
         - type: picture-entity
           entity: camera.xiaofang1s
@@ -127,12 +124,15 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
-            - entity: switch.xiaofang1s_ir_filter
-            - entity: switch.xiaofang1s_ir_led
-            - entity: switch.xiaofang1s_night_mode
-            - entity: switch.xiaofang1s_night_mode_auto
-            # - entity: switch.xiaofang1s_motion_detection            
-            # - entity: binary_sensor.xiaofang1s_motion_sensor
+            - entity: sensor.da_day_work
+              name: Дневной режим
+            - entity: sensor.mqtt_binary_sensor_158d00016d56f5
+              name: Движение
+              icon: mdi:run-fast 
+            - entity: binary_sensor.da_air
+              name: Уведомление 
+            - entity: binary_sensor.mijia_air
+              name: Низкое качество воздух
             
         - type: custom:stack-in-card
           mode: vertical
@@ -167,7 +167,65 @@ cards:
                 font-size: 26px;
               }   
           content: >
-              **Детская А - Сенсоры** 
+              **Устройства** 
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.0x00158d00010ec4b8_power
+            name: Увлажнитель
+            icon: mdi:flash
+          - entity: sensor.0x00158d0002d7bb2b_power
+            name: Стол и отопление
+            icon: mdi:flash
+    
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+          - type: markdown
+            content: >
+               **Управление камерой**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: switch.xiaofang1s_night_mode
+              name: Ночной режим
+            - entity: switch.xiaofang1s_ir_filter
+              name: ИК фильтр
+            - entity: switch.xiaofang1s_ir_led
+              name: ИК подсветка
+
+
+
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+          - type: markdown
+            content: >
+               **Детская А, ESP 32 BLE шлюз**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: sensor.da_esp32_uptime_custom
+            - entity: sensor.da_esp32_wi_fi
+              name: Сигнал wi-fi
+            - entity: sensor.da_esp32_firmware_version
+              name: Прошивка
+            - entity: switch.da_esp32_restart
+              name: Перезагрузка
+              icon: mdi:reload
+             
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Сенсоры**
               
         - type: glance
           show_state: false
@@ -203,63 +261,6 @@ cards:
           points_per_hour: 1
           group_by: hour
           hours_to_show: 72
-             
-        - type: glance
-          show_state: true
-          state_color: true
-          entities:
-           - entity: sensor.mqtt_binary_sensor_158d00016d56f5
-             name: Последнее движение
-             icon: mdi:run-fast 
-           - entity: sensor.load_158d00010ec4b8
-             name: Увлажнитель
-           - entity: sensor.load_158d0002d7bb2b
-             name: Стол и отопление
-             
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: switch.da_hum_mode
-          - entity: input_number.humidity_level_da
-          - entity: binary_sensor.da_hum
-          - entity: switch.0x00158d00010ec4b8_switch
-
-        - type: custom:simple-thermostat
-          entity: climate.da_heater
-          step_layout: row
-          name: false
-          icon: false
-        #   control: false
-          sensors:
-              - entity: sensor.08_mean_humidity
-                name: Humidity
-
-             
-      - type: vertical-stack
-        cards:
-
-        - type: markdown
-          style: |
-              ha-card {
-                font-size: 26px;
-              }   
-          content: >
-              **Детская А - климат**
-              
-        - type: glance
-          show_state: false
-          state_color: true
-          entities:
-           - entity: sensor.da_day_work
-             name: Сценарии
-           - entity: binary_sensor.da_hum
-             name: Увлажнение
-           - entity: binary_sensor.da_heat
-             name: Отопление
-           - entity: binary_sensor.mijia_air
-             name: Воздух
-           - entity: binary_sensor.da_air
-             name: Проветрить
 
         - type: custom:mini-graph-card
           entities:
