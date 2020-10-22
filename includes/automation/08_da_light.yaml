@@ -1,3 +1,18 @@
+# Проектор
+- alias: 08_smart_projector
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: sensor.0x00158d0001e8a244_action
+    to: 'single'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'  
+  action:
+  - service: light.toggle
+    entity_id: light.bfa26533f8ba487e23ug9z
+
 ## Включение ночника по движению
 - alias: 08_da_light_auto
   initial_state: true
@@ -95,22 +110,22 @@
     - service: script.turn_on
       entity_id: script.08_da_lightoff
       
-# Управление ночным режимы камеры 
-- alias: 08_da_xiaofang
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id:
-      - sensor.0x04cf8cdf3c78ca91_illuminance
-  action:
-    service_template: >-
-      {% set illum = states('sensor.0x04cf8cdf3c78ca91_illuminance') | float %}
-      {% if illum >= 5000 %}
-        switch.turn_off
-      {% elif illum < 5000 %}
-        switch.turn_on
-      {% endif %}
-    entity_id: switch.xiaofang1s_night_mode
+# # Управление ночным режимы камеры 
+# - alias: 08_da_xiaofang
+#   initial_state: true
+#   trigger:
+#     platform: state
+#     entity_id:
+#       - sensor.0x04cf8cdf3c78ca91_illuminance
+#   action:
+#     service_template: >-
+#       {% set illum = states('sensor.0x04cf8cdf3c78ca91_illuminance') | float %}
+#       {% if illum >= 5000 %}
+#         switch.turn_off
+#       {% elif illum < 5000 %}
+#         switch.turn_on
+#       {% endif %}
+#     entity_id: switch.xiaofang1s_night_mode
       
 ## Запись последнего движения в детской А
 - alias: 08_da_motion_time

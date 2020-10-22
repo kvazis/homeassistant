@@ -45,7 +45,91 @@ cards:
                 #     width: 15%
                 #     border: 1px solid white
                 #     border-radius: 10%
-                
+
+# Режимы работ - автоматизации 
+                - type: state-icon
+                  title: Режим управления
+                  icon: mdi:server
+                  tap_action:
+                      action: toggle
+                  entity: switch.control_mode
+                  style:
+                     top: 5%
+                     left: 3% 
+                     
+                - type: state-icon
+                  title: Никого нет дома
+                #   icon: mdi:server
+                  tap_action:
+                      action: toggle
+                  entity: switch.away
+                  style:
+                     top: 5%
+                     left: 5% 
+                     
+                - type: state-icon
+                  title: Отопление
+                #   icon: mdi:server
+                  tap_action:
+                      action: toggle
+                  entity: switch.radiator_mode
+                  style:
+                     top: 5%
+                     left: 7% 
+                     
+                - type: state-icon
+                  title: Бойлер
+                #   icon: mdi:server
+                  tap_action:
+                      action: toggle
+                  entity: switch.heater_mode
+                  style:
+                     top: 5%
+                     left: 9% 
+                     
+                - type: state-icon
+                  title: Выходной день
+                #   icon: mdi:server
+                  tap_action:
+                      action: toggle
+                  entity: switch.holiday_mode
+                  style:
+                     top: 5%
+                     left: 11% 
+                     
+# Мониторинг
+                - type: state-label
+                  entity: sensor.unavailable_now_light
+                  prefix: "Светильники - "
+                  suffix: " отвалилось"
+                  style:
+                     top: 7%
+                     left: 7% 
+                     
+                - type: state-label
+                  entity: sensor.unavailable_now_switch
+                  prefix: "Выключатели - "
+                  suffix: " отвалилось"
+                  style:
+                     top: 8%
+                     left: 7% 
+
+                - type: state-label
+                  entity: sensor.unavailable_now_sensor
+                  prefix: "Сенсоры - "
+                  suffix: " отвалилось"
+                  style:
+                     top: 9%
+                     left: 7% 
+                     
+                - type: state-label
+                  entity: sensor.unavailable_now_binary_sensor
+                  prefix: "Бинарники - "
+                  suffix: " отвалилось"
+                  style:
+                     top: 10%
+                     left: 7% 
+
 # Свет в прихожей                    
                 - type: state-icon
                   tap_action:
@@ -82,6 +166,13 @@ cards:
                   style:
                      top: 15%
                      left: 25% 
+                     
+# Датчик в протечки туалете 
+                - type: state-icon
+                  entity: binary_sensor.0xec1bbdfffe8f1e42_water_leak
+                  style:
+                     top: 12%
+                     left: 23% 
 
 # Свет в туалете 
                 - type: state-icon
@@ -96,7 +187,7 @@ cards:
                 - type: state-icon
                   tap_action:
                       action: toggle
-                  entity: light.sonoff_02_mirror
+                  entity: light.tt_mirror
                   icon: mdi:mirror
                   style:
                      top:  10%
@@ -141,6 +232,13 @@ cards:
                      top: 3%
                      left: 33% 
                      
+# Потребление - стиралка              
+                - type: state-label
+                  entity: sensor.0x842e14fffe51c5ae_power
+                  style:
+                     top: 5%
+                     left: 33% 
+                     
 # Движение в коридоре
                 - type: state-icon
                   entity: binary_sensor.0x00158d00010f8920_occupancy
@@ -171,6 +269,13 @@ cards:
                   entity: light.aqara_04_strip
                   style:
                      top: 15%
+                     left: 39% 
+                     
+# Потребление - чайник                
+                - type: state-label
+                  entity: sensor.bw_shp_2_power
+                  style:
+                     top: 17%
                      left: 39% 
                      
                 # - type: image
@@ -216,6 +321,38 @@ cards:
                      top: 27%
                      left: 39% 
 
+
+# Температура
+                - type: state-label
+                  entity: sensor.0x00158d0001581109_temperature
+                  style:
+                     top: 8%
+                     left: 47% 
+                     
+# Влажность
+                - type: state-label
+                  entity: sensor.0x00158d0001581109_humidity
+                  style:
+                     top: 9%
+                     left: 47% 
+
+
+# Отопление
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: climate.kn_heater
+                  style:
+                     top: 9%
+                     left: 54% 
+
+                - type: state-label
+                  entity: climate.kn_heater
+                  style:
+                     top: 9%
+                     left: 57%
+
+
 # Дверь на балкон                   
                 - type: state-icon
                   entity: binary_sensor.0x00158d0001a20885_contact
@@ -247,13 +384,19 @@ cards:
                      top: 23%
                      left: 59% 
                      
-# Потребление - микроволновка                     
+# Потребление - аэрогриль                
                 - type: state-label
                   entity: sensor.0x000d6f0014bb14b4_power
                   style:
                      top: 3%
                      left: 59% 
-
+                     
+# Движение в кухне ВТ
+                - type: state-icon
+                  entity: binary_sensor.mijia_night_light_occupancy
+                  style:
+                     top: 3%
+                     left: 56% 
 # Окно на балконе                     
                 - type: state-icon
                   entity: binary_sensor.0x00158d0001a4a394_contact
@@ -261,13 +404,65 @@ cards:
                      top: 18%
                      left: 79%
                      
-                     
-# Атмосферное давление                     
+# Температура на балконе                     
                 - type: state-label
-                  entity: sensor.mean_pressure
+                  entity: sensor.0x00158d000171ffde_temperature
                   style:
-                     top: 10%
-                     left: 79%
+                     top: 20%
+                     left: 76%
+                     
+# Температура на балконе                     
+                - type: state-label
+                  entity: sensor.0x00158d000171ffde_humidity
+                  style:
+                     top: 21%
+                     left: 76%
+                     
+# Влажность на балконе                     
+                - type: state-icon
+                  entity: binary_sensor.0xec1bbdfffe302df1_occupancy
+                  style:
+                     top: 23%
+                     left: 84%
+
+# Замиокулькас
+                - type: state-label
+                  entity: sensor.zamiokulkas_moisture
+                  prefix: "Замиокулькас - "
+                  style:
+                     top: 34%
+                     left: 45% 
+
+# Юкка
+                - type: state-label
+                  prefix: "Юкка - "
+                  entity: sensor.yucca_moisture
+                  style:
+                     top: 54%
+                     left: 69% 
+                     
+# Диффенбахия
+                - type: state-label
+                  prefix: "Диффенбахия - "
+                  entity: sensor.dieffenbac_moisture
+                  style:
+                     top: 55%
+                     left: 71% 
+                     
+# Deep Purple
+                - type: state-label
+                  prefix: "Deep Purple - "
+                  entity: sensor.deep_purple_moisture
+                  style:
+                     top: 32%
+                     left: 74% 
+# True Blue
+                - type: state-label
+                  prefix: "True Blue - "
+                  entity: sensor.true_blue_moisture
+                  style:
+                     top: 33%
+                     left: 74% 
                      
 # Телевизор в гостиной
                 - type: state-icon
@@ -310,9 +505,42 @@ cards:
 # Устройств в сети
                 - type: state-label
                   entity: sensor.asuswrt_devices_connected
+                  prefix: "В сети - "
+                  suffix: " хостов"
                   style:
-                     top: 33%
-                     left: 47% 
+                     top: 40%
+                     left: 45% 
+                     
+                     
+# Температура
+                - type: state-label
+                  entity: sensor.05_mean_temperature
+                  style:
+                     top: 36%
+                     left: 50% 
+                     
+# Влажность
+                - type: state-label
+                  entity: sensor.05_mean_humidity
+                  style:
+                     top: 37%
+                     left: 50% 
+                     
+# CO2
+                - type: state-label
+                  entity: sensor.cleargrass_air_co2
+                  style:
+                     top: 38%
+                     left: 50% 
+
+# Настольная лампа
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_05_table
+                  style:
+                     top: 32%
+                     left: 60% 
                      
 # Ноутбук HP                     
                 - type: state-icon
@@ -335,6 +563,56 @@ cards:
                   style:
                      top: 32%
                      left: 66% 
+                     
+# Выходной день
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.living_holiday
+                  style:
+                     top: 42%
+                     left: 42% 
+                     
+# Режим тишины
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.silent_mode
+                  style:
+                     top: 42%
+                     left: 44% 
+                     
+# Режим увлажнения
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.lr_hum_mode
+                  style:
+                     top: 42%
+                     left: 46% 
+
+# Дневные сценарии                  
+                - type: state-icon
+                  entity: sensor.living_day_work
+                  style:
+                     top: 42%
+                     left: 48% 
+                     
+# Проветривание                  
+                - type: state-icon
+                  entity: binary_sensor.cleargrass_air
+                  style:
+                     top: 42%
+                     left: 50% 
+                     
+# Свет на стене
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.aqara_05_wall 
+                  style:
+                     top: 56%
+                     left: 49% 
                      
 # Люстра 1 в гостиной
                 - type: state-icon
@@ -370,14 +648,21 @@ cards:
                       action: toggle
                   entity: climate.living_heater
                   style:
-                     top: 49%
+                     top: 48%
                      left: 62% 
 
                 - type: state-label
                   entity: climate.living_heater
                   style:
-                     top: 49%
-                     left: 66%
+                     top: 48%
+                     left: 65%
+
+# Движение в гостиной
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0005414857_occupancy
+                  style:
+                     top: 51%
+                     left: 59% 
                      
 # Увлажнитель в гостиной 1
                 - type: state-icon
@@ -419,6 +704,19 @@ cards:
                      top: 51%
                      left: 68% 
                      
+                - type: state-label
+                  entity: sensor.smartmi_water
+                  style:
+                     top: 51%
+                     left: 70% 
+
+# Окно на балкон кухни
+                - type: state-icon
+                  entity: binary_sensor.0xec1bbdfffedf6a6a_contact
+                  style:
+                     top: 30%
+                     left: 77% 
+                     
 # Окно на балкон
                 - type: state-icon
                   entity: binary_sensor.0x00158d00013ed373_contact
@@ -449,6 +747,20 @@ cards:
                      top: 65%
                      left: 72% 
                      
+# Температура
+                - type: state-label
+                  entity: sensor.0xec1bbdfffe4534c0_temperature
+                  style:
+                     top: 64%
+                     left: 75% 
+                     
+# Влажность
+                - type: state-label
+                  entity: sensor.0xec1bbdfffe4534c0_humidity
+                  style:
+                     top: 65%
+                     left: 75% 
+                     
 # Окно на балконе
                 - type: state-icon
                   entity: binary_sensor.0x00158d0001a2f5f7_contact
@@ -456,9 +768,449 @@ cards:
                      top: 70%
                      left: 75% 
                      
+# Бойлер                
+                - type: state-icon
+                  icon: mdi:water-boiler 
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d00015751f4_switch
+                  style:
+                     top: 50%
+                     left: 14% 
+                     
+# Потребление - бойлер
+                - type: state-label
+                  entity: sensor.0x00158d00015751f4_power
+                  style:
+                     top: 50%
+                     left: 16% 
+                     
+# Температура
+                - type: state-label
+                  entity: sensor.06_mean_temperature
+                  style:
+                     top: 52%
+                     left: 16% 
+                     
+# Влажность
+                - type: state-label
+                  entity: sensor.06_mean_humidity
+                  style:
+                     top: 53%
+                     left: 16% 
+                     
+# Вентиляция ванная                
+                - type: state-icon
+                  icon: mdi:fan
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d0001117040_switch_left
+                  style:
+                     top: 50%
+                     left: 25% 
+# Освещение ванная                
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_06_ceiling
+                  style:
+                     top: 56%
+                     left: 20% 
+                     
+# Движение в ванной  
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001e547a3_occupancy
+                  style:
+                     top: 52%
+                     left: 29% 
+                     
+# Протечка под раковиной в ванной                    
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001d72fa2_water_leak
+                  style:
+                     top: 51%
+                     left: 24% 
+                     
+# Протечка под душевой в ванной                    
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001bb60c2_water_leak
+                  style:
+                     top: 64%
+                     left: 27% 
+                     
+
+# Движение             
+                - type: state-icon
+                  entity: binary_sensor.0x00158d00016d56f5_occupancy
+                  style:
+                     top: 69%
+                     left: 28%
+
+# Выходной день               
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.da_holiday
+                  style:
+                     top: 79%
+                     left: 22%
+                     
+# Увлажнение               
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.da_hum_mode
+                  style:
+                     top: 79%
+                     left: 24%
+                     
+# Дневные сценарии               
+                - type: state-icon
+                  entity: sensor.da_day_work
+                  style:
+                     top: 79%
+                     left: 26%
+                     
+# Проветривание              
+                - type: state-icon
+                  entity: binary_sensor.mijia_air
+                  style:
+                     top: 79%
+                     left: 28%
+
+# Освещение Детская А                
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.aqara_08_ceiling
+                  style:
+                     top: 82%
+                     left: 25%
+                     
+# Ночник                
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_08_bedside
+                  style:
+                     top: 75%
+                     left: 35%
+                     
+# Увлажнитель                
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d00010ec4b8_switch
+                  style:
+                     top: 73%
+                     left: 35%
+                     
+# Лента                
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_08_strip
+                  style:
+                     top: 79%
+                     left: 35%
+                     
+# Шлюз                
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.gateway_light_f0b429cc1f11
+                  style:
+                     top: 68%
+                     left: 30%
+                     
+# Температура
+                - type: state-label
+                  entity: sensor.08_mean_temperature
+                  style:
+                     top: 84%
+                     left: 25%
+                     
+# Влажность
+                - type: state-label
+                  entity: sensor.08_mean_humidity
+                  style:
+                     top: 85%
+                     left: 25%
+                     
+# СО2
+                - type: state-label
+                  entity: sensor.mijia_air_co2a
+                  style:
+                     top: 86%
+                     left: 25%
+                     
+# ЛОВ
+                - type: state-label
+                  entity: sensor.mijia_air_tvoc
+                  style:
+                     top: 87%
+                     left: 25%
+                     
+# Настольная лампа Детская А                
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.24730816ecfabc996804
+                  style:
+                     top: 94%
+                     left: 16%
+                     
+# Philips Детская А                
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.philips_08_bedside
+                  style:
+                     top: 88%
+                     left: 14%
+                     
+# Ноутбук Chuwi                    
+                - type: state-icon
+                  entity: binary_sensor.notebook_chuwi
+                  style:
+                     top: 91%
+                     left: 17% 
+                     
+# Отопление
+
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: climate.da_heater
+                  style:
+                     top: 97%
+                     left: 14% 
+
+                - type: state-label
+                  entity: climate.da_heater
+                  style:
+                     top: 97%
+                     left: 17%
+                     
+# Окно
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001583c7b_contact
+                  style:
+                     top: 97%
+                     left: 24% 
+
+
+# Выходной день               
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.dd_holiday
+                  style:
+                     top: 66%
+                     left: 47%
+                     
+# Увлажнение               
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.dd_hum_mode
+                  style:
+                     top: 66%
+                     left: 49%
+                     
+# Дневные сценарии               
+                - type: state-icon
+                  entity: sensor.dd_day_work
+                  style:
+                     top: 66%
+                     left: 51%
+                     
+# Температура
+                - type: state-label
+                  entity: sensor.07_mean_temperature
+                  style:
+                     top: 70%
+                     left: 49% 
+                     
+# Влажность
+                - type: state-label
+                  entity: sensor.07_mean_humidity
+                  style:
+                     top: 71%
+                     left: 49% 
+                     
+# СО2
+                - type: state-label
+                  entity: sensor.0x00124b001ed165de_co2
+                  style:
+                     top: 72%
+                     left: 49% 
+                     
+# Движение Детская Д
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a66222_occupancy
+                  style:
+                     top: 63%
+                     left: 38% 
+                     
+
+# Освещение Детская Д
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.philips_07_ceiling
+                  style:
+                     top: 68%
+                     left: 49% 
+                     
+# Настольная лампа Детская Д
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.xiaomi_07_table
+                  style:
+                     top: 84%
+                     left: 60% 
+                     
+# Бра
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.yeelight_07_whitebulb
+                  style:
+                     top: 63%
+                     left: 61% 
+                     
+# Увлажнитель
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: switch.0x00158d0001a2ccab_switch_left
+                  style:
+                     top: 79%
+                     left: 61% 
+                     
+# Ноутбук Детская Д
+                - type: state-icon
+                  entity: binary_sensor.notebook_acer_15
+                  style:
+                     top: 82%
+                     left: 57% 
+                     
+# Принтер
+                - type: state-icon
+                  icon: mdi:printer
+                  tap_action:
+                      action: toggle
+                  entity: switch.plug1
+                  style:
+                     top: 84%
+                     left: 49% 
+                     
+# Отопление
+
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: climate.dd_heater
+                  style:
+                     top: 86%
+                     left: 49% 
+
+                - type: state-label
+                  entity: climate.dd_heater
+                  style:
+                     top: 86%
+                     left: 52%
+
+# Освещение  балкон Детская Д
+                - type: state-icon
+                  tap_action:
+                      action: toggle
+                  entity: light.dd_balcony
+                  style:
+                     top: 92%
+                     left: 45% 
+# Окно Детская Д
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001193697_contact
+                  style:
+                     top: 89%
+                     left: 50% 
+                     
+# Дверь на балкон Детская Д
+                - type: state-icon
+                  entity: binary_sensor.0x00158d00015843d4_contact
+                  style:
+                     top: 89%
+                     left: 42% 
+                     
+# Температура на балконе Детская Д
+                - type: state-label
+                  entity: sensor.0x00158d0001fa8321_temperature
+                  style:
+                     top: 92%
+                     left: 49% 
+                     
+# Влажность на балконе Детская Д
+                - type: state-label
+                  entity: sensor.0x00158d0001fa8321_humidity
+                  style:
+                     top: 93%
+                     left: 49% 
+
+# Движение на балконе Детская Д
+                - type: state-icon
+                  entity: binary_sensor.0xec1bbdfffe4521a3_occupancy
+                  style:
+                     top: 93%
+                     left: 39% 
+                     
+# Окно на балконе с сеткой Детская Д
+                - type: state-icon
+                  entity: binary_sensor.0x00158d0001a65b68_contact
+                  style:
+                     top: 96%
+                     left: 41% 
+                     
+# Окно на балконе 2 Детская Д
+                - type: state-icon
+                  entity: binary_sensor.dd_balcony_window_2_contact
+                  style:
+                     top: 95%
+                     left: 47% 
+
+# Погода             
+                - type: state-label
+                  entity: sensor.openweathermap_weather
+                  style:
+                     top: 7%
+                     left: 79%  
+
+# Температура на улице               
+                - type: state-label
+                  entity: sensor.0x00158d0001a4b9da_temperature
+                  style:
+                     top: 8%
+                     left: 79%  
+                     
+# Влажность на улице               
+                - type: state-label
+                  entity: sensor.0x00158d0001a4b9da_humidity
+                  style:
+                     top: 9%
+                     left: 79%   
+                     
+# Атмосферное давление на улице                   
+                - type: state-label
+                  entity: sensor.pressure_mmhg_158d0001a4b9da
+                  style:
+                     top: 10%
+                     left: 79%
+                     
 # Радиация                     
                 - type: state-label
                   entity: sensor.radiation_max
                   style:
-                     top: 78%
-                     left: 75%
+                     top: 11%
+                     left: 79%

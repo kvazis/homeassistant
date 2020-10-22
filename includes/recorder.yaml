@@ -29,9 +29,13 @@
        - binary_sensor.notebook_acer_15
 # Термостаты
        - climate.kn_heater
+       - switch.kn_radiator
        - climate.living_heater
+       - switch.lr_radiator
        - climate.dd_heater
+       - switch.0x00158d0001a2ccab_switch_right
        - climate.da_heater
+       - switch.0x00158d0002d7bb2b_switch_l2
 # Заряд гаджетов
        - sensor.360_alex_battery
        - sensor.ipad_aleksei_battery_level

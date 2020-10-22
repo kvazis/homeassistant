@@ -23,7 +23,7 @@ heating_kitchen:
           kn_heat_valve:
             friendly_name: "Термостат кухня -"
             value_template: >-
-                  {{ state_attr('climate.0xec1bbdfffe9466c5_climate', 'position') | int == 100}}
+                  {{ (states('sensor.0xec1bbdfffe9466c5_position')| int == 100) }}
             device_class: lock
             icon_template: >-
               {% if is_state("binary_sensor.kn_heat_valve", "on") %}
@@ -38,16 +38,16 @@ heating_kitchen:
         switches:              
           kn_radiator:
             friendly_name: "Кухня головка радиатора"
-            value_template: "{{  is_state_attr('climate.0xec1bbdfffe9466c5_climate', 'force', 'open') }}"
+            value_template: "{{ is_state('sensor.0xec1bbdfffe9466c5_force','OPEN') }}"
             turn_on:
               service: mqtt.publish
               data_template:
-                topic: "zigbee2mqtt/KN thermostat/set/force"
+                topic: "ZigbeeSLS/KN thermostat/set/force"
                 payload_template: 'open'
             turn_off:
               service: mqtt.publish
               data_template:
-                topic: "zigbee2mqtt/KN thermostat/set/force"
+                topic: "ZigbeeSLS/KN thermostat/set/force"
                 payload_template: 'close'
             icon_template: >-
               {% if is_state('switch.kn_radiator', 'on') %}
@@ -70,6 +70,13 @@ heating_kitchen:
           - platform: state
             entity_id:
               - binary_sensor.kitchen_heat
+        condition:
+          - condition: state
+            entity_id: binary_sensor.radiator
+            state: 'on'  
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on'  
         action:
           - service: script.turn_on
             data_template:

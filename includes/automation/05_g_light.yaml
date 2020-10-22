@@ -7,6 +7,9 @@
   condition:
    - condition: template
      value_template: "{{ states('switch.0x00158d00015723f1_switch_right') != 'on' }}"
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
    - service: switch.turn_on
      entity_id: switch.0x00158d00015723f1_switch_right
@@ -21,32 +24,38 @@
     for:
       minutes: 5
   condition:
-    condition: numeric_state
+  - condition: numeric_state
     entity_id: sensor.unavailable_now_light
     below: 5
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
-    - service: mqtt.publish
-      data_template:
-        topic: "notification/messages"
-        payload_template: '0502'
-        retain: true
-    - service: switch.turn_off
-      entity_id: switch.0x00158d00015723f1_switch_right
+  - service: mqtt.publish
+    data_template:
+      topic: "notification/messages"
+      payload_template: '0502'
+      retain: true
+  - service: switch.turn_off
+    entity_id: switch.0x00158d00015723f1_switch_right
     
-
 - id: Гостиная, люстра 1
   alias: 05_gg_cell_1_light
   initial_state: true
   trigger:
 ## Главный выключатель без нуля
     - platform: state
-      entity_id: sensor.0x00158d00015723f1_click
-      to: 'right'
+      entity_id: sensor.0x00158d00015723f1_action
+      to: 'single_right'
+## Пульт ДУ на три кнопки, первая
+    - platform: state
+      entity_id: sensor.0x60a423fffe942cf2_action
+      to: '1_single'
 ## Выключатель на столе - левая кнопка
     - platform: state
-      entity_id: sensor.lr_ws_2ch_table_action
+      entity_id: sensor.0x00158d00027c0e2b_action
       to: 'left'
-## 3 кнопка Aqara Opple
+## Выключатель Aqara Opple
     - platform: state
       entity_id: sensor.0x04cf8cdf3c79360a_action
       to: 'button_3_single'
@@ -56,12 +65,16 @@
       to: 'flip180' 
 ## Выключатель возле комода - правая кнопка
     - platform: state
-      entity_id: sensor.0x00158d0001f47e10_click
-      to: 'right'
+      entity_id: sensor.0x00158d0001f47e10_action
+      to: 'single_right'
 ## Выключатель на входе в комнату - левая кнопка
     - platform: state
-      entity_id: sensor.0x00158d00013fc3bc_click
-      to: 'left'
+      entity_id: sensor.0x00158d00013fc3bc_action
+      to: 'single_left'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:    
     - service: script.turn_on
       data_template:
@@ -76,13 +89,17 @@
   alias: 05_gg_cell_2_light
   initial_state: true
   trigger:
+## Пульт ДУ на три кнопки, вторая
+    - platform: state
+      entity_id: sensor.0x60a423fffe942cf2_action
+      to: '2_single'
 ## 4 кнопка Aqara Opple
     - platform: state
       entity_id: sensor.0x04cf8cdf3c79360a_action
       to: 'button_4_single'
 ## Выключатель на столе - правая кнопка
     - platform: state
-      entity_id: sensor.lr_ws_2ch_table_action
+      entity_id: sensor.0x00158d00027c0e2b_action
       to: 'right'
 ## Тряска кубика
     - platform: state
@@ -90,8 +107,12 @@
       to: 'shake' 
 ## Выключатель возле комода - левая кнопка
     - platform: state
-      entity_id: sensor.0x00158d0001f47e10_click
-      to: 'left'
+      entity_id: sensor.0x00158d0001f47e10_action
+      to: 'single_left'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:    
     - service: script.turn_on
       data_template:
@@ -110,6 +131,10 @@
     - platform: state
       entity_id: sensor.0x04cf8cdf3c79360a_action
       to: 'button_1_single'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:    
     - service: script.turn_on
       data_template:
@@ -130,12 +155,16 @@
       to: 'fall' 
 ## Выключатель возле комода - обе кнопки
     - platform: state
-      entity_id: sensor.0x00158d0001f47e10_click
-      to: 'both'
+      entity_id: sensor.0x00158d0001f47e10_action
+      to: 'single_both'
 ## Выключатель на столе - обе кнопки
     - platform: state
-      entity_id: sensor.lr_ws_2ch_table_action
+      entity_id: sensor.0x00158d00027c0e2b_action
       to: 'both'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:    
     - service: script.turn_on
       data_template:
@@ -150,17 +179,21 @@
   alias: 05_gg_wall_light
   initial_state: true
   trigger:
+## Пульт ДУ на три кнопки, третья
+  - platform: state
+    entity_id: sensor.0x60a423fffe942cf2_action
+    to: '3_single'
 ## 2 кнопка Aqara Opple
   - platform: state
     entity_id: sensor.0x04cf8cdf3c79360a_action
     to: 'button_2_single'
 ## Круглая кнопка в прихожей
   - platform: state
-    entity_id: sensor.0x00158d00010b1963_click
+    entity_id: sensor.0x00158d00010b1963_action
     to: 'single'
 ## Выключатель на столе - левая кнопка х2
   - platform: state
-    entity_id: sensor.lr_ws_2ch_table_action
+    entity_id: sensor.0x00158d00027c0e2b_action
     to: 'left_double'
 ## Переворот кубика на 90 градусов
   - platform: state
@@ -168,8 +201,12 @@
     to: 'flip90' 
 ## Выключатель на входе в комнату - правая кнопка
   - platform: state
-    entity_id: sensor.0x00158d00013fc3bc_click
-    to: 'right'
+    entity_id: sensor.0x00158d00013fc3bc_action
+    to: 'single_right'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
     service: light.toggle
     entity_id: light.aqara_05_wall
@@ -184,8 +221,12 @@
     to: 'button_6_single'
 ## Выключатель на столе - правая кнопка х2
   - platform: state
-    entity_id: sensor.lr_ws_2ch_table_action
+    entity_id: sensor.0x00158d00027c0e2b_action
     to: 'right_double'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:    
     - service: switch.toggle
       entity_id: switch.movie_mode
@@ -202,11 +243,13 @@
   - platform: state
     entity_id: sensor.0x00158d0001186d82_action
     to: 'tap' 
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
     service: switch.toggle
     entity_id: switch.tv_xiaomi_55
-
-
 
 ## Люстра на балконе
 - alias: 05_gg_balkoon_light_toggle
@@ -219,11 +262,14 @@
   - platform: state
     entity_id: sensor.0x00158d0001b86d2e_action
     to: 'single' 
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
    - service: light.toggle
      entity_id:
       - light.66633530807d3a766432
-
 
 ## Люстра на балконе вкл
 - alias: 05_gg_balkoon_light_on
@@ -233,9 +279,12 @@
     entity_id: binary_sensor.lr_balcony_motion
     to: 'on'
   condition:
-   - condition: state
-     entity_id: light.66633530807d3a766432
-     state: 'off'
+  - condition: state
+    entity_id: light.66633530807d3a766432
+    state: 'off'
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
    - service: light.turn_on
      entity_id:
@@ -252,9 +301,12 @@
     entity_id: binary_sensor.0x00158d000449b773_occupancy
     to: 'off'
   condition:
-   - condition: state
-     entity_id: light.66633530807d3a766432
-     state: 'on'
+  - condition: state
+    entity_id: light.66633530807d3a766432
+    state: 'on'
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
    - service: light.turn_off
      entity_id:
@@ -270,9 +322,12 @@
     for:
         minutes: 3
   condition:
-    - condition: state
-      entity_id: binary_sensor.0x00158d000449b773_occupancy
-      state: 'off'
+  - condition: state
+    entity_id: binary_sensor.0x00158d000449b773_occupancy
+    state: 'off'
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
    - service: light.turn_off
      entity_id:
@@ -286,6 +341,10 @@
   - platform: state
     entity_id: binary_sensor.0x00158d0005414857_occupancy
     to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action: 
   - service: mqtt.publish
     data_template:
@@ -301,6 +360,10 @@
   - platform: state
     entity_id: binary_sensor.0x00158d000449b773_occupancy
     to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action: 
   - service: mqtt.publish
     data_template:

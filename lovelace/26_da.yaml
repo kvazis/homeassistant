@@ -47,8 +47,8 @@ cards:
               name: Yeelight
               
             - type: light
-              entity: light.gateway_light_f0b429cc1f11
-              name: Шлюз
+              entity: light.bfa26533f8ba487e23ug9z
+              name: Проектор
 
         - type: custom:stack-in-card
           mode: vertical
@@ -116,7 +116,7 @@ cards:
               **Мониторинг** 
 
         - type: picture-entity
-          entity: camera.xiaofang1s
+          entity: camera.reolink_e1_zoom_profile000_mainstream
           camera_view: live 
           show_state: false
           show_name: false
@@ -184,25 +184,6 @@ cards:
           cards: 
           - type: markdown
             content: >
-               **Управление камерой**
-          - type: entities
-            show_header_toggle: false
-            entities:
-            - entity: switch.xiaofang1s_night_mode
-              name: Ночной режим
-            - entity: switch.xiaofang1s_ir_filter
-              name: ИК фильтр
-            - entity: switch.xiaofang1s_ir_led
-              name: ИК подсветка
-
-
-
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards: 
-          - type: markdown
-            content: >
                **Детская А, ESP 32 BLE шлюз**
           - type: entities
             show_header_toggle: false
@@ -215,6 +196,72 @@ cards:
             - entity: switch.da_esp32_restart
               name: Перезагрузка
               icon: mdi:reload
+              
+        - type: custom:mini-graph-card
+          entities:
+            - entity: sensor.mijia_air_co2a
+              name: СО2 
+          color_thresholds:
+            - value: 1000
+              color: "#00FFFF"
+            - value: 2000
+              color: "#00FF00"
+            - value: 3000
+              color: "#FFFF00"
+            - value: 9999
+              color: "#FF0000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 7
+            
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.mijia_air_tvoc
+             name: ЛОВ
+          color_thresholds:
+            - value: 0.3
+              color: "#00FFFF"
+            - value: 1
+              color: "#00FF00"
+            - value: 3
+              color: "#FFFF00"
+            - value: 9
+              color: "#FF0000"
+            - value: 20
+              color: "#800000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+        - type: custom:mini-graph-card  
+          entities:
+           - entity: sensor.mijia_air_pm25
+             name: РМ 2.5
+          color_thresholds:
+            - value: 12
+              color: "#00FFFF"
+            - value: 35
+              color: "#00FF00"
+            - value: 55
+              color: "#FFFF00"
+            - value: 150
+              color: "#FFD700"
+            - value: 250
+              color: "#FF0000"
+            - value: 999
+              color: "#800000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
              
       - type: vertical-stack
         cards:
@@ -312,68 +359,4 @@ cards:
           group_by: hour
           hours_to_show: 72
 
-        - type: custom:mini-graph-card
-          entities:
-            - entity: sensor.mijia_air_co2a
-              name: СО2 
-          color_thresholds:
-            - value: 1000
-              color: "#00FFFF"
-            - value: 2000
-              color: "#00FF00"
-            - value: 3000
-              color: "#FFFF00"
-            - value: 9999
-              color: "#FF0000"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 7
-            
-        - type: custom:mini-graph-card
-          entities:
-           - entity: sensor.mijia_air_tvoc
-             name: ЛОВ
-          color_thresholds:
-            - value: 0.3
-              color: "#00FFFF"
-            - value: 1
-              color: "#00FF00"
-            - value: 3
-              color: "#FFFF00"
-            - value: 9
-              color: "#FF0000"
-            - value: 20
-              color: "#800000"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72
 
-        - type: custom:mini-graph-card  
-          entities:
-           - entity: sensor.mijia_air_pm25
-             name: РМ 2.5
-          color_thresholds:
-            - value: 12
-              color: "#00FFFF"
-            - value: 35
-              color: "#00FF00"
-            - value: 55
-              color: "#FFFF00"
-            - value: 150
-              color: "#FFD700"
-            - value: 250
-              color: "#FF0000"
-            - value: 999
-              color: "#800000"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72

@@ -256,3 +256,44 @@
       payload: "{{ states('sensor.time_date')}}"
       retain: true
       
+## Обнаружение протечки, туалет раковина
+- alias: 02_toilet_wleak_on
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.0x00158d0001bbeba6_water_leak
+   to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on' 
+  action:
+  - service: mqtt.publish
+    data_template:
+      topic: "notification/alarm"
+      payload_template: '0202'
+      retain: true
+  - service: script.turn_on
+    entity_id: script.11_warning
+      
+## Протечка устранена, туалет раковина       
+- alias: 02_toilet_wleak_off
+  initial_state: true
+  trigger:       
+   platform: state
+   entity_id: binary_sensor.0x00158d0001bbeba6_water_leak
+   from: 'on'
+   to: 'off'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on' 
+  action:
+  - service: mqtt.publish
+    data_template:
+      topic: "notification/alarm"
+      payload_template: '0203'
+      retain: true
+  - service: script.turn_on
+    entity_id: script.11_all_ok
+      

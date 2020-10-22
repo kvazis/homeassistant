@@ -149,6 +149,12 @@ sensor.mijia_night_light_battery:
 
 ## Кухня балкон
 
+## Датчик движения Blitzwolf
+binary_sensor.0xec1bbdfffe302df1_occupancy:
+  friendly_name: Кухня балкон движение
+sensor.0xec1bbdfffe302df1_linkquality:
+  friendly_name: Кухня балкон движение
+
 ## Сенсоры
 sensor.0x00158d000171ffde_humidity:
   friendly_name: Кухня балкон влажность
@@ -166,6 +172,7 @@ binary_sensor.0x00158d0001a20885_contact:
 binary_sensor.0x00158d0001a4a394_contact:
   friendly_name: Кухня балкон окно
   device_class: window 
+
   
 ## Уровень заряда
 sensor.0x00158d0001a20885_battery:

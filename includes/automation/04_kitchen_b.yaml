@@ -40,7 +40,22 @@
      entity_id: light.yeelight_strip2_7c49ebb111e4
    - service: switch.turn_off
      entity_id: switch.wall_switch_ln_right_158d0001a2ccab
-
-
-
-
+     
+## Запись последнего движения на балконе кухни
+- alias: kn_balcony_motion_time
+  initial_state: true
+  trigger:
+## Движение в коридоре
+  - platform: state
+    entity_id: binary_sensor.0xec1bbdfffe302df1_occupancy
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'  
+  action:
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/1bbdfffe302df1"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true

@@ -1,31 +1,55 @@
+# ## Запись последнего движения в коридоре
+# - alias: 03_motion_time
+#   initial_state: true
+#   trigger:
+# ## Движение в коридоре
+#   - platform: state
+#     entity_id: 
+#       - binary_sensor.0x00158d00010f8920_occupancy
+#       - binary_sensor.0xec1bbdfffe302df1_occupancy
+#   condition:
+#   - condition: state
+#     entity_id: switch.control_mode
+#     state: 'on'  
+#   action:
+#       - choose:
+#           - conditions:
+#               - condition: state
+#                 entity_id: binary_sensor.0x00158d00010f8920_occupancy
+#                 state: 'on'
+#             sequence:
+#               - service: mqtt.publish
+#                 data_template:
+#                   topic: "binary_sensor/158d00010f8920"
+#                   payload: "{{ states('sensor.time_date')}}"
+#                   retain: true
+#           - conditions:
+#               - condition: state
+#                 entity_id: binary_sensor.0xec1bbdfffe302df1_occupancy
+#                 state: 'on'
+#             sequence:
+#               - service: mqtt.publish
+#                 data_template:
+#                   topic: "binary_sensor/1bbdfffe302df1"
+#                   payload: "{{ states('sensor.time_date')}}"
+#                   retain: true
+
 ## Запись последнего движения в коридоре
 - alias: 03_motion_time
   initial_state: true
   trigger:
 ## Движение в коридоре
   - platform: state
-    entity_id: 
-      - binary_sensor.0x00158d00010f8920_occupancy
-      - binary_sensor.0xec1bbdfffe302df1_occupancy
+    entity_id: binary_sensor.0x00158d00010f8920_occupancy
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'  
   action:
-      - choose:
-          - conditions:
-              - condition: state
-                entity_id: binary_sensor.0x00158d00010f8920_occupancy
-                state: 'on'
-            sequence:
-              - service: mqtt.publish
-                data_template:
-                  topic: "binary_sensor/158d00010f8920"
-                  payload: "{{ states('sensor.time_date')}}"
-                  retain: true
-          - conditions:
-              - condition: state
-                entity_id: binary_sensor.0xec1bbdfffe302df1_occupancy
-                state: 'on'
-            sequence:
-              - service: mqtt.publish
-                data_template:
-                  topic: "binary_sensor/1bbdfffe302df1"
-                  payload: "{{ states('sensor.time_date')}}"
-                  retain: true
+  - service: mqtt.publish
+    data_template:
+      topic: "binary_sensor/158d00010f8920"
+      payload: "{{ states('sensor.time_date')}}"
+      retain: true
+

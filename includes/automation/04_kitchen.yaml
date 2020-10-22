@@ -8,6 +8,9 @@
     - condition: state
       entity_id: switch.0x00158d0001fa2934_switch
       state: 'off'
+    - condition: state
+      entity_id: switch.control_mode
+      state: 'on'  
   action:
    - service: switch.turn_on
      entity_id: switch.0x00158d0001fa2934_switch
@@ -27,7 +30,11 @@
 ## Подброс кубика
   - platform: state
     entity_id: sensor.0x00158d000101bdc6_action
-    to: 'fall'    
+    to: 'fall'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'  
   action:    
     - service: switch.toggle
       entity_id: switch.04_kn_mainlight 
@@ -44,6 +51,9 @@
    - condition: state
      entity_id: binary_sensor.04_kn_light
      state: 'on'
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'  
   action:
     - service: script.turn_on
       data_template:
@@ -68,6 +78,9 @@
    - condition: state
      entity_id: binary_sensor.04_kn_autolight
      state: 'on'
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on' 
   action:
     - service: script.turn_on
       entity_id: script.04_kn_ceiling_off
@@ -76,10 +89,6 @@
 - alias: 04_kn_led_toggle
   initial_state: true
   trigger:
-# ## Круглая кнопка на стене
-#   - platform: state
-#     entity_id: sensor.0x00158d000154a353_click
-#     to: 'single'
 ## Переворот кубика на 90 градусов
   - platform: state
     entity_id: sensor.0x00158d000101bdc6_action
@@ -88,6 +97,10 @@
   - platform: state
     entity_id: sensor.0x00158d000282a130_click
     to: 'left'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
     service: light.toggle
     entity_id: light.aqara_04_strip
@@ -97,8 +110,12 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.0x00158d0001bbeba6_water_leak
+   entity_id: binary_sensor.0xec1bbdfffe8f1e42_water_leak
    to: 'on'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
   - service: mqtt.publish
     data_template:
@@ -114,9 +131,13 @@
   initial_state: true
   trigger:       
    platform: state
-   entity_id: binary_sensor.0x00158d0001bbeba6_water_leak
+   entity_id: binary_sensor.0xec1bbdfffe8f1e42_water_leak
    from: 'on'
    to: 'off'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
   - service: mqtt.publish
     data_template:
@@ -142,6 +163,10 @@
   - platform: state
     entity_id: sensor.0x00158d000101bdc6_action
     to: 'tap'  
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
     service: script.turn_on
     entity_id: script.xiaomi_tv
@@ -154,6 +179,10 @@
   - platform: state
     entity_id: sensor.0x04cf8cdf3c794209_action
     to: 'button_6_double'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
     service: script.turn_on
     entity_id: script.mini8_android
@@ -166,6 +195,10 @@
     - platform: state
       entity_id: sensor.0x00158d0002a8ab8b_action
       to: 'vibration'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
     - service: mqtt.publish
       data_template:
@@ -181,6 +214,10 @@
   - platform: state
     entity_id: binary_sensor.0x00158d0001e16204_occupancy
     to: 'on'
+  condition:
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action: 
   - service: mqtt.publish
     data_template:

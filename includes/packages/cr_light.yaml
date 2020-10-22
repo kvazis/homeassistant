@@ -51,6 +51,9 @@ cr_light:
             - condition: state
               entity_id: light.yeelight_03_ceiling
               state: 'off'
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on'  
           action: 
             - service: light.turn_on
               entity_id:
@@ -77,6 +80,9 @@ cr_light:
             - condition: state
               entity_id: binary_sensor.cr_night
               state: 'off'
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on' 
           action:
             - service: light.turn_on
               entity_id:
@@ -104,6 +110,9 @@ cr_light:
             - condition: state
               entity_id: binary_sensor.cr_night
               state: 'on'
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on' 
           action:
             - service: light.turn_on
               entity_id: light.yeelight_03_ceiling_ambilight
@@ -140,6 +149,9 @@ cr_light:
             - condition: state
               entity_id: light.yeelight_03_ceiling
               state: 'on'
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on' 
           action: 
             - service: light.turn_off
               entity_id:
@@ -153,6 +165,10 @@ cr_light:
           - platform: state
             entity_id: sensor.0x00158d00013fc3bc_click
             to: 'both'
+          condition:
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on' 
           action: 
           - service: script.turn_on
             data_template:

@@ -36,13 +36,13 @@ p_wifi_2usb:
           wifi_2usb_money_month:
             friendly_name: "Стоимость за текущий месяц"
             unit_of_measurement: 'грн'
-            value_template: "{{ (states('sensor.wifi_2usb_power_month') | float * 1.68)|round(2) }}"
+            value_template: "{{ (states('sensor.wifi_2usb_power_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
             icon_template: mdi:square-inc-cash 
         
           wifi_2usb_money_lastmonth:
             friendly_name: "Стоимость за прошлый месяц"
             unit_of_measurement: 'грн'
-            value_template: "{{ (states('sensor.wifi_2usb_power_lastmonth') | float * 1.68)|round(2) }}"
+            value_template: "{{ (states('sensor.wifi_2usb_power_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
             icon_template: mdi:square-inc-cash 
             
     script:

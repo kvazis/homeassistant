@@ -95,6 +95,8 @@ cards:
           show_header_toggle: false
           state_color: true
           entities:
+            - entity: sensor.zodiac
+              name: Активный знак Зодиака -
             - entity: binary_sensor.workday_sensor
             - entity: sensor.date
               name: Текущая дата  -

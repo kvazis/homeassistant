@@ -19,6 +19,8 @@ cards:
           entities:
            - entity: binary_sensor.0x00158d0001a24e71_occupancy
              name: Движение
+           - entity: binary_sensor.0xec1bbdfffe8f1e42_water_leak
+             name: Датчик протечки
            - entity: binary_sensor.tt_light_timer
              name: Автосвет
 

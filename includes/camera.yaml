@@ -5,67 +5,67 @@
     still_image_url: http://192.168.0.125/image.jpg
     stream_source: rtsp://192.168.0.125:554/unicast
 
-# Кубик Xiaofang 1s    
-  - platform: ffmpeg
-    name: xiaofang1s
-    input: rtsp://192.168.0.127:8554/unicast
-    extra_arguments: "-rtsp_transport tcp"
+# # Кубик Xiaofang 1s    
+#   - platform: ffmpeg
+#     name: xiaofang1s
+#     input: rtsp://192.168.0.127:8554/unicast
+#     extra_arguments: "-rtsp_transport tcp"
 
-# Reolink - RLC-411WS
-# Основной поток
+# # Reolink - RLC-411WS
+# # Основной поток
 
-  - platform: ffmpeg
-    name: Reolink
-    input: !secret reolink1_rtsp
+#   - platform: ffmpeg
+#     name: Reolink
+#     input: !secret reolink1_rtsp
 
-# Reolink - RLC-411WS
-# Дополнительный поток
+# # Reolink - RLC-411WS
+# # Дополнительный поток
 
-  - platform: ffmpeg
-    name: Reolink_sub
-    input: !secret reolink1_sub_rtsp
+#   - platform: ffmpeg
+#     name: Reolink_sub
+#     input: !secret reolink1_sub_rtsp
 
-# Reolink C2 Pro
-# Основной поток
+# # Reolink C2 Pro
+# # Основной поток
 
-  - platform: ffmpeg
-    name: Reolink2
-    input: !secret reolink2_rtsp
+#   - platform: ffmpeg
+#     name: Reolink2
+#     input: !secret reolink2_rtsp
 
-# Reolink C2 Pro
-# Дополнительный поток
+# # Reolink C2 Pro
+# # Дополнительный поток
 
-  - platform: ffmpeg
-    name: Reolink2_sub
-    input: !secret reolink2_sub_rtsp
+#   - platform: ffmpeg
+#     name: Reolink2_sub
+#     input: !secret reolink2_sub_rtsp
 
-# Reolink 410
-# Основной поток
+# # Reolink 410
+# # Основной поток
 
-  - platform: ffmpeg
-    name: Reolink3
-    input: !secret reolink3_rtsp
+#   - platform: ffmpeg
+#     name: Reolink3
+#     input: !secret reolink3_rtsp
 
-# Reolink 410
-# Дополнительный поток
+# # Reolink 410
+# # Дополнительный поток
 
-  - platform: ffmpeg
-    name: Reolink3_sub
-    input: !secret reolink3_sub_rtsp
+#   - platform: ffmpeg
+#     name: Reolink3_sub
+#     input: !secret reolink3_sub_rtsp
 
-# Reolink E1 Pro
-# Основной поток
+# # Reolink E1 Pro
+# # Основной поток
 
-  - platform: ffmpeg
-    name: Reolink4
-    input: !secret reolink4_rtsp
+#   - platform: ffmpeg
+#     name: Reolink4
+#     input: !secret reolink4_rtsp
 
-# Reolink E1 Pro
-# Дополнительный поток
+# # Reolink E1 Pro
+# # Дополнительный поток
 
-  - platform: ffmpeg
-    name: Reolink4_sub
-    input: !secret reolink4_sub_rtsp
+#   - platform: ffmpeg
+#     name: Reolink4_sub
+#     input: !secret reolink4_sub_rtsp
 
 # Hikvision HDR
 

@@ -139,7 +139,7 @@ cards:
               **Мониторинг**
 
         - type: picture-entity
-          entity: camera.reolink4_sub
+          entity: camera.reolink_e1_pro_profile000_mainstream
           camera_view: live 
           show_state: false
           show_name: false

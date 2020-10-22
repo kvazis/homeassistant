@@ -23,8 +23,6 @@
   - platform: template
     sensors:
        hikvision_uptime_custom:
-         entity_id:
-          - sensor.hikvision_uptime
          value_template: >
            {% set uptime = states.sensor.hikvision_uptime.state | int %}
            {% set minutes = (( uptime % 60) / 1) | int %}

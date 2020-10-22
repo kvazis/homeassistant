@@ -19,8 +19,6 @@ sensor.0x00158d0002a4f77e_action:
 ## Бинарные сенсоры
 binary_sensor.0x00158d00010f8920_occupancy:
   friendly_name: Коридор движение
-binary_sensor.0xec1bbdfffe302df1_occupancy:
-  friendly_name: Коридор движение 2
 
 ## Уровень заряда
 sensor.0x00158d0002a4f77e_battery:
@@ -37,5 +35,3 @@ sensor.0x00158d00010f8920_linkquality:
   friendly_name: Коридор движение
 sensor.0x00158d0001f3fefe_linkquality:
   friendly_name: Коридор шкаф кнопка
-sensor.0xec1bbdfffe302df1_linkquality:
-  friendly_name: Коридор движение 2

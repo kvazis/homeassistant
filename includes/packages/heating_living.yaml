@@ -9,7 +9,6 @@ heating_living:
             friendly_name: "Режим отопления, Гостиная -"
             value_template: >-
               {{ is_state('binary_sensor.0x00158d000445206b_contact', 'off')  
-                 and is_state('binary_sensor.0x00158d00013ed373_contact', 'off')
                  and is_state('binary_sensor.0xec1bbdfffedf6a6a_contact', 'off')
                  and is_state('binary_sensor.away', 'off')
                  and is_state('binary_sensor.radiator', 'on') }}
@@ -68,6 +67,13 @@ heating_living:
           - platform: state
             entity_id:
               - binary_sensor.living_heat
+        condition:
+          - condition: state
+            entity_id: binary_sensor.radiator
+            state: 'on'  
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on'  
         action:
           - service: script.turn_on
             data_template:

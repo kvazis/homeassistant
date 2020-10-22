@@ -21,6 +21,7 @@ air_cleargrass:
             value_template: >-
               {{ is_state('binary_sensor.0x00158d000445206b_contact', 'off')  
                  and is_state('binary_sensor.0x00158d00013ed373_contact', 'off')
+                 and is_state('binary_sensor.0xec1bbdfffedf6a6a_contact', 'off')
                  and is_state('binary_sensor.cleargrass_air', 'on')
                  and is_state('binary_sensor.away', 'off')
                  and is_state('sensor.living_day_work', 'Включен') }}
@@ -84,6 +85,9 @@ air_cleargrass:
           condition:
             - condition: state
               entity_id:  binary_sensor.living_air
+              state: 'on'
+            - condition: state
+              entity_id: switch.control_mode
               state: 'on'
           action:
            - service: mqtt.publish

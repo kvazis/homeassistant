@@ -1,11 +1,3 @@
-  - platform: template
-    sensors:
-      philips_07_ceiling:
-        friendly_name: 'Детская Д, люстра сцена - '
-        value_template: "{{ state_attr('light.philips_07_ceiling', 'scene') }}"  
-        icon_template: mdi:numeric
-        entity_id: light.philips_07_ceiling
-
 # Время фиксации движения в детской Д
   - platform: mqtt
     state_topic: "binary_sensor/158d0001a66222"
@@ -15,14 +7,17 @@
   - platform: mqtt
     state_topic: "binary_sensor/1bbdfffe4521a3"
     name: 'mqtt_binary_sensor_1bbdfffe4521a3'
-    
-# BLE Hub ESP 32 в онлайне
+
   - platform: template
     sensors:
+      philips_07_ceiling:
+        friendly_name: 'Детская Д, люстра сцена - '
+        value_template: "{{ state_attr('light.philips_07_ceiling', 'scene') }}"  
+        icon_template: mdi:numeric
+
+# BLE Hub ESP 32 в онлайне
       dd_esp32_uptime_custom:
         friendly_name: "BLE Hub, детская Д в онлайне"
-        entity_id:
-          - sensor.dd_esp32_uptime
         value_template: >
           {%- set time = states('sensor.dd_esp32_uptime') | int %}
           {%- set minutes = ((time % 3600) // 60) %}

@@ -69,6 +69,19 @@ cards:
               name: false
               icon: false
 
+            - type: custom:logbook-card
+              entity: switch.kn_radiator
+              max_items: 10
+              title: История включений
+              duration_labels:
+                second:  '${value} секунда'
+                seconds: '${value} секунд'
+                minute:  '${value} минута'
+                minutes: '${value} минут'
+                hour:    '${value} час'
+                hours:   '${value} часов'
+                day:     '${value} день'
+                days:    '${value} дней'
 
 ############################ Колонка 2 ############################
 
@@ -136,6 +149,20 @@ cards:
               step_layout: row
               name: false
               icon: false
+
+            - type: custom:logbook-card
+              entity: switch.lr_radiator
+              max_items: 10
+              title: История включений
+              duration_labels:
+                second:  '${value} секунда'
+                seconds: '${value} секунд'
+                minute:  '${value} минута'
+                minutes: '${value} минут'
+                hour:    '${value} час'
+                hours:   '${value} часов'
+                day:     '${value} день'
+                days:    '${value} дней'
               
 ############################ Колонка 3 ############################
 
@@ -200,6 +227,20 @@ cards:
               step_layout: row
               name: false
               icon: false
+              
+            - type: custom:logbook-card
+              entity: switch.0x00158d0001a2ccab_switch_right
+              max_items: 10
+              title: История включений
+              duration_labels:
+                second:  '${value} секунда'
+                seconds: '${value} секунд'
+                minute:  '${value} минута'
+                minutes: '${value} минут'
+                hour:    '${value} час'
+                hours:   '${value} часов'
+                day:     '${value} день'
+                days:    '${value} дней'
 
 ############################ Колонка 4 ############################
 
@@ -263,3 +304,17 @@ cards:
               name: false
               icon: false
             #   control: false
+            
+            - type: custom:logbook-card
+              entity: switch.0x00158d0002d7bb2b_switch_l2
+              max_items: 10
+              title: История включений
+              duration_labels:
+                second:  '${value} секунда'
+                seconds: '${value} секунд'
+                minute:  '${value} минута'
+                minutes: '${value} минут'
+                hour:    '${value} час'
+                hours:   '${value} часов'
+                day:     '${value} день'
+                days:    '${value} дней'

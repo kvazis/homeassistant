@@ -29,7 +29,6 @@ homeassistant:
 config:
 #Сканирование доступных устройств в сети
 ssdp:
-
 # Включение официального интерфейса
 frontend:
   themes: !include_dir_merge_named themes
@@ -47,21 +46,13 @@ updater:
 stream:
 # Включение истории
 history:
-
 # Включение журнала
 logbook:
 
-# panel_iframe:
-#   sls_gateway:
-#     title: 'SLS Gateway'
-#     icon: mdi:zigbee
-#     url: 'http://192.168.0.84'
-
-# Автообнаружение устройств
-# discovery:
-#   ignore:
-#     - yeelight
-#     - homekit
+logger:
+  default: info
+  logs:
+     libav.rtsp: critical
 
 lovelace:
   mode: yaml
@@ -90,15 +81,9 @@ lovelace:
      type: module
    - url: /hacsfiles/entity-attributes-card/entity-attributes-card.js
      type: module
-   - url: /hacsfiles/entity-attributes-card/entity-attributes-card.js
-     type: module
      
 #Платформы
-# tuya:
-#   username: !secret tuya_username
-#   password: !secret tuya_password
-#   country_code: 380
-  
+
 mqtt:
 #   broker: core-mosquitto
   broker: 192.168.0.74
@@ -150,6 +135,7 @@ device_tracker:
     new_device_defaults:
       track_new_devices: false
 
+zodiac:
 
 life360:
   driving_speed: 20

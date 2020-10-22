@@ -10,6 +10,9 @@
   - condition: state
     entity_id: light.aqara_02_ceiling
     state: 'off'
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on' 
   action:
   - service: light.turn_on
     entity_id: light.aqara_02_ceiling
@@ -27,6 +30,9 @@
   - condition: state
     entity_id: light.aqara_02_ceiling
     state: 'on'
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on' 
   action:
   - service: light.turn_off
     entity_id: light.aqara_02_ceiling
@@ -38,9 +44,12 @@
     - platform: time_pattern
       minutes: '/1'
   condition:
-    - condition: state
-      entity_id: switch.bwshp2_relay
-      state: 'off'
+  - condition: state
+    entity_id: switch.bwshp2_relay
+    state: 'off'
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on' 
   action:
    - service: switch.turn_on
      entity_id: switch.bwshp2_relay
@@ -52,6 +61,10 @@
    platform: state
    entity_id: binary_sensor.0x00158d0002705b7b_water_leak
    to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'  
   action:
   - service: mqtt.publish
     data_template:
@@ -69,6 +82,10 @@
    entity_id: binary_sensor.0x00158d0002705b7b_water_leak
    from: 'on'
    to: 'off'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on' 
   action:
   - service: mqtt.publish
     data_template:
@@ -86,6 +103,10 @@
   - platform: state
     entity_id: binary_sensor.0x00158d0001ab3350_occupancy
     to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on' 
   action: 
   - service: mqtt.publish
     data_template:

@@ -12,9 +12,12 @@ cards:
 
         - type: picture-glance
           title: Этаж, выход к лифту
-          camera_image: camera.reolink_sub
+          camera_image: camera.reolink_411_ws_profile000_mainstream
           camera_view: live
           entities:
+           - entity: switch.87874800dc4f22ec37b2
+             tap_action:
+                action: toggle
            - entity: script.photo_reolink
              icon: mdi:camera 
              tap_action:
@@ -26,7 +29,7 @@ cards:
 
         - type: picture-glance
           title: Этаж, поворот
-          camera_image: camera.reolink3_sub
+          camera_image: camera.reolink_410_profile000_mainstream
           camera_view: live
           entities:
            - entity: script.photo_reolink3
@@ -58,7 +61,7 @@ cards:
              
         - type: picture-glance
           title: Кухня, холодильник
-          camera_image: camera.reolink2
+          camera_image: camera.reolink_c2_pro_profile000_mainstream
           camera_view: live
           entities:
            - entity: light.yeelight_02_ceiling
@@ -81,29 +84,29 @@ cards:
 
         - type: markdown
           content: >
-              **Xiaofang 1S** 
+              **Reolink E1 Zoom** 
              
         - type: picture-glance
           title: Детская А
-          camera_image: camera.xiaofang1s
+          camera_image: camera.reolink_e1_zoom_profile000_mainstream
           camera_view: live
           entities:
-           - entity: switch.0x00158d00010ec4b8_switch
-           - entity: light.aqara_08_ceiling
-           - entity: light.24730816ecfabc996804
-           - entity: script.photo_xiaofang1s
-             icon: mdi:camera 
-             tap_action:
+          - entity: switch.0x00158d00010ec4b8_switch
+          - entity: light.aqara_08_ceiling
+          - entity: light.24730816ecfabc996804
+        #   - entity: script.photo_xiaofang1s
+            icon: mdi:camera 
+            tap_action:
                 action: toggle
 
                 
         - type: markdown
           content: >
-              **Reolink E1** 
+              **Reolink E1 Pro** 
              
         - type: picture-glance
           title: Гостиная
-          camera_image: camera.reolink4_sub
+          camera_image: camera.reolink_e1_pro_profile000_mainstream
           camera_view: live
           entities:
            - entity: light.yeelight_05_ceiling1

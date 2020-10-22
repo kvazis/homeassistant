@@ -41,6 +41,13 @@ heating_da:
           - platform: state
             entity_id:
               - binary_sensor.da_heat
+        condition:
+          - condition: state
+            entity_id: binary_sensor.radiator
+            state: 'on'  
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on'  
         action:
           - service: script.turn_on
             data_template:

@@ -110,7 +110,7 @@ cards:
               **Мониторинг**
               
         - type: picture-entity
-          entity: camera.reolink2
+          entity: camera.reolink_c2_pro_profile000_mainstream
           camera_view: live 
           show_state: false
           show_name: false
