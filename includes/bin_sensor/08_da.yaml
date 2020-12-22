@@ -5,7 +5,6 @@
         friendly_name: "Условия для включения ночника -"
         value_template: >-
           {{ is_state('light.aqara_08_ceiling', 'off')  
-             and is_state('light.yeelight_08_bedside', 'off') 
              and is_state('light.yeelight_08_strip', 'off') 
              and is_state('binary_sensor.da_night_time', 'on') }}
         icon_template: >-

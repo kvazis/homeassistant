@@ -26,7 +26,15 @@ heating_dd:
         type: mean
         entity_ids:
           - sensor.0x00158d000156e92e_temperature
-          - sensor.dd_bt_temperature
+          - sensor.4c65a8d054bb_temperature
+
+      - platform: mqtt
+        name: dd_temp_home
+        state_topic: "states/dd/temp_home"
+
+      - platform: mqtt
+        name: dd_temp_away
+        state_topic: "states/dd/temp_away"  
 
     automation:              
 
@@ -56,7 +64,43 @@ heating_dd:
                 script.dd_home
                 {%- elif states.binary_sensor.dd_heat.state == 'off' -%}
                 script.dd_away
-                {%- endif -%}  
+                {%- endif -%}
+                
+      - id: Изменение температуры детская Д
+        alias: dd_heat_temp
+        initial_state: true
+        trigger:
+          - platform: state
+            entity_id: climate.dd_heater
+            attribute: temperature
+        condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on'
+        action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: climate.dd_heater
+                    attribute: preset_mode
+                    state: "none"
+                sequence:
+                  - service: mqtt.publish
+                    data_template:
+                      topic: "states/dd/temp_home"
+                      payload: "{{ state_attr('climate.dd_heater', 'temperature') }}" 
+                      retain: true 
+              - conditions:
+                  - condition: state
+                    entity_id: climate.dd_heater
+                    attribute: preset_mode
+                    state: "away"
+                sequence:
+                  - service: mqtt.publish
+                    data_template:
+                      topic: "states/dd/temp_away"
+                      payload: "{{ state_attr('climate.dd_heater', 'temperature') }}" 
+                      retain: true 
                   
     script:
     
@@ -70,7 +114,7 @@ heating_dd:
             - service: climate.set_temperature
               data:
                 entity_id: climate.dd_heater
-                temperature: 22
+                temperature: "{{ states('sensor.dd_temp_home')}}"
                 
                   
         dd_away:
@@ -83,4 +127,4 @@ heating_dd:
             - service: climate.set_temperature
               data:
                 entity_id: climate.dd_heater
-                temperature: 19
+                temperature: "{{ states('sensor.dd_temp_away')}}"

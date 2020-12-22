@@ -1,0 +1,358 @@
+alarm:
+
+    sensor: 
+        - platform: mqtt
+          state_topic: "date_time/158d000149d28b/selftest"
+          name: '0x00158d000149d28b_selftest'
+            
+        - platform: mqtt
+          state_topic: "date_time/158d000149d28b/alarm"
+          name: '0x00158d000149d28b_alarm'
+
+    automation:
+    
+        - id: Прихожая, обнаружение дыма
+          alias: en_detect_smoke
+          initial_state: true
+          trigger:       
+           - platform: state
+             entity_id: binary_sensor.0x00158d000149d28b_smoke
+             to: 'on'
+          condition:
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on'
+          action:
+            - service: mqtt.publish
+              data_template:
+                topic: "notification/alarm"
+                payload_template: '0100'
+                retain: true
+            - service: script.turn_on
+              entity_id: script.warning
+            - service: mqtt.publish
+              data_template:
+                topic: "date_time/158d000149d28b/alarm"
+                payload: "{{ states('sensor.time_date')}}"
+                retain: true
+              
+        - id: Прихожая, задымление устранено
+          alias: en_detect_smoke_off
+          initial_state: true
+          trigger:       
+           - platform: state
+             entity_id: binary_sensor.0x00158d000149d28b_smoke
+             from: 'on'
+             to: 'off'
+          condition:
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on'
+          action:
+            - service: mqtt.publish
+              data_template:
+                topic: "notification/alarm"
+                payload_template: '0101'
+                retain: true
+            - service: script.turn_on
+              entity_id: script.all_ok
+              
+        - id: Кухня, обнаружение дыма
+          alias: kn_detect_smoke
+          initial_state: true
+          trigger:       
+           - platform: state
+             entity_id: binary_sensor.0x842e14fffef6d9e5_smoke
+             to: 'on'
+          condition:
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on'
+          action:
+            - service: mqtt.publish
+              data_template:
+                topic: "notification/alarm"
+                payload_template: '0402'
+                retain: true
+            - service: script.turn_on
+              entity_id: script.warning
+
+              
+        - id: Кухня, задымление устранено
+          alias: kn_detect_smoke_off
+          initial_state: true
+          trigger:       
+           - platform: state
+             entity_id: binary_sensor.0x842e14fffef6d9e5_smoke
+             from: 'on'
+             to: 'off'
+          condition:
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on'
+          action:
+            - service: mqtt.publish
+              data_template:
+                topic: "notification/alarm"
+                payload_template: '0403'
+                retain: true
+            - service: script.turn_on
+              entity_id: script.all_ok
+              
+        - id: Прачечная, протечка возле стиральной машины
+          alias: ln_wleak_washmash_on
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0x00158d0002705b7b_water_leak
+           to: 'on'
+          condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on'  
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0200'
+              retain: true
+          - service: script.turn_on
+            entity_id: script.warning
+              
+        - id: Прачечная, протечка возле стиральной машины устранена
+          alias: ln_wleak_washmash_off
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0x00158d0002705b7b_water_leak
+           from: 'on'
+           to: 'off'
+          condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on' 
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0201'
+              retain: true
+          - service: script.turn_on
+            entity_id: script.all_ok
+
+        - id: Туалет, протечка под раковиной
+          alias: tt_wleak_on
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0x00158d0001bbeba6_water_leak
+           to: 'on'
+          condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on' 
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0202'
+              retain: true
+          - service: script.turn_on
+            entity_id: script.warning
+              
+        - id: Туалет, протечка под раковиной устранена
+          alias: tt_wleak_off
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0x00158d0001bbeba6_water_leak
+           from: 'on'
+           to: 'off'
+          condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on' 
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0203'
+              retain: true
+          - service: script.turn_on
+            entity_id: script.all_ok
+            
+        - id: Кухня, протечка под раковиной
+          alias: kn_wleak_on
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0xec1bbdfffe8f1e42_water_leak
+           to: 'on'
+          condition:
+           - condition: state
+             entity_id: switch.control_mode
+             state: 'on'
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0400'
+              retain: true
+          - service: script.turn_on
+            entity_id: script.warning
+        
+        
+        - id: Кухня, протечка под раковиной устранена
+          alias: kn_kitchen_wleak_washstand_off
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0xec1bbdfffe8f1e42_water_leak
+           from: 'on'
+           to: 'off'
+          condition:
+           - condition: state
+             entity_id: switch.control_mode
+             state: 'on'
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0401'
+              retain: true
+          - service: script.turn_on
+            entity_id: script.all_ok
+            
+        - id: Ванная, протечка под раковиной
+          alias: bt_wleak_washstand_on
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0x00158d0001d72fa2_water_leak
+           to: 'on'
+          condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on' 
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0600'
+              retain: true
+          - service: script.turn_on
+            entity_id: script.warning
+        
+        - id: Ванная, протечка под раковиной устранена
+          alias: bt_wleak_washstand_off
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0x00158d0001d72fa2_water_leak
+           from: 'on'
+           to: 'off'
+          condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on' 
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0601'
+              retain: true
+          - service: script.turn_on
+            entity_id: script.all_ok
+        
+        - id: Ванная, протечка под душевой
+          alias: bt_wleak_shower_on
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0x00158d0001bb60c2_water_leak
+           to: 'on'
+          condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on' 
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0602'
+              retain: truee
+          - service: script.turn_on
+            entity_id: script.warning
+        
+        - id: Ванная, протечка под душевой устранена
+          alias: bt_wleak_shower_off
+          initial_state: true
+          trigger:       
+           platform: state
+           entity_id: binary_sensor.0x00158d0001bb60c2_water_leak
+           from: 'on'
+           to: 'off'
+          condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on' 
+          action:
+          - service: mqtt.publish
+            data_template:
+              topic: "notification/alarm"
+              payload_template: '0603'
+              retain: true
+          - service: script.turn_on
+            entity_id: script.all_ok
+            
+          
+    script:
+    
+        en_smoke_selftest:
+          alias: Самотестирование датчика дыма в прихожей
+          sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "zigbee2mqtt/EN smoke sensor/set"
+                payload_template: '{"selftest": ""}'
+            - service: mqtt.publish
+              data_template:
+                topic: "date_time/158d000149d28b/selftest"
+                payload: "{{ states('sensor.time_date')}}"
+                retain: true
+                
+        warning:
+          alias: Включение тревоги
+          sequence:
+            - service: xiaomi_miio.light_set_scene
+              entity_id: light.philips_05_bedside
+              data:
+                 scene: 3
+            - service: light.turn_on
+              entity_id: 
+                 - light.yeelight_05_rgbtvbulb
+                 - light.yeelight_05_bedside2
+              data_template:
+                brightness_pct: 100
+                rgb_color: [255, 0, 0]
+        
+        all_ok:
+          alias: Выключение тревоги
+          sequence:
+            - service: xiaomi_miio.light_set_scene
+              entity_id: light.philips_05_bedside
+              data:
+                 scene: 1
+            - service: light.turn_on
+              entity_id: 
+                 - light.yeelight_05_rgbtvbulb
+                 - light.yeelight_05_bedside2
+              data_template:
+                brightness_pct: 100
+                rgb_color: [0, 255, 0]
+            - delay: 00:00:10
+            - service: light.turn_off
+              entity_id: 
+                 - light.yeelight_05_rgbtvbulb
+                 - light.yeelight_05_bedside2
+                 - light.philips_05_bedside

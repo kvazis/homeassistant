@@ -25,23 +25,24 @@
   initial_state: true
   trigger:
 ## Влажность более 70 процентов
-   - platform: numeric_state
-     entity_id: sensor.06_mean_humidity
-     above: 70
+  - platform: numeric_state
+    entity_id: sensor.06_mean_humidity
+    above: 70
 ## Беспроводный выключатель
-   - platform: state
-     entity_id: sensor.0x00158d000238a140_click
-     to: 'right'
+  - platform: state
+    entity_id: sensor.0x00158d000238a140_click
+    to: 'right'
   condition:
-     - condition: state
-       entity_id: switch.0x00158d0001117040_switch_left
-       state: 'off'
-     - condition: time
-       after: '08:00:00'
-       before: '22:00:00'
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'  
+  - condition: state
+    entity_id: switch.0x00158d0001117040_switch_left
+    state: 'off'
+  - condition: time
+    after: '08:00:00'
+    before: '22:00:00'
   action:
-  - service: timer.start
-    entity_id: timer.bathroom
   - service: switch.turn_on
     entity_id: switch.0x00158d0001117040_switch_left
 
@@ -50,89 +51,24 @@
   initial_state: true
   trigger:    
 ## Завершение таймера
-   - platform: event
-     event_type: timer.finished
-     event_data:
-       entity_id: timer.bathroom
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.bathroom
 ## Беспроводный выключатель
-   - platform: state
-     entity_id: sensor.0x00158d000238a140_click
-     to: 'right'
+  - platform: state
+    entity_id: sensor.0x00158d000238a140_click
+    to: 'right'
   condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'  
   - condition: state
     entity_id: switch.0x00158d0001117040_switch_left
     state: 'on'
   action:
   - service: switch.turn_off
     entity_id: switch.0x00158d0001117040_switch_left
-  - service: timer.cancel
-    entity_id: timer.bathroom
-
-## Обнаружение протечки, умывальник
-- alias: 06_bathroom_wleak_washstand_on
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.0x00158d0001d72fa2_water_leak
-   to: 'on'
-  action:
-  - service: mqtt.publish
-    data_template:
-      topic: "notification/alarm"
-      payload_template: '0600'
-      retain: true
-  - service: script.turn_on
-    entity_id: script.11_warning
-
-## Протечка устранена, умывальник      
-- alias: 06_bathroom_wleak_washstand_off
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.0x00158d0001d72fa2_water_leak
-   from: 'on'
-   to: 'off'
-  action:
-  - service: mqtt.publish
-    data_template:
-      topic: "notification/alarm"
-      payload_template: '0601'
-      retain: true
-  - service: script.turn_on
-    entity_id: script.11_all_ok
-
-## Обнаружение протечки, душевая кабина  
-- alias: 06_bathroom_wleak_shower_on
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.0x00158d0001bb60c2_water_leak
-   to: 'on'
-  action:
-  - service: mqtt.publish
-    data_template:
-      topic: "notification/alarm"
-      payload_template: '0602'
-      retain: truee
-  - service: script.turn_on
-    entity_id: script.11_warning
-
-## Протечка устранена, душевая кабина    
-- alias: 06_bathroom_wleak_shower_off
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.0x00158d0001bb60c2_water_leak
-   from: 'on'
-   to: 'off'
-  action:
-  - service: mqtt.publish
-    data_template:
-      topic: "notification/alarm"
-      payload_template: '0603'
-      retain: true
-  - service: script.turn_on
-    entity_id: script.11_all_ok
 
 ## Запись последнего движения в ванной
 - alias: 06_bathroom_motion_time
@@ -142,6 +78,10 @@
   - platform: state
     entity_id: binary_sensor.0x00158d0001e547a3_occupancy
     to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on' 
   action: 
   - service: mqtt.publish
     data_template:

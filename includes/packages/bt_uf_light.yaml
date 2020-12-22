@@ -1,0 +1,7 @@
+bt_uf_light:
+
+    switch:
+      - platform: xiaomi_five_uvc_lamp
+        name: five_uvc_lamp
+        host: 192.168.0.160
+        token: fdc9386562432bf43b2fceb8603ecde3

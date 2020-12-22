@@ -1,0 +1,13 @@
+{
+  "domain": "xiaomi_five_uvc_lamp",
+  "name": "Custom component to support Xiaomi UVC lamp",
+  "documentation": "",
+  "requirements": [
+    "construct==2.9.45",
+    "python-miio>=0.4.8"
+  ],
+  "dependencies": [],
+  "codeowners": [
+    "@vyzaq:"
+  ]
+}

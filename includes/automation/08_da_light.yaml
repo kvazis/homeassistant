@@ -1,3 +1,19 @@
+## Возобновление питания на рабочем столе
+- alias: 08_da_relay_power
+  initial_state: true
+  trigger:       
+   - platform: time_pattern
+     minutes: '/1'
+  condition:
+   - condition: template
+     value_template: "{{ states('switch.0x00158d0002d7bb2b_switch_l1') != 'on' }}"
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
+  action:
+   - service: switch.turn_on
+     entity_id: switch.0x00158d0002d7bb2b_switch_l1
+
 # Проектор
 - alias: 08_smart_projector
   initial_state: true
@@ -25,7 +41,10 @@
   condition:
     - condition: state
       entity_id: binary_sensor.da_nightlight
-      state: 'on'  
+      state: 'on'
+    - condition: state
+      entity_id: switch.control_mode
+      state: 'on'
   action:
   - service: light.turn_on
     entity_id: 
@@ -56,19 +75,23 @@
   - platform: state
     entity_id: sensor.0x00158d000186d9a9_click
     to: 'single'
+  condition:
+    - condition: state
+      entity_id: switch.control_mode
+      state: 'on'
   action:    
     - service: script.turn_on
       data_template:
         entity_id: >-
-         {%- if states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_bedside.state == 'off' and states("binary_sensor.tod_long_day") == 'on' -%}
+         {%- if states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_strip.state == 'off' and states("binary_sensor.tod_long_day") == 'on' -%}
          script.08_da_ceiling_on
-         {%- elif states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_bedside.state == 'off' and states("binary_sensor.tod_early_night") == 'on' -%}
+         {%- elif states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_strip.state == 'off' and states("binary_sensor.tod_early_night") == 'on' -%}
          script.08_da_nightlight
-         {%- elif states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_bedside.state == 'on' -%}
+         {%- elif states.light.aqara_08_ceiling.state == 'off' and states.light.yeelight_08_strip.state == 'on' -%}
          script.08_da_nightlight_off
-         {%- elif states.light.aqara_08_ceiling.state == 'on' and states.light.yeelight_08_bedside.state == 'on' -%}
+         {%- elif states.light.aqara_08_ceiling.state == 'on' and states.light.yeelight_08_strip.state == 'on' -%}
          script.08_da_nightlight_off
-         {%- elif states.light.aqara_08_ceiling.state == 'on' and states.light.yeelight_08_bedside.state == 'off' -%}
+         {%- elif states.light.aqara_08_ceiling.state == 'on' and states.light.yeelight_08_strip.state == 'off' -%}
          script.08_da_ceiling_off
          {% endif %}     
 
@@ -87,17 +110,20 @@
 ## Кубик
   - platform: state
     entity_id: sensor.0x00158d00028f6fe6_action
-    to: 'shake' 
+    to: 'shake'
+  condition:
+    - condition: state
+      entity_id: switch.control_mode
+      state: 'on'
   action:    
     - service: script.turn_on
       data_template:
         entity_id: >-
-         {%- if states.light.yeelight_08_bedside.state == 'off' -%}
+         {%- if states.light.yeelight_08_strip.state == 'off' -%}
          script.08_da_light_circle_1
-         {%- elif states.light.yeelight_08_bedside.state == 'on' -%}
+         {%- elif states.light.yeelight_08_strip.state == 'on' -%}
          script.08_da_nightlight_off
          {% endif %}  
-
 
 # Выключение всего освещения
 - alias: 08_da_alllight_off
@@ -105,7 +131,11 @@
   trigger:
   - platform: state
     entity_id: sensor.0x00158d00028f6fe6_action
-    to: 'fall'    
+    to: 'fall'
+  condition:
+    - condition: state
+      entity_id: switch.control_mode
+      state: 'on'
   action:
     - service: script.turn_on
       entity_id: script.08_da_lightoff
@@ -135,6 +165,10 @@
   - platform: state
     entity_id: binary_sensor.0x00158d00016d56f5_occupancy
     to: 'on'
+  condition:
+    - condition: state
+      entity_id: switch.control_mode
+      state: 'on'
   action: 
   - service: mqtt.publish
     data_template:

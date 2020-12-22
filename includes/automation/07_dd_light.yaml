@@ -13,7 +13,11 @@
 # Кубик
   - platform: state
     entity_id: sensor.0x00158d00011063da_action
-    to: 'flip90'  
+    to: 'flip90'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:    
     - service: script.turn_on
       data_template:
@@ -39,6 +43,9 @@
    - condition: state
      entity_id: light.philips_07_ceiling
      state: 'off'
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
    - condition: or
      conditions:
         #  - condition: numeric_state
@@ -82,6 +89,9 @@
    - condition: numeric_state
      entity_id: sensor.philips_07_ceiling
      above: 1
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
   action:
    - service: light.turn_off
      entity_id: light.philips_07_ceiling
@@ -94,6 +104,10 @@
     entity_id: light.philips_07_ceiling
     from: 'unavailable'
     to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
    - service: light.turn_off
      entity_id: light.philips_07_ceiling
@@ -109,6 +123,10 @@
   - platform: state
     entity_id: sensor.0x00158d0003d50723_action
     to: 'right'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action: 
   - service: script.turn_on
     data_template:
@@ -126,6 +144,10 @@
   - platform: state
     entity_id: switch.0x00158d00030a6e78_switch
     to: 'off'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
   - delay: 00:00:03
   - service: switch.turn_on
@@ -148,6 +170,10 @@
   - platform: state
     entity_id: sensor.0x00158d00011063da_action
     to: 'fall'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
     - service: script.turn_on
       entity_id: script.07_dd_lightoff
@@ -163,7 +189,11 @@
 # Кубик 
   - platform: state
     entity_id: sensor.0x00158d00011063da_action
-    to: 'flip180'  
+    to: 'flip180' 
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action:
     service: switch.toggle
     entity_id: switch.plug1
@@ -176,6 +206,10 @@
   - platform: state
     entity_id: binary_sensor.0x00158d0001a66222_occupancy
     to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action: 
   - service: mqtt.publish
     data_template:
@@ -191,6 +225,10 @@
   - platform: state
     entity_id: binary_sensor.0xec1bbdfffe4521a3_occupancy
     to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
   action: 
   - service: mqtt.publish
     data_template:

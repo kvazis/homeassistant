@@ -30,7 +30,7 @@
     name: tt_mirror
     entity_id: switch.0xec1bbdfffea37571_switch
 
-## Кухня
+# Кухня
   - platform: switch
     name: aqara_04_strip
     entity_id: switch.0x00158d0001d35bc0_switch

@@ -21,6 +21,17 @@ switch.0x00158d00015751f4_switch:
   icon: mdi:hot-tub
 
 ## Сенсоры 
+## Датчик на двери 
+binary_sensor.0x00158d00054495dc_contact:
+  friendly_name: Ванная дверь
+  device_class: door
+sensor.0x00158d00054495dc_battery:
+  friendly_name: Ванная дверь
+sensor.0x00158d00054495dc_voltage:
+  friendly_name: Ванная дверь
+sensor.0x00158d00054495dc_linkquality:
+  friendly_name: Ванная дверь
+
 sensor.0x00158d00015751f4_power:
   friendly_name: Бойлер потребление
   unit_of_measurement: Вт
@@ -30,10 +41,10 @@ sensor.0x00158d00015751f4_voltage:
   friendly_name: Бойлер напряжение
   unit_of_measurement: В
   
-sensor.bt_lywsd02_humidity:
+sensor.3f59c882d82d_humidity:
   friendly_name: Ванная влажность BLE
   icon: mdi:water-percent
-sensor.bt_lywsd02_temperature:
+sensor.3f59c882d82d_temperature:
   friendly_name: Ванная температура BLE
   icon: mdi:temperature-celsius
 

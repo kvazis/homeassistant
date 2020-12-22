@@ -9,7 +9,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.24730816ecfabc996804
            - light.aqara_08_ceiling
            - light.philips_08_bedside
@@ -36,7 +36,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -46,7 +46,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -56,7 +56,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -66,7 +66,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -76,7 +76,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -86,7 +86,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -96,7 +96,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
            
   08_da_nightlight_off:
@@ -110,7 +110,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
            
   08_da_light_circle_1:
@@ -123,7 +123,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -133,7 +133,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -143,7 +143,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -162,7 +162,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -172,7 +172,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50
@@ -182,7 +182,7 @@
           entity_id: 
            - light.gateway_light_f0b429cc1f11
            - light.yeelight_08_strip
-           - light.yeelight_08_bedside
+        #   - light.yeelight_08_bedside
            - light.philips_08_bedside
           data_template:
             brightness_pct: 50

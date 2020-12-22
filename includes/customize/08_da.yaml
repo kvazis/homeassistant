@@ -44,6 +44,17 @@ switch.0x00158d00010ec4b8_switch:
   icon: mdi:cup-water
 
 ## Сенсоры 
+
+## Температура для термостатов
+sensor.da_temp_home:
+  friendly_name: Детская А температура в режиме дома
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
+sensor.da_temp_away:
+  friendly_name: Детская А температура в режиме никого нет
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
+  
 sensor.0x00158d0002d7bb2b_power:
   friendly_name: Детская А отопление и рабочий стол 
   icon: mdi:flash

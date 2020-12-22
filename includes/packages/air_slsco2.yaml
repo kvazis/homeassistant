@@ -31,6 +31,9 @@ air_slsco2:
             - condition: state
               entity_id:  binary_sensor.dd_air
               state: 'on'
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on' 
           action:
            - service: mqtt.publish
              data_template:

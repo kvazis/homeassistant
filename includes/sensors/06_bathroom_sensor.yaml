@@ -3,14 +3,14 @@
     type: mean
     entity_ids:
       - sensor.0x00158d0001dcd47e_temperature
-      - sensor.bt_lywsd02_temperature
+      - sensor.3f59c882d82d_temperature
 
   - platform: min_max
     name: 06_mean_humidity
     type: mean
     entity_ids:
       - sensor.0x00158d0001dcd47e_humidity
-      - sensor.bt_lywsd02_humidity
+      - sensor.3f59c882d82d_humidity
 
 # Время фиксации движения в ванной
   - platform: mqtt

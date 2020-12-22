@@ -34,6 +34,10 @@ cards:
           show_header_toggle: false
           entities:
           - entity: switch.kn_radiator
+          - entity: sensor.kn_temp_home
+            name: Температура в режиме дома - 
+          - entity: sensor.kn_temp_away
+            name: Температура в режиме никого нет - 
 
         - type: custom:stack-in-card
           mode: vertical
@@ -115,6 +119,10 @@ cards:
           show_header_toggle: false
           entities:
           - entity: switch.lr_radiator
+          - entity: sensor.living_temp_home
+            name: Температура в режиме дома - 
+          - entity: sensor.living_temp_away
+            name: Температура в режиме никого нет - 
           
         - type: custom:stack-in-card
           mode: vertical
@@ -193,6 +201,10 @@ cards:
           show_header_toggle: false
           entities:
           - entity: switch.0x00158d0001a2ccab_switch_right
+          - entity: sensor.dd_temp_home
+            name: Температура в режиме дома - 
+          - entity: sensor.dd_temp_away
+            name: Температура в режиме никого нет - 
 
         - type: custom:stack-in-card
           mode: vertical
@@ -269,6 +281,10 @@ cards:
           show_header_toggle: false
           entities:
           - entity: switch.0x00158d0002d7bb2b_switch_l2
+          - entity: sensor.da_temp_home
+            name: Температура в режиме дома - 
+          - entity: sensor.da_temp_away
+            name: Температура в режиме никого нет - 
 
         - type: custom:stack-in-card
           mode: vertical

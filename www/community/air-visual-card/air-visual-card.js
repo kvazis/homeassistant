@@ -68,7 +68,6 @@ class AirVisualCard extends HTMLElement {
         .temp {
           grid-column-start: 3;
           grid-column-end: 4;
-          background-color: #FFFFFF;
           text-align: right;
           font-size: 1.7em;
           font-weight: 300;
@@ -151,6 +150,7 @@ class AirVisualCard extends HTMLElement {
       this.myhass = hass;
       
       const hideTitle = config.hide_title ? 1 : 0;
+      const hideFace = config.hide_face ? 1 : 0;
       const iconDirectory = config.icons || "https://cdn.jsdelivr.net/gh/dnguyen800/air-visual-card@0.0.4/dist";
       const country = config.country || 'US';
       const city = config.city || '';
@@ -270,10 +270,15 @@ class AirVisualCard extends HTMLElement {
         `;
       }
 
-      card_content += `
-          <div class="face" id="face" style="background-color: ${AQIfaceColor[getAQI()]};">
+      if (!hideFace){
+        card_content += `
+        <div class="face" id="face" style="background-color: ${AQIfaceColor[getAQI()]};">
             <img src="${iconDirectory}/ic-face-${getAQI()}.svg"></img>
-          </div>  
+          </div>
+          `;
+      }
+
+      card_content += `
           <div class="aqiSensor" id="aqiSensor" style="background-color: ${AQIbgColor[getAQI()]}; color: ${AQIfontColor[getAQI()]}">
             <div style="font-size:3em;">${aqiSensor.value}</div>
             ${country} ${unitOfMeasurement}
@@ -296,9 +301,11 @@ class AirVisualCard extends HTMLElement {
       root.getElementById('content').innerHTML = card_content;      
 
       // hard-coded version of click event
-      card.querySelector('#face').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'  
-        fireEvent(this, "hass-more-info", { entityId: aqiSensor.config });
-      });     
+      if (!hideFace){
+	      card.querySelector('#face').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'  
+	        fireEvent(this, "hass-more-info", { entityId: aqiSensor.config });
+	      });
+      }
       card.querySelector('#aqiSensor').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'  
         fireEvent(this, "hass-more-info", { entityId: aqiSensor.config });
       });

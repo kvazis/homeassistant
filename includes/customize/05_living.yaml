@@ -91,6 +91,16 @@ fan.gg_purifier:
 air_quality.05_air_monitor:
   friendly_name: Гостиная монитор воздуха Mi
   icon: mdi:tablet-dashboard
+  
+## Температура для термостатов
+sensor.living_temp_home:
+  friendly_name: Гостиная температура в режиме дома
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
+sensor.living_temp_away:
+  friendly_name: Гостиная температура в режиме никого нет
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
 
 ## Сенсоры
 sensor.0x04cf8cdf3c764e0a_power:

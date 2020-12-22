@@ -18,8 +18,8 @@ hum_dd:
               {{ is_state('binary_sensor.0x00158d0001193697_contact', 'off')  
                  and is_state('binary_sensor.0x00158d00015843d4_contact', 'off')
                  and is_state('binary_sensor.dd_hum_mode', 'on')
+                 and is_state('binary_sensor.away', 'off')
                  and is_state('light.xiaomi_07_table', 'off')
-                 and is_state('binary_sensor.humidification', 'on') 
                  and is_state('sensor.dd_day_work', 'Включен') }}
             icon_template: >-
               {% if is_state("binary_sensor.dd_hum", "on") %}
@@ -36,7 +36,7 @@ hum_dd:
         type: mean
         entity_ids:
           - sensor.0x00158d000156e92e_humidity
-          - sensor.dd_bt_humidity
+          - sensor.4c65a8d054bb_humidity
               
     input_number:
 
@@ -82,6 +82,10 @@ hum_dd:
             - input_number.humidity_level_dd
             - sensor.07_mean_humidity
             - binary_sensor.dd_hum
+      condition:
+        - condition: state
+          entity_id: switch.control_mode
+          state: 'on' 
       action:
         service_template: >-
           {% set hi = (states('input_number.humidity_level_dd') | float) + 5 %}
@@ -110,6 +114,9 @@ hum_dd:
          for:
            minutes: 1
       condition:
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
     ## Увлажнитель включен
          - condition: state
            entity_id: switch.0x00158d0001a2ccab_switch_left

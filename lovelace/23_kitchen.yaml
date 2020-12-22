@@ -203,13 +203,13 @@ cards:
             - type: entities
               show_header_toggle: false
               entities:
-              - entity: binary_sensor.mijia_night_light_occupancy
+              - entity: sensor.50ec50e24dff_action
                 secondary_info: last-changed
-              - entity: binary_sensor.mijia_night_light_status
+              - entity: sensor.50ec50e24dff_illuminance
                 secondary_info: last-changed
-              - entity: sensor.mijia_night_light_time
+              - entity: sensor.50ec50e24dff_idle_time
                 secondary_info: last-changed
-              - entity: sensor.mijia_night_light_battery
+              - entity: sensor.50ec50e24dff_battery
                 secondary_info: last-changed
 
       - type: vertical-stack

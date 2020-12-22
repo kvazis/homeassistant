@@ -2,14 +2,14 @@ control_reserve:
 
     sensor:
     
-        - platform: rest
-          resource: http://192.168.0.71:8123/api/states/group.scenario
-          name: reserve_scenario_group
-          force_update: true
-          headers: 
-            Authorization: !secret rasp4_2_secret_token
-            content-type: 'application/json'
-          value_template: '{{ value_json.state }}'
+        # - platform: rest
+        #   resource: http://192.168.0.71:8123/api/states/group.scenario
+        #   name: reserve_scenario_group
+        #   force_update: true
+        #   headers: 
+        #     Authorization: !secret rasp4_2_secret_token
+        #     content-type: 'application/json'
+        #   value_template: '{{ value_json.state }}'
           
         - platform: rest
           resource: http://192.168.0.71:8123/api/states/sensor.online_custom
@@ -48,18 +48,18 @@ control_reserve:
                  topic: "notification/error"
                  payload_template: '022'
         
-        - id: Восстановление работы сценариев
-          alias:  911_scenario_on
-          initial_state: true
-          trigger:
-           platform: state
-           entity_id: sensor.reserve_scenario_group
-           to: 'unavailable'
-          condition:
-            - condition: state
-              entity_id: group.scenario
-              state: 'off'     
-          action:
-            - service: homeassistant.turn_on
-              entity_id:
-                 - group.scenario
+        # - id: Восстановление работы сценариев
+        #   alias:  911_scenario_on
+        #   initial_state: true
+        #   trigger:
+        #   platform: state
+        #   entity_id: sensor.reserve_scenario_group
+        #   to: 'unavailable'
+        #   condition:
+        #     - condition: state
+        #       entity_id: group.scenario
+        #       state: 'off'     
+        #   action:
+        #     - service: homeassistant.turn_on
+        #       entity_id:
+        #          - group.scenario

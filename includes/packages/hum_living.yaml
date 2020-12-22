@@ -16,7 +16,8 @@ hum_living:
               {{ is_state('binary_sensor.0x00158d000445206b_contact', 'off')  
                  and is_state('binary_sensor.0xec1bbdfffedf6a6a_contact', 'off')
                  and is_state('binary_sensor.silent_mode', 'off')
-                 and is_state('binary_sensor.lr_hum_mode', 'on') 
+                 and is_state('binary_sensor.lr_hum_mode', 'on')
+                 and is_state('binary_sensor.away', 'off')
                  and is_state('sensor.living_day_work', 'Включен') }}
             icon_template: >-
               {% if is_state("binary_sensor.living_hum", "on") %}
@@ -177,7 +178,7 @@ hum_living:
             - platform: state
               entity_id:
                 - input_number.humidity_level_gg
-                - sensor.05_mean_humidity
+                - sensor.0x00158d00015aebb6_humidity
                 - binary_sensor.living_hum
           condition:
            - condition: state
@@ -196,13 +197,13 @@ hum_living:
                     {% set low = (states('input_number.humidity_level_gg') | float) - 5 %}
                     {% set medium = (states('input_number.humidity_level_gg') | float) - 10 %}
                     {% set high = (states('input_number.humidity_level_gg') | float) - 15 %}
-                    {% set humidity = states('sensor.05_mean_humidity') | float %}
+                    {% set humidity = states('sensor.0x00158d00015aebb6_humidity') | float %}
                     {% if humidity < high %} 
                     switch.gg_humidifier_mode_high
                     {% elif humidity < medium %} 
                     switch.gg_humidifier_mode_medium
                     {% elif humidity < low %} 
-                    switch.gg_humidifier_mode_low
+                    switch.gg_humidifier_mode_silent
                     {% else %} 
                     switch.gg_humidifier_mode_auto
                     {% endif %}

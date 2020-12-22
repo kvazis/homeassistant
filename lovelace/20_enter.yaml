@@ -83,7 +83,7 @@ cards:
 
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.cgd1_temperature
+           - entity: sensor.582d3451c85e_temperature
              name: Температура
           color_thresholds:
             - value: 10
@@ -107,7 +107,7 @@ cards:
          
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.cgd1_humidity
+           - entity: sensor.582d3451c85e_humidity
              name: Влажность
           color_thresholds:
             - value: 20

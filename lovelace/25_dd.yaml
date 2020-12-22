@@ -110,6 +110,7 @@ cards:
         - type: entities
           show_header_toggle: false
           entities:
+           - entity: sensor.dd_light_sensor_illuminance
            - entity: sensor.dd_day_work
              name: Дневной режим
            - entity: sensor.mqtt_binary_sensor_158d0001a66222

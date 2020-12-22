@@ -15,7 +15,7 @@ cards:
           camera_image: camera.reolink_411_ws_profile000_mainstream
           camera_view: live
           entities:
-           - entity: switch.87874800dc4f22ec37b2
+           - entity: switch.0x00158d0003f46bb6_switch_l1
              tap_action:
                 action: toggle
            - entity: script.photo_reolink
@@ -32,6 +32,9 @@ cards:
           camera_image: camera.reolink_410_profile000_mainstream
           camera_view: live
           entities:
+           - entity: switch.0x00158d0003f46bb6_switch_l2
+             tap_action:
+                action: toggle
            - entity: script.photo_reolink3
              icon: mdi:camera 
              tap_action:

@@ -50,10 +50,10 @@
         transition: 200
         model: mono1   
 ## Детская А
-      192.168.0.114:
-        name: yeelight_08_bedside
-        transition: 200
-        model: bslamp1
+    #   192.168.0.114:
+    #     name: yeelight_08_bedside
+    #     transition: 200
+    #     model: bslamp1
       192.168.0.115:
         name: yeelight_08_strip
         transition: 200

@@ -1,35 +1,35 @@
   dieffenbac_ble:
     sensors:
-      moisture: sensor.dieffenbac_moisture
-      temperature: sensor.dieffenbac_temperature
-      conductivity: sensor.dieffenbac_conductivity
-      brightness: sensor.dieffenbac_illuminance
+      moisture: sensor.c47c8d6a0ef3_moisture
+      temperature: sensor.c47c8d6a0ef3_temperature
+      conductivity: sensor.c47c8d6a0ef3_conductivity
+      brightness: sensor.c47c8d6a0ef3_illuminance
     min_moisture: 20
     
   yucca_ble:
     sensors:
-      moisture: sensor.yucca_moisture
-      temperature: sensor.yucca_temperature
-      conductivity: sensor.yucca_conductivity
-      brightness: sensor.yucca_illuminance
+      moisture: sensor.c47c8d628a8a_moisture
+      temperature: sensor.c47c8d628a8a_temperature
+      conductivity: sensor.c47c8d628a8a_conductivity
+      brightness: sensor.c47c8d628a8a_illuminance
     min_moisture: 20
     
   zamiokulkas_ble:
     sensors:
-      moisture: sensor.zamiokulkas_moisture
-      temperature: sensor.zamiokulkas_temperature
-      conductivity: sensor.zamiokulkas_conductivity
-      brightness: sensor.zamiokulkas_illuminance
+      moisture: sensor.80eaca88b765_moisture
+      temperature: sensor.80eaca88b765_temperature
+      conductivity: sensor.80eaca88b765_conductivity
+      brightness: sensor.80eaca88b765_illuminance
     min_moisture: 20
     
   deep_purple_ble:
     sensors:
-      moisture: sensor.deep_purple_moisture
-      conductivity: sensor.deep_purple_conductivity
+      moisture: sensor.c47c8d6d1cf9_moisture
+      conductivity: sensor.c47c8d6d1cf9_conductivity
     min_moisture: 20
     
   true_blue_ble:
     sensors:
-      moisture: sensor.true_blue_moisture
-      conductivity: sensor.true_blue_conductivity
+      moisture: sensor.c47c8d6d2c7e_moisture
+      conductivity: sensor.c47c8d6d2c7e_conductivity
     min_moisture: 20

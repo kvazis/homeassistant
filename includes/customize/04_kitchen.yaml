@@ -9,82 +9,162 @@ light.aqara_04_strip:
   friendly_name: Кухня рабочая зона
   icon: mdi:led-strip
 
+## Шлюз Xiaomi
 light.gateway_light_7811dc64f4c8:
   friendly_name: Кухня шлюз свет
   icon: mdi:star-circle-outline
+sensor.illumination_7811dc64f4c8:
+  friendly_name: Кухня шлюз освещенность
 
-## Реле
+## Питание
+## Розетка Aqara над плитой
 switch.0x00158d0001d35bc0_switch:
-  friendly_name: Кухня питание LED ленты
+  friendly_name: Кухня LED лента рабочей зоны
   device_class: plug  
   icon: mdi:power-socket-eu
-
+sensor.0x00158d0001d35bc0_power:
+  friendly_name: Кухня LED лента рабочей зоны
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'
+sensor.0x00158d0001d35bc0_consumption:
+  friendly_name: Кухня LED лента рабочей зоны
+  icon_template: mdi:gauge
+  unit_of_measurement: 'КВт*ч'
+sensor.0x00158d0001d35bc0_switch_temperature:
+  friendly_name: Кухня LED лента рабочей зоны
+sensor.0x00158d0001d35bc0_linkquality:
+  friendly_name: Кухня LED лента рабочей зоны
+  
+## Розетка Xiaomi - холодильник
 switch.0x00158d0001fa2934_switch:
   friendly_name: Холодильник
   device_class: plug  
   icon: mdi:power-socket-eu
-
-switch.0x00158d0001291d12_switch:
-  friendly_name: Кухня питание телевизора
-  device_class: plug  
-  icon: mdi:power-socket-eu
-  
-switch.0x000d6f0014bb14b4_switch:
-  friendly_name: Аэрогриль
-  device_class: plug  
-  icon: mdi:power-socket-eu
-
-switch.bw_shp_2_relay:
-  friendly_name: Чайник
-  device_class: plug  
-  icon: mdi:power-socket-eu
-
-## Сенсоры
-
-sensor.0x000d6f0014bb14b4_power:
-  friendly_name: Аэрогиль
-  icon_template: mdi:flash
-  unit_of_measurement: 'Вт'
-  
-sensor.0x00158d0001d35bc0_power:
-  friendly_name: Кухня LED лента
-  icon_template: mdi:flash
-  unit_of_measurement: 'Вт'
-  
 sensor.0x00158d0001fa2934_power:
   friendly_name: Холодильник
   icon_template: mdi:flash
   unit_of_measurement: 'Вт'
-  
+sensor.0x00158d0001fa2934_consumption:
+  friendly_name: Холодильник
+  icon_template: mdi:gauge
+  unit_of_measurement: 'КВт*ч'
+sensor.0x00158d0001fa2934_energy:
+  friendly_name: Холодильник
+  icon_template: mdi:gauge
+  unit_of_measurement: 'КВт*ч'
+sensor.0x00158d0001fa2934_voltage:
+  friendly_name: Холодильник
+  icon_template: mdi:alpha-v
+  unit_of_measurement: 'В'
+sensor.0x00158d0001fa2934_switch_temperature:
+  friendly_name: Холодильник
+sensor.0x00158d0001fa2934_linkquality:
+  friendly_name: Холодильник
+
+## Розетка Xiaomi - телевизор
+switch.0x00158d0001291d12_switch:
+  friendly_name: Кухня телевизор Xiaomi
+  device_class: plug  
+  icon: mdi:power-socket-eu
 sensor.0x00158d0001291d12_power:
-  friendly_name: Кухня телевизор
+  friendly_name: Кухня телевизор Xiaomi
   icon_template: mdi:flash
   unit_of_measurement: 'Вт'
-
+sensor.0x00158d0001291d12_consumption:
+  friendly_name: Кухня телевизор Xiaomi
+  icon_template: mdi:gauge
+  unit_of_measurement: 'КВт*ч'  
+sensor.0x00158d0001291d12_switch_temperature:
+  friendly_name: Кухня телевизор Xiaomi
+sensor.0x00158d0001291d12_linkquality:
+  friendly_name: Кухня телевизор Xiaomi
+  
+## Розетка Heiman - Электрогриль
+switch.0x000d6f0014bb14b4_switch:
+  friendly_name: Электрогриль
+  device_class: plug  
+  icon: mdi:power-socket-eu
+sensor.0x000d6f0014bb14b4_power:
+  friendly_name: Электрогриль
+  icon_template: mdi:flash
+  unit_of_measurement: 'Вт'  
+sensor.0x000d6f0014bb14b4_voltage:
+  friendly_name: Электрогриль
+  icon_template: mdi:alpha-v
+  unit_of_measurement: 'В'
+sensor.kn_heiman_socket_current:
+  friendly_name: Электрогриль
+  icon_template: mdi:alpha-a
+  unit_of_measurement: 'А'
+sensor.0x000d6f0014bb14b4_linkquality:
+  friendly_name: Электрогриль
+ 
+## Розетка Blitzwolf - Микроволновка
+switch.bw_shp_2_relay:
+  friendly_name: Микроволоновка
+  device_class: plug  
+  icon: mdi:power-socket-eu
 sensor.bw_shp_2_power:
   friendly_name: Чайник
   icon_template: mdi:flash
   unit_of_measurement: 'Вт'
   icon: mdi:flash
-  
-sensor.kn_heiman_socket_voltage:
-  friendly_name: Аэрогиль
-  unit_of_measurement: 'В'
-
 sensor.bw_shp_2_voltage:
   friendly_name: Чайник
   unit_of_measurement: 'В'
 
+## Температура для термостатов
+sensor.kn_temp_home:
+  friendly_name: Кухня температура в режиме дома
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
+sensor.kn_temp_away:
+  friendly_name: Кухня температура в режиме никого нет
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
   
-sensor.illumination_7811dc64f4c8:
-  friendly_name: Кухня шлюз освещенность
-
+## Сенсоры
+## Датчик движения
+binary_sensor.0x00158d0001e16204_occupancy:
+  friendly_name: Кухня движение
 sensor.0x00158d0001e16204_illuminance:
   friendly_name: Кухня ДД освещенность
-  
+sensor.0x00158d0001e16204_battery:
+  friendly_name: Кухня, движение
+sensor.0x00158d0001e16204_linkquality:
+  friendly_name: Кухня, движение
+
+## Датчик освещенности  
 sensor.0x04cf8cdf3c772379_illuminance:
   friendly_name: Кухня освещенность
   unit_of_measurement: 'lx'
+sensor.0x04cf8cdf3c772379_illuminance_lux:
+  friendly_name: Кухня освещенность
+sensor.0x04cf8cdf3c772379_battery:
+  friendly_name: Кухня датчик света
+sensor.0x04cf8cdf3c772379_linkquality:
+  friendly_name: Кухня датчик света
+  
+## BLE ночник
+sensor.50ec50e24dff_action:
+  friendly_name: Кухня BLE ночник
+sensor.50ec50e24dff_illuminance:
+  friendly_name: Кухня BT ночник
+sensor.50ec50e24dff_idle_time:
+  friendly_name: Кухня BT ночник время простоя
+sensor.50ec50e24dff_battery:
+  friendly_name: Кухня BT ночник
+  
+## Датчик протечки Blitzwolf
+binary_sensor.0xec1bbdfffe8f1e42_water_leak:
+  friendly_name: Кухня датчик протечки под раковиной
+sensor.0xec1bbdfffe8f1e42_battery:
+  friendly_name: Кухня датчик протечки под раковиной
+sensor.0xec1bbdfffe8f1e42_voltage:
+  friendly_name: Кухня датчик протечки под раковиной
+sensor.0xec1bbdfffe8f1e42_linkquality:
+  friendly_name: Кухня датчик протечки под раковиной
+
 
 sensor.0x00158d0001581109_humidity:
   friendly_name: Кухня влажность
@@ -103,35 +183,20 @@ sensor.0x00158d000101bdc6_action:
 sensor.0x00158d0002a8ab8b_action:
   friendly_name: Кухня конфетница
   
-sensor.mijia_night_light_time:
-  friendly_name: Кухня BT ночник время
+
 
 ## Бинарные сенсоры
-binary_sensor.0x00158d0001e16204_occupancy:
-  friendly_name: Кухня движение
+
 
 binary_sensor.0x00158d0001a99562_contact:
   friendly_name: Кухня окно
   device_class: window 
 
-binary_sensor.0x00158d0001bbeba6_water_leak:
-  friendly_name: Кухня раковина протечка
-  
-binary_sensor.mijia_night_light_occupancy:
-  friendly_name: Кухня BT ночник движение
-  
-binary_sensor.mijia_night_light_status:
-  friendly_name: Кухня BT ночник статус
 
 ## Уровень заряда
 sensor.0x00158d0002a8ab8b_battery:
   friendly_name: Кухня конфетница
-sensor.0x00158d0001bbeba6_battery:
-  friendly_name: Кухня раковина протечка
-sensor.0x00158d0001e16204_battery:
-  friendly_name: Кухня, движение
-sensor.0x04cf8cdf3c772379_battery:
-  friendly_name: Кухня датчик света
+
 sensor.0x00158d0001581109_battery:
   friendly_name: Кухня климат
 sensor.0x00158d000282a130_battery:
@@ -144,8 +209,7 @@ sensor.0x00158d0001a672ef_battery:
   friendly_name: Кухня, вход, квадратная
 sensor.0x00158d000101bdc6_battery:
   friendly_name: Кухня кубик
-sensor.mijia_night_light_battery:
-  friendly_name: Кухня BT ночник
+
 
 ## Кухня балкон
 

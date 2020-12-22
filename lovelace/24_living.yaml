@@ -111,6 +111,9 @@ cards:
               - entity: switch.0x00158d00015723f1_switch_right
                 name: Гостиная люстра 1
                 icon: mdi:power-socket-eu
+              - entity: switch.0x842e14fffee5451a_switch
+                name: Гостиная люстра 2
+                icon: mdi:power-socket-eu
               - entity: switch.xiaomi_wifi_socket_usb
                 name: Электронные часы
                 icon: mdi:power-socket-eu

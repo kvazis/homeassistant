@@ -13,7 +13,13 @@ cards:
                 font-size: 26px;
               }          
           content: >
-             **Интернет сенсоры**
+             **Воздух, погода, радиация**
+
+        - type: custom:air-visual-card
+          air_pollution_level: sensor.u_s_air_pollution_level
+          air_quality_index: sensor.u_s_air_quality_index
+          main_pollutant: sensor.u_s_main_pollutant
+          city: 'Киев'
 
         - type: custom:weather-card
           entity: weather.openweathermap
@@ -24,12 +30,36 @@ cards:
           hourly_forecast: true
           number_of_forecasts: 6
 
-        - type: custom:air-visual-card
-          air_pollution_level: sensor.u_s_air_pollution_level
-          air_quality_index: sensor.u_s_air_quality_index
-          main_pollutant: sensor.u_s_main_pollutant
-          city: 'Киев'
-
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:          
+            - type: custom:mini-graph-card
+              icon: mdi:radioactive
+              entities:
+                - entity: sensor.0x00124b001d3bdce0_radiation_dose_per_hour
+                  name: Радиация мкР/ч
+              color_thresholds:
+                - value: 20
+                  color: "#00FFFF"
+                - value: 30
+                  color: "#008080"
+                - value: 50
+                  color: "#FFFF00"
+                - value: 9999
+                  color: "#FF0000"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+          
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: sensor.radiation_max
+                name: Максимальный фон сегодня -
+                icon: mdi:radioactive 
 
     - type: vertical-stack
       cards:
@@ -66,38 +96,6 @@ cards:
           content: >
              **Датчики**
 
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-    
-            - type: custom:mini-graph-card
-              icon: mdi:radioactive
-              entities:
-                - entity: sensor.0x00124b001d3bdce0_radiation_dose_per_hour
-                  name: Радиация мкР/ч
-              color_thresholds:
-                - value: 20
-                  color: "#00FFFF"
-                - value: 30
-                  color: "#008080"
-                - value: 50
-                  color: "#FFFF00"
-                - value: 9999
-                  color: "#FF0000"
-              animate: true
-              line_width: 2
-              hour24: true
-              points_per_hour: 1
-              group_by: hour
-              hours_to_show: 72
-          
-            - type: entities
-              show_header_toggle: false
-              entities:
-              - entity: sensor.radiation_max
-                name: Максимальный фон сегодня -
-                icon: mdi:radioactive 
-          
         - type: custom:mini-graph-card
           entities:
            - entity: sensor.0x00158d0001a4b9da_temperature

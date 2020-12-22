@@ -105,48 +105,6 @@
     service: light.toggle
     entity_id: light.aqara_04_strip
 
-## Обнаружение протечки, раковина     
-- alias: 04_kitchen_wleak_washstand_on
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.0xec1bbdfffe8f1e42_water_leak
-   to: 'on'
-  condition:
-   - condition: state
-     entity_id: switch.control_mode
-     state: 'on'
-  action:
-  - service: mqtt.publish
-    data_template:
-      topic: "notification/alarm"
-      payload_template: '0400'
-      retain: true
-  - service: script.turn_on
-    entity_id: script.11_warning
-
-
-## Протечка устранена, раковина          
-- alias: 04_kitchen_wleak_washstand_off
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.0xec1bbdfffe8f1e42_water_leak
-   from: 'on'
-   to: 'off'
-  condition:
-   - condition: state
-     entity_id: switch.control_mode
-     state: 'on'
-  action:
-  - service: mqtt.publish
-    data_template:
-      topic: "notification/alarm"
-      payload_template: '0401'
-      retain: true
-  - service: script.turn_on
-    entity_id: script.11_all_ok
-
 ## Управление телевизором       
 - alias: 04_tv_xiaomi
   initial_state: true

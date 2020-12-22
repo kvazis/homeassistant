@@ -28,6 +28,14 @@ heating_living:
           - sensor.0x00158d00015aebb6_temperature
           - sensor.05_smartmi_temperature
           - sensor.cleargrass_air_temperature
+          
+      - platform: mqtt
+        name: living_temp_home
+        state_topic: "states/lr/temp_home"
+
+      - platform: mqtt
+        name: living_temp_away
+        state_topic: "states/lr/temp_away"  
 
     switch:              
       - platform: template
@@ -82,8 +90,44 @@ heating_living:
                 script.living_home
                 {%- elif states.binary_sensor.living_heat.state == 'off' -%}
                 script.living_away
-                {%- endif -%}  
-                  
+                {%- endif -%} 
+                
+      - id: Изменение температуры гостиная
+        alias: lr_heat_temp
+        initial_state: true
+        trigger:
+          - platform: state
+            entity_id: climate.living_heater
+            attribute: temperature
+        condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on'
+        action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: climate.living_heater
+                    attribute: preset_mode
+                    state: "none"
+                sequence:
+                  - service: mqtt.publish
+                    data_template:
+                      topic: "states/lr/temp_home"
+                      payload: "{{ state_attr('climate.living_heater', 'temperature') }}" 
+                      retain: true 
+              - conditions:
+                  - condition: state
+                    entity_id: climate.living_heater
+                    attribute: preset_mode
+                    state: "away"
+                sequence:
+                  - service: mqtt.publish
+                    data_template:
+                      topic: "states/lr/temp_away"
+                      payload: "{{ state_attr('climate.living_heater', 'temperature') }}" 
+                      retain: true 
+
     script:
     
         living_home:
@@ -96,9 +140,8 @@ heating_living:
             - service: climate.set_temperature
               data:
                 entity_id: climate.living_heater
-                temperature: 22
+                temperature: "{{ states('sensor.living_temp_home')}}"
                 
-                  
         living_away:
           alias: Обгрев гостиной, режим away
           sequence:
@@ -109,4 +152,5 @@ heating_living:
             - service: climate.set_temperature
               data:
                 entity_id: climate.living_heater
-                temperature: 19
+                temperature: "{{ states('sensor.living_temp_away')}}"
+                

@@ -1,0 +1,60 @@
+{
+  "config": {
+    "error": {
+      "no_servers": "Please select at least one server",
+      "cant_login": "Can't login, check username and password"
+    },
+    "step": {
+      "user": {
+        "title": "Select Action",
+        "data": {
+          "action": "Action"
+        }
+      },
+      "cloud": {
+        "title": "Add Mi Cloud Account",
+        "description": "Select only those servers where you have devices",
+        "data": {
+          "username": "Email / Mi Account ID",
+          "password": "Password",
+          "servers": "Servers"
+        }
+      },
+      "token": {
+        "description": "[Obtain](https://github.com/Maxmudjon/com.xiaomi-miio/blob/master/docs/obtain_token.md) Mi Home token. Use **ZHA** mode ONLY if you [know what you doing](https://github.com/AlexxIT/XiaomiGateway3#zigbee-home-automation-mode) {error_text}",
+        "data": {
+          "host": "Host",
+          "token": "Token",
+          "ble": "Support BLE Devices",
+          "zha": "Zigbee Home Automation (ZHA) Mode"
+        }
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "MiCloud devices info",
+        "data": {
+          "did": "Device"
+        },
+        "description": "{device_info}"
+      }
+    }
+  },
+  "device_automation": {
+    "trigger_type": {
+      "button": "Button press",
+      "button_1": "1st button press",
+      "button_2": "2nd button press",
+      "button_3": "3rd button press",
+      "button_4": "4th button press",
+      "button_5": "5th button press",
+      "button_6": "6th button press",
+      "button_both": "Both button press",
+      "button_both_12": "1st and 2nd button press",
+      "button_both_13": "1st and 3rd button press",
+      "button_both_23": "2nd and 3rd button press"
+    }
+  }
+}

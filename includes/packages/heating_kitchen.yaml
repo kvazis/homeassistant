@@ -31,7 +31,16 @@ heating_kitchen:
               {% else %}
               mdi:valve-closed
               {% endif %}
+
+    sensor:
               
+      - platform: mqtt
+        name: kn_temp_home
+        state_topic: "states/kn/temp_home"
+
+      - platform: mqtt
+        name: kn_temp_away
+        state_topic: "states/kn/temp_away"                
               
     switch:              
       - platform: template
@@ -40,15 +49,23 @@ heating_kitchen:
             friendly_name: "Кухня головка радиатора"
             value_template: "{{ is_state('sensor.0xec1bbdfffe9466c5_force','OPEN') }}"
             turn_on:
-              service: mqtt.publish
-              data_template:
-                topic: "ZigbeeSLS/KN thermostat/set/force"
-                payload_template: 'open'
+              - service: mqtt.publish
+                data_template:
+                  topic: "ZigbeeSLS/KN thermostat/set/force"
+                  payload_template: 'open'
+              - service: mqtt.publish
+                data_template:
+                  topic: "ZigbeeSLS/KN thermostat/set/current_heating_setpoint"
+                  payload_template: '25'
             turn_off:
-              service: mqtt.publish
-              data_template:
-                topic: "ZigbeeSLS/KN thermostat/set/force"
-                payload_template: 'close'
+              - service: mqtt.publish
+                data_template:
+                  topic: "ZigbeeSLS/KN thermostat/set/force"
+                  payload_template: 'close'
+              - service: mqtt.publish
+                data_template:
+                  topic: "ZigbeeSLS/KN thermostat/set/current_heating_setpoint"
+                  payload_template: '18'
             icon_template: >-
               {% if is_state('switch.kn_radiator', 'on') %}
                 mdi:radiator
@@ -86,6 +103,42 @@ heating_kitchen:
                 {%- elif states.binary_sensor.kitchen_heat.state == 'off' -%}
                 script.kn_away_heat
                 {%- endif -%}  
+
+      - id: Изменение температуры кухня
+        alias: kn_heat_temp
+        initial_state: true
+        trigger:
+          - platform: state
+            entity_id: climate.kn_heater
+            attribute: temperature
+        condition:
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on'
+        action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: climate.kn_heater
+                    attribute: preset_mode
+                    state: "none"
+                sequence:
+                  - service: mqtt.publish
+                    data_template:
+                      topic: "states/kn/temp_home"
+                      payload: "{{ state_attr('climate.kn_heater', 'temperature') }}" 
+                      retain: true 
+              - conditions:
+                  - condition: state
+                    entity_id: climate.kn_heater
+                    attribute: preset_mode
+                    state: "away"
+                sequence:
+                  - service: mqtt.publish
+                    data_template:
+                      topic: "states/kn/temp_away"
+                      payload: "{{ state_attr('climate.kn_heater', 'temperature') }}" 
+                      retain: true 
                 
                 
     script:
@@ -100,7 +153,7 @@ heating_kitchen:
           - service: climate.set_temperature
             data:
               entity_id: climate.kn_heater
-              temperature: 22
+              temperature: "{{ states('sensor.kn_temp_home')}}"
               
         kn_away_heat:
          alias: Обгрев кухни, режим away
@@ -112,5 +165,5 @@ heating_kitchen:
           - service: climate.set_temperature
             data:
               entity_id: climate.kn_heater
-              temperature: 19
+              temperature: "{{ states('sensor.kn_temp_away')}}"
               

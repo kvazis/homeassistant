@@ -41,12 +41,27 @@
        - sensor.ipad_aleksei_battery_level
        - sensor.360_olga_battery
        - sensor.360_dima_battery
-# Влажность растений
-       - sensor.dieffenbac_moisture
-       - sensor.yucca_moisture
-       - sensor.zamiokulkas_moisture
-       - sensor.deep_purple_moisture
-       - sensor.true_blue_moisture
+# Растения
+       - sensor.80eaca88b765_moisture
+       - sensor.80eaca88b765_temperature
+       - sensor.80eaca88b765_conductivity
+       - sensor.80eaca88b765_illuminance
+       
+       - sensor.c47c8d628a8a_moisture
+       - sensor.c47c8d628a8a_temperature
+       - sensor.c47c8d628a8a_conductivity
+       - sensor.c47c8d628a8a_illuminance
+       
+       - sensor.c47c8d6a0ef3_moisture
+       - sensor.c47c8d6a0ef3_temperature
+       - sensor.c47c8d6a0ef3_conductivity
+       - sensor.c47c8d6a0ef3_illuminance
+
+       - sensor.c47c8d6d1cf9_moisture
+       - sensor.c47c8d6d1cf9_conductivity
+       
+       - sensor.c47c8d6d2c7e_moisture
+       - sensor.c47c8d6d2c7e_conductivity
 # Местоположение
        - device_tracker.life360_alex
        - device_tracker.life360_olga
@@ -136,6 +151,8 @@
        - sensor.07_mean_humidity
        - sensor.0x00158d0001fa8321_temperature
        - sensor.0x00158d0001fa8321_humidity
+       - sensor.4c65a8d054bb_temperature
+       - sensor.4c65a8d054bb_humidity
        - sensor.pressure_mmhg_158d0001fa8321
        - sensor.08_mean_temperature
        - sensor.08_mean_humidity
@@ -145,12 +162,12 @@
        - sensor.mijia_air_co2a
        - sensor.mijia_air_pm25
        - sensor.mijia_air_tvoc
-       - sensor.bt_lywsd02_temperature
-       - sensor.bt_lywsd02_humidity
+       - sensor.3f59c882d82d_temperature
+       - sensor.3f59c882d82d_humidity
        - sensor.0xec1bbdfffe6f3394_temperature
        - sensor.0xec1bbdfffe6f3394_humidity
-       - sensor.cgd1_humidity
-       - sensor.cgd1_temperature
+       - sensor.582d3451c85e_humidity
+       - sensor.582d3451c85e_temperature
        - sensor.mean_pressure
        - sensor.0xec1bbdfffe8d6ac9_temperature
        - sensor.0xec1bbdfffe8d6ac9_humidity

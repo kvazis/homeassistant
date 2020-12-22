@@ -1,4 +1,4 @@
-## Возобновление питания на выключателе люстры
+## Возобновление питания на выключателе люстры 1
 - alias: 05_gg_cell_1_power
   initial_state: true
   trigger:       
@@ -13,8 +13,24 @@
   action:
    - service: switch.turn_on
      entity_id: switch.0x00158d00015723f1_switch_right
+     
+## Возобновление питания на выключателе люстры 2
+- alias: 05_gg_cell_2_power
+  initial_state: true
+  trigger:       
+   - platform: time_pattern
+     minutes: '/1'
+  condition:
+   - condition: template
+     value_template: "{{ states('switch.0x842e14fffee5451a_switch') != 'on' }}"
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
+  action:
+   - service: switch.turn_on
+     entity_id: switch.0x842e14fffee5451a_switch
 
-# Перезагрузка зависшей люстры
+# Перезагрузка зависшей люстры 1
 - alias: 05_gg_cell_1_reboot
   initial_state: true
   trigger:
@@ -38,6 +54,31 @@
       retain: true
   - service: switch.turn_off
     entity_id: switch.0x00158d00015723f1_switch_right
+    
+# Перезагрузка зависшей люстры 2
+- alias: 05_gg_cell_2_reboot
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_05_ceiling2
+    to: 'unavailable'
+    for:
+      minutes: 5
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.unavailable_now_light
+    below: 5
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
+  action:
+  - service: mqtt.publish
+    data_template:
+      topic: "notification/messages"
+      payload_template: '0503'
+      retain: true
+  - service: switch.turn_off
+    entity_id: switch.0x842e14fffee5451a_switch
     
 - id: Гостиная, люстра 1
   alias: 05_gg_cell_1_light
@@ -83,7 +124,9 @@
           script.05_gg_650_1_on
           {%- else -%}
           script.05_gg_650_1_off
-          {%- endif -%}  
+          {%- endif -%}
+    - delay: 00:00:03
+
 
 - id: Гостиная, люстра 2
   alias: 05_gg_cell_2_light
@@ -121,7 +164,8 @@
           script.05_gg_650_2_on
           {%- else -%}
           script.05_gg_650_2_off
-          {%- endif -%}  
+          {%- endif -%}
+    - delay: 00:00:03
           
 - id: Гостиная, настольная лампа
   alias: lr_table_lamp
@@ -208,8 +252,9 @@
     entity_id: switch.control_mode
     state: 'on'
   action:
-    service: light.toggle
-    entity_id: light.aqara_05_wall
+    - service: light.toggle
+      entity_id: light.aqara_05_wall
+    - delay: 00:00:03
     
 - id: Гостиная, подсветка для ТВ
   alias: 05_gg_movie_light

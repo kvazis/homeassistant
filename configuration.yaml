@@ -84,18 +84,18 @@ lovelace:
      
 #Платформы
 
-mqtt:
-#   broker: core-mosquitto
-  broker: 192.168.0.74
-  discovery: true
-  discovery_prefix: homeassistant
-  username: mqtt
-  password: mqtt
+# mqtt:
+# #   broker: core-mosquitto
+#   broker: 192.168.0.74
+#   discovery: true
+#   discovery_prefix: homeassistant
+#   username: mqtt
+#   password: mqtt
 
-weather:
-  - platform: openweathermap
-    api_key: !secret openweathermap_key
-#   mode: daily
+# weather:
+#   - platform: openweathermap
+#     api_key: !secret openweathermap_key
+# #   mode: daily
 
 # Text to speech
 tts:
@@ -149,9 +149,9 @@ life360:
   warning_threshold: 2
   error_threshold: 3
   
-sonoff:
-  username: !secret sonoff_user
-  password: !secret sonoff_psw
+# sonoff:
+#   username: !secret sonoff_user
+#   password: !secret sonoff_psw
   
 # Качество воздуха
 air_quality:

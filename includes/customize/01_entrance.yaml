@@ -1,3 +1,26 @@
+## Этаж
+switch.0x00158d0003f46bb6_switch_l1:
+  friendly_name: Этаж питание камеры Reolink 410
+  icon: mdi:cctv
+switch.0x00158d0003f46bb6_switch_l2:
+  friendly_name: Этаж питание камеры Reolink 411
+  icon: mdi:cctv
+sensor.0x00158d0003f46bb6_power:
+  friendly_name: Этаж питание камер потребление
+  unit_of_measurement: Вт
+  device_class: power
+sensor.0x00158d0003f46bb6_energy:
+  friendly_name: Этаж питание камер
+  icon_template: mdi:gauge
+  unit_of_measurement: 'КВт*ч' 
+sensor.0x00158d0003f46bb6_voltage:
+  friendly_name: Этаж питание камер напряжение
+  unit_of_measurement: В
+sensor.0x00158d0003f46bb6_linkquality:
+  friendly_name: Этаж питание камер
+sensor.0x00158d0003f46bb6_switch_temperature:
+  friendly_name: Этаж питание камер
+
 ## Прихожая
 
 ## Освещение

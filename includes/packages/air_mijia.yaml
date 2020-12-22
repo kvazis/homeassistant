@@ -82,6 +82,9 @@ air_mijia:
             - condition: state
               entity_id:  binary_sensor.da_air
               state: 'on'
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on'
           action:
            - service: mqtt.publish
              data_template:

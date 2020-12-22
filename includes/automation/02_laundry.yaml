@@ -54,47 +54,6 @@
    - service: switch.turn_on
      entity_id: switch.bwshp2_relay
     
-## Обнаружение протечки, стиралка 
-- alias: 02_laundry_wleak_washmash_on
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.0x00158d0002705b7b_water_leak
-   to: 'on'
-  condition:
-  - condition: state
-    entity_id: switch.control_mode
-    state: 'on'  
-  action:
-  - service: mqtt.publish
-    data_template:
-      topic: "notification/alarm"
-      payload_template: '0200'
-      retain: true
-  - service: script.turn_on
-    entity_id: script.11_warning
-      
-## Протечка устранена, стиралка        
-- alias: 02_laundry_wleak_washmash_off
-  initial_state: true
-  trigger:       
-   platform: state
-   entity_id: binary_sensor.0x00158d0002705b7b_water_leak
-   from: 'on'
-   to: 'off'
-  condition:
-  - condition: state
-    entity_id: switch.control_mode
-    state: 'on' 
-  action:
-  - service: mqtt.publish
-    data_template:
-      topic: "notification/alarm"
-      payload_template: '0201'
-      retain: true
-  - service: script.turn_on
-    entity_id: script.11_all_ok
-    
 ## Запись последнего движения в прачечной
 - alias: 02_laundry_motion_time
   initial_state: true

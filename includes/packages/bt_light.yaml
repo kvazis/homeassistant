@@ -54,6 +54,9 @@ bt_light:
         condition:
          - condition: template
            value_template: "{{ states('switch.0x00158d0001117040_switch_right') != 'on' }}"
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
         action:
          - service: switch.turn_on
            entity_id: switch.0x00158d0001117040_switch_right
@@ -68,9 +71,12 @@ bt_light:
           for:
             minutes: 5
         condition:
-          condition: numeric_state
-          entity_id: sensor.unavailable_now_light
-          below: 5
+         - condition: numeric_state
+           entity_id: sensor.unavailable_now_light
+           below: 5
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
         action:
           - service: mqtt.publish
             data_template:
@@ -87,6 +93,10 @@ bt_light:
         - platform: state
           entity_id: light.yeelight_06_ceiling
           to: 'on'
+        condition:
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
         action:
         - service: light.turn_on
           entity_id:
@@ -117,9 +127,12 @@ bt_light:
           entity_id: binary_sensor.0x00158d0001e547a3_occupancy
           to: 'on'
         condition:
-          - condition: state
-            entity_id: light.yeelight_06_ceiling
-            state: 'off'
+         - condition: state
+           entity_id: light.yeelight_06_ceiling
+           state: 'off'
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
         action:
           - service: light.turn_on
             entity_id:
@@ -146,6 +159,9 @@ bt_light:
           - condition: state
             entity_id: light.yeelight_06_ceiling
             state: 'on'
+          - condition: state
+            entity_id: switch.control_mode
+            state: 'on'
         action:
           - service: light.turn_off
             entity_id:
@@ -162,13 +178,17 @@ bt_light:
           entity_id: binary_sensor.bt_light_night_on
           to: 'on'
         action:
-          service: timer.start
+        - service: timer.start
           entity_id: timer.bathroom_light
           data_template: 
               duration: > 
-               {%- if states("binary_sensor.bt_light_on") == 'on' -%}
+               {%- if states("binary_sensor.bt_light_on") == 'on' and states("binary_sensor.0x00158d00054495dc_contact") == 'off' -%}
+               00:30:00
+               {%- elif states("binary_sensor.bt_light_on") == 'on' and states("binary_sensor.0x00158d00054495dc_contact") == 'on' -%}
                00:10:00
-               {%- elif states("binary_sensor.bt_light_night_on") == 'on' -%}
+               {%- elif states("binary_sensor.bt_light_night_on") == 'on' and states("binary_sensor.0x00158d00054495dc_contact") == 'off' -%}
+               00:15:00
+               {%- elif states("binary_sensor.bt_light_night_on") == 'on' and states("binary_sensor.0x00158d00054495dc_contact") == 'on' -%}
                00:05:00
                {% endif %}
 

@@ -93,6 +93,16 @@ switch.plug4:
 
 ## Датчики 
 
+## Температура для термостатов
+sensor.dd_temp_home:
+  friendly_name: Детская Д температура в режиме дома
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
+sensor.dd_temp_away:
+  friendly_name: Детская Д температура в режиме никого нет
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
+
 ## Логические
 sensor.07_mean_humidity:
   friendly_name: Детская Д средняя влажность

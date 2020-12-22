@@ -1,8 +1,8 @@
   - platform: generic_thermostat
     name: living_heater
     heater: switch.lr_radiator
-    target_sensor: sensor.05_mean_temperature
-    target_temp: 22
+    target_sensor: sensor.0x00158d00015aebb6_temperature
+    # target_temp: 22
     away_temp: 18
     min_temp: 16
     max_temp: 28
@@ -19,7 +19,7 @@
     name: kn_heater
     heater: switch.kn_radiator
     target_sensor: sensor.0x00158d0001581109_temperature
-    target_temp: 22
+    # target_temp: 22
     away_temp: 18
     min_temp: 16
     max_temp: 28
@@ -36,7 +36,7 @@
     name: dd_heater
     heater: switch.0x00158d0001a2ccab_switch_right
     target_sensor: sensor.07_mean_temperature
-    target_temp: 22
+    # target_temp: 22
     away_temp: 18
     min_temp: 16
     max_temp: 28
@@ -53,7 +53,7 @@
     name: da_heater
     heater: switch.0x00158d0002d7bb2b_switch_l2
     target_sensor: sensor.08_mean_temperature
-    target_temp: 22
+    # target_temp: 22
     away_temp: 18
     min_temp: 16
     max_temp: 28

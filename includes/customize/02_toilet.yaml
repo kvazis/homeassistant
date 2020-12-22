@@ -5,13 +5,14 @@
 light.yeelight_02_ceiling:
   friendly_name: Туалет люстра
   icon: mdi:ceiling-light
+  
+light.tt_mirror:
+  friendly_name: Туалет подсветка зеркала
+  icon: mdi:mirror
 
 ## Питание
 
 ## Реле Lonsonho
-light.sonoff_02_mirror:
-  friendly_name: Туалет, подсветка зеркала
-  icon: mdi:spotlight-beam
 switch.0xec1bbdfffea37571_switch:
   friendly_name: Туалет питание подсветки
   device_class: plug  
@@ -65,6 +66,18 @@ sensor.0x00158d0001a24e71_battery:
 sensor.0x00158d0001a24e71_linkquality:
   friendly_name: Туалет движение
   
+## Датчик протечки
+binary_sensor.0x00158d0001bbeba6_water_leak:
+  friendly_name: Туалет протечка под раковиной
+sensor.0x00158d0001bbeba6_battery: 
+  friendly_name: Туалет протечка под раковиной
+sensor.0x00158d0001bbeba6_linkquality: 
+  friendly_name: Туалет протечка под раковиной
+binary_sensor.0x00158d0001bbeba6_battery_low: 
+  friendly_name: Туалет протечка под раковиной
+binary_sensor.0x00158d0001bbeba6_tamper: 
+  friendly_name: Туалет протечка под раковиной
+  
 ## Выключатели, кнопки
 
 ## Выключатель на стене внутри
@@ -106,6 +119,10 @@ sensor.0x842e14fffe51c5ae_power:
   friendly_name: Стиральная машина потребление
   unit_of_measurement: Вт
   device_class: power
+sensor.0x842e14fffe51c5ae_energy:
+  friendly_name: Стиральная машина
+  icon_template: mdi:gauge
+  unit_of_measurement: 'КВт*ч'
 sensor.0x842e14fffe51c5ae_voltage:
   friendly_name: Стиральная машина напряжение
   unit_of_measurement: В

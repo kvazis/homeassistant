@@ -33,7 +33,7 @@ from custom_components.hacs.share import (
 )
 
 from ..enums import HacsCategory, HacsStage
-from ..models.base import Hacs as HacsBase
+from ..base import HacsBase
 
 
 class HacsStatus:
@@ -130,7 +130,7 @@ class Hacs(HacsBase, HacsHelpers):
         """Register a repository."""
         await register_repository(full_name, category, check=check)
 
-    async def startup_tasks(self, _event):
+    async def startup_tasks(self, _event=None):
         """Tasks that are started after startup."""
         await self.async_set_stage(HacsStage.STARTUP)
         self.status.background_task = True
@@ -167,7 +167,6 @@ class Hacs(HacsBase, HacsHelpers):
         self.status.background_task = False
         self.hass.bus.async_fire("hacs/status", {})
         await self.async_set_stage(HacsStage.RUNNING)
-        await self.data.async_write()
 
     async def handle_critical_repositories_startup(self):
         """Handled critical repositories during startup."""

@@ -80,16 +80,20 @@ away:
             value_template: >-
               {{ is_state('binary_sensor.kn_alex', 'on') 
                  or is_state('binary_sensor.kn_olha', 'on')  
-                 or is_state('binary_sensor.kn_dima', 'on') 
+                 or is_state('binary_sensor.kn_dima', 'on')
+                 or is_state('binary_sensor.kn_arina', 'on')                  
                  or is_state('binary_sensor.gg_alex', 'on')              
                  or is_state('binary_sensor.gg_olha', 'on')  
-                 or is_state('binary_sensor.gg_dima', 'on') 
+                 or is_state('binary_sensor.gg_dima', 'on')
+                 or is_state('binary_sensor.gg_arina', 'on') 
                  or is_state('binary_sensor.dd_alex', 'on')              
                  or is_state('binary_sensor.dd_olha', 'on')  
-                 or is_state('binary_sensor.dd_dima', 'on') 
+                 or is_state('binary_sensor.dd_dima', 'on')
+                 or is_state('binary_sensor.dd_arina', 'on')
                  or is_state('binary_sensor.da_alex', 'on')              
                  or is_state('binary_sensor.da_olha', 'on')  
-                 or is_state('binary_sensor.da_dima', 'on')  }}
+                 or is_state('binary_sensor.da_dima', 'on')  
+                 or is_state('binary_sensor.da_arina', 'on')  }}
             icon_template: >-
                 mdi:bluetooth-connect
               
