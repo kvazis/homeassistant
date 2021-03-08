@@ -38,4 +38,3 @@
           {% else %}
           mdi:close-circle-outline
           {% endif %}
-

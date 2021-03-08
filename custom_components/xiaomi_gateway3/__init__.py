@@ -2,12 +2,13 @@ import logging
 
 import voluptuous as vol
 from homeassistant.config import DATA_CUSTOMIZE
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, Event
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 from homeassistant.helpers.entity import Entity
+from homeassistant.helpers.entity_registry import EntityRegistry
 from homeassistant.helpers.storage import Store
-from homeassistant.util import sanitize_filename
 
 from .core import utils
 from .core.gateway3 import Gateway3
@@ -15,6 +16,9 @@ from .core.utils import DOMAIN
 from .core.xiaomi_cloud import MiCloud
 
 _LOGGER = logging.getLogger(__name__)
+
+DOMAINS = ['binary_sensor', 'climate', 'cover', 'light', 'remote', 'sensor',
+           'switch', 'alarm_control_panel']
 
 CONF_DEVICES = 'devices'
 CONF_DEBUG = 'debug'
@@ -36,14 +40,16 @@ CONFIG_SCHEMA = vol.Schema({
 async def async_setup(hass: HomeAssistant, hass_config: dict):
     config = hass_config.get(DOMAIN) or {}
 
+    if 'disabled' in config:
+        # for dev purposes
+        return False
+
+    hass.data[DOMAIN] = {
+        'config': config,
+        'debug': _LOGGER.level > 0  # default debug from Hass config
+    }
+
     config.setdefault('devices', {})
-
-    if 'debug' in config:
-        debug = utils.XiaomiGateway3Debug(hass)
-        _LOGGER.setLevel(logging.DEBUG)
-        _LOGGER.addHandler(debug)
-
-    hass.data[DOMAIN] = {'config': config}
 
     await _handle_device_remove(hass)
 
@@ -52,33 +58,69 @@ async def async_setup(hass: HomeAssistant, hass_config: dict):
     return True
 
 
-async def async_setup_entry(hass: HomeAssistant, config_entry):
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     """Support two kind of enties - MiCloud and Gateway."""
 
     # entry for MiCloud login
-    if 'servers' in config_entry.data:
-        return await _setup_micloud_entry(hass, config_entry)
+    if 'servers' in entry.data:
+        return await _setup_micloud_entry(hass, entry)
+
+    # migrate data (also after first setup) to options
+    if entry.data:
+        hass.config_entries.async_update_entry(entry, data={},
+                                               options=entry.data)
+
+    await _setup_logger(hass)
 
     config = hass.data[DOMAIN]['config']
 
-    hass.data[DOMAIN][config_entry.entry_id] = \
-        gw = Gateway3(**config_entry.data, config=config)
+    hass.data[DOMAIN][entry.entry_id] = \
+        gw = Gateway3(**entry.options, config=config)
+
+    # add options handler
+    if not entry.update_listeners:
+        entry.add_update_listener(async_update_options)
 
     # init setup for each supported domains
-    for domain in (
-            'binary_sensor', 'climate', 'cover', 'light', 'remote', 'sensor',
-            'switch'
-    ):
+    for domain in DOMAINS:
         hass.async_create_task(hass.config_entries.async_forward_entry_setup(
-            config_entry, domain))
+            entry, domain))
 
     gw.start()
 
     return True
 
 
-# async def async_unload_entry(hass: HomeAssistant, config_entry):
-#     return True
+async def async_update_options(hass: HomeAssistant, entry: ConfigEntry):
+    await hass.config_entries.async_reload(entry.entry_id)
+
+
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry):
+    # check unload cloud integration
+    if entry.entry_id not in hass.data[DOMAIN]:
+        return
+
+    # remove all stats entities if disable stats
+    if not entry.options.get('stats'):
+        suffix = ('_gateway', '_zigbee')
+        registry: EntityRegistry = hass.data['entity_registry']
+        remove = [
+            entity.entity_id
+            for entity in list(registry.entities.values())
+            if entity.config_entry_id == entry.entry_id and
+               entity.unique_id.endswith(suffix)
+        ]
+        for entity_id in remove:
+            registry.async_remove(entity_id)
+
+    gw = hass.data[DOMAIN][entry.entry_id]
+    gw.stop()
+
+    return all([
+        await hass.config_entries.async_forward_entry_unload(entry, domain)
+        for domain in DOMAINS
+    ])
+
 
 async def _setup_micloud_entry(hass: HomeAssistant, config_entry):
     data: dict = config_entry.data.copy()
@@ -108,8 +150,7 @@ async def _setup_micloud_entry(hass: HomeAssistant, config_entry):
             _LOGGER.error("Can't login to MiCloud")
 
     # load devices from or save to .storage
-    filename = sanitize_filename(data['username'])
-    store = Store(hass, 1, f"{DOMAIN}/{filename}.json")
+    store = Store(hass, 1, f"{DOMAIN}/{data['username']}.json")
     if devices is None:
         _LOGGER.debug("Loading a list of devices from the .storage")
         devices = await store.async_load()
@@ -150,19 +191,20 @@ async def _handle_device_remove(hass: HomeAssistant):
         if not hass_device or not hass_device.identifiers:
             return
 
-        domain, mac = next(iter(hass_device.identifiers))
+        identifier = next(iter(hass_device.identifiers))
+
         # handle only our devices
-        if domain != DOMAIN or hass_device.name_by_user != 'delete':
+        if identifier[0] != DOMAIN or hass_device.name_by_user != 'delete':
             return
 
         # remove from Mi Home
         for gw in hass.data[DOMAIN].values():
             if not isinstance(gw, Gateway3):
                 continue
-            gw_device = gw.get_device(mac)
+            gw_device = gw.get_device(identifier[1])
             if not gw_device:
                 continue
-            _LOGGER.debug(f"{gw.host} | Remove device: {gw_device['did']}")
+            gw.debug(f"Remove device: {gw_device['did']}")
             gw.miio.send('remove_device', [gw_device['did']])
             break
 
@@ -170,6 +212,27 @@ async def _handle_device_remove(hass: HomeAssistant):
         registry.async_remove_device(hass_device.id)
 
     hass.bus.async_listen('device_registry_updated', device_registry_updated)
+
+
+async def _setup_logger(hass: HomeAssistant):
+    entries = hass.config_entries.async_entries(DOMAIN)
+    any_debug = any(e.options.get('debug') for e in entries)
+
+    # only if global logging don't set
+    if not hass.data[DOMAIN]['debug']:
+        # disable log to console
+        _LOGGER.propagate = not any_debug
+        # set debug if any of integrations has debug
+        _LOGGER.setLevel(logging.DEBUG if any_debug else logging.NOTSET)
+
+    # if don't set handler yet
+    if any_debug and not _LOGGER.handlers:
+        handler = utils.XiaomiGateway3Debug(hass)
+        _LOGGER.addHandler(handler)
+
+        info = await hass.helpers.system_info.async_get_system_info()
+        info.pop('timezone')
+        _LOGGER.debug(f"SysInfo: {info}")
 
 
 class Gateway3Device(Entity):
@@ -190,7 +253,7 @@ class Gateway3Device(Entity):
         self.entity_id = f"{DOMAIN}.{self._unique_id}"
 
     def debug(self, message: str):
-        _LOGGER.debug(f"{self.entity_id} | {message}")
+        self.gw.debug(f"{self.entity_id} | {message}")
 
     async def async_added_to_hass(self):
         """Also run when rename entity_id"""
@@ -250,7 +313,7 @@ class Gateway3Device(Entity):
                 'manufacturer': self.device['device_manufacturer'],
                 'model': self.device['device_model'],
                 'name': self.device['device_name'],
-                'sw_version': self.device['zb_ver'],
+                'sw_version': self.device.get('fw_ver'),
                 'via_device': (DOMAIN, self.gw.device['mac'])
             }
         else:  # ble and mesh

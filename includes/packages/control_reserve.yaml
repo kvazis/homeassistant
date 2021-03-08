@@ -30,10 +30,13 @@ control_reserve:
            entity_id: sensor.reserve_state
            to: 'unavailable'
           action:
-            - service: mqtt.publish
+            - service: telegram_bot.send_message
               data_template:
-                 topic: "notification/error"
-                 payload_template: '021'
+                target:
+                    - !secret chat_id_group_tech
+                message: | 
+                     Божечки!
+                     Мы потеряли Антонио в {{ states('sensor.time_date') }}
         
         - id: Восстановление связи с резервным сервером
           alias: 911_reserve_online
@@ -43,10 +46,12 @@ control_reserve:
            entity_id: sensor.reserve_state
            from: 'unavailable'
           action:
-            - service: mqtt.publish
+            - service: telegram_bot.send_message
               data_template:
-                 topic: "notification/error"
-                 payload_template: '022'
+                target:
+                    - !secret chat_id_group_tech
+                message: | 
+                     К нам вернулся Антонио в {{ states('sensor.time_date') }}
         
         # - id: Восстановление работы сценариев
         #   alias:  911_scenario_on

@@ -21,7 +21,7 @@ air_mijia:
             value_template: >-
               {{ is_state('binary_sensor.0x00158d0001583c7b_contact', 'off')  
                  and is_state('binary_sensor.mijia_air', 'on')
-                 and is_state('binary_sensor.away', 'off')
+                 and is_state('binary_sensor.occupancy', 'on')
                  and is_state('sensor.da_day_work', 'Включен') }}
             icon_template: >-
               {% if is_state("binary_sensor.da_air", "on") %}
@@ -38,35 +38,30 @@ air_mijia:
             friendly_name: 'Mijia air СО2а - '
             value_template: "{{ state_attr('air_quality.mijia_air_monitor', 'carbon_dioxide_equivalent') }}"  
             icon_template: mdi:molecule-co2
-            entity_id: air_quality.mijia_air_monitor
             unit_of_measurement: 'ppm'
             
           mijia_air_tvoc:
             friendly_name: 'Mijia air ЛОВ - '
             value_template: "{{ state_attr('air_quality.mijia_air_monitor', 'total_volatile_organic_compounds') }}"  
             icon_template: mdi:alpha-t
-            entity_id: air_quality.mijia_air_monitor
             unit_of_measurement: 'mg_m3'
             
           mijia_air_pm25:
             friendly_name: 'Mijia air PM 2.5 - '
             value_template: "{{ state_attr('air_quality.mijia_air_monitor', 'particulate_matter_2_5') }}"  
             icon_template: mdi:alpha-p
-            entity_id: air_quality.mijia_air_monitor
             unit_of_measurement: 'ppm'
             
           mijia_air_temperature:
             friendly_name: 'Mijia air температура - '
             value_template: "{{ state_attr('air_quality.mijia_air_monitor', 'temperature') }}"  
             icon_template: mdi:temperature-celsius
-            entity_id: air_quality.mijia_air_monitor
             unit_of_measurement: '°C'
             
           mijia_air_humidity:
             friendly_name: 'Mijia air влажность - '
             value_template: "{{ state_attr('air_quality.mijia_air_monitor', 'humidity') }}"  
             icon_template: mdi:water-percent
-            entity_id: air_quality.mijia_air_monitor
             unit_of_measurement: '%'
             
     automation:
@@ -86,11 +81,12 @@ air_mijia:
               entity_id: switch.control_mode
               state: 'on'
           action:
-           - service: mqtt.publish
+           - service: telegram_bot.send_message
              data_template:
-               topic: "notification/messages"
-               payload_template: '0801'
-               retain: true
+               target:
+                   - !secret chat_id_group
+               message: | 
+                    {{"\U0001F637"}} Детская А {{ states('sensor.time_date') }} - хорошо бы проветрить
            - service: light.turn_on
              entity_id:
                - light.gateway_light_f0b429cc1f11

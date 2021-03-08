@@ -78,11 +78,6 @@ bt_light:
            entity_id: switch.control_mode
            state: 'on'
         action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/messages"
-              payload_template: '0603'
-              retain: true
           - service: switch.turn_off
             entity_id: switch.0x00158d0001117040_switch_right
             
@@ -120,8 +115,8 @@ bt_light:
           to: 'right'
       ## Беспроводный выключатель
         - platform: state
-          entity_id: sensor.0x00158d000238a140_click
-          to: 'left'
+          entity_id: sensor.0x00158d000238a140_action
+          to: 'single_left'
       ## Датчик движения
         - platform: state
           entity_id: binary_sensor.0x00158d0001e547a3_occupancy
@@ -148,8 +143,8 @@ bt_light:
           to: 'right'
     ## Беспроводный выключатель
         - platform: state
-          entity_id: sensor.0x00158d000238a140_click
-          to: 'left'
+          entity_id: sensor.0x00158d000238a140_action
+          to: 'single_left'
     ## Таймер
         - platform: event
           event_type: timer.finished

@@ -93,14 +93,26 @@ air_quality.05_air_monitor:
   icon: mdi:tablet-dashboard
   
 ## Температура для термостатов
-sensor.living_temp_home:
-  friendly_name: Гостиная температура в режиме дома
+sensor.lr_temp_home:
+  friendly_name: Температура - дома
   icon: mdi:temperature-celsius
   unit_of_measurement: 'C'
-sensor.living_temp_away:
-  friendly_name: Гостиная температура в режиме никого нет
+sensor.lr_temp_away:
+  friendly_name: Температура - никого нет
   icon: mdi:temperature-celsius
   unit_of_measurement: 'C'
+sensor.lr_temp_window:
+  friendly_name: Температура - проветривание
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
+
+## Логические
+sensor.05_mean_humidity:
+  friendly_name: Гостиная средняя влажность
+  icon: mdi:water-percent  
+sensor.lr_mean_temperature:
+  friendly_name: Гостиная средняя температура
+  icon: mdi:temperature-celsius
 
 ## Сенсоры
 sensor.0x04cf8cdf3c764e0a_power:
@@ -127,12 +139,6 @@ sensor.0x00158d00015aebb6_humidity:
   icon: mdi:water-percent  
 sensor.0x00158d00015aebb6_temperature:
   friendly_name: Гостиная температура
-  icon: mdi:temperature-celsius
-sensor.05_mean_humidity:
-  friendly_name: Гостиная средняя влажность
-  icon: mdi:water-percent  
-sensor.05_mean_temperature:
-  friendly_name: Гостиная средняя температура
   icon: mdi:temperature-celsius
 sensor.0x00158d00013fc3bc_click:
   friendly_name: Гостиная вход

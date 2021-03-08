@@ -12,7 +12,7 @@ cards:
                 font-size: 26px;
               }   
           content: >
-              **Ванная**
+              **Панель управления**
 
         - type: glance
           show_state: false
@@ -62,7 +62,63 @@ cards:
           - entity: timer.bathroom
           state_filter:
             - "active"
+
+      - type: vertical-stack
+        cards:
+        
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Бойлер**
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: binary_sensor.boiler
+            name: Режим нагрева воды
+              
+        - type: custom:logbook-card
+          entity: switch.bathroom_bolier
+          max_items: 5
+          title: История работы
+          duration_labels:
+            second:  '${value} секунда'
+            seconds: '${value} секунд'
+            minute:  '${value} минута'
+            minutes: '${value} минут'
+            hour:    '${value} час'
+            hours:   '${value} часов'
+            day:     '${value} день'
+            days:    '${value} дней'
             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.bathroom_bolier_instantpower
+             name: Энергопотребление
+          color_thresholds:
+            - value: 50
+              color: "#98FB98"
+            - value: 100
+              color: "#006400"
+            - value: 500
+              color: "#8A2BE2"
+            - value: 1000
+              color: "#4B0082"
+            - value: 2000
+              color: "#A52A2A"
+            - value: 3500
+              color: "#800000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 2
+          group_by: hour
+          hours_to_show: 36
+
+
       - type: vertical-stack
         cards:
 
@@ -72,12 +128,12 @@ cards:
                 font-size: 26px;
               }   
           content: >
-              **Климат**
-              
+              **Климат, освещенность**
+
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.06_mean_temperature
-             name: Средняя температура
+           - entity: sensor.0x00158d0001dcd47e_temperature
+             name: Температура
           color_thresholds:
             - value: 10
               color: "#191970"
@@ -100,8 +156,8 @@ cards:
          
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.06_mean_humidity
-             name: Средняя влажность
+           - entity: sensor.0x00158d0001dcd47e_humidity
+             name: Влажность
           color_thresholds:
             - value: 20
               color: "#FFFF00"
@@ -148,7 +204,6 @@ cards:
           group_by: hour
           hours_to_show: 72
 
-
       - type: vertical-stack
         cards:
 
@@ -158,70 +213,93 @@ cards:
                 font-size: 26px;
               }   
           content: >
-              **Бойлер**
-              
+              **Zigbee Устройства**
+
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: switch.0x00158d00015751f4_switch
-            name: Питание
-              
-        - type: custom:logbook-card
-          entity: switch.0x00158d00015751f4_switch
-          max_items: 5
-          title: История работы
-          duration_labels:
-            second:  '${value} секунда'
-            seconds: '${value} секунд'
-            minute:  '${value} минута'
-            minutes: '${value} минут'
-            hour:    '${value} час'
-            hours:   '${value} часов'
-            day:     '${value} день'
-            days:    '${value} дней'
-            
-        - type: custom:mini-graph-card
+          - entity: switch.bathroom_bolier
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Бойлер
+            secondary_info: last-changed
+            state_header: Питание
+            entities:
+              - entity: sensor.bathroom_bolier_instantvoltage
+                name: Напряжение
+              - entity: sensor.bathroom_bolier_instantpower
+                name: Потребление
+              - entity: sensor.0x00158d00015751f4_linkquality
+                name: Сигнал
+          - type: divider
+          - entity: switch.0x00158d0001117040_switch_right
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Выключатель
+            secondary_info: last-changed
+            state_header: Питание люстры
+            entities:
+              - entity: sensor.0x00158d0001117040_linkquality
+                name: Сигнал
+              - entity: switch.0x00158d0001117040_switch_left
+                name: Вентилятор
+                toggle: true
+                    
+        - type: entities
+          show_header_toggle: false
           entities:
-           - entity: sensor.0x00158d00015751f4_power
-             name: Энергопотребление
-          color_thresholds:
-            - value: 50
-              color: "#98FB98"
-            - value: 100
-              color: "#006400"
-            - value: 500
-              color: "#8A2BE2"
-            - value: 1000
-              color: "#4B0082"
-            - value: 2000
-              color: "#A52A2A"
-            - value: 3500
-              color: "#800000"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 2
-          group_by: hour
-          hours_to_show: 36
-          
-        - type: custom:mini-graph-card
-          entities:
-           - entity: sensor.0x00158d00015751f4_voltage
-             name: Напряжение в сети
-          color_thresholds:
-            - value: 215
-              color: "#DC143C"
-            - value: 220
-              color: "#FFFFE0"
-            - value: 230
-              color: "#00FF00"
-            - value: 240
-              color: "#FFFFE0"
-            - value: 300
-              color: "#DC143C"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 2
-          group_by: hour
-          hours_to_show: 36
+          - entity: sensor.0x00158d0001d72fa2_battery
+            type: custom:multiple-entity-row
+            icon: mdi:water
+            name: Сенсор протечки, раковина
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d0001d72fa2_linkquality
+                name: Сигнал
+          - type: divider 
+          - entity: sensor.0x00158d0001bb60c2_battery
+            type: custom:multiple-entity-row
+            icon: mdi:water
+            name: Сенсор протечки, кабина
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d0001bb60c2_linkquality
+                name: Сигнал
+          - type: divider                     
+          - entity: sensor.0x00158d00054495dc_battery
+            type: custom:multiple-entity-row
+            icon: mdi:door
+            name: Сенсор двери
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d00054495dc_linkquality
+                name: Сигнал
+          - type: divider
+          - entity: sensor.0x00158d0001e547a3_battery
+            type: custom:multiple-entity-row
+            icon: mdi:run
+            name: Сенсор движения
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d0001e547a3_linkquality
+                name: Сигнал
+          - type: divider
+          - entity: sensor.0x00158d0001dcd47e_battery
+            type: custom:multiple-entity-row
+            icon: mdi:coolant-temperature
+            name: Сенсор климата
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d0001dcd47e_linkquality
+                name: Сигнал
+          - type: divider   
+          - entity: sensor.0x00158d000238a140_battery
+            type: custom:multiple-entity-row
+            icon: mdi:gesture-double-tap
+            name: Выключатель на стене
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d000238a140_linkquality
+                name: Сигнал

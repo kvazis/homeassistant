@@ -1,0 +1,195 @@
+living_heating:
+
+    climate:
+      - platform: generic_thermostat
+        name: living_heater
+        heater: switch.lr_radiator
+        target_sensor: sensor.lr_mean_temperature
+        # target_temp: 22
+        # away_temp: 18
+        min_temp: 16
+        max_temp: 28
+        ac_mode: false
+        cold_tolerance: 0.5
+        hot_tolerance: 0.5
+        min_cycle_duration:
+          minutes: 5
+        keep_alive:
+          minutes: 3
+        initial_hvac_mode: "heat"
+
+    sensor:
+    
+      - platform: template
+        sensors:
+          lr_heat_mode:
+            friendly_name: "Режим отопления, Гостиная -"
+            value_template: >-
+              {% if is_state('binary_sensor.radiator', 'off') %}
+              Выключен
+              {% elif is_state('binary_sensor.radiator', 'on') 
+                 and is_state('binary_sensor.lr_aeration', 'on') %}
+              Проветривание
+              {% elif is_state('binary_sensor.radiator', 'on') 
+                 and is_state('binary_sensor.occupancy', 'off') %}
+              Не дома
+              {% elif is_state('binary_sensor.radiator', 'on') 
+                 and is_state('binary_sensor.lr_work', 'on')
+                 and is_state('binary_sensor.lr_away_time', 'on')
+                 and is_state('binary_sensor.workday_sensor', 'on') %}
+              Не дома
+              {% else %}
+              Дома
+              {% endif %}
+            icon_template: >-
+              {% if is_state("sensor.lr_heat_mode", "Выключен") %}
+              mdi:radiator-off
+              {% elif is_state("sensor.lr_heat_mode", "Проветривание") %}
+              mdi:window-open-variant
+              {% elif is_state("sensor.lr_heat_mode", "Не дома") %}
+              mdi:account-group-outline
+              {% else %}
+              mdi:account-group
+              {% endif %}
+              
+      - platform: mqtt
+        name: lr_temp_home
+        state_topic: "states/lr/temp_home"
+
+      - platform: mqtt
+        name: lr_temp_away
+        state_topic: "states/lr/temp_away"
+        
+      - platform: mqtt
+        name: lr_temp_window
+        state_topic: "states/lr/temp_window"
+
+    switch:              
+      - platform: template
+        switches:  
+          lr_radiator:
+            friendly_name: "Гостиная головка радиатора"
+            value_template: >-
+              {{ is_state('switch.0x00124b001e722013_switch', 'on')  
+                 or is_state('switch.0x00158d000114a1e1_switch', 'on') }}
+            turn_on:
+              - service: switch.turn_on
+                entity_id: 
+                  - switch.0x00124b001e722013_switch
+                  - switch.0x00158d000114a1e1_switch
+            turn_off:
+              - service: switch.turn_off
+                entity_id: 
+                  - switch.0x00124b001e722013_switch
+                  - switch.0x00158d000114a1e1_switch
+            icon_template: >-
+              {% if is_state('switch.lr_radiator', 'on') %}
+                mdi:radiator
+              {% else %}
+                mdi:radiator-off
+              {% endif %}
+
+    automation:              
+
+      - id: Установка параметров отопления LR
+        alias: lr_heating_initial
+        initial_state: true
+        trigger:
+        - platform: homeassistant
+          event: start
+        - platform: state
+          entity_id:
+            - binary_sensor.radiator
+        action:
+        - service_template: >-
+           {% if states.binary_sensor.radiator.state == 'on' %}
+           climate.turn_on
+           {%-elif states.binary_sensor.radiator.state == 'off' %}
+           climate.turn_off
+           {% endif %}
+          entity_id: climate.living_heater 
+                
+      - id: Установка параметров обогрева LR
+        alias: lr_heating_mode
+        initial_state: true
+        trigger:
+          - platform: homeassistant
+            event: start
+          - platform: state
+            entity_id:
+              - sensor.lr_heat_mode
+              - sensor.lr_temp_home
+              - sensor.lr_temp_away
+              - sensor.lr_temp_window
+        condition:
+          - condition: template
+            value_template: "{{ states('sensor.lr_heat_mode') != 'Выключен' }}"
+        action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.lr_heat_mode
+                    state: "Дома"
+                sequence:
+                  - service: climate.set_temperature
+                    data:
+                      entity_id: climate.living_heater
+                      temperature: "{{ states('sensor.lr_temp_home')}}"
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.lr_heat_mode
+                    state: "Не дома"
+                sequence:
+                  - service: climate.set_temperature
+                    data:
+                      entity_id: climate.living_heater
+                      temperature: "{{ states('sensor.lr_temp_away')}}"
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.lr_heat_mode
+                    state: "Проветривание"
+                sequence:
+                  - service: climate.set_temperature
+                    data:
+                      entity_id: climate.living_heater
+                      temperature: "{{ states('sensor.lr_temp_window')}}"
+                      
+      - id: Изменение температуры с термостата LR
+        alias: lr_heating_thermo_temp
+        initial_state: true
+        trigger:
+          - platform: state
+            entity_id: climate.living_heater
+            attribute: temperature
+        action:
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.lr_heat_mode
+                    state: "Дома"
+                sequence:
+                  - service: mqtt.publish
+                    data:
+                      topic: 'states/lr/temp_home'
+                      retain: true
+                      payload: "{{ state_attr('climate.living_heater', 'temperature') }}" 
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.lr_heat_mode
+                    state: "Не дома"
+                sequence:
+                  - service: mqtt.publish
+                    data:
+                      topic: 'states/lr/temp_away'
+                      retain: true
+                      payload: "{{ state_attr('climate.living_heater', 'temperature') }}" 
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.lr_heat_mode
+                    state: "Проветривание"
+                sequence:
+                  - service: mqtt.publish
+                    data:
+                      topic: 'states/lr/temp_window'
+                      retain: true
+                      payload: "{{ state_attr('climate.living_heater', 'temperature') }}" 

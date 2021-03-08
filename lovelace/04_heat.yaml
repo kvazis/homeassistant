@@ -16,28 +16,37 @@ cards:
           content: >
               **Кухня**
 
-        - type: glance
-          show_state: true
-          show_name: true
-          state_color: true
-          entities:
-          - entity: binary_sensor.kitchen_heat
-            name: Отопление
-          - entity: binary_sensor.kn_heat_valve
-            name: Кран
-          - entity: binary_sensor.0x00158d0001a99562_contact
-            name: Окно
-          - entity: binary_sensor.0x00158d0001a20885_contact
-            name: Дверь
-              
         - type: entities
           show_header_toggle: false
           entities:
+          - entity: binary_sensor.occupancy
+            type: custom:multiple-entity-row
+            state_color: true
+            name: Статус
+            state_header: Активность
+            entities:
+              - entity: sensor.kn_heat_mode
+                name: Режим
           - entity: switch.kn_radiator
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Нагрев
+            state_header: Термоголовка
+            entities:
+              - entity: binary_sensor.kn_heat_valve
+                name: Кран
+              - entity: binary_sensor.kn_aeration
+                name: Проветривание
           - entity: sensor.kn_temp_home
-            name: Температура в режиме дома - 
-          - entity: sensor.kn_temp_away
-            name: Температура в режиме никого нет - 
+            type: custom:multiple-entity-row
+            name: Температура
+            state_header: Дома
+            entities:
+              - entity: sensor.kn_temp_away
+                name: Не дома
+              - entity: sensor.kn_temp_window
+                name: Проветривание
 
         - type: custom:stack-in-card
           mode: vertical
@@ -75,7 +84,7 @@ cards:
 
             - type: custom:logbook-card
               entity: switch.kn_radiator
-              max_items: 10
+              max_items: 5
               title: История включений
               duration_labels:
                 second:  '${value} секунда'
@@ -87,91 +96,6 @@ cards:
                 day:     '${value} день'
                 days:    '${value} дней'
 
-############################ Колонка 2 ############################
-
-    - type: vertical-stack
-      cards:
-
-        - type: markdown
-          style: |
-              ha-card {
-                font-size: 26px;
-              }  
-          content: >
-              **Гостиная**
-              
-        - type: glance
-          show_state: true
-          show_name: true
-          state_color: true
-          entities:
-          - entity: binary_sensor.living_heat
-            name: Отопление
-          - entity: binary_sensor.0x00158d00013ed373_contact
-            name: Окно 1
-          - entity: binary_sensor.0xec1bbdfffedf6a6a_contact
-            name: Окно 2            
-          - entity: binary_sensor.0x00158d000445206b_contact
-            name: Дверь              
-            
-            
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: switch.lr_radiator
-          - entity: sensor.living_temp_home
-            name: Температура в режиме дома - 
-          - entity: sensor.living_temp_away
-            name: Температура в режиме никого нет - 
-          
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-
-            - type: custom:mini-graph-card
-              entities:
-               - entity: sensor.05_mean_temperature
-                 name: Температура
-              color_thresholds:
-                - value: 10
-                  color: "#191970"
-                - value: 15
-                  color: "#0000FF"
-                - value: 20
-                  color: "#ADD8E6"
-                - value: 25
-                  color: "#E0FFFF"
-                - value: 30
-                  color: "#FFFF00"
-                - value: 50
-                  color: "#FFD700"
-              animate: true
-              line_width: 2
-              hour24: true
-              points_per_hour: 1
-              group_by: hour
-              hours_to_show: 72
-              
-            - type: custom:simple-thermostat
-              entity: climate.living_heater
-              step_layout: row
-              name: false
-              icon: false
-
-            - type: custom:logbook-card
-              entity: switch.lr_radiator
-              max_items: 10
-              title: История включений
-              duration_labels:
-                second:  '${value} секунда'
-                seconds: '${value} секунд'
-                minute:  '${value} минута'
-                minutes: '${value} минут'
-                hour:    '${value} час'
-                hours:   '${value} часов'
-                day:     '${value} день'
-                days:    '${value} дней'
-              
 ############################ Колонка 3 ############################
 
     - type: vertical-stack
@@ -185,34 +109,44 @@ cards:
           content: >
               **Детская Д**
               
-        - type: glance
-          show_state: true
-          show_name: true
-          state_color: true
-          entities:
-          - entity: binary_sensor.dd_heat
-            name: Отопление
-          - entity: binary_sensor.0x00158d0001193697_contact
-            name: Окно
-          - entity: binary_sensor.0x00158d00015843d4_contact
-            name: Дверь
-
         - type: entities
           show_header_toggle: false
           entities:
+          - entity: switch.dd_school
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Статус
+            state_header: Учеба
+            entities:
+              - entity: sensor.dd_heat_mode
+                name: Режим
           - entity: switch.0x00158d0001a2ccab_switch_right
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Нагрев
+            state_header: Термоголовка
+            entities:
+              - entity: binary_sensor.dd_aeration
+                name: Проветриваение
           - entity: sensor.dd_temp_home
-            name: Температура в режиме дома - 
-          - entity: sensor.dd_temp_away
-            name: Температура в режиме никого нет - 
+            type: custom:multiple-entity-row
+            name: Температура
+            state_header: Дома
+            entities:
+              - entity: sensor.dd_temp_away
+                name: Не дома
+              - entity: sensor.dd_temp_window
+                name: Проветривание
 
         - type: custom:stack-in-card
           mode: vertical
           cards:
-
+              
             - type: custom:mini-graph-card
               entities:
-               - entity: sensor.07_mean_temperature
+               - entity: sensor.dd_mean_temperature
                  name: Температура
               color_thresholds:
                 - value: 10
@@ -233,26 +167,27 @@ cards:
               points_per_hour: 1
               group_by: hour
               hours_to_show: 72
-              
+          
             - type: custom:simple-thermostat
               entity: climate.dd_heater
               step_layout: row
               name: false
               icon: false
-              
-            - type: custom:logbook-card
-              entity: switch.0x00158d0001a2ccab_switch_right
-              max_items: 10
-              title: История включений
-              duration_labels:
-                second:  '${value} секунда'
-                seconds: '${value} секунд'
-                minute:  '${value} минута'
-                minutes: '${value} минут'
-                hour:    '${value} час'
-                hours:   '${value} часов'
-                day:     '${value} день'
-                days:    '${value} дней'
+            #   control: false
+            
+        - type: custom:logbook-card
+          entity: switch.0x00158d0001a2ccab_switch_right
+          max_items: 5
+          title: История включений
+          duration_labels:
+            second:  '${value} секунда'
+            seconds: '${value} секунд'
+            minute:  '${value} минута'
+            minutes: '${value} минут'
+            hour:    '${value} час'
+            hours:   '${value} часов'
+            day:     '${value} день'
+            days:    '${value} дней'
 
 ############################ Колонка 4 ############################
 
@@ -266,25 +201,37 @@ cards:
               }  
           content: >
               **Детская А**
-              
-        - type: glance
-          show_state: true
-          show_name: true
-          state_color: true
-          entities:
-          - entity: binary_sensor.da_heat
-            name: Отопление
-          - entity: binary_sensor.0x00158d0001583c7b_contact
-            name: Окно
 
         - type: entities
           show_header_toggle: false
           entities:
+          - entity: switch.da_school
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Статус
+            state_header: Учеба
+            entities:
+              - entity: sensor.da_heat_mode
+                name: Режим
           - entity: switch.0x00158d0002d7bb2b_switch_l2
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Нагрев
+            state_header: Термоголовка
+            entities:
+              - entity: binary_sensor.0x00158d0001583c7b_contact
+                name: Проветриваение
           - entity: sensor.da_temp_home
-            name: Температура в режиме дома - 
-          - entity: sensor.da_temp_away
-            name: Температура в режиме никого нет - 
+            type: custom:multiple-entity-row
+            name: Температура
+            state_header: Дома
+            entities:
+              - entity: sensor.da_temp_away
+                name: Не дома
+              - entity: sensor.da_temp_window
+                name: Проветривание
 
         - type: custom:stack-in-card
           mode: vertical
@@ -292,7 +239,7 @@ cards:
               
             - type: custom:mini-graph-card
               entities:
-               - entity: sensor.08_mean_temperature
+               - entity: sensor.da_mean_temperature
                  name: Температура
               color_thresholds:
                 - value: 10
@@ -320,17 +267,17 @@ cards:
               name: false
               icon: false
             #   control: false
-            
-            - type: custom:logbook-card
-              entity: switch.0x00158d0002d7bb2b_switch_l2
-              max_items: 10
-              title: История включений
-              duration_labels:
-                second:  '${value} секунда'
-                seconds: '${value} секунд'
-                minute:  '${value} минута'
-                minutes: '${value} минут'
-                hour:    '${value} час'
-                hours:   '${value} часов'
-                day:     '${value} день'
-                days:    '${value} дней'
+
+        - type: custom:logbook-card
+          entity: switch.0x00158d0002d7bb2b_switch_l2
+          max_items: 5
+          title: История включений
+          duration_labels:
+            second:  '${value} секунда'
+            seconds: '${value} секунд'
+            minute:  '${value} минута'
+            minutes: '${value} минут'
+            hour:    '${value} час'
+            hours:   '${value} часов'
+            day:     '${value} день'
+            days:    '${value} дней'

@@ -1,0 +1,93 @@
+power_source_kitchen:
+
+
+    sensor:
+      - platform: template
+        sensors:
+
+          kitchen_total_instantpower:
+            friendly_name: 'Кухня потребление'
+            unit_of_measurement: "Вт"
+            device_class: power
+            icon_template: mdi:flash
+            value_template: 
+             "{{ (
+                  (states('sensor.kitchen_grill_instantpower') | float) + 
+                  (states('sensor.kitchen_toster_instantpower') | float) + 
+                  (states('sensor.kitchen_airgrill_instantpower') | float) + 
+                  (states('sensor.kitchen_fridge_instantpower') | float) + 
+                  (states('sensor.kitchen_tv_instantpower') | float) + 
+                  (states('sensor.kitchen_led_instantpower') | float)
+                 ) | round(3)
+               }}"
+        
+          kitchen_grill_instantpower:
+            friendly_name: 'Кухня электрогриль'
+            device_class: power
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            value_template: "{{ (states('sensor.0x000d6f0014bb14b4_power') | float) | round(3)}}"
+            
+          kitchen_grill_instantvoltage:
+            friendly_name: 'Кухня электрогриль'
+            icon_template: mdi:alpha-v
+            unit_of_measurement: 'В'
+            value_template: "{{ (states('sensor.0x000d6f0014bb14b4_voltage') | float) | round(1)}}"
+            
+          kitchen_toster_instantpower:
+            friendly_name: 'Кухня тостер, блендер'
+            device_class: power
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            value_template: "{{ (states('sensor.dual_power') | float) | round(3)}}"
+            
+          kitchen_airgrill_instantpower:
+            friendly_name: 'Кухня аэрогриль'
+            device_class: power
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            value_template: "{{ (states('sensor.bw_shp_2_power') | float) | round(3)}}"
+            
+          kitchen_fridge_instantpower:
+            friendly_name: 'Кухня холодильник'
+            device_class: power
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            value_template: "{{ (states('sensor.0x00158d0001fa2934_power') | float) | round(3)}}"
+
+          kitchen_tv_instantpower:
+            friendly_name: 'Кухня телевизор'
+            device_class: power
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            value_template: "{{ (states('sensor.0x00158d0001291d12_power') | float) | round(3)}}"
+            
+          kitchen_led_instantpower:
+            friendly_name: 'Кухня LED лента'
+            device_class: power
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            value_template: "{{ (states('sensor.0x00158d0001d35bc0_power') | float) | round(3)}}"
+            
+            
+    switch:
+      - platform: template
+        switches:
+
+          tv_xiaomi:
+            friendly_name: "ТВ Xiaomi"
+            value_template: "{{ states('sensor.0x00158d0001291d12_power') | float > 10 }}"
+            turn_on:
+              service: script.turn_on
+              data:
+                entity_id: script.xiaomi_tv
+            turn_off:
+              service: script.turn_on
+              data:
+                entity_id: script.xiaomi_tv
+            icon_template: >-
+              {% if is_state("switch.tv_xiaomi", "on") %}
+              mdi:television
+              {% else %}
+              mdi:television-off
+              {% endif %}

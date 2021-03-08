@@ -12,9 +12,12 @@ views:
   - !include lovelace/09_camera.yaml
   - !include lovelace/19_plan_map.yaml
   - !include lovelace/20_enter.yaml
+  - !include lovelace/20a_corridor.yaml
   - !include lovelace/21_toilet.yaml
+  - !include lovelace/21a_laundry.yaml
   - !include lovelace/22_bathroom.yaml
   - !include lovelace/23_kitchen.yaml
+  - !include lovelace/24_living_climate.yaml
   - !include lovelace/24_living.yaml
   - !include lovelace/25_dd.yaml
   - !include lovelace/26_da.yaml

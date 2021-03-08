@@ -1,0 +1,184 @@
+'0xec1bbdfffe8d6ac9':
+  friendly_name: LN climate
+  retain: true
+'0x00158d0001117040':
+  friendly_name: BT wd 2ch enter
+  retain: true
+'0x842e14fffe51c5ae':
+  friendly_name: LN washmashine
+  retain: true
+'0x00158d0002705b7b':
+  friendly_name: LN water leak
+  retain: true
+'0x588e81fffed4af56':
+  friendly_name: LR tv socket
+  retain: true
+'0x00158d00010f8920':
+  friendly_name: CR moving
+  retain: true
+'0x00158d0002a4f77e':
+  friendly_name: CR vibration
+  retain: true
+'0x00158d0001291d12':
+  friendly_name: KN tv power
+  retain: true
+'0x000d6f0014bb14b4':
+  friendly_name: KN grill power
+  retain: true
+'0x00158d000149d28b':
+  friendly_name: EN smoke sensor
+  retain: true
+'0x00158d00013fc3bc':
+  friendly_name: LR ws 2ch enter
+  retain: true
+'0x04cf8cdf3c79360a':
+  friendly_name: LR Opple six commode
+  retain: true
+'0x00158d00014a1a55':
+  friendly_name: LN switch
+  retain: true
+'0x00158d0001ab3350':
+  friendly_name: LN moving
+  retain: true
+'0x00158d000420dbab':
+  friendly_name: DD E27 Aqara
+  retain: true
+'0x00158d00014a1abd':
+  friendly_name: DA wd 1 ch
+  retain: true
+'0x00158d0002d7bb2b':
+  friendly_name: DA 2ch relay
+  retain: true
+'0x00158d0001a2ccab':
+  friendly_name: DD wd 2 ch neutral
+'0x00124b0022659c04':
+  friendly_name: CR climate
+  retain: true
+'0x00158d000155d2fb':
+  friendly_name: DA bed round
+  retain: true
+'0x00158d0001e8a244':
+  friendly_name: DA bed square
+  retain: true
+'0x04cf8cdf3c78ca91':
+  friendly_name: DA light sensor
+'0x00158d00028f6fe6':
+  friendly_name: DA cube
+  retain: true
+'0x00158d00016d56f5':
+  friendly_name: DA moving
+  retain: true
+'0x00158d000186d9a9':
+  friendly_name: DA table round
+  retain: true
+'0x00158d00015751f4':
+  friendly_name: BT boiler
+  retain: true
+'0x00158d0001dcd47e':
+  friendly_name: BT climate
+  retain: true
+'0x00158d00054495dc':
+  friendly_name: BT door
+  retain: true
+'0x00158d0001bb60c2':
+  friendly_name: BT water shower
+  retain: true
+'0x00158d0001d72fa2':
+  friendly_name: BT water washhand
+'0x00158d00012896cb':
+  friendly_name: DA USB Charge
+  retain: true
+'0x00158d000238a140':
+  friendly_name: BT ws 2 ch
+'0x00158d0001e547a3':
+  friendly_name: BT moving
+  retain: true
+'0x00158d000159c7e6':
+  friendly_name: DA climate
+  retain: true
+'0x00158d0001718ca8':
+  friendly_name: KN ws 2ch enter
+  retain: true
+'0x04cf8cdf3c7f7b6e':
+  friendly_name: KN T1 relay
+'0x00158d00014dceb3':
+  friendly_name: TT wd 2ch enter
+  retain: true
+'0xec1bbdfffe6f3394':
+  friendly_name: TT klimat
+  retain: true
+'0x00158d00013ed373':
+  friendly_name: LR window
+  retain: true
+'0x00124b001e722013':
+  friendly_name: LR thermostat 1
+'0xec1bbdfffedf6a6a':
+  friendly_name: LR window 2
+  retain: true
+'0x00158d00013f7894':
+  friendly_name: EN moving
+'0x00158d000119378d':
+  friendly_name: EN door
+  retain: true
+'0x00158d00010b1963':
+  friendly_name: EN cupboard round
+  retain: true
+'0x00158d00015723f1':
+  friendly_name: LR wd 2ch light cell 1
+  retain: true
+'0x00158d000114a1e1':
+  friendly_name: LR thermostat 2
+'0x00158d0001bbeba6':
+  friendly_name: TT water leak
+  retain: true
+'0x00158d000128cd1a':
+  friendly_name: TT ws 2ch wall
+  retain: true
+'0x00158d0001186d82':
+  friendly_name: LR cube
+'0x00158d0001a24e71':
+  friendly_name: TT moving
+'0x00158d000445206b':
+  friendly_name: LR balcony door
+  retain: true
+'0xec1bbdfffe4534c0':
+  friendly_name: LR balcony climate
+  retain: true
+'0x00158d00010b5aee':
+  friendly_name: LR balcony ws 1ch
+  retain: true
+'0x00158d0001f47e10':
+  friendly_name: LR ws 2ch wall
+  retain: true
+'0x00158d0001a4b9da':
+  friendly_name: LR balcony climate outside
+'0x00158d000449b773':
+  friendly_name: LR balcony moving
+'0x00158d0001a2f5f7':
+  friendly_name: LR balcony window
+  retain: true
+'0x00158d0001f3fefe':
+  friendly_name: CR cupboard round
+  retain: true
+'0x00158d0001fa2934':
+  friendly_name: KN fridge
+'0x04cf8cdf3c772379':
+  friendly_name: KN light sensor
+  retain: true
+'0x00158d0001e16204':
+  friendly_name: KN moving
+'0x00158d000101bdc6':
+  friendly_name: KN cube
+  retain: true
+'0x00158d0002a8ab8b':
+  friendly_name: KN vibration
+  retain: true
+'0x00158d0003f46bb6':
+  friendly_name: FR Aqara Relay
+  retain: true
+'0xec1bbdfffea37571':
+  friendly_name: TT mirror switch
+  retain: true
+'0x00158d00057305ac':
+  friendly_name: EN wd 2 ch
+  retain: true

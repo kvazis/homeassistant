@@ -1,0 +1,247 @@
+title: Прачечная
+icon: mdi:washing-machine
+cards:
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+              **Панель управления**
+
+        - type: glance
+          show_state: false
+          entities:
+           - entity: binary_sensor.0x00158d0001ab3350_occupancy
+             name: Движение
+           - entity: binary_sensor.0x00158d0002705b7b_water_leak
+             name: Датчик протечки
+
+        - type: light
+          entity: light.aqara_02_ceiling
+          name: Свет
+          icon: mdi:ceiling-light
+          
+        - type: glance
+          show_state: true
+          entities:
+           - entity: sensor.0x00158d0001ab3350_illuminance
+             name: Освещенность
+           - entity: sensor.mqtt_binary_sensor_158d0001ab3350
+             icon: mdi:run-fast
+             name: Прачечная
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Стиральная машина**
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: binary_sensor.washer
+             name: Стирка
+
+              
+        - type: custom:logbook-card
+          entity: binary_sensor.washer
+          max_items: 5
+          title: История стирок
+          duration_labels:
+            second:  '${value} секунда'
+            seconds: '${value} секунд'
+            minute:  '${value} минута'
+            minutes: '${value} минут'
+            hour:    '${value} час'
+            hours:   '${value} часов'
+            day:     '${value} день'
+            days:    '${value} дней'
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.laundry_washmachine_instantpower
+             name: Энергопотребление
+          color_thresholds:
+            - value: 50
+              color: "#98FB98"
+            - value: 100
+              color: "#006400"
+            - value: 500
+              color: "#8A2BE2"
+            - value: 1000
+              color: "#4B0082"
+            - value: 2000
+              color: "#A52A2A"
+            - value: 3500
+              color: "#800000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 2
+          group_by: hour
+          hours_to_show: 72
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+              **Климат, освещенность**
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0xec1bbdfffe8d6ac9_temperature
+             name: Температура
+          color_thresholds:
+            - value: 10
+              color: "#191970"
+            - value: 15
+              color: "#0000FF"
+            - value: 20
+              color: "#ADD8E6"
+            - value: 25
+              color: "#E0FFFF"
+            - value: 30
+              color: "#FFFF00"
+            - value: 50
+              color: "#FFD700"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+             
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0xec1bbdfffe8d6ac9_humidity
+             name: Влажность
+          color_thresholds:
+            - value: 20
+              color: "#FFFF00"
+            - value: 30
+              color: "#FAFAD2"
+            - value: 40
+              color: "#E0FFFF"
+            - value: 50
+              color: "#7FFFD4"
+            - value: 60
+              color: "#00CED1"
+            - value: 80
+              color: "#0000FF"
+            - value: 100
+              color: "#000080"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+          
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d0001ab3350_illuminance
+             name: Освещенность
+          color_thresholds:
+              - value: 100
+                color: "#000000"
+              - value: 300
+                color: "#2F4F4F"
+              - value: 500
+                color: "#708090"
+              - value: 800
+                color: "#A9A9A9"
+              - value: 1000
+                color: "#D3D3D3"
+              - value: 2000
+                color: "#FFFFFF"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+          
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Zigbee Устройства**
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: switch.0x00158d00014a1a55_switch
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Выключатель
+            secondary_info: last-changed
+            state_header: Питание люстры
+            entities:
+              - entity: sensor.0x00158d00014a1a55_linkquality
+                name: Сигнал          
+          - type: divider
+          - entity: switch.laundry_washmachine
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Стиральная машина
+            secondary_info: last-changed
+            state_header: Питание
+            entities:
+              - entity: sensor.laundry_washmachine_instantvoltage
+                name: Напряжение
+              - entity: sensor.laundry_washmachine_instantpower
+                name: Потребление
+              - entity: sensor.0x842e14fffe51c5ae_linkquality
+                name: Сигнал
+                
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.0x00158d0002705b7b_battery
+            type: custom:multiple-entity-row
+            icon: mdi:water
+            name: Датчик протечки
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d0002705b7b_linkquality
+                name: Сигнал
+          - type: divider
+          - entity: sensor.0x00158d0001ab3350_battery
+            type: custom:multiple-entity-row
+            icon: mdi:run
+            name: Сенсор движения
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d0001ab3350_linkquality
+                name: Сигнал
+          - type: divider
+          - entity: sensor.0xec1bbdfffe8d6ac9_battery
+            type: custom:multiple-entity-row
+            icon: mdi:coolant-temperature
+            name: Сенсор климата
+            state_header: Заряд
+            entities:
+              - entity: sensor.0xec1bbdfffe8d6ac9_linkquality
+                name: Сигнал

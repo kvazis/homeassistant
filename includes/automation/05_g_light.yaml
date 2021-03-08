@@ -84,14 +84,14 @@
   alias: 05_gg_cell_1_light
   initial_state: true
   trigger:
+## Пульт LeTv
+    - platform: state
+      entity_id: sensor.0x00124b000adb33b6_action
+      to: 'button_5_single'
 ## Главный выключатель без нуля
     - platform: state
       entity_id: sensor.0x00158d00015723f1_action
       to: 'single_right'
-## Пульт ДУ на три кнопки, первая
-    - platform: state
-      entity_id: sensor.0x60a423fffe942cf2_action
-      to: '1_single'
 ## Выключатель на столе - левая кнопка
     - platform: state
       entity_id: sensor.0x00158d00027c0e2b_action
@@ -125,17 +125,15 @@
           {%- else -%}
           script.05_gg_650_1_off
           {%- endif -%}
-    - delay: 00:00:03
-
 
 - id: Гостиная, люстра 2
   alias: 05_gg_cell_2_light
   initial_state: true
   trigger:
-## Пульт ДУ на три кнопки, вторая
+## Пульт LeTv
     - platform: state
-      entity_id: sensor.0x60a423fffe942cf2_action
-      to: '2_single'
+      entity_id: sensor.0x00124b000adb33b6_action
+      to: 'button_3_single'
 ## 4 кнопка Aqara Opple
     - platform: state
       entity_id: sensor.0x04cf8cdf3c79360a_action
@@ -165,12 +163,15 @@
           {%- else -%}
           script.05_gg_650_2_off
           {%- endif -%}
-    - delay: 00:00:03
-          
+
 - id: Гостиная, настольная лампа
   alias: lr_table_lamp
   initial_state: true
   trigger:
+## Пульт LeTv
+    - platform: state
+      entity_id: sensor.0x00124b000adb33b6_action
+      to: 'button_4_single'
 ## 1 кнопка Aqara Opple
     - platform: state
       entity_id: sensor.0x04cf8cdf3c79360a_action
@@ -193,6 +194,10 @@
   alias: 05_gg_full_light
   initial_state: true
   trigger:
+## Пульт LeTv
+    - platform: state
+      entity_id: sensor.0x00124b000adb33b6_action
+      to: 'button_1_single'
 ## Подброс кубика
     - platform: state
       entity_id: sensor.0x00158d0001186d82_action
@@ -223,10 +228,10 @@
   alias: 05_gg_wall_light
   initial_state: true
   trigger:
-## Пульт ДУ на три кнопки, третья
+## Пульт LeTv
   - platform: state
-    entity_id: sensor.0x60a423fffe942cf2_action
-    to: '3_single'
+    entity_id: sensor.0x00124b000adb33b6_action
+    to: 'button_2_single'
 ## 2 кнопка Aqara Opple
   - platform: state
     entity_id: sensor.0x04cf8cdf3c79360a_action
@@ -254,12 +259,15 @@
   action:
     - service: light.toggle
       entity_id: light.aqara_05_wall
-    - delay: 00:00:03
-    
+
 - id: Гостиная, подсветка для ТВ
   alias: 05_gg_movie_light
   initial_state: true
   trigger:
+## Пульт LeTv
+  - platform: state
+    entity_id: sensor.0x00124b000adb33b6_action
+    to: 'button_8_single'
 ## 6 кнопка Aqara Opple
   - platform: state
     entity_id: sensor.0x04cf8cdf3c79360a_action
@@ -280,6 +288,10 @@
   alias: 05_tv_xiaomi55
   initial_state: true
   trigger:
+## Пульт LeTv
+  - platform: state
+    entity_id: sensor.0x00124b000adb33b6_action
+    to: 'button_7_single'
 ## 5 кнопка Aqara Opple
   - platform: state
     entity_id: sensor.0x04cf8cdf3c79360a_action
@@ -300,6 +312,10 @@
 - alias: 05_gg_balkoon_light_toggle
   initial_state: true
   trigger:
+## Пульт LeTv
+  - platform: state
+    entity_id: sensor.0x00124b000adb33b6_action
+    to: 'button_6_single'
 # Выключатель на входе на балкон
   - platform: state
     entity_id: sensor.0x00158d00010b5aee_action
@@ -321,7 +337,7 @@
   initial_state: true
   trigger:
   - platform: state
-    entity_id: binary_sensor.lr_balcony_motion
+    entity_id: binary_sensor.lr_balcony_moving_in_dark
     to: 'on'
   condition:
   - condition: state

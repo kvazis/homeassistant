@@ -1,5 +1,5 @@
 ##################  ECTLB
-title: Этаж, вход, коридор
+title: Этаж, вход
 icon: mdi:exit-run
 cards:
 
@@ -7,61 +7,63 @@ cards:
       - type: vertical-stack
         cards:
 
-
         - type: markdown
           style: |
               ha-card {
                 font-size: 26px;
-              }   
+              }          
           content: >
-              **Прихожая**
+              **Панель управления**
  
         - type: glance
           show_state: false
           entities:
              - entity: binary_sensor.0x00158d000119378d_contact
                name: Входная дверь
-             - entity: binary_sensor.0x00158d00013f7894_occupancy
-               name: Движение  
+             - entity: binary_sensor.entrance_motion
+               name: Движение 
+             - entity: binary_sensor.0x00158d000149d28b_smoke
+               name: Дым
              - entity: binary_sensor.en_light_on
                name: Автосвет
              - entity: binary_sensor.en_night
                name: Ночь
 
-   
         - type: light
-          entity: light.0x00158d000420dbab_light
-          name: Прихожая
+          entity: light.yeelight_ct_bulb_0x000000000531b38e
+          name: Лампочка
           
         - type: entities
           show_header_toggle: false
           entities:
-          - entity: sensor.0x00158d000119378d_changed
-            name: Входная дверь открывалась в -
-            icon: mdi:door
-          - entity: sensor.0x00158d00013f7894_changed
-            name: Последнее движение в -
-            icon: mdi:run-fast
+             - entity: sensor.0x00158d000119378d_changed
+               name: Входная дверь открывалась в -
+               icon: mdi:door
+             - entity: sensor.0x00158d00013f7894_changed
+               name: Последнее движение в -
+               icon: mdi:run-fast
 
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: binary_sensor.0x00158d000149d28b_smoke
-            name: Датчик дыма
-          - entity: sensor.0x00158d000149d28b_sensitivity
-            name: Уровень чувствительности - 
-          - entity: sensor.0x00158d000149d28b_alarm
-            name: Последняя сработка - 
-          - entity: script.en_smoke_selftest
-            name: Самотестирование
-          - entity: sensor.0x00158d000149d28b_selftest
-            name: Последний тест - 
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+            - type: markdown
+              content: >
+                 **Датчик дыма**
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: sensor.0x00158d000149d28b_alarm
+                name: Последняя сработка - 
+              - entity: script.en_smoke_selftest
+                name: Самотестирование
+              - entity: sensor.0x00158d000149d28b_selftest
+                name: Последний тест - 
 
         - type: entity-filter
           show_header_toggle: false
           entities:
           - entity: timer.camphoto
-          - entity: timer.entrance
           state_filter:
             - "active"
 
@@ -77,9 +79,32 @@ cards:
               **Мониторинг**
 
         - type: picture-entity
+          entity: camera.reolink_411_fr
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+        - type: picture-entity
+          entity: camera.reolink_410_fr
+          camera_view: live 
+          show_state: false
+          show_name: false
+
+        - type: picture-entity
           entity: camera.xiaofang
           show_state: false
           show_name: false
+
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+              **Климат**
 
         - type: custom:mini-graph-card
           entities:
@@ -132,50 +157,110 @@ cards:
           hours_to_show: 72
 
       - type: vertical-stack
-        cards:            
-            
+        cards:
+
         - type: markdown
           style: |
               ha-card {
                 font-size: 26px;
               }   
           content: >
-              **Коридор**
- 
-        - type: glance
-          show_state: false
-          entities:
-             - entity: binary_sensor.0x00158d00010f8920_occupancy  
-               name: Коридор
-             - entity: binary_sensor.cr_light_on
-               name: Автосвет
-             - entity: binary_sensor.cr_night
-               name: Ночь
+              **Zigbee Устройства**
 
-        - type: custom:stack-in-card
-          mode: horizontal
-          cards: 
-
-            - type: light
-              entity: light.yeelight_03_ceiling
-              name: Основной
-            - type: light
-              entity: light.yeelight_03_ceiling_ambilight
-              name: Амбилайт
-            # - type: light
-            #   entity: light.yeelight_03_ceiling_nightlight
-            #   name: Ночник
 
         - type: entities
           show_header_toggle: false
           entities:
-           - entity: sensor.mqtt_binary_sensor_158d00010f8920
-             name: Последнее движение в коридоре -
-             icon: mdi:run-fast
+          - entity: switch.0x00158d0003f46bb6_switch_l1
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Реле камер
+            secondary_info: last-changed
+            state_header: Reolink 410
+            entities:
+              - entity: sensor.0x00158d0003f46bb6_voltage
+                name: Напряжение
+              - entity: sensor.0x00158d0003f46bb6_linkquality
+                name: Сигнал
+              - entity: switch.0x00158d0003f46bb6_switch_l2
+                name: Reolink 411
+                toggle: true
 
-        - type: entity-filter
+          - type: divider
+          - entity: switch.0x00158d00057305ac_right
+            type: custom:multiple-entity-row
+            icon: mdi:lightbulb-on
+            toggle: true
+            state_color: true
+            name: Выключатель
+            secondary_info: last-changed
+            state_header: Питание лампы
+            entities:
+              - entity: sensor.0x00158d00057305ac_linkquality
+                name: Сигнал
+                
+        - type: entities
           show_header_toggle: false
           entities:
-          - entity: timer.corridor
-          state_filter:
-            - "active"
+          - entity: sensor.0x00158d000149d28b_battery
+            type: custom:multiple-entity-row
+            icon: mdi:fire
+            name: Датчик дыма
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d000149d28b_sensitivity
+                name: Чувствительность
+              - entity: sensor.0x00158d000149d28b_linkquality
+                name: Сигнал
+          - type: divider
+          - entity: sensor.0x00158d000119378d_battery
+            type: custom:multiple-entity-row
+            icon: mdi:door
+            name: Входная дверь
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d000119378d_linkquality
+                name: Сигнал
+          - type: divider
+          - entity: sensor.0x00158d00013f7894_battery
+            type: custom:multiple-entity-row
+            icon: mdi:run
+            name: Сенсор движения
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d00013f7894_linkquality
+                name: Сигнал
+          - type: divider
+          - entity: sensor.0x00158d00010b1963_battery
+            type: custom:multiple-entity-row
+            icon: mdi:gesture-double-tap
+            name: Кнопка шкаф
+            state_header: Заряд
+            entities:
+              - entity: sensor.0x00158d00010b1963_linkquality
+                name: Сигнал
+
+                
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Bluetooth Устройства**
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.582d3451c85e_battery
+            type: custom:multiple-entity-row
+            icon: mdi:alarm
+            name: Часы
+            state_header: Заряд
+            entities:
+              - entity: sensor.582d3451c85e_rssi
+                name: RSSI
+              - entity: sensor.582d3451c85e_ble
+                format: relative
+                name: Обновление

@@ -18,6 +18,11 @@
 - alias: 08_smart_projector
   initial_state: true
   trigger:
+## Пульт ДУ на три кнопки, третья
+  - platform: state
+    entity_id: sensor.0x60a423fffe942cf2_action
+    to: '3_single'
+## Квадратная возле кровати
   - platform: state
     entity_id: sensor.0x00158d0001e8a244_action
     to: 'single'
@@ -27,7 +32,8 @@
     state: 'on'  
   action:
   - service: light.toggle
-    entity_id: light.bfa26533f8ba487e23ug9z
+    entity_id: light.da_proektor
+  - delay: 00:00:03
 
 ## Включение ночника по движению
 - alias: 08_da_light_auto
@@ -65,12 +71,16 @@
   trigger:
 ## Выключатель на входе
   - platform: state
-    entity_id: sensor.0x00158d00010b5c6e_click
+    entity_id: sensor.0x00158d00010b5c6e_action
     to: 'single'
 ## Круглая кнопка возле кровати
   - platform: state
     entity_id: sensor.0x00158d000155d2fb_click
     to: 'single'
+## Пульт ДУ на три кнопки, первая
+  - platform: state
+    entity_id: sensor.0x60a423fffe942cf2_action
+    to: '1_single'
 ## Круглая кнопка на столе
   - platform: state
     entity_id: sensor.0x00158d000186d9a9_click
@@ -93,12 +103,17 @@
          script.08_da_nightlight_off
          {%- elif states.light.aqara_08_ceiling.state == 'on' and states.light.yeelight_08_strip.state == 'off' -%}
          script.08_da_ceiling_off
-         {% endif %}     
+         {% endif %}    
+    - delay: 00:00:03
 
 ## Управление циклической подсветкой
 - alias: 08_da_light_circle
   initial_state: true
   trigger:
+## Пульт ДУ на три кнопки, вторая
+  - platform: state
+    entity_id: sensor.0x60a423fffe942cf2_action
+    to: '2_single'
 ## Круглая кнопка возле кровати
   - platform: state
     entity_id: sensor.0x00158d000155d2fb_click
@@ -123,7 +138,8 @@
          script.08_da_light_circle_1
          {%- elif states.light.yeelight_08_strip.state == 'on' -%}
          script.08_da_nightlight_off
-         {% endif %}  
+         {% endif %}
+    - delay: 00:00:03
 
 # Выключение всего освещения
 - alias: 08_da_alllight_off

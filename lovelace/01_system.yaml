@@ -17,33 +17,37 @@ cards:
         - type: markdown
           content: >
                **Основной сервер** 
-      
         - type: entities
           show_header_toggle: false
           entities:
           - entity: sensor.last_boot_custom
-            name: Сервер в онлайне -
-            icon: mdi:av-timer
+            type: custom:multiple-entity-row
+            name: В онлайне -
+            state_header: Сервер
+            entities:
+              - entity: sensor.online_custom
+                name: Home Assistant
           - entity: sensor.local_ip
             name: IP адрес - 
           - entity: binary_sensor.rpi_power_status
             name: Питание Raspberry Pi 4 B 4GB - 
             icon: mdi:power-plug
-          - entity: sensor.online_custom
-            name: Home Assistant в онлайне -
-            icon: mdi:clock
           - type: divider
           - entity: switch.control_mode
-        #   - entity: group.scenario
-        #     name: Бытовые сценарии - 
-        #     icon: mdi:format-list-numbered
+          - type: divider
+          - entity: sensor.hacs
+            type: custom:multiple-entity-row
+            name: Обновления для HACS - 
+            icon: mdi:format-list-numbered
+            state_header: Доступно
           - type: divider
           - entity: sensor.current_ha
-            name: Установлен Home Assistant -
-            icon: mdi:alpha-v-circle
-          - entity: sensor.version
-            name: Последний Home Assistant -
-            icon: mdi:alpha-v-circle-outline
+            type: custom:multiple-entity-row
+            name: Home Assistant -
+            state_header: Установлен
+            entities:
+              - entity: sensor.version
+                name: Последняя версия
 
 
         - type: markdown
@@ -96,14 +100,17 @@ cards:
           state_color: true
           entities:
             - entity: sensor.zodiac
-              name: Активный знак Зодиака -
+              name: Знак Зодиака
             - entity: binary_sensor.workday_sensor
-            - entity: sensor.date
-              name: Текущая дата  -
+              type: custom:multiple-entity-row
               icon: mdi:calendar-month
-            - entity: sensor.time
-              name: Текущее время - 
-              icon: mdi:clock-outline
+              name: Календарь -
+              state_header: Рабочий день
+              entities:
+                - entity: sensor.time
+                  name: Время
+                - entity: sensor.date
+                  name: Дата
 
         - type: custom:mini-graph-card
           entities:
@@ -187,9 +194,20 @@ cards:
           show_header_toggle: false
           entities:
             - entity: sensor.last_google_backup_main
-            - entity: sensor.snapshots_in_google_drive_main
-            - entity: sensor.snapshots_in_hassio_main
-      
+            - entity: sensor.snapshot_backup
+              type: custom:multiple-entity-row
+              name: Snapshots
+              show_state: false
+              entities:
+                - attribute: snapshots_in_google_drive
+                  name: Google Drive
+                - attribute: size_in_google_drive
+                  name: Объем
+                - attribute: snapshots_in_hassio
+                  name: Local Drive
+                - attribute: size_in_home_assistant
+                  name: Объем
+
         - type: custom:mini-graph-card
           entities:
            - entity: sensor.disk_use_percent

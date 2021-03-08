@@ -3,7 +3,7 @@
 
   devices:
 #  ## Прихожая
-#       192.168.0.105:
+#       192.168.0.111:
 #         name: yeelight_01_whitebulb
 #         transition: 200
 ## Санузел
@@ -45,10 +45,10 @@
         transition: 200
         model: ceiling3  
 ## Детская Д
-      192.168.0.113:
-        name: yeelight_07_whitebulb
-        transition: 200
-        model: mono1   
+    #   192.168.0.113:
+    #     name: yeelight_07_whitebulb
+    #     transition: 200
+    #     model: mono1   
 ## Детская А
     #   192.168.0.114:
     #     name: yeelight_08_bedside

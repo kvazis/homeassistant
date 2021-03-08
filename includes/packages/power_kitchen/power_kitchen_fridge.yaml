@@ -1,0 +1,84 @@
+power_kitchen_fridge:
+# Кухня холодильник
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/kitchen/fridge/today"
+        name: 'kitchen_fridge_consumption_today'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/kitchen/fridge/yesterday"
+        name: 'kitchen_fridge_consumption_yesterday'
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/kitchen/fridge/month"
+        name: 'kitchen_fridge_consumption_month'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/kitchen/fridge/lastmonth"
+        name: 'kitchen_fridge_consumption_lastmonth'
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: template
+        sensors:
+          kitchen_fridge_money_month:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.kitchen_fridge_consumption_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          kitchen_fridge_money_lastmonth:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.kitchen_fridge_consumption_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+    script:
+          
+          kitchen_fridge_day:
+            alias: Холодильник энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/kitchen/fridge/today"
+                payload: "{{(states('sensor.kitchen_fridge_consumption_today') | float + (states('sensor.kitchen_fridge_instantpower') | float /120000))|round(5) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/kitchen/fridge/month"
+                payload: "{{(states('sensor.kitchen_fridge_consumption_month') | float + (states('sensor.kitchen_fridge_instantpower') | float /120000))|round(5) }}"
+                retain: true
+
+          kitchen_fridge_yesterday:
+            alias: Холодильник энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/fridge/yesterday"
+                payload: "{{states('sensor.kitchen_fridge_consumption_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/fridge/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          kitchen_fridge_lastmonth:
+            alias: Холодильник энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/fridge/lastmonth"
+                payload: "{{states('sensor.kitchen_fridge_consumption_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/fridge/month"
+                payload: "{{ 0.0 }}"
+                retain: true

@@ -4,10 +4,6 @@
   auto_purge: true
   include:
     entities:
-# Свичи для сбора истории
-       - switch.tv_xiaomi
-       - switch.tv_xiaomi_55
-       - switch.0x00158d00015751f4_switch
 # Сенсор объема
        - sensor.home_assistant_v2_db
        - sensor.maria_db
@@ -36,11 +32,13 @@
        - switch.0x00158d0001a2ccab_switch_right
        - climate.da_heater
        - switch.0x00158d0002d7bb2b_switch_l2
-# Заряд гаджетов
+# Заряд / питание
+       - binary_sensor.rpi_power_status
        - sensor.360_alex_battery
        - sensor.ipad_aleksei_battery_level
        - sensor.360_olga_battery
        - sensor.360_dima_battery
+       - sensor.0x00158d0001a4b9da_battery
 # Растения
        - sensor.80eaca88b765_moisture
        - sensor.80eaca88b765_temperature
@@ -76,30 +74,43 @@
        - sensor.asuswrt_devices_connected
        - sensor.asuswrt_download_speed
        - sensor.asuswrt_upload_speed
+
 # Сенсоры мощности и напряжения
 
 # Суммарное потребление
-       - sensor.total_power
-       - sensor.total_power_today
+       - sensor.total_instantpower
+       - sensor.total_consumption_today
+       
 # Стиральная машина
-       - sensor.0x842e14fffe51c5ae_power
-       - sensor.0x842e14fffe51c5ae_voltage
-       - sensor.0x842e14fffe51c5ae_current
+       - sensor.laundry_washmachine_instantpower
+       - sensor.laundry_washmachine_instantvoltage
        - binary_sensor.washer
-# Чайник  
-       - sensor.bw_shp_2_power
-       - sensor.bw_shp_2_voltage
-# Кухня телевизор
-       - sensor.0x00158d0001291d12_power
+# Бойлер
+       - switch.bathroom_bolier
+       - sensor.bathroom_bolier_instantpower
+       - sensor.bathroom_bolier_instantvoltage
+       
+# Кухня
+       - sensor.kitchen_total_instantpower
+# Электрогриль 
+       - sensor.kitchen_grill_instantpower
+# Тостер, блендер
+       - sensor.kitchen_toster_instantpower
+# Аэрогриль
+       - sensor.kitchen_airgrill_instantpower
 # Холодильник
-       - sensor.0x00158d0001fa2934_power
-# Кухня LED лента
-       - sensor.0x00158d0001d35bc0_power
-# Кухня Heiman
-       - sensor.0x000d6f0014bb14b4_power
-       - sensor.0x000d6f0014bb14b4_voltage
+       - sensor.kitchen_fridge_instantpower
+# Телевизор
+       - switch.tv_xiaomi
+       - sensor.kitchen_tv_instantpower
+# LED лента
+       - sensor.kitchen_led_instantpower
+
+# Гостиная
+       - switch.tv_xiaomi_55
+       - sensor.lr_total_instantpower
 # Гостиная телевизор
-       - sensor.0x00158d00012896cb_power
+       - sensor.lr_tv_instantpower
 # Xiaomi wi-fi + 2 USB
        - sensor.wifi_2usb_power
 # Гостиная ночник
@@ -112,17 +123,17 @@
        - sensor.wifi_3usb_power
 # Удлинитель - гостиная, стойка ТВ
        - sensor.wifi_6port_power
-# Бойлер
-       - sensor.0x00158d00015751f4_power
-       - sensor.0x00158d00015751f4_voltage
+
 # Детская Д, увлажнение и отопление
        - sensor.0x00158d0001a2ccab_power
 # Детская Д, настольная лампа
        - sensor.0x00158d00030a6e78_power
+
 # Детская А, отопление и рабочий стол       
        - sensor.0x00158d0002d7bb2b_power
 # Детская А, увлажнитель
        - sensor.0x00158d00010ec4b8_power
+       
 # Сенсоры расхода
        - sensor.smartmi_water
        - sensor.purifier_filter
@@ -132,6 +143,11 @@
 # Датчики движения
        - binary_sensor.mijia_night_light_occupancy
 # Климат сенсоры
+       - sensor.0x00158d00015aebb6_temperature
+       - sensor.0x00158d00015aebb6_humidity
+       - sensor.0x00124b0022659c04_humidity
+       - sensor.0x00124b0022659c04_temperature
+       - sensor.0x00124b001ec7eb15_co2
        - sensor.0x00124b001ed165de_co2
        - sensor.0x00158d0001dcd47e_temperature
        - sensor.0x00158d0001dcd47e_humidity
@@ -140,28 +156,28 @@
        - sensor.0x00158d000171ffde_temperature
        - sensor.0x00158d000171ffde_humidity
        - sensor.pressure_mmhg_158d000171ffde
-       - sensor.05_mean_temperature
-       - sensor.05_mean_humidity
+       - sensor.lr_mean_temperature
+       - sensor.lr_mean_humidity
        - sensor.0x00158d0001a4b9da_temperature
        - sensor.0x00158d0001a4b9da_humidity
        - sensor.pressure_mmhg_158d0001a4b9da
-       - sensor.06_mean_temperature
-       - sensor.06_mean_humidity
-       - sensor.07_mean_temperature
-       - sensor.07_mean_humidity
+       - sensor.dd_mean_temperature
+       - sensor.dd_mean_humidity
        - sensor.0x00158d0001fa8321_temperature
        - sensor.0x00158d0001fa8321_humidity
        - sensor.4c65a8d054bb_temperature
        - sensor.4c65a8d054bb_humidity
        - sensor.pressure_mmhg_158d0001fa8321
-       - sensor.08_mean_temperature
-       - sensor.08_mean_humidity
+       - sensor.da_mean_temperature
+       - sensor.da_mean_humidity
        - sensor.cleargrass_air_co2
        - sensor.cleargrass_air_pm25
        - sensor.cleargrass_air_tvoc
        - sensor.mijia_air_co2a
        - sensor.mijia_air_pm25
        - sensor.mijia_air_tvoc
+       - sensor.4c65a8d00e2f_temperature
+       - sensor.4c65a8d00e2f_humidity
        - sensor.3f59c882d82d_temperature
        - sensor.3f59c882d82d_humidity
        - sensor.0xec1bbdfffe6f3394_temperature

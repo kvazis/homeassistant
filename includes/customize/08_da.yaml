@@ -17,10 +17,6 @@ light.24730816ecfabc996804:
   friendly_name: Детская А настольная лампа
   icon: mdi:desk-lamp
 
-light.yeelight_08_bedside:
-  friendly_name: Детская А прикроватник
-  icon: mdi:lighthouse
-
 light.philips_08_bedside: 
   friendly_name: Детская А ночник стол
   icon: mdi:lighthouse
@@ -47,11 +43,15 @@ switch.0x00158d00010ec4b8_switch:
 
 ## Температура для термостатов
 sensor.da_temp_home:
-  friendly_name: Детская А температура в режиме дома
+  friendly_name: Температура - дома
   icon: mdi:temperature-celsius
   unit_of_measurement: 'C'
 sensor.da_temp_away:
-  friendly_name: Детская А температура в режиме никого нет
+  friendly_name: Температура - никого нет
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
+sensor.da_temp_window:
+  friendly_name: Температура - проветривание
   icon: mdi:temperature-celsius
   unit_of_measurement: 'C'
   
@@ -66,9 +66,10 @@ sensor.0x00158d00010ec4b8_power:
 sensor.08_mean_humidity:
   friendly_name: Детская А средняя влажность
   icon: mdi:water-percent  
-sensor.08_mean_temperature:
+sensor.da_mean_temperature:
   friendly_name: Детская А средняя температура
   icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
 sensor.0x04cf8cdf3c78ca91_illuminance:
   friendly_name: Детская А освещенность
   unit_of_measurement: 'lx'

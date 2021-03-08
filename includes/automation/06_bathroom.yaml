@@ -26,12 +26,12 @@
   trigger:
 ## Влажность более 70 процентов
   - platform: numeric_state
-    entity_id: sensor.06_mean_humidity
+    entity_id: sensor.bt_mean_humidity
     above: 70
 ## Беспроводный выключатель
   - platform: state
-    entity_id: sensor.0x00158d000238a140_click
-    to: 'right'
+    entity_id: sensor.0x00158d000238a140_action
+    to: 'single_right'
   condition:
   - condition: state
     entity_id: switch.control_mode
@@ -57,8 +57,8 @@
       entity_id: timer.bathroom
 ## Беспроводный выключатель
   - platform: state
-    entity_id: sensor.0x00158d000238a140_click
-    to: 'right'
+    entity_id: sensor.0x00158d000238a140_action
+    to: 'single_right'
   condition:
   - condition: state
     entity_id: switch.control_mode

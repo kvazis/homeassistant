@@ -124,12 +124,13 @@ cards:
           show_header_toggle: false
           entities:
            - entity: sensor.asuswrt_download
-             name: Принято сегодня - 
-             icon: mdi:download
-           - entity: sensor.asuswrt_upload
-             name: Отправлено сегодня - 
-             icon: mdi:upload
-   
+             type: custom:multiple-entity-row
+             name: Трафик -
+             state_header: Принято
+             entities:
+               - entity: sensor.asuswrt_upload
+                 name: Отправлено
+
         - type: custom:mini-graph-card
           entities:
            - entity: sensor.speedtest_ping

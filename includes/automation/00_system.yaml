@@ -5,38 +5,27 @@
   - platform: homeassistant
     event: start
   action:  
-    - service: mqtt.publish
+    - service: telegram_bot.send_message
       data_template:
-         topic: "notification/info"
-         payload_template: '011'
-         retain: true
+        target:
+            - !secret chat_id_group_tech
+        message: | 
+             {{"\U0001F4AC"}} Основной сервер Raspberry Pi 4 B 4GB
+             {{"\U0001F567"}} Запущен в {{ states('sensor.time_date') }} 
+             {{"\U0001F4C3"}} Отчет о состоянии будет через 1 минуту  
     - delay: 00:01:10
-    - service: mqtt.publish
+    - service: telegram_bot.send_message
       data_template:
-         topic: "notification/info"
-         payload_template: '012'
-         
-- id: Проверка термостатов
-  alias: check_thermostate
-  initial_state: true
-  trigger:
-  - platform: homeassistant
-    event: start
-  - platform: time_pattern
-    minutes: '/5'
-  - platform: state
-    entity_id:
-      - binary_sensor.radiator
-  condition:
-  - condition: state
-    entity_id: switch.control_mode
-    state: 'on'
-  action:
-  - service: script.turn_on
-    data_template:
-      entity_id: >-
-        {%- if states.binary_sensor.radiator.state == 'on' -%}
-        script.thermostat_on
-        {%- elif states.binary_sensor.radiator.state == 'off' -%}
-        script.thermostat_off
-        {%- endif -%}  
+        target:
+            - !secret chat_id_group_tech
+        message: | 
+             {{"\U0001F4AC"}} Основной сервер Raspberry Pi 4 B 4GB
+             {{"\U0001F567"}} Отчет за {{ states('sensor.time_date') }}
+             {{"\U0001F503"}} Режим управления - {{ states('switch.control_mode') }} 
+             {{"\U0001F4A1"}} недоступно - {{ states('sensor.unavailable_now_light') }} 
+             {{"\U0001F50C"}} недоступно - {{ states('sensor.unavailable_now_switch') }} 
+             {{"\U0001F321"}} Сенсоров недоступно - {{ states('sensor.unavailable_now_sensor') }} 
+             {{"\U0001F51F"}} Бинарных сенсоров недоступно - {{ states('sensor.unavailable_now_binary_sensor') }} 
+    - delay: 00:00:10
+    - service: localtuya.reload
+      data: {}

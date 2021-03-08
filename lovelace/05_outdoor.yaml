@@ -163,3 +163,25 @@ cards:
           points_per_hour: 1
           group_by: hour
           hours_to_show: 72
+          
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.0x00158d0001a4b9da_battery
+             name: Уровень заряда
+          color_thresholds:
+            - value: 25
+              color: "#DC143C"
+            - value: 50
+              color: "#FF8C00"
+            - value: 75
+              color: "#FFFF00"
+            - value: 90
+              color: "#98FB98"
+            - value: 110
+              color: "#7FFF00"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72

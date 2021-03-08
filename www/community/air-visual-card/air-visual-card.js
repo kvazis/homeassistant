@@ -1,7 +1,10 @@
+// To study:
+// Plant Picture Card: https://github.com/badguy99/PlantPictureCard/blob/master/dist/PlantPictureCard.js
+
 
 // UPDATE FOR EACH RELEASE!!! From aftership-card. Version # is hard-coded for now.
 console.info(
-  `%c  AIR-VISUAL-CARD  \n%c  Version 0.0.11   `,
+  `%c  AIR-VISUAL-CARD  \n%c  Version 0.0.16   `,
   'color: orange; font-weight: bold; background: black',
   'color: white; font-weight: bold; background: dimgray',
 );
@@ -20,18 +23,23 @@ const fireEvent = (node, type, detail, options) => {
   return event;
 };
 
+let oldStates = {}
+
 class AirVisualCard extends HTMLElement {
     constructor() {
       super();
       this.attachShadow({ mode: 'open' });
     }
-  
-    setConfig(config) {  
+
+    setConfig(config) {
       const root = this.shadowRoot;
       if (root.lastChild) root.removeChild(root.lastChild);
-  
-      const cardConfig = Object.assign({}, config);   
 
+      const re = new RegExp("(sensor|weather)");
+      if (!re.test(config.air_quality_index.split('.')[0])) throw new Error('Please define a sensor or weather entity.');
+
+
+      const cardConfig = Object.assign({}, config);
       const card = document.createElement('ha-card');
       const content = document.createElement('div');
       const style = document.createElement('style');
@@ -40,7 +48,7 @@ class AirVisualCard extends HTMLElement {
         ha-card {
           /* sample css */
         }
-     
+
         body {
           margin: 0;
           font-family: Arial, Helvetica, sans-serif;
@@ -60,9 +68,9 @@ class AirVisualCard extends HTMLElement {
           text-indent: 0.3em;
           font-size: 1.8em;
           font-weight: 300;
-          padding: .2em .2em;    
-          background-color: var(--background-color); 
-          color: var(--text-color);  
+          padding: .2em .2em;
+          background-color: var(--background-color);
+          color: var(--text-color);
         }
 
         .temp {
@@ -71,21 +79,21 @@ class AirVisualCard extends HTMLElement {
           text-align: right;
           font-size: 1.7em;
           font-weight: 300;
-          background-color: var(--background-color); 
-          color: var(--text-color);  
-          padding: .2em .2em;       
+          background-color: var(--background-color);
+          color: var(--text-color);
+          padding: .2em .2em;
         }
-  
+
         .face {
-          border-radius: 0px 0px 0px var(--ha-card-border-radius);
+          border-radius: ${cardConfig.hide_title ? 'var(--ha-card-border-radius)' : '0px'} 0px 0px var(--ha-card-border-radius);
           grid-row-start: 2;
           grid-row-end: 3;
           grid-column-start: 1;
           grid-column-end: 2;
           justify-items: center;
           align-items: center;
-          display: grid;                  
-          width: 4.5em;      
+          display: grid;
+          width: 4.5em;
         }
 
         .face img {
@@ -93,9 +101,9 @@ class AirVisualCard extends HTMLElement {
           margin-left: auto;
           margin-right: auto;
           height: 4.5em;
-          width: auto;  
+          width: auto;
         }
-  
+
         .aqiSensor {
           grid-row-start: 2;
           grid-row-end: 3;
@@ -105,8 +113,8 @@ class AirVisualCard extends HTMLElement {
           height: 5em;
           line-height: 1.1;
           text-align: center;
-          justify-items: center;       
-          margin: auto;         
+          justify-items: center;
+          margin: auto;
         }
 
         .aplSensor {
@@ -117,41 +125,64 @@ class AirVisualCard extends HTMLElement {
           text-align: center;
           line-height: 1;
           padding: .1em .1em;
-          font-size: 1.8em;      
-          margin: auto;    
-        }  
+          font-size: 1.8em;
+          margin: auto;
+        }
 
         .mainPollutantSensor {
           float: center;
           border: 0;
-          padding: .1em .1em;         
+          padding: .1em .1em;
           background-color: white;
-          border-radius: 4px;       
+          border-radius: 4px;
           font-size: 0.4em;
-          font-weight: bold;        
+          font-weight: bold;
         }
       `
       content.innerHTML = `
       <div id='content'>
       </div>
       `;
-      
+
       card.appendChild(content);
       card.appendChild(style);
       root.appendChild(card);
+      oldStates = {}
       this._config = cardConfig;
     }
-  
- 
+
+    shouldNotUpdate(config, hass) {
+      let clone = JSON.parse(JSON.stringify(config))
+      delete clone["city"]
+      delete clone["type"]
+      delete clone["icons"]
+      delete clone["hide_title"]
+      delete clone["hide_face"]
+      let states = {}
+      for (let entity of Object.values(clone)) {
+        states[entity] = hass.states[entity]
+      }
+      if (JSON.stringify(oldStates) === JSON.stringify(states)) {
+        return true
+      }
+      oldStates = states
+      return false
+    }
+
     set hass(hass) {
       const config = this._config;
       const root = this.shadowRoot;
       const card = root.lastChild;
-      this.myhass = hass;
-      
+      if (this.shouldNotUpdate(config, hass)) {
+        return 
+      }
+
       const hideTitle = config.hide_title ? 1 : 0;
       const hideFace = config.hide_face ? 1 : 0;
-      const iconDirectory = config.icons || "https://cdn.jsdelivr.net/gh/dnguyen800/air-visual-card@0.0.4/dist";
+      const hideAQI = config.hide_aqi ? 1 : 0;
+      const hideAPL = config.hide_apl ? 1 : 0;
+      // points to local directory created by HACS installation
+      const iconDirectory = config.icons || "/hacsfiles/air-visual-card";
       const country = config.country || 'US';
       const city = config.city || '';
       const tempSensor = config.temp || '';
@@ -160,10 +191,8 @@ class AirVisualCard extends HTMLElement {
       const aqiSensor = { name: 'aqiSensor', config: config.air_quality_index || null, value: 0 };
       const aplSensor = { name: 'aplSensor', config: config.air_pollution_level || null, value: 0 };
       const mainPollutantSensor = { name: 'mainPollutantSensor', config: config.main_pollutant || null, value: 0 };
-      const airvisualSensorList = [aqiSensor, aplSensor, mainPollutantSensor];
-      // const unitOfMeasurement = hass.states[aqiSensor.config].attributes['unit_of_measurement'] || 'AQI';
+      const sensorList = [aqiSensor, aplSensor, mainPollutantSensor];
       const unitOfMeasurement = hass.states[aqiSensor.config] ? hass.states[aqiSensor.config].attributes['unit_of_measurement'] : 'AQI';
-      const pollutantUnit = hass.states[mainPollutantSensor.config] ? hass.states[mainPollutantSensor.config].attributes['pollutant_unit'] : 'µg/m³';
 
       const faceIcon = {
         '1': 'mdi:emoticon-excited',
@@ -180,7 +209,7 @@ class AirVisualCard extends HTMLElement {
         '4': '#FE6A69',
         '5': '#A97ABC',
         '6': '#A87383',
-      }
+      };
       const AQIfaceColor = {
         '1': `#B0E867`,
         '2': '#E3C143',
@@ -188,7 +217,7 @@ class AirVisualCard extends HTMLElement {
         '4': '#E45F5E',
         '5': '#986EA9',
         '6': '#A5516B',
-      }
+      };
       const AQIfontColor = {
         '1': `#718B3A`,
         '2': '#A57F23',
@@ -196,7 +225,7 @@ class AirVisualCard extends HTMLElement {
         '4': '#AF2C3B',
         '5': '#634675',
         '6': '#683E51',
-      }
+      };
 
       const weatherIcons = {
         'clear-night': 'mdi:weather-night',
@@ -215,29 +244,38 @@ class AirVisualCard extends HTMLElement {
         'windy-variant': `mdi:weather-windy-variant`,
         'exceptional': '!!',
       }
-   
+
+      // WAQI sensor-specific stuff
+      // AirVisual sensors have the APL description as part of the sensor state, but WAQI doesn't. These APL states will be used as backup if AirVisual sensors is not used.
+      const APLdescription = {
+        '1': 'Good',
+        '2': 'Moderate',
+        '3': 'Unhealthy for Sensitive Groups',
+        '4': 'Unhealthy',
+        '5': 'Very Unhealthy',
+        '6': 'Hazardous',
+      }
+      const pollutantUnitValue = {
+        'pm25': 'µg/m³',
+        'pm10': 'µg/m³',
+        'o3': 'ppb',
+        'no2': 'ppb',
+        'so2': 'ppb',
+      }
+      const mainPollutantValue = {
+        'pm25': 'PM2.5',
+        'pm10': 'PM10',
+        'o3': 'Ozone',
+        'no2': 'Nitrogen Dioxide',
+        'so2': 'Sulfur Dioxide',
+      }
+
       let currentCondition = '';
       let tempValue = '';
+      let pollutantUnit = '';
+      let apl = '';
+      let mainPollutant = '';
 
-      airvisualSensorList.forEach(sensor => {
-        if (sensor.config.split('.')[0] == 'sensor') {
-          try { 
-            sensor.value = hass.states[sensor.config].state;
-          }
-          catch(err) {
-            console.log(`Error in sensor: ${sensor.name}`);
-          }
-        } else { sensor.value = 0; }
-      });
-
-      if (tempSensor.split('.')[0] == 'sensor') {
-        tempValue = hass.states[tempSensor].state + 'º';
-        if (weatherStatus !== '') { currentCondition = hass.states[weatherStatus].state };
-      } else if (tempSensor.split('.')[0] == 'weather') {
-        tempValue = hass.states[tempSensor].attributes['temperature'] + 'º';     
-        currentCondition = hass.states[tempSensor].state;
-      } 
- 
       let getAQI = function () {
         switch (true) {
           case (aqiSensor.value <= 50):
@@ -257,9 +295,50 @@ class AirVisualCard extends HTMLElement {
         }
       };
 
+      var i;
+      // Use this section to assign values (real or placeholder), after doing validation check
+      for (i = 0; i < sensorList.length; i++) {
+        if (typeof hass.states[sensorList[i].config] == "undefined") { continue; }            
+        // if Main Pollutant is an Airvisual sensor, else if if it is an WAQI sensor
+        if (typeof hass.states[mainPollutantSensor.config] != "undefined") {
+          if (typeof hass.states[mainPollutantSensor.config].attributes['pollutant_unit'] != "undefined") {
+            pollutantUnit = hass.states[mainPollutantSensor.config].attributes['pollutant_unit'];
+            mainPollutant = hass.states[mainPollutantSensor.config].state;
+          } else if (typeof hass.states[mainPollutantSensor.config].attributes['dominentpol'] != "undefined") {
+            pollutantUnit = pollutantUnitValue[hass.states[mainPollutantSensor.config].attributes['dominentpol']];
+            mainPollutant = mainPollutantValue[hass.states[mainPollutantSensor.config].attributes['dominentpol']];
+          } else {
+            pollutantUnit = 'pollutant unit';
+            mainPollutant = 'main pollutant';
+          }         
+        }
+        if (typeof hass.states[aqiSensor.config] != "undefined") {
+          aqiSensor.value = hass.states[aqiSensor.config].state;
+        }
+        // Check if APL is an WAQI sensor (because the state is an integer). Returns 'NaN' if it is not a number
+        if (typeof hass.states[aplSensor.config] != "undefined") {
+          if (parseInt(hass.states[aplSensor.config].state) != 'NaN') {
+            apl = APLdescription[getAQI()];      
+          } else {
+            apl = hass.states[aplSensor.config].state;
+          }
+        }
+      };
 
-      let faceHTML = ``;     
- 
+
+      if (tempSensor.split('.')[0] == 'sensor') {
+        tempValue = hass.states[tempSensor].state + 'º';
+        if (weatherStatus !== '') { currentCondition = hass.states[weatherStatus].state };
+      } else if (tempSensor.split('.')[0] == 'weather') {
+        tempValue = hass.states[tempSensor].attributes['temperature'] + 'º';
+        currentCondition = hass.states[tempSensor].state;
+      }
+
+
+
+
+      let faceHTML = ``;
+
       let card_content = `
         <div class="grid-container" style="background-color: ${AQIbgColor[getAQI()]};">
         `;
@@ -275,73 +354,62 @@ class AirVisualCard extends HTMLElement {
         <div class="face" id="face" style="background-color: ${AQIfaceColor[getAQI()]};">
             <img src="${iconDirectory}/ic-face-${getAQI()}.svg"></img>
           </div>
-          `;
+        `;
       }
 
-      card_content += `
+      if (!hideAQI){
+        card_content += `
           <div class="aqiSensor" id="aqiSensor" style="background-color: ${AQIbgColor[getAQI()]}; color: ${AQIfontColor[getAQI()]}">
             <div style="font-size:3em;">${aqiSensor.value}</div>
             ${country} ${unitOfMeasurement}
           </div>
+        `;
+      }
+      if (!hideAPL){        
+        card_content += `
           <div class="aplSensor" id="aplSensor" style="background-color: ${AQIbgColor[getAQI()]}; color: ${AQIfontColor[getAQI()]}">
-            ${aplSensor.value}
+            ${apl}
             <br>
             <div class="mainPollutantSensor" id="mainPollutantSensor">
-              ${mainPollutantSensor.value} | ${pollutantUnit}
+              ${mainPollutant} | ${pollutantUnit}
             </div>
-          </div>
-        </div> 
+          </div>     
+        `;
+      }
+      card_content += `
+      </div> 
       `;
 
 
-
-
-
       root.lastChild.hass = hass;
-      root.getElementById('content').innerHTML = card_content;      
+      root.getElementById('content').innerHTML = card_content;
 
       // hard-coded version of click event
       if (!hideFace){
-	      card.querySelector('#face').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'  
-	        fireEvent(this, "hass-more-info", { entityId: aqiSensor.config });
-	      });
-      }
-      card.querySelector('#aqiSensor').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'  
+	      card.querySelector('#face').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'
         fireEvent(this, "hass-more-info", { entityId: aqiSensor.config });
-      });
-      card.querySelector('#aplSensor').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'  
-       fireEvent(this, "hass-more-info", { entityId: aplSensor.config });
-      });
-      card.querySelector('#mainPollutantSensor').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'  
-        fireEvent(this, "hass-more-info", { entityId: mainPollutantSensor.config });
-      });
-
-/* not working - it did work, once.
-      const sensorList = [aqiSensor, aplSensor, mainPollutantSensor];
-      sensorList.forEach(setOnClick);
-      function setOnClick(sensor, index, array) {
-        console.log(`let sensor in sensorList: ${sensor}`);
-        console.log(`sensor.name: ${sensor.name}`);
-        console.log(`sensor.config: ${sensor.config}`);
-  
-     
-        if (sensor.config.split('.')[0] == 'sensor') {
-          console.log('IF statement running!');
-          card.querySelector(`#${sensor.name}`).addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'  
-            fireEvent(this, "hass-more-info", { entityId: aqiSensor.config });
-            console.log('on-click if statement ran!');
-          });
-        }
-      }  
-
-*/
-
-
+        });
+      }
+      if (!hideAQI){
+        card.querySelector('#aqiSensor').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'
+        fireEvent(this, "hass-more-info", { entityId: aqiSensor.config });
+        });
+      }
+      if (!hideAPL){
+        card.querySelector('#aplSensor').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'
+          fireEvent(this, "hass-more-info", { entityId: aplSensor.config });
+        });
+        card.querySelector('#mainPollutantSensor').addEventListener('click', event => {   // when selecting HTML id, do not use dash '-'  
+          fireEvent(this, "hass-more-info", { entityId: mainPollutantSensor.config });
+        });
+      }
     }
 
+    // The height of your card. Home Assistant uses this to automatically
+    // distribute all cards over the available columns.
     getCardSize() {
       return 1;
     }
 }
-  
+
 customElements.define('air-visual-card', AirVisualCard);

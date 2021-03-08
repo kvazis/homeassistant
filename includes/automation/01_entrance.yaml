@@ -13,11 +13,18 @@
      entity_id: switch.control_mode
      state: 'on'     
   action: 
-   - service: mqtt.publish
+   - service: telegram_bot.send_message
      data_template:
-       topic: "notification/messages"
-       payload_template: '0100'
-       retain: true
+       target:
+           - !secret chat_id_group
+       message: | 
+            {{"\U0001F6AA"}} Входная дверь открыта в {{ states.sensor.time_date.state }}
+   - service: script.turn_on
+     entity_id: 
+        - script.photo_xiaofang
+        - script.photo_reolink
+        - script.photo_reolink2
+        - script.photo_reolink3
    - service: timer.start
      entity_id: timer.camphoto
    - delay:

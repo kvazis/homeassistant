@@ -16,7 +16,7 @@ hum_da:
             value_template: >-
               {{ is_state('binary_sensor.0x00158d0001583c7b_contact', 'off')  
                  and is_state('binary_sensor.da_hum_mode', 'on')
-                 and is_state('binary_sensor.away', 'off')
+                 and is_state('binary_sensor.occupancy', 'on')
                  and is_state('sensor.da_day_work', 'Включен') }}
             icon_template: >-
               {% if is_state("binary_sensor.da_hum", "on") %}
@@ -28,11 +28,11 @@ hum_da:
     sensor:
     
           - platform: min_max
-            name: 08_mean_humidity
+            name: da_mean_humidity
             type: mean
             entity_ids:
               - sensor.0x00158d000159c7e6_humidity
-              - sensor.da_bt_humidity
+              - sensor.4c65a8d00e2f_humidity
               - sensor.mijia_air_humidity
               
     input_number:
@@ -77,7 +77,7 @@ hum_da:
             - platform: state
               entity_id:
                 - input_number.humidity_level_da
-                - sensor.08_mean_humidity
+                - sensor.da_mean_humidity
                 - binary_sensor.da_hum
           condition:
              - condition: state
@@ -87,7 +87,7 @@ hum_da:
             service_template: >-
               {% set hi = (states('input_number.humidity_level_da') | float) + 5 %}
               {% set lo = (states('input_number.humidity_level_da') | float) - 5 %}
-              {% set humidity = states('sensor.08_mean_humidity') | float %}
+              {% set humidity = states('sensor.da_mean_humidity') | float %}
               {% if humidity > hi %}
                 switch.turn_off
               {% elif states.binary_sensor.da_hum.state == 'off' %} 
@@ -122,11 +122,12 @@ hum_da:
                entity_id: binary_sensor.da_hum
                state: 'on'
           action:
-            - service: mqtt.publish
+            - service: telegram_bot.send_message
               data_template:
-                topic: "notification/messages"
-                payload_template: '0800'
-                retain: true
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U0001F6B1"}} Детская А, закончилась вода в увлажнителе или он выключен вручную {{ states('sensor.time_date') }} 
             - service: xiaomi_aqara.play_ringtone
               data:
                 gw_mac: F0:B4:29:CC:1F:11

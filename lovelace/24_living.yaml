@@ -14,6 +14,18 @@ cards:
           content: >
               **Панель управления**
 
+        - type: glance
+          show_state: false
+          state_color: true
+          entities:
+           - entity: binary_sensor.0x00158d0005414857_occupancy
+             name: Движение
+           - entity: binary_sensor.0x00158d00013ed373_contact
+             name: Окно справа
+           - entity: binary_sensor.0xec1bbdfffedf6a6a_contact
+             name: Окно слева
+           - entity: binary_sensor.0x00158d000445206b_contact
+             name: Балкон
 
         - type: custom:stack-in-card
           mode: vertical
@@ -99,67 +111,6 @@ cards:
                 service_data:
                   entity_id: script.ilife_a4
                   
-        - type: custom:stack-in-card
-          mode: vertical
-          cards: 
-          - type: markdown
-            content: >
-               **Управление питанием**
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: switch.0x00158d00015723f1_switch_right
-                name: Гостиная люстра 1
-                icon: mdi:power-socket-eu
-              - entity: switch.0x842e14fffee5451a_switch
-                name: Гостиная люстра 2
-                icon: mdi:power-socket-eu
-              - entity: switch.xiaomi_wifi_socket_usb
-                name: Электронные часы
-                icon: mdi:power-socket-eu
-              - entity: switch.xiaomi_wifi_socket_usb_usb
-                name: Вентиляция роутера
-                icon: mdi:fan
-              - entity: switch.0x00158d00012896cb_switch
-                name: Питание телевизора
-                icon: mdi:power-socket-eu
-              - entity: switch.0x04cf8cdf3c764e0a_switch 
-                name: Питание на рабочий стол
-                icon: mdi:power-socket-eu
-              - entity: switch.wifi_3usb 
-                name: Удлинитель на комоде
-                icon: mdi:power-socket-eu
-
-      - type: vertical-stack
-        cards:
-
-        - type: markdown
-          style: |
-              ha-card {
-                font-size: 26px;
-              }          
-          content: >
-              **Мониторинг**
-
-        - type: picture-entity
-          entity: camera.reolink_e1_pro_profile000_mainstream
-          camera_view: live 
-          show_state: false
-          show_name: false
-          
-        - type: entities
-          show_header_toggle: false
-          entities:
-           - entity: sensor.living_day_work
-             name: Дневной режим
-           - entity: sensor.time_158d0005414857
-             name: Движение
-             icon: mdi:run-fast
-           - entity: binary_sensor.living_air
-             name: Уведомление
-           - entity: binary_sensor.cleargrass_air
-             name: Низкое качество воздуха
-
         - type: media-control
           entity: media_player.mitv_mssp1
           
@@ -186,6 +137,89 @@ cards:
                 hours:   '${value} часов'
                 day:     '${value} день'
                 days:    '${value} дней'
+                  
+      - type: vertical-stack
+        cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }          
+          content: >
+              **Мониторинг**
+
+        - type: picture-entity
+          entity: camera.reolink_e1_pro_profile000_mainstream
+          camera_view: live 
+          show_state: false
+          show_name: false
+          
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: sensor.time_158d0005414857
+             name: Движение
+             icon: mdi:run-fast
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Растения**
+
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.c47c8d6a0ef3_moisture
+            type: custom:multiple-entity-row
+            icon: mdi:sprout
+            name: Диффенбахия
+            state_header: Влажность
+            entities:
+              - entity: sensor.c47c8d6a0ef3_conductivity
+                name: Фертильность
+              - entity: sensor.c47c8d6a0ef3_illuminance
+                name: Освещенность
+          - entity: sensor.c47c8d628a8a_moisture
+            type: custom:multiple-entity-row
+            icon: mdi:sprout-outline
+            name: Юкка
+            state_header: Влажность
+            entities:
+              - entity: sensor.c47c8d628a8a_conductivity
+                name: Фертильность
+              - entity: sensor.c47c8d628a8a_illuminance
+                name: Освещенность
+          - entity: sensor.80eaca88b765_moisture
+            type: custom:multiple-entity-row
+            icon: mdi:spa-outline
+            name: Замиокулькас
+            state_header: Влажность
+            entities:
+              - entity: sensor.80eaca88b765_conductivity
+                name: Фертильность
+              - entity: sensor.80eaca88b765_illuminance
+                name: Освещенность
+          - entity: sensor.c47c8d6d1cf9_moisture
+            type: custom:multiple-entity-row
+            icon: mdi:flower-tulip
+            name: Deep Purple
+            state_header: Влажность
+            entities:
+              - entity: sensor.c47c8d6d1cf9_conductivity
+                name: Фертильность
+          - entity: sensor.c47c8d6d2c7e_moisture
+            type: custom:multiple-entity-row
+            icon: mdi:pot
+            name: Пустой горшок
+            state_header: Влажность
+            entities:
+              - entity: sensor.c47c8d6d2c7e_conductivity
+                name: Фертильность
 
       - type: vertical-stack
         cards:
@@ -240,55 +274,44 @@ cards:
               name: Перезагрузка
               icon: mdi:reload
 
-        - type: plant-status
-          entity: plant.dieffenbac_ble
-          name: Диффенбахия
-        - type: plant-status
-          entity: plant.yucca_ble
-          name: Юкка
-        - type: plant-status
-          entity: plant.zamiokulkas_ble
-          name: Замиокулькас
-            
-        - type: custom:stack-in-card
-          mode: horizontal
-          cards:              
-              - type: plant-status
-                entity: plant.deep_purple_ble
-                name: Deep Purple
-              - type: plant-status
-                entity: plant.true_blue_ble
-                name: True Blue
-
       - type: vertical-stack
         cards:
-        
+
         - type: markdown
           style: |
               ha-card {
                 font-size: 26px;
               }  
           content: >
-              **Сенсоры**
-
-
+              **Балкон**
+              
         - type: glance
           show_state: false
-          state_color: true
           entities:
-           - entity: binary_sensor.0x00158d0005414857_occupancy
-             name: Движение
-           - entity: binary_sensor.0x00158d00013ed373_contact
-             name: Окно справа
-           - entity: binary_sensor.0xec1bbdfffedf6a6a_contact
-             name: Окно слева
+           - entity: light.66633530807d3a766432
+             name: Свет
+             tap_action:
+                action: toggle
            - entity: binary_sensor.0x00158d000445206b_contact
-             name: Балкон
-
+             name: Дверь
+           - entity: binary_sensor.0x00158d0001a2f5f7_contact
+             name: Окно
+           - entity: binary_sensor.0x00158d000449b773_occupancy
+             name: Движение
+           - entity: binary_sensor.lr_balcony_moving_in_dark
+             name: Автосвет
+           
+        - type: entities
+          show_header_toggle: false
+          entities:
+           - entity: sensor.time_158d000449b773
+             name: Движение
+             icon: mdi:run-fast
+   
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.05_mean_temperature
-             name: Средняя температура
+           - entity: sensor.0xec1bbdfffe4534c0_temperature
+             name: Температура
           color_thresholds:
             - value: 10
               color: "#191970"
@@ -311,8 +334,8 @@ cards:
          
         - type: custom:mini-graph-card
           entities:
-           - entity: sensor.05_mean_humidity
-             name: Средняя влажность
+           - entity: sensor.0xec1bbdfffe4534c0_humidity
+             name: Влажность
           color_thresholds:
             - value: 20
               color: "#FFFF00"
@@ -337,17 +360,21 @@ cards:
 
         - type: custom:mini-graph-card
           entities:
-            - entity: sensor.cleargrass_air_co2
-              name: СО2 
+           - entity: sensor.0x00158d000449b773_illuminance
+             name: Освещенность
           color_thresholds:
-            - value: 1000
-              color: "#00FFFF"
-            - value: 2000
-              color: "#00FF00"
-            - value: 3000
-              color: "#FFFF00"
-            - value: 9999
-              color: "#FF0000"
+              - value: 100
+                color: "#000000"
+              - value: 300
+                color: "#2F4F4F"
+              - value: 500
+                color: "#708090"
+              - value: 800
+                color: "#A9A9A9"
+              - value: 1000
+                color: "#D3D3D3"
+              - value: 2000
+                color: "#FFFFFF"
           animate: true
           line_width: 2
           hour24: true
@@ -355,49 +382,5 @@ cards:
           group_by: hour
           hours_to_show: 72
 
-        - type: custom:mini-graph-card
-          entities:
-           - entity: sensor.cleargrass_air_tvoc
-             name: ЛОВ
-          color_thresholds:
-            - value: 65
-              color: "#00FFFF"
-            - value: 220
-              color: "#00FF00"
-            - value: 660
-              color: "#FFFF00"
-            - value: 2000
-              color: "#FF0000"
-            - value: 9999
-              color: "#800000"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72
 
-        - type: custom:mini-graph-card  
-          entities:
-           - entity: sensor.cleargrass_air_pm25
-             name: РМ 2.5
-          color_thresholds:
-            - value: 12
-              color: "#00FFFF"
-            - value: 35
-              color: "#00FF00"
-            - value: 55
-              color: "#FFFF00"
-            - value: 150
-              color: "#FFD700"
-            - value: 250
-              color: "#FF0000"
-            - value: 999
-              color: "#800000"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72
 

@@ -1,0 +1,140 @@
+living_air:
+
+    binary_sensor:
+      - platform: template
+        sensors:
+          cleargrass_air:
+            friendly_name: "Cleargrass Air, плохой воздух"
+            value_template: >-
+              {{ states('sensor.cleargrass_air_co2')|float > 1500 
+                 or states('sensor.cleargrass_air_pm25')|float > 100 
+                 or states('sensor.cleargrass_air_tvoc')|float > 220 }}
+            icon_template: >-
+              {% if is_state("binary_sensor.cleargrass_air", "on") %}
+              mdi:biohazard
+              {% else %}
+              mdi:air-filter
+              {% endif %}
+              
+          lr_air:
+            friendly_name: "Уведомление о проветривании гостиной - "
+            value_template: >-
+              {{ is_state('binary_sensor.lr_aeration', 'off')  
+                 and is_state('binary_sensor.cleargrass_air', 'on')
+                 and is_state('binary_sensor.occupancy', 'on')
+                 and is_state('sensor.living_day_work', 'Включен') }}
+            icon_template: >-
+              {% if is_state("binary_sensor.lr_air", "on") %}
+              mdi:alarm-note
+              {% else %}
+              mdi:alarm-off
+              {% endif %}
+
+          lr_aeration:
+            friendly_name: "Проветривание"
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d000445206b_contact', 'on')  
+                 or is_state('binary_sensor.0xec1bbdfffedf6a6a_contact', 'on')
+                 or is_state('binary_sensor.0x00158d00013ed373_contact', 'on')
+              }}
+            delay_on: 
+                seconds: 30
+            device_class: window
+            icon_template: >-
+              {% if is_state("binary_sensor.lr_aeration", "on") %}
+              mdi:window-open-variant
+              {% else %}
+              mdi:window-closed-variant
+              {% endif %}
+              
+
+    sensor: 
+
+      - platform: min_max
+        name: lr_mean_humidity
+        type: mean
+        entity_ids:
+          - sensor.0x00158d00015aebb6_humidity
+          - sensor.05_smartmi_humidity
+          - sensor.cleargrass_air_humidity
+
+      - platform: min_max
+        name: lr_mean_temperature
+        type: mean
+        entity_ids:
+          - sensor.0x00158d00015aebb6_temperature
+          - sensor.05_smartmi_temperature
+          - sensor.cleargrass_air_temperature
+
+
+      - platform: template
+        sensors:
+          cleargrass_air_co2:
+            friendly_name: 'Cleargrass air СО2 - '
+            value_template: "{{ state_attr('air_quality.cleargrass_air_monitor', 'carbon_dioxide') }}"  
+            icon_template: mdi:molecule-co2
+            unit_of_measurement: 'ppm'
+            
+          cleargrass_air_tvoc:
+            friendly_name: 'Cleargrass air ЛОВ - '
+            value_template: "{{ state_attr('air_quality.cleargrass_air_monitor', 'total_volatile_organic_compounds') }}"
+            icon_template: mdi:alpha-t
+            unit_of_measurement: 'ppb'
+            
+          cleargrass_air_pm25:
+            friendly_name: 'Cleargrass air PM 2.5 - '
+            value_template: "{{ state_attr('air_quality.cleargrass_air_monitor', 'particulate_matter_2_5') }}"  
+            icon_template: mdi:alpha-p
+            unit_of_measurement: 'ppm'
+            
+          cleargrass_air_temperature:
+            friendly_name: 'Cleargrass air температура - '
+            value_template: "{{ state_attr('air_quality.cleargrass_air_monitor', 'temperature') }}"  
+            icon_template: mdi:temperature-celsius
+            unit_of_measurement: '°C'
+            
+          cleargrass_air_humidity:
+            friendly_name: 'Cleargrass air влажность - '
+            value_template: "{{ state_attr('air_quality.cleargrass_air_monitor', 'humidity') }}"  
+            icon_template: mdi:water-percent
+            unit_of_measurement: '%'
+            
+            
+    automation:
+    
+        - id: Гостиная, уведомление о проветривании
+          alias: living_air_fresh
+          initial_state: true
+        # Проверка каждые 30 минут
+          trigger:
+            - platform: time_pattern
+              minutes: '/30'
+          condition:
+            - condition: state
+              entity_id:  binary_sensor.lr_air
+              state: 'on'
+            - condition: state
+              entity_id: switch.control_mode
+              state: 'on'
+          action:
+           - service: telegram_bot.send_message
+             data_template:
+               target:
+                   - !secret chat_id_group
+               message: | 
+                    {{"\U0001F637"}} Гостиная {{ states('sensor.time_date') }} - хорошо бы проветрить
+           - service: light.turn_on
+             entity_id:
+                - light.gateway_light_34ce0088b039
+             data_template:
+               brightness_pct: 20
+               rgb_color: [0, 0, 255]
+           - service: xiaomi_aqara.play_ringtone
+             data:
+              gw_mac: 34:CE:00:88:B0:39
+              ringtone_id: 10010
+              ringtone_vol: 50
+           - delay: 00:00:04
+           - service: light.turn_off
+             entity_id:
+                - light.gateway_light_34ce0088b039 

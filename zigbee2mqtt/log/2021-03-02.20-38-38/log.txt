@@ -1,0 +1,8 @@
+error 2021-03-02 20:48:12: Request 'z2m_cc2652/bridge/request/device/configure_reporting' failed with error: 'Bind 0x00124b0022659c04/1 msTemperatureMeasurement from '0x00124b0022811c73/1' failed (AREQ - ZDO - bindRsp after 10000ms)'
+error 2021-03-02 20:48:37: Failed to execute LQI for 'LR tv socket'
+error 2021-03-02 20:48:49: Failed to execute LQI for 'KN tv power'
+error 2021-03-02 20:49:01: Failed to execute LQI for 'DD E27 Aqara'
+error 2021-03-02 20:49:14: Failed to execute LQI for 'DD wd 2 ch neutral'
+error 2021-03-02 21:46:14: Publish 'set' 'state' to 'DA 2ch relay' failed: 'Error: Command 0x00158d0002d7bb2b/2 genOnOff.off({}, {"timeout":10000,"disableResponse":false,"disableRecovery":false,"disableDefaultResponse":false,"direction":0,"srcEndpoint":null,"reservedBits":0,"manufacturerCode":null,"transactionSequenceNumber":null,"writeUndiv":false}) failed (Timeout - 50042 - 2 - 253 - 6 - 11 after 10000ms)'
+error 2021-03-02 21:48:31: Publish 'set' 'state' to 'DA 2ch relay' failed: 'Error: Command 0x00158d0002d7bb2b/2 genOnOff.off({}, {"timeout":10000,"disableResponse":false,"disableRecovery":false,"disableDefaultResponse":false,"direction":0,"srcEndpoint":null,"reservedBits":0,"manufacturerCode":null,"transactionSequenceNumber":null,"writeUndiv":false}) failed (Timeout - 50042 - 2 - 4 - 6 - 11 after 10000ms)'
+error 2021-03-02 23:25:09: Publish 'set' 'state' to 'DD wd 2 ch neutral' failed: 'Error: Command 0x00158d0001a2ccab/2 genOnOff.on({}, {"timeout":10000,"disableResponse":false,"disableRecovery":false,"disableDefaultResponse":false,"direction":0,"srcEndpoint":null,"reservedBits":0,"manufacturerCode":null,"transactionSequenceNumber":null,"writeUndiv":false}) failed (Timeout - 56398 - 2 - 95 - 6 - 11 after 10000ms)'

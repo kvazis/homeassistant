@@ -2,12 +2,13 @@ import logging
 
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-from homeassistant.config_entries import ConfigFlow, OptionsFlow
+from homeassistant.config_entries import ConfigFlow, OptionsFlow, ConfigEntry
 from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
 from . import DOMAIN
 from .core import gateway3
+from .core.gateway3 import TELNET_CMD
 from .core.xiaomi_cloud import MiCloud
 
 _LOGGER = logging.getLogger(__name__)
@@ -24,6 +25,18 @@ SERVERS = {
     'ru': "Russia",
     'sg': "Singapore",
     'us': "United States"
+}
+
+OPT_DEBUG = {
+    'true': "Basic logs",
+    'miio': "miIO logs",
+    'mqtt': "MQTT logs"
+}
+OPT_PARENT = {
+    -1: "Disabled", 0: "Manually", 60: "Hourly"
+}
+OPT_MODE = {
+    False: "Mi Home", True: "Zigbee Home Automation (ZHA)"
 }
 
 
@@ -44,10 +57,8 @@ class XiaomiGateway3FlowHandler(ConfigFlow, domain=DOMAIN):
                     data_schema=vol.Schema({
                         vol.Required('host', default=device['localip']): str,
                         vol.Required('token', default=device['token']): str,
-                        vol.Required('ble', default=True): bool,
-                        vol.Required('zha', default=False): bool
+                        vol.Required('telnet_cmd', default=TELNET_CMD): str,
                     }),
-                    description_placeholders={'error_text': ''}
                 )
 
         if DOMAIN in self.hass.data and 'devices' in self.hass.data[DOMAIN]:
@@ -106,25 +117,28 @@ class XiaomiGateway3FlowHandler(ConfigFlow, domain=DOMAIN):
             data_schema=vol.Schema({
                 vol.Required('host'): str,
                 vol.Required('token'): str,
-                vol.Required('ble', default=True): bool,
-                vol.Required('zha', default=False): bool
+                vol.Required('telnet_cmd', default=TELNET_CMD): str,
             }),
-            description_placeholders={
-                'error_text': "\nERROR: " + error if error else ''
-            }
+            errors={'base': error} if error else None
         )
 
     @staticmethod
     @callback
-    def async_get_options_flow(config_entry):
-        return OptionsFlowHandler('username' in config_entry.data)
+    def async_get_options_flow(entry: ConfigEntry):
+        return OptionsFlowHandler(entry)
 
 
 class OptionsFlowHandler(OptionsFlow):
-    def __init__(self, cloud: bool):
-        self.cloud = cloud
+    def __init__(self, entry: ConfigEntry):
+        self.entry = entry
 
     async def async_step_init(self, user_input=None):
+        if 'servers' in self.entry.data:
+            return await self.async_step_cloud()
+        else:
+            return await self.async_step_user()
+
+    async def async_step_cloud(self, user_input=None):
         if user_input is not None:
             did = user_input['did']
             device = next(d for d in self.hass.data[DOMAIN]['devices']
@@ -136,25 +150,59 @@ class OptionsFlowHandler(OptionsFlow):
                 f"MAC: {device['mac']}\n"
                 f"Token: {device['token']}"
             )
-        elif not self.cloud:
-            device_info = "Options for Gateway not supported yet"
+            if device['model'] == 'lumi.gateway.v3':
+                device_info += "\nLAN key: " + gateway3.get_lan_key(device)
+
         elif not self.hass.data[DOMAIN].get('devices'):
             device_info = "No devices in account"
         else:
-            device_info = "Select device from list"
+            # noinspection SqlResolve
+            device_info = "SELECT device FROM list"
 
         devices = {
             device['did']: f"{device['name']} ({device['localip']})"
             for device in self.hass.data[DOMAIN].get('devices', [])
+            # 0 - wifi, 8 - wifi+ble
             if device['pid'] in ('0', '8')
         }
 
         return self.async_show_form(
-            step_id="init",
+            step_id="cloud",
             data_schema=vol.Schema({
                 vol.Required('did'): vol.In(devices)
             }),
             description_placeholders={
                 'device_info': device_info
             }
+        )
+
+    async def async_step_user(self, user_input=None):
+        if user_input:
+            return self.async_create_entry(title='', data=user_input)
+
+        host = self.entry.options['host']
+        token = self.entry.options['token']
+        telnet_cmd = self.entry.options.get('telnet_cmd', '')
+        ble = self.entry.options.get('ble', True)
+        stats = self.entry.options.get('stats', False)
+        debug = self.entry.options.get('debug', [])
+        buzzer = self.entry.options.get('buzzer', False)
+        parent = self.entry.options.get('parent', -1)
+        zha = self.entry.options.get('zha', False)
+
+        return self.async_show_form(
+            step_id="user",
+            data_schema=vol.Schema({
+                vol.Required('host', default=host): str,
+                vol.Required('token', default=token): str,
+                vol.Optional('telnet_cmd', default=telnet_cmd): str,
+                vol.Required('ble', default=ble): bool,
+                vol.Required('stats', default=stats): bool,
+                vol.Optional('debug', default=debug): cv.multi_select(
+                    OPT_DEBUG
+                ),
+                vol.Optional('buzzer', default=buzzer): bool,
+                vol.Optional('parent', default=parent): vol.In(OPT_PARENT),
+                vol.Required('zha', default=zha): vol.In(OPT_MODE),
+            }),
         )

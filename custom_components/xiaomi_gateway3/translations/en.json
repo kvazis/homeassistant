@@ -2,7 +2,9 @@
   "config": {
     "error": {
       "no_servers": "Please select at least one server",
-      "cant_login": "Can't login, check username and password"
+      "cant_login": "Can't login, check username and password",
+      "cant_connect": "Can't connect to gateway",
+      "wrong_model": "Unsupported gateway model"
     },
     "step": {
       "user": {
@@ -21,24 +23,38 @@
         }
       },
       "token": {
-        "description": "[Obtain](https://github.com/Maxmudjon/com.xiaomi-miio/blob/master/docs/obtain_token.md) Mi Home token. Use **ZHA** mode ONLY if you [know what you doing](https://github.com/AlexxIT/XiaomiGateway3#zigbee-home-automation-mode) {error_text}",
+        "description": "You can obtain Mi Home token automatically with [Cloud integration](https://github.com/AlexxIT/XiaomiGateway3#obtain-mi-home-device-token) or [manually](https://github.com/Maxmudjon/com.xiaomi-miio/blob/master/docs/obtain_token.md). Check supported firmwares info in [component docs](https://github.com/AlexxIT/XiaomiGateway3#supported-firmwares).",
         "data": {
           "host": "Host",
           "token": "Token",
-          "ble": "Support BLE Devices",
-          "zha": "Zigbee Home Automation (ZHA) Mode"
+          "telnet_cmd": "Open Telnet command"
         }
       }
     }
   },
   "options": {
     "step": {
-      "init": {
+      "cloud": {
         "title": "MiCloud devices info",
         "data": {
           "did": "Device"
         },
         "description": "{device_info}"
+      },
+      "user": {
+        "title": "Gateway Config",
+        "data": {
+          "host": "Host",
+          "token": "Token",
+          "telnet_cmd": "Open Telnet command",
+          "ble": "Support BLE Devices",
+          "stats": "Zigbee and BLE performance data",
+          "debug": "Debug",
+          "buzzer": "Disable buzzer [PRO]",
+          "parent": "Parent devices in stats [PRO]",
+          "zha": "Mode [PRO]"
+        },
+        "description": "Change **PRO** options ONLY if you know what you doing"
       }
     }
   },

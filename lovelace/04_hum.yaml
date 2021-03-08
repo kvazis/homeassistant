@@ -5,93 +5,6 @@ cards:
 
 ############################ Колонка 1 ############################
 
-    - type: vertical-stack
-      cards:
-
-        - type: markdown
-          style: |
-              ha-card {
-                font-size: 26px;
-              }  
-          content: >
-              **Гостиная**
-              
-        - type: glance
-          show_state: true
-          show_name: true
-          state_color: true
-          entities:
-          - entity: binary_sensor.living_hum
-            name: Увлажнение
-          - entity: binary_sensor.0x00158d00013ed373_contact
-            name: Окно 1
-          - entity: binary_sensor.0xec1bbdfffedf6a6a_contact
-            name: Окно 2            
-          - entity: binary_sensor.0x00158d000445206b_contact
-            name: Дверь              
-            
-            
-        - type: entities
-          show_header_toggle: false
-          entities:
-          - entity: switch.lr_hum_mode
-
-        - type: custom:stack-in-card
-          mode: vertical
-          cards:
-         
-            - type: custom:mini-graph-card
-              entities:
-               - entity: sensor.05_mean_humidity
-                 name: Влажность
-              color_thresholds:
-                - value: 20
-                  color: "#FFFF00"
-                - value: 30
-                  color: "#FAFAD2"
-                - value: 40
-                  color: "#E0FFFF"
-                - value: 50
-                  color: "#7FFFD4"
-                - value: 60
-                  color: "#00CED1"
-                - value: 80
-                  color: "#0000FF"
-                - value: 100
-                  color: "#000080"
-              animate: true
-              line_width: 2
-              hour24: true
-              points_per_hour: 1
-              group_by: hour
-              hours_to_show: 72
-
-            - type: entities
-              show_header_toggle: false
-              entities:
-              - entity: input_number.humidity_level_gg
-              - entity: sensor.smartmi_water
-                name: Остаток воды - 
-                
-            - type: custom:stack-in-card
-              mode: horizontal
-              cards: 
-                - type: button
-                  entity: switch.gg_humidifier_mode_auto
-                  name: Auto
-                  icon: mdi:brightness-auto
-                - type: button
-                  entity: switch.gg_humidifier_mode_silent
-                  name: Silent
-                  icon: mdi:speedometer-slow
-                - type: button
-                  entity: switch.gg_humidifier_mode_medium
-                  name: Medium
-                  icon: mdi:speedometer-medium
-                - type: button
-                  entity: switch.gg_humidifier_mode_high
-                  name: High
-                  icon: mdi:speedometer
 
 ############################ Колонка 2 ############################
 
@@ -129,7 +42,7 @@ cards:
          
             - type: custom:mini-graph-card
               entities:
-               - entity: sensor.07_mean_humidity
+               - entity: sensor.dd_mean_humidity
                  name: Влажность
               color_thresholds:
                 - value: 20
@@ -194,7 +107,7 @@ cards:
          
             - type: custom:mini-graph-card
               entities:
-               - entity: sensor.08_mean_humidity
+               - entity: sensor.da_mean_humidity
                  name: Влажность
               color_thresholds:
                 - value: 20

@@ -3,33 +3,58 @@ title: Местонахождение
 icon: mdi:map-search
 cards:
 
+
     - type: vertical-stack
       cards:
 
+        - type: markdown
+          content: >
+              **Активность в доме**
 
-        - type: glance
-          show_name: false
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: binary_sensor.occupancy
+              secondary_info: last-changed
+            - type: divider
+            - entity: binary_sensor.motion_in_home
+              secondary_info: last-changed
+            - entity: binary_sensor.working_tv
+              secondary_info: last-changed
+            - entity: binary_sensor.working_light
+              secondary_info: last-changed
+            - entity: binary_sensor.bluetooth_in_home
+              secondary_info: last-changed
+            - entity: binary_sensor.smartphone_in_home
+              secondary_info: last-changed
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+              
+            - type: markdown
+              content: >
+                  **Общие режимы**
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: switch.holiday_mode
+                name: Режим выходного дня - 
+
+    - type: vertical-stack
+      cards:
+
+        - type: entities
+          show_header_toggle: false
           entities:
           - entity: sensor.alex
-          - entity: sensor.360_alex_battery
-            icon: mdi:cellphone-android
-          - entity: sensor.ipad_aleksei_battery_level
-            icon: mdi:tablet-ipad
-          - entity: sensor.alex_rssi_summ
-          
-        - type: custom:entity-attributes-card
-          heading_name: Атрибут
-          heading_state: Значение
-          filter:
-            include:
-              - key: device_tracker.life360_alex.address
-                name: Адрес
-              - key: device_tracker.life360_alex.speed
-                name: Скорость
-              - key: device_tracker.life360_alex.wifi_on
-                name: Подключение к wi-fi
-              - key: device_tracker.life360_alex.battery_charging
-                name: Зарядка
+            type: custom:multiple-entity-row
+            name: Алексей -
+            state_header: Находится в
+            entities:
+              - entity: sensor.360_alex_battery
+                name: Заряд телефона
 
         - type: map
           aspect_ratio: 16:9
@@ -40,26 +65,16 @@ cards:
     - type: vertical-stack
       cards:
 
-        - type: glance
-          show_name: false
+        - type: entities
+          show_header_toggle: false
           entities:
           - entity: sensor.olga
-          - entity: sensor.360_olga_battery
-          - entity: sensor.olha_rssi_summ
-          
-        - type: custom:entity-attributes-card
-          heading_name: Атрибут
-          heading_state: Значение
-          filter:
-            include:
-              - key: device_tracker.life360_olga.address
-                name: Адрес
-              - key: device_tracker.life360_olga.speed
-                name: Скорость
-              - key: device_tracker.life360_olga.wifi_on
-                name: Подключение к wi-fi
-              - key: device_tracker.life360_olga.battery_charging
-                name: Зарядка
+            type: custom:multiple-entity-row
+            name: Ольга -
+            state_header: Находится в
+            entities:
+              - entity: sensor.360_olga_battery
+                name: Заряд телефона
 
         - type: map
           aspect_ratio: 16:9
@@ -70,26 +85,16 @@ cards:
     - type: vertical-stack
       cards:
 
-        - type: glance
-          show_name: false
+        - type: entities
+          show_header_toggle: false
           entities:
           - entity: sensor.dima
-          - entity: sensor.360_dima_battery
-          - entity: sensor.dima_rssi_summ
-         
-        - type: custom:entity-attributes-card
-          heading_name: Атрибут
-          heading_state: Значение
-          filter:
-            include:
-              - key: device_tracker.life360_dima.address
-                name: Адрес
-              - key: device_tracker.life360_dima.speed
-                name: Скорость
-              - key: device_tracker.life360_dima.wifi_on
-                name: Подключение к wi-fi
-              - key: device_tracker.life360_dima.battery_charging
-                name: Зарядка
+            type: custom:multiple-entity-row
+            name: Дима -
+            state_header: Находится в
+            entities:
+              - entity: sensor.360_dima_battery
+                name: Заряд телефона
 
         - type: map
           aspect_ratio: 16:9

@@ -1,0 +1,11 @@
+error 2021-03-07 12:48:42: Invalid JSON '{"sensitivity": medium}', skipping...
+error 2021-03-07 12:49:24: Invalid JSON '', skipping...
+error 2021-03-07 13:35:14: Failed to execute LQI for 'LR tv socket'
+error 2021-03-07 13:35:26: Failed to execute LQI for 'KN tv power'
+error 2021-03-07 13:35:39: Failed to execute LQI for 'DD E27 Aqara'
+error 2021-03-07 13:35:51: Failed to execute LQI for 'DD wd 2 ch neutral'
+error 2021-03-07 13:36:02: Failed to execute LQI for 'BT boiler'
+error 2021-03-07 13:36:13: Failed to execute LQI for 'DA USB Charge'
+error 2021-03-07 13:36:26: Failed to execute LQI for 'LR thermostat 2'
+error 2021-03-07 18:44:02: Publish 'set' 'state' to 'DA 2ch relay' failed: 'Error: Command 0x00158d0002d7bb2b/2 genOnOff.off({}, {"timeout":10000,"disableResponse":false,"disableRecovery":false,"disableDefaultResponse":false,"direction":0,"srcEndpoint":null,"reservedBits":0,"manufacturerCode":null,"transactionSequenceNumber":null,"writeUndiv":false}) failed (Timeout - 50042 - 2 - 29 - 6 - 11 after 10000ms)'
+error 2021-03-07 20:10:45: Publish 'set' 'state' to 'DA 2ch relay' failed: 'Error: Command 0x00158d0002d7bb2b/2 genOnOff.off({}, {"timeout":10000,"disableResponse":false,"disableRecovery":false,"disableDefaultResponse":false,"direction":0,"srcEndpoint":null,"reservedBits":0,"manufacturerCode":null,"transactionSequenceNumber":null,"writeUndiv":false}) failed (Timeout - 50042 - 2 - 190 - 6 - 11 after 10000ms)'

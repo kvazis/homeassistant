@@ -4,6 +4,42 @@
     name: Xiaofang
     still_image_url: http://192.168.0.125/image.jpg
     stream_source: rtsp://192.168.0.125:554/unicast
+    
+  - platform: reolink_dev
+    host: 192.168.0.127
+    username: admin
+    password: !secret reolink_psw
+    name: reolink_e1_zoom_da
+
+#   - platform: reolink_dev
+#     host: 192.168.0.130
+#     username: admin
+#     password: !secret reolink_psw
+#     name: reolink_e1_pro_lr
+#     protocol: rtsp
+    
+  - platform: reolink_dev
+    host: 192.168.0.128
+    username: admin
+    password: !secret reolink_psw
+    name: reolink_c2_kn
+    
+  - platform: reolink_dev
+    host: 192.168.0.129
+    username: admin
+    password: !secret reolink_psw
+    name: reolink_410_fr
+    
+  - platform: reolink_dev
+    host: 192.168.0.126
+    username: admin
+    password: !secret reolink_psw
+    name: reolink_411_fr
+    
+    #   stream: main or sub (optional, default main)
+    #   protocol: rtmp or rtsp (optional, default rtmp)
+    #   channel: NVR camera channel (optional, default 0)
+    #   scan_interval: 5 (optional, default 30s)
 
 # # Кубик Xiaofang 1s    
 #   - platform: ffmpeg

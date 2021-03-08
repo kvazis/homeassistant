@@ -3,5 +3,63 @@ bt_uf_light:
     switch:
       - platform: xiaomi_five_uvc_lamp
         name: five_uvc_lamp
-        host: 192.168.0.160
+        host: 192.168.0.124
         token: fdc9386562432bf43b2fceb8603ecde3
+        
+    automation:
+    
+      - id: Ванная, отключение УФ лампы
+        alias: five_uvc_lamp_off
+        initial_state: true
+        trigger:
+        - platform: state
+          entity_id: binary_sensor.0x00158d00054495dc_contact
+          from: 'off'
+          to: 'on'
+        condition:
+         - condition: state
+           entity_id: switch.five_uvc_lamp
+           state: 'on'
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
+        action:
+          - service: switch.turn_off
+            entity_id: switch.five_uvc_lamp
+
+      - id: Ванная, включение УФ лампы ночью
+        alias: five_uvc_lamp_on
+        initial_state: true
+        trigger:
+           platform: time
+           at: '03:00:00'
+        condition:
+         - condition: state
+           entity_id: binary_sensor.0x00158d00054495dc_contact
+           state: 'off'
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
+        action:
+          - service: switch.turn_on
+            entity_id: switch.five_uvc_lamp
+            
+      - id: Уведомление о включение УФ лампы 
+        alias: five_uvc_lamp_message
+        initial_state: true
+        trigger:
+         - platform: state
+           entity_id: switch.five_uvc_lamp
+           from: 'off'
+           to: 'on'
+        condition:
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
+        action:
+           - service: telegram_bot.send_message
+             data_template:
+               target:
+                   - !secret chat_id_group
+               message: | 
+                    {{"\U0001F60E"}} Ванная - включение УФ лампы в {{ states('sensor.time_date') }}

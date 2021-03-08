@@ -16,22 +16,36 @@
         - script.total_power_day
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
-        - script.842e14fffe51c5ae_day
-##### КУХНЯ  
-##### Розетка Heiman
-        -  script.000d6f0014bb14b4_day
-##### Розетка Blitzwolf BW SHP-2
-        - script.bw_shp_2_day
+        - script.laundry_washmachine_day
+##### КУХНЯ
+##### Общее
+        - script.kitchen_total_day
+##### Гриль
+        -  script.kitchen_grill_day
+##### Тостер
+        -  script.kitchen_toster_day
+##### Аэрогиль
+        - script.kitchen_airgrill_day
+##### Телевизор
+        - script.kitchen_tv_day
+##### Холодильник
+        - script.kitchen_fridge_day
+##### Кухня LED лента
+        - script.kitchen_led_day
 ##### ГОСТИНАЯ
+##### Общее
+        - script.lr_total_day
 ##### wifi + 2 USB
         - script.wifi_2usb_day
+##### Гостиная телевизор
+        - script.lr_tv_day
 ##### Удлинитель 6 портов
         - script.wifi_6port_day
 ##### Удлинитель 3+3
         - script.wifi_3usb_day
-##### ВАННАЯ 
+##### ВАННАЯ
 ##### Бойлер
-        - script.00158d00015751f4_day
+        - script.bathroom_bolier_day
 ##### ДЕТСКАЯ Д
 ##### Ноутбук
         - script.00158d000153dd8e_day
@@ -58,23 +72,29 @@
         - script.total_power_yesterday
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
-        - script.842e14fffe51c5ae_yesterday
-##### КУХНЯ  
-##### Телевизор Xiaomi
-        - script.00158d0001291d12_yesterday
+        - script.laundry_washmachine_yesterday
+##### КУХНЯ
+##### Общее
+        - script.kitchen_total_yesterday
+##### Гриль
+        -  script.kitchen_grill_yesterday
+##### Тостер
+        -  script.kitchen_toster_yesterday
+##### Аэрогиль
+        - script.kitchen_airgrill_yesterday
+##### Телевизор
+        - script.kitchen_tv_yesterday
 ##### Холодильник
-        - script.00158d0001fa2934_yesterday
+        - script.kitchen_fridge_yesterday
 ##### Кухня LED лента
-        - script.00158d0001d35bc0_yesterday
-##### Розетка Heiman
-        - script.000d6f0014bb14b4_yesterday
-##### Розетка Blitzwolf BW SHP-2
-        - script.bw_shp_2_yesterday
+        - script.kitchen_led_yesterday
 ##### ГОСТИНАЯ
+##### Общее
+        - script.lr_total_yesterday
 ##### wifi + 2 USB
         - script.wifi_2usb_yesterday
 ##### Гостиная телевизор
-        - script.00158d00012896cb_yesterday
+        - script.lr_tv_yesterday
 ##### Удлинитель - гостиная, стол
         - script.04cf8cdf3c764e0a_yesterday
 ##### Батарея 2
@@ -85,7 +105,7 @@
         - script.wifi_3usb_yesterday
 ##### ВАННАЯ 
 ##### Бойлер
-        - script.00158d00015751f4_yesterday
+        - script.bathroom_bolier_yesterday
 ##### ДЕТСКАЯ Д
 ##### Ноутбук
         - script.00158d000153dd8e_yesterday
@@ -120,23 +140,29 @@
         - script.total_power_lastmonth
 ##### ПРАЧЕЧНАЯ
 ##### Стиральная машина
-        - script.842e14fffe51c5ae_lastmonth
-##### КУХНЯ  
-##### Телевизор Xiaomi
-        - script.00158d0001291d12_lastmonth
+        - script.laundry_washmachine_lastmonth
+##### КУХНЯ
+##### Общее
+        - script.kitchen_total_lastmonth
+##### Гриль
+        -  script.kitchen_grill_lastmonth
+##### Тостер
+        -  script.kitchen_toster_lastmonth
+##### Аэрогиль
+        - script.kitchen_airgrill_lastmonth
+##### Телевизор
+        - script.kitchen_tv_lastmonth
 ##### Холодильник
-        - script.00158d0001fa2934_lastmonth
+        - script.kitchen_fridge_lastmonth
 ##### Кухня LED лента  
-        - script.00158d0001d35bc0_lastmonth
-##### Розетка Heiman
-        - script.000d6f0014bb14b4_lastmonth
-##### Розетка Blitzwolf BW SHP-2
-        - script.bw_shp_2_lastmonth
+        - script.kitchen_led_lastmonth
 ##### ГОСТИНАЯ
+##### Общее
+        - script.lr_total_lastmonth
 ##### wifi + 2 USB
         - script.wifi_2usb_lastmonth
 ##### Гостиная телевизор
-        - script.00158d00012896cb_lastmonth
+        - script.lr_tv_lastmonth
 ##### Удлинитель - гостиная, стол
         - script.04cf8cdf3c764e0a_lastmonth
 ##### Батарея 2 
@@ -147,7 +173,7 @@
         - script.wifi_3usb_lastmonth
 ##### ВАННАЯ 
 ##### Бойлер
-        - script.00158d00015751f4_lastmonth
+        - script.bathroom_bolier_lastmonth
 ##### ДЕТСКАЯ Д
 ##### Ноутбук
         - script.00158d000153dd8e_lastmonth

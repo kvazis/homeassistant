@@ -1,0 +1,84 @@
+power_lr_total:
+# Гостиная общее
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/lr/total/today"
+        name: 'lr_total_consumption_today'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/lr/total/yesterday"
+        name: 'lr_total_consumption_yesterday'
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/lr/total/month"
+        name: 'lr_total_consumption_month'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/lr/total/lastmonth"
+        name: 'lr_total_consumption_lastmonth'
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: template
+        sensors:
+          lr_total_money_month:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.lr_total_consumption_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          lr_total_money_lastmonth:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.lr_total_consumption_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+    script:
+          
+          lr_total_day:
+            alias: Гостиная общее энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/lr/total/today"
+                payload: "{{(states('sensor.lr_total_consumption_today') | float + (states('sensor.lr_total_instantpower') | float /120000))|round(5) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/lr/total/month"
+                payload: "{{(states('sensor.lr_total_consumption_month') | float + (states('sensor.lr_total_instantpower') | float /120000))|round(5) }}"
+                retain: true
+
+          lr_total_yesterday:
+            alias: Гостиная общее энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/lr/total/yesterday"
+                payload: "{{states('sensor.lr_total_consumption_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/lr/total/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          lr_total_lastmonth:
+            alias: Гостиная общее энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/lr/total/lastmonth"
+                payload: "{{states('sensor.lr_total_consumption_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/lr/total/month"
+                payload: "{{ 0.0 }}"
+                retain: true

@@ -12,9 +12,10 @@ cards:
 
         - type: picture-glance
           title: Этаж, выход к лифту
-          camera_image: camera.reolink_411_ws_profile000_mainstream
+          camera_image: camera.reolink_411_fr
           camera_view: live
           entities:
+           - entity: binary_sensor.reolink_411_fr_occupancy
            - entity: switch.0x00158d0003f46bb6_switch_l1
              tap_action:
                 action: toggle
@@ -29,9 +30,10 @@ cards:
 
         - type: picture-glance
           title: Этаж, поворот
-          camera_image: camera.reolink_410_profile000_mainstream
+          camera_image: camera.reolink_410_fr
           camera_view: live
           entities:
+           - entity: binary_sensor.reolink_410_fr_occupancy
            - entity: switch.0x00158d0003f46bb6_switch_l2
              tap_action:
                 action: toggle
@@ -51,7 +53,8 @@ cards:
           title: Прихожая, входная дверь
           camera_image: camera.xiaofang
           entities:
-           - entity: light.0x00158d000420dbab_light
+           - entity: binary_sensor.entrance_motion
+           - entity: light.yeelight_ct_bulb_0x000000000531b38e
            - entity: light.yeelight_03_ceiling
            - entity: script.photo_xiaofang
              icon: mdi:camera 
@@ -64,9 +67,10 @@ cards:
              
         - type: picture-glance
           title: Кухня, холодильник
-          camera_image: camera.reolink_c2_pro_profile000_mainstream
+          camera_image: camera.reolink_c2_kn
           camera_view: live
           entities:
+           - entity: binary_sensor.kitchen_motion
            - entity: light.yeelight_02_ceiling
              icon: mdi:toilet
            - entity: light.philips_04_ceiling
@@ -91,9 +95,10 @@ cards:
              
         - type: picture-glance
           title: Детская А
-          camera_image: camera.reolink_e1_zoom_profile000_mainstream
+          camera_image: camera.reolink_e1_zoom_da
           camera_view: live
           entities:
+          - entity: binary_sensor.childrens_a_motion
           - entity: switch.0x00158d00010ec4b8_switch
           - entity: light.aqara_08_ceiling
           - entity: light.24730816ecfabc996804
@@ -112,6 +117,7 @@ cards:
           camera_image: camera.reolink_e1_pro_profile000_mainstream
           camera_view: live
           entities:
+           - entity: binary_sensor.living_motion
            - entity: light.yeelight_05_ceiling1
            - entity: light.yeelight_05_ceiling2
            - entity: switch.tv_xiaomi_55

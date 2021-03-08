@@ -1,0 +1,162 @@
+## Датчики движения
+
+
+      - platform: template
+        sensors:
+          entrance_motion:
+            friendly_name: "Движение в прихожей"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d00013f7894_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.entrance_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+              
+          corridor_motion:
+            friendly_name: "Движение в коридоре"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d00010f8920_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.corridor_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+              
+          toilet_motion:
+            friendly_name: "Движение в туалете"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d0001a24e71_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.toilet_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+              
+          laundry_motion:
+            friendly_name: "Движение в прачечной"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d0001ab3350_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.laundry_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+              
+          kitchen_motion:
+            friendly_name: "Движение в кухне"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d0001e16204_occupancy', 'on')
+                or is_state('camera.reolink_c2_kn', 'motion')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.kitchen_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+              
+          kitchen_balcony_motion:
+            friendly_name: "Движение на балконе кухни"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0xec1bbdfffe302df1_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.kitchen_balcony_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+              
+          living_motion:
+            friendly_name: "Движение в гостиной"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d0005414857_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.living_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+              
+          living_balcony_motion:
+            friendly_name: "Движение на балконе гостиной"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d000449b773_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.living_balcony_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+              
+          bathroom_motion:
+            friendly_name: "Движение в ванной"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d0001e547a3_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.bathroom_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+
+          childrens_a_motion:
+            friendly_name: "Движение в детской А"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d00016d56f5_occupancy', 'on')
+                or is_state('camera.reolink_e1_zoom_da', 'motion')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.childrens_a_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+              
+          childrens_d_motion:
+            friendly_name: "Движение в детской Д"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0x00158d0001a66222_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.childrens_d_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}
+
+          childrens_dbalk_motion:
+            friendly_name: "Движение на балконе детской Д"
+            device_class: motion
+            value_template: >-
+              {{ is_state('binary_sensor.0xec1bbdfffe4521a3_occupancy', 'on')
+              }}
+            icon_template: >-
+              {% if is_state('binary_sensor.childrens_dbalk_motion', 'on') %}
+                mdi:motion-sensor
+              {% else %}
+                mdi:motion-sensor-off
+              {% endif %}

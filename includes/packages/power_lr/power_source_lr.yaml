@@ -1,0 +1,45 @@
+power_source_lr:
+
+    sensor:
+      - platform: template
+        sensors:
+
+          lr_total_instantpower:
+            friendly_name: 'Гостиная потребление'
+            unit_of_measurement: "Вт"
+            device_class: power
+            icon_template: mdi:flash
+            value_template: 
+             "{{ (
+                  (states('sensor.lr_tv_instantpower') | float) 
+                 ) | round(3)
+               }}"
+        
+          lr_tv_instantpower:
+            friendly_name: 'Гостиная, телевизор'
+            device_class: power
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            value_template: "{{ (states('sensor.0x588e81fffed4af56_power') | float) | round(3)}}"
+            
+    switch:
+      - platform: template
+        switches:
+
+          tv_xiaomi_55:
+            friendly_name: "ТВ Xiaomi 55"
+            value_template: "{{ states('sensor.lr_tv_instantpower') | float > 10 }}"
+            turn_on:
+              service: script.turn_on
+              data:
+                entity_id: script.xiaomi55_tv_on
+            turn_off:
+              service: script.turn_on
+              data:
+                entity_id: script.xiaomi55_tv_off
+            icon_template: >-
+              {% if is_state("switch.tv_xiaomi_55", "on") %}
+              mdi:television
+              {% else %}
+              mdi:television-off
+              {% endif %}

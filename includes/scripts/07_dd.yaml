@@ -2,7 +2,7 @@
     sequence:
       - service: light.turn_on
         entity_id:
-          -  light.yeelight_07_whitebulb
+          -  light.0x00158d000420dbab
         data_template:
           brightness_pct: 100
           kelvin: 4000
@@ -11,7 +11,7 @@
     sequence:
       - service: light.turn_off
         entity_id:
-          - light.yeelight_07_whitebulb
+          - light.0x00158d000420dbab
           
   07_dd_philpis_on:
     sequence:
@@ -30,7 +30,7 @@
     sequence:
         - service: light.turn_off
           entity_id:
-           - light.yeelight_07_whitebulb
+           - light.0x00158d000420dbab
            - light.philips_07_ceiling
            - light.xiaomi_07_table
         - delay: 00:00:03

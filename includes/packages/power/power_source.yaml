@@ -1,0 +1,82 @@
+power_source:
+
+
+    sensor:
+      - platform: template
+        sensors:
+
+## Прачечная 
+
+          laundry_washmachine_instantpower:
+            friendly_name: 'Стиральная машина'
+            device_class: power
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            value_template: "{{ (states('sensor.0x842e14fffe51c5ae_power') | float) | round(3)}}"
+            
+          laundry_washmachine_instantvoltage:
+            friendly_name: 'Стиральная машина'
+            icon_template: mdi:alpha-v
+            unit_of_measurement: 'В'
+            value_template: "{{ ((states('sensor.0x842e14fffe51c5ae_voltage') | float) + 10 )| round(1)}}"
+            
+## Ванная 
+
+          bathroom_bolier_instantpower:
+            friendly_name: 'Бойлер'
+            device_class: power
+            icon_template: mdi:flash
+            unit_of_measurement: 'Вт'
+            value_template: "{{ (states('sensor.0x00158d00015751f4_power') | float) | round(3)}}"
+            
+          bathroom_bolier_instantvoltage:
+            friendly_name: 'Бойлер'
+            icon_template: mdi:alpha-v
+            unit_of_measurement: 'В'
+            value_template: "{{ (states('sensor.0x00158d00015751f4_voltage') | float) | round(1)}}"
+
+    switch:
+      - platform: template
+        switches:
+
+## Прачечная 
+
+          laundry_washmachine:
+            friendly_name: "Стиральная машина"
+            value_template: "{{ is_state('switch.0x842e14fffe51c5ae', 'on') }}"
+            turn_on:
+              service: switch.turn_on
+              data:
+                entity_id: switch.0x842e14fffe51c5ae
+            turn_off:
+              service: switch.turn_off
+              data:
+                entity_id: switch.0x842e14fffe51c5ae
+            icon_template: >-
+              {% if is_state("switch.laundry_washmachine", "on") %}
+              mdi:washing-machine
+              {% elif is_state("switch.laundry_washmachine", "unavailable") %}
+              mdi:washing-machine-alert
+              {% else %}
+              mdi:washing-machine-off
+              {% endif %}
+              
+          bathroom_bolier:
+            friendly_name: "Бойлер"
+            value_template: "{{ is_state('switch.0x00158d00015751f4_switch', 'on') }}"
+            turn_on:
+              service: switch.turn_on
+              data:
+                entity_id: switch.0x00158d00015751f4_switch
+            turn_off:
+              service: switch.turn_off
+              data:
+                entity_id: switch.0x00158d00015751f4_switch
+            icon_template: >-
+              {% if is_state("switch.bathroom_bolier", "on") %}
+              mdi:water-boiler
+              {% elif is_state("switch.bathroom_bolier", "unavailable") %}
+              mdi:water-boiler-alert
+              {% else %}
+              mdi:water-boiler-off
+              {% endif %}

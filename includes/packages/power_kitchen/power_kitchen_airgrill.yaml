@@ -1,0 +1,84 @@
+power_kitchen_airgrill:
+# Кухня аэрогриль
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/kitchen/airgrill/today"
+        name: 'kitchen_airgrill_consumption_today'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/kitchen/airgrill/yesterday"
+        name: 'kitchen_airgrill_consumption_yesterday'
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/kitchen/airgrill/month"
+        name: 'kitchen_airgrill_consumption_month'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/kitchen/airgrill/lastmonth"
+        name: 'kitchen_airgrill_consumption_lastmonth'
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: template
+        sensors:
+          kitchen_airgrill_money_month:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.kitchen_airgrill_consumption_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          kitchen_airgrill_money_lastmonth:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.kitchen_airgrill_consumption_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+    script:
+          
+          kitchen_airgrill_day:
+            alias: Кухня аэрогриль энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/kitchen/airgrill/today"
+                payload: "{{(states('sensor.kitchen_airgrill_consumption_today') | float + (states('sensor.kitchen_airgrill_instantpower') | float /120000))|round(5) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/kitchen/airgrill/month"
+                payload: "{{(states('sensor.kitchen_airgrill_consumption_month') | float + (states('sensor.kitchen_airgrill_instantpower') | float /120000))|round(5) }}"
+                retain: true
+
+          kitchen_airgrill_yesterday:
+            alias: Кухня аэрогриль энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/airgrill/yesterday"
+                payload: "{{states('sensor.kitchen_airgrill_consumption_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/airgrill/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          kitchen_airgrill_lastmonth:
+            alias: Кухня аэрогриль энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/airgrill/lastmonth"
+                payload: "{{states('sensor.kitchen_airgrill_consumption_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/airgrill/month"
+                payload: "{{ 0.0 }}"
+                retain: true

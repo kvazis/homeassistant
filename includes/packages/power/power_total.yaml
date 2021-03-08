@@ -1,0 +1,117 @@
+power_total:
+# Общее энергопотребление
+
+    input_text:
+     
+      power_rate:
+        name: Тариф за электроэнергию
+        initial: грн за кВт⋅ч 
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/rate"
+        name: power_rate
+        unit_of_measurement: 'грн за кВт⋅ч'
+
+      - platform: mqtt
+        state_topic: "power/total_energy/today"
+        name: total_consumption_today
+        unit_of_measurement: 'кВт⋅ч'
+
+      - platform: mqtt
+        state_topic: "power/total_energy/yesterday"
+        name: total_consumption_yesterday
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/total_energy/month"
+        name: total_consumption_month
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: mqtt
+        state_topic: "power/total_energy/lastmonth"
+        name: total_consumption_lastmonth
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: template
+        sensors:
+        
+          total_instantpower:
+            friendly_name: 'Суммарное потребление'
+            unit_of_measurement: "Вт"
+            icon_template: mdi:sigma
+            value_template: 
+             "{{ (
+                  (states('sensor.laundry_washmachine_instantpower') | float) +
+                  (states('sensor.bathroom_bolier_instantpower') | float) +
+                  (states('sensor.kitchen_total_instantpower') | float) + 
+                  (states('sensor.lr_total_instantpower') | float)
+                  ) | round(3)}}"
+                  
+          total_money_month:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.total_consumption_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          total_money_lastmonth:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.total_consumption_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+            
+    script:
+
+          power_rate:
+            alias: Ручной ввод тарифа за электроэнергию
+            sequence:          
+                - service: mqtt.publish
+                  data_template:                
+                    topic: "power/rate"
+                    payload: "{{states('input_text.power_rate')}}"
+
+          
+          total_power_day:
+            alias: Общий энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/total_energy/today"
+                payload: "{{(states('sensor.total_consumption_today') | float + (states('sensor.total_instantpower') | float /120000))|round(5) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/total_energy/month"
+                payload: "{{(states('sensor.total_consumption_month') | float + (states('sensor.total_instantpower') | float /120000))|round(5) }}"
+                retain: true
+
+          total_power_yesterday:
+            alias: Общий энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/total_energy/yesterday"
+                payload: "{{states('sensor.total_consumption_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/total_energy/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          total_power_lastmonth:
+            alias: Общий энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/total_energy/lastmonth"
+                payload: "{{states('sensor.total_consumption_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/total_energy/month"
+                payload: "{{ 0.0 }}"
+                retain: true

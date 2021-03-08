@@ -96,3 +96,14 @@ cards:
             show_header_toggle: false
             entities:
             - entity: script.broadlink_learn
+           
+          - type: custom:auto-entities
+            show_empty: false
+            card:
+              type: entities
+              show_header_toggle: false
+            filter:
+              include:
+               - state: 'unavailable'
+                 
+

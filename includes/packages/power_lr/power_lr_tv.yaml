@@ -1,0 +1,84 @@
+power_lr_tv:
+# Гостиная телевизор
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/lr/tv/today"
+        name: 'lr_tv_consumption_today'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/lr/tv/yesterday"
+        name: 'lr_tv_consumption_yesterday'
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/lr/tv/month"
+        name: 'lr_tv_consumption_month'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/lr/tv/lastmonth"
+        name: 'lr_tv_consumption_lastmonth'
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: template
+        sensors:
+          lr_tv_money_month:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.lr_tv_consumption_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          lr_tv_money_lastmonth:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.lr_tv_consumption_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+    script:
+          
+          lr_tv_day:
+            alias: Телевизор гостиная энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/lr/tv/today"
+                payload: "{{(states('sensor.lr_tv_consumption_today') | float + (states('sensor.lr_tv_instantpower') | float /120000))|round(5) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/lr/tv/month"
+                payload: "{{(states('sensor.lr_tv_consumption_month') | float + (states('sensor.lr_tv_instantpower') | float /120000))|round(5) }}"
+                retain: true
+
+          lr_tv_yesterday:
+            alias: Телевизор гостиная энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/lr/tv/yesterday"
+                payload: "{{states('sensor.lr_tv_consumption_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/lr/tv/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          lr_tv_lastmonth:
+            alias: Телевизор гостиная энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/lr/tv/lastmonth"
+                payload: "{{states('sensor.lr_tv_consumption_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/lr/tv/month"
+                payload: "{{ 0.0 }}"
+                retain: true

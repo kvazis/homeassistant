@@ -23,11 +23,12 @@ alarm:
               entity_id: switch.control_mode
               state: 'on'
           action:
-            - service: mqtt.publish
+            - service: telegram_bot.send_message
               data_template:
-                topic: "notification/alarm"
-                payload_template: '0100'
-                retain: true
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U0001F6AC"}} В прихожей обнаружен дым в {{ states('sensor.time_date') }} 
             - service: script.turn_on
               entity_id: script.warning
             - service: mqtt.publish
@@ -49,11 +50,12 @@ alarm:
               entity_id: switch.control_mode
               state: 'on'
           action:
-            - service: mqtt.publish
+            - service: telegram_bot.send_message
               data_template:
-                topic: "notification/alarm"
-                payload_template: '0101'
-                retain: true
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U0001F6AD"}} Задымление устранено {{ states('sensor.time_date') }} 
             - service: script.turn_on
               entity_id: script.all_ok
               
@@ -69,11 +71,12 @@ alarm:
               entity_id: switch.control_mode
               state: 'on'
           action:
-            - service: mqtt.publish
+            - service: telegram_bot.send_message
               data_template:
-                topic: "notification/alarm"
-                payload_template: '0402'
-                retain: true
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U0001F6AC"}} В кухне обнаружен дым в {{ states('sensor.time_date') }} 
             - service: script.turn_on
               entity_id: script.warning
 
@@ -91,11 +94,12 @@ alarm:
               entity_id: switch.control_mode
               state: 'on'
           action:
-            - service: mqtt.publish
+            - service: telegram_bot.send_message
               data_template:
-                topic: "notification/alarm"
-                payload_template: '0403'
-                retain: true
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U0001F6AD"}} Задымление устранено {{ states('sensor.time_date') }} 
             - service: script.turn_on
               entity_id: script.all_ok
               
@@ -111,13 +115,14 @@ alarm:
             entity_id: switch.control_mode
             state: 'on'  
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0200'
-              retain: true
-          - service: script.turn_on
-            entity_id: script.warning
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U000026F2"}} Обнаружена протечка - стиральная машина {{ states('sensor.time_date') }} 
+            - service: script.turn_on
+              entity_id: script.warning
               
         - id: Прачечная, протечка возле стиральной машины устранена
           alias: ln_wleak_washmash_off
@@ -132,13 +137,14 @@ alarm:
             entity_id: switch.control_mode
             state: 'on' 
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0201'
-              retain: true
-          - service: script.turn_on
-            entity_id: script.all_ok
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U00002600"}} Протечка устранена - стиральная машина {{ states('sensor.time_date') }} 
+            - service: script.turn_on
+              entity_id: script.all_ok
 
         - id: Туалет, протечка под раковиной
           alias: tt_wleak_on
@@ -152,13 +158,14 @@ alarm:
             entity_id: switch.control_mode
             state: 'on' 
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0202'
-              retain: true
-          - service: script.turn_on
-            entity_id: script.warning
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U0001F6BD"}} Обнаружена протечка - туалет под раковиной {{ states('sensor.time_date') }} 
+            - service: script.turn_on
+              entity_id: script.warning
               
         - id: Туалет, протечка под раковиной устранена
           alias: tt_wleak_off
@@ -173,13 +180,14 @@ alarm:
             entity_id: switch.control_mode
             state: 'on' 
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0203'
-              retain: true
-          - service: script.turn_on
-            entity_id: script.all_ok
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U00002600"}} Протечка устранена - туалет под раковиной {{ states('sensor.time_date') }} 
+            - service: script.turn_on
+              entity_id: script.all_ok
             
         - id: Кухня, протечка под раковиной
           alias: kn_wleak_on
@@ -193,13 +201,14 @@ alarm:
              entity_id: switch.control_mode
              state: 'on'
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0400'
-              retain: true
-          - service: script.turn_on
-            entity_id: script.warning
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U0001F374"}} Обнаружена протечка - кухня под раковиной {{ states('sensor.time_date') }}
+            - service: script.turn_on
+              entity_id: script.warning
         
         
         - id: Кухня, протечка под раковиной устранена
@@ -215,13 +224,14 @@ alarm:
              entity_id: switch.control_mode
              state: 'on'
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0401'
-              retain: true
-          - service: script.turn_on
-            entity_id: script.all_ok
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U00002600"}} Протечка устранена - кухня под раковиной {{ states('sensor.time_date') }} 
+            - service: script.turn_on
+              entity_id: script.all_ok
             
         - id: Ванная, протечка под раковиной
           alias: bt_wleak_washstand_on
@@ -235,13 +245,14 @@ alarm:
             entity_id: switch.control_mode
             state: 'on' 
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0600'
-              retain: true
-          - service: script.turn_on
-            entity_id: script.warning
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U0001F6C0"}} Обнаружена протечка - ванная под раковиной {{ states('sensor.time_date') }}
+            - service: script.turn_on
+              entity_id: script.warning
         
         - id: Ванная, протечка под раковиной устранена
           alias: bt_wleak_washstand_off
@@ -256,13 +267,14 @@ alarm:
             entity_id: switch.control_mode
             state: 'on' 
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0601'
-              retain: true
-          - service: script.turn_on
-            entity_id: script.all_ok
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U00002600"}} Протечка устранена - ванная под раковиной {{ states('sensor.time_date') }} 
+            - service: script.turn_on
+              entity_id: script.all_ok
         
         - id: Ванная, протечка под душевой
           alias: bt_wleak_shower_on
@@ -276,13 +288,14 @@ alarm:
             entity_id: switch.control_mode
             state: 'on' 
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0602'
-              retain: truee
-          - service: script.turn_on
-            entity_id: script.warning
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U0001F6C0"}} Обнаружена протечка - ванная под душевой {{ states('sensor.time_date') }}
+            - service: script.turn_on
+              entity_id: script.warning
         
         - id: Ванная, протечка под душевой устранена
           alias: bt_wleak_shower_off
@@ -297,13 +310,15 @@ alarm:
             entity_id: switch.control_mode
             state: 'on' 
           action:
-          - service: mqtt.publish
-            data_template:
-              topic: "notification/alarm"
-              payload_template: '0603'
-              retain: true
-          - service: script.turn_on
-            entity_id: script.all_ok
+            - service: telegram_bot.send_message
+              data_template:
+                target:
+                    - !secret chat_id_group
+                message: | 
+                     {{"\U00002600"}} Протечка устранена - ванная под душевой {{ states('sensor.time_date') }} 
+            - service: script.turn_on
+              entity_id: script.all_ok
+
             
           
     script:
@@ -313,7 +328,7 @@ alarm:
           sequence:
             - service: mqtt.publish
               data_template:
-                topic: "zigbee2mqtt/EN smoke sensor/set"
+                topic: "z2m_cc2652/EN smoke sensor/set"
                 payload_template: '{"selftest": ""}'
             - service: mqtt.publish
               data_template:
@@ -324,14 +339,12 @@ alarm:
         warning:
           alias: Включение тревоги
           sequence:
-            - service: xiaomi_miio.light_set_scene
-              entity_id: light.philips_05_bedside
-              data:
-                 scene: 3
             - service: light.turn_on
               entity_id: 
                  - light.yeelight_05_rgbtvbulb
                  - light.yeelight_05_bedside2
+                 - light.yeelight_05_ceiling1_ambilight
+                 - light.yeelight_05_ceiling2_ambilight
               data_template:
                 brightness_pct: 100
                 rgb_color: [255, 0, 0]
@@ -339,14 +352,12 @@ alarm:
         all_ok:
           alias: Выключение тревоги
           sequence:
-            - service: xiaomi_miio.light_set_scene
-              entity_id: light.philips_05_bedside
-              data:
-                 scene: 1
             - service: light.turn_on
               entity_id: 
                  - light.yeelight_05_rgbtvbulb
                  - light.yeelight_05_bedside2
+                 - light.yeelight_05_ceiling1_ambilight
+                 - light.yeelight_05_ceiling2_ambilight
               data_template:
                 brightness_pct: 100
                 rgb_color: [0, 255, 0]
@@ -355,4 +366,5 @@ alarm:
               entity_id: 
                  - light.yeelight_05_rgbtvbulb
                  - light.yeelight_05_bedside2
-                 - light.philips_05_bedside
+                 - light.yeelight_05_ceiling1_ambilight
+                 - light.yeelight_05_ceiling2_ambilight

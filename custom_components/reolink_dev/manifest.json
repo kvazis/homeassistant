@@ -1,0 +1,8 @@
+{
+    "domain": "reolink_dev",
+    "name": "Reolink IP camera",
+    "documentation": "https://www.example.com",
+    "dependencies": ["ffmpeg"],
+    "codeowners": ["@fwestenberg"],
+    "requirements": ["aiosmtpd==1.2"]
+  }

@@ -3,56 +3,106 @@
   photo_xiaofang:
     alias: Фотография xiaofang и отправка в телеграмм
     sequence:
-       - service: mqtt.publish
+       - service: camera.snapshot
+         data:
+              entity_id: camera.xiaofang
+              filename: "/config/www/cam_captures/xiaofang.jpg"
+       - delay: 00:00:15
+       - service: telegram_bot.send_photo
          data_template:
-           topic: "notification/messages"
-           payload_template: '0001'
-
-  photo_xiaofang1s:
-    alias: Фотография xiaofang 1s и отправка в телеграмм
-    sequence:
-       - service: mqtt.publish
-         data_template:
-           topic: "notification/messages"
-           payload_template: '0002'
+           target:
+            - !secret chat_id_group
+           file: "/config/www/cam_captures/xiaofang.jpg"
 
   photo_reolink:
     alias: Фотография Reolink 411 и отправка в телеграмм
     sequence:
-       - service: mqtt.publish
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink_411_fr
+              filename: "/config/www/cam_captures/reolink411.jpg"
+       - delay: 00:00:15
+       - service: telegram_bot.send_photo
          data_template:
-           topic: "notification/messages"
-           payload_template: '0003'
+           target:
+            - !secret chat_id_group
+            # - !secret chat_id_alex
+           file: "/config/www/cam_captures/reolink411.jpg"
 
   photo_reolink2:
     alias: Фотография Reolink C2 и отправка в телеграмм
     sequence:
-       - service: mqtt.publish
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink_c2_kn
+              filename: "/config/www/cam_captures/reolinkc2.jpg"
+       - delay: 00:00:15
+       - service: telegram_bot.send_photo
          data_template:
-           topic: "notification/messages"
-           payload_template: '0004'
+           target:
+            - !secret chat_id_group
+            # - !secret chat_id_alex
+           file: "/config/www/cam_captures/reolinkc2.jpg"  
 
   photo_reolink3:
     alias: Фотография Reolink 410 и отправка в телеграмм
     sequence:
-       - service: mqtt.publish
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink_410_fr
+              filename: "/config/www/cam_captures/reolink410.jpg"
+       - delay: 00:00:15
+       - service: telegram_bot.send_photo
          data_template:
-           topic: "notification/messages"
-           payload_template: '0005'
+           target:
+            - !secret chat_id_group
+            # - !secret chat_id_alex
+           file: "/config/www/cam_captures/reolink410.jpg"  
 
   photo_reolink4:
     alias: Фотография Reolink E1 и отправка в телеграмм
     sequence:
-       - service: mqtt.publish
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink_e1_pro_profile000_mainstream
+              filename: "/config/www/cam_captures/reolink4.jpg"
+       - delay: 00:00:15
+       - service: telegram_bot.send_photo
          data_template:
-           topic: "notification/messages"
-           payload_template: '0006'
+           target:
+            - !secret chat_id_group
+            # - !secret chat_id_alex
+           file: "/config/www/cam_captures/reolink4.jpg"
+           
+  photo_reolink5:
+    alias: Фотография Reolink E1 zoom и отправка в телеграмм
+    sequence:
+       - service: camera.snapshot
+         data:
+              entity_id: camera.reolink_e1_zoom_da
+              filename: "/config/www/cam_captures/reolink5.jpg"
+       - delay: 00:00:15
+       - service: telegram_bot.send_photo
+         data_template:
+           target:
+            - !secret chat_id_group
+            # - !secret chat_id_alex
+           file: "/config/www/cam_captures/reolink5.jpg"  
            
   video_reolink2:
     alias: Запись с камеры Реолинк С2 и отправка в телеграмм
     sequence:
-       - service: mqtt.publish
-         data_template:
-           topic: "notification/messages"
-           payload_template: '0014'
-    
+    - service: camera.record
+      data_template:
+        entity_id: camera.reolink_c2_kn
+        filename: "/config/www/cam_captures/reolink2.mp4"
+        lookback: 5
+        duration: 15
+    - delay: 00:00:45
+    - service: telegram_bot.send_video
+      data_template:
+        target:
+           - !secret chat_id_group
+        #  - !secret chat_id_olha
+        file: "/config/www/cam_captures/reolink2.mp4"
+        caption: "Кто то полез в конфетницу - {{ states('sensor.time') }}"

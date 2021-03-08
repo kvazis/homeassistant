@@ -34,3 +34,12 @@
     sequence:
      - service: switch.toggle
        entity_id: switch.vacancy
+       
+  telegramm_test_messager:
+    alias: Тестирование телеги
+    sequence:
+    - service: telegram_bot.send_message
+      data_template:
+        target:
+            - !secret chat_id_group
+        message: 'Тестовое сообщение. Время события - {{ states.sensor.time_date.state }}'

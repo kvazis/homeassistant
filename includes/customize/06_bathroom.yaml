@@ -5,7 +5,9 @@ light.yeelight_06_ceiling:
   friendly_name: Ванная, люстра
   icon: mdi:ceiling-light
 
-## Реле
+## Питание
+
+## Выключатель без нулевой линии на входе
 switch.0x00158d0001117040_switch_right:
   friendly_name: Ванная, питание лампы
   device_class: plug  
@@ -14,14 +16,61 @@ switch.0x00158d0001117040_switch_left:
   friendly_name: Ванная, вентиляция
   device_class: plug  
   icon: mdi:fan
-
+sensor.0x00158d0001117040_action:
+  friendly_name: Ванная выключатель на входе без нуля
+sensor.0x00158d0001117040_click:
+  friendly_name: Ванная выключатель на входе без нуля
+sensor.0x00158d0001117040_switch_temperature:
+  friendly_name: Ванная выключатель на входе без нуля
+sensor.0x00158d0001117040_linkquality:
+  friendly_name: Ванная выключатель на входе без нуля
+  
+## Розетка Aqara - питание бойлера
 switch.0x00158d00015751f4_switch:
   friendly_name: Бойлер
   device_class: plug  
   icon: mdi:hot-tub
+sensor.0x00158d00015751f4_energy:
+  friendly_name: Бойлер
+  icon_template: mdi:gauge
+  unit_of_measurement: 'КВт*ч'
+sensor.0x00158d00015751f4_power:
+  friendly_name: Бойлер потребление
+  unit_of_measurement: Вт
+  device_class: power
+sensor.0x00158d00015751f4_voltage:
+  friendly_name: Бойлер напряжение
+  unit_of_measurement: В
+binary_sensor.bt_heater_power_outage_memory:
+  friendly_name: Бойлер восстановление после сбоя питания
+sensor.0x00158d00015751f4_switch_temperature:
+  friendly_name: Бойлер
+sensor.0x00158d00015751f4_linkquality:
+  friendly_name: Бойлер
 
-## Сенсоры 
-## Датчик на двери 
+## Датчики 
+
+## Логические
+sensor.06_mean_humidity:
+  friendly_name: Ванная, средняя влажность
+  icon: mdi:water-percent  
+sensor.06_mean_temperature:
+  friendly_name: Ванная, средняя температура
+  icon: mdi:temperature-celsius
+  
+## Датчик климата
+sensor.0x00158d0001dcd47e_humidity:
+  friendly_name: Ванная влажность
+  icon: mdi:water-percent
+sensor.0x00158d0001dcd47e_temperature:
+  friendly_name: Ванная температура
+  icon: mdi:temperature-celsius
+sensor.0x00158d0001dcd47e_battery:
+  friendly_name: Ванная климат
+sensor.0x00158d0001dcd47e_linkquality:
+  friendly_name: Ванная климат  
+  
+## Датчик открытия двери 
 binary_sensor.0x00158d00054495dc_contact:
   friendly_name: Ванная дверь
   device_class: door
@@ -32,74 +81,62 @@ sensor.0x00158d00054495dc_voltage:
 sensor.0x00158d00054495dc_linkquality:
   friendly_name: Ванная дверь
 
-sensor.0x00158d00015751f4_power:
-  friendly_name: Бойлер потребление
-  unit_of_measurement: Вт
-  device_class: power
-
-sensor.0x00158d00015751f4_voltage:
-  friendly_name: Бойлер напряжение
-  unit_of_measurement: В
-  
-sensor.3f59c882d82d_humidity:
+## Bluetooth датчик климата 
+sensor.bt_lywsd02_humidity:
   friendly_name: Ванная влажность BLE
   icon: mdi:water-percent
-sensor.3f59c882d82d_temperature:
+sensor.bt_lywsd02_temperature:
   friendly_name: Ванная температура BLE
   icon: mdi:temperature-celsius
 
-
-sensor.0x00158d0001e547a3_illuminance:
-  friendly_name: Ванная освещенность
-
-sensor.0x00158d0001dcd47e_humidity:
-  friendly_name: Ванная влажность
-  icon: mdi:water-percent
-sensor.0x00158d0001dcd47e_temperature:
-  friendly_name: Ванная температура
-  icon: mdi:temperature-celsius
-  
-sensor.06_mean_humidity:
-  friendly_name: Ванная, средняя влажность
-  icon: mdi:water-percent  
-sensor.06_mean_temperature:
-  friendly_name: Ванная, средняя температура
-  icon: mdi:temperature-celsius
-  
-sensor.0x00158d000238a140_click:
-  friendly_name: Ванная выключатель
-
-#Бинарные сенсоры
+## Датчик движения
 binary_sensor.0x00158d0001e547a3_occupancy:
   friendly_name: Ванная движение
-
-binary_sensor.0x00158d0001bb60c2_water_leak:
-  friendly_name: Ванная протечка душевая
-binary_sensor.0x00158d0001d72fa2_water_leak:
-  friendly_name: Ванная протечка раковина
-
-## Уровень заряда  
-sensor.0x00158d0001dcd47e_battery:
-  friendly_name: Ванная климат
-sensor.0x00158d000238a140_battery:
-  friendly_name: Ванная выключатель
-sensor.0x00158d0001bb60c2_battery:
-  friendly_name: Ванная протечка душевая
-sensor.0x00158d0001d72fa2_battery:
-  friendly_name: Ванная протечка раковина
+sensor.0x00158d0001e547a3_occupancy_timeout:
+  friendly_name: Ванная движение - таймаут
+sensor.0x00158d0001e547a3_illuminance:
+  friendly_name: Ванная освещенность
 sensor.0x00158d0001e547a3_battery:
   friendly_name: Ванная, движение
-  
-## Уровень сигнала
-sensor.0x00158d00015751f4_linkquality:
-  friendly_name: Бойлер
-sensor.0x00158d0001dcd47e_linkquality:
-  friendly_name: Ванная климат
-sensor.0x00158d000238a140_linkquality:
-  friendly_name: Ванная выключатель
-sensor.0x00158d0001bb60c2_linkquality:
-  friendly_name: Ванная протечка душевая
-sensor.0x00158d0001d72fa2_linkquality:
-  friendly_name: Ванная протечка раковина
 sensor.0x00158d0001e547a3_linkquality:
   friendly_name: Ванная, движение
+sensor.0x00158d0001e547a3_voltage:
+  friendly_name: Ванная, движение
+  
+## Датчик протечки душевая
+binary_sensor.0x00158d0001bb60c2_water_leak:
+  friendly_name: Ванная протечка душевая
+binary_sensor.0x00158d0001bb60c2_tamper:
+  friendly_name: Ванная протечка душевая, тампер
+sensor.0x00158d0001bb60c2_battery:
+  friendly_name: Ванная протечка душевая
+binary_sensor.0x00158d0001bb60c2_battery_low:
+  friendly_name: Ванная протечка душевая низкий заряд
+sensor.0x00158d0001bb60c2_linkquality:
+  friendly_name: Ванная протечка душевая  
+  
+## Датчик протечки раковина 
+binary_sensor.0x00158d0001d72fa2_water_leak:
+  friendly_name: Ванная протечка раковина
+binary_sensor.0x00158d0001d72fa2_tamper:
+  friendly_name: Ванная протечка раковина, тампер
+sensor.0x00158d0001d72fa2_battery:
+  friendly_name: Ванная протечка раковина  
+binary_sensor.0x00158d0001d72fa2_battery_low:
+  friendly_name: Ванная протечка раковина низкий заряд   
+sensor.0x00158d0001d72fa2_linkquality:
+  friendly_name: Ванная протечка раковина  
+  
+## Выключатели, кнопки
+
+## Выключатель на выходе  
+sensor.0x00158d000238a140_click:
+  friendly_name: Ванная выключатель
+sensor.0x00158d000238a140_action:
+  friendly_name: Ванная выключатель
+sensor.0x00158d000238a140_battery:
+  friendly_name: Ванная выключатель
+sensor.0x00158d000238a140_voltage:
+  friendly_name: Ванная выключатель
+sensor.0x00158d000238a140_linkquality:
+  friendly_name: Ванная выключатель

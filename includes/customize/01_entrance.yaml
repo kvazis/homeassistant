@@ -24,11 +24,9 @@ sensor.0x00158d0003f46bb6_switch_temperature:
 ## Прихожая
 
 ## Освещение
-light.0x00158d000420dbab_light:
-  friendly_name: Прихожая лампа Е27
+light.yeelight_ct_bulb_0x000000000531b38e:
+  friendly_name: Прихожая Е27 Yeelight
   icon: mdi:lightbulb
-sensor.0x00158d000420dbab_linkquality:
-  friendly_name: Прихожая лампа Е27  
 
 ## Датчики 
   
@@ -76,13 +74,15 @@ sensor.0x00158d00013f7894_linkquality:
 ## Выключатели, кнопки
 
 ## Выключатель на входе
-sensor.0x00158d0001718ca8_click:
+sensor.0x00158d00057305ac_action:
   friendly_name: Прихожая выключатель вход
-sensor.0x00158d0001718ca8_action:
+sensor.0x00158d00057305ac_click:
   friendly_name: Прихожая выключатель вход
-sensor.0x00158d0001718ca8_battery:
-  friendly_name: Прихожая выключатель вход
-sensor.0x00158d0001718ca8_linkquality:
+switch.0x00158d00057305ac_left:
+  friendly_name: Питание люстры в коридоре
+switch.0x00158d00057305ac_right:
+  friendly_name: Питание лампочки в прихожей
+sensor.0x00158d00057305ac_linkquality:
   friendly_name: Прихожая выключатель вход
 
 ## Кнопка mijia на шкафу

@@ -17,6 +17,12 @@ sensor.illumination_7811dc64f4c8:
   friendly_name: Кухня шлюз освещенность
 
 ## Питание
+## Реле Aqara Т1 на входе
+switch.0x04cf8cdf3c7f7b6e:
+  friendly_name: Кухня питание люстры
+sensor.0x04cf8cdf3c7f7b6e_linkquality:
+  friendly_name: Кухня реле Aqara T1 без нуля
+
 ## Розетка Aqara над плитой
 switch.0x00158d0001d35bc0_switch:
   friendly_name: Кухня LED лента рабочей зоны
@@ -165,6 +171,17 @@ sensor.0xec1bbdfffe8f1e42_voltage:
 sensor.0xec1bbdfffe8f1e42_linkquality:
   friendly_name: Кухня датчик протечки под раковиной
 
+## Кухня, выключатель на входе
+sensor.0x00158d0001718ca8_action:
+  friendly_name: Кухня выключатель вход
+sensor.0x00158d0001718ca8_click:
+  friendly_name: Кухня выключатель вход
+sensor.0x00158d0001718ca8_battery:
+  friendly_name: Кухня выключатель вход
+sensor.0x00158d0001718ca8_linkquality:
+  friendly_name: Кухня выключатель вход
+sensor.0x00158d0001718ca8_voltage:
+  friendly_name: Кухня выключатель вход
 
 sensor.0x00158d0001581109_humidity:
   friendly_name: Кухня влажность
@@ -173,8 +190,7 @@ sensor.0x00158d0001581109_temperature:
   friendly_name: Кухня температура
   icon: mdi:temperature-celsius
 
-sensor.0x00158d000282a130_click:
-  friendly_name: Кухня выключатель вход
+
  
 sensor.0x00158d000101bdc6_action:
   friendly_name: Кухня кубик
@@ -199,8 +215,7 @@ sensor.0x00158d0002a8ab8b_battery:
 
 sensor.0x00158d0001581109_battery:
   friendly_name: Кухня климат
-sensor.0x00158d000282a130_battery:
-  friendly_name: Кухня выключатель вход
+
 sensor.0x00158d000154a353_battery:
   friendly_name: Кухня, вход, круглая
 sensor.0x00158d0001a99562_battery:

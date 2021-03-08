@@ -3,10 +3,11 @@
 light.philips_07_ceiling:
   friendly_name: Детская Д основной свет
   icon: mdi:ceiling-light
-
-light.yeelight_07_whitebulb:
+light.0x00158d000420dbab:
   friendly_name: Детская Д бра
-  icon: mdi:lightbulb  
+  icon: mdi:lightbulb
+sensor.0x00158d000420dbab_linkquality:
+  friendly_name: Детская Д бра
 
 light.xiaomi_07_table:
   friendly_name: Детская Д настольная лампа
@@ -73,33 +74,43 @@ sensor.0x00158d000153dd8e_voltage:
 sensor.0x00158d000153dd8e_linkquality:
   friendly_name: Детская Д ноутбук
 
-## Удлинитель Broadlink
-switch.plug1:
-  friendly_name: Broadlink розетка 1 - Принтер HP
+## Удлинитель Useelink
+switch.0x842e14fffefd9721_switch_l1:
+  friendly_name: Useelink розетка 1
   device_class: plug  
   icon: mdi:power-socket-eu
-switch.plug2:
-  friendly_name: Broadlink розетка 2 - Зарядка
+switch.0x842e14fffefd9721_switch_l2:
+  friendly_name: Router Asus RT-AC66U B1
   device_class: plug  
-  icon: mdi:power-socket-eu
-switch.plug3:
-  friendly_name: Broadlink розетка 3 - Роутер
+  icon: mdi:router-wireless
+switch.0x842e14fffefd9721_switch_l3:
+  friendly_name: Зарядная станция
   device_class: plug  
-  icon: mdi:power-socket-eu
-switch.plug4:
-  friendly_name: Broadlink розетка 4 - Колонка
+  icon: mdi:battery-charging
+switch.0x842e14fffefd9721_switch_l4:
+  friendly_name: Принтер HP
   device_class: plug  
-  icon: mdi:power-socket-eu
+  icon: mdi:printer
+switch.0x842e14fffefd9721_switch_l5:
+  friendly_name: Xiaomi Gateway 3
+  device_class: plug  
+  icon: mdi:hubspot
+sensor.0x842e14fffefd9721_linkquality:
+  friendly_name: Удлинитель Useelink
 
 ## Датчики 
 
 ## Температура для термостатов
 sensor.dd_temp_home:
-  friendly_name: Детская Д температура в режиме дома
+  friendly_name: Температура - дома
   icon: mdi:temperature-celsius
   unit_of_measurement: 'C'
 sensor.dd_temp_away:
-  friendly_name: Детская Д температура в режиме никого нет
+  friendly_name: Температура - никого нет
+  icon: mdi:temperature-celsius
+  unit_of_measurement: 'C'
+sensor.dd_temp_window:
+  friendly_name: Температура - проветривание
   icon: mdi:temperature-celsius
   unit_of_measurement: 'C'
 
@@ -107,7 +118,7 @@ sensor.dd_temp_away:
 sensor.07_mean_humidity:
   friendly_name: Детская Д средняя влажность
   icon: mdi:water-percent  
-sensor.07_mean_temperature:
+sensor.dd_mean_temperature:
   friendly_name: Детская Д средняя температура
   icon: mdi:temperature-celsius
 

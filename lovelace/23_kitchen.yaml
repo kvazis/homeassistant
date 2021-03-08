@@ -85,18 +85,18 @@ cards:
           - type: entities
             show_header_toggle: false
             entities:
-              - entity: switch.0x00158d0001291d12_switch
-                name: Телевизор
-                icon: mdi:power-socket-eu
-              - entity: switch.0x00158d0001fa2934_switch
-                name: Холодильник
-                icon: mdi:power-socket-eu
-              - entity: switch.0x000d6f0014bb14b4_switch
-                name: Аэрогриль
-                icon: mdi:power-socket-eu
-              - entity: switch.bw_shp_2_relay
-                name: Чайник
-                icon: mdi:power-socket-eu
+              - entity: switch.kitchen_grill
+                type: custom:multiple-entity-row
+                toggle: true
+                state_color: true
+                name: Гриль
+                secondary_info: last-changed
+                state_header: Питание
+                entities:
+                  - entity: sensor.kitchen_grill_instantvoltage
+                    name: Напряжение
+                  - entity: sensor.kitchen_grill_instantpower
+                    name: Потребление
                 
       - type: vertical-stack
         cards:
@@ -110,7 +110,7 @@ cards:
               **Мониторинг**
               
         - type: picture-entity
-          entity: camera.reolink_c2_pro_profile000_mainstream
+          entity: camera.reolink_c2_kn
           camera_view: live 
           show_state: false
           show_name: false
@@ -156,25 +156,6 @@ cards:
               }   
           content: >
               **Устройства**
-
-        - type: entities
-          show_header_toggle: false
-          entities:
-           - entity: sensor.0x00158d0001291d12_power
-             name: Телевизор
-             icon: mdi:television
-           - entity: sensor.0x00158d0001fa2934_power
-             name: Холодильник
-             icon: mdi:fridge
-           - entity: sensor.0x00158d0001d35bc0_power
-             name: LED лента
-             icon: mdi:led-strip-variant
-           - entity: sensor.0x000d6f0014bb14b4_power
-             name: Аэрогриль
-             icon: mdi:grill
-           - entity: sensor.bw_shp_2_power
-             name: Чайник
-             icon: mdi:kettle
 
         - type: custom:stack-in-card
           mode: vertical

@@ -5,13 +5,17 @@
    entity_id: sensor.mqtt_state
    to: 'unavailable'
   condition:
-   - condition: state
-     entity_id: switch.control_mode
-     state: 'on'
+    - condition: state
+      entity_id: switch.control_mode
+      state: 'on'
   action:
-    - service: notify.telegram
-      data:
-        message: "Потеря связи с MQTT сервером - {{ states('sensor.time_date') }} ."
+    - service: telegram_bot.send_message
+      data_template:
+        target:
+            - !secret chat_id_group_tech
+        message: | 
+             Ужасные новости
+             Дон Хуан покинул нас в {{ states('sensor.time_date') }}
 
 - alias: 911_mqtt_online
   initial_state: true
@@ -24,9 +28,13 @@
      entity_id: switch.control_mode
      state: 'on'
   action:
-    - service: notify.telegram
-      data:
-        message: "Связь с MQTT сервером восстановлена в - {{ states('sensor.time_date') }} ."
+    - service: telegram_bot.send_message
+      data_template:
+        target:
+            - !secret chat_id_group_tech
+        message: | 
+             Как луч света в темноте
+             Дон Хуан вернулся к нам в {{ states('sensor.time_date') }}
         
 - alias: 911_test_lost
   initial_state: true
@@ -39,10 +47,12 @@
      entity_id: switch.control_mode
      state: 'on'
   action:
-    - service: mqtt.publish
+    - service: telegram_bot.send_message
       data_template:
-         topic: "notification/error"
-         payload_template: '041' 
+        target:
+            - !secret chat_id_group_tech
+        message: | 
+             Мы потеряли тестовый сервер, не нарочно, прасцице {{ states('sensor.time_date') }}
 
 - alias: 911_test_online
   initial_state: true
@@ -55,7 +65,9 @@
      entity_id: switch.control_mode
      state: 'on'
   action:
-    - service: mqtt.publish
+    - service: telegram_bot.send_message
       data_template:
-         topic: "notification/error"
-         payload_template: '042'
+        target:
+            - !secret chat_id_group_tech
+        message: | 
+             О, мы снова нашли тестовый сервер, он лежал под тумбочкой {{ states('sensor.time_date') }}

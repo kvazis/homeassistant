@@ -1,32 +1,71 @@
-## Возобновление питания на выключателе холодильника
-- alias: 04_kn_power
+- id: Кухня, контроль питания на холодильнике
+  alias: kitchen_fridge_power
   initial_state: true
   trigger:
     - platform: time_pattern
       minutes: '/1'
   condition:
-    - condition: state
-      entity_id: switch.0x00158d0001fa2934_switch
-      state: 'off'
-    - condition: state
-      entity_id: switch.control_mode
-      state: 'on'  
+   - condition: template
+     value_template: "{{ states('switch.0x00158d0001fa2934_switch') != 'on' }}"
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'  
   action:
    - service: switch.turn_on
      entity_id: switch.0x00158d0001fa2934_switch
      
-## Включение люстры
-- alias: 04_kn_ceiling
+- id: Кухня, контроль питания на люстре
+  alias: kitchen_cell_power
+  initial_state: true
+  trigger:       
+   - platform: time_pattern
+     minutes: '/1'
+  condition:
+   - condition: template
+     value_template: "{{ states('switch.0x04cf8cdf3c7f7b6e') != 'on' }}"
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
+  action:
+   - service: switch.turn_on
+     entity_id: switch.0x04cf8cdf3c7f7b6e
+     
+- id: Кухня, перезагрузка зависшей люстры
+  alias: kitchen_cell_reboot
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.philips_04_ceiling
+    to: 'unavailable'
+    for:
+      minutes: 5
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.unavailable_now_light
+    below: 5
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.0x04cf8cdf3c7f7b6e
+     
+- id: Кухня, включение люстры
+  alias: kitchen_ceiling
   initial_state: true
   trigger:
 ## Выключатель на входе в кухню - правая кнопка
   - platform: state
-    entity_id: sensor.0x00158d000282a130_action
+    entity_id: sensor.0x00158d0001718ca8_action
     to: 'single_right'
 ## 6 клавишник на входе
   - platform: state
     entity_id: sensor.0x04cf8cdf3c794209_action
     to: 'button_1_single'
+## 4 клавишник на комоде
+  - platform: state
+    entity_id: sensor.0x04cf8cdf3c7942ca_action
+    to: 'button_4_single'
 ## Подброс кубика
   - platform: state
     entity_id: sensor.0x00158d000101bdc6_action
@@ -39,8 +78,8 @@
     - service: switch.toggle
       entity_id: switch.04_kn_mainlight 
   
-# Автоматическое включение люстры
-- alias: 04_kn_ceiling_auto_on
+- id: Кухня, автоматическое включение люстры
+  alias: kitchen_ceiling_auto_on
   initial_state: true
   trigger:
 # Датчик движения
@@ -66,8 +105,8 @@
          script.04_kn_ceiling_auto_3
          {% endif %}
          
-# Автоматическое выключение люстры 
-- alias: 04_kn_ceiling_auto_off
+- id: Кухня, автоматическое выключение люстры 
+  alias: kitchen_ceiling_auto_off
   initial_state: true
   trigger:
   - platform: state
@@ -85,8 +124,8 @@
     - service: script.turn_on
       entity_id: script.04_kn_ceiling_off
 
-# Включение подсветки  
-- alias: 04_kn_led_toggle
+- id: Кухня, Включение подсветки рабочей зоны 
+  alias: kitchen_led_toggle
   initial_state: true
   trigger:
 ## Переворот кубика на 90 градусов
@@ -95,8 +134,8 @@
     to: 'flip90'  
 ## Выключатель на входе в кухню - левая кнопка
   - platform: state
-    entity_id: sensor.0x00158d000282a130_click
-    to: 'left'
+    entity_id: sensor.0x00158d0001718ca8_action
+    to: 'single_left'
   condition:
    - condition: state
      entity_id: switch.control_mode
@@ -105,8 +144,8 @@
     service: light.toggle
     entity_id: light.aqara_04_strip
 
-## Управление телевизором       
-- alias: 04_tv_xiaomi
+- id: Кухня, управление телевизором       
+  alias: kitchen_tv_xiaomi
   initial_state: true
   trigger:
 ## 6 клавишник на входе
@@ -115,8 +154,8 @@
     to: 'button_5_single'
 ## Правая клавиша, выключатель на входе   
   - platform: state
-    entity_id: sensor.0x00158d000282a130_click
-    to: 'right_double'
+    entity_id: sensor.0x00158d0001718ca8_action
+    to: 'single_both'
 ## Двойной тап кубиком
   - platform: state
     entity_id: sensor.0x00158d000101bdc6_action
@@ -129,8 +168,8 @@
     service: script.turn_on
     entity_id: script.xiaomi_tv
     
-## Включение Android Box       
-- alias: 04_android
+- id: Кухня, управление Android Box       
+  alias: kitchen_android_box
   initial_state: true
   trigger:
 ## 6 клавишник на входе
@@ -145,8 +184,8 @@
     service: script.turn_on
     entity_id: script.mini8_android
     
-## Датчик вибрации     
-- alias: 04_photo_on_vibro
+- id: Кухня, съемка при вибрации
+  alias: kitchen_video_on_vibro
   initial_state: true
   trigger:
 ## Датчик вибрации
@@ -158,19 +197,20 @@
      entity_id: switch.control_mode
      state: 'on'
   action:
-    - service: mqtt.publish
-      data_template:
-        topic: "notification/messages"
-        payload_template: '0400'
-        retain: true
+   - service: script.turn_on
+     entity_id: 
+        - script.video_reolink2
     
-## Запись последнего движения в кухне
-- alias: 04_kitchen_motion_time
+- id: Кухня запись последнего движения в кухне
+  alias: kitchen_motion_time
   initial_state: true
   trigger:
 ## Движение в кухне
   - platform: state
     entity_id: binary_sensor.0x00158d0001e16204_occupancy
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.reolink_kn_occupancy
     to: 'on'
   condition:
    - condition: state

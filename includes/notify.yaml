@@ -18,3 +18,7 @@
   - name: telegram_olha
     platform: telegram
     chat_id: !secret chat_id_olha
+    
+  - name: telegram_group
+    platform: telegram
+    chat_id: !secret chat_id_group

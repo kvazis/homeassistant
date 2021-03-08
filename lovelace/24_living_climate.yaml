@@ -1,0 +1,297 @@
+##################   Living room
+title: Гостиная
+icon: mdi:home-thermometer
+cards:
+
+    - type: vertical-stack
+      cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Панель управления**
+
+        - type: glance
+          show_state: false
+          state_color: true
+          entities:
+           - entity: binary_sensor.cleargrass_air
+             name: Воздух
+           - entity: binary_sensor.lr_aeration
+             name: Проветривание
+           - entity: binary_sensor.lr_air
+             name: Уведомление
+
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+            - entity: sensor.living_day_work
+              name: Режим дневных сценариев
+            - type: divider
+            - entity: switch.lr_work
+              state_color: true
+            - entity: switch.silent_mode
+              state_color: true
+      
+        - type: entity-filter
+          show_header_toggle: false
+          entities:
+          - entity: timer.lr_silent
+          state_filter:
+            - "active"
+
+    - type: vertical-stack
+      cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Воздух**
+
+        - type: custom:mini-graph-card
+          entities:
+            - entity: sensor.cleargrass_air_co2
+              name: СО2 
+          color_thresholds:
+            - value: 1000
+              color: "#00FFFF"
+            - value: 2000
+              color: "#00FF00"
+            - value: 3000
+              color: "#FFFF00"
+            - value: 9999
+              color: "#FF0000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+        - type: custom:mini-graph-card
+          entities:
+           - entity: sensor.cleargrass_air_tvoc
+             name: ЛОВ
+          color_thresholds:
+            - value: 65
+              color: "#00FFFF"
+            - value: 220
+              color: "#00FF00"
+            - value: 660
+              color: "#FFFF00"
+            - value: 2000
+              color: "#FF0000"
+            - value: 9999
+              color: "#800000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+        - type: custom:mini-graph-card  
+          entities:
+           - entity: sensor.cleargrass_air_pm25
+             name: РМ 2.5
+          color_thresholds:
+            - value: 12
+              color: "#00FFFF"
+            - value: 35
+              color: "#00FF00"
+            - value: 55
+              color: "#FFFF00"
+            - value: 150
+              color: "#FFD700"
+            - value: 250
+              color: "#FF0000"
+            - value: 999
+              color: "#800000"
+          animate: true
+          line_width: 2
+          hour24: true
+          points_per_hour: 1
+          group_by: hour
+          hours_to_show: 72
+
+
+            
+    - type: vertical-stack
+      cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Отопление**
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: sensor.lr_heat_mode
+          - entity: switch.lr_radiator
+            state_color: true
+          - entity: sensor.lr_temp_home
+            type: custom:multiple-entity-row
+            name: Температура
+            state_header: Дома
+            entities:
+              - entity: sensor.lr_temp_away
+                name: Не дома
+              - entity: sensor.lr_temp_window
+                name: Проветривание
+          
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.lr_mean_temperature
+                 name: Температура
+              color_thresholds:
+                - value: 10
+                  color: "#191970"
+                - value: 15
+                  color: "#0000FF"
+                - value: 20
+                  color: "#ADD8E6"
+                - value: 25
+                  color: "#E0FFFF"
+                - value: 30
+                  color: "#FFFF00"
+                - value: 50
+                  color: "#FFD700"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+              
+            - type: custom:simple-thermostat
+              entity: climate.living_heater
+              step_layout: row
+              name: false
+              icon: false
+
+            - type: custom:logbook-card
+              entity: switch.lr_radiator
+              max_items: 5
+              title: История включений
+              duration_labels:
+                second:  '${value} секунда'
+                seconds: '${value} секунд'
+                minute:  '${value} минута'
+                minutes: '${value} минут'
+                hour:    '${value} час'
+                hours:   '${value} часов'
+                day:     '${value} день'
+                days:    '${value} дней'
+                
+    - type: vertical-stack
+      cards:
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }  
+          content: >
+              **Увлажнение**
+              
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: switch.lr_hum_mode
+            state_color: true
+            name: Режим увлажнения
+          - entity: fan.gg_humidifier
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Увлажнитель
+            secondary_info: last-changed
+            entities:
+              - entity: sensor.smartmi_water
+                name: Вода %
+              - entity: sensor.smartmi_mode
+                name: Режим
+                
+          - entity: fan.gg_purifier
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Очиститель
+            secondary_info: last-changed
+            entities:
+              - entity: sensor.purifier_filter
+                name: Фильтр %
+              - entity: sensor.purifier_mode
+                name: Режим
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards:
+         
+            - type: custom:mini-graph-card
+              entities:
+               - entity: sensor.lr_mean_humidity
+                 name: Влажность
+              color_thresholds:
+                - value: 20
+                  color: "#FFFF00"
+                - value: 30
+                  color: "#FAFAD2"
+                - value: 40
+                  color: "#E0FFFF"
+                - value: 50
+                  color: "#7FFFD4"
+                - value: 60
+                  color: "#00CED1"
+                - value: 80
+                  color: "#0000FF"
+                - value: 100
+                  color: "#000080"
+              animate: true
+              line_width: 2
+              hour24: true
+              points_per_hour: 1
+              group_by: hour
+              hours_to_show: 72
+
+            - type: entities
+              show_header_toggle: false
+              entities:
+              - entity: input_number.humidity_level_gg
+              - entity: sensor.smartmi_water
+                name: Остаток воды - 
+                
+            - type: custom:stack-in-card
+              mode: horizontal
+              cards: 
+                - type: button
+                  entity: switch.gg_humidifier_mode_auto
+                  name: Auto
+                  icon: mdi:brightness-auto
+                - type: button
+                  entity: switch.gg_humidifier_mode_silent
+                  name: Silent
+                  icon: mdi:speedometer-slow
+                - type: button
+                  entity: switch.gg_humidifier_mode_medium
+                  name: Medium
+                  icon: mdi:speedometer-medium
+                - type: button
+                  entity: switch.gg_humidifier_mode_high
+                  name: High
+                  icon: mdi:speedometer

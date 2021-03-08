@@ -18,7 +18,7 @@ hum_dd:
               {{ is_state('binary_sensor.0x00158d0001193697_contact', 'off')  
                  and is_state('binary_sensor.0x00158d00015843d4_contact', 'off')
                  and is_state('binary_sensor.dd_hum_mode', 'on')
-                 and is_state('binary_sensor.away', 'off')
+                 and is_state('binary_sensor.occupancy', 'on')
                  and is_state('light.xiaomi_07_table', 'off')
                  and is_state('sensor.dd_day_work', 'Включен') }}
             icon_template: >-
@@ -32,7 +32,7 @@ hum_dd:
     
     # Аverage humidity
       - platform: min_max
-        name: 07_mean_humidity
+        name: dd_mean_humidity
         type: mean
         entity_ids:
           - sensor.0x00158d000156e92e_humidity
@@ -80,7 +80,7 @@ hum_dd:
         - platform: state
           entity_id:
             - input_number.humidity_level_dd
-            - sensor.07_mean_humidity
+            - sensor.dd_mean_humidity
             - binary_sensor.dd_hum
       condition:
         - condition: state
@@ -90,7 +90,7 @@ hum_dd:
         service_template: >-
           {% set hi = (states('input_number.humidity_level_dd') | float) + 5 %}
           {% set lo = (states('input_number.humidity_level_dd') | float) - 5 %}
-          {% set humidity = states('sensor.07_mean_humidity') | float %}
+          {% set humidity = states('sensor.dd_mean_humidity') | float %}
           {% if humidity > hi %}
             switch.turn_off
           {% elif states.binary_sensor.dd_hum.state == 'off' %} 
@@ -126,11 +126,12 @@ hum_dd:
            entity_id: binary_sensor.dd_hum
            state: 'on'
       action:
-        - service: mqtt.publish
+        - service: telegram_bot.send_message
           data_template:
-            topic: "notification/messages"
-            payload_template: '0700'
-            retain: true
+            target:
+                - !secret chat_id_group
+            message: | 
+                 {{"\U0001F6B1"}} Детская Д, закончилась вода в увлажнителе или он выключен вручную {{ states('sensor.time_date') }} 
         - service: xiaomi_aqara.play_ringtone
           data:
             gw_mac: 28:6C:07:F0:AD:27

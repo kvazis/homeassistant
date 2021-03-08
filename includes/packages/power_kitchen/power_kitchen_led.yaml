@@ -1,0 +1,84 @@
+power_kitchen_led:
+# Кухня LED лента
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/kitchen/led/today"
+        name: 'kitchen_led_consumption_today'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/kitchen/led/yesterday"
+        name: 'kitchen_led_consumption_yesterday'
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/kitchen/led/month"
+        name: 'kitchen_led_consumption_month'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/kitchen/led/lastmonth"
+        name: 'kitchen_led_consumption_lastmonth'
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: template
+        sensors:
+          kitchen_led_money_month:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.kitchen_led_consumption_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          kitchen_led_money_lastmonth:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.kitchen_led_consumption_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+    script:
+          
+          kitchen_led_day:
+            alias: Кухня LED лента энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/kitchen/led/today"
+                payload: "{{(states('sensor.kitchen_led_consumption_today') | float + (states('sensor.kitchen_led_instantpower') | float /120000))|round(5) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/kitchen/led/month"
+                payload: "{{(states('sensor.kitchen_led_consumption_month') | float + (states('sensor.kitchen_led_instantpower') | float /120000))|round(5) }}"
+                retain: true
+
+          kitchen_led_yesterday:
+            alias: Кухня LED лента энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/led/yesterday"
+                payload: "{{states('sensor.kitchen_led_consumption_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/led/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          kitchen_led_lastmonth:
+            alias: Кухня LED лента энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/led/lastmonth"
+                payload: "{{states('sensor.kitchen_led_consumption_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/kitchen/led/month"
+                payload: "{{ 0.0 }}"
+                retain: true

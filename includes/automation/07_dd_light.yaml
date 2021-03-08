@@ -1,10 +1,46 @@
+- id: ДД, включение питания на Gateway 3
+  alias: dd_gateway_power
+  initial_state: true
+  trigger:       
+   - platform: time_pattern
+     minutes: '/1'
+  condition:
+   - condition: template
+     value_template: "{{ states('switch.0x842e14fffefd9721_switch_l5') != 'on' }}"
+   - condition: state
+     entity_id: switch.control_mode
+     state: 'on'
+  action:
+   - service: switch.turn_on
+     entity_id: switch.0x842e14fffefd9721_switch_l5
+     
+- id: ДД, перезагрузка зависшего шлюза
+  alias: dd_gateway_reboot
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: switch.0x680ae2fffe83f67a_firmware_lock
+    to: 'unavailable'
+    for:
+      minutes: 5
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.unavailable_now_light
+    below: 5
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    entity_id: switch.0x842e14fffefd9721_switch_l5
+
 - id: ДД, ручное управление люстрой
   alias: 07_dd_philips
   initial_state: true
   trigger:
 # Выключатель у входа
   - platform: state
-    entity_id: sensor.0x00158d000163e571_click
+    entity_id: sensor.0x00158d000163e571_action
     to: 'right'
 # Выключатель возле кровати
   - platform: state
@@ -117,7 +153,7 @@
   initial_state: true
   trigger:
   - platform: state
-    entity_id: sensor.0x00158d000163e571_click
+    entity_id: sensor.0x00158d000163e571_action
     to: 'left'
 # Выключатель возле кровати
   - platform: state
@@ -131,9 +167,9 @@
   - service: script.turn_on
     data_template:
      entity_id: >-
-        {%- if states.light.yeelight_07_whitebulb.state  == 'off' -%}
+        {%- if states('light.0x00158d000420dbab')  == 'off' -%}
         script.07_dd_bra_on
-        {%- elif states.light.yeelight_07_whitebulb.state  == 'on' -%}
+        {%- elif states('light.0x00158d000420dbab')  == 'on' -%}
         script.07_dd_bra_off
         {%- endif -%}
 
@@ -160,7 +196,7 @@
   trigger:
 # Выключатель на входе
   - platform: state
-    entity_id: sensor.0x00158d000163e571_click
+    entity_id: sensor.0x00158d000163e571_action
     to: 'both'
 # Выключатель возле кровати
   - platform: state
@@ -184,7 +220,7 @@
   trigger:
 # Кнопка на принтере
   - platform: state
-    entity_id: sensor.0x00158d00013f82b7_click
+    entity_id: sensor.0x00158d00013f82b7_action
     to: 'single'   
 # Кубик 
   - platform: state
@@ -196,7 +232,7 @@
     state: 'on'
   action:
     service: switch.toggle
-    entity_id: switch.plug1
+    entity_id: switch.0x842e14fffefd9721_switch_l4
         
 - id: ДД, запись последнего движения
   alias: 07_dd_motion_time

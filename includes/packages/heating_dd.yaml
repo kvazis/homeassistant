@@ -1,130 +1,231 @@
 heating_dd:
 
+    climate:
+      - platform: generic_thermostat
+        name: dd_heater
+        heater: switch.0x00158d0001a2ccab_switch_right
+        target_sensor: sensor.dd_mean_temperature
+        # target_temp: 22
+        # away_temp: 18
+        min_temp: 16
+        max_temp: 28
+        ac_mode: false
+        cold_tolerance: 0.5
+        hot_tolerance: 0.5
+        min_cycle_duration:
+          minutes: 5
+        keep_alive:
+          minutes: 3
+        initial_hvac_mode: "heat"
+
     binary_sensor:
     
-    # Условия для включения отопления
+      - platform: mqtt
+        name: dd_school
+        state_topic: "states/dd/school"
+        payload_on: "ON"
+        payload_off: "OFF"
+        
+    # Окно и дверь на балкон
       - platform: template
         sensors:
-          dd_heat:
-            friendly_name: "Режим отопления, Детская Д -"
+          dd_aeration:
+            friendly_name: "Проветривание"
             value_template: >-
-              {{ is_state('binary_sensor.0x00158d0001193697_contact', 'off')  
-                 and is_state('binary_sensor.0x00158d00015843d4_contact', 'off')
-                 and is_state('binary_sensor.away', 'off')
-                 and is_state('binary_sensor.radiator', 'on') }}
+              {{ is_state('binary_sensor.0x00158d0001193697_contact', 'on')  
+                 or is_state('binary_sensor.0x00158d00015843d4_contact', 'on')
+              }}
+            delay_on: 
+                seconds: 30
+            device_class: window
             icon_template: >-
-              {% if is_state("binary_sensor.dd_heat", "on") %}
-              mdi:radiator
+              {% if is_state("binary_sensor.dd_aeration", "on") %}
+              mdi:window-open-variant
               {% else %}
-              mdi:radiator-off
+              mdi:window-closed-variant
               {% endif %}
 
     sensor:
+    
+      - platform: template
+        sensors:
+          dd_heat_mode:
+            friendly_name: "Режим отопления, Детская Д -"
+            value_template: >-
+              {% if is_state('binary_sensor.radiator', 'off') %}
+              Выключен
+              {% elif is_state('binary_sensor.radiator', 'on') 
+                 and is_state('binary_sensor.dd_aeration', 'on') %}
+              Проветривание
+              {% elif is_state('binary_sensor.radiator', 'on') 
+                 and is_state('binary_sensor.occupancy', 'off') %}
+              Не дома
+              {% elif is_state('binary_sensor.radiator', 'on') 
+                 and is_state('binary_sensor.dd_school', 'on')
+                 and is_state('binary_sensor.dd_away_time', 'on')
+                 and is_state('binary_sensor.workday_sensor', 'on') %}
+              Не дома
+              {% else %}
+              Дома
+              {% endif %}
+            icon_template: >-
+              {% if is_state("sensor.dd_heat_mode", "Выключен") %}
+              mdi:radiator-off
+              {% elif is_state("sensor.dd_heat_mode", "Проветривание") %}
+              mdi:window-open-variant
+              {% elif is_state("sensor.dd_heat_mode", "Не дома") %}
+              mdi:account-group-outline
+              {% else %}
+              mdi:account-group
+              {% endif %}
               
       - platform: min_max
-        name: 07_mean_temperature
+        name: dd_mean_temperature
         type: mean
         entity_ids:
           - sensor.0x00158d000156e92e_temperature
           - sensor.4c65a8d054bb_temperature
-
+          
       - platform: mqtt
         name: dd_temp_home
         state_topic: "states/dd/temp_home"
 
       - platform: mqtt
         name: dd_temp_away
-        state_topic: "states/dd/temp_away"  
+        state_topic: "states/dd/temp_away"
+        
+      - platform: mqtt
+        name: dd_temp_window
+        state_topic: "states/dd/temp_window"
+        
+    switch:
 
-    automation:              
+      - platform: template
+        switches:    
+          dd_school:
+            friendly_name: "Дима учеба"
+            value_template: "{{  is_state('binary_sensor.dd_school', 'on') }}"
+            turn_on:
+              service: mqtt.publish
+              data_template:
+                topic: "states/dd/school"
+                payload_template: 'ON'
+                retain: true 
+            turn_off:
+              service: mqtt.publish
+              data_template:
+                topic: "states/dd/school"
+                payload_template: 'OFF'
+                retain: true 
+            icon_template: >-
+              {% if is_state('switch.dd_school', 'on') %}
+                mdi:school
+              {% else %}
+                mdi:school-outline
+              {% endif %}
+        
+    automation:
+    
+      - id: Установка параметров отопления ДД
+        alias: dd_heating_initial
+        initial_state: true
+        trigger:
+        - platform: homeassistant
+          event: start
+        - platform: state
+          entity_id:
+            - binary_sensor.radiator
+        action:
+        - service_template: >-
+           {% if states.binary_sensor.radiator.state == 'on' %}
+           climate.turn_on
+           {%-elif states.binary_sensor.radiator.state == 'off' %}
+           climate.turn_off
+           {% endif %}
+          entity_id: climate.dd_heater
 
-      - id: Обгрев Детской Д
-        alias: dd_heating
+      - id: Установка параметров обогрева Детской Д
+        alias: dd_heating_mode
         initial_state: true
         trigger:
           - platform: homeassistant
             event: start
-          - platform: time_pattern
-            minutes: '/5'
           - platform: state
             entity_id:
-              - binary_sensor.dd_heat
+              - sensor.dd_heat_mode
+              - sensor.dd_temp_home
+              - sensor.dd_temp_away
+              - sensor.dd_temp_window
         condition:
-          - condition: state
-            entity_id: binary_sensor.radiator
-            state: 'on'  
-          - condition: state
-            entity_id: switch.control_mode
-            state: 'on'  
+          - condition: template
+            value_template: "{{ states('sensor.dd_heat_mode') != 'Выключен' }}"
         action:
-          - service: script.turn_on
-            data_template:
-              entity_id: >-
-                {%- if states.binary_sensor.dd_heat.state == 'on' -%}
-                script.dd_home
-                {%- elif states.binary_sensor.dd_heat.state == 'off' -%}
-                script.dd_away
-                {%- endif -%}
-                
-      - id: Изменение температуры детская Д
-        alias: dd_heat_temp
+            - choose:
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.dd_heat_mode
+                    state: "Дома"
+                sequence:
+                  - service: climate.set_temperature
+                    data:
+                      entity_id: climate.dd_heater
+                      temperature: "{{ states('sensor.dd_temp_home')}}"
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.dd_heat_mode
+                    state: "Не дома"
+                sequence:
+                  - service: climate.set_temperature
+                    data:
+                      entity_id: climate.dd_heater
+                      temperature: "{{ states('sensor.dd_temp_away')}}"
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.dd_heat_mode
+                    state: "Проветривание"
+                sequence:
+                  - service: climate.set_temperature
+                    data:
+                      entity_id: climate.dd_heater
+                      temperature: "{{ states('sensor.dd_temp_window')}}"
+
+      - id: Изменение температуры с термостата детская Д
+        alias: dd_heating_thermo_temp
         initial_state: true
         trigger:
           - platform: state
             entity_id: climate.dd_heater
             attribute: temperature
-        condition:
-          - condition: state
-            entity_id: switch.control_mode
-            state: 'on'
         action:
             - choose:
               - conditions:
                   - condition: state
-                    entity_id: climate.dd_heater
-                    attribute: preset_mode
-                    state: "none"
+                    entity_id: sensor.dd_heat_mode
+                    state: "Дома"
                 sequence:
                   - service: mqtt.publish
-                    data_template:
-                      topic: "states/dd/temp_home"
+                    data:
+                      topic: 'states/dd/temp_home'
+                      retain: true
                       payload: "{{ state_attr('climate.dd_heater', 'temperature') }}" 
-                      retain: true 
               - conditions:
                   - condition: state
-                    entity_id: climate.dd_heater
-                    attribute: preset_mode
-                    state: "away"
+                    entity_id: sensor.dd_heat_mode
+                    state: "Не дома"
                 sequence:
                   - service: mqtt.publish
-                    data_template:
-                      topic: "states/dd/temp_away"
+                    data:
+                      topic: 'states/dd/temp_away'
+                      retain: true
                       payload: "{{ state_attr('climate.dd_heater', 'temperature') }}" 
-                      retain: true 
-                  
-    script:
-    
-        dd_home:
-          alias: Обгрев Детской Д, режим дом
-          sequence:
-            - service: climate.set_preset_mode
-              data:
-                entity_id: climate.dd_heater
-                preset_mode: none
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.dd_heater
-                temperature: "{{ states('sensor.dd_temp_home')}}"
-                
-                  
-        dd_away:
-          alias: Обгрев Детской Д, режим away
-          sequence:
-            - service: climate.set_preset_mode
-              data:
-                entity_id: climate.dd_heater
-                preset_mode: away
-            - service: climate.set_temperature
-              data:
-                entity_id: climate.dd_heater
-                temperature: "{{ states('sensor.dd_temp_away')}}"
+              - conditions:
+                  - condition: state
+                    entity_id: sensor.dd_heat_mode
+                    state: "Проветривание"
+                sequence:
+                  - service: mqtt.publish
+                    data:
+                      topic: 'states/dd/temp_window'
+                      retain: true
+                      payload: "{{ state_attr('climate.dd_heater', 'temperature') }}" 
+

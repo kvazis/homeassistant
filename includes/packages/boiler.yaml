@@ -118,7 +118,7 @@ bolier:
         initial_state: true
         trigger:
          - platform: state
-           entity_id: switch.0x00158d00015751f4_switch
+           entity_id: switch.bathroom_bolier
            to: 'on'
         condition:
          - condition: state
@@ -129,12 +129,13 @@ bolier:
            state: 'on'
         action:
          - service: switch.turn_off
-           entity_id: switch.0x00158d00015751f4_switch
-         - service: mqtt.publish
+           entity_id: switch.bathroom_bolier
+         - service: telegram_bot.send_message
            data_template:
-             topic: "notification/messages"
-             payload_template: '0602'
-             retain: true
+             target:
+                 - !secret chat_id_group_tech
+             message: | 
+                  {{"\U0001F6AB"}} Включение бойлера невозможно, отключен режим нагрева воды. Время события - {{ states.sensor.time_date.state }}
     
       - id: Включение бойлера
         alias: boiler_on
@@ -145,18 +146,18 @@ bolier:
            from: 'off'
            to: 'on'
          - platform: state
-           entity_id: sensor.0x00158d000238a140_click
+           entity_id: sensor.0x00158d000238a140_action
            to: 'both'
         condition:
          - condition: state
-           entity_id: switch.0x00158d00015751f4_switch
+           entity_id: switch.bathroom_bolier
            state: 'off'
          - condition: state
            entity_id: switch.control_mode
            state: 'on'
         action:
          - service: switch.turn_on
-           entity_id: switch.0x00158d00015751f4_switch
+           entity_id: switch.bathroom_bolier
            
       - id: Выключение бойлера
         alias: boiler_off
@@ -167,7 +168,7 @@ bolier:
            from: 'on'
            to: 'off'
          - platform: state
-           entity_id: sensor.0x00158d000238a140_click
+           entity_id: sensor.0x00158d000238a140_action
            to: 'both'
          - platform: event
            event_type: timer.finished
@@ -175,21 +176,21 @@ bolier:
              entity_id: timer.heater
         condition:
          - condition: state
-           entity_id: switch.0x00158d00015751f4_switch
+           entity_id: switch.bathroom_bolier
            state: 'on'
          - condition: state
            entity_id: switch.control_mode
            state: 'on'
         action:
          - service: switch.turn_off
-           entity_id: switch.0x00158d00015751f4_switch
+           entity_id: switch.bathroom_bolier
     
       - id: Уведомление при включении бойлера
         alias: boiler_notify_on
         initial_state: true
         trigger:
          - platform: state
-           entity_id: switch.0x00158d00015751f4_switch
+           entity_id: switch.bathroom_bolier
            to: 'on'
         condition:
          - condition: state
@@ -199,18 +200,19 @@ bolier:
            entity_id: switch.control_mode
            state: 'on'
         action:
-         - service: mqtt.publish
+         - service: telegram_bot.send_message
            data_template:
-             topic: "notification/messages"
-             payload_template: '0600'
-             retain: true
+             target:
+                 - !secret chat_id_group_tech
+             message: | 
+                  {{"\U00002714"}} Включение бойлера. Время события - {{ states.sensor.time_date.state }}
              
       - id: Уведомление при выключении бойлера
         alias: boiler_notify_off
         initial_state: true
         trigger:
          - platform: state
-           entity_id: switch.0x00158d00015751f4_switch
+           entity_id: switch.bathroom_bolier
            to: 'off'
         condition:
          - condition: state
@@ -220,18 +222,19 @@ bolier:
            entity_id: switch.control_mode
            state: 'on'
         action:
-         - service: mqtt.publish
+         - service: telegram_bot.send_message
            data_template:
-             topic: "notification/messages"
-             payload_template: '0601'
-             retain: true
+             target:
+                 - !secret chat_id_group_tech
+             message: | 
+                  {{"\U00002716"}} Выключение бойлера. Время события - {{ states.sensor.time_date.state }}
              
       - id: Запуск таймера при ручном включении бойлера
         alias: boiler_timer_on
         initial_state: true
         trigger:
          - platform: state
-           entity_id: switch.0x00158d00015751f4_switch
+           entity_id: switch.bathroom_bolier
            to: 'on'
            for:
              minutes: 1
@@ -254,7 +257,7 @@ bolier:
         initial_state: true
         trigger:
          - platform: state
-           entity_id: switch.0x00158d00015751f4_switch
+           entity_id: switch.bathroom_bolier
            to: 'off'
            for:
              minutes: 1
@@ -293,10 +296,10 @@ bolier:
          alias: Включение бойлера вручную
          sequence:
           - service: switch.turn_on
-            entity_id: switch.0x00158d00015751f4_switch
+            entity_id: switch.bathroom_bolier
         
         boiler_manual_off:
          alias: Выключение бойлера вручную
          sequence:
           - service: switch.turn_off
-            entity_id: switch.0x00158d00015751f4_switch
+            entity_id: switch.bathroom_bolier

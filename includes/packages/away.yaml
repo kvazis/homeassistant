@@ -2,23 +2,6 @@ away:
 
     binary_sensor:
     
-      - platform: mqtt
-        name: away
-        state_topic: "states/away"
-        payload_on: "ON"
-        payload_off: "OFF"
-        
-      - platform: mqtt
-        name: vacancy
-        state_topic: "states/vacancy"
-        payload_on: "ON"
-        payload_off: "OFF"
-        
-      - platform: tod
-        name: away_tod
-        after: '08:00'
-        before: '21:00'
-    
     # Движение в доме
       - platform: template
         sensors:
@@ -38,18 +21,30 @@ away:
                  or is_state('binary_sensor.0x00158d0001a66222_occupancy', 'on')
                  or is_state('binary_sensor.0x00158d00016d56f5_occupancy', 'on')
               }}
+            delay_off: 
+                minutes: 15
             icon_template: >-
-                mdi:run-fast
+              {% if is_state("binary_sensor.motion_in_home", "on") %}
+              mdi:motion-sensor
+              {% else %}
+              mdi:motion-sensor-off
+              {% endif %}
               
-          working_tech:
-            friendly_name: "Телевизоры"
+          working_tv:
+            friendly_name: "Работающие телевизоры"
             device_class: connectivity
             value_template: >-
               {{ is_state('switch.tv_xiaomi', 'on')
                  or is_state('switch.tv_xiaomi_55', 'on')
               }}
+            delay_off: 
+                minutes: 5
             icon_template: >-
-                mdi:television
+              {% if is_state("binary_sensor.working_tv", "on") %}
+              mdi:television
+              {% else %}
+              mdi:television-off
+              {% endif %}
               
           working_light:
             friendly_name: "Работающие светильники"
@@ -62,19 +57,16 @@ away:
                  or is_state('light.yeelight_02_ceiling', 'on')
                  or is_state('light.yeelight_06_ceiling', 'on')
               }}
+            delay_off: 
+                minutes: 5
             icon_template: >-
-                mdi:lightbulb-on
-              
-          time_away:
-            friendly_name: "Время режима никого нет дома"
-            value_template: >-
-              {{ is_state('binary_sensor.vacancy', 'on')
-                 or is_state('binary_sensor.away_tod', 'on')
-              }}
-            icon_template: >-
-                mdi:timetable
-              
-          people_in_home:
+              {% if is_state("binary_sensor.working_light", "on") %}
+              mdi:lightbulb-on
+              {% else %}
+              mdi:lightbulb-off
+              {% endif %}
+
+          bluetooth_in_home:
             friendly_name: "BLE метки"
             device_class: presence
             value_template: >-
@@ -94,100 +86,45 @@ away:
                  or is_state('binary_sensor.da_olha', 'on')  
                  or is_state('binary_sensor.da_dima', 'on')  
                  or is_state('binary_sensor.da_arina', 'on')  }}
+            delay_off: 
+                minutes: 15
             icon_template: >-
-                mdi:bluetooth-connect
+              {% if is_state("binary_sensor.bluetooth_in_home", "on") %}
+              mdi:bluetooth-connect
+              {% else %}
+              mdi:bluetooth-off
+              {% endif %}
+              
+          smartphone_in_home:
+            friendly_name: "Смартфоны"
+            device_class: presence
+            value_template: >-
+              {{ states('sensor.alex') == 'Дом'
+              or states('sensor.olga') == 'Дом'
+              or states('sensor.dima') == 'Дом'
+              }}
+            delay_off: 
+                minutes: 15
+            icon_template: >-
+              {% if is_state("binary_sensor. smartphone_in_home", "on") %}
+              mdi:cellphone
+              {% else %}
+              mdi:cellphone-erase
+              {% endif %}
               
           occupancy:
             friendly_name: "Активность в доме"
             device_class: presence
             value_template: >-
               {{ is_state('binary_sensor.motion_in_home', 'on')
-                 or is_state('binary_sensor.working_tech', 'on')
+                 or is_state('binary_sensor.working_tv', 'on')
                  or is_state('binary_sensor.working_light', 'on')
-                 or is_state('binary_sensor.people_in_home', 'on')
-                 or is_state('binary_sensor.time_away', 'off')
+                 or is_state('binary_sensor.bluetooth_in_home', 'on')
+                 or is_state('binary_sensor.smartphone_in_home', 'on')
               }}
             icon_template: >-
-                mdi:home-account
-
-
-    switch:
-    
-      - platform: template
-        switches:
-          away:
-            friendly_name: "Никого нет дома"
-            value_template: "{{  is_state('binary_sensor.away', 'on') }}"
-            turn_on:
-              service: mqtt.publish
-              data_template:
-                topic: "states/away"
-                payload_template: 'ON'
-                retain: true 
-            turn_off:
-              service: mqtt.publish
-              data_template:
-                topic: "states/away"
-                payload_template: 'OFF'
-                retain: true 
-            icon_template: >-
-                mdi:home-remove
-                
-          vacancy:
-            friendly_name: "Отпуск"
-            value_template: "{{  is_state('binary_sensor.vacancy', 'on') }}"
-            turn_on:
-              service: mqtt.publish
-              data_template:
-                topic: "states/vacancy"
-                payload_template: 'ON'
-                retain: true 
-            turn_off:
-              service: mqtt.publish
-              data_template:
-                topic: "states/vacancy"
-                payload_template: 'OFF'
-                retain: true 
-            icon_template: >-
-                mdi:palm-tree
-
-    automation:
-                
-      - id: Никого нет дома
-        alias: away_from_home
-        initial_state: true
-        trigger:
-        - platform: state
-          entity_id: binary_sensor.occupancy
-          to: 'off'
-          for:
-            minutes: 5
-        condition:
-         - condition: state
-           entity_id: switch.control_mode
-           state: 'on'
-         - condition: state
-           entity_id: switch.away
-           state: 'off'
-        action:
-          - service: switch.turn_on
-            entity_id: switch.away
-            
-      - id: Выключение режима никого нет дома
-        alias: back_to_home
-        initial_state: true
-        trigger:
-        - platform: state
-          entity_id: binary_sensor.0x00158d000119378d_contact
-          from: 'off'
-          to: 'on'
-        condition:
-         - condition: state
-           entity_id: switch.control_mode
-           state: 'on'
-         - condition: state
-           entity_id: switch.away
-           state: 'on'
-        action:
-          - service: switch.turn_off
-            entity_id: switch.away
+              {% if is_state("binary_sensor.occupancy", "on") %}
+              mdi:home-account
+              {% else %}
+              mdi:home-remove
+              {% endif %}

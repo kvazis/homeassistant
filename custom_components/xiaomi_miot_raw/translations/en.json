@@ -1,0 +1,116 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "You have already configured this device!"
+        },
+        "create_entry": {
+            "default": "If the device has multiple sub-devices, it takes up to 30 seconds to show all of them."
+        },
+        "error": {
+            "unexpected_error": "Unexpected error. See logs for detail",
+            "cannot_connect": "Can not connect",
+            "value_error": "Wrong value",
+            "bad_params": "Bad params",
+            "no_local_access": "Possible reasons:\n(1) Wrong siid or piid\n(2) Local access is not supported by device. Try Cloud Access.",
+            "no_connect_warning": "Failed to discover your device. If it is a Xiaomi Speaker, it is normal and you need to enter its model manually above. If not, please check your input.",
+            "cant_login": "Cannot login"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "name": "Name",
+                    "host": "IP",
+                    "token": "token"
+                },
+                "description": "Log in your Xiaomi account for a faster way to add devices.\nNot all devices in the list are supported yet.",
+                "title": "Select Operation"
+            },
+            "xiaomi_account": {
+				"title": "Log in Xiaomi Account",
+				"description": "This is to facilitate adding devices. \nAfter logging in, come back here to select devices to add.",
+				"data": {
+					"username": "Email/Xiaomi ID",
+					"password": "Password"
+				}
+			},
+            "localinfo": {
+                "data": {
+                    "name": "Name",
+                    "host": "IP",
+                    "token": "token"
+                },
+                "description": "Local access requires information above",
+                "title": "Configure"
+            },
+            "devinfo": {
+                "title": "Device info",
+                "data": {
+                    "devtype": "Device type(s)",
+                    "mapping": "mapping",
+                    "params": "params",
+                    "cloud_read": "Read status from cloud",
+                    "cloud_write": "Control device from cloud"
+
+                },
+                "description": "{device_info}"
+            },
+            "cloudinfo": {
+                "title": "Account Credientals",
+                "data": {
+                    "did": "did",
+                    "userId": "userId",
+                    "serviceToken": "serviceToken",
+                    "ssecurity": "ssecurity"
+                },
+                "description": "Cloud access requires information above"
+            }
+        },
+        "title": "MIoT"
+    },
+    "system_health": {
+        "info": {
+            "logged_in": "Logged in to Xiaomi Account",
+            "can_reach_micloud_server": "Reach Xiaomi Cloud Server",
+            "account_devices_count": "Devices in account",
+            "added_devices": "Devices added",
+            "accounts_count": "Xiaomi accounts"
+        }
+    },
+    "options": {
+        "abort": {
+            "no_configurable_options": "No options available.",
+            "no_configurable_account": "No options available for the account.\nTo log out, use **Delete**. This will not affect added devices.\nTo refresh devices list, use **Reload**."
+        },
+        "step": {
+            "account": {
+                "data": {
+                    "server_location": "Server location"
+                },
+                "description": "Select which server are your devices in.\nTo log out, use **Delete**. This will not affect added devices.\nTo refresh devices list, use **Reload**.",
+                "title": "Account options"
+            },
+            "sensor": {
+                "data": {
+                    "show_individual_sensor": "Each attribute as an entity"
+                },
+                "description": "If checked, there will be a sensor entity for each attribule.",
+                "title": "Sensor options"
+            },
+            "climate": {
+                "data": {
+                    "current_temp_source": "Environment temperature sensor entity ID"
+                },
+                "description": "Enter a entity ID of temperature sensor here to use it as the current temperature sensor.",
+                "title": "Climate options"
+            },
+            "light_and_lock": {
+                "data": {
+                    "show_indicator_light": "Enable switch for indicator light",
+                    "show_physical_controls_locked": "Enable switch for child lock"
+                },
+                "description": "",
+                "title": "Indicator light / child lock options"
+            }
+        }
+    }
+}

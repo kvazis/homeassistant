@@ -81,6 +81,9 @@ lovelace:
      type: module
    - url: /hacsfiles/entity-attributes-card/entity-attributes-card.js
      type: module
+   - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
+     type: module    
+
      
 #Платформы
 
@@ -117,23 +120,25 @@ telegram_bot:
     allowed_chat_ids:
       - !secret chat_id_alex
       - !secret chat_id_olha
+      - !secret chat_id_group
+      - !secret chat_id_group_tech
       
 # Роутер
-asuswrt:
-  host: !secret asus_ip
-  username: !secret asus_user
-  password: !secret asus_password
-  sensors:
-    - devices
-    - upload
-    - download
-    - upload_speed
-    - download_speed
-device_tracker:
-  - platform: asuswrt
-    consider_home: 180
-    new_device_defaults:
-      track_new_devices: false
+# asuswrt:
+#   host: !secret asus_ip
+#   username: !secret asus_user
+#   password: !secret asus_password
+#   sensors:
+#     - devices
+#     - upload
+#     - download
+#     - upload_speed
+#     - download_speed
+# device_tracker:
+#   - platform: asuswrt
+#     consider_home: 180
+#     new_device_defaults:
+#       track_new_devices: false
 
 zodiac:
 

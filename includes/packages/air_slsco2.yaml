@@ -9,7 +9,7 @@ air_slsco2:
               {{ is_state('binary_sensor.0x00158d0001193697_contact', 'off')  
                  and is_state('binary_sensor.0x00158d00015843d4_contact', 'off') 
                  and states('sensor.0x00124b001ed165de_co2')|float > 1000 
-                 and is_state('binary_sensor.away', 'off')
+                 and is_state('binary_sensor.occupancy', 'on')
                  and is_state('sensor.dd_day_work', 'Включен') }}
             icon_template: >-
               {% if is_state("binary_sensor.da_air", "on") %}
@@ -35,9 +35,10 @@ air_slsco2:
               entity_id: switch.control_mode
               state: 'on' 
           action:
-           - service: mqtt.publish
+           - service: telegram_bot.send_message
              data_template:
-               topic: "notification/messages"
-               payload_template: '0701'
-               retain: true
+               target:
+                   - !secret chat_id_group
+               message: | 
+                    {{"\U0001F637"}} Детская Д {{ states('sensor.time_date') }} - хорошо бы проветрить
 

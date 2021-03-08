@@ -1,0 +1,118 @@
+living_time:
+
+    binary_sensor:
+    
+      - platform: tod
+        name: lr_away_time
+        after: '08:00'
+        before: '17:00'
+        
+      - platform: tod
+        name: lr_workday_time
+        after: '08:00'
+        before: '22:00'
+
+      - platform: tod
+        name: lr_holiday_time
+        after: '10:00'
+        before: '22:00'
+        
+      - platform: mqtt
+        name: lr_work
+        state_topic: "states/lr/work"
+        payload_on: "ON"
+        payload_off: "OFF"
+        
+    # Режим тишины гостиная
+      - platform: mqtt
+        name: silent_mode
+        state_topic: "states/silent_mode"
+        payload_on: "ON"
+        payload_off: "OFF"
+
+    sensor: 
+    
+      - platform: template
+        sensors:
+          living_day_work:
+            friendly_name: "Гостиная ДС"
+            value_template: >-
+              {%- if is_state('binary_sensor.workday_sensor', 'on')
+                  and is_state('binary_sensor.lr_workday_time', 'on')
+                  and is_state('binary_sensor.silent_mode', 'off')  
+                  and is_state('binary_sensor.lr_work', 'on') -%} 
+                
+              Включен
+               
+              {%- elif is_state('binary_sensor.workday_sensor', 'on') 
+                  and  is_state('binary_sensor.lr_holiday_time', 'on') 
+                  and  is_state('binary_sensor.silent_mode', 'off')  
+                  and  is_state('binary_sensor.lr_work', 'off') -%} 
+                
+              Включен   
+              
+              {%- elif is_state('binary_sensor.workday_sensor', 'off')
+                  and  is_state('binary_sensor.lr_holiday_time', 'on')
+                  and  is_state('binary_sensor.silent_mode', 'off') -%} 
+            
+              Включен
+    
+              {%- else -%} 
+     
+              Выключен
+     
+              {%- endif %} 
+            icon_template: >-
+              {% if is_state("sensor.living_day_work", "Включен") %}
+              mdi:check-circle
+              {% else %}
+              mdi:close-circle
+              {% endif %} 
+        
+    switch:              
+      - platform: template
+        switches: 
+        
+          lr_work:
+            friendly_name: "Рабочий день"
+            value_template: "{{  is_state('binary_sensor.lr_work', 'on') }}"
+            turn_on:
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/lr/work"
+                  payload_template: 'ON'
+                  retain: true 
+            turn_off:
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/lr/work"
+                  payload_template: 'ON'
+                  retain: true 
+            icon_template: >-
+              {% if is_state('switch.lr_work', 'on') %}
+                mdi:account-network
+              {% else %}
+                mdi:account-network-outline
+              {% endif %}
+              
+          silent_mode:
+            friendly_name: "Режим тишины, Гостиная -"
+            value_template: "{{  is_state('binary_sensor.silent_mode', 'on') }}"
+            turn_on:
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/silent_mode"
+                  payload_template: 'ON'
+                  retain: true
+              - service: timer.start
+                entity_id: timer.lr_silent
+            turn_off:
+              - service: mqtt.publish
+                data_template:
+                  topic: "states/silent_mode"
+                  payload_template: 'OFF'
+                  retain: true
+              - service: timer.cancel
+                entity_id: timer.lr_silent
+            icon_template: >-
+                mdi:volume-off   

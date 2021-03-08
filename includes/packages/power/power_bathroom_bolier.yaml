@@ -1,0 +1,84 @@
+power_bathroom_bolier:
+# Ванная, бойлер
+
+    sensor:
+    
+      - platform: mqtt
+        state_topic: "power/bathroom/boiler/today"
+        name: 'bathroom_bolier_consumption_today'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/bathroom/boiler/yesterday"
+        name: 'bathroom_bolier_consumption_yesterday'
+        unit_of_measurement: 'кВт⋅ч'
+            
+      - platform: mqtt
+        state_topic: "power/bathroom/boiler/month"
+        name: 'bathroom_bolier_consumption_month'
+        unit_of_measurement: 'кВт⋅ч'
+    
+      - platform: mqtt
+        state_topic: "power/bathroom/boiler/lastmonth"
+        name: 'bathroom_bolier_consumption_lastmonth'
+        unit_of_measurement: 'кВт⋅ч'
+        
+      - platform: template
+        sensors:
+          bathroom_bolier_money_month:
+            friendly_name: "Стоимость за текущий месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.bathroom_bolier_consumption_month') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+          bathroom_bolier_money_lastmonth:
+            friendly_name: "Стоимость за прошлый месяц"
+            unit_of_measurement: 'грн'
+            value_template: "{{ (states('sensor.bathroom_bolier_consumption_lastmonth') | float * (states('sensor.power_rate') | float))|round(2) }}"
+            icon_template: mdi:square-inc-cash 
+        
+    script:
+          
+          bathroom_bolier_day:
+            alias: Бойлер энергомониторинг день
+            sequence:
+            - service: mqtt.publish
+              data_template:
+                topic: "power/bathroom/boiler/today"
+                payload: "{{(states('sensor.bathroom_bolier_consumption_today') | float + (states('sensor.bathroom_bolier_instantpower') | float /120000))|round(5) }}"
+                retain: true
+            - service: mqtt.publish
+              data_template:
+                topic: "power/bathroom/boiler/month"
+                payload: "{{(states('sensor.bathroom_bolier_consumption_month') | float + (states('sensor.bathroom_bolier_instantpower') | float /120000))|round(5) }}"
+                retain: true
+
+          bathroom_bolier_yesterday:
+            alias: Бойлер энергомониторинг смена дня
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/bathroom/boiler/yesterday"
+                payload: "{{states('sensor.bathroom_bolier_consumption_today') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/bathroom/boiler/today"
+                payload: "{{ 0.0 }}"
+                retain: true
+                
+          bathroom_bolier_lastmonth:
+            alias: Бойлер энергомониторинг смена месяца
+            sequence:
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/bathroom/boiler/lastmonth"
+                payload: "{{states('sensor.bathroom_bolier_consumption_month') | float}}"
+                retain: true
+            - delay: 00:00:05
+            - service: mqtt.publish
+              data_template:                
+                topic: "power/bathroom/boiler/month"
+                payload: "{{ 0.0 }}"
+                retain: true

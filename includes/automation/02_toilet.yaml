@@ -31,13 +31,8 @@
      entity_id: switch.control_mode
      state: 'on' 
   action:
-    - service: mqtt.publish
-      data_template:
-        topic: "notification/messages"
-        payload_template: '0200'
-        retain: true
-    - service: switch.turn_off
-      entity_id: switch.0x00158d00014dceb3_switch_left
+   - service: switch.turn_off
+     entity_id: switch.0x00158d00014dceb3_switch_left
 
 # Автоматическая установка яркости
 - alias: 02_toilet_light
@@ -111,6 +106,10 @@
   - platform: state
     entity_id: sensor.0x00158d000128cd1a_click
     to: 'left'
+## 4 клавишник на комоде
+  - platform: state
+    entity_id: sensor.0x04cf8cdf3c7942ca_action
+    to: 'button_2_single'
   condition:
   - condition: state
     entity_id: light.yeelight_02_ceiling
@@ -140,6 +139,10 @@
   - platform: state
     entity_id: sensor.0x00158d000128cd1a_click
     to: 'left'
+## 4 клавишник на комоде
+  - platform: state
+    entity_id: sensor.0x04cf8cdf3c7942ca_action
+    to: 'button_2_single'
   condition:
   - condition: state
     entity_id: light.yeelight_02_ceiling

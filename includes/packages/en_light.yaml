@@ -14,10 +14,12 @@ en_light:
           en_light_on:
             friendly_name: "Свет в прихожей днем"
             value_template: >-
-              {{ is_state('light.0x00158d000420dbab_light', 'on')  
-                 and is_state('binary_sensor.0x00158d00013f7894_occupancy', 'off')  
+              {{ is_state('light.yeelight_ct_bulb_0x000000000531b38e', 'on')  
+                 and is_state('binary_sensor.entrance_motion', 'off')  
                  and is_state('binary_sensor.en_night', 'off') 
               }}
+            delay_on:
+              minutes: 3
             icon_template: >-
               {% if is_state("binary_sensor.en_light_on", "on") %}
               mdi:timer
@@ -28,10 +30,12 @@ en_light:
           en_light_night_on:
             friendly_name: "Свет в прихожей ночью"
             value_template: >-
-              {{ is_state('light.0x00158d000420dbab_light', 'on')  
-                 and is_state('binary_sensor.0x00158d00013f7894_occupancy', 'off')  
+              {{ is_state('light.yeelight_ct_bulb_0x000000000531b38e', 'on')  
+                 and is_state('binary_sensor.entrance_motion', 'off')  
                  and is_state('binary_sensor.en_night', 'on') 
               }}
+            delay_on: 
+                seconds: 30
             icon_template: >-
               {% if is_state("binary_sensor.en_light_night_on", "on") %}
               mdi:timer-sand-full
@@ -39,13 +43,43 @@ en_light:
               mdi:timer-sand-empty
               {% endif %}
 
-    timer:
-    
-        entrance:
-          name: Свет в прихожей отключится через - 
-          duration: '00:03:00'
-              
     automation:
+    
+      - id: Прихожая, включение питания
+        alias: enter_light_power
+        initial_state: true
+        trigger:       
+         - platform: time_pattern
+           minutes: '/1'
+        condition:
+         - condition: template
+           value_template: "{{ states('switch.0x00158d00057305ac_right') != 'on' }}"
+         - condition: state
+           entity_id: switch.control_mode
+           state: 'on'
+        action:
+         - service: switch.turn_on
+           entity_id: switch.0x00158d00057305ac_right
+           
+      - id: Прихожая, перезагрузка зависшей люстры
+        alias: enter_light_reboot
+        initial_state: true
+        trigger:
+        - platform: state
+          entity_id: light.yeelight_ct_bulb_0x000000000531b38e
+          to: 'unavailable'
+          for:
+            minutes: 5
+        condition:
+        - condition: numeric_state
+          entity_id: sensor.unavailable_now_light
+          below: 5
+        - condition: state
+          entity_id: switch.control_mode
+          state: 'on'
+        action:
+        - service: switch.turn_off
+          entity_id: switch.0x00158d00057305ac_right
 
       - id: Прихожая, управление освещением
         alias: enter_light
@@ -53,16 +87,20 @@ en_light:
         trigger:
         ## Выключатель, вход
         - platform: state
-          entity_id: sensor.0x00158d0001718ca8_click
-          to: 'right'
+          entity_id: sensor.0x00158d00057305ac_action
+          to: 'single_right'
         ## Кнопка, коридор шкаф
         - platform: state
-          entity_id: sensor.0x00158d0001f3fefe_click
+          entity_id: sensor.0x00158d0001f3fefe_action
           to: 'double'
-        ## 6 клавишник на входе
+        ## 6 клавишник на входе кухни
         - platform: state
           entity_id: sensor.0x04cf8cdf3c794209_action
           to: 'button_4_single'
+        ## 4 клавишник на комоде
+        - platform: state
+          entity_id: sensor.0x04cf8cdf3c7942ca_action
+          to: 'button_1_single'
         condition:
         - condition: state
           entity_id: switch.control_mode
@@ -71,9 +109,9 @@ en_light:
         - service: script.turn_on
           data_template:
             entity_id: >-
-              {%- if states("light.0x00158d000420dbab_light") == 'off' -%}
+              {%- if states("light.yeelight_ct_bulb_0x000000000531b38e") == 'off' -%}
               script.01_enter_on
-              {%- elif states("light.0x00158d000420dbab_light") == 'on' -%}
+              {%- elif states("light.yeelight_ct_bulb_0x000000000531b38e") == 'on' -%}
               script.01_enter_off
               {%- endif -%}         
         
@@ -88,7 +126,7 @@ en_light:
           to: 'on'
         condition:
         - condition: template
-          value_template: "{{(as_timestamp (now()) -as_timestamp(states['light.0x00158d000420dbab_light'].last_changed))|int > 180 }}"
+          value_template: "{{(as_timestamp (now()) -as_timestamp(states['light.yeelight_ct_bulb_0x000000000531b38e'].last_changed))|int > 180 }}"
         - condition: state
           entity_id: switch.control_mode
           state: 'on'
@@ -100,56 +138,28 @@ en_light:
         alias: 01_enter_light_auto_off
         initial_state: true
         trigger:
+        - platform: state
+          entity_id: binary_sensor.en_light_on
+          to: 'on'
         ## Лампочка включилась на 30 сек
         - platform: state
           entity_id: binary_sensor.en_light_night_on
           to: 'on'
-          for:
-            seconds: 30
-        ## Таймер выключился
-        - platform: event
-          event_type: timer.finished
-          event_data:
-            entity_id: timer.entrance
         condition:
         - condition: state
           entity_id: switch.control_mode
           state: 'on'
         action:
         - service: light.turn_off
-          entity_id: light.0x00158d000420dbab_light
-              
-      - id: Прихожая, запуск таймера освещения
-        alias: 01_enter_light_timer_on
-        initial_state: true
-        trigger:
-        ## Сенсор автоотключения света включается
-        - platform: state
-          entity_id: binary_sensor.en_light_on
-          to: 'on'
-        action:
-        - service: timer.start
-          entity_id: timer.entrance
-            
-      - id: Прихожая, отключение таймера освещения
-        alias: 01_enter_light_timer_off
-        initial_state: true
-        trigger:
-      ## енсор автоотключения света выключается
-        - platform: state
-          entity_id: binary_sensor.en_light_on
-          to: 'off'
-        action:
-        - service: timer.cancel
-          entity_id: timer.entrance
-          
+          entity_id: light.yeelight_ct_bulb_0x000000000531b38e
+
     script:
     
         01_enter_on:
           alias: Включение лампочки в прихожей
           sequence:
             - service: light.turn_on
-              entity_id: light.0x00158d000420dbab_light
+              entity_id: light.yeelight_ct_bulb_0x000000000531b38e
               data_template:
                 brightness_pct: 100
                 kelvin: 4500
@@ -158,4 +168,4 @@ en_light:
           alias: Включение лампочки в прихожей
           sequence:
             - service: light.turn_off
-              entity_id: light.0x00158d000420dbab_light
+              entity_id: light.yeelight_ct_bulb_0x000000000531b38e

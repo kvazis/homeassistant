@@ -24,7 +24,7 @@ cards:
               entity: light.philips_07_ceiling
               name: Люстра 
             - type: light
-              entity: light.yeelight_07_whitebulb
+              entity: light.0x00158d000420dbab
               name: Бра
 
           - type: conditional
@@ -79,22 +79,15 @@ cards:
           cards: 
           - type: markdown
             content: >
-               **Broadlink 4 socket**
+               **Useelink удлинитель**
           - type: entities
             show_header_toggle: false
             entities:
-              - entity: switch.plug1
-                name: Принтер
-                icon: mdi:printer
-              - entity: switch.plug2
-                name: Зарядная станция
-                icon: mdi:power-socket-eu
-              - entity: switch.plug3
-                name: Asus RT-AC66U B1
-                icon: mdi:router-wireless
-              - entity: switch.plug4
-                name: Колонка XiaoAI
-                icon: mdi:speaker-bluetooth
+              - entity: switch.0x842e14fffefd9721_switch_l1
+              - entity: switch.0x842e14fffefd9721_switch_l2
+              - entity: switch.0x842e14fffefd9721_switch_l3
+              - entity: switch.0x842e14fffefd9721_switch_l4              
+             
 
       - type: vertical-stack
         cards:
@@ -170,6 +163,21 @@ cards:
           cards: 
           - type: markdown
             content: >
+               **Xiaomi Gateway 3**
+          - type: entities
+            show_header_toggle: false
+            entities:
+            - entity: switch.0x842e14fffefd9721_switch_l5 
+            - entity: remote.0x680ae2fffe83f67a_pair
+            - entity: switch.0x680ae2fffe83f67a_firmware_lock
+
+
+
+        - type: custom:stack-in-card
+          mode: vertical
+          cards: 
+          - type: markdown
+            content: >
                **Детская Д, ESP 32 BLE шлюз**
           - type: entities
             show_header_toggle: false
@@ -182,7 +190,30 @@ cards:
             - entity: switch.dd_esp32_restart
               name: Перезагрузка
               icon: mdi:reload
-              
+
+        - type: markdown
+          style: |
+              ha-card {
+                font-size: 26px;
+              }   
+          content: >
+              **Zigbee Устройства**
+
+
+        - type: entities
+          show_header_toggle: false
+          entities:
+          - entity: light.0x00158d000420dbab
+            type: custom:multiple-entity-row
+            toggle: true
+            state_color: true
+            name: Лампочка
+            secondary_info: last-changed
+            state_header: Питание лампы
+            entities:
+              - entity: sensor.0x00158d000420dbab_linkquality
+                name: Сигнал
+          - type: divider
 
       - type: vertical-stack
         cards:
