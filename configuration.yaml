@@ -82,7 +82,9 @@ lovelace:
    - url: /hacsfiles/entity-attributes-card/entity-attributes-card.js
      type: module
    - url: /hacsfiles/lovelace-multiple-entity-row/multiple-entity-row.js
-     type: module    
+     type: module
+   - url: /hacsfiles/lovelace-tempometer-gauge-card/tempometer-gauge-card.js
+     type: module
 
      
 #Платформы

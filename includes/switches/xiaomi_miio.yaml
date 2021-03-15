@@ -1,14 +1,14 @@
-  - platform: xiaomi_miio
-    name: wifi_6port
-    host: 192.168.0.95
-    token: 82dc0e63cd05e7d74b9065c0bc9e0556
-    model: zimi.powerstrip.v2
+#   - platform: xiaomi_miio
+#     name: wifi_6port
+#     host: 192.168.0.95
+#     token: 82dc0e63cd05e7d74b9065c0bc9e0556
+#     model: zimi.powerstrip.v2
 
-  - platform: xiaomi_miio
-    name: Xiaomi WiFi Socket USB
-    host: 192.168.0.96
-    token: b7086999a920a560080c07beeb5da4cd
-    model: chuangmi.plug.v3
+#   - platform: xiaomi_miio
+#     name: Xiaomi WiFi Socket USB
+#     host: 192.168.0.96
+#     token: b7086999a920a560080c07beeb5da4cd
+#     model: chuangmi.plug.v3
     
 #   - platform: xiaomi_miio
 #     name: Xiaomi WiFi Socket
@@ -16,8 +16,8 @@
 #     token: d2a2dd48b585340b46fe650cb2f9462b
 #     model: chuangmi.plug.m1 
 
-  - platform: xiaomi_miio
-    name: wifi_3usb
-    host: 192.168.0.101
-    token: 29eae10bd4d757528e31dc6a783ec2ee
-    model: qmi.powerstrip.v1
+#   - platform: xiaomi_miio
+#     name: wifi_3usb
+#     host: 192.168.0.101
+#     token: 29eae10bd4d757528e31dc6a783ec2ee
+#     model: qmi.powerstrip.v1

@@ -17,13 +17,22 @@
   value_template: '{{ value_json.state }}'
   
 - platform: rest
-  resource: http://192.168.0.74:8123/api/states/sensor.online_custom
+  resource: http://192.168.0.73:8123/api/states/sensor.online
   name: mqtt_state
   force_update: true
   headers: 
     Authorization: !secret mqtt_secret_token
     content-type: 'application/json'
   value_template: '{{ value_json.state }}'
+  
+# - platform: rest
+#   resource: http://192.168.0.74:8123/api/states/sensor.online_custom
+#   name: mqtt_state
+#   force_update: true
+#   headers: 
+#     Authorization: !secret mqtt_secret_token
+#     content-type: 'application/json'
+#   value_template: '{{ value_json.state }}'
   
 
   

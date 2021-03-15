@@ -10,9 +10,6 @@
 '0x00158d0002705b7b':
   friendly_name: LN water leak
   retain: true
-'0x588e81fffed4af56':
-  friendly_name: LR tv socket
-  retain: true
 '0x00158d00010f8920':
   friendly_name: CR moving
   retain: true

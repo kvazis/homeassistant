@@ -26,6 +26,26 @@
              {{"\U0001F50C"}} недоступно - {{ states('sensor.unavailable_now_switch') }} 
              {{"\U0001F321"}} Сенсоров недоступно - {{ states('sensor.unavailable_now_sensor') }} 
              {{"\U0001F51F"}} Бинарных сенсоров недоступно - {{ states('sensor.unavailable_now_binary_sensor') }} 
-    - delay: 00:00:10
-    - service: localtuya.reload
-      data: {}
+    # - delay: 00:00:10
+    # - service: localtuya.reload
+    #   data: {}
+      
+- id: Очистка уведомлений о паролях
+  alias: persistent_notification_clear_pwned
+  initial_state: true
+  mode: parallel
+  trigger:
+    - platform: event
+      event_type: call_service
+      event_data:
+        domain: persistent_notification
+        service: create
+  condition:
+    - condition: template
+      value_template: >
+        {{ 'supervisor_issue_pwned' in trigger.event.data.service_data.notification_id }}
+  action:
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: >
+          {{ trigger.event.data.service_data.notification_id }}

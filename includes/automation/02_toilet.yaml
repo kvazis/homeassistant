@@ -198,6 +198,24 @@
   - service: switch.toggle
     entity_id: 
          - switch.0x00158d00014dceb3_switch_right
+         
+- id: Туалет автоматическое включение вентиляции   
+  alias: toilet_vent_auto
+  initial_state: true
+  trigger:
+  - platform: state
+    entity_id: light.yeelight_02_ceiling
+    to: 'on'
+    for:
+      minutes: 5
+  condition:
+  - condition: state
+    entity_id: switch.control_mode
+    state: 'on'
+  action:
+  - service: switch.turn_on
+    entity_id: 
+         - switch.0x00158d00014dceb3_switch_right
 
 # Включение таймера
 - alias: 02_toilet_vent_timer

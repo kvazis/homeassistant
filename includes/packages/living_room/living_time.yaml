@@ -86,7 +86,7 @@ living_time:
               - service: mqtt.publish
                 data_template:
                   topic: "states/lr/work"
-                  payload_template: 'ON'
+                  payload_template: 'OFF'
                   retain: true 
             icon_template: >-
               {% if is_state('switch.lr_work', 'on') %}

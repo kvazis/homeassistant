@@ -1,7 +1,7 @@
 {
     "0xec1bbdfffe8d6ac9": {
-        "temperature": 23,
-        "humidity": 29.6,
+        "temperature": 22.7,
+        "humidity": 34.1,
         "battery": 80,
         "voltage": 2700
     },
@@ -9,66 +9,58 @@
         "state_left": "OFF",
         "state_right": "ON",
         "operation_mode_right": "decoupled",
-        "temperature": 27
+        "temperature": 28
     },
     "0x842e14fffe51c5ae": {
         "state": "ON",
-        "energy": 85.75,
-        "power_outage_memory": "restore",
+        "energy": 87.92,
+        "power_outage_memory": "on",
         "power": 0,
-        "current": 0.04,
-        "voltage": 215
+        "current": 0,
+        "voltage": 214
     },
     "0x00158d0002705b7b": {
-        "voltage": 3045,
+        "voltage": 3035,
         "battery": 100,
         "water_leak": false,
         "tamper": false,
         "battery_low": false
     },
-    "0x588e81fffed4af56": {
-        "state": "ON",
-        "energy": 2.68,
-        "power_outage_memory": "restore",
-        "power": 0,
-        "current": 0,
-        "voltage": 221
-    },
     "0x00158d00010f8920": {
         "voltage": 3015,
         "battery": 100,
-        "occupancy": true
+        "occupancy": false
     },
     "0x00158d0002a4f77e": {
-        "voltage": 3195,
+        "voltage": 3145,
         "battery": 100,
-        "angle": 6,
+        "angle": 5,
         "sensitivity": "medium",
-        "angle_x": -10,
-        "angle_y": 75,
-        "angle_z": 12,
-        "angle_x_absolute": 100,
-        "angle_y_absolute": 15,
-        "strength": 7
+        "angle_x": -9,
+        "angle_y": 76,
+        "angle_z": 11,
+        "angle_x_absolute": 99,
+        "angle_y_absolute": 14,
+        "strength": 6
     },
     "0x00158d0001291d12": {
         "state": "ON",
-        "power": 27.58,
-        "consumption": 215.24,
-        "energy": 215.24,
-        "temperature": 43,
+        "power": 3.58,
+        "consumption": 216.75,
+        "energy": 216.75,
+        "temperature": 36,
         "power_outage_memory": true
     },
     "0x000d6f0014bb14b4": {
         "state": "ON",
-        "voltage": 222.64,
+        "voltage": 221.99,
         "power": 0,
         "current": 0
     },
     "0x00158d000149d28b": {
         "voltage": 3085,
         "battery": 100,
-        "smoke_density": 2,
+        "smoke_density": 3,
         "enrolled": false,
         "smoke": false,
         "tamper": false,
@@ -93,8 +85,8 @@
     "0x00158d0001ab3350": {
         "voltage": 3075,
         "battery": 100,
-        "illuminance": 0,
-        "illuminance_lux": 0,
+        "illuminance": 3,
+        "illuminance_lux": 3,
         "temperature": 25,
         "occupancy": false
     },
@@ -108,28 +100,28 @@
     },
     "0x00158d0002d7bb2b": {
         "state_l1": "ON",
-        "state_l2": "ON",
-        "power": 9.05,
-        "consumption": 10.17,
-        "energy": 10.17,
-        "temperature": 30,
-        "voltage": 222.5,
+        "state_l2": "OFF",
+        "power": 7.01,
+        "consumption": 11.52,
+        "energy": 11.52,
+        "temperature": 35,
+        "voltage": 222.1,
         "interlock": false
     },
     "0x00158d0001a2ccab": {
         "state_left": "OFF",
         "state_right": "ON",
         "power": 1.44,
-        "consumption": 22.95,
-        "energy": 22.95,
-        "temperature": 26,
+        "consumption": 23.59,
+        "energy": 23.59,
+        "temperature": 25,
         "operation_mode_left": "control_left_relay"
     },
     "0x00124b0022659c04": {
         "voltage": 3200,
         "battery": 100,
-        "temperature": 23.34,
-        "humidity": 37.98
+        "temperature": 22.75,
+        "humidity": 36.34
     },
     "0x00158d000155d2fb": {
         "voltage": 3042,
@@ -142,19 +134,19 @@
     "0x04cf8cdf3c78ca91": {
         "voltage": 3100,
         "battery": 100,
-        "illuminance": 19085,
-        "illuminance_lux": 81
+        "illuminance": 18921,
+        "illuminance_lux": 78
     },
     "0x00158d00028f6fe6": {
         "voltage": 3085,
         "battery": 100,
-        "angle": -3.88,
+        "angle": -9.85,
         "side": 0
     },
     "0x00158d00016d56f5": {
-        "voltage": 2985,
-        "battery": 91,
-        "occupancy": true
+        "voltage": 2975,
+        "battery": 86,
+        "occupancy": false
     },
     "0x00158d000186d9a9": {
         "voltage": 3022,
@@ -172,8 +164,8 @@
     "0x00158d0001dcd47e": {
         "voltage": 2965,
         "battery": 80,
-        "temperature": 23.45,
-        "humidity": 35.43
+        "temperature": 23.12,
+        "humidity": 44.29
     },
     "0x00158d00054495dc": {
         "voltage": 3015,
@@ -186,16 +178,18 @@
         "water_leak": false
     },
     "0x00158d0001d72fa2": {
-        "voltage": 3015,
+        "voltage": 3005,
         "battery": 100,
-        "water_leak": false
+        "water_leak": false,
+        "tamper": false,
+        "battery_low": false
     },
     "0x00158d00012896cb": {
         "state": "ON",
-        "power": 6.29,
-        "consumption": 325.75,
-        "energy": 325.75,
-        "temperature": 32,
+        "power": 5.52,
+        "consumption": 326.76,
+        "energy": 326.76,
+        "temperature": 33,
         "power_outage_memory": true
     },
     "0x00158d000238a140": {
@@ -207,14 +201,14 @@
         "battery": 100,
         "illuminance": 0,
         "illuminance_lux": 0,
-        "temperature": 27,
+        "temperature": 26,
         "occupancy": false
     },
     "0x00158d000159c7e6": {
-        "voltage": 2995,
-        "battery": 97,
-        "temperature": 21.53,
-        "humidity": 36.56
+        "voltage": 2985,
+        "battery": 91,
+        "temperature": 21.41,
+        "humidity": 43.5
     },
     "0x00158d0001718ca8": {
         "voltage": 3025,
@@ -225,26 +219,26 @@
     },
     "0x00158d00014dceb3": {
         "state_left": "ON",
-        "state_right": "ON",
-        "temperature": 28,
+        "state_right": "OFF",
+        "temperature": 27,
         "operation_mode_left": "decoupled"
     },
     "0xec1bbdfffe6f3394": {
         "battery": 100,
         "voltage": 2900,
-        "temperature": 24.5,
-        "humidity": 37.5
+        "temperature": 23.8,
+        "humidity": 33.3
     },
     "0x00158d00013ed373": {
         "voltage": 3025,
         "battery": 100,
-        "contact": true
+        "contact": false
     },
     "0x00124b001e722013": {
         "state": "OFF"
     },
     "0xec1bbdfffedf6a6a": {
-        "battery": 69,
+        "battery": 67,
         "voltage": 1800,
         "contact": true,
         "tamper": false,
@@ -253,7 +247,7 @@
     "0x00158d00013f7894": {
         "voltage": 3175,
         "battery": 100,
-        "occupancy": true
+        "occupancy": false
     },
     "0x00158d000119378d": {
         "voltage": 3035,
@@ -268,14 +262,14 @@
         "state_left": "OFF",
         "state_right": "ON",
         "operation_mode_right": "decoupled",
-        "temperature": 28
+        "temperature": 27
     },
     "0x00158d000114a1e1": {
         "state": "OFF",
         "power": 0,
-        "consumption": 42.19,
-        "energy": 42.19,
-        "temperature": 30,
+        "consumption": 42.23,
+        "energy": 42.23,
+        "temperature": 27,
         "power_outage_memory": false
     },
     "0x00158d0001bbeba6": {
@@ -284,7 +278,7 @@
         "battery": 100
     },
     "0x00158d000128cd1a": {
-        "voltage": 3285,
+        "voltage": 3255,
         "battery": 100
     },
     "0x00158d0001186d82": {
@@ -296,20 +290,20 @@
     "0x00158d0001a24e71": {
         "voltage": 3055,
         "battery": 100,
-        "illuminance": 0,
-        "illuminance_lux": 0,
-        "temperature": 29,
-        "occupancy": true
+        "illuminance": 97,
+        "illuminance_lux": 97,
+        "temperature": 28,
+        "occupancy": false
     },
     "0x00158d000445206b": {
         "voltage": 3005,
         "battery": 100,
         "contact": true,
-        "temperature": 25
+        "temperature": 24
     },
     "0xec1bbdfffe4534c0": {
-        "temperature": 10.71,
-        "humidity": 30.67,
+        "temperature": 10.41,
+        "humidity": 60.01,
         "battery": 78,
         "voltage": 2800
     },
@@ -322,17 +316,17 @@
         "battery": 100
     },
     "0x00158d0001a4b9da": {
-        "voltage": 2945,
-        "battery": 68,
-        "temperature": 3.77,
-        "humidity": 46.3,
-        "pressure": 988
+        "voltage": 2955,
+        "battery": 74,
+        "temperature": 6.91,
+        "humidity": 78.42,
+        "pressure": 987.3
     },
     "0x00158d000449b773": {
-        "voltage": 2975,
-        "battery": 86,
-        "illuminance": 494,
-        "illuminance_lux": 494,
+        "voltage": 2985,
+        "battery": 91,
+        "illuminance": 418,
+        "illuminance_lux": 418,
         "temperature": 16,
         "occupancy": false
     },
@@ -342,56 +336,56 @@
         "contact": false
     },
     "0x00158d0001f3fefe": {
-        "voltage": 3012,
+        "voltage": 3022,
         "battery": 100
     },
     "0x00158d0001fa2934": {
         "state": "ON",
-        "power": 7.63,
-        "consumption": 1807.2,
-        "energy": 1807.2,
-        "temperature": 36,
+        "power": 2.78,
+        "consumption": 1822.09,
+        "energy": 1822.09,
+        "temperature": 34,
         "power_outage_memory": true
     },
     "0x04cf8cdf3c772379": {
         "voltage": 3000,
         "battery": 100,
-        "illuminance": 22330,
-        "illuminance_lux": 171
+        "illuminance": 13223,
+        "illuminance_lux": 21
     },
     "0x00158d0001e16204": {
         "voltage": 3055,
         "battery": 100,
-        "illuminance": 39,
-        "illuminance_lux": 39,
-        "temperature": 25,
-        "occupancy": true
+        "illuminance": 0,
+        "illuminance_lux": 0,
+        "temperature": 23,
+        "occupancy": false
     },
     "0x00158d000101bdc6": {
-        "voltage": 3155,
+        "voltage": 3055,
         "battery": 100,
         "side": 0
     },
     "0x00158d0002a8ab8b": {
-        "voltage": 3245,
+        "voltage": 3155,
         "battery": 100,
-        "angle": 5,
+        "angle": 7,
         "angle_x": 0,
-        "angle_y": 80,
-        "angle_z": 10,
+        "angle_y": 81,
+        "angle_z": 9,
         "angle_x_absolute": 90,
-        "angle_y_absolute": 10,
+        "angle_y_absolute": 9,
         "strength": 5
     },
     "0x00158d0003f46bb6": {
         "state_l1": "ON",
         "state_l2": "ON",
-        "power": 5.66,
+        "power": 5.75,
         "interlock": false,
-        "consumption": 3.18,
-        "energy": 3.18,
+        "consumption": 4.08,
+        "energy": 4.08,
         "temperature": 40,
-        "voltage": 217.3
+        "voltage": 216.4
     },
     "0xec1bbdfffea37571": {
         "state": "OFF"

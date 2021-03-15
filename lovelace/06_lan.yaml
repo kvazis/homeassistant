@@ -63,51 +63,50 @@ cards:
           points_per_hour: 1
           group_by: hour
           hours_to_show: 72
-          
 
-        - type: custom:mini-graph-card
-          entities:
-           - entity: sensor.asuswrt_download_speed
-             name: Загрузка
-          color_thresholds:
-            - value: 20
-              color: "#7FFF00"
-            - value: 40
-              color: "#98FB98"
-            - value: 60
-              color: "#FFFF00"
-            - value: 80
-              color: "#FF8C00"
-            - value: 1000
-              color: "#DC143C"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72
+        # - type: custom:mini-graph-card
+        #   entities:
+        #   - entity: sensor.asuswrt_download_speed
+        #      name: Загрузка
+        #   color_thresholds:
+        #     - value: 20
+        #       color: "#7FFF00"
+        #     - value: 40
+        #       color: "#98FB98"
+        #     - value: 60
+        #       color: "#FFFF00"
+        #     - value: 80
+        #       color: "#FF8C00"
+        #     - value: 1000
+        #       color: "#DC143C"
+        #   animate: true
+        #   line_width: 2
+        #   hour24: true
+        #   points_per_hour: 1
+        #   group_by: hour
+        #   hours_to_show: 72
           
-        - type: custom:mini-graph-card
-          entities:
-           - entity: sensor.asuswrt_upload_speed
-             name: Отдача
-          color_thresholds:
-            - value: 20
-              color: "#7FFF00"
-            - value: 40
-              color: "#98FB98"
-            - value: 60
-              color: "#FFFF00"
-            - value: 80
-              color: "#FF8C00"
-            - value: 1000
-              color: "#DC143C"
-          animate: true
-          line_width: 2
-          hour24: true
-          points_per_hour: 1
-          group_by: hour
-          hours_to_show: 72
+        # - type: custom:mini-graph-card
+        #   entities:
+        #   - entity: sensor.asuswrt_upload_speed
+        #      name: Отдача
+        #   color_thresholds:
+        #     - value: 20
+        #       color: "#7FFF00"
+        #     - value: 40
+        #       color: "#98FB98"
+        #     - value: 60
+        #       color: "#FFFF00"
+        #     - value: 80
+        #       color: "#FF8C00"
+        #     - value: 1000
+        #       color: "#DC143C"
+        #   animate: true
+        #   line_width: 2
+        #   hour24: true
+        #   points_per_hour: 1
+        #   group_by: hour
+        #   hours_to_show: 72
           
     - type: vertical-stack
       cards:
@@ -153,6 +152,44 @@ cards:
           group_by: hour
           hours_to_show: 72
           
+
+        - type: custom:stack-in-card
+        #   mode: horizontal
+          cards: 
+
+            - type: custom:tempometer-gauge-card
+              entity: sensor.speedtest_download
+              min: 0
+              max: 100
+            #   entity_min: sensor.barometer_min_this_week
+            #   entity_max: sensor.barometer_max_this_week
+              title: Загрузка
+              style: custom
+              icon1: mdi:wifi-strength-1
+              icon2: mdi:wifi-strength-2
+              icon3: mdi:wifi-strength-4
+              decimals: 0
+              severity:
+                green: 90
+                yellow: 70
+                red: 40
+                
+            - type: custom:tempometer-gauge-card
+              entity: sensor.speedtest_upload
+              min: 0
+              max: 100
+            #   entity_min: sensor.barometer_min_this_week
+            #   entity_max: sensor.barometer_max_this_week
+              title: Отдача
+              style: custom
+              icon1: mdi:wifi-strength-1
+              icon2: mdi:wifi-strength-2
+              icon3: mdi:wifi-strength-4
+              decimals: 0
+              severity:
+                green: 90
+                yellow: 70
+                red: 40
 
         - type: custom:mini-graph-card
           entities:

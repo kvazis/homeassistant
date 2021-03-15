@@ -27,6 +27,7 @@ SUPPORTED_DOMAINS = [
     "media_player",
     "climate",
     "lock",
+    "water_heater",
 ]
 DEFAULT_NAME = "Xiaomi MIoT Device"
 
@@ -64,6 +65,8 @@ MAP = {
         "temperature_humidity_sensor",
         "magnet_sensor",
         "motion_sensor",
+        "submersion_sensor",
+        "tds_sensor",
     },
     "switch": {
         "switch",
@@ -111,6 +114,9 @@ MAP = {
     },
     "lock": {
         "physical_controls_locked",
+    },
+    "water_heater": {
+        "water_heater",
     },
 }
 
